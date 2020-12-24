@@ -207,11 +207,7 @@
 }
 
 .wdg-component-projects-preview .project-slider {
-	width: 100%;
-	overflow: -moz-scrollbars-horizontal;/* Firefox */ 
-	-ms-overflow-style: scrollbar;/* Edge */
-	overflow-x: auto;
-	margin-bottom: 0.8%;
+	margin-bottom: 48px;
 }
 .wdg-component-projects-preview .block-projects {
     z-index: 0;
@@ -221,7 +217,6 @@
     justify-content: center;
 	-webkit-flex-wrap: wrap;
 	flex-wrap: wrap;
-	height: 555px;
 	margin: auto;
 }
 @media screen and (min-width: 1200px) {
