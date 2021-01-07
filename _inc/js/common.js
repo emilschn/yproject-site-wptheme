@@ -628,7 +628,8 @@ var WDGNavFunctions = (function($) {
 				'data': {
 					'action': 'get_current_user_info',
 					'pageinfo': strPageInfo
-				}
+				}, 
+				'timeout' : 30000 // sets timeout to 30 seconds
 			}).done( function( result ){
 				if ( result === '0' ) {
 					$( '#submenu-user.not-connected .menu-loading-init' ).hide();
