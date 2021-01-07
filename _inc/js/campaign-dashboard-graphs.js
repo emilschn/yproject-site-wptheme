@@ -742,8 +742,8 @@ function formatGoogleDate(date) {
 // Pour relier correctement les points "sans data" dans Chart.js
 Chart.pluginService.register({
   beforeDatasetsDraw: function(chart) {
-    for (var dataset in chart.config.data.datasets) {
-      for (var data in dataset._meta[chart.id].data) {
+    for (dataset of chart.config.data.datasets) {
+      for (data of dataset._meta[chart.id].data) {
         data._model.skip = false;
         data._model.tension = 0;
       }
