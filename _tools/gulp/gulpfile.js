@@ -2,7 +2,7 @@
 var gulp = require( 'gulp' );
 var plugins = require( 'gulp-load-plugins' )();
 var concat = require( 'gulp-concat' );
-var uglify = require( 'gulp-uglify' );
+var uglify = require( 'gulp-uglifyes' );
 
 // Variables de chemins
 var source = '../../'; // (=> yproject)
