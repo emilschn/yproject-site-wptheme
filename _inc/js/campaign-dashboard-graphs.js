@@ -481,7 +481,7 @@ $(document).ready(function(){
 
       // Graphique visites + votes + investissements + pré-investissements
       $.ajax({
-        url : "wdg-api-analytics/visits.php", // appel de la "mini-api" pour faire le lien avec Google Analytics
+        url : "../wp-content/plugins/appthemer-crowdfunding/analytics-api/visits.php", // appel de la "mini-api" pour faire le lien avec Google Analytics
         type : "POST",
         data : visitsPostData,
         dataType  : 'json',
@@ -613,7 +613,7 @@ $(document).ready(function(){
 
       // Graphique des sources (principaux canaux)
       $.ajax({
-        url : "wdg-api-analytics/visits.php",
+        url : "../wp-content/plugins/appthemer-crowdfunding/analytics-api/visits.php",
         type : "POST",
         data : sourcesPostData,
         dataType  : 'json',
@@ -654,7 +654,7 @@ $(document).ready(function(){
 
       // Graphique des villes (tableau "Provenances")
       $.ajax({
-        url : "wdg-api-analytics/visits.php",
+        url : "../wp-content/plugins/appthemer-crowdfunding/analytics-api/visits.php",
         type : "POST",
         data : citiesPostData,
         dataType  : 'json',
