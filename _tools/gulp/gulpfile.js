@@ -39,6 +39,10 @@ var jsCommonFileList = [
 var jsProjectDashboardFileList = [
 	source + '_inc/js/campaign-dashboard.js'
 ];
+// JS - Project Dashboard
+var jsProjectDashboardGraphsFileList = [
+	source + '_inc/js/campaign-dashboard-graphs.js'
+];
 
 
 // Tache 1 : récupérer tous les fichiers communs et les assembler en un seul
@@ -141,6 +145,17 @@ gulp.task( 'minify-js-projectdb', ['concat-js-projectdb'], function() {
 		} ) )
 		.pipe( gulp.dest( source + '_inc/js/' ) );
 } );
+gulp.task( 'minify-js-projectdb-graphs', function() {
+	return gulp.src(jsProjectDashboardGraphsFileList[0] )
+		.pipe( uglify().on('error', console.error) ) // minify
+		.pipe( plugins.rename( { // rename .min.css  
+			dirname: "",
+			basename: "campaign-dashboard-graphs",
+			suffix: ".min",
+			extname: ".js"
+		} ) )
+		.pipe( gulp.dest( source + '_inc/js/' ) );
+} );
 
 
 // Tâche de mise à jour du fichier de version
@@ -167,6 +182,7 @@ gulp.task( 'css-invest', [ 'concat-invest', 'minify-invest', 'update-version' ] 
 gulp.task( 'css-projectdb', [ 'concat-projectdb', 'minify-projectdb', 'update-version' ] );
 gulp.task( 'js-common', [ 'concat-js-common', 'minify-js-common', 'update-version' ] );
 gulp.task( 'js-projectdb', [ 'concat-js-projectdb', 'minify-js-projectdb', 'update-version' ] );
+gulp.task( 'js-projectdb-graphs', [ 'minify-js-projectdb-graphs', 'update-version' ] );
 
 
 // Tâche de veille pour les modifications des différents fichiers
@@ -177,4 +193,5 @@ gulp.task( 'watch', function() {
 	gulp.watch( cssProjectDashboardFileList, ['css-projectdb'] );
 	gulp.watch( jsCommonFileList, ['js-common'] );
 	gulp.watch( jsProjectDashboardFileList, ['js-projectdb'] );
+	gulp.watch( jsProjectDashboardGraphsFileList, ['js-projectdb-graphs'] );
 } );
