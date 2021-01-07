@@ -424,19 +424,31 @@ UserAccountDashboard.prototype.toggleRois = function(){
  * Affiche le formulaire de dispense
  */
 UserAccountDashboard.prototype.initTaxExemption = function(){
-	$( '#display-tax-exemption-form' ).click( function() {
-		if ( $( '#tax-exemption-form' ).is(':visible')) {
-			$( '#tax-exemption-form' ).slideUp( 300 );
+	var slideTaxExemptionForm = function(){
+		var year = $( this ).data('year');
+		if ( $( '#tax-exemption-form-' + year ).is(':visible')  ) {
+			$( '#tax-exemption-form-' + year ).slideUp( 300 );
 		} else {
-			$( '#tax-exemption-form' ).slideDown( 300 );
-		}		
+			$( '#tax-exemption-form-' + year ).slideDown( 300 );
+		}	
+		if( year == 'inprogress' ){
+			$( '#tax-exemption-form-next' ).slideUp( 300 );
+		}else{
+			$( '#tax-exemption-form-inprogress' ).slideUp( 300 );
+		}
 		$( '#upload-tax-exemption-form' ).slideUp( 300 );
-	} );
+	}
+	$( '#display-tax-exemption-form-inprogress' ).on("click", slideTaxExemptionForm);
+	$( '#display-tax-exemption-form-next' ).on("click", slideTaxExemptionForm);
 	
-	$( '#tax-exemption-form button.half.left' ).click( function() {
-		$( '#tax-exemption-form' ).slideUp( 300 );
+	$( '#tax-exemption-form-inprogress button.half.left' ).click( function() {
+		$( '#tax-exemption-form-inprogress' ).slideUp( 300 );
+		$( '#tax-exemption-form-next' ).slideUp( 300 );
 	} );
-
+	$( '#tax-exemption-form-next button.half.left' ).click( function() {
+		$( '#tax-exemption-form-inprogress' ).slideUp( 300 );
+		$( '#tax-exemption-form-next' ).slideUp( 300 );
+	} );
 	
 	$( '#display-upload-tax-exemption-form' ).click( function() {		
 		if ( $( '#upload-tax-exemption-form' ).is(':visible')) {
@@ -444,7 +456,8 @@ UserAccountDashboard.prototype.initTaxExemption = function(){
 		} else {
 			$( '#upload-tax-exemption-form' ).slideDown( 300 );
 		}
-		$( '#tax-exemption-form' ).slideUp( 300 );
+		$( '#tax-exemption-form-inprogress' ).slideUp( 300 );
+		$( '#tax-exemption-form-next' ).slideUp( 300 );
 	} );
 	
 	$( '#upload-tax-exemption-form button.half.left' ).click( function() {

@@ -463,15 +463,15 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		return ( empty( $tax_exemption_filename ) && $this->get_can_ask_tax_exemption() );
 	}
 	
-	public function get_tax_exemption_preview() {
+	public function get_tax_exemption_preview($year) {
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_control( 'templates/pdf/form-tax-exemption' );
 		$user_name = $this->current_user->get_firstname(). ' ' .$this->current_user->get_lastname();
 		$user_address = $this->current_user->get_full_address_str(). ' ' .$this->current_user->get_postal_code( TRUE ). ' ' .$this->current_user->get_city();
 		$form_ip_address = $_SERVER[ 'REMOTE_ADDR' ];
 		$date_today = new DateTime();
-		$form_date = $date_today->format( 'd/m/Y' );
-		return WDG_Template_PDF_Form_Tax_Exemption::get( $user_name, $user_address, $form_ip_address, $form_date );
+		$form_date = $date_today->format( 'd/m/Y' ); // TODO à changer suivant l'année ?
+		return WDG_Template_PDF_Form_Tax_Exemption::get( $user_name, $user_address, $form_ip_address, $form_date, $year );
 	}
 	
 /******************************************************************************/
