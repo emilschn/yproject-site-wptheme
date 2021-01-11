@@ -91,9 +91,11 @@
 			<h4><?php _e( "Faire ma demande de dispense annuelle", 'yproject' ); ?></h4>
 			<button id="display-tax-exemption-form-inprogress" data-year="inprogress" class="button blue half left"><?php echo $inprogress_year; ?></button>
 			<button id="display-tax-exemption-form-next" data-year="next" class="button blue half right"><?php echo $next_year; ?></button>
-			<br><br><?php _e( "ou", 'yproject' ); ?><br><br>
-			<button id="display-upload-tax-exemption-form" class="button blue"><?php _e( "Envoyer ma demande de dispense annuelle", 'yproject' ); ?></button>
-			<br><br>
+			<br><br><br><br><?php _e( "ou", 'yproject' ); ?><br>
+			<h4><?php _e( "Envoyer ma demande de dispense annuelle", 'yproject' ); ?></h4>
+			<button id="display-upload-tax-exemption-form-inprogress" data-year="inprogress" class="button blue half left"><?php echo $inprogress_year; ?></button>
+			<button id="display-upload-tax-exemption-form-next" data-year="next" class="button blue half right"><?php echo $next_year; ?></button>
+			<br><br><br><br>
 		</div>
 
 		<form method="post" id="tax-exemption-form-inprogress" class="db-form v3 full enlarge hidden">
@@ -139,7 +141,25 @@
 			<button type="submit" class="button red half right"><?php _e( "Enregistrer ma demande de dispense", 'yproject' ); ?></button>
 			<div class="clear"></div>
 		</form>
-		<form method="post" id="upload-tax-exemption-form" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
+		<form method="post" id="upload-tax-exemption-form-inprogress" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
+			<input type="hidden" name="year" value="<?php echo $inprogress_year; ?>">
+
+			<?php foreach ( $fields_hidden as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<?php foreach ( $fields_upload as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<button type="button" class="button transparent half left"><?php _e( "Annuler", 'yproject' ); ?></button>
+			<button type="submit" class="button red half right"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+			<div class="clear"></div>
+		</form>
+		<form method="post" id="upload-tax-exemption-form-next" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
+			<input type="hidden" name="year" value="<?php echo $next_year; ?>">
 
 			<?php foreach ( $fields_hidden as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>

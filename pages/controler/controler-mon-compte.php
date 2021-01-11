@@ -459,7 +459,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	public function get_show_user_tax_exemption_form() {
 		$date_today = new DateTime();
 		$tax_exemption_filename = get_user_meta( $this->current_user->get_wpref(), 'tax_exemption_' .$date_today->format( 'Y' ), TRUE );
-		
+		// todo
 		return ( empty( $tax_exemption_filename ) && $this->get_can_ask_tax_exemption() );
 	}
 	
