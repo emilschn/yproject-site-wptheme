@@ -4,7 +4,8 @@
 	$list_current_organizations = $page_controler->get_current_user_organizations();
 	$WDGUserTaxExemptionForm = $page_controler->get_user_tax_exemption_form();
 	$fields_hidden = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_hidden );
-	$fields_upload = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_upload );
+	$fields_upload_inprogress = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_upload_inprogress );
+	$fields_upload_next = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_upload_next );
 	$fields_create = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_create );
 ?>
 
@@ -149,7 +150,7 @@
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
 
-			<?php foreach ( $fields_upload as $field ): ?>
+			<?php foreach ( $fields_upload_inprogress as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
@@ -166,7 +167,7 @@
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
 
-			<?php foreach ( $fields_upload as $field ): ?>
+			<?php foreach ( $fields_upload_next as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
