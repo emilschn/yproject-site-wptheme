@@ -3,7 +3,8 @@
 	$WDGUser_displayed = $page_controler->get_current_user();
 	$list_current_organizations = $page_controler->get_current_user_organizations();
 	$WDGUserTaxExemptionForm = $page_controler->get_user_tax_exemption_form();
-	$fields_hidden = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_hidden );
+	$fields_hidden_inprogress = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_hidden_inprogress );
+	$fields_hidden_next = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_hidden_next );
 	$fields_upload_inprogress = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_upload_inprogress );
 	$fields_upload_next = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_upload_next );
 	$fields_create = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_create );
@@ -73,7 +74,7 @@
 		$inprogress_year = $date_today->format( 'Y' );
 		$next_year = $date_today->format( 'Y' )+1;
 	?>
-	<?php for ( $year = $date_start_for_wdg; $year <= $date_today->format( 'Y' ); $year++ ): ?>
+	<?php for ( $year = $date_start_for_wdg; $year <= $date_today->format( 'Y' ) + 1; $year++ ): ?>
 		<?php 
 			$tax_exemption_filename = $WDGUser_displayed->has_tax_exemption_for_year( $year ); 
 			$file_name_exploded = explode('.', $tax_exemption_filename);
@@ -100,13 +101,12 @@
 		</div>
 
 		<form method="post" id="tax-exemption-form-inprogress" class="db-form v3 full enlarge hidden">
-			<input type="hidden" name="year" value="<?php echo $inprogress_year; ?>">
 							
 			<div id="tax-exemption-preview">
 				<?php echo $page_controler->get_tax_exemption_preview($inprogress_year); ?>
 			</div>
 
-			<?php foreach ( $fields_hidden as $field ): ?>
+			<?php foreach ( $fields_hidden_inprogress as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
@@ -122,13 +122,12 @@
 		</form>
 
 		<form method="post" id="tax-exemption-form-next" class="db-form v3 full enlarge hidden">
-			<input type="hidden" name="year" value="<?php echo $next_year; ?>">
 			
 			<div id="tax-exemption-preview">
 				<?php echo $page_controler->get_tax_exemption_preview($next_year); ?>
 			</div>
 
-			<?php foreach ( $fields_hidden as $field ): ?>
+			<?php foreach ( $fields_hidden_next as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
@@ -143,9 +142,8 @@
 			<div class="clear"></div>
 		</form>
 		<form method="post" id="upload-tax-exemption-form-inprogress" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
-			<input type="hidden" name="year" value="<?php echo $inprogress_year; ?>">
 
-			<?php foreach ( $fields_hidden as $field ): ?>
+			<?php foreach ( $fields_hidden_inprogress as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
@@ -160,9 +158,8 @@
 			<div class="clear"></div>
 		</form>
 		<form method="post" id="upload-tax-exemption-form-next" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
-			<input type="hidden" name="year" value="<?php echo $next_year; ?>">
 
-			<?php foreach ( $fields_hidden as $field ): ?>
+			<?php foreach ( $fields_hidden_next as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
