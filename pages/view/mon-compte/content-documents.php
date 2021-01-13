@@ -3,8 +3,10 @@
 	$WDGUser_displayed = $page_controler->get_current_user();
 	$list_current_organizations = $page_controler->get_current_user_organizations();
 	$WDGUserTaxExemptionForm = $page_controler->get_user_tax_exemption_form();
-	$fields_hidden = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_hidden );
-	$fields_upload = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_upload );
+	$fields_hidden_inprogress = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_hidden_inprogress );
+	$fields_hidden_next = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_hidden_next );
+	$fields_upload_inprogress = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_upload_inprogress );
+	$fields_upload_next = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_upload_next );
 	$fields_create = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_create );
 ?>
 
@@ -69,8 +71,10 @@
 	<?php
 		$date_today = new DateTime();
 		$date_start_for_wdg = 2018;
+		$inprogress_year = $date_today->format( 'Y' );
+		$next_year = $date_today->format( 'Y' )+1;
 	?>
-	<?php for ( $year = $date_start_for_wdg; $year <= $date_today->format( 'Y' ); $year++ ): ?>
+	<?php for ( $year = $date_start_for_wdg; $year <= $date_today->format( 'Y' ) + 1; $year++ ): ?>
 		<?php 
 			$tax_exemption_filename = $WDGUser_displayed->has_tax_exemption_for_year( $year ); 
 			$file_name_exploded = explode('.', $tax_exemption_filename);
@@ -86,19 +90,23 @@
 	<?php if ( $page_controler->get_show_user_tax_exemption_form() ): ?>
 		<br><br>
 		<div class="db-form v3 full">
-			<button id="display-tax-exemption-form" class="button blue"><?php _e( "Faire ma demande de dispense annuelle", 'yproject' ); ?></button>
-			<br><br><?php _e( "ou", 'yproject' ); ?><br><br>
-			<button id="display-upload-tax-exemption-form" class="button blue"><?php _e( "Envoyer ma demande de dispense annuelle", 'yproject' ); ?></button>
-			<br><br>
+			<h4><?php _e( "Faire ma demande de dispense annuelle", 'yproject' ); ?></h4>
+			<button id="display-tax-exemption-form-inprogress" data-year="inprogress" class="button blue half left"><?php echo $inprogress_year; ?></button>
+			<button id="display-tax-exemption-form-next" data-year="next" class="button blue half right"><?php echo $next_year; ?></button>
+			<br><br><br><br><?php _e( "ou", 'yproject' ); ?><br>
+			<h4><?php _e( "Envoyer ma demande de dispense annuelle", 'yproject' ); ?></h4>
+			<button id="display-upload-tax-exemption-form-inprogress" data-year="inprogress" class="button blue half left"><?php echo $inprogress_year; ?></button>
+			<button id="display-upload-tax-exemption-form-next" data-year="next" class="button blue half right"><?php echo $next_year; ?></button>
+			<br><br><br><br>
 		</div>
 
-		<form method="post" id="tax-exemption-form" class="db-form v3 full enlarge hidden">
-			
+		<form method="post" id="tax-exemption-form-inprogress" class="db-form v3 full enlarge hidden">
+							
 			<div id="tax-exemption-preview">
-				<?php echo $page_controler->get_tax_exemption_preview(); ?>
+				<?php echo $page_controler->get_tax_exemption_preview($inprogress_year); ?>
 			</div>
 
-			<?php foreach ( $fields_hidden as $field ): ?>
+			<?php foreach ( $fields_hidden_inprogress as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
@@ -113,14 +121,50 @@
 			<div class="clear"></div>
 		</form>
 
-		<form method="post" id="upload-tax-exemption-form" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
+		<form method="post" id="tax-exemption-form-next" class="db-form v3 full enlarge hidden">
+			
+			<div id="tax-exemption-preview">
+				<?php echo $page_controler->get_tax_exemption_preview($next_year); ?>
+			</div>
 
-			<?php foreach ( $fields_hidden as $field ): ?>
+			<?php foreach ( $fields_hidden_next as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
 
-			<?php foreach ( $fields_upload as $field ): ?>
+			<?php foreach ( $fields_create as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<button type="button" class="button transparent half left"><?php _e( "Annuler", 'yproject' ); ?></button>
+			<button type="submit" class="button red half right"><?php _e( "Enregistrer ma demande de dispense", 'yproject' ); ?></button>
+			<div class="clear"></div>
+		</form>
+		<form method="post" id="upload-tax-exemption-form-inprogress" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
+
+			<?php foreach ( $fields_hidden_inprogress as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<?php foreach ( $fields_upload_inprogress as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<button type="button" class="button transparent half left"><?php _e( "Annuler", 'yproject' ); ?></button>
+			<button type="submit" class="button red half right"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+			<div class="clear"></div>
+		</form>
+		<form method="post" id="upload-tax-exemption-form-next" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
+
+			<?php foreach ( $fields_hidden_next as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<?php foreach ( $fields_upload_next as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
