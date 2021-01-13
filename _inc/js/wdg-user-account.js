@@ -424,31 +424,39 @@ UserAccountDashboard.prototype.toggleRois = function(){
  * Affiche le formulaire de dispense
  */
 UserAccountDashboard.prototype.initTaxExemption = function(){
-	$( '#display-tax-exemption-form' ).click( function() {
-		if ( $( '#tax-exemption-form' ).is(':visible')) {
-			$( '#tax-exemption-form' ).slideUp( 300 );
+	var slideTaxExemptionForm = function(event){		
+		var year = $( this ).data('year');
+		if ( $( event.data.showdiv + year ).is(':visible')  ) {
+			$( event.data.showdiv + year ).slideUp( 300 );
 		} else {
-			$( '#tax-exemption-form' ).slideDown( 300 );
-		}		
-		$( '#upload-tax-exemption-form' ).slideUp( 300 );
-	} );
-	
-	$( '#tax-exemption-form button.half.left' ).click( function() {
-		$( '#tax-exemption-form' ).slideUp( 300 );
-	} );
-
-	
-	$( '#display-upload-tax-exemption-form' ).click( function() {		
-		if ( $( '#upload-tax-exemption-form' ).is(':visible')) {
-			$( '#upload-tax-exemption-form' ).slideUp( 300 );
-		} else {
-			$( '#upload-tax-exemption-form' ).slideDown( 300 );
+			$( event.data.showdiv + year ).slideDown( 300 );
+		}	
+		if( year == 'inprogress' ){
+			$( event.data.showdiv + 'next' ).slideUp( 300 );
+		}else{
+			$( event.data.showdiv + 'inprogress' ).slideUp( 300 );
 		}
-		$( '#tax-exemption-form' ).slideUp( 300 );
-	} );
+		$( event.data.hidediv + 'next' ).slideUp( 300 );
+		$( event.data.hidediv + 'inprogress' ).slideUp( 300 );
+	}
+
+	$( '#display-tax-exemption-form-inprogress' ).on("click", {showdiv:"#tax-exemption-form-", hidediv:"#upload-tax-exemption-form-"}, slideTaxExemptionForm);
+	$( '#display-tax-exemption-form-next' ).on("click", {showdiv:"#tax-exemption-form-", hidediv:"#upload-tax-exemption-form-"}, slideTaxExemptionForm);
 	
-	$( '#upload-tax-exemption-form button.half.left' ).click( function() {
-		$( '#upload-tax-exemption-form' ).slideUp( 300 );
+	$( '#display-upload-tax-exemption-form-inprogress' ).on("click", {showdiv:"#upload-tax-exemption-form-", hidediv:"#tax-exemption-form-"}, slideTaxExemptionForm);
+	$( '#display-upload-tax-exemption-form-next' ).on("click", {showdiv:"#upload-tax-exemption-form-", hidediv:"#tax-exemption-form-"}, slideTaxExemptionForm);
+
+	$( '#tax-exemption-form-inprogress button.half.left' ).click( function() {
+		$( '#tax-exemption-form-inprogress' ).slideUp( 300 );
+	} );
+	$( '#tax-exemption-form-next button.half.left' ).click( function() {
+		$( '#tax-exemption-form-next' ).slideUp( 300 );
+	} );
+	$( '#upload-tax-exemption-form-inprogress button.half.left' ).click( function() {
+		$( '#upload-tax-exemption-form-inprogress' ).slideUp( 300 );
+	} );
+	$( '#upload-tax-exemption-form-next button.half.left' ).click( function() {
+		$( '#upload-tax-exemption-form-next' ).slideUp( 300 );
 	} );
 };
 

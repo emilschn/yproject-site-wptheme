@@ -10,7 +10,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php _e( "Merci pour votre d&eacute;claration de chiffre d'affaires.", 'yproject' ); ?><br>
 	<?php _e( "Le versement des royalties sera fait dans les plus brefs d&eacute;lais.", 'yproject' ); ?><br><br>
 	
-	<?php _e( "D&egrave;s que le versement sera effectu&eacute;, vous pourrez retrouver un justificatif de d&eacute;claration au sein de votre tableau de bord une fois les royalties vers&eacute;es.", 'yproject' ); ?><br><br>
+	<?php _e( "D&egrave;s que le versement des royalties sera effectu&eacute;, vous pourrez retrouver un justificatif de d&eacute;claration au sein de votre tableau de bord.", 'yproject' ); ?><br><br>
 	
 	<?php if ( $page_controler->has_commission() ): ?>
 		<?php _e( "Nous vous enverrons la facture des frais de gestion au cours de ce mois, lorsque nous l'aurons &eacute;dit&eacute;e.", 'yproject' ); ?><br><br>

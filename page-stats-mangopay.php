@@ -59,9 +59,16 @@ get_header();
 //			$roi = new WDGROI(2798); $roi->retry();
 			?>
 			
-			<?php // Infos sur une transaction
-			//$lw_transaction_result = LemonwayLib::get_transaction_by_id( 'INVU7C11182TS39068' ); print_r($lw_transaction_result); 
-			?>
+			<?php // Infos sur une transaction 
+		/*	$transactionId = 'TRANSID12709';
+			echo '<br>id : '.$transactionId.'<br>';
+			echo '<br>transactionMerchantToken<br>';
+			$lw_transaction_result = LemonwayLib::get_transaction_by_id( $transactionId, 'moneyIn' ); print_r($lw_transaction_result); 
+			echo '<br>transactionId<br>';
+			$lw_transaction_result2 = LemonwayLib::get_transaction_by_id( $transactionId, 'transactionId' ); print_r($lw_transaction_result2); 
+			echo '<br>payment<br>';
+			$lw_transaction_result2 = LemonwayLib::get_transaction_by_id( $transactionId, 'payment' ); print_r($lw_transaction_result2); 
+		*/	?>
 			
 			<?php // Init user sur LW
 			//$wdgUser = new WDGUser(4155); $wdgUser->register_lemonway(); 

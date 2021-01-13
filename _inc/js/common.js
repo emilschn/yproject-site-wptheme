@@ -191,13 +191,6 @@ YPUIFunctions = (function($) {
 				YPUIFunctions.getInvestments(campaign_id, true);
 			}
 			
-			// Page accueil : affichage slider de projets
-			if ($("body.home.page").length > 0) {
-				if ($(".wdg-component-projects-preview .project-slider").length > 0) {
-					$(".wdg-component-projects-preview .block-projects").width( ($(".wdg-component-projects-preview .project-container").width() + 5) * $(".wdg-component-projects-preview .project-container").length );
-					$(".wdg-component-projects-preview .project-slider").scrollLeft( ($(".wdg-component-projects-preview .block-projects").width() - $(".wdg-component-projects-preview .project-slider").width()) / 2 );
-				}
-			}
 			// Page les projets : affichage slider de projets (en cours / financés)
 			if ($(".projects-current .wdg-component-projects-preview .project-slider .block-projects").width() > $(".projects-current .wdg-component-projects-preview .project-slider").width()) {
 				
@@ -661,7 +654,8 @@ var WDGNavFunctions = (function($) {
 				'data': {
 					'action': 'get_current_user_info',
 					'pageinfo': strPageInfo
-				}
+				}, 
+				'timeout' : 30000 // sets timeout to 30 seconds
 			}).done( function( result ){
 				if ( result === '0' ) {
 					$( '#submenu-user.not-connected .menu-loading-init' ).hide();

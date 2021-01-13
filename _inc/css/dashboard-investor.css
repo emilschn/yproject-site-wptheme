@@ -557,10 +557,16 @@ body.template-mon-compte div#container div#content div#item-body-bank div.user-r
 }
 
 @media screen and (max-width: 700px) {
-	body.template-mon-compte div#container div#content main #tax-exemption-form button {
+	body.template-mon-compte div#container div#content main #tax-exemption-form-inprogress button {
 		width: 100%;
 	}
-	body.template-mon-compte div#container div#content main #tax-exemption-form button.transparent {
+	body.template-mon-compte div#container div#content main #tax-exemption-form-inprogress button.transparent {
+		margin-bottom: 16px;
+	}
+	body.template-mon-compte div#container div#content main #tax-exemption-form-next button {
+		width: 100%;
+	}
+	body.template-mon-compte div#container div#content main #tax-exemption-form-next button.transparent {
 		margin-bottom: 16px;
 	}
 
