@@ -65,18 +65,18 @@ if (!empty($current_organization)) {
 	$owner_str = $wdg_organization->get_name();
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
 		<div class="content align-left"><br />
-		<span>'.__('Forme juridique : ', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
-		<span>'.__('Num&eacute;ro SIRET : ', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
-		<span>'.__('Code APE : ', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
+		<span>'.__('Forme juridique :', 'yproject').'</span> '.$wdg_organization->get_legalform().'<br />
+		<span>'.__('Num&eacute;ro SIRET :', 'yproject').'</span> '.$wdg_organization->get_idnumber().'<br />
+		<span>'.__('Code APE :', 'yproject').'</span> '.$wdg_organization->get_ape().'<br />';
 	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
-		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA : ', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
+		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA :', 'yproject').'</span> '.$wdg_organization->get_vat().'<br />';
 	}
 	$lightbox_content .= 
-		'<span>'.__('Capital social : ', 'yproject').'</span>'.$wdg_organization->get_capital().' &euro;'.'<br /><br />
+		'<span>'.__('Capital social :', 'yproject').'</span> '.$wdg_organization->get_capital().' &euro;'.'<br /><br />
 		</div>
 		<div class="lightbox-organization-separator"></div>'.'<br/>
 		<div class="content align-left">
-		<span>'.__('Si&egrave;ge social : ', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_full_address_str().'<br />
+		<span>'.__('Si&egrave;ge social :', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_full_address_str().'<br />
 		<span></span>'.$wdg_organization->get_postal_code().' '.$wdg_organization->get_city().'<br />
 		<span></span>'.$wdg_organization->get_nationality().'<br />
 		</div>';
