@@ -112,6 +112,9 @@ msgstr "Valider"
 msgid "common.ACCEPT"
 msgstr "Accepter"
 
+msgid "common.READ_MORE"
+msgstr "Lire plus"
+
 # ############################## COMMON - FORMS - ERROR ################################
 msgid "common.forms.error.FILE_WRONG_FORMAT"
 msgstr "Ce fichier n'est pas au bon format."

@@ -667,7 +667,7 @@ var WDGNavFunctions = (function($) {
 						$( '#menu .btn-user' ).addClass( 'needs-authentication' );
 					}
 					$( '#menu .btn-user img' ).remove();
-					$( '#menu .btn-user' ).text( 'Mon compte' );
+					$( '#menu .btn-user' ).text( infoDecoded[ 'userinfos' ][ 'my_account_txt' ] );
 					
 					$( '#submenu-user.not-connected .menu-loading-init' ).hide();
 					$( '#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name' ).html( infoDecoded[ 'userinfos' ][ 'username' ] );
