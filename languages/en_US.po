@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-13 14:41+0100\n"
+"PO-Revision-Date: 2021-01-13 14:51+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1972,8 +1972,17 @@ msgid "Votes"
 msgstr "Votes"
 
 # THEME - projects/common/stats-public-votes.php
-msgid "personnes ont vot&eacute; sur ce projet."
-msgstr "persons have voted on this project."
+msgid "personnes ont &eacute;valu&eacute; ce projet."
+msgstr "persons have evaluated this project."
+
+msgid "Pr&eacute;investissements"
+msgstr "Preinvestment"
+
+msgid "Nombre de pr&eacute;investissements :"
+msgstr "Number of preinvestments:"
+
+msgid "Montant des pr&eacute;investissements :"
+msgstr "Amount of preinvestments:"
 
 msgid "Impact et coh&eacute;rence du projet"
 msgstr "Impact and consistency of the project"
@@ -1990,8 +1999,14 @@ msgstr "Social:"
 msgid "Autres :"
 msgstr "Others:"
 
+msgid "Notes attribu&eacute;es au projet"
+msgstr "Rates"
+
 msgid "Ces impacts sont-ils suffisants pour que ce projet soit en financement sur WEDOGOOD.co ?"
 msgstr "Are these impacts sufficient for this project to be funded on WEDOGOOD.co?"
+
+msgid "des &eacute;valuateurs ont donn&eacute; un avis positif (note sup&eacute;rieure &agrave; 2)"
+msgstr "of evaluators have given a positive notice (rate superior to 2)"
 
 msgid "personnes ont vot&eacute; oui"
 msgstr "persons have voted yes"
@@ -2464,8 +2479,11 @@ msgstr "Team"
 msgid "Statistiques"
 msgstr "Statistics"
 
-msgid "Les statistiques de vote et d&apos;investissement du projet"
-msgstr "The project vote and investment statistics"
+msgid "Les statistiques d'&eacute;valuation et d&apos;investissement du projet"
+msgstr "The project evaluation and investment statistics"
+
+msgid "&Eacute;valuations"
+msgstr "Evaluations"
 
 msgid "Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi&egrave;res sur la pr&eacute;vention du risque repr&eacute;sent&eacute; par l&apos;investissement participatif,"
 msgstr "In order to meet the financial authorities recommendations on the prevention of crowdfunding's risks,"
