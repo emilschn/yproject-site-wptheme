@@ -65,6 +65,6 @@ $pending_wire_investments = $WDGOrganization->get_pending_wire_investments();
 		
 	</div>
 </div>
-	
+
 <div id="ajax-loader-<?php echo $WDGOrganization->get_wpref(); ?>" class="center" style="text-align: center;"><img id="ajax-loader-img-<?php echo $WDGOrganization->get_wpref(); ?>" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
 

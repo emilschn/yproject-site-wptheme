@@ -682,6 +682,9 @@ msgstr "Ces documents sont imm&eacute;diatement transmis, puis v&eacute;rifi&eac
 msgid "account.identitydocs.AUTHENTICATION_TEXT_3"
 msgstr "En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne."
 
+msgid "account.identitydocs.SOME_FILES_DOUBLE"
+msgstr "Certains fichiers ont &eacute;t&eacute; transmis en doublon :"
+
 msgid "account.identitydocs.SMS_EXPLAINED"
 msgstr "Ce SMS sera envoy&eacute; uniquement lorsque tous les documents sont valid&eacute;s, ou en cas de documents incomplets ou refus&eacute;s."
 
@@ -768,6 +771,63 @@ msgstr "En d&eacute;faut"
 
 msgid "account.investments.orga.TITLE"
 msgstr "Investissements de"
+
+msgid "account.investments.RELOAD"
+msgstr "Recharger"
+
+msgid "account.investments.LOADING_PROBLEM"
+msgstr "Probl&egrave;me de chargement"
+
+msgid "account.investments.NO_INVESTMENTS"
+msgstr "Aucun investissement valid&eacute; pour l&apos;instant."
+
+msgid "account.investments.NO_INVESTMENTS_IF_VOTE"
+msgstr "Si vous avez investi sur un projet en cours d&apos;&eacute;valuation, cet investissement est encore en attente de validation."
+
+msgid "account.investments.MY_INVESTMENTS_ON"
+msgstr "Mes investissements sur"
+
+msgid "account.investments.INVESTMENT_DURATION"
+msgstr "Investissement sur"
+
+msgid "account.investments.INVESTMENT_DURATION_YEARS"
+msgstr "ans"
+
+msgid "account.investments.INVESTMENT_DURATION_STARTING"
+msgstr "&agrave; compter du"
+
+msgid "account.investments.ROYALTIES_RECEIVED_A"
+msgstr "Royalties re&ccedil;ues :"
+
+msgid "account.investments.RETURN_ON_INVESTMENT"
+msgstr "Retour sur investissement :"
+
+msgid "account.investments.FINISH_INVESTMENT"
+msgstr "Finaliser l'investissement"
+
+msgid "account.investments.INACCESSIBLE"
+msgstr "inaccessible"
+
+msgid "account.investments.QUARTERLY_PAYMENTS"
+msgstr "Versements trimestriels"
+
+msgid "account.investments.YEARS"
+msgstr "Ann&eacute;es"
+
+msgid "account.investments.TURNOVER"
+msgstr "Chiffre d&apos;affaires"
+
+msgid "account.investments.ROYALTIES"
+msgstr "Royalties"
+
+msgid "account.investments.OTHER_COMMITMENTS"
+msgstr "Autres &eacute;ch&eacute;ances &eacute;ventuelles jusqu&apos;&agrave; remboursement"
+
+msgid "account.investments.COMPANY_IS_COMMITED"
+msgstr "L&apos;entreprise est engag&eacute;e &agrave; vous verser des royalties jusqu&apos;&agrave; remboursement, sauf en cas d&apos;arr&ecirc;t d&eacute;finitif de l&apos;activit&eacute;."
+
+msgid "account.investments.ESTIMATED"
+msgstr "pr&eacute;visionnel"
 
 msgid "account.notifications.TITLE"
 msgstr "Notifications en provenance de WE DO GOOD"
@@ -868,6 +928,9 @@ msgstr "Historique de mes transactions"
 msgid "account.wallet.VIEW_TRANSACTIONS_HISTORY"
 msgstr "Voir l'historique de mes transactions"
 
+msgid "account.wallet.orga.TITLE"
+msgstr "Porte-monnaie &eacute;lectronique de"
+
 msgid "account.wallet.orga.AWAITING_AUTHENTICATION"
 msgstr "%s &euro; sont en attente d'authentification."
 
@@ -897,6 +960,21 @@ msgstr "en cours de versement sur le compte bancaire"
 
 msgid "account.wallet.orga.NO_MONEY_TRANSFER"
 msgstr "Aucun transfert d&apos;argent."
+
+msgid "account.wallet.transactions.DOWNLOAD_HISTORY"
+msgstr "T&eacute;l&eacute;charger mon historique"
+
+msgid "account.wallet.transactions.VIEW_ELEMENT_ON_ELEMENTS"
+msgstr "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments"
+
+msgid "account.wallet.transactions.VIEW_ELEMENT_ON_ELEMENTS_EMPTY"
+msgstr "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ments"
+
+msgid "account.wallet.transactions.NAV_PREVIOUS"
+msgstr "Pr&eacute;c&eacute;dent"
+
+msgid "account.wallet.transactions.NAV_NEXT"
+msgstr "Suivant"
 
 msgid "account.wallet.transactions.NONE"
 msgstr "Aucune transaction"
@@ -1371,6 +1449,49 @@ msgstr "Je viens d'investir sur le projet"
 msgid "share-buttons.email.SUBJECT"
 msgstr "Un projet sur lequel investir !"
 
+# ############################## forms - common ################################
+msgid "forms.file.DOCUMENT_ACCEPTED_BY_PROVIDER"
+msgstr "Document valid&eacute; par notre prestataire"
+
+msgid "forms.file.DOCUMENT_UNDER_VALIDATION"
+msgstr "Document en cours de validation par notre prestataire"
+
+msgid "forms.file.REFUSED_BY_PAYMENT_PROVIDER"
+msgstr "Le fichier a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement."
+
+msgid "forms.file.PREVIEW_SENT"
+msgstr "Aper&ccedil;u du fichier envoy&eacute; le"
+
+msgid "forms.file.FILE_PREVIEW"
+msgstr "Aper&ccedil;u du fichier"
+
+msgid "forms.file.REPLACE_SENT_FILE"
+msgstr "Vous pouvez remplacer votre fichier envoy&eacute;. Il sera revalid&eacute; par notre prestataire."
+
+msgid "forms.file.FILE_SIZE_INFO"
+msgstr "Le fichier doit avoir une taille inf&eacute;rieure à 8 Mo."
+
+msgid "forms.file.FILE_TYPE_INFO"
+msgstr "Les formats de documents autoris&eacute;s sont : PDF, JPG, JPEG, GIF et PNG."
+
+msgid "forms.file.DRAG_FILE_HERE"
+msgstr "Glisser mon fichier ici"
+
+msgid "forms.file.REPLACE_FILE"
+msgstr "Remplacer mon fichier"
+
+msgid "forms.file.IMPORT_FILE"
+msgstr "Importer mon fichier"
+
+msgid "forms.file.TAKE_PICTURE"
+msgstr "Je prends une photo"
+
+msgid "forms.file.I_IMPORT_A_FILE"
+msgstr "J'importe un fichier"
+
+msgid "forms.file.IMPORT_A_FILE"
+msgstr "Importer un fichier"
+
 # ############################## form - user-bank ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
 msgstr "Nom du propri&eacute;taire du compte"
@@ -1403,8 +1524,14 @@ msgstr "E-mail"
 msgid "form.user-details.FIRSTNAME"
 msgstr "Pr&eacute;nom"
 
+msgid "form.user-details.FIRSTNAME_DESCRIPTION"
+msgstr "Merci de renseigner votre vrai pr&eacute;nom, sans abr&eacute;viation"
+
 msgid "form.user-details.LASTNAME"
 msgstr "Nom"
+
+msgid "form.user-details.LASTNAME_DESCRIPTION"
+msgstr "Merci de renseigner votre vrai nom, sans abr&eacute;viation"
 
 msgid "form.user-details.USENAME"
 msgstr "Nom d'usage"

@@ -9,7 +9,7 @@ $pending_amount = $WDGOrganization->get_pending_rois_amount();
 
 ?>
 
-<h2>Porte-monnaie électronique de <?php echo $WDGOrganization->get_name(); ?></h2>
+<h2><?php _e( 'account.wallet.orga.TITLE', 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
 
 
 <div class="db-form v3 align-left" id="item-body-wallet">
