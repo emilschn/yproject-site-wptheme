@@ -140,8 +140,13 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	}
 	
 	public function get_lemonway_amount() {
-		$WDGUser_current = WDGUser::current();
-		return $WDGUser_current->get_lemonway_wallet_amount();
+		if ( $this->current_investment->get_session_user_type() == 'user' ) {
+			$WDGUser_current = WDGUser::current();
+			return $WDGUser_current->get_lemonway_wallet_amount();
+		} else {
+			$WDGOrganization = new WDGOrganization( $this->current_investment->get_session_user_type() );
+			return $WDGOrganization->get_available_rois_amount();
+		}
 	}
 	
 	public function get_remaining_amount() {
