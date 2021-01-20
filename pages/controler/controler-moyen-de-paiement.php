@@ -224,12 +224,14 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		if ( !isset( $this->can_use_wallet ) ) {
 			$this->can_use_wallet = FALSE;
 			$this->can_use_card_and_wallet = TRUE;
-			if ( !$this->current_investment->has_token() && ATCF_CrowdFunding::get_platform_context() == "wedogood" ) {
-				if ( $this->current_investment->get_session_user_type() == 'user' ) {
-					$WDGUser_current = WDGUser::current();
-					$this->can_use_wallet = $WDGUser_current->can_pay_with_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
-					$this->can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
-				}
+			if ( $this->current_investment->get_session_user_type() == 'user' ) {
+				$WDGUser_current = WDGUser::current();
+				$this->can_use_wallet = $WDGUser_current->can_pay_with_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
+				$this->can_use_card_and_wallet = $WDGUser_current->can_pay_with_card_and_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
+			} else {
+				$WDGOrganization = new WDGOrganization( $this->current_investment->get_session_user_type() );
+				$this->can_use_wallet = $WDGOrganization->can_pay_with_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
+				$this->can_use_card_and_wallet = $WDGOrganization->can_pay_with_card_and_wallet( $this->current_investment->get_session_amount(), $this->current_campaign );
 			}
 		}
 	}
