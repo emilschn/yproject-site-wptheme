@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-14 17:08+0100\n"
+"PO-Revision-Date: 2021-01-20 12:04+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1554,6 +1554,9 @@ msgstr "I wish to receive the monthly newsletter"
 msgid "form.user-details.YOU_ARE"
 msgstr "You are"
 
+msgid "form.user-details.GENDER"
+msgstr "Gender"
+
 msgid "form.user-details.A_WOMAN"
 msgstr "a woman"
 
@@ -1640,6 +1643,12 @@ msgstr "Error in the city field."
 
 msgid "form.user-details.SAVE_SUCCESS"
 msgstr "Your personal information has been saved."
+
+msgid "form.user-details.error.YOU_HAVE_TO_FILL_THE_FIELD"
+msgstr "You have to fill in the field"
+
+msgid "form.user-details.error.ONLY_MAJOR"
+msgstr "Seules les personnes majeures peuvent investir."
 
 # ############################## form - organization-details
 # ################################

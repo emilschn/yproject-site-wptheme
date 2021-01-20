@@ -1542,6 +1542,9 @@ msgstr "Je souhaite recevoir la newsletter WE DO GOOD mensuelle"
 msgid "form.user-details.YOU_ARE"
 msgstr "Vous &ecirc;tes"
 
+msgid "form.user-details.GENDER"
+msgstr "Genre"
+
 msgid "form.user-details.A_WOMAN"
 msgstr "une femme"
 
@@ -1628,6 +1631,12 @@ msgstr "Votre ville n'est pas correcte."
 
 msgid "form.user-details.SAVE_SUCCESS"
 msgstr "Vos informations ont &eacute;t&eacute; enregistr&eacute;es avec succ&egrave;s."
+
+msgid "form.user-details.error.YOU_HAVE_TO_FILL_THE_FIELD"
+msgstr "Vous devez renseigner le champ"
+
+msgid "form.user-details.error.ONLY_MAJOR"
+msgstr "Seules les personnes majeures peuvent investir."
 
 # ############################## form - organization-details ################################
 msgid "form.organization-details.NAME"
