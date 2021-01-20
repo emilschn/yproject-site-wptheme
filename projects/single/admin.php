@@ -2,6 +2,7 @@
 global $campaign, $language_list;
 $WDGUser_current = WDGUser::current();
 $page_dashboard = home_url( '/tableau-de-bord/?campaign_id=' . $campaign->ID );	// Tableau de bord
+$lang_list = $campaign->get_lang_list();
 ?>
 <div class="project-admin">
 	<a href="<?php echo $page_dashboard; ?>" class="btn-dashboard"><?php _e('Tableau de bord', 'yproject'); ?></a>
@@ -17,6 +18,15 @@ $page_dashboard = home_url( '/tableau-de-bord/?campaign_id=' . $campaign->ID );	
 			</select>
 			<button type="submit" class="add-button">+</button>
 		</form>
+
+		<?php if ( count( $lang_list ) > 0 ): ?>
+			<?php foreach ( $lang_list as $lang ): ?>
+				<?php $language_name = $language_list[ $lang ]; ?>
+				<span class="remove-lang-container">- <?php echo $language_name; ?> (<span id="remove-lang-<?php echo $lang; ?>"><a href="#" class="remove-lang" data-lang="<?php echo $lang; ?>" data-lang-str="<?php echo $language_name; ?>"><?php _e( 'Supprimer', 'yproject' ); ?></a></span>)</span><br>
+			<?php endforeach; ?>
+			<br>
+		<?php endif; ?>
+
 		<?php if ( $WDGUser_current->is_admin() ): ?>
 		<button id="wdg-send-project-notification-to-project" class="wdg-send-project-notification"><?php _e( "J'ai fini ma relecture", 'yproject'); ?></button>
 		<?php elseif ( WDGCampaignNotifications::can_ask_proofreading( $campaign->ID ) ): ?>

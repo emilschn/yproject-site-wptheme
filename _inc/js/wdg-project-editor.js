@@ -16,9 +16,9 @@ var ProjectEditor = (function($) {
 				$("#wdg-edit-project-add-lang").click(function() {
 					ProjectEditor.clickShowAddLang();
 				});
-				$("#wdg-edit-project-add-lang button.add-button").click(function() {
-					ProjectEditor.clickAddLang();
-				});
+				$( 'a.remove-lang' ).click( function() {
+					ProjectEditor.clickRemoveLang( $( this ).data( 'lang' ), $( this ).data( 'lang-str' ) );
+				} );
 
 				if ( $( '#wdg-remove-cache' ).length > 0 ) {
 					$( '#wdg-remove-cache' ).show();
@@ -67,9 +67,23 @@ var ProjectEditor = (function($) {
 			$("#wdg-edit-project-add-lang select, #wdg-edit-project-add-lang button.add-button").show();
 		},
 		
-		//Ajoute effectivement une langue
-		clickAddLang: function() {
-			
+		//Supprime une langue
+		clickRemoveLang: function( sLangId, sLangLabel ) {
+			var confirmRemove = window.confirm( "Vous êtes sur le point de supprimer la langue " +sLangLabel+ " ainsi que ses contenus. Êtes-vous sûr de vouloir procéder à la suppression ?" );
+			if ( confirmRemove ) {
+				$( '#remove-lang-' + sLangId ).text( 'En cours...' );
+				$.ajax({
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'data': {
+						'action':	'remove_project_lang',
+						'id_campaign':  $("#content").data("campaignid"),
+						'lang':	sLangId
+					}
+				}).done( function() {
+					window.location.reload(false); 
+				});
+			}
 		},
 		
 		//Permet de switcher du mode édition au mode prévisualisation
@@ -79,6 +93,7 @@ var ProjectEditor = (function($) {
 				ProjectEditor.initEdition();
 				$(clickedElement).addClass("btn-edit-validate");
 				$("#wdg-edit-project-add-lang").show();
+				$('span.remove-lang-container').show();
 				// on déplace la div d'erreur 
 				var divh = $("#wdg-edit-project-add-lang").height() + 5;
 				$( '.project-admin .project-errors').css('top', divh + 'px');
@@ -90,6 +105,7 @@ var ProjectEditor = (function($) {
 					ProjectEditor.stopEdition();
 					$(clickedElement).removeClass("btn-edit-validate");
 					$("#wdg-edit-project-add-lang").hide();
+					$('span.remove-lang-container').hide();
 					$( '.project-admin .project-errors').css('top', '0px');
 					var background = $("#project-banner-picture").css('background-image');
 					if(background){
