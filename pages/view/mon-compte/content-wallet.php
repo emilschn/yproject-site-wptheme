@@ -113,6 +113,13 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 
 
 		<h3><?php _e( 'account.wallet.TRANSACTIONS_HISTORY', 'yproject' ); ?></h3>
+		<span class="hidden">
+			<span id="transaction-trans-download_history"><?php _e( 'account.wallet.transactions.DOWNLOAD_HISTORY', 'yproject' ); ?></span>
+			<span id="transaction-trans-info_elements"><?php _e( 'account.wallet.transactions.VIEW_ELEMENT_ON_ELEMENTS', 'yproject' ); ?></span>
+			<span id="transaction-trans-info_elements_empty"><?php _e( 'account.wallet.transactions.VIEW_ELEMENT_ON_ELEMENTS_EMPTY', 'yproject' ); ?></span>
+			<span id="transaction-trans-nav_previous"><?php _e( 'account.wallet.transactions.NAV_PREVIOUS', 'yproject' ); ?></span>
+			<span id="transaction-trans-nav_next"><?php _e( 'account.wallet.transactions.NAV_NEXT', 'yproject' ); ?></span>
+		</span>
 		<div class="user-transactions-init db-form v3 align-left">
 			<button type="submit" class="button blue" data-userid="<?php echo $page_controler->get_current_user()->get_wpref(); ?>"><?php _e( 'account.wallet.VIEW_TRANSACTIONS_HISTORY', 'yproject' ); ?></button>
 			<div class="loading align-center hidden">

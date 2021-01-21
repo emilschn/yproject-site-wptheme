@@ -70,7 +70,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<?php if ( $page_controler->can_use_wallet() ): ?>
 						<span><?php _e( "Vous pouvez directement choisir votre porte-monnaie &eacute;lectronique comme moyen de paiement, pour gagner du temps.", 'yproject' ); ?></span><br>
 					<?php endif; ?>
-					<span><?php _e( "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom.", 'yproject' ); ?></span><br>
+					<span><?php _e( 'account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME', 'yproject' ); ?></span><br>
 					<span><?php _e( 'invest.mean-payment.WIRE_DETAILS', 'yproject' ); ?></span>
 				</div>
 			</a>

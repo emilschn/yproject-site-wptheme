@@ -292,7 +292,7 @@
 			<div class="wdg-lightbox-padder">
 				<span><?php _e( 'terms.UPDATE', 'yproject' ); ?></span>
 				<div class="validate-terms-excerpt">
-					<?php echo wpautop( stripslashes( $edd_options[WDGUser::$edd_general_terms_excerpt])); ?>
+					<?php echo wpautop( stripslashes( WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_term_extracts, 'terms_general_excerpt' ) ) ); ?>
 				</div>
 				<form method="POST">
 					<input type="hidden" name="action" value="validate-terms" />

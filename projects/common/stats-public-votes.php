@@ -1,11 +1,11 @@
 <?php function print_vote_results($vote_results) { ?>
 
 <?php if ($vote_results['count_voters'] > 0): ?>
-<strong><?php echo $vote_results['count_voters']; ?></strong> <?php _e('personnes ont &eacute;valu&eacute; sur ce projet.', 'yproject'); ?><br />
+<strong><?php echo $vote_results['count_voters']; ?></strong> <?php _e('personnes ont &eacute;valu&eacute; ce projet.', 'yproject'); ?><br />
 
 <h3><?php _e( "Pr&eacute;investissements", 'yproject' ); ?></h3>
-	<?php _e( "Nombre de pr&eacute;investissements :" ); ?> <?php echo $vote_results[ 'count_preinvestments' ]; ?><br>
-	<?php _e( "Montant des pr&eacute;investissements :" ); ?> <?php echo $vote_results[ 'amount_preinvestments' ]; ?> &euro;<br>
+	<?php _e( "Nombre de pr&eacute;investissements :", 'yproject' ); ?> <?php echo $vote_results[ 'count_preinvestments' ]; ?><br>
+	<?php _e( "Montant des pr&eacute;investissements :", 'yproject' ); ?> <?php echo $vote_results[ 'amount_preinvestments' ]; ?> &euro;<br>
 	<br>
 
 <h3><?php _e('Impact et coh&eacute;rence du projet', 'yproject'); ?></h3>

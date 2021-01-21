@@ -49,6 +49,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"editable"		=> true
 			));
 
+			DashboardUtility::create_field(array(
+				"id"			=> "new_legal_procedure",
+				"type"			=> "select",
+				"label"			=> __( "Proc&eacute;dure de recouvrement en cours", 'yproject' ),
+				"value"			=> $page_controler->get_campaign()->get_legal_procedure(),
+				"options_id"	=> array_keys( ATCF_Campaign::$legal_procedure_list ),
+				"options_names"	=> array_values( ATCF_Campaign::$legal_procedure_list ),
+				"editable"		=> $page_controler->can_access_admin(),
+				"admin_theme"	=> true
+			));
 
 		$terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
 		$term_category_id = $terms_category[0]->term_id;

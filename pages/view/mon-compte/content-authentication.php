@@ -5,5 +5,5 @@
 <br>
 
 <div class="center">
-	<?php echo wpautop( ATCF_CrowdFunding::get_translated_setting( 'lemonway_generalities' ) ); ?>
+	<?php echo wpautop( WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_info_lemonway, 'lemonway_generalities' ) ); ?>
 </div>

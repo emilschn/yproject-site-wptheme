@@ -228,6 +228,15 @@ div#content.version-3 div.project-admin > div.btn-edit#wdg-remove-cache:before {
 	background: #000;
 	cursor: pointer;
 }
+div#content.version-3 div.project-admin span.remove-lang-container {
+	display: none;
+}
+div#content.version-3 div.project-admin a.remove-lang {
+	padding: 0px;
+	text-transform: none;
+	background: none;
+	color: #EA4F51;
+}
 
 div#content div.project-admin div.intro {
 	width: 210px;

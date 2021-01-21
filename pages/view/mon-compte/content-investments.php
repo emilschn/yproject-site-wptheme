@@ -102,6 +102,28 @@ if ( $WDGUser_current->is_admin() ){
 	
 </div>
 
-	
+
+<span class="hidden">
+	<span id="invest-trans-reload"><?php _e( 'account.investments.RELOAD', 'yproject' ); ?></span>
+	<span id="invest-trans-loading_problem"><?php _e( 'account.investments.LOADING_PROBLEM', 'yproject' ); ?></span>
+	<span id="invest-trans-no_investments"><?php _e( 'account.investments.NO_INVESTMENTS', 'yproject' ); ?></span>
+	<span id="invest-trans-no_investments_if_vote"><?php _e( 'account.investments.NO_INVESTMENTS_IF_VOTE', 'yproject' ); ?></span>
+	<span id="invest-trans-my_investments_on"><?php _e( 'account.investments.MY_INVESTMENTS_ON', 'yproject' ); ?></span>
+	<span id="invest-trans-investiement_duration"><?php _e( 'account.investments.INVESTMENT_DURATION', 'yproject' ); ?></span>
+	<span id="invest-trans-investiement_duration_years"><?php _e( 'account.investments.INVESTMENT_DURATION_YEARS', 'yproject' ); ?></span>
+	<span id="invest-trans-investiement_duration_starting"><?php _e( 'account.investments.INVESTMENT_DURATION_STARTING', 'yproject' ); ?></span>
+	<span id="invest-trans-royalties_received"><?php _e( 'account.investments.ROYALTIES_RECEIVED_A', 'yproject' ); ?></span>
+	<span id="invest-trans-return_on_investment"><?php _e( 'account.investments.RETURN_ON_INVESTMENT', 'yproject' ); ?></span>
+	<span id="invest-trans-contract"><?php _e( 'invest.header.steps.CONTRACT', 'yproject' ); ?></span>
+	<span id="invest-trans-finish_investment"><?php _e( 'account.investments.FINISH_INVESTMENT', 'yproject' ); ?></span>
+	<span id="invest-trans-inaccessible"><?php _e( 'account.investments.INACCESSIBLE', 'yproject' ); ?></span>
+	<span id="invest-trans-quarterly_payments"><?php _e( 'account.investments.QUARTERLY_PAYMENTS', 'yproject' ); ?></span>
+	<span id="invest-trans-years"><?php _e( 'account.investments.YEARS', 'yproject' ); ?></span>
+	<span id="invest-trans-turnover"><?php _e( 'account.investments.TURNOVER', 'yproject' ); ?></span>
+	<span id="invest-trans-royalties"><?php _e( 'account.investments.ROYALTIES', 'yproject' ); ?></span>
+	<span id="invest-trans-estimated"><?php _e( 'account.investments.ESTIMATED', 'yproject' ); ?></span>
+	<span id="invest-trans-other_commitments"><?php _e( 'account.investments.OTHER_COMMITMENTS', 'yproject' ); ?></span>
+	<span id="invest-trans-company_is_commited"><?php _e( 'account.investments.COMPANY_IS_COMMITED', 'yproject' ); ?></span>
+</span>
 <div id="ajax-loader-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="center" style="text-align: center;"><img id="ajax-loader-img-<?php echo $WDGUser_displayed->get_wpref(); ?>" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
 

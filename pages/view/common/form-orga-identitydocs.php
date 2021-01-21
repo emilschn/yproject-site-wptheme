@@ -18,7 +18,7 @@
 	<?php $kyc_duplicates = $WDGOrganizationIdentityDocsForm->getDuplicates(); ?>
 	<?php if ( !empty( $kyc_duplicates ) ): ?>
 		<div class="wdg-message error">
-			<?php _e( "Certains fichiers ont &eacute;t&eacute; transmis en doublon :", 'yproject' ); ?><br>
+			<?php _e( 'account.identitydocs.SOME_FILES_DOUBLE', 'yproject' ); ?><br>
 			<?php foreach ( $kyc_duplicates as $str_duplicate ): ?>
 				- <?php echo $str_duplicate; ?><br>
 			<?php endforeach; ?>

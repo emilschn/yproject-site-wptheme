@@ -110,7 +110,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 // FILTERS
 /******************************************************************************/
 	private function prepare_filters() {
-		$this->filters_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$filters_html_key, WDG_Page_Controler_ProjectList::$filters_html_version );
+		$this->filters_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$filters_html_key . $this->get_cache_html_key_suffix(), WDG_Page_Controler_ProjectList::$filters_html_version );
 		if ( empty( $this->filters_html ) ) {
 			$this->filters_list = array();
 
@@ -123,12 +123,6 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 			) );
 
 			$this->filters_list[ 'regions' ] = atcf_get_regions();
-
-			$this->filters_list[ 'status' ] = array(
-				'vote'		=> __( 'project.status.VOTE', 'yproject' ),
-				'collecte'	=> __( 'project.status.FUNDING', 'yproject' ),
-				'funded'	=> __( 'project.status.FUNDED', 'yproject' )	
-			);
 
 			$terms_activity = get_terms('download_category', array( 'slug' => 'types', 'hide_empty' => false ) );
 			$term_activity_id = $terms_activity[0]->term_id;
@@ -146,10 +140,15 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	public function set_filters_html( $html ) {
 		$this->filters_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$filters_html_key, $html, WDG_Page_Controler_ProjectList::$filters_html_duration, WDG_Page_Controler_ProjectList::$filters_html_version );
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$filters_html_key . $this->get_cache_html_key_suffix(), $html, WDG_Page_Controler_ProjectList::$filters_html_duration, WDG_Page_Controler_ProjectList::$filters_html_version );
 	}
 	
 	public function get_filters_list() {
+		$this->filters_list[ 'status' ] = array(
+			'vote'		=> __( 'project.status.VOTE', 'yproject' ),
+			'collecte'	=> __( 'project.status.FUNDING', 'yproject' ),
+			'funded'	=> __( 'project.status.FUNDED', 'yproject' )	
+		);
 		return $this->filters_list;
 	}
 	

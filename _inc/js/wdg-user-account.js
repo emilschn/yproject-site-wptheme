@@ -68,15 +68,15 @@ UserAccountDashboard.prototype.initMenu = function() {
 					buttons: [
 						{
 							extend: 'excelHtml5',
-							text: 'Télécharger mon historique',
+							text: $( 'span#transaction-trans-download_history' ).text(),
 						}
 					],
 					language: {
 						"sProcessing":     "Traitement en cours...",
 						"sSearch":         "Rechercher&nbsp;:",
 						"sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
-						"sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-						"sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ments",
+						"sInfo":           $( 'span#transaction-trans-info_elements' ).text(),
+						"sInfoEmpty":      $( 'span#transaction-trans-info_elements_empty' ).text(),
 						"sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
 						"sInfoPostFix":    "",
 						"sLoadingRecords": "Chargement en cours...",
@@ -84,8 +84,8 @@ UserAccountDashboard.prototype.initMenu = function() {
 						"sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau",
 						"oPaginate": {
 							"sFirst":      "Premier",
-							"sPrevious":   "Pr&eacute;c&eacute;dent",
-							"sNext":       "Suivant",
+							"sPrevious":   $( 'span#transaction-trans-nav_previous' ).text(),
+							"sNext":       $( 'span#transaction-trans-nav_next' ).text(),
 							"sLast":       "Dernier"
 						},
 						"oAria": {
@@ -153,7 +153,7 @@ UserAccountDashboard.prototype.initProjectList = function() {
 		self.displayUserInvestments( result, userID, userType );
 
 	}).fail(function() {
-		var sBuffer = '<div id="container-reload-investments-' + userID + '" class="db-form v3"><button id="reload-investments-' + userID + '" class="button blue">Recharger</button></div>';
+		var sBuffer = '<div id="container-reload-investments-' + userID + '" class="db-form v3"><button id="reload-investments-' + userID + '" class="button blue">' +$('#invest-trans-reload').text()+ '</button></div>';
 		$( '#ajax-loader-' + userID ).after( sBuffer );
 		$( '#ajax-loader-img-' + userID ).hide();
 		$( '#reload-investments-' + userID ).click( function() { self.reloadUserInvestments(); } );
@@ -185,7 +185,7 @@ UserAccountDashboard.prototype.reloadUserInvestments = function() {
 		self.displayUserInvestments( result, userID, userType );
 
 	}).fail(function() {
-		sBuffer = '<div class="align-center">Problème de chargement</div>';
+		sBuffer = '<div class="align-center">'+$('#invest-trans-loading_problem').text()+'</div>';
 	});
 };
 
@@ -207,7 +207,7 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 			var oCampaignItem = aInvestmentCampaigns[ nCampaignID ];
 			if ( oCampaignItem[ 'name' ] !== undefined && oCampaignItem[ 'name' ] !== null ) {
 				var bCountProject = false;
-				var sCampaignBuffer = '<h3 class="has-margin-top">Mes investissements sur ' + oCampaignItem[ 'name' ] + '</h3>';
+				var sCampaignBuffer = '<h3 class="has-margin-top">' + $('#invest-trans-my_investments_on').text() + ' ' + oCampaignItem[ 'name' ] + '</h3>';
 				var aCampaignInvestments = oCampaignItem[ 'items' ];
 				for ( var nIndex in aCampaignInvestments ) {
 					var oInvestmentItem = aCampaignInvestments[ nIndex ];
@@ -237,37 +237,37 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 					sCampaignBuffer += '</div>';
 
 					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += 'Investissement sur ' + oCampaignItem[ 'funding_duration' ] + ' ans<br>';
+					sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem[ 'funding_duration' ] + ' '+$('#invest-trans-investiement_duration_years').text()+'<br>';
 					if ( oCampaignItem[ 'start_date' ] !== '' ) {
-						sCampaignBuffer += 'à compter du ' + oCampaignItem[ 'start_date' ];
+						sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem[ 'start_date' ];
 					}
 					sCampaignBuffer += '</div>';
 
 					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += 'Royalties reçues :<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
+					sCampaignBuffer += $('#invest-trans-royalties_received').text() + '<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
 					sCampaignBuffer += '</div>';
 
 					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += 'Retour sur investissement :<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
+					sCampaignBuffer += $('#invest-trans-return_on_investment').text() + '<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
 					sCampaignBuffer += '</div>';
 
 					if ( oInvestmentItem[ 'contract_file_path' ] != '' ) {
 						sCampaignBuffer += '<div class="align-center single-line">';
 						sCampaignBuffer += '<a href="' +oInvestmentItem[ 'contract_file_path' ]+ '" download="' +oInvestmentItem[ 'contract_file_name' ]+ '" class="button blue-pale" title="T&eacute;l&eacute;charger le contrat">';
-						sCampaignBuffer += 'Contrat';
+						sCampaignBuffer += $('#invest-trans-contract').text();
 						sCampaignBuffer += '</a>';
 						sCampaignBuffer += '<div class="clear"></div>';
 						sCampaignBuffer += '</div>';
 					} else if ( oInvestmentItem[ 'conclude-investment-url' ] != '' ) {
 						sCampaignBuffer += '<div class="align-center single-line">';
 						sCampaignBuffer += '<a href="' +oInvestmentItem[ 'conclude-investment-url' ]+ '" class="button red" title="Finaliser investissement">';
-						sCampaignBuffer += 'Finaliser l&apos;investissement';
+						sCampaignBuffer += $('#invest-trans-finish_investment').text();
 						sCampaignBuffer += '</a>';
 						sCampaignBuffer += '<div class="clear"></div>';
 						sCampaignBuffer += '</div>';
 					} else {
 						sCampaignBuffer += '<div class="align-center">';
-						sCampaignBuffer += 'Contrat<br>inaccessible';
+						sCampaignBuffer += $('#invest-trans-contract').text() + '<br>' + $('#invest-trans-inaccessible').text();
 						sCampaignBuffer += '<div class="clear"></div>';
 						sCampaignBuffer += '</div>';
 					}
@@ -284,29 +284,29 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 						
 						sCampaignBuffer += '<hr>';
 						
-						sCampaignBuffer += '<div>Versements trimestriels</div>';
+						sCampaignBuffer += '<div>'+$('#invest-trans-quarterly_payments').text()+'</div>';
 						
 						sCampaignBuffer += '<table class="roi-table">';
 						for ( var i = 0; i < nYears; i++ ) {
 							var oYearItem = oInvestmentItem[ 'rois_by_year' ][ i ];
 							sCampaignBuffer += '<tr class="year-title yearly-title">';
-							sCampaignBuffer += '<td>Ann&eacute;e ' +(i+1)+ '</td>';
+							sCampaignBuffer += '<td>'+$('#invest-trans-years').text()+' ' +(i+1)+ '</td>';
 							sCampaignBuffer += '<td></td>';
 							sCampaignBuffer += '</tr>';
 							
 							sCampaignBuffer += '<tr class="yearly-title">';
-							sCampaignBuffer += '<td>Chiffre d&apos;affaires</td>';
+							sCampaignBuffer += '<td>'+$('#invest-trans-turnover').text()+'</td>';
 							if ( oYearItem[ 'estimated_turnover' ] != '-' ) {
-								sCampaignBuffer += '<td>' +oYearItem[ 'amount_turnover' ]+ ' / ' +oYearItem[ 'estimated_turnover' ]+ ' <span>(pr&eacute;visionnel)</span></td>';
+								sCampaignBuffer += '<td>' +oYearItem[ 'amount_turnover' ]+ ' / ' +oYearItem[ 'estimated_turnover' ]+ ' <span>('+$('#invest-trans-estimated').text()+')</span></td>';
 							} else {
 								sCampaignBuffer += '<td></td>';
 							}
 							sCampaignBuffer += '</tr>';
 							
 							sCampaignBuffer += '<tr class="yearly-title">';
-							sCampaignBuffer += '<td>Royalties</td>';
+							sCampaignBuffer += '<td>'+$('#invest-trans-royalties').text()+'</td>';
 							if ( oYearItem[ 'estimated_rois' ] != '-' ) {
-								sCampaignBuffer += '<td>' +oYearItem[ 'amount_rois' ]+ ' / ' +oYearItem[ 'estimated_rois' ]+ ' <span>(pr&eacute;visionnel)</span></td>';
+								sCampaignBuffer += '<td>' +oYearItem[ 'amount_rois' ]+ ' / ' +oYearItem[ 'estimated_rois' ]+ ' <span>('+$('#invest-trans-estimated').text()+')</span></td>';
 							} else {
 								sCampaignBuffer += '<td></td>';
 							}
@@ -335,10 +335,10 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 							sCampaignBuffer += '<tr class="year-title">';
 							sCampaignBuffer += '<td></td>';
 							sCampaignBuffer += '<td class="status future">';
-							sCampaignBuffer += 'Autres échéances éventuelles jusqu&apos;à remboursement';
+							sCampaignBuffer += $('#invest-trans-other_commitments').text();
 							sCampaignBuffer += '<div class="tooltip">';
 							sCampaignBuffer += '<button type="button">i</button>';
-							sCampaignBuffer += '<div class="tooltip-text">L&apos;entreprise est engagée à vous verser des royalties jusqu&apos;à remboursement, sauf en cas d&apos;arrêt définitif de l&apos;activité.</div>';
+							sCampaignBuffer += '<div class="tooltip-text">'+$('#invest-trans-company_is_commited').text()+'</div>';
 							sCampaignBuffer += '</div>';
 							sCampaignBuffer += '</td>';
 							sCampaignBuffer += '</tr>';
@@ -367,8 +367,8 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 	
 	if ( result === '' || aInvestmentCampaigns.length === 0 ) {
 		sBuffer = '<div class="align-center">';
-		sBuffer += 'Aucun investissement valid&eacute; pour l&apos;instant.<br>';
-		sBuffer += 'Si vous avez investi sur un projet en cours d&apos;&eacute;valuation, cet investissement est encore en attente de validation.';
+		sBuffer += $( '#invest-trans-no_investments' ).text() + '<br>';
+		sBuffer += $( '#invest-trans-no_investments_if_vote' ).text();
 		sBuffer += '</div>';
 	} else {
 		$( '#investment-synthesis-' + userID + ' .publish-count' ).text( nInvestmentPublishCount );
@@ -424,31 +424,39 @@ UserAccountDashboard.prototype.toggleRois = function(){
  * Affiche le formulaire de dispense
  */
 UserAccountDashboard.prototype.initTaxExemption = function(){
-	$( '#display-tax-exemption-form' ).click( function() {
-		if ( $( '#tax-exemption-form' ).is(':visible')) {
-			$( '#tax-exemption-form' ).slideUp( 300 );
+	var slideTaxExemptionForm = function(event){		
+		var year = $( this ).data('year');
+		if ( $( event.data.showdiv + year ).is(':visible')  ) {
+			$( event.data.showdiv + year ).slideUp( 300 );
 		} else {
-			$( '#tax-exemption-form' ).slideDown( 300 );
-		}		
-		$( '#upload-tax-exemption-form' ).slideUp( 300 );
-	} );
-	
-	$( '#tax-exemption-form button.half.left' ).click( function() {
-		$( '#tax-exemption-form' ).slideUp( 300 );
-	} );
-
-	
-	$( '#display-upload-tax-exemption-form' ).click( function() {		
-		if ( $( '#upload-tax-exemption-form' ).is(':visible')) {
-			$( '#upload-tax-exemption-form' ).slideUp( 300 );
-		} else {
-			$( '#upload-tax-exemption-form' ).slideDown( 300 );
+			$( event.data.showdiv + year ).slideDown( 300 );
+		}	
+		if( year == 'inprogress' ){
+			$( event.data.showdiv + 'next' ).slideUp( 300 );
+		}else{
+			$( event.data.showdiv + 'inprogress' ).slideUp( 300 );
 		}
-		$( '#tax-exemption-form' ).slideUp( 300 );
-	} );
+		$( event.data.hidediv + 'next' ).slideUp( 300 );
+		$( event.data.hidediv + 'inprogress' ).slideUp( 300 );
+	}
+
+	$( '#display-tax-exemption-form-inprogress' ).on("click", {showdiv:"#tax-exemption-form-", hidediv:"#upload-tax-exemption-form-"}, slideTaxExemptionForm);
+	$( '#display-tax-exemption-form-next' ).on("click", {showdiv:"#tax-exemption-form-", hidediv:"#upload-tax-exemption-form-"}, slideTaxExemptionForm);
 	
-	$( '#upload-tax-exemption-form button.half.left' ).click( function() {
-		$( '#upload-tax-exemption-form' ).slideUp( 300 );
+	$( '#display-upload-tax-exemption-form-inprogress' ).on("click", {showdiv:"#upload-tax-exemption-form-", hidediv:"#tax-exemption-form-"}, slideTaxExemptionForm);
+	$( '#display-upload-tax-exemption-form-next' ).on("click", {showdiv:"#upload-tax-exemption-form-", hidediv:"#tax-exemption-form-"}, slideTaxExemptionForm);
+
+	$( '#tax-exemption-form-inprogress button.half.left' ).click( function() {
+		$( '#tax-exemption-form-inprogress' ).slideUp( 300 );
+	} );
+	$( '#tax-exemption-form-next button.half.left' ).click( function() {
+		$( '#tax-exemption-form-next' ).slideUp( 300 );
+	} );
+	$( '#upload-tax-exemption-form-inprogress button.half.left' ).click( function() {
+		$( '#upload-tax-exemption-form-inprogress' ).slideUp( 300 );
+	} );
+	$( '#upload-tax-exemption-form-next button.half.left' ).click( function() {
+		$( '#upload-tax-exemption-form-next' ).slideUp( 300 );
 	} );
 };
 
