@@ -178,15 +178,11 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		return ( $this->current_step == 1 && $invest_start == '1' && $this->current_campaign->campaign_status() == ATCF_Campaign::$campaign_status_collecte );
 	}
 	public function get_warning_content() {
-		global $locale;
-		$edd_settings = get_option( 'edd_settings' );
-		return wpautop( ATCF_CrowdFunding::get_translated_setting( 'investment_generalities', $locale ) );
+		return wpautop( WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_investment_generalities, 'investment_generalities' ) );
 	}
 	
 	public function get_contract_warning() {
-		WDG_PDF_Generator::add_shortcodes();
-		$edd_settings = get_option( 'edd_settings' );
-		return wpautop( ATCF_CrowdFunding::get_translated_setting( 'investment_terms', $locale ) );
+		return wpautop( WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_investment_terms, 'investment_terms' ) );
 	}
 	
 	public function is_authentication_alert_visible() {
