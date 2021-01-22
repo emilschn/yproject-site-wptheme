@@ -5,10 +5,10 @@ $(document).ready(function(){
   var fundingObject = JSON.parse(unescape(fundingData)); // objet contenant toutes les données de la partie funding du jeu de données
   var campaignUrl = JSON.parse(unescape(cookies['campaign_url']));
 
-  switch (tab) {
+  /*switch (tab) {
 
     //---- Graphiques de l'onglet évaluations ----//
-    case 'evaluations':
+    case 'evaluations':*/
 
       var listDates = []; // dates en abscisse
 
@@ -137,33 +137,38 @@ $(document).ready(function(){
         ]
       };
 
-      // création du graphique "Courbe des objectifs"
-      var ctx = $("#goal-chart");
-      var LineGraph = new Chart(ctx, {
-        type: 'line',
-        data: targetChartData,
-        options: {
-          tooltips: {
-            callbacks: {
-                title: function(tooltipItems, data) {
-                  return moment(data.labels[tooltipItems[0].index]).format('DD/MM/YYYY');;
-                }
-            }
-          },
-          scales: {
-            xAxes: [{
-                type: "time",
-                time: {
-                    unit: 'day',
-                    min: listDates[0],
-                    displayFormats: {
-                        day: 'DD/MM/YYYY'
-                    }
-                }
-            }]
-          }
-        }
-      });
+		// création du graphique "Courbe des objectifs"
+		var ctx = $("#goal-chart");
+		var LineGraph = new Chart(ctx, {
+			type: 'line',
+			data: targetChartData,
+			options: {
+				tooltips: {
+					callbacks: {
+						title: function(tooltipItems, data) {
+							return moment(data.labels[tooltipItems[0].index]).format('DD/MM/YYYY');;
+						}
+					}
+				},
+				options:{
+					tooltips:{
+						callbacks:{title:function(P,Q){return moment(Q.labels[P[0].index]).format('DD/MM/YYYY')}}
+					}
+				},
+				scales: {
+					xAxes: [{
+						type: "time",
+						time: {
+							unit: 'day',
+							min: listDates[0],
+							displayFormats: {
+								day: 'DD/MM/YYYY'
+							}
+						}
+					}]
+				}
+			}
+		});
 
       // création du graphique "Risque"
       new Chart(document.getElementById("risk-chart"),{
@@ -253,10 +258,10 @@ $(document).ready(function(){
         .attr("title", function(d) { return d.value + " internautes"; })
         .html(function(d) { return d.data.name; });
 
-    break;
+    /*break;
 
     //---- Graphiques de l'onglet levée de fonds ----//
-    case 'levee-de-fonds':
+    case 'levee-de-fonds':*/
 
       var listDates = []; // dates en abscisse
 
@@ -402,10 +407,10 @@ $(document).ready(function(){
         }
       });
 
-    break;
+    /*break;
 
     //---- Graphiques de l'onglet visites ----//
-    case 'visites':
+    case 'visites':*/
 
       var listDates = []; // dates en abscisse
 
@@ -680,9 +685,9 @@ $(document).ready(function(){
         }
       });
 
-    break;
+    /*break;
 
-  }
+  }*/
 
 });
 
