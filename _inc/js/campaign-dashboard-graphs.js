@@ -5,11 +5,8 @@ $(document).ready(function(){
   var fundingObject = JSON.parse(unescape(fundingData)); // objet contenant toutes les données de la partie funding du jeu de données
   var campaignUrl = JSON.parse(unescape(cookies['campaign_url']));
 
-  /*switch (tab) {
 
     //---- Graphiques de l'onglet évaluations ----//
-    case 'evaluations':*/
-
       var listDates = []; // dates en abscisse
 
       var listVoteCurrent = []; // points montants des intentions d'investissements
@@ -258,11 +255,8 @@ $(document).ready(function(){
         .attr("title", function(d) { return d.value + " internautes"; })
         .html(function(d) { return d.data.name; });
 
-    /*break;
 
     //---- Graphiques de l'onglet levée de fonds ----//
-    case 'levee-de-fonds':*/
-
       var listDates = []; // dates en abscisse
 
       var listInvestmentCurrent = []; // points montants des investissements
@@ -407,10 +401,7 @@ $(document).ready(function(){
         }
       });
 
-    /*break;
-
     //---- Graphiques de l'onglet visites ----//
-    case 'visites':*/
 
       var listDates = []; // dates en abscisse
 
@@ -684,10 +675,6 @@ $(document).ready(function(){
         error : function(data) {
         }
       });
-
-    /*break;
-
-  }*/
 
 });
 
