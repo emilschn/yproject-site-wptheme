@@ -163,7 +163,7 @@
 				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
 				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
 
-				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+				<?php if ( false && is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 					<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
 					<a href="#" id="btn-switch-lang">
 					<?php foreach ( $active_languages as $language_key => $language_item ): if ( $language_item[ 'active' ] ): ?>
@@ -176,7 +176,7 @@
 				<a href="#" class="btn-user not-connected inactive"><?php _e( 'common.CONNECTION', 'yproject' ); ?></a>
 				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
 				
-				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+				<?php if ( false && is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 				<div id="submenu-switch-lang" class="submenu-style hidden">
 					<ul class="submenu-list">
 					<?php foreach ( $active_languages as $language_key => $language_item ): ?>
