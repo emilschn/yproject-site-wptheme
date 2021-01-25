@@ -59,6 +59,17 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"editable"		=> $page_controler->can_access_admin(),
 				"admin_theme"	=> true
 			));
+			
+			DashboardUtility::create_field(array(
+				"id"			=> "new_organization_type",
+				"type"			=> "select",
+				"label"			=> __( "Type de structure FPF", 'yproject' ),
+				"value"			=> $page_controler->get_campaign()->get_organization_type(),
+				"options_id"	=> array_keys( ATCF_Campaign::$organization_type_list ),
+				"options_names"	=> array_values( ATCF_Campaign::$organization_type_list ),
+				"editable"		=> $page_controler->can_access_admin(),
+				"admin_theme"	=> true
+			));
 
 		$terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
 		$term_category_id = $terms_category[0]->term_id;
@@ -134,6 +145,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			?></span>
 		</div>
 		<?php endif; ?>
+
+		
 
 		<?php if ( $terms_tousnosprojets ): ?>
 		<div class="field admin-theme">
