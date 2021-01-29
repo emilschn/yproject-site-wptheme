@@ -23,7 +23,8 @@
 	<?php endforeach; ?>
 
 	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
-		<?php _e( "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;es :", 'yproject' ); ?><br>
+	<div class="form-error-general align-left">
+		<?php _e( 'account.parameters.orga.ERROR', 'yproject' ); ?><br>
 		<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
 			<div class="wdg-message error">
 				<?php echo $error[ 'text' ]; ?>
@@ -43,7 +44,7 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 
-	<h2><?php _e( "Si&egrave;ge social" ); ?></h2>
+	<h2><?php _e( 'account.parameters.orga.HEAD_OFFICE', 'yproject' ); ?></h2>
 	<?php foreach ( $fields_address as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
@@ -59,12 +60,12 @@
 	<?php endif; ?>
 
 	<p class="align-left">
-		<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+		* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
 	</p>
 
 	<div id="organization-details-form-buttons">
 		<button type="submit" class="button save red <?php if ( $page_controler->get_campaign() !== FALSE && !$page_controler->get_campaign()->is_preparing() ) { ?>confirm<?php } ?>">
-			<?php _e( "Enregistrer les modifications", 'yproject' ); ?>
+			<?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
 		</button>
 	</div>
 	

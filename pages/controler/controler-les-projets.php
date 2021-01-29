@@ -43,6 +43,15 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		$this->prepare_positive_savings_projects();
 		$this->prepare_fundedprojects();
 	}
+
+	private function get_cache_html_key_suffix() {
+		global $locale;
+		$suffix = '';
+		if ( $locale != 'fr_FR' ) {
+			$suffix = '_' . $locale;
+		}
+		return $suffix;
+	}
 	
 /******************************************************************************/
 // SLIDER
@@ -101,7 +110,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 // FILTERS
 /******************************************************************************/
 	private function prepare_filters() {
-		$this->filters_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$filters_html_key, WDG_Page_Controler_ProjectList::$filters_html_version );
+		$this->filters_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$filters_html_key . $this->get_cache_html_key_suffix(), WDG_Page_Controler_ProjectList::$filters_html_version );
 		if ( empty( $this->filters_html ) ) {
 			$this->filters_list = array();
 
@@ -114,12 +123,6 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 			) );
 
 			$this->filters_list[ 'regions' ] = atcf_get_regions();
-
-			$this->filters_list[ 'status' ] = array(
-				'vote'		=> __( "En &eacute;valuation", 'yproject' ),
-				'collecte'	=> __( "En financement", 'yproject' ),
-				'funded'	=> __( "Financ&eacute;", 'yproject' )	
-			);
 
 			$terms_activity = get_terms('download_category', array( 'slug' => 'types', 'hide_empty' => false ) );
 			$term_activity_id = $terms_activity[0]->term_id;
@@ -137,10 +140,15 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	public function set_filters_html( $html ) {
 		$this->filters_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$filters_html_key, $html, WDG_Page_Controler_ProjectList::$filters_html_duration, WDG_Page_Controler_ProjectList::$filters_html_version );
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$filters_html_key . $this->get_cache_html_key_suffix(), $html, WDG_Page_Controler_ProjectList::$filters_html_duration, WDG_Page_Controler_ProjectList::$filters_html_version );
 	}
 	
 	public function get_filters_list() {
+		$this->filters_list[ 'status' ] = array(
+			'vote'		=> __( 'project.status.VOTE', 'yproject' ),
+			'collecte'	=> __( 'project.status.FUNDING', 'yproject' ),
+			'funded'	=> __( 'project.status.FUNDED', 'yproject' )	
+		);
 		return $this->filters_list;
 	}
 	
@@ -148,7 +156,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 // CURRENT PROJECTS
 /******************************************************************************/
 	private function prepare_currentprojects() {
-		$this->currentprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$currentprojects_html_key, WDG_Page_Controler_ProjectList::$currentprojects_html_version );
+		$this->currentprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$currentprojects_html_key . $this->get_cache_html_key_suffix(), WDG_Page_Controler_ProjectList::$currentprojects_html_version );
 		if ( empty( $this->currentprojects_html ) ) {
 			$this->currentprojects_list = array(
 				'funding'			=> ATCF_Campaign::get_list_funding( -1, '', TRUE ),
@@ -169,7 +177,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	public function set_currentprojects_html( $html ) {
 		$this->currentprojects_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$currentprojects_html_key, $html, WDG_Page_Controler_ProjectList::$currentprojects_html_duration, WDG_Page_Controler_ProjectList::$currentprojects_html_version );
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$currentprojects_html_key . $this->get_cache_html_key_suffix(), $html, WDG_Page_Controler_ProjectList::$currentprojects_html_duration, WDG_Page_Controler_ProjectList::$currentprojects_html_version );
 	}
 	
 	public function get_currentprojects_list() {
@@ -180,7 +188,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 // POSITIVE SAVINGS PROJECTS
 /******************************************************************************/
 	private function prepare_positive_savings_projects() {
-		$this->positive_savings_projects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$positive_savings_projects_html_key, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_version );
+		$this->positive_savings_projects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$positive_savings_projects_html_key . $this->get_cache_html_key_suffix(), WDG_Page_Controler_ProjectList::$positive_savings_projects_html_version );
 		if ( empty( $this->positive_savings_projects_html ) ) {
 			$this->positive_savings_projects_list = ATCF_Campaign::get_list_positive_savings( 0 );
 		}
@@ -192,7 +200,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	public function set_positive_savings_projects_html( $html ) {
 		$this->positive_savings_projects_html = $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$positive_savings_projects_html_key, $html, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_duration, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_version );
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$positive_savings_projects_html_key . $this->get_cache_html_key_suffix(), $html, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_duration, WDG_Page_Controler_ProjectList::$positive_savings_projects_html_version );
 	}
 	
 	public function get_positive_savings_projects_list() {
@@ -204,7 +212,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 /******************************************************************************/
 	private function prepare_fundedprojects() {
 		$nb_key = ceil( WDG_Cache_Plugin::$nb_query_campaign_funded / 5 );
-		$this->fundedprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+		$this->fundedprojects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key . $this->get_cache_html_key_suffix(), WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 		if ( empty( $this->fundedprojects_html ) ) {
 			$this->fundedprojects_html = '';
 			$this->fundedprojects_list = ATCF_Campaign::get_list_funded( WDG_Cache_Plugin::$nb_query_campaign_funded );
@@ -212,7 +220,7 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 		} else {
 			$this->fundedprojects_html = '';
 			for ( $i = 1; $i <= $nb_key; $i++ ) {
-				$this->fundedprojects_html .= $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key. '_' .$i, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+				$this->fundedprojects_html .= $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key . $this->get_cache_html_key_suffix(). '_' .$i, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 			}
 		}
 	}
@@ -223,8 +231,8 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	
 	public function set_fundedprojects_html( $html, $index ) {
 		$this->fundedprojects_html .= $html;
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key, '1', WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
-		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key. '_' .$index, $html, WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key . $this->get_cache_html_key_suffix(), '1', WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
+		$this->set_db_cached_elements( WDG_Page_Controler_ProjectList::$fundedprojects_html_key . $this->get_cache_html_key_suffix(). '_' .$index, $html, WDG_Page_Controler_ProjectList::$fundedprojects_html_duration, WDG_Page_Controler_ProjectList::$fundedprojects_html_version );
 	}
 	
 	public function get_fundedprojects_list() {

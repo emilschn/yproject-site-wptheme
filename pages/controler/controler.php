@@ -21,6 +21,11 @@ class WDG_Page_Controler {
 		$this->db_cache_manager = new WDG_Cache_Plugin();
 		$this->init_page_title();
 		$this->init_page_description();
+
+		// Si c'est une page projet
+		if ( is_single() && get_post_type() == 'download' ) {
+			$this->init_override_languages();
+		}
 		$this->init_analytics_data();
 		
 		if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
@@ -133,6 +138,35 @@ class WDG_Page_Controler {
 	 */
 	public function get_header_nav_visible() {
 		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
+	}
+
+//******************************************************************************
+	/**
+	 * Gestion multilingue : nécessaire pour mettre à jour les liens vers les pages particulières (projets)
+	 */
+	protected function init_override_languages() {
+		add_filter( 'wpml_active_languages', 'WDG_Page_Controler::override_languages', 10 );
+	}
+
+	public static function override_languages( $languages ) {
+		$buffer = array();
+
+		global $post, $locale, $wpml_request_handler;
+		$language_cookie_lang = $wpml_request_handler->get_cookie_lang();
+		$campaign = new ATCF_Campaign( $post );
+
+		foreach ( $languages as $language_key => $language_item ) {
+			$buffer_item = $language_item;
+			$buffer_item[ 'active' ] = ( $language_cookie_lang == $language_item[ 'code' ] );
+			if ( $language_key == 'fr' ) {
+				$buffer_item[ 'url' ] = site_url( '/' . $campaign->get_url() . '/' );
+			} else {
+				$buffer_item[ 'url' ] = site_url( '/' . $language_key . '/' . $campaign->get_url() . '/' );
+			}
+			array_push( $buffer, $buffer_item );
+		}
+
+		return $buffer;
 	}
 
 //******************************************************************************

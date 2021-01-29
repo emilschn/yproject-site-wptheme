@@ -12,14 +12,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<br><br>
 		
 		<?php if ( $page_controler->has_refused_eversign() ): ?>
-			<?php _e( "Nous sommes navr&eacute;s de votre refus de signer ce contrat.", 'yproject' ); ?><br><br>
-			<?php _e( "Nous allons proc&eacute;der &agrave; l'annulation de votre investissement.", 'yproject' ); ?><br><br>
+			<?php _e( 'invest.share.SORRY_FOR_CONTRACT_REJECTED', 'yproject' ); ?><br><br>
+			<?php _e( 'invest.share.GOING_TO_REFUND', 'yproject' ); ?><br><br>
 		
 		<?php else: ?>
-			<?php _e( "Votre investissement a bien &eacute;t&eacute; pris en compte, merci !", 'yproject' ); ?><br><br>
+			<?php _e( 'invest.share.INVESTMENT_VALIDATED', 'yproject' ); ?><br><br>
 
 			<?php if ( $page_controler->has_accepted_eversign() ): ?>
-				<?php _e( "Merci pour votre signature &eacute;lectronique !", 'yproject' ); ?><br><br>
+				<?php _e( 'invest.share.THANK_YOU_SIGNING', 'yproject' ); ?><br><br>
 			<?php endif; ?>
 		
 			<?php if ( $page_controler->can_display_form() ): ?>
@@ -51,7 +51,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<?php endforeach; ?>
 
 					<div id="fieldgroup-to-display">
-						<button type="submit" class="button half right transparent"><?php _e( "Suivant", 'yproject' ); ?></button>
+						<button type="submit" class="button half right transparent"><?php _e( 'common.NEXT', 'yproject' ); ?></button>
 					</div>
 
 					<div class="clear"></div>
@@ -61,9 +61,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<?php else: ?>
 
 				<?php if ( $page_controler->get_current_campaign() != FALSE && $page_controler->get_current_campaign()->is_positive_savings() ): ?>
-					<strong><?php _e( "Pour d&eacute;multiplier mon impact et permettre &agrave; plus de projets positifs de voir le jour, je passe le mot sur :" ); ?></strong><br><br>
+					<strong><?php _e( 'invest.share.SHARE_POSITIVE_SAVINGS', 'yproject' ); ?></strong><br><br>
 				<?php else: ?>
-					<strong><?php _e( "Pour augmenter les chances de r&eacute;ussite de ce projet, je passe le mot sur :" ); ?></strong><br><br>
+					<strong><?php _e( 'invest.share.SHARE_PROJECT', 'yproject' ); ?></strong><br><br>
 				<?php endif; ?>
 
 				<div class="align-center">
@@ -73,10 +73,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 				<div class="db-form v3 full">
 					<?php if ( $page_controler->get_current_campaign() != FALSE && $page_controler->get_current_campaign()->is_positive_savings() ): ?>
-						<a class="button transparent" href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( "Retour &agrave; la page &Eacute;pargne positive", 'yproject' ); ?></a>
+						<a class="button transparent" href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( 'invest.share.BACK_POSITIVE_SAVINGS', 'yproject' ); ?></a>
 					<?php else: ?>
 						<?php $public_url = ( $page_controler->get_current_campaign() != FALSE ) ? $page_controler->get_current_campaign()->get_public_url() : home_url(); ?>
-						<a class="button transparent" href="<?php echo $public_url; ?>"><?php _e( "Retour au projet", 'yproject' ); ?></a>
+						<a class="button transparent" href="<?php echo $public_url; ?>"><?php _e( 'invest.share.BACK_PROJECT', 'yproject' ); ?></a>
 					<?php endif; ?>
 				</div>
 

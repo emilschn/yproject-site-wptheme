@@ -1,11 +1,9 @@
-<?php $edd_settings = get_option( 'edd_settings' ); ?>
-
-<h2><?php _e( 'Mon authentification', 'yproject' ); ?></h2>
+<h2><?php _e( 'account.menu.MY_AUTHENTICATION', 'yproject' ); ?></h2>
 
 <?php locate_template( array( 'pages/view/mon-compte/partial-authentication.php' ), true, false ); ?>
 
 <br>
 
 <div class="center">
-	<?php echo wpautop( $edd_settings[ 'lemonway_generalities' ] ); ?>
+	<?php echo wpautop( WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_info_lemonway, 'lemonway_generalities' ) ); ?>
 </div>

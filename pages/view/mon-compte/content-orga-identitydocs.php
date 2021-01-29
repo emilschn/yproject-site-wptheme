@@ -2,7 +2,7 @@
     global $WDGOrganization;
 ?>
 
-<h2><?php _e( "Justificatifs d'identitification de", 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
+<h2><?php _e( 'account.identitydocs.orga.TITLE', 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
 
 
 <?php 

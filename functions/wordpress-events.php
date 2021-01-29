@@ -249,12 +249,20 @@ class WDG_WordPress_Events {
 	 * Charge les styles et scripts nécessaires pour la page
 	 */
 	public static function wp_enqueue_scripts() {
-		global $can_modify, $is_campaign, $is_campaign_page, $post;
+		global $can_modify, $is_campaign, $is_campaign_page, $post, $locale;
+		
+		$post_name = $post->post_name;
+		if ( $locale != 'fr' && $locale != 'fr_FR' ) {
+			$post_in_french_id = apply_filters( 'wpml_object_id', $post->ID, 'page', FALSE, 'fr' );
+			$post_in_french = get_post( $post_in_french_id );
+			$post_name = $post_in_french->post_name;
+		}
+
 		$campaign = atcf_get_current_campaign();
 		$can_modify = ($is_campaign) && ($campaign->current_user_can_edit());
-		$is_dashboard_page = ($post->post_name == 'tableau-de-bord');
-		$is_admin_page = ($post->post_name == 'liste-des-paiements');
-		$is_user_account = ($post->post_name == 'mon-compte');
+		$is_dashboard_page = ($post_name == 'tableau-de-bord');
+		$is_admin_page = ($post_name == 'liste-des-paiements');
+		$is_user_account = ($post_name == 'mon-compte');
 		
 		// Modification version jquery chargée
 		include_once( 'assets-version.php' );
@@ -273,7 +281,7 @@ class WDG_WordPress_Events {
 		
 		// Styles utiles dans les pages complexes (avec selection de date, popups, formulaires spécifiques etc.)
 		$pages_simple = array( 'connexion', 'inscription', 'les-projets' );
-		if ( !in_array( $post->post_name, $pages_simple ) && !is_home() && !is_front_page() ) {
+		if ( !in_array( $post_name, $pages_simple ) && !is_home() && !is_front_page() ) {
 			wp_enqueue_script('jquery-ui-dialog');
 			wp_enqueue_script('jquery-ui-datepicker');
 			wp_enqueue_script('wdg-project-dashboard-i18n-fr', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/i18n/datepicker-fr.js', array('jquery', 'jquery-ui-datepicker'), ASSETS_VERSION);
@@ -288,7 +296,7 @@ class WDG_WordPress_Events {
 			
 		}
 		
-		if ( in_array( $post->post_name, $pages_simple ) || is_home() || is_front_page() || $is_user_account ) {
+		if ( in_array( $post_name, $pages_simple ) || is_home() || is_front_page() || $is_user_account ) {
 			remove_action( 'wp_head', 'print_emoji_detection_script', 7 );
 			remove_action( 'wp_print_styles', 'print_emoji_styles' );
 			wp_deregister_script( 'wp-embed' );
@@ -321,7 +329,7 @@ class WDG_WordPress_Events {
 		
 		// Styles et scripts liés aux pages d'investissements
 		$pages_investment = array( 'investir', 'moyen-de-paiement', 'paiement-effectue', 'paiement-partager', 'terminer-preinvestissement', 'declarer-chiffre-daffaires' );
-		if ( in_array( $post->post_name, $pages_investment ) ) {
+		if ( in_array( $post_name, $pages_investment ) ) {
 			wp_enqueue_style( 'invest-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/invest.min.css', null, ASSETS_VERSION, 'all' );
 			wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery'), ASSETS_VERSION );
 		}

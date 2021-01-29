@@ -8,7 +8,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 		
 	<?php if ( $page_controler->get_wallet_to_bankaccount_result() != FALSE ): ?>
 		<?php if ( $page_controler->get_wallet_to_bankaccount_result() === TRUE ): ?>
-			<div class="success">Transfert effectué</div>
+			<div class="success"><?php _e( 'account.transfert.TRANSFERT_COMPLETED', 'yproject' ); ?></div>
 		<?php else: ?>
 			<div class="wdg-message error">
 				<?php echo $page_controler->get_wallet_to_bankaccount_result(); ?>

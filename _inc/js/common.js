@@ -410,6 +410,7 @@ var WDGNavFunctions = (function($) {
 	return {
 
 		isConnectionChecked: false,
+		currentHref: '',
 		
 		init: function() {
 			
@@ -442,6 +443,7 @@ var WDGNavFunctions = (function($) {
 			// Navbar : bouton recherche
 			$('#btn-search, #btn-burger').click(function(e){
 				e.preventDefault();
+				$( '#submenu-switch-lang' ).hide();
 				if ($('#btn-search, #btn-burger').hasClass('active')) {
 					$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
 					$('#submenu-search').hide();
@@ -545,6 +547,30 @@ var WDGNavFunctions = (function($) {
 					}
 				}
 			});
+
+			$( '#menu #btn-switch-lang' ).click( function() {
+				$( '#submenu-switch-lang' ).toggle();
+			} );
+			$( '#submenu-switch-lang a' ).click( function( e ) {
+				e.preventDefault();
+				$( '#submenu-switch-lang ul' ).hide();
+				$( '#submenu-switch-lang img' ).show();
+				WDGNavFunctions.currentHref = $( this ).attr( 'href' );
+				$.ajax({
+					'type' : "POST",
+					'url' : ajax_object.ajax_url,
+					'data': {
+						'action':'save_user_language',
+						'language_key':$( this ).data( 'key' )
+					}
+				}).always(function() {
+					window.location = WDGNavFunctions.currentHref;
+				});
+			} );
+
+			$( '#footer-switch-lang' ).change( function() {
+				window.location = $( this ).val();
+			} );
 			
 			
 			$('#menu .btn-user').click(function(){
@@ -628,7 +654,7 @@ var WDGNavFunctions = (function($) {
 				'data': {
 					'action': 'get_current_user_info',
 					'pageinfo': strPageInfo
-				}, 
+				},
 				'timeout' : 30000 // sets timeout to 30 seconds
 			}).done( function( result ){
 				if ( result === '0' ) {
@@ -641,7 +667,7 @@ var WDGNavFunctions = (function($) {
 						$( '#menu .btn-user' ).addClass( 'needs-authentication' );
 					}
 					$( '#menu .btn-user img' ).remove();
-					$( '#menu .btn-user' ).text( 'Mon compte' );
+					$( '#menu .btn-user' ).text( infoDecoded[ 'userinfos' ][ 'my_account_txt' ] );
 					
 					$( '#submenu-user.not-connected .menu-loading-init' ).hide();
 					$( '#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name' ).html( infoDecoded[ 'userinfos' ][ 'username' ] );

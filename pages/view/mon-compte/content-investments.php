@@ -14,12 +14,12 @@ if ( $WDGUser_current->is_admin() ){
 
 ?>
 
-<h2><?php _e( "Investissements de", 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
+<h2><?php _e( 'account.investments.INVESTMENTS_OF', 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
 
 <p>
-	<?php _e( "Les informations ci-dessous sont celles de votre compte personnel.", 'yproject' ); ?><br>
+	<?php _e( 'account.common.INFORMATION_BELOW_PERSONAL_ACCOUNT', 'yproject' ); ?><br>
 	<?php if ( count( $list_current_organizations ) > 0 ): ?>
-		<?php _e( "Retrouvez celles de vos organisations en utilisant le menu.", 'yproject' ); ?>
+		<?php _e( 'account.common.IF_INVESTMENT_ORGA', 'yproject' ); ?>
 	<?php endif; ?>
 </p>
 
@@ -58,26 +58,26 @@ if ( $WDGUser_current->is_admin() ){
 
 
 <div id="investment-synthesis-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="investment-synthesis hidden">
-	<span class="publish-count">0</span> <?php _e( "investissements valid&eacute;s", 'yproject' ); ?><span class="pending-str hidden">, <span class="pending-count">0</span> en attente</span>.
+	<span class="publish-count">0</span> <?php _e( 'account.investments.INVESTMENTS_VALIDATED', 'yproject' ); ?><span class="pending-str hidden">, <span class="pending-count">0</span> <?php _e( 'account.investments.INVESTMENTS_PENDING', 'yproject' ); ?></span>.
 </div>
 
 <div id="investment-synthesis-pictos-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="investment-synthesis-pictos hidden">
 	<div class="funded-projects">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="montgolfiere" width="80" height="80">
 		<span class="data">0</span><br>
-		<span class="txt"><?php _e( "projets financ&eacute;s", 'yproject' ); ?></span>
+		<span class="txt"><?php _e( 'account.investments.PROJECTS_FUNDED', 'yproject' ); ?></span>
 	</div>
 	
 	<div class="amount-invested">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-arrows.png" alt="fleche" width="81" height="80">
 		<span class="data">0 &euro;</span><br>
-		<span class="txt"><?php _e( "investis", 'yproject' ); ?></span>
+		<span class="txt"><?php _e( 'account.investments.INVESTED', 'yproject' ); ?></span>
 	</div>
 	
 	<div class="royalties-received">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-money.png" alt="monnaie" width="97" height="80">
 		<span class="data">0 &euro;</span><br>
-		<span class="txt"><?php _e( "royalties re&ccedil;ues", 'yproject' ); ?></span>
+		<span class="txt"><?php _e( 'account.investments.ROYALTIES_RECEIVED', 'yproject' ); ?></span>
 		
 	</div>
 </div>
@@ -85,14 +85,14 @@ if ( $WDGUser_current->is_admin() ){
 <div id="vote-intentions-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="vote-intentions hidden">
 	
 	<?php if ( count( $list_intentions_to_confirm ) > 0 ): ?>
-		<h3><?php _e( "Mes intentions d'investissement &agrave; concr&eacute;tiser", 'yproject' ); ?></h3>
+		<h3><?php _e( 'account.investments.INVESTMENTS_TO_CONCLUDE', 'yproject' ); ?></h3>
 	
 		<?php foreach ( $list_intentions_to_confirm as $intention_item ): ?>
 		
 			<?php if ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote || $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_collecte ): ?>
-				<?php $status_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? "en &eacute;valuation" : "en investissement"; ?>
-				<?php $button_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? "Pr&eacute;-investir" : "Investir"; ?>
-				<h4><?php echo YPUIHelpers::display_number( $intention_item[ 'vote_amount' ], TRUE, 0 ). ' &euro; sur ' .$intention_item[ 'campaign_name' ]. ' (' .$status_str. ')'; ?></h4>
+				<?php $status_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? __( 'account.investments.STATUS_VOTE', 'yproject' ) : __( 'account.investments.STATUS_INVESTMENT', 'yproject' ); ?>
+				<?php $button_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? __( 'common.PREINVEST', 'yproject' ) : __( 'common.INVEST', 'yproject' ); ?>
+				<h4><?php echo YPUIHelpers::display_number( $intention_item[ 'vote_amount' ], TRUE, 0 ). ' &euro; - ' .$intention_item[ 'campaign_name' ]. ' (' .$status_str. ')'; ?></h4>
 				<a href="<?php echo home_url( '/investir/?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ] ); ?>" class="button red"><?php echo $button_str; ?></a>
 			<?php endif; ?>
 
@@ -102,6 +102,28 @@ if ( $WDGUser_current->is_admin() ){
 	
 </div>
 
-	
+
+<span class="hidden">
+	<span id="invest-trans-reload"><?php _e( 'account.investments.RELOAD', 'yproject' ); ?></span>
+	<span id="invest-trans-loading_problem"><?php _e( 'account.investments.LOADING_PROBLEM', 'yproject' ); ?></span>
+	<span id="invest-trans-no_investments"><?php _e( 'account.investments.NO_INVESTMENTS', 'yproject' ); ?></span>
+	<span id="invest-trans-no_investments_if_vote"><?php _e( 'account.investments.NO_INVESTMENTS_IF_VOTE', 'yproject' ); ?></span>
+	<span id="invest-trans-my_investments_on"><?php _e( 'account.investments.MY_INVESTMENTS_ON', 'yproject' ); ?></span>
+	<span id="invest-trans-investiement_duration"><?php _e( 'account.investments.INVESTMENT_DURATION', 'yproject' ); ?></span>
+	<span id="invest-trans-investiement_duration_years"><?php _e( 'account.investments.INVESTMENT_DURATION_YEARS', 'yproject' ); ?></span>
+	<span id="invest-trans-investiement_duration_starting"><?php _e( 'account.investments.INVESTMENT_DURATION_STARTING', 'yproject' ); ?></span>
+	<span id="invest-trans-royalties_received"><?php _e( 'account.investments.ROYALTIES_RECEIVED_A', 'yproject' ); ?></span>
+	<span id="invest-trans-return_on_investment"><?php _e( 'account.investments.RETURN_ON_INVESTMENT', 'yproject' ); ?></span>
+	<span id="invest-trans-contract"><?php _e( 'invest.header.steps.CONTRACT', 'yproject' ); ?></span>
+	<span id="invest-trans-finish_investment"><?php _e( 'account.investments.FINISH_INVESTMENT', 'yproject' ); ?></span>
+	<span id="invest-trans-inaccessible"><?php _e( 'account.investments.INACCESSIBLE', 'yproject' ); ?></span>
+	<span id="invest-trans-quarterly_payments"><?php _e( 'account.investments.QUARTERLY_PAYMENTS', 'yproject' ); ?></span>
+	<span id="invest-trans-years"><?php _e( 'account.investments.YEARS', 'yproject' ); ?></span>
+	<span id="invest-trans-turnover"><?php _e( 'account.investments.TURNOVER', 'yproject' ); ?></span>
+	<span id="invest-trans-royalties"><?php _e( 'account.investments.ROYALTIES', 'yproject' ); ?></span>
+	<span id="invest-trans-estimated"><?php _e( 'account.investments.ESTIMATED', 'yproject' ); ?></span>
+	<span id="invest-trans-other_commitments"><?php _e( 'account.investments.OTHER_COMMITMENTS', 'yproject' ); ?></span>
+	<span id="invest-trans-company_is_commited"><?php _e( 'account.investments.COMPANY_IS_COMMITED', 'yproject' ); ?></span>
+</span>
 <div id="ajax-loader-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="center" style="text-align: center;"><img id="ajax-loader-img-<?php echo $WDGUser_displayed->get_wpref(); ?>" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement" /></div>
 

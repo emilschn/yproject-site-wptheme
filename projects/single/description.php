@@ -33,6 +33,8 @@ $implementation_content = apply_filters('the_content', $implementation);
 <div class="project-description">
 	
 	<h2 class="standard">/ <?php _e('Pr&eacute;sentation', 'yproject'); ?> /</h2>
+
+	<span id="read-more-txt" class="hidden"><?php _e( 'common.READ_MORE', 'yproject' ); ?></span>
 	
 	<div class="center">
 

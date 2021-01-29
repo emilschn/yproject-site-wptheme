@@ -29,16 +29,18 @@ class WDG_Templates_Engine {
 		if ( ! isset ( self::$current_page_name ) ) {
 			wp_reset_query();
 			global $wp_query;
-			if ( is_home() or is_front_page() ) {
-				self::$current_page_name = 'home';
-				
-			} elseif ( isset( $wp_query ) && is_single() ) {
+			if ( isset( $wp_query ) && is_single() ) {
 				self::$current_page_name = 'projet';
 
 			} else {
-				global $post;
+				global $post, $locale;
 				self::$current_page_name = $post->post_name;
-
+		
+				if ( $locale != 'fr' && $locale != 'fr_FR' ) {
+					$post_in_french_id = apply_filters( 'wpml_object_id', $post->ID, 'page', FALSE, 'fr' );
+					$post_in_french = get_post( $post_in_french_id );
+					self::$current_page_name = $post_in_french->post_name;
+				}
 			}
 		}
 		return self::$current_page_name;
@@ -133,19 +135,16 @@ class WDG_Templates_Engine {
 	}
 	
 	/**
-	 * Détermine si c'est une page qui doit être surchargée par le contexte
-	 * @param string $page_name
-	 * @return boolean
-	 */
-	public function is_context_overriden( $page_name ) {
-		return ( $page_name == 'home' );
-	}
-	
-	/**
 	 * Appelé à chaque chargement de page :
 	 * - si une existe sur une page, remplace le content
 	 */
 	public static function override_content( $content ) {
+		// Si on est en back-office, on ne surcharge rien du tout, ça pourrait planter
+		if ( is_admin() ) {
+			return $content;
+		}
+
+		// Sinon, on vérifie si on a bien quelque chose à surcharger
 		$wdg_templates_engine = WDG_Templates_Engine::instance();
 		$view = $wdg_templates_engine->get_view_name();
 		if ( $view ) {

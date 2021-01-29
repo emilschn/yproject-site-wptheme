@@ -7,26 +7,26 @@ $fields_iban = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_iba
 $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_file );
 ?>
 
-<h2><?php _e( "Mes coordonn&eacute;es bancaires", 'yproject' ); ?></h2>
+<h2><?php _e( 'account.menu.MY_BANK_INFO', 'yproject' ); ?></h2>
 
 <div class="db-form v3">
 	<?php if ( $WDGUser_displayed->has_saved_card_expiration_date() ): ?>
-	<h3><?php _e( "Ma carte bancaire", 'yproject' ); ?></h3>
+	<h3><?php _e( 'account.bank.MY_BANK_CARD', 'yproject' ); ?></h3>
 
 	<p class="align-justify">
-		<?php _e( "Les informations de vos cartes bancaires sont stock&eacute;es par Lemon Way, prestataire de service de paiement agr&eacute;&eacute;.", 'yproject' ); ?>
-		<?php _e( "WE DO GOOD ne stocke que la date d'expiration afin de vous pr&eacute;venir quand la date approche.", 'yproject' ); ?><br><br>
+		<?php _e( 'account.bank.YOUR_BANK_CARD_INFO_ON_LEMON_WAY', 'yproject' ); ?>
+		<?php _e( 'account.bank.WEDOGOOD_KEEPS_EXPIRATION_DATE', 'yproject' ); ?><br><br>
 	</p>
 
 	<?php $lemonway_registered_cards = $WDGUser_displayed->get_lemonway_registered_cards(); ?>
 	<?php if ( !empty( $lemonway_registered_cards ) ): ?>
 
 		<div class="align-justify">
-			<strong><?php _e( "Mes cartes bancaires enregistr&eacute;es", 'yproject' ); ?></strong><br>
+			<strong><?php _e( 'account.bank.MY_REGISTERED_BANK_CARDS', 'yproject' ); ?></strong><br>
 
 			<?php foreach ( $lemonway_registered_cards as $registered_card ): ?>
 				<div class="user-registered-card">
-					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-cb.png" alt="<?php _e( "Carte bancaire", 'yproject' ); ?>" width="120">
+					<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-cb.png" alt="<?php _e( 'account.bank.BANK_CARD', 'yproject' ); ?>" width="120">
 					<span>
 						<?php echo $registered_card[ 'number' ]; ?><br>
 						Exp <?php echo $registered_card[ 'expiration' ]; ?>
@@ -34,7 +34,7 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 					<form method="POST" action="<?php echo admin_url( 'admin-post.php?action=remove_user_registered_card' ); ?>" class="db-form v3">
 						<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>">
 						<input type="hidden" name="card_id" value="<?php echo $registered_card[ 'id' ]; ?>">
-						<button type="submit" class="button blue"><?php _e( "Supprimer", 'yproject' ); ?></button>
+						<button type="submit" class="button blue"><?php _e( 'account.bank.REMOVE_CARD', 'yproject' ); ?></button>
 					</form>
 				</div>
 			<?php endforeach; ?>
@@ -45,18 +45,18 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 	<br><br>
 	<?php endif; ?>
 
-	<h3><?php _e( "Mon relev&eacute; d'identit&eacute; bancaire", 'yproject' ); ?></h3>
+	<h3><?php _e( 'account.bank.MY_BANK_DETAILS', 'yproject' ); ?></h3>
 	<p class="align-justify">
 		<?php if ( !$WDGUser_displayed->can_register_lemonway() ): ?>
-			<?php _e( "Pensez &agrave; renseigner vos informations personnelles pour que notre prestataire puisse valider votre RIB.", 'yproject' ); ?><br>
-			<a href="#parameters" class="button red go-to-tab" data-tab="parameters"><?php _e( "Mes informations personnelles" ); ?></a><br>
+			<?php _e( 'account.bank.PROVIDE_PERSONAL_INFORMATION', 'yproject' ); ?><br>
+			<a href="#parameters" class="button red go-to-tab" data-tab="parameters"><?php _e( 'account.menu.MY_INFO', 'yproject' ); ?></a><br>
 			<br>
 
 		<?php endif; ?>
 
-		<?php _e( "Afin de lutter contre la fraude et le blanchiment d'argent, il est n&eacute;cessaire que votre RIB soit contr&ocirc;l&eacute; par notre prestataire de paiement.", 'yproject' ); ?><br>
-		<?php _e( "Le compte bancaire qui vous permettra de r&eacute;cup&eacute;rer l'argent doit &ecirc;tre &agrave; votre nom.", 'yproject' ); ?><br>
-		<?php _e( "Si votre compte bancaire est un compte en ligne (Ex : Compte Nickel), notre prestataire vous demandera une deuxi&egrave;me pi&egrave;ce d'identit&eacute; pour le valider. Il sera &agrave; transmettre dans l'onglet Mes justificatifs d'identit&eacute;.", 'yproject' ); ?><br>
+		<?php _e( 'account.bank.BANK_DETAILS_TO_BE_CHECKED', 'yproject' ); ?><br>
+		<?php _e( 'account.bank.BANK_DETAILS_WITH_YOUR_NAME', 'yproject' ); ?><br>
+		<?php _e( 'account.bank.ONLINE_BANK_ACCOUNT_AUTHENTICATION', 'yproject' ); ?><br>
 		
 		<br>
 	</p>
@@ -73,15 +73,15 @@ $WDGUser_lw_bank_document_status = $page_controler->get_current_user_iban_docume
 if ( $page_controler->is_iban_validated() ): ?>
 	<form method="POST" enctype="multipart/form-data" class="db-form v3 full">
 		<div class="wdg-message confirm">
-			<?php _e( "Coordonn&eacute;es bancaires valid&eacute;es", 'yproject' ); ?>
+			<?php _e( 'account.bank.VALIDATED_BANK_DETAILS', 'yproject' ); ?>
 		</div>
 
-		<?php _e( "Le RIB valid&eacute; est le suivant :", 'yproject' ); ?><br>
-		<strong><?php _e( "Propri&eacute;taire du compte :" );?></strong><br>
+		<?php _e( 'account.bank.VALIDATED_BANK_DETAILS_ARE', 'yproject' ); ?><br>
+		<strong><?php _e( 'account.bank.BANK_ACCOUNT_OWNER', 'yproject' );?></strong><br>
 		<?php echo $WDGUser_lw_bank_info->HOLDER; ?><br>
-		<strong><?php _e( "IBAN :" );?></strong><br>
+		<strong><?php _e( 'account.bank.IBAN', 'yproject' );?></strong><br>
 		<?php echo $WDGUser_lw_bank_info->DATA; ?><br>
-		<strong><?php _e( "BIC :" );?></strong><br>
+		<strong><?php _e( 'account.bank.BIC', 'yproject' );?></strong><br>
 		<?php echo $WDGUser_lw_bank_info->SWIFT; ?><br>
 
 		<?php
@@ -90,12 +90,12 @@ if ( $page_controler->is_iban_validated() ): ?>
 		$bank_file_path = ( empty( $current_file_bank ) ) ? '' : $current_file_bank->get_public_filepath();
 		?>
 		<div class="align-center">
-			<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( "Aper&ccedil;u", 'yproject' ); ?></a>
+			<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( 'common.PREVIEW', 'yproject' ); ?></a>
 		</div>
 
 		<br><br>
 		<div class="align-center">
-			<button id="modify-iban" type="button" class="button blue"><?php _e( "Modifier mon RIB", 'yproject' ); ?></button>
+			<button id="modify-iban" type="button" class="button blue"><?php _e( 'account.bank.MODIFY_BANK_DETAILS', 'yproject' ); ?></button>
 		</div>
 		<br><br>
 
@@ -116,11 +116,11 @@ if ( $page_controler->is_iban_validated() ): ?>
 			<?php endforeach; ?>
 
 			<p class="align-left">
-				<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+				* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
 			</p>
 
 			<div id="user-bank-form-buttons">
-				<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+				<button type="submit" class="button save red"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
 			</div>
 		</div>
 
@@ -130,14 +130,14 @@ if ( $page_controler->is_iban_validated() ): ?>
 // Si l'IBAN et le document de RIB sont en attente, on affiche juste un résumé
 elseif( $page_controler->is_iban_waiting() ): ?>
 	<div class="wdg-message error">
-		<?php _e( "Coordonn&eacute;es bancaires en attente de validation", 'yproject' ); ?>
+		<?php _e( 'account.bank.BANK_DETAILS_AWAITING_VALIDATION', 'yproject' ); ?>
 	</div>
 
-	<strong><?php _e( "Propri&eacute;taire du compte :" );?></strong><br>
+	<strong><?php _e( 'account.bank.BANK_ACCOUNT_OWNER', 'yproject' );?></strong><br>
 	<?php echo $WDGUser_lw_bank_info->HOLDER; ?><br>
-	<strong><?php _e( "IBAN :" );?></strong><br>
+	<strong><?php _e( 'account.bank.IBAN', 'yproject' );?></strong><br>
 	<?php echo $WDGUser_lw_bank_info->DATA; ?><br>
-	<strong><?php _e( "BIC :" );?></strong><br>
+	<strong><?php _e( 'account.bank.BIC', 'yproject' );?></strong><br>
 	<?php echo $WDGUser_lw_bank_info->SWIFT; ?><br>
 
 	<?php
@@ -146,19 +146,19 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 	$bank_file_path = ( empty( $current_file_bank ) ) ? '' : $current_file_bank->get_public_filepath();
 	?>
 	<div class="align-center">
-		<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( "Aper&ccedil;u", 'yproject' ); ?></a>
+		<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( 'common.PREVIEW', 'yproject' ); ?></a>
 	</div>
 	
 
 <?php else: ?>
 	<?php if ( $WDGUser_lw_bank_status == WDGUser::$iban_status_disabled ): ?>
 		<div class="wdg-message error">
-			<?php _e( "Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es", 'yproject' ); ?>
+			<?php _e( 'account.bank.BANK_DETAILS_DISABLED', 'yproject' ); ?>
 		</div>
 
 	<?php elseif ( $WDGUser_lw_bank_status == WDGUser::$iban_status_rejected ): ?>
 		<div class="wdg-message error">
-			<?php _e( "Coordonn&eacute;es bancaires refus&eacute;es", 'yproject' ); ?>
+			<?php _e( 'account.bank.BANK_DETAILS_REJECTED', 'yproject' ); ?>
 		</div>
 	<?php endif; ?>
 
@@ -183,7 +183,7 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 		<?php elseif ( $WDGUser_lw_bank_status == WDGUser::$iban_status_waiting ): ?>
 			<div>
 				<div class="wdg-message error">
-					<?php _e( "Coordonn&eacute;es bancaires en attente de validation", 'yproject' ); ?>
+					<?php _e( 'account.bank.BANK_DETAILS_AWAITING_VALIDATION', 'yproject' ); ?>
 				</div>
 			</div>
 		<?php endif; ?>
@@ -191,7 +191,7 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 		<?php if ( $WDGUser_lw_bank_document_status == LemonwayDocument::$document_status_waiting ): ?>
 			<div>
 				<div class="wdg-message error">
-					<?php _e( "RIB en attente de validation", 'yproject' ); ?>
+					<?php _e( 'account.bank.BANK_DETAILS_RIB_AWAITING_VALIDATION', 'yproject' ); ?>
 				</div>
 			</div>
 		<?php else: ?>
@@ -202,11 +202,11 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 		<?php endif; ?>
 		
 		<p class="align-left">
-			<?php _e( "* Champs obligatoires", 'yproject' ); ?><br>
+			* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
 		</p>
 	
 		<div id="user-bank-form-buttons">
-			<button type="submit" class="button save red"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+			<button type="submit" class="button save red"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
 		</div>
 
 	</form>

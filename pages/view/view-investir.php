@@ -1,6 +1,7 @@
 <?php
 global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
+$page_controler->init_form();
 ?>
 
 

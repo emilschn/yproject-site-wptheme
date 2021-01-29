@@ -126,8 +126,8 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 	
 	public function get_contract_warning() {
 		WDG_PDF_Generator::add_shortcodes();
-		$edd_settings = get_option( 'edd_settings' );
-		return wpautop( $edd_settings[ 'investment_terms' ] );
+		$investment_terms = WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_investment_terms, 'investment_terms' );
+		return wpautop( $investment_terms );
 	}
 	
 /******************************************************************************/

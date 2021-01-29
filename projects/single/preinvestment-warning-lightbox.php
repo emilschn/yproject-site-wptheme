@@ -13,7 +13,7 @@ $edd_settings = get_option( 'edd_settings' );
 	<form method="post" class="sidebar-login-form db-form v3 full ajax-form">
 		
 		<div class="align-left">
-			<?php echo apply_filters( 'the_content', ATCF_CrowdFunding::get_translated_setting( 'preinvest_warning' ) ); ?>
+			<?php echo apply_filters( 'the_content', WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_investment_generalities_preinvestment, 'preinvest_warning' ) ); ?>
 		</div>
 		
 		<div id="user-details-form-buttons">

@@ -7,7 +7,7 @@ if ( empty( $campaign ) ) {
 		exit( 'Access error current campaign - AECC1431' );
 	}
 }
-$btn_follow_href = home_url( '/connexion/' ) . '?source=project';
+$btn_follow_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';
 $btn_follow_text = __('Suivre', 'yproject');
@@ -65,18 +65,18 @@ if (!empty($current_organization)) {
 	$owner_str = $wdg_organization->get_name();
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
 		<div class="content align-left"><br />
-		<span>'.__('Forme juridique : ', 'yproject').'</span>'.$wdg_organization->get_legalform().'<br />
-		<span>'.__('Num&eacute;ro SIRET : ', 'yproject').'</span>'.$wdg_organization->get_idnumber().'<br />
-		<span>'.__('Code APE : ', 'yproject').'</span>'.$wdg_organization->get_ape().'<br />';
+		<span>'.__('Forme juridique :', 'yproject').'</span> '.$wdg_organization->get_legalform().'<br />
+		<span>'.__('Num&eacute;ro SIRET :', 'yproject').'</span> '.$wdg_organization->get_idnumber().'<br />
+		<span>'.__('Code APE :', 'yproject').'</span> '.$wdg_organization->get_ape().'<br />';
 	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
-		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA : ', 'yproject').'</span>'.$wdg_organization->get_vat().'<br />';
+		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA :', 'yproject').'</span> '.$wdg_organization->get_vat().'<br />';
 	}
 	$lightbox_content .= 
-		'<span>'.__('Capital social : ', 'yproject').'</span>'.$wdg_organization->get_capital().' &euro;'.'<br /><br />
+		'<span>'.__('Capital social :', 'yproject').'</span> '.$wdg_organization->get_capital().' &euro;'.'<br /><br />
 		</div>
 		<div class="lightbox-organization-separator"></div>'.'<br/>
 		<div class="content align-left">
-		<span>'.__('Si&egrave;ge social : ', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_full_address_str().'<br />
+		<span>'.__('Si&egrave;ge social :', 'yproject').'<br/>'.'</span>'.$wdg_organization->get_full_address_str().'<br />
 		<span></span>'.$wdg_organization->get_postal_code().' '.$wdg_organization->get_city().'<br />
 		<span></span>'.$wdg_organization->get_nationality().'<br />
 		</div>';
@@ -96,14 +96,18 @@ $campaign_categories_str = $campaign->get_categories_str();
 	<div class="project-banner-title padder">
 		<?php if (!empty($lang_list)): ?>
 			<select name="lang">
-				<?php global $locale; $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
+				<?php
+				global $locale, $wpml_request_handler;
+				$language_cookie_lang = $wpml_request_handler->get_cookie_lang();
+				$active_languages = apply_filters( 'wpml_active_languages', NULL );
+				?>
 				<option value="<?php echo site_url( '/' . $campaign->get_url() . '/' ); ?>" <?php selected( $active_languages[ 'fr' ][ 'active' ] ); ?>>Fran&ccedil;ais</option>
 
 				<?php foreach ($lang_list as $lang): ?>
 					<?php
 					$language_key = substr( $lang, 0, 2 );
 					$language_name = '';
-					$language_is_active = ( $locale == $lang || $locale == $language_key );
+					$language_is_active = ( $language_cookie_lang == $language_key );
 					if ( isset( $active_languages[ $language_key ] ) ) {
 						$language_item = $active_languages[ $language_key ];
 						$language_name = $language_item[ 'native_name' ];
@@ -234,7 +238,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 					<div class="clear">
 					<?php if ( $campaign->time_remaining_str() != '-' ): ?>
 						<?php if ( !is_user_logged_in() ): ?>
-							<a href="<?php echo home_url( '/connexion/' ); ?>?source=project" class="button red">
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>?source=project" class="button red">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 
@@ -267,8 +271,8 @@ $campaign_categories_str = $campaign->get_categories_str();
 				<?php // cas d'un projet en financement ?>
 				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 					<?php
-					$invest_url = home_url( '/investir/?campaign_id=' .$campaign->ID. '&amp;invest_start=1' );
-					$invest_url_href = home_url( '/connexion/' ) . '?source=project&redirect-invest=' .$campaign->ID;
+					$invest_url = WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$campaign->ID. '&amp;invest_start=1';
+					$invest_url_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project&redirect-invest=' .$campaign->ID;
 					if ( is_user_logged_in() ) {
 						$invest_url_href = $invest_url;
 					}
@@ -365,7 +369,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 					<div class="end-sentence">
 						<?php echo $nbinvestors. " " .__("personnes","yproject"). " " .__("ont investi","yproject"). " " .$invest_amount. " " .__("pour propulser cette lev&eacute;e de fonds","yproject"); ?>
 					</div>
-					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 				
                                         
 				<?php // cas d'un projet terminé et non financé ?>
@@ -377,7 +381,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 							<?php echo $campaign->archive_message(); ?>
 						<?php endif; ?>
 					</div>
-					<a href="<?php echo home_url( '/les-projets/' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
 
 				<?php endif; ?>
                                       				

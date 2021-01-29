@@ -10,17 +10,17 @@
 	$fields_create = $WDGUserTaxExemptionForm->getFields( WDG_Form_User_Tax_Exemption::$field_group_create );
 ?>
 
-<h2><?php _e( "Documents de", 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
+<h2><?php _e( 'account.documents.DOCUMENTS_OF', 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
 
 <p>
-	<?php _e( "Les informations ci-dessous sont celles de votre compte personnel.", 'yproject' ); ?><br>
+	<?php _e( 'account.common.INFORMATION_BELOW_PERSONAL_ACCOUNT', 'yproject' ); ?><br>
 	<?php if ( count( $list_current_organizations ) > 0 ): ?>
-		<?php _e( "Si vous avez investi avec votre entreprise, vous retrouverez les informations respectives dans la partie Organisation, dans le menu de votre compte.", 'yproject' ); ?>
+		<?php _e( 'account.common.IF_INVESTMENT_ORGA', 'yproject' ); ?>
 	<?php endif; ?>
 </p>
 
 
-<h3><?php _e( "Mes attestations de transactions annuelles", 'yproject' ); ?></h3>
+<h3><?php _e( 'account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES', 'yproject' ); ?></h3>
 <?php
 	$has_declaration = false;
 	$date_now = new DateTime();
@@ -31,22 +31,22 @@
 			$has_declaration = true;
 			$declaration_url = $WDGUser_displayed->get_royalties_certificate_per_year( $year );
 		?>
-		<a href="<?php echo $declaration_url; ?>" download="attestation-royalties-<?php echo $year; ?>.pdf" class="button blue-pale download-certificate">Télécharger l'attestation <?php echo $year; ?></a>
+		<a href="<?php echo $declaration_url; ?>" download="attestation-royalties-<?php echo $year; ?>.pdf" class="button blue-pale download-certificate"><?php _e( "account.documents.DOWNLOAD_CERTIFICATE", 'yproject' ); ?> <?php echo $year; ?></a>
 		<br><br>
 	<?php endif; ?>
 <?php endfor; ?>
 <?php if ( !$has_declaration ): ?>
-	<?php _e( "Aucune", 'yproject' ); ?>
+	<?php _e( 'common.NONE.F', 'yproject' ); ?>
 	<br>
 	<br>
 <?php endif; ?>
 
 
 <?php if ( $page_controler->has_tax_documents() ): ?>
-	<h3><?php _e( "Mes attestations IFU (Imprim&eacute; Fiscal Unique - 2561)", 'yproject' ); ?></h3>
+	<h3><?php _e( 'account.documents.MY_CERTIFICATES_IFU', 'yproject' ); ?></h3>
 	<?php $tax_documents = $page_controler->get_tax_documents(); ?>
 	<?php foreach( $tax_documents as $year => $document_path ): ?>
-		<a href="<?php echo $document_path; ?>" download="ifu-<?php echo $year; ?>.pdf" class="button blue-pale download-certificate">Télécharger l'attestation <?php echo $year; ?></a>
+		<a href="<?php echo $document_path; ?>" download="ifu-<?php echo $year; ?>.pdf" class="button blue-pale download-certificate"><?php _e( "account.documents.DOWNLOAD_CERTIFICATE", 'yproject' ); ?> <?php echo $year; ?></a>
 		<br><br>
 	<?php endforeach; ?>
 <?php endif; ?>
@@ -55,17 +55,18 @@
 
 <?php if ( $page_controler->get_can_ask_tax_exemption() ): ?>
 
-	<h3><?php _e( "Mes demandes annuelles de dispense de pr&eacute;l&egrave;vement", 'yproject' ); ?></h3>
+	<h3><?php _e( 'account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION', 'yproject' ); ?></h3>
 
-	<?php _e( "Lorsque les royalties vers&eacute;es par un projet sont sup&eacute;rieures &agrave; la somme initialement investie, la plus value r&eacute;alis&eacute;e doit &ecirc;tre d&eacute;clar&eacute;e dans le cadre de l'imp&ocirc;t sur le revenu.", 'yproject' ); ?>
-	<?php _e( "Elle est soumise au Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30 %, dont 12,8 % d'imp&ocirc;ts sur le revenu et 17,2 % de contributions et pr&eacute;l&egrave;vements sociaux.", 'yproject' ); ?>
-	<?php _e( "La d&eacute;claration est effectu&eacute;e de fa&ccedil;on automatis&eacute;e tous les ans par WE DO GOOD &agrave; la Direction G&eacute;n&eacute;rale des Finances Publiques.", 'yproject' ); ?><br><br>
+	<?php _e( 'account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_1', 'yproject' ); ?>
+	<?php _e( 'account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_2', 'yproject' ); ?>
+	<?php _e( 'account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_3', 'yproject' ); ?>
+	<br><br>
 
-	<?php _e( "Toutefois, vous pouvez nous adresser en amont une demande de dispense pour &ecirc;tre impos&eacute;(e) au bar&egrave;me de l'imp&ocirc;t sur le revenu selon votre taux d'imposition, si le revenu fiscal de référence de votre foyer fiscal est inf&eacute;rieur &agrave; :", 'yproject' ); ?><br>
-	<?php _e( "- 25 000 € (pour les contribuables c&eacute;libataires, divorc&eacute;s ou veufs) ;", 'yproject' ); ?><br>
-	<?php _e( "- 50 000 € (pour les contribuables soumis &agrave; imposition commune).", 'yproject' ); ?><br><br>
+	<?php _e( 'account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_4', 'yproject' ); ?><br>
+	<?php _e( 'account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_5', 'yproject' ); ?><br>
+	<?php _e( 'account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_6', 'yproject' ); ?><br><br>
 		
-	<?php _e( "Cette dispense ne s'appliquera qu'&agrave; la partie concernant l'imp&ocirc;t sur le revenu (12,8 %) et ne peut &ecirc;tre faite que par les investisseurs dont la r&eacute;sidence fiscale est en France.", 'yproject' ); ?><br>
+	<?php _e( 'account.documents.MY_ANNUAL_REQUEST_OF_LEVY_EXEMPTION_TEXT_7', 'yproject' ); ?><br>
 	<br>
 
 	<?php
@@ -82,7 +83,7 @@
 		?>
 		<?php if ( !empty( $tax_exemption_filename ) ): ?>
 
-			<a href="<?php echo $tax_exemption_filename; ?>" download="dispense-prelevement-<?php echo $year; ?>.<?php echo $ext; ?>" class="button blue-pale download-certificate">Télécharger la dispense <?php echo $year; ?></a>
+			<a href="<?php echo $tax_exemption_filename; ?>" download="dispense-prelevement-<?php echo $year; ?>.<?php echo $ext; ?>" class="button blue-pale download-certificate"><?php _e( 'account.documents.DOWNLOAD_EXEMPTION_FILE', 'yproject' ); ?> <?php echo $year; ?></a>
 			<br><br>
 		<?php endif; ?>
 	<?php endfor; ?>
@@ -90,11 +91,11 @@
 	<?php if ( $page_controler->get_show_user_tax_exemption_form() ): ?>
 		<br><br>
 		<div class="db-form v3 full">
-			<h4><?php _e( "Faire ma demande de dispense annuelle", 'yproject' ); ?></h4>
+			<h4><?php _e( 'account.documents.ASK_ANNUAL_EXEMPTION', 'yproject' ); ?></h4>
 			<button id="display-tax-exemption-form-inprogress" data-year="inprogress" class="button blue half left"><?php echo $inprogress_year; ?></button>
 			<button id="display-tax-exemption-form-next" data-year="next" class="button blue half right"><?php echo $next_year; ?></button>
-			<br><br><br><br><?php _e( "ou", 'yproject' ); ?><br>
-			<h4><?php _e( "Envoyer ma demande de dispense annuelle", 'yproject' ); ?></h4>
+			<br><br><br><br><?php _e( 'common.OR', 'yproject' ); ?><br>
+			<h4><?php _e( 'account.documents.SEND_ANNUAL_EXEMPTION', 'yproject' ); ?></h4>
 			<button id="display-upload-tax-exemption-form-inprogress" data-year="inprogress" class="button blue half left"><?php echo $inprogress_year; ?></button>
 			<button id="display-upload-tax-exemption-form-next" data-year="next" class="button blue half right"><?php echo $next_year; ?></button>
 			<br><br><br><br>
@@ -137,8 +138,8 @@
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
 
-			<button type="button" class="button transparent half left"><?php _e( "Annuler", 'yproject' ); ?></button>
-			<button type="submit" class="button red half right"><?php _e( "Enregistrer ma demande de dispense", 'yproject' ); ?></button>
+			<button type="button" class="button transparent half left"><?php _e( 'common.CANCEL', 'yproject' ); ?></button>
+			<button type="submit" class="button red half right"><?php _e( 'account.documents.SAVE_ANNUAL_EXEMPTION', 'yproject' ); ?></button>
 			<div class="clear"></div>
 		</form>
 		<form method="post" id="upload-tax-exemption-form-inprogress" class="db-form v3 full enlarge hidden" enctype="multipart/form-data">
@@ -169,8 +170,8 @@
 				<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 			<?php endforeach; ?>
 
-			<button type="button" class="button transparent half left"><?php _e( "Annuler", 'yproject' ); ?></button>
-			<button type="submit" class="button red half right"><?php _e( "Enregistrer", 'yproject' ); ?></button>
+			<button type="button" class="button transparent half left"><?php _e( 'common.CANCEL', 'yproject' ); ?></button>
+			<button type="submit" class="button red half right"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
 			<div class="clear"></div>
 		</form>
 	<?php endif; ?>

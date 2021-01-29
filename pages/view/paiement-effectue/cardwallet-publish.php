@@ -6,20 +6,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <div class="center align-justify padding-bottom">
 	<br><br>
 
-	<?php _e( "Votre compte bancaire a &eacute;t&eacute; d&eacute;bit&eacute;.", 'yproject' ); ?><br>
+	<?php _e( 'invest.mean-payment.success.ACCOUNT_DEBIT', 'yproject' ); ?><br>
 	<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>
 
 		<?php if ( !$page_controler->has_contract_errors() ): ?>
-			<?php _e( "Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse", 'yproject' ); ?> <?php echo $page_controler->get_current_user_email(); ?>
-			(<?php _e( "pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable", 'yproject' ); ?>) :<br><br>
+			<?php _e( 'invest.mean-payment.success.TWO_EMAILS', 'yproject' ); ?> <?php echo $page_controler->get_current_user_email(); ?>
+			<?php _e( 'invest.mean-payment.success.TWO_EMAILS_CHECK_SPAM', 'yproject' ); ?> :<br><br>
 
-			<?php if ( ATCF_CrowdFunding::get_platform_context() == "wedogood" ): ?>
-			- <?php _e( "un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement.", 'yproject' ); ?><br><br>
-			<?php else: ?>
-			- <?php _e( "un e-mail envoy&eacute; pour la confirmation de votre paiement.", 'yproject' ); ?><br><br>
-			<?php endif; ?>
-
-			- <?php _e( "un e-mail envoy&eacute; par notre partenaire Eversign. Cet e-mail contient un lien vous permettant de signer le pouvoir pour le contrat d&apos;investissement", 'yproject' ); ?><br><br>
+			- <?php _e( 'invest.mean-payment.success.TWO_EMAILS_LIST_1', 'yproject' ); ?><br><br>
+			- <?php _e( 'invest.mean-payment.success.TWO_EMAILS_LIST_2', 'yproject' ); ?><br><br>
 			<center><img src="<?php echo $stylesheet_directory_uri; ?>/images/eversign.png" width="150" height="40" /></center><br>
 
 		<?php else: ?>
@@ -29,20 +24,20 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 
 	<?php else: ?>
-		<?php _e( "Votre investissement est valid&eacute;.", 'yproject' ); ?><br>
-		<?php _e( "Vous allez recevoir un e-mail &agrave; l&apos;adresse", 'yproject' ); ?> <?php echo $page_controler->get_current_user_email(); ?> (<?php _e( "pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable", 'yproject' ); ?>).<br>
-		<?php _e( "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail.", 'yproject' ); ?><br><br>
+		<?php _e( 'invest.mean-payment.success.ONE_EMAIL_1', 'yproject' ); ?><br>
+		<?php _e( 'invest.mean-payment.success.ONE_EMAIL_2', 'yproject' ); ?> <?php echo $page_controler->get_current_user_email(); ?> <?php _e( 'invest.mean-payment.success.TWO_EMAILS_CHECK_SPAM', 'yproject' ); ?>.<br>
+		<?php _e( 'invest.mean-payment.success.ONE_EMAIL_3', 'yproject' ); ?><br><br>
 
 	<?php endif; ?>
 
 	<?php if ( $page_controler->is_preinvestment() ): ?>
-		<?php _e( "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase de vote.", 'yproject' ); ?><br>
-		<?php _e( "Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement.", 'yproject' ); ?><br>
-		<?php _e( "Si un changement devait survenir, vous devrez confirmer ou infirmer votre investissement.", 'yproject' ); ?><br><br>
+		<?php _e( 'invest.mean-payment.success.PREINVESTMENT_ALERT_1', 'yproject' ); ?><br>
+		<?php _e( 'invest.mean-payment.success.PREINVESTMENT_ALERT_2', 'yproject' ); ?><br>
+		<?php _e( 'invest.mean-payment.success.PREINVESTMENT_ALERT_3', 'yproject' ); ?><br><br>
 	<?php endif; ?>
 
 	<div class="db-form full v3">
-		<a class="button half right transparent" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e( "Suivant", 'yproject' ); ?></a>
+		<a class="button half right transparent" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e( "common.NEXT", 'yproject' ); ?></a>
 		<div class="clear"></div>
 	</div>
 

@@ -44,6 +44,14 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 						$amount = $lw_transaction_result->CRED;
 						NotificationsAPI::prospect_setup_payment_method_received_card( $api_result->email, $metadata_decoded->user->name, $amount, $datetime->format( 'd/m/Y H:i:s' ), $metadata_decoded->organization->name );
 	
+						// Transfert vers le wallet de gestion de WDG
+						$orga_email = 'bonjour@wedogood.co';
+						if ( defined( 'PAYMENT_ORGA_EMAIL' ) ) {
+							$orga_email = PAYMENT_ORGA_EMAIL;
+						}
+						$orga_user = get_user_by( 'email', $orga_email );
+						$WDGOrganization = new WDGOrganization( $orga_user->ID );
+						LemonwayLib::ask_transfer_funds( $WDGOrganization->get_lemonway_id(), 'SC', $amount );
 						// Transfert vers le compte bancaire de WDG
 						$transfer_message = 'PROSPECT_SETUP_PAYMENT_CARD ' . $metadata_decoded->user->name . ' - ' . $metadata_decoded->organization->name;
 						$result_transfer = LemonwayLib::ask_transfer_to_iban( 'SC', $amount, 0, 0, $transfer_message );						
@@ -93,6 +101,14 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 
 	public function get_init_guid() {
 		return $this->guid;
+	}
+
+	public function get_init_locale() {
+		global $locale;
+		if ( empty( $locale ) ) {
+			return 'fr_FR';
+		}
+		return $locale;
 	}
 	
 }
