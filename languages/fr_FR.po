@@ -883,23 +883,20 @@ msgstr "Recharger mon porte-monnaie par virement"
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER"
 msgstr "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement. Vous pouvez utiliser votre carte pour investir sur les projets depuis leur page de pr&eacute;sentation."
 
+msgid "account.wallet.SEND_MONEY_TO_WALLET_WARNINGS"
+msgstr "Attention :"
+
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME"
 msgstr "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom."
+
+msgid "account.wallet.SEND_MONEY_TO_WALLET_IBAN_CHANGED"
+msgstr "Les coordonn&eacute;es bancaires ont chang&eacute; depuis janvier 2021."
 
 msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
 msgstr "Compte bancaire de destination"
 
-msgid "account.wallet.TRANSFER_ID_CODE"
-msgstr "Code &agrave; indiquer (pour identifier votre paiement) :"
-
-msgid "account.wallet.COPY_CODE"
-msgstr "Copier le code"
-
-msgid "account.wallet.CODE_COPIED"
-msgstr "Code copi&eacute;"
-
-msgid "account.wallet.WHERE_TO_COPY_THE_CODE"
-msgstr "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !"
+msgid "account.wallet.LOAD_VIBAN"
+msgstr "Obtenir les coordonn&eacute;es bancaires de destination"
 
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Virer vers mon compte bancaire"
