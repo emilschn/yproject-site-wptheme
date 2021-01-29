@@ -14,6 +14,15 @@ $validated_or_after = true; //$preview_or_after || $status==ATCF_Campaign::$camp
 $status_list = ATCF_Campaign::get_campaign_status_list();
 $nb_status = count( $status_list ) - 2;
 $i=1;
+
+// si on est en évaluation, on ne peut pas passer en collecte tant qu'il y a des chèques non validés
+$remaining_check = FALSE;
+if( $status==ATCF_Campaign::$campaign_status_vote ) {
+	$investment_results = WDGCampaignInvestments::get_list( $page_controler->get_campaign_id() );
+	if( $investment_results[ 'count_not_validate_check_investments' ] > 0 ){
+		$remaining_check = TRUE;
+	}
+}
 ?>
 <div id="status-list">
 	
@@ -486,6 +495,13 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 			'warning'		=> true
 		));
 
+		?>
+		<?php if ( $remaining_check ): ?>
+			<div class="field admin-theme">
+			Attention : Il y a des chèques en attente de validation avant de pouvoir autoriser à passer à l'étape d'investissement !
+			</div>
+		<?php endif; ?>
+		<?php
 		DashboardUtility::create_field(array(
 			"id"			=> 'new_can_go_next_status',
 			"type"			=> 'check',
@@ -493,7 +509,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 			"value"			=> $page_controler->get_campaign()->can_go_next_status(),
 			"editable"		=> $page_controler->can_access_admin(),
 			"admin_theme"	=> $page_controler->can_access_admin(),
-			"visible"		=> $page_controler->can_access_admin() && $validated_or_after
+			"visible"		=> $page_controler->can_access_admin() && $validated_or_after && !$remaining_check 
 		));
 
 		DashboardUtility::create_save_button( 'statusmanage-form', $page_controler->can_access_admin(), 'Enregistrer', 'Enregistrement', TRUE );
