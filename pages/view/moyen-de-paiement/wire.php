@@ -1,6 +1,7 @@
 <?php
 global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
+$viban = $page_controler->get_investor_iban();
 ?>
 
 <div class="center align-justify wdg-lightbox-ref">
@@ -8,20 +9,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <?php _e( 'invest.mean-payment.wire.INFORMATION', 'yproject' ); ?><br>
 <ul>
-	<li><strong><?php _e( 'invest.mean-payment.wire.ACCOUNT_OWNER', 'yproject' ); ?></strong> LEMON WAY</li>
-	<li><strong>IBAN :</strong> FR76 3000 4025 1100 0111 8625 268</li>
-	<li><strong>BIC :</strong> BNPAFRPPIFE</li>
+	<li><strong><?php _e( 'invest.mean-payment.wire.ACCOUNT_OWNER', 'yproject' ); ?></strong> <?php echo $viban->HOLDER; ?></li>
+	<li><strong>IBAN :</strong> <?php echo $viban->DATA; ?></li>
+	<li><strong>BIC :</strong> <?php echo $viban->SWIFT; ?></li>
 </ul>
-
-<?php _e( 'account.wallet.TRANSFER_ID_CODE', 'yproject' ); ?><br>
-<strong><span id="clipboard-user-lw-code">wedogood-<?php echo $page_controler->get_investor_lemonway_id(); ?></span></strong>
-<div class="align-center">
-	<button type="button" class="button blue copy-clipboard" data-clipboard="clipboard-user-lw-code"><?php _e( 'account.wallet.COPY_CODE', 'yproject' ); ?></button>
-	<span class="hidden"><?php _e( 'account.wallet.CODE_COPIED', 'yproject' ); ?></span>
-</div>
-<br><br>
-<?php _e( 'account.wallet.WHERE_TO_COPY_THE_CODE', 'yproject' ); ?>
-
 <br><br>
 
 <div class="db-form full v3">
@@ -33,8 +24,3 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <br><br>
 
 </div>
-
-
-<hr />
-<?php _e( 'invest.mean-payment.wire.CODE_EXAMPLES', 'yproject' ); ?><br><br>
-<div class="align-center"><img src="<?php echo home_url( '/wp-content/plugins/appthemer-crowdfunding/includes/ui/shortcodes/capture-lbp.png' ); ?>" /></div><br><br>

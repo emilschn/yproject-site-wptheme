@@ -97,6 +97,31 @@ UserAccountDashboard.prototype.initMenu = function() {
 			} );
 		} );
 	}
+
+	if ( $( '.button-load-viban' ).length > 0 ) {
+		$( '.button-load-viban' ).click( function() {
+			var user_id = $( this ).data( 'iban-user' );
+			$( this ).prop( 'disabled', true );
+			$( '#ajax-viban-loader-' + user_id ).show();
+			$.ajax({
+				'type' : "POST",
+				'url' : ajax_object.ajax_url,
+				'data': {
+					'user_id': user_id,
+					'action' : 'get_viban_info'
+				}
+	
+			}).done( function( result ){
+				var parsedResults = JSON.parse( result );
+				$( '#loaded-iban-' + user_id + ' span.reload-bank-owner' ).html( parsedResults[ 'holder' ] );
+				$( '#loaded-iban-' + user_id + ' span.reload-bank-iban' ).html( parsedResults[ 'iban' ] );
+				$( '#loaded-iban-' + user_id + ' span.reload-bank-bic' ).html( parsedResults[ 'bic' ] );
+				$( '#loaded-iban-' + user_id ).show();
+				$( '#button-load-viban-' + user_id ).hide();
+				$( '#ajax-viban-loader-' + user_id ).hide();
+			});
+		} );
+	}
 };
 
 /**
