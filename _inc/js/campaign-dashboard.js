@@ -830,8 +830,13 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 					'draft_id': draftId,
 					'campaign_id': campaignId
 				}
-			} ).always( function( result ) {
-				window.location.reload();
+			} ).done( function( result ) {
+				if (result == '1'){
+					window.location.reload();
+				}else{
+					$( '#preview-investment-draft-' +draftId+ ' #img-loading-create-investment' ).after("<em>"+result+"</em>");
+					$( '#preview-investment-draft-' +draftId+ ' #img-loading-create-investment' ).hide();//On cache la roue de chargement.
+				}
 			} );
 		} );
 	}
