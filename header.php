@@ -157,11 +157,11 @@
 		<nav id="main">
 			<div id="menu">
 				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
-				<a href="<?php echo home_url( '/les-projets/' ); ?>" class="lines"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/epargne-positive/' ); ?>" class="lines"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/financement/' ); ?>" class="lines"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/investissement/' ); ?>" class="lines"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
-				<a href="<?php echo home_url( '/a-propos/vision/' ); ?>" class="lines"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
+				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="lines"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
+				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>" class="lines"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
+				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>" class="lines"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
+				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>" class="lines"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
+				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>" class="lines"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
 
 				<?php if ( false && is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 					<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
