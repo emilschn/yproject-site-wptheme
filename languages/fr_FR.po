@@ -1691,7 +1691,7 @@ msgid "form.organization-details.error.ADDRESS_NUMBER"
 msgstr "Le num&eacute;ro de rue de l'organisation doit &ecirc;tre un nombre."
 
 msgid "form.organization-details.error.ZIP_CODE"
-msgstr "Le code postal de l'organisation doit &ecirc;tre un nombre."
+msgstr "Le code postal de l'organisation n'est pas valide."
 
 # ############################## form - user-identitydocs ################################
 msgid "form.user-identitydocs.ID_OF_PRESIDENT"
