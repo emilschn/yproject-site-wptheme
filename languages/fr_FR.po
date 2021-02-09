@@ -1427,6 +1427,48 @@ msgstr "Vous aviez l'intention d'investir %s &euro; sur le projet %s."
 msgid "invest.lightbox.investment.DESCRIPTION"
 msgstr "Votre compte a &eacute;t&eacute; authentifi&eacute; par notre prestataire de paiement. Nous vous proposons donc de reprendre votre d&eacute;marche d'investissement."
 
+msgid "invest.contract.CIVILITY_MALE"
+msgstr "M"
+
+msgid "invest.contract.CIVILITY_FEMALE"
+msgstr "Mme"
+
+msgid "invest.contract.FOR_FIRST_QUARTER"
+msgstr "pour le premier trimestre"
+
+msgid "invest.contract.FOR_SECOND_QUARTER"
+msgstr "pour le deuxième trimestre"
+
+msgid "invest.contract.FOR_THIRD_QUARTER"
+msgstr "pour le troisième trimestre"
+
+msgid "invest.contract.FOR_FOURTH_QUARTER"
+msgstr "pour le quatrième trimestre"
+
+msgid "invest.contract.PERIODICITY_MONTH"
+msgstr "mensuelle"
+
+msgid "invest.contract.PERIODICITY_QUARTER"
+msgstr "trimestrielle"
+
+msgid "invest.contract.PERIODICITY_SEMESTER"
+msgstr "semestrielle"
+
+msgid "invest.contract.PERIODICITY_YEAR"
+msgstr "annuelle"
+
+msgid "invest.contract.PERIOD_MONTH"
+msgstr "mois"
+
+msgid "invest.contract.PERIOD_QUARTER"
+msgstr "trimestre"
+
+msgid "invest.contract.PERIOD_SEMESTER"
+msgstr "semestre"
+
+msgid "invest.contract.PERIOD_YEAR"
+msgstr "an"
+
 # ############################## share-buttons ################################
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
 msgstr "Faites comme moi, épargnez positif dès 10 € pour soutenir"

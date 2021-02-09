@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-29 14:19+0100\n"
+"PO-Revision-Date: 2021-02-09 15:09+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1435,6 +1435,48 @@ msgstr "You have pre-invested €%s in the %s project."
 
 msgid "invest.lightbox.investment.DESCRIPTION"
 msgstr "Your account has been authenticated by our payment provider. You can therefore resume your investment process."
+
+msgid "invest.contract.CIVILITY_MALE"
+msgstr "Mr"
+
+msgid "invest.contract.CIVILITY_FEMALE"
+msgstr "Mrs"
+
+msgid "invest.contract.FOR_FIRST_QUARTER"
+msgstr "for the first quarter"
+
+msgid "invest.contract.FOR_SECOND_QUARTER"
+msgstr "for the second quarter"
+
+msgid "invest.contract.FOR_THIRD_QUARTER"
+msgstr "for the third quarter"
+
+msgid "invest.contract.FOR_FOURTH_QUARTER"
+msgstr "for the fourth quarter"
+
+msgid "invest.contract.PERIODICITY_MONTH"
+msgstr "monthly"
+
+msgid "invest.contract.PERIODICITY_QUARTER"
+msgstr "quarterly"
+
+msgid "invest.contract.PERIODICITY_SEMESTER"
+msgstr "biannual"
+
+msgid "invest.contract.PERIODICITY_YEAR"
+msgstr "annual"
+
+msgid "invest.contract.PERIOD_MONTH"
+msgstr "month"
+
+msgid "invest.contract.PERIOD_QUARTER"
+msgstr "quarter"
+
+msgid "invest.contract.PERIOD_SEMESTER"
+msgstr "semester"
+
+msgid "invest.contract.PERIOD_YEAR"
+msgstr "year"
 
 # ############################## share-buttons
 # ################################
