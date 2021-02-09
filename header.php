@@ -113,7 +113,7 @@
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		
-		<?php if ( !is_user_logged_in() && $post->post_name == 'inscription' ): ?>
+		<?php if ( !is_user_logged_in() && ( $post->post_name == 'inscription' || $post->post_name == 'registration')): ?>
 		<script src='https://www.google.com/recaptcha/api.js'></script>
 		<?php endif; ?>
 
