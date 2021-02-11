@@ -1,4 +1,7 @@
-<?php $page_controler = WDG_Templates_Engine::instance()->get_controler(); ?>
+<?php 
+WDG_Languages_Helpers::load_languages();
+$page_controler = WDG_Templates_Engine::instance()->get_controler(); 
+?>
 
 <div id="content">
 

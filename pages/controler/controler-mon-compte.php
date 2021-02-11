@@ -61,7 +61,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 				//exit();
 			}
 		}
-		
+		WDG_Languages_Helpers::load_languages();
 		$core = ATCF_CrowdFunding::instance();
 		$core->include_form( 'user-password' );
 		$core->include_form( 'user-unlink-facebook' );
