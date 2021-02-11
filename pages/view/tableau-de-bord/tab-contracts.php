@@ -73,7 +73,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_contract_earnings_description_configtext_post_id",
 			"type"			=> "select",
-			"label"			=> __( "Informations simples pr&eacute;-param&eacute;tr&eacute;es", 'yproject' ),
+			"label"			=> __( "Description des revenus pr&eacute;-param&eacute;tr&eacute;es", 'yproject' ),
 			"value"			=> $page_controler->get_campaign()->contract_earnings_description_configtext_post_id(),
 			"options_id"	=> array_keys( $configtext_post_list_kv ),
 			"options_names"	=> array_values( $configtext_post_list_kv ),
