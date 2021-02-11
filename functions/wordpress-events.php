@@ -31,7 +31,7 @@ class WDG_WordPress_Events {
 		// Requetes sur page chargée
 		add_action( 'pre_get_posts', 'WDG_WordPress_Events::pre_get_posts' );
 		add_action( 'wp_enqueue_scripts', 'WDG_WordPress_Events::wp_enqueue_scripts' );
-		add_action( 'wp_print_scripts', 'WDG_WordPress_Events::login_or_register' );
+		add_action( 'wp_enqueue_scripts', 'WDG_WordPress_Events::login_or_register' );
 		add_action( 'wp_insert_comment', array('NotificationsEmails', 'new_comment'), 99 ,2 );
 		// Composants
 		add_action( 'widgets_init', 'WDG_WordPress_Events::widgets_init' );
