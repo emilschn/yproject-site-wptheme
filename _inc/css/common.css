@@ -1,7 +1,7 @@
 body {
 	margin: 0px;
     background-color: #FFFFFF;
-	font-size: 12pt;
+	font-size: 1.1em;
     color: #333333;
     font-family: Arial, Helvetica, sans-serif;
 }
@@ -9,17 +9,27 @@ body a {
 	color: #EA4F51;
 	font-family: Arial, Helvetica, sans-serif;
 	text-decoration: none;
+	font-weight: 600;
 }
-body a.link {
-	font-weight: bold;
+body a.button, body a.hidden-link, #menu a, .wp-block-button__link {
+	font-weight: 400;
 }
 body input, body select {
 	font-family: Arial, Helvetica, sans-serif;
 }
 
-h1, h2 {
+body h1, body h2 {
 	font-family: Trebuchet MS, sans-serif;
 	text-transform: uppercase;
+}
+body h1 {
+	font-size: 2.2em;
+}
+body h2 {
+	font-size: 1.8em;
+}
+body h3 {
+	font-size: 1.1em;
 }
 
 /*******************************************************************************
