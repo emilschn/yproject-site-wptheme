@@ -66,7 +66,7 @@
     position: relative;
     line-height: 100%;
     font-size: 50px;
-    font-family: wedogood;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     color: #FFFFFF;
 }
@@ -304,7 +304,6 @@
     top: 375px;
     width: 100%;
     margin-top: 15px;
-    letter-spacing: 0.125em;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
     border-right: 2px solid #333;
@@ -341,7 +340,6 @@ body.template-les-projets .wdg-component-projects-preview .project-container.cat
     display: inline-block;
     text-align: center;
     font-size: 0.938em;
-    letter-spacing: 0.063em;
     text-transform: uppercase;   
     padding: 20px 0%;
     bottom: 0%;
@@ -421,20 +419,11 @@ body.template-les-projets .wdg-component-projects-preview .project-container .pr
     border: solid 4px transparent; 
     color: #FFFFFF;
     cursor: pointer;
-    margin: 0px 1px;
+	margin: 0px 1px;
+	border: 4px solid white;
 }
 .wdg-component-projects-preview .impacts-container .impact-logo {
 	transition: all .2s linear;
-}
-/* Dégradés de couleurs pour les impacts */
-.impacts-container .impact-ecologic{
-    background: linear-gradient(45deg, #8BC79C, #00879B);
-}
-.impacts-container .impact-social{
-    background: linear-gradient(45deg, #E2C80D, #EA4F51);
-}
-.impacts-container .impact-economic{
-    background: linear-gradient(45deg, #00879B, #005663);
 }
 
 .wdg-component-projects-preview .impacts-container .impact-logo:hover {
