@@ -269,7 +269,9 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	}
 	
 	public function can_use_check() {
+		global $locale;
 		$buffer = $this->current_campaign->can_use_check( $this->current_investment->get_session_amount() / $this->current_campaign->part_value() )
+				&& $locale == 'fr_FR'
 				&& !$this->current_investment->has_token();
 		return $buffer;
 	}
