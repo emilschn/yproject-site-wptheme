@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-09 15:09+0100\n"
+"PO-Revision-Date: 2021-02-11 16:40+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1244,8 +1244,14 @@ msgstr "Warning: the amount you wish to invest may exceed the payment limit of y
 msgid "invest.mean-payment.WIRE_DETAILS"
 msgstr "The RIB ID of our service provider will be shown on the following page, as well as a specific recipient code that must be sent with the transfer."
 
+msgid "invest.mean-payment.CHECK_DETAILS_FRANCE"
+msgstr "The cheque should come from a french bank account."
+
 msgid "invest.mean-payment.CHECK_DETAILS"
 msgstr "Take a photo of the cheque to process it more quickly."
+
+msgid "invest.mean-payment.CHECK_DETAILS_PENDING"
+msgstr "The cheque collection is pending while the fundraising is not over."
 
 msgid "invest.mean-payment.PAY"
 msgstr "Pay"

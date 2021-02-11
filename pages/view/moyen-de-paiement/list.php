@@ -91,8 +91,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-cheque.png" alt="<?php _e( 'invest.mean-payment.list.CHECK', 'yproject' ); ?>" width="120">
 				<div>
 					<span class="mean-payment-name"><?php _e( 'invest.mean-payment.list.CHECK', 'yproject' ); ?></span><br>
-					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS', 'yproject' ); ?></span>
-					<span><?php _e( "Le ch&egrave;que reste en attente d'encaissement jusqu'&agrave; la r&eacute;ussite de la lev&eacute;e de fonds.", 'yproject' ); ?></span>
+					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS_FRANCE', 'yproject' ); ?></span><br>
+					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS', 'yproject' ); ?></span><br>
+					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS_PENDING', 'yproject' ); ?></span>
 				</div>
 			</a>
 			
