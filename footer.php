@@ -53,7 +53,7 @@ else {
 							<a class="link" href="<?php echo home_url('/a-propos/newsletter/'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a>
 						</div>
 
-						<?php if ( false && is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+						<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 						<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
 						<div class="select">
 							<select id="footer-switch-lang">
