@@ -192,6 +192,7 @@ class WDG_WordPress_Events {
 		return $init;
 	}
 
+	
 	public static function display_toolbar( $init ) {
     	$init['toolbar'] = true;
     	return $init;
