@@ -61,7 +61,25 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'admin_theme'	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
-		
+
+		// Description des revenus
+		// Récupération des posts de textes de configuration qui permettent de le définir
+		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_earnings_description );
+		$configtext_post_list_kv = array();
+		$configtext_post_list_kv[ 'custom' ] = 'Personnalisé';
+		foreach ( $configtext_post_list as $configtext_post_item ) {
+			$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+		}
+		DashboardUtility::create_field(array(
+			"id"			=> "new_project_contract_earnings_description_configtext_post_id",
+			"type"			=> "select",
+			"label"			=> __( "Description des revenus pr&eacute;-param&eacute;tr&eacute;es", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->contract_earnings_description_configtext_post_id(),
+			"options_id"	=> array_keys( $configtext_post_list_kv ),
+			"options_names"	=> array_values( $configtext_post_list_kv ),
+			'admin_theme'	=> $page_controler->can_access_admin(),
+			"editable"		=> $page_controler->can_access_admin()
+		));
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_contract_earnings_description",
 			"type"			=> "editor",
@@ -71,6 +89,24 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
+		// Informations simples
+		// Récupération des posts de textes de configuration qui permettent de le définir
+		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_simple_info );
+		$configtext_post_list_kv = array();
+		$configtext_post_list_kv[ 'custom' ] = 'Personnalisé';
+		foreach ( $configtext_post_list as $configtext_post_item ) {
+			$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+		}
+		DashboardUtility::create_field(array(
+			"id"			=> "new_project_contract_simple_info_configtext_post_id",
+			"type"			=> "select",
+			"label"			=> __( "Informations simples pr&eacute;-param&eacute;tr&eacute;es", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->contract_simple_info_configtext_post_id(),
+			"options_id"	=> array_keys( $configtext_post_list_kv ),
+			"options_names"	=> array_values( $configtext_post_list_kv ),
+			'admin_theme'	=> $page_controler->can_access_admin(),
+			"editable"		=> $page_controler->can_access_admin()
+		));
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_contract_simple_info",
 			"type"			=> "editor",
@@ -80,6 +116,24 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
+		// Informations détaillées
+		// Récupération des posts de textes de configuration qui permettent de le définir
+		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_detailed_info );
+		$configtext_post_list_kv = array();
+		$configtext_post_list_kv[ 'custom' ] = 'Personnalisé';
+		foreach ( $configtext_post_list as $configtext_post_item ) {
+			$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+		}
+		DashboardUtility::create_field(array(
+			"id"			=> "new_project_contract_detailed_info_configtext_post_id",
+			"type"			=> "select",
+			"label"			=> __( "Informations d&eacute;taill&eacute;es pr&eacute;-param&eacute;tr&eacute;es", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->contract_detailed_info_configtext_post_id(),
+			"options_id"	=> array_keys( $configtext_post_list_kv ),
+			"options_names"	=> array_values( $configtext_post_list_kv ),
+			'admin_theme'	=> $page_controler->can_access_admin(),
+			"editable"		=> $page_controler->can_access_admin()
+		));
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_contract_detailed_info",
 			"type"			=> "editor",
@@ -88,6 +142,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'admin_theme'	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
+
 
 		DashboardUtility::create_field(array(
 			"id"			=> "new_contract_premium",

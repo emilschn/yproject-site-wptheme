@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-01-20 12:04+0100\n"
+"PO-Revision-Date: 2021-02-09 15:09+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -892,23 +892,20 @@ msgstr "Make a bank transfer to my wallet"
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER"
 msgstr "To prevent money laundering, you can only transfer money to your wallet through a bank transfer."
 
+msgid "account.wallet.SEND_MONEY_TO_WALLET_WARNINGS"
+msgstr "Warning:"
+
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME"
 msgstr "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom."
+
+msgid "account.wallet.SEND_MONEY_TO_WALLET_IBAN_CHANGED"
+msgstr "Les coordonn&eacute;es bancaires ont chang&eacute; depuis janvier 2021."
 
 msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
 msgstr "Recipient bank account"
 
-msgid "account.wallet.TRANSFER_ID_CODE"
-msgstr "Transfer code (for your payment identification):"
-
-msgid "account.wallet.COPY_CODE"
-msgstr "Copy the code"
-
-msgid "account.wallet.CODE_COPIED"
-msgstr "Code copied"
-
-msgid "account.wallet.WHERE_TO_COPY_THE_CODE"
-msgstr "Please paste this code as 'recipient label' when you will execute the bank transfer!"
+msgid "account.wallet.LOAD_VIBAN"
+msgstr "Get the bank account details"
 
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Transfer to my bank account"
@@ -1438,6 +1435,48 @@ msgstr "You have pre-invested €%s in the %s project."
 
 msgid "invest.lightbox.investment.DESCRIPTION"
 msgstr "Your account has been authenticated by our payment provider. You can therefore resume your investment process."
+
+msgid "invest.contract.CIVILITY_MALE"
+msgstr "Mr"
+
+msgid "invest.contract.CIVILITY_FEMALE"
+msgstr "Mrs"
+
+msgid "invest.contract.FOR_FIRST_QUARTER"
+msgstr "for the first quarter"
+
+msgid "invest.contract.FOR_SECOND_QUARTER"
+msgstr "for the second quarter"
+
+msgid "invest.contract.FOR_THIRD_QUARTER"
+msgstr "for the third quarter"
+
+msgid "invest.contract.FOR_FOURTH_QUARTER"
+msgstr "for the fourth quarter"
+
+msgid "invest.contract.PERIODICITY_MONTH"
+msgstr "monthly"
+
+msgid "invest.contract.PERIODICITY_QUARTER"
+msgstr "quarterly"
+
+msgid "invest.contract.PERIODICITY_SEMESTER"
+msgstr "biannual"
+
+msgid "invest.contract.PERIODICITY_YEAR"
+msgstr "annual"
+
+msgid "invest.contract.PERIOD_MONTH"
+msgstr "month"
+
+msgid "invest.contract.PERIOD_QUARTER"
+msgstr "quarter"
+
+msgid "invest.contract.PERIOD_SEMESTER"
+msgstr "semester"
+
+msgid "invest.contract.PERIOD_YEAR"
+msgstr "year"
 
 # ############################## share-buttons
 # ################################

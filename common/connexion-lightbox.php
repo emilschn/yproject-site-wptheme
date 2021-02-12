@@ -63,7 +63,7 @@
 			<div class="login-separator-label"><span><?php _e( 'common.OR', 'yproject' ); ?></span></div>
 		</form>
 			
-		<form method="post" action="<?php echo home_url( "/inscription/" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
+		<form method="post" action="<?php echo WDG_Redirect_Engine::override_get_page_url( "inscription" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
 			<div>
 				<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 				<button class="button transparent" type="submit"><?php _e( 'login.CREATE_ACCOUNT', 'yproject' ); ?></button>

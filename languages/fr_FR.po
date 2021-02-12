@@ -883,23 +883,20 @@ msgstr "Recharger mon porte-monnaie par virement"
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER"
 msgstr "Afin d'emp&ecirc;cher les utilisations de cartes frauduleuses et le blanchiment d'argent, il n'est pas possible, pour l'instant, de recharger son porte-monnaie avec un autre moyen de paiement. Vous pouvez utiliser votre carte pour investir sur les projets depuis leur page de pr&eacute;sentation."
 
+msgid "account.wallet.SEND_MONEY_TO_WALLET_WARNINGS"
+msgstr "Attention :"
+
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME"
 msgstr "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom."
+
+msgid "account.wallet.SEND_MONEY_TO_WALLET_IBAN_CHANGED"
+msgstr "Les coordonn&eacute;es bancaires ont chang&eacute; depuis janvier 2021."
 
 msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
 msgstr "Compte bancaire de destination"
 
-msgid "account.wallet.TRANSFER_ID_CODE"
-msgstr "Code &agrave; indiquer (pour identifier votre paiement) :"
-
-msgid "account.wallet.COPY_CODE"
-msgstr "Copier le code"
-
-msgid "account.wallet.CODE_COPIED"
-msgstr "Code copi&eacute;"
-
-msgid "account.wallet.WHERE_TO_COPY_THE_CODE"
-msgstr "Indiquez imp&eacute;rativement ce code comme 'libell&eacute; b&eacute;n&eacute;ficiaire' ou 'code destinataire' au moment du virement !"
+msgid "account.wallet.LOAD_VIBAN"
+msgstr "Obtenir les coordonn&eacute;es bancaires de destination"
 
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Virer vers mon compte bancaire"
@@ -1430,6 +1427,48 @@ msgstr "Vous aviez l'intention d'investir %s &euro; sur le projet %s."
 msgid "invest.lightbox.investment.DESCRIPTION"
 msgstr "Votre compte a &eacute;t&eacute; authentifi&eacute; par notre prestataire de paiement. Nous vous proposons donc de reprendre votre d&eacute;marche d'investissement."
 
+msgid "invest.contract.CIVILITY_MALE"
+msgstr "M"
+
+msgid "invest.contract.CIVILITY_FEMALE"
+msgstr "Mme"
+
+msgid "invest.contract.FOR_FIRST_QUARTER"
+msgstr "pour le premier trimestre"
+
+msgid "invest.contract.FOR_SECOND_QUARTER"
+msgstr "pour le deuxième trimestre"
+
+msgid "invest.contract.FOR_THIRD_QUARTER"
+msgstr "pour le troisième trimestre"
+
+msgid "invest.contract.FOR_FOURTH_QUARTER"
+msgstr "pour le quatrième trimestre"
+
+msgid "invest.contract.PERIODICITY_MONTH"
+msgstr "mensuelle"
+
+msgid "invest.contract.PERIODICITY_QUARTER"
+msgstr "trimestrielle"
+
+msgid "invest.contract.PERIODICITY_SEMESTER"
+msgstr "semestrielle"
+
+msgid "invest.contract.PERIODICITY_YEAR"
+msgstr "annuelle"
+
+msgid "invest.contract.PERIOD_MONTH"
+msgstr "mois"
+
+msgid "invest.contract.PERIOD_QUARTER"
+msgstr "trimestre"
+
+msgid "invest.contract.PERIOD_SEMESTER"
+msgstr "semestre"
+
+msgid "invest.contract.PERIOD_YEAR"
+msgstr "an"
+
 # ############################## share-buttons ################################
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
 msgstr "Faites comme moi, épargnez positif dès 10 € pour soutenir"
@@ -1694,7 +1733,7 @@ msgid "form.organization-details.error.ADDRESS_NUMBER"
 msgstr "Le num&eacute;ro de rue de l'organisation doit &ecirc;tre un nombre."
 
 msgid "form.organization-details.error.ZIP_CODE"
-msgstr "Le code postal de l'organisation doit &ecirc;tre un nombre."
+msgstr "Le code postal de l'organisation n'est pas valide."
 
 # ############################## form - user-identitydocs ################################
 msgid "form.user-identitydocs.ID_OF_PRESIDENT"
