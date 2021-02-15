@@ -507,7 +507,7 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
 }
 @media screen and (max-width: 1070px) and (min-width: 998px) {
 	nav#main > div#menu > a {
-		font-size: 14px;
+		font-size: 12px;
 	}
 }
 
@@ -766,6 +766,11 @@ ul.project-list a.needs-authentication:after {
 }
 @media screen and (max-width: 1020px) and (min-width: 998px) {
 	nav#main > div#menu > a:nth-child(3) { display: none; }
+}
+
+/*** pas de gras sur le menu de mon compte ***/
+#container #content nav ul.nav-menu li a {
+	font-weight: 300;
 }
 
 /*******************************************************************************
@@ -1380,7 +1385,7 @@ body.template-les-projets header .header-container > div > div.wdg-component-sli
 }
 body.template-les-projets header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container .button-slide {
 	width: auto;
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 0px 10px;
 	padding: 20px 50px;
 }
 
@@ -1415,6 +1420,13 @@ body.template-les-projets header .header-container > div > div#wdg-project-stats
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span {
 	font-size: 16pt;
 }
+
+@media screen and (max-width: 1070px) and (min-width: 998px) { /** réduction de la police en responsive **/
+	body.template-les-projets header .header-container > div > div#wdg-project-stats p span {
+		font-size: 15px;
+	}
+}
+
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span span {
 	font-size: 25pt;
 	font-weight: bold;

@@ -336,6 +336,12 @@ body.template-les-projets .wdg-component-projects-preview .project-container.cat
     margin: 0;
 }
 
+@media screen and (max-width: 1070px) and (min-width: 998px) { /** réduction de la taille de la police en responsive **/
+	.wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
+		font-size: 11px;
+	}
+}
+
 .wdg-component-projects-preview .home-button-project{
     display: inline-block;
     text-align: center;
