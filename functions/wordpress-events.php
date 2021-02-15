@@ -31,6 +31,7 @@ class WDG_WordPress_Events {
 		// Requetes sur page chargée
 		add_action( 'pre_get_posts', 'WDG_WordPress_Events::pre_get_posts' );
 		add_action( 'wp_enqueue_scripts', 'WDG_WordPress_Events::wp_enqueue_scripts' );
+		add_action( 'wp_enqueue_scripts', 'WDG_WordPress_Events::login_or_register' );
 		add_action( 'wp_insert_comment', array('NotificationsEmails', 'new_comment'), 99 ,2 );
 		// Composants
 		add_action( 'widgets_init', 'WDG_WordPress_Events::widgets_init' );
@@ -77,9 +78,6 @@ class WDG_WordPress_Events {
 		
 		// Donne la possibilité de mettre des tags aux pages
 		register_taxonomy_for_object_type('post_tag', 'page');
-		// Vérifie si le formulaire de connexion ou d'inscription a été posté
-		WDGFormUsers::login();
-		WDGFormUsers::register();
 		
 		// Sécurisation utilisateur
 		show_admin_bar( false );
@@ -343,6 +341,12 @@ class WDG_WordPress_Events {
 
 		// Ajout variable JS avec l'url de la page utilisée pour les requêtes Ajax
 		wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+	}
+
+	public static function login_or_register() {	
+		// Vérifie si le formulaire de connexion ou d'inscription a été posté
+		WDGFormUsers::login();
+		WDGFormUsers::register();
 	}
 	
 	public static function widgets_init() {
