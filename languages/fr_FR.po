@@ -1741,6 +1741,9 @@ msgstr "Le num&eacute;ro de rue de l'organisation doit &ecirc;tre un nombre."
 msgid "form.organization-details.error.ZIP_CODE"
 msgstr "Le code postal de l'organisation n'est pas valide."
 
+msgid "form.organization-details.error.RCS"
+msgstr "Le RCS de l'organisation n'est pas valide."
+
 # ############################## form - user-identitydocs ################################
 msgid "form.user-identitydocs.ID_OF_PRESIDENT"
 msgstr "Justificatif d'identit&eacute; du g&eacute;rant ou du pr&eacute;sident"
