@@ -1235,8 +1235,14 @@ msgstr "Attention : le montant que vous souhaitez investir risque de d&eacute;pa
 msgid "invest.mean-payment.WIRE_DETAILS"
 msgstr "Le RIB de notre prestataire sera indiqu&eacute; sur la page suivante, ainsi qu'un code destinataire sp&eacute;cifique &agrave; transmettre imp&eacute;rativement lors du virement."
 
+msgid "invest.mean-payment.CHECK_DETAILS_FRANCE"
+msgstr "Le chèque doit être émis depuis un compte bancaire en France."
+
 msgid "invest.mean-payment.CHECK_DETAILS"
-msgstr "Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce ch&egrave;que."
+msgstr "Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce chèque."
+
+msgid "invest.mean-payment.CHECK_DETAILS_PENDING"
+msgstr "Le chèque reste en attente d'encaissement jusqu'à la réussite de la levée de fonds."
 
 msgid "invest.mean-payment.PAY"
 msgstr "Payer"
@@ -1740,6 +1746,9 @@ msgstr "Le num&eacute;ro de rue de l'organisation doit &ecirc;tre un nombre."
 
 msgid "form.organization-details.error.ZIP_CODE"
 msgstr "Le code postal de l'organisation n'est pas valide."
+
+msgid "form.organization-details.error.RCS"
+msgstr "Le RCS de l'organisation n'est pas valide."
 
 # ############################## form - user-identitydocs ################################
 msgid "form.user-identitydocs.ID_OF_PRESIDENT"
