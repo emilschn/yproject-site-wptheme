@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-15 15:09+0100\n"
+"PO-Revision-Date: 2021-02-15 15:32+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1447,6 +1447,12 @@ msgstr "Mr"
 
 msgid "invest.contract.CIVILITY_FEMALE"
 msgstr "Mrs"
+
+msgid "invest.contract.MAXIMUM"
+msgstr "Ceiling"
+
+msgid "invest.contract.COLLECTED_FUNDS"
+msgstr "Collected amount"
 
 msgid "invest.contract.FOR_FIRST_QUARTER"
 msgstr "for the first quarter"

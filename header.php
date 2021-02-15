@@ -163,7 +163,7 @@
 				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>" class="lines"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
 				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>" class="lines"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
 
-				<?php if ( false && is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 					<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
 					<a href="#" id="btn-switch-lang">
 					<?php foreach ( $active_languages as $language_key => $language_item ): if ( $language_item[ 'active' ] ): ?>
@@ -176,11 +176,17 @@
 				<a href="#" class="btn-user not-connected inactive"><?php _e( 'common.CONNECTION', 'yproject' ); ?></a>
 				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
 				
-				<?php if ( false && is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+				<?php
+				$url_suffix = '';
+				if ( isset( $_GET[ 'campaign_id' ] ) ) {
+					$url_suffix = '?campaign_id=' . $_GET[ 'campaign_id' ];
+				}
+				?>
 				<div id="submenu-switch-lang" class="submenu-style hidden">
 					<ul class="submenu-list">
 					<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-						<li <?php if ( $language_item[ 'active' ] ) { echo 'class="active"'; } ?>><a href="<?php echo $language_item[ 'url' ]; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
+						<li <?php if ( $language_item[ 'active' ] ) { echo 'class="active"'; } ?>><a href="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
 					<?php endforeach; ?>
 					</ul>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" class="hidden">

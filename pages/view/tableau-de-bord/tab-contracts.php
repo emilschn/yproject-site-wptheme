@@ -67,8 +67,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_earnings_description );
 		$configtext_post_list_kv = array();
 		$configtext_post_list_kv[ 'custom' ] = 'Personnalisé';
-		foreach ( $configtext_post_list as $configtext_post_item ) {
-			$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+		if ( !empty( $configtext_post_list ) ) {
+			foreach ( $configtext_post_list as $configtext_post_item ) {
+				$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+			}
 		}
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_contract_earnings_description_configtext_post_id",
@@ -94,8 +96,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_simple_info );
 		$configtext_post_list_kv = array();
 		$configtext_post_list_kv[ 'custom' ] = 'Personnalisé';
-		foreach ( $configtext_post_list as $configtext_post_item ) {
-			$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+		if ( !empty( $configtext_post_list ) ) {
+			foreach ( $configtext_post_list as $configtext_post_item ) {
+				$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+			}
 		}
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_contract_simple_info_configtext_post_id",
@@ -121,8 +125,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_detailed_info );
 		$configtext_post_list_kv = array();
 		$configtext_post_list_kv[ 'custom' ] = 'Personnalisé';
-		foreach ( $configtext_post_list as $configtext_post_item ) {
-			$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+		if ( !empty( $configtext_post_list ) ) {
+			foreach ( $configtext_post_list as $configtext_post_item ) {
+				$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+			}
 		}
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_contract_detailed_info_configtext_post_id",
@@ -144,23 +150,66 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 
 
+		// Prime
+		// Récupération des posts de textes de configuration qui permettent de le définir
+		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_premium );
+		$configtext_post_list_kv = array();
+		$configtext_post_list_kv[ 'custom' ] = 'Personnalisé';
+		if ( !empty( $configtext_post_list ) ) {
+			foreach ( $configtext_post_list as $configtext_post_item ) {
+				$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+			}
+		}
 		DashboardUtility::create_field(array(
-			"id"			=> "new_contract_premium",
+			"id"			=> "new_project_contract_premium_configtext_post_id",
+			"type"			=> "select",
+			"label"			=> __( "Primes pr&eacute;-param&eacute;tr&eacute;es", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->contract_premium_configtext_post_id(),
+			"options_id"	=> array_keys( $configtext_post_list_kv ),
+			"options_names"	=> array_values( $configtext_post_list_kv ),
+			'admin_theme'	=> $page_controler->can_access_admin(),
+			"editable"		=> $page_controler->can_access_admin()
+		));
+		DashboardUtility::create_field(array(
+			"id"			=> "new_project_contract_premium",
 			"type"			=> "editor",
-			"label"			=> "Prime",
+			"label"			=> __( "Prime", 'yproject' ),
 			"value"			=> $page_controler->get_campaign()->contract_premium(),
-			"admin_theme"	=> $page_controler->can_access_admin(),
+			'admin_theme'	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
+
+		// Garantie
+		// Récupération des posts de textes de configuration qui permettent de le définir
+		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_warranty );
+		$configtext_post_list_kv = array();
+		$configtext_post_list_kv[ 'custom' ] = 'Personnalisé';
+		if ( !empty( $configtext_post_list ) ) {
+			foreach ( $configtext_post_list as $configtext_post_item ) {
+				$configtext_post_list_kv[ $configtext_post_item->ID ] = $configtext_post_item->post_title;
+			}
+		}
+		DashboardUtility::create_field(array(
+			"id"			=> "new_project_contract_warranty_configtext_post_id",
+			"type"			=> "select",
+			"label"			=> __( "Garanties pr&eacute;-param&eacute;tr&eacute;es", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->contract_warranty_configtext_post_id(),
+			"options_id"	=> array_keys( $configtext_post_list_kv ),
+			"options_names"	=> array_values( $configtext_post_list_kv ),
+			'admin_theme'	=> $page_controler->can_access_admin(),
+			"editable"		=> $page_controler->can_access_admin()
+		));
 		DashboardUtility::create_field(array(
 			"id"			=> "new_contract_warranty",
 			"type"			=> "editor",
-			"label"			=> "Garantie",
+			"label"			=> __( "Garantie", 'yproject' ),
 			"value"			=> $page_controler->get_campaign()->contract_warranty(),
-			"admin_theme"	=> $page_controler->can_access_admin(),
+			'admin_theme'	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
+
+		
 
 		DashboardUtility::create_field(array(
 			"id"			=> "new_contract_budget_type",

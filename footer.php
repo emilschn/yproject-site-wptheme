@@ -53,12 +53,18 @@ else {
 							<a class="link" href="<?php echo home_url('/a-propos/newsletter/'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a>
 						</div>
 
-						<?php if ( false && is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+						<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+						<?php
+						$url_suffix = '';
+						if ( isset( $_GET[ 'campaign_id' ] ) ) {
+							$url_suffix = '?campaign_id=' . $_GET[ 'campaign_id' ];
+						}
+						?>
 						<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
 						<div class="select">
 							<select id="footer-switch-lang">
 								<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-									<option value="<?php echo $language_item[ 'url' ]; ?>" <?php if ( $language_item[ 'active' ] ) { echo 'selected="selected"'; } ?>><?php echo mb_strtoupper( $language_item[ 'native_name' ], 'UTF-8' ); ?></option>
+									<option value="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" <?php if ( $language_item[ 'active' ] ) { echo 'selected="selected"'; } ?>><?php echo mb_strtoupper( $language_item[ 'native_name' ], 'UTF-8' ); ?></option>
 								<?php endforeach; ?>
 							</select>
 							<div class="select_arrow"></div>

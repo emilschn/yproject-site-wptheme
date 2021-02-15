@@ -1439,6 +1439,12 @@ msgstr "M"
 msgid "invest.contract.CIVILITY_FEMALE"
 msgstr "Mme"
 
+msgid "invest.contract.MAXIMUM"
+msgstr "Plafond"
+
+msgid "invest.contract.COLLECTED_FUNDS"
+msgstr "Montant collecté"
+
 msgid "invest.contract.FOR_FIRST_QUARTER"
 msgstr "pour le premier trimestre"
 
