@@ -249,6 +249,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			'/solutions/incubateurs-accelerateurs/'			=> '0.6',
 			// 0.5
 			// PROJETS
+			'/a-propos/statistiques/rapport-activite-2020/'			=> '0.5',
 			'/financement/offres/crowdfunding/'						=> '0.5',
 			'/financement/offres/crowdfunding-accompagnement/'		=> '0.5',
 			'/financement/offres/love-money/'						=> '0.5',
@@ -257,13 +258,13 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 //			'/investissement/cooperatives/'							=> '0.5',
 			'/investissement/fiscalite-royalties/'					=> '0.5',
 			// 0.4
-			'/a-propos/statistiques/rapport-activite-2019/'			=> '0.4',
 			'/financement/offres/'									=> '0.4',
 //			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
 //			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
 			// 0.3
 			'/a-propos/espace-presse/'			=> '0.3',
 			'/a-propos/partenaires/'			=> '0.3',
+			'/a-propos/statistiques/rapport-activite-2019/'			=> '0.3',
 			'/financement/offres/crowdfunding-accompagnement/atelier/'		=> '0.3',
 			'/financement/offres/crowdfunding-accompagnement/basique/'		=> '0.3',
 			'/financement/offres/crowdfunding-accompagnement/conseils/'		=> '0.3',
