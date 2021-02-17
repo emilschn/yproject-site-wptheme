@@ -71,6 +71,7 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 			$WDGCurrent_User = WDGUser::current();
 			$poll_answers = WDGWPREST_Entity_PollAnswer::get_list( $WDGCurrent_User->get_api_id(), $this->current_campaign->get_api_id() );
 			if ( empty( $poll_answers ) ) {
+				WDG_Languages_Helpers::load_languages();
 				$this->can_display_form = TRUE;
 				$core = ATCF_CrowdFunding::instance();
 				if ( $this->current_campaign->is_positive_savings() ) {
