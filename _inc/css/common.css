@@ -1,16 +1,39 @@
 body {
 	margin: 0px;
     background-color: #FFFFFF;
-	font-size: 12pt;
+	font-size: 1.1em;
     color: #333333;
-    font-family: Trebuchet MS, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
 }
 body a {
-    color: #EA4F51;
-    text-decoration: none;
+	color: #EA4F51;
+	font-family: Arial, Helvetica, sans-serif;
+	text-decoration: underline;
+	font-weight: 600;
 }
+body a.button, body a.hidden-link, #menu a, .wp-block-button__link {
+	font-weight: 400;
+}
+body a.button, body a.hidden-link, #menu a, .wp-block-button__link, body h2.project-title, .footer-container a, .project-button, .button-slide {
+	text-decoration: none;
+}
+
 body input, body select {
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+body h1, body h2 {
 	font-family: Trebuchet MS, sans-serif;
+	text-transform: uppercase;
+}
+body h1 {
+	font-size: 2.2em;
+}
+body h2 {
+	font-size: 1.8em;
+}
+body h3 {
+	font-size: 1.1em;
 }
 
 /*******************************************************************************
@@ -53,11 +76,8 @@ h2.standard {
     text-align: center;
     margin: 0;
     padding: 40px 0px;
-    font-family: Trebuchet MS, sans-serif;
-    text-transform: uppercase;
     font-size: 25pt;
     font-weight: bold;
-    letter-spacing: 0.125em;
 }
 
 a.hidden-link {
@@ -428,7 +448,6 @@ nav#main > div#menu > a {
 	height: 40px;
 	vertical-align: middle;
 	font-size: 15px;
-	letter-spacing: 2px;
 	text-transform: uppercase;
 	color: #333333;
 	-webkit-transition: color 0.4s;
@@ -492,7 +511,7 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
 }
 @media screen and (max-width: 1070px) and (min-width: 998px) {
 	nav#main > div#menu > a {
-		font-size: 14px;
+		font-size: 12px;
 	}
 }
 
@@ -715,7 +734,7 @@ ul.project-list a.needs-authentication:after {
     background-color: #E1E3E2;
     color: #6F777D;
     letter-spacing: 1px;
-    font-family: Trebuchet MS, sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     padding: 5px;
 }
 #submenu-user form.sidebar-login-form .pwd_submit {
@@ -1365,7 +1384,7 @@ body.template-les-projets header .header-container > div > div.wdg-component-sli
 }
 body.template-les-projets header .header-container > div > div.wdg-component-slider .slider-container #slider #button-container .button-slide {
 	width: auto;
-	margin: 0px 0px 0px 20px;
+	margin: 0px 0px 0px 10px;
 	padding: 20px 50px;
 }
 
@@ -1400,9 +1419,15 @@ body.template-les-projets header .header-container > div > div#wdg-project-stats
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span {
 	font-size: 16pt;
 }
+
+@media screen and (max-width: 1070px) and (min-width: 998px) { /** réduction de la police en responsive **/
+	body.template-les-projets header .header-container > div > div#wdg-project-stats p span {
+		font-size: 15px;
+	}
+}
+
 body.template-les-projets header .header-container > div > div#wdg-project-stats p span span {
 	font-size: 25pt;
-	letter-spacing: 2px;
 	font-weight: bold;
 }
 

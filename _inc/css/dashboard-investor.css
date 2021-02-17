@@ -53,6 +53,9 @@ body.template-mon-compte div#container div#content nav ul.nav-menu li a {
 	padding: 5px 0px 5px 15px;
 	text-transform: uppercase;
 	color: #333333;
+	font-weight: 300;
+	text-decoration: none;
+	font-size: 0.85em;
 }
 body.template-mon-compte div#container div#content nav ul.nav-menu li.selected a {
 	background: #F4F4F4;
