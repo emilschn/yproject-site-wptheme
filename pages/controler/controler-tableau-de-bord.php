@@ -626,6 +626,7 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		$this->campaign_stats[ 'funding' ][ 'nb_investment' ][ 'median' ] = round( $reference_for_median_ratio_nb_investment * $campaign_ratio_to_median );
 		$this->campaign_stats[ 'funding' ][ 'amount_investment' ] = array();
 		$this->campaign_stats[ 'funding' ][ 'amount_investment' ][ 'current' ] = $this->campaign->current_amount( FALSE );
+		$this->campaign_stats[ 'funding' ][ 'amount_investment' ][ 'not_validated' ] = max( 0, $investment_results[ 'amount_not_validate_investments' ] );
 		$this->campaign_stats[ 'funding' ][ 'amount_investment' ][ 'average' ] = round( $reference_for_average_ratio_amount_investment * $campaign_ratio_to_average );
 		$this->campaign_stats[ 'funding' ][ 'amount_investment' ][ 'median' ] = round( $reference_for_median_ratio_amount_investment * $campaign_ratio_to_median );
 		
