@@ -8,12 +8,16 @@ body {
 body a {
 	color: #EA4F51;
 	font-family: Arial, Helvetica, sans-serif;
-	text-decoration: none;
+	text-decoration: underline;
 	font-weight: 600;
 }
 body a.button, body a.hidden-link, #menu a, .wp-block-button__link {
 	font-weight: 400;
 }
+body a.button, body a.hidden-link, #menu a, .wp-block-button__link, body h2.project-title, .footer-container a, .project-button, .button-slide {
+	text-decoration: none;
+}
+
 body input, body select {
 	font-family: Arial, Helvetica, sans-serif;
 }
@@ -766,11 +770,6 @@ ul.project-list a.needs-authentication:after {
 }
 @media screen and (max-width: 1020px) and (min-width: 998px) {
 	nav#main > div#menu > a:nth-child(3) { display: none; }
-}
-
-/*** pas de gras sur le menu de mon compte ***/
-#container #content nav ul.nav-menu li a {
-	font-weight: 300;
 }
 
 /*******************************************************************************
