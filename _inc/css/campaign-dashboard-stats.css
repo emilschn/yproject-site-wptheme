@@ -355,26 +355,42 @@ body.template-tableau-de-bord div#container div#content main {
 /*************** TABLEAU OBJECTIF */
 
 .tablo, th, td {  
-  border-bottom: 1px solid #C2C2C2;
-  border-right: 1px solid #C2C2C2;
   border-collapse: collapse;
 }
 
 .tablo tr td:first-child {
   text-align: left; 
   background-color: #EBEBEB;
+  border-bottom: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
+  border-top: 0;
+  font-size: 0.8em;
+}
+.tablo tr:last-of-type td:first-of-type {
+  border-bottom: 0;
 }
 
 .tablo td:nth-child(2) {
-  color: #5EB82C;
+  color: #00879B;
 }
 .tablo th {
-  padding: 0 0.5rem 1rem; }
+  padding: 1rem 1rem; 
+  vertical-align: middle;
+  border: 1px solid #c2c2c2;
+  font-size: 0.8em;
+}
+.tablo th:first-of-type {
+  border: 0;
+}
 
 .tablo td {
   /*width: 20%;*/
   padding: 0.8rem;
-  vertical-align: middle; }
+  vertical-align: middle;
+  border-bottom: 1px solid #c2c2c2;
+  border-right: 1px solid #c2c2c2;
+  border-top: 1px solid #c2c2c2; 
+}
 
 .min-ok {
   color: #00879b; }
