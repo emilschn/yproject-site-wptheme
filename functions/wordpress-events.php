@@ -160,6 +160,50 @@ class WDG_WordPress_Events {
 		"FFFFFF", "Blanc",
 		"FFFFFF", "Blanc",
 
+		"A9EAFE", "Azurin",
+		"FF5E4D", "Rouge capucine",
+		"F7FF3C", "Jaune citron",
+		"B0F2B6", "Vert eau",
+		"FEBFD2", "Rose dragée",
+		"FFE4C4", "Beige",
+		"CECECE", "Gris perle",
+		"FFFFFF", "Blanc",
+
+		"77B5FE", "Bleu ciel",
+		"FF0000", "Rouge vif",
+		"E7F00D", "Jaune",
+		"16B84E", "Vert menthe",
+		"FD6C9E", "Rose",
+		"BA9B61", "Claro",
+		"9E9E9E", "Gris souris",
+		"FFFFFF", "Blanc",
+
+		"318CE7", "Bleu France",
+		"DE2916", "Rouge tomate",
+		"DFAF2C", "Ocre jaune",
+		"3A9D23", "Vert gazon",
+		"D473D4", "Mauve",	
+		"87591A", "Marron",
+		"606060", "Gris",
+		"FFFFFF", "Blanc",
+
+		"0131B4", "Bleu saphir",
+		"BC2001", "Rouge écrevisse",
+		"ED7F10", "Orange",
+		"096A09", "Vert bouteille",
+		"800080", "Magenta foncé",
+		"5B3C11", "Brun",
+		"000000", "Noir",
+		"FFFFFF", "Blanc",
+
+		"0F056B", "Bleu nuit",
+		"6D071A", "Bordeaux",
+		"CC5500", "Orange foncé",
+		"00561B", "Vert impérial",
+		"660099", "Violet",
+		"463F32", "Taupe",
+		"FFFFFF", "Blanc",
+
 		';
 
 		$init['textcolor_map'] = '['.$default_colours.']';
