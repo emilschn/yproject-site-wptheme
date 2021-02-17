@@ -307,6 +307,7 @@
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
     border-right: 2px solid #333;
+	line-height: 1;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers,
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-days,
@@ -325,14 +326,14 @@ body.template-les-projets .wdg-component-projects-preview .project-container.cat
 	display: block;
     text-transform: uppercase;
     text-align: center;
-    font-size: 12pt;
+    font-size: 0.9em;
     font-weight: bold;
     margin: 0;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
     text-transform: uppercase;
     text-align: center;
-    font-size: 9pt;
+    font-size: 0.7em;
     margin: 0;
 }
 
