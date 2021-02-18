@@ -31,7 +31,8 @@ class WDG_WordPress_Events {
 		// Requetes sur page chargée
 		add_action( 'pre_get_posts', 'WDG_WordPress_Events::pre_get_posts' );
 		add_action( 'wp_enqueue_scripts', 'WDG_WordPress_Events::wp_enqueue_scripts' );
-		add_action( 'wp_enqueue_scripts', 'WDG_WordPress_Events::login_or_register' );
+		//add_action( 'wp_enqueue_scripts', 'WDG_WordPress_Events::login_or_register' );
+		WDG_WordPress_Events::login_or_register();
 		add_action( 'wp_insert_comment', array('NotificationsEmails', 'new_comment'), 99 ,2 );
 		// Composants
 		add_action( 'widgets_init', 'WDG_WordPress_Events::widgets_init' );
@@ -138,56 +139,75 @@ class WDG_WordPress_Events {
 	 */
 	public static function color_text_editor( $init ) {
 		$default_colours = '
+		"EA4F51", "WDG Rouge",
+		"00879B", "WDG Bleu",
+		"EBCE67", "WDG Jaune",
+		"5EB82C", "WDG Vert",
+		"F8CACA", "WDG Rose",
+		"B3DAE1", "WDG Bleu clair",
+		"F9F0D1", "WDG Jaune clair",
+		"CEE9C0", "WDG Vert clair",
+
+		"333333", "WDG Noir",
+		"C2C2C2", "WDG Gris",
+		"EBEBEB", "WDG Gris clair",
+		"FFFFFF", "WDG Blanc",
 		"FFFFFF", "Blanc",
+		"FFFFFF", "Blanc",
+		"FFFFFF", "Blanc",
+		"FFFFFF", "Blanc",
+
 		"A9EAFE", "Azurin",
 		"FF5E4D", "Rouge capucine",
 		"F7FF3C", "Jaune citron",
 		"B0F2B6", "Vert eau",
 		"FEBFD2", "Rose dragée",
 		"FFE4C4", "Beige",
-		"EACDCB", "Rose WDG",
-
 		"CECECE", "Gris perle",
+		"FFFFFF", "Blanc",
+
 		"77B5FE", "Bleu ciel",
 		"FF0000", "Rouge vif",
 		"E7F00D", "Jaune",
 		"16B84E", "Vert menthe",
 		"FD6C9E", "Rose",
 		"BA9B61", "Claro",
-		"EA4F51", "Rouge WDG",
-
 		"9E9E9E", "Gris souris",
+		"FFFFFF", "Blanc",
+
 		"318CE7", "Bleu France",
 		"DE2916", "Rouge tomate",
 		"DFAF2C", "Ocre jaune",
 		"3A9D23", "Vert gazon",
-		"D473D4", "Mauve",
+		"D473D4", "Mauve",	
 		"87591A", "Marron",
-		"8BC79C", "Vert WDG",
-
 		"606060", "Gris",
+		"FFFFFF", "Blanc",
+
 		"0131B4", "Bleu saphir",
 		"BC2001", "Rouge écrevisse",
 		"ED7F10", "Orange",
 		"096A09", "Vert bouteille",
 		"800080", "Magenta foncé",
 		"5B3C11", "Brun",
-		"00879B", "Bleu WDG",
-
 		"000000", "Noir",
+		"FFFFFF", "Blanc",
+
 		"0F056B", "Bleu nuit",
 		"6D071A", "Bordeaux",
 		"CC5500", "Orange foncé",
 		"00561B", "Vert impérial",
 		"660099", "Violet",
 		"463F32", "Taupe",
-		"333333", "Noir WDG",
+		"FFFFFF", "Blanc",
+
 		';
 
 		$init['textcolor_map'] = '['.$default_colours.']';
 		return $init;
 	}
 
+	
 	public static function display_toolbar( $init ) {
     	$init['toolbar'] = true;
     	return $init;
@@ -203,7 +223,75 @@ class WDG_WordPress_Events {
 		load_child_theme_textdomain( 'yproject', get_stylesheet_directory() . '/languages' );
 		// Activer les blocs larges et plein écran
 		add_theme_support( 'align-wide' );
+
+		/** palette de couleurs Gutenberg **/
+		add_theme_support(
+			'editor-color-palette',
+			[
+				[
+					'name'  => esc_html__( 'Rouge', 'wpdc' ),
+					'slug'  => 'rouge',
+					'color' => '#EA4F51',
+				],
+				[
+					'name'  => esc_html__( 'Bleu', 'wpdc' ),
+					'slug'  => 'bleu',
+					'color' => '#00879B',
+				],
+				[
+					'name'  => esc_html__( 'Jaune', 'wpdc' ),
+					'slug'  => 'jaune',
+					'color' => '#EBCE67',
+				],
+				[
+					'name'  => esc_html__( 'Vert', 'wpdc' ),
+					'slug'  => 'vert',
+					'color' => '#5EB82C',
+				],
+				[
+					'name'  => esc_html__( 'Rose', 'wpdc' ),
+					'slug'  => 'rose',
+					'color' => '#F8CACA',
+				],
+				[
+					'name'  => esc_html__( 'Bleu clair', 'wpdc' ),
+					'slug'  => 'bleu-clair',
+					'color' => '#B3DAE1',
+				],
+				[
+					'name'  => esc_html__( 'Jaune clair', 'wpdc' ),
+					'slug'  => 'jaune-clair',
+					'color' => '#F9F0D1',
+				],
+				[
+					'name'  => esc_html__( 'Vert clair', 'wpdc' ),
+					'slug'  => 'vert-clair',
+					'color' => '#CEE9C0',
+				],
+				[
+					'name'  => esc_html__( 'Noir', 'wpdc' ),
+					'slug'  => 'noir',
+					'color' => '#333333',
+				],
+				[
+					'name'  => esc_html__( 'Gris', 'wpdc' ),
+					'slug'  => 'gris',
+					'color' => '#C2C2C2',
+				],
+				[
+					'name'  => esc_html__( 'Gris clair', 'wpdc' ),
+					'slug'  => 'gris-clair',
+					'color' => '#EBEBEB',
+				],
+				[
+					'name'  => esc_html__( 'Blanc', 'wpdc' ),
+					'slug'  => 'blanc',
+					'color' => '#ffffff',
+				],
+			]
+		);
 	}
+
 
 	/**
 	 * S'assure que les tags sont inclus dans les requêtes
