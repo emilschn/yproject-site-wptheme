@@ -283,7 +283,9 @@ body.template-tableau-de-bord div#container div#content main {
   transition-timing-function: ease-in-out;
   transition-duration: 0.2s;
   color: #333; 
-  text-decoration: none;}
+  text-decoration: none;
+  font-weight: 300;
+  font-size: 0.85em;}
 
 .menu-onglet li a:hover, .menu-onglet .focus {
   border-bottom: 0.3rem solid #D3EAE9;
