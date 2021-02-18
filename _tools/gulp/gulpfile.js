@@ -2,6 +2,7 @@
 var gulp = require( 'gulp' );
 var plugins = require( 'gulp-load-plugins' )();
 var concat = require( 'gulp-concat' );
+const terser = require('gulp-terser');
 var uglify = require( 'gulp-uglifyes' );
 
 // Variables de chemins
@@ -28,6 +29,10 @@ var cssInvestFileList = [
 // CSS - Project Dashboard
 var cssProjectDashboardFileList = [
 	source + '_inc/css/campaign-dashboard.css'
+];
+// CSS - Project Dashboard
+var cssProjectDashboardStatsFileList = [
+	source + '_inc/css/campaign-dashboard-stats.css'
 ];
 
 // JS - Common
@@ -123,6 +128,17 @@ gulp.task( 'minify-projectdb', gulp.series('concat-projectdb', function() {
 		} ) )
 		.pipe( gulp.dest( source + '_inc/css/' ) );
 } ));
+gulp.task( 'minify-css-projectdb-stats', function() {
+	return gulp.src(cssProjectDashboardStatsFileList[0] )
+		.pipe( plugins.csso() ) // minify
+		.pipe( plugins.rename( { // rename .min.css  
+			dirname: "",
+			basename: "campaign-dashboard-stats",
+			suffix: ".min",
+			extname: ".css"
+		} ) )
+		.pipe( gulp.dest( source + '_inc/css/' ) );
+} );
 gulp.task( 'minify-js-common', gulp.series('concat-js-common', function() {
 	return gulp.src(destination+'concatCommonScripts.js')
 		.pipe( uglify() ) // minify
@@ -176,17 +192,14 @@ gulp.task( 'update-version', function() {
 
 
 // Tâches lançant les différentes actions
-gulp.task( 'css', gulp.series( 'concat', 'minify', 'update-version'  ));
-gulp.task( 'css-campaign', gulp.series( 'concat-campaign', 'minify-campaign', 'update-version'  ));
-gulp.task( 'css-invest', gulp.series( 'concat-invest', 'minify-invest', 'update-version'  ));
-gulp.task( 'css-projectdb', gulp.series(  'concat-projectdb', 'minify-projectdb', 'update-version'  ));
-gulp.task( 'js-common', gulp.series( 'concat-js-common', 'minify-js-common', 'update-version'  ));
-gulp.task( 'js-projectdb', gulp.series( 'concat-js-projectdb', 'minify-js-projectdb', 'update-version' ));
-gulp.task( 'js-projectdb-graphs', gulp.series( 'minify-js-projectdb-graphs', 'update-version'  ));
-gulp.task('default', gulp.series(function(done) {    
-    // task code here
-    done();
-}));
+gulp.task( 'css', gulp.series( 'concat', 'minify', 'update-version' ) );
+gulp.task( 'css-campaign', gulp.series( 'concat-campaign', 'minify-campaign', 'update-version' ) );
+gulp.task( 'css-invest', gulp.series( 'concat-invest', 'minify-invest', 'update-version' ) );
+gulp.task( 'css-projectdb', gulp.series( 'concat-projectdb', 'minify-projectdb', 'update-version' ) );
+gulp.task( 'css-projectdb-stats', gulp.series( 'minify-css-projectdb-stats', 'update-version' ) );
+gulp.task( 'js-common', gulp.series( 'concat-js-common', 'minify-js-common', 'update-version' ) );
+gulp.task( 'js-projectdb', gulp.series( 'concat-js-projectdb', 'minify-js-projectdb', 'update-version' ) );
+gulp.task( 'js-projectdb-graphs', gulp.series( 'minify-js-projectdb-graphs', 'update-version' ) );
 
 
 // Tâche de veille pour les modifications des différents fichiers
@@ -195,6 +208,7 @@ gulp.task( 'watch', function() {
 	gulp.watch( cssCampaignFileList, gulp.series('css-campaign') );
 	gulp.watch( cssInvestFileList, gulp.series('css-invest') );
 	gulp.watch( cssProjectDashboardFileList, gulp.series('css-projectdb') );
+	gulp.watch( cssProjectDashboardStatsFileList, gulp.series('css-projectdb-stats') );
 	gulp.watch( jsCommonFileList, gulp.series('js-common') );
 	gulp.watch( jsProjectDashboardFileList, gulp.series('js-projectdb') );
 	gulp.watch( jsProjectDashboardGraphsFileList, gulp.series('js-projectdb-graphs') );
