@@ -34,6 +34,7 @@ body.template-tableau-de-bord div#container div#content nav ul.nav-menu li {
 	background: #F4F4F4;
 	font-weight: bold;
 	border-bottom: 1px solid #E1E3E2;
+
 }
 body.template-tableau-de-bord div#container div#content nav ul.nav-menu li a {
 	display: inline-block;
@@ -43,6 +44,7 @@ body.template-tableau-de-bord div#container div#content nav ul.nav-menu li a {
 	text-transform: uppercase;
 	font-weight: normal;
 	color: #000000;
+	text-decoration: none;
 }
 body.template-tableau-de-bord div#container div#content nav ul.nav-menu li.selected {
 	background: #FFFFFF;
