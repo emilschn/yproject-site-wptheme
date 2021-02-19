@@ -633,6 +633,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	font-size: 1.5em;
 }
 .wdg-lightbox .wdg-lightbox-padder h3 {
 	text-transform: uppercase;
@@ -663,6 +664,33 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 .wdg-lightbox.cornered.msg-valid .wdg-lightbox-button-close a {
 	color: #FFFFFF;
+}
+
+@media screen and (max-width: 600px) {
+	.wdg-lightbox.cornered .db-form.v3 a.button.half {
+		width: -webkit-calc(100% - 2px);
+		width: -moz-calc(100% - 2px);
+		width: calc(100% - 2px);
+	}
+
+	.wdg-lightbox.cornered .db-form.v3.button-list {
+		display: -webkit-flex;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.wdg-lightbox.cornered .db-form.v3.button-list a.button.red {
+		order: 1;
+		margin-bottom: 16px;
+	}
+	.wdg-lightbox.cornered .db-form.v3.button-list a.button.transparent {
+		order: 2;
+		margin-bottom: 16px;
+	}
+	.wdg-lightbox.cornered .db-form.v3.button-list a:nth-child(5) {
+		order: 3;
+		margin-bottom: 16px;
+	}
 }
 
 #validate-terms .validate-terms-excerpt {
