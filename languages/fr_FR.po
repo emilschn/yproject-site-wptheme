@@ -1418,6 +1418,9 @@ msgstr "Vous aviez pr&eacute;-investi %s &euro; sur le projet %s."
 msgid "invest.lightbox.preinvestment.DESCRIPTION"
 msgstr "A l'issue de l'&eacute;valuation, les conditions de la lev&eacute;e de fonds ont &eacute;t&eacute; modifi&eacute;es :"
 
+msgid "invest.lightbox.OTHER_AMOUNT"
+msgstr "Investir un autre montant"
+
 msgid "invest.lightbox.CONFIRM"
 msgstr "Confirmer mon investissement"
 

@@ -10,10 +10,6 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_investment
 <?php ob_start(); ?>
 <div class="wdg-lightbox-ref">
 	
-	<p class="align-center">
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/picto-stat-loupe.png" width="150">
-	</p>
-	
 	<p class="align-justify">
 		<?php echo sprintf( __( 'invest.lightbox.investment.INTRO', 'yproject' ), $WDGUserPendingPreinvestment->get_saved_amount(), $WDGUserPendingPreinvestment->get_saved_campaign()->data->post_title ); ?>
 	</p>
@@ -22,10 +18,12 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_investment
 		<?php _e( 'invest.lightbox.investment.DESCRIPTION', 'yproject' ); ?><br>
 	</p>
 	
-	<form class="db-form v3">
-		<a href="<?php echo home_url( '/investir/?init_with_id=' .$WDGUserPendingPreinvestment->get_id(). '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID ); ?>" class="button red"><?php _e( 'invest.lightbox.CONFIRM', 'yproject' ); ?></a>
+	<form class="db-form v3 button-list">
+		<a href="<?php echo home_url( '/investir/?init_invest=' .$WDGUserPendingPreinvestment->get_saved_amount() . '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID ); ?>" class="button transparent half"><?php _e( 'invest.lightbox.OTHER_AMOUNT', 'yproject' ); ?></a>
+		<a href="<?php echo home_url( '/investir/?init_with_id=' .$WDGUserPendingPreinvestment->get_id(). '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID ); ?>" class="button red half"><?php _e( 'invest.lightbox.CONFIRM', 'yproject' ); ?></a>
 		<br><br>
-		<a href="<?php echo home_url( '/investir/?init_with_id=' .$WDGUserPendingPreinvestment->get_id(). '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID. '&cancel=1' ); ?>" class="button transparent"><?php _e( 'invest.lightbox.CANCEL', 'yproject' ); ?></a>
+		<a href="<?php echo home_url( '/investir/?init_with_id=' .$WDGUserPendingPreinvestment->get_id(). '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID. '&cancel=1' ); ?>"><?php _e( 'invest.lightbox.CANCEL', 'yproject' ); ?></a>
+		<br><br>
 	</form>
 	
 </div>

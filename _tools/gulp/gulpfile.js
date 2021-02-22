@@ -175,7 +175,7 @@ gulp.task( 'minify-js-projectdb-graphs', function() {
 
 
 // Tâche de mise à jour du fichier de version
-gulp.task( 'update-version', function() {
+gulp.task( 'update-version', function( done ) {
 	fs = require('fs');
 	fs.readFile( destination + 'assets-version-template.php', 'utf8', function ( err, templateData ) {
 		if (err) {
@@ -188,6 +188,7 @@ gulp.task( 'update-version', function() {
 			}
 		} );
 	});
+	done();
 } );
 
 
