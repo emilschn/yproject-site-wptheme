@@ -19,7 +19,7 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_investment
 	</p>
 	
 	<form class="db-form v3 button-list">
-		<a href="<?php echo home_url( '/investir/?campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID ); ?>" class="button transparent half"><?php _e( 'invest.lightbox.OTHER_AMOUNT', 'yproject' ); ?></a>
+		<a href="<?php echo home_url( '/investir/?init_invest=' .$WDGUserPendingPreinvestment->get_saved_amount() . '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID ); ?>" class="button transparent half"><?php _e( 'invest.lightbox.OTHER_AMOUNT', 'yproject' ); ?></a>
 		<a href="<?php echo home_url( '/investir/?init_with_id=' .$WDGUserPendingPreinvestment->get_id(). '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID ); ?>" class="button red half"><?php _e( 'invest.lightbox.CONFIRM', 'yproject' ); ?></a>
 		<br><br>
 		<a href="<?php echo home_url( '/investir/?init_with_id=' .$WDGUserPendingPreinvestment->get_id(). '&campaign_id=' .$WDGUserPendingPreinvestment->get_saved_campaign()->ID. '&cancel=1' ); ?>"><?php _e( 'invest.lightbox.CANCEL', 'yproject' ); ?></a>
