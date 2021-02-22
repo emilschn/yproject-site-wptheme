@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-02-11 13:38+0000\n"
-"Last-Translator: Admin WE DO GOOD <admin@wedogood.co>, 2021\n"
+"PO-Revision-Date: 2021-02-15 15:09+0100\n"
+"Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1361,8 +1361,14 @@ msgstr ""
 "The RIB ID of our service provider will be shown on the following page, as "
 "well as a specific recipient code that must be sent with the transfer."
 
+msgid "invest.mean-payment.CHECK_DETAILS_FRANCE"
+msgstr "The cheque should come from a french bank account."
+
 msgid "invest.mean-payment.CHECK_DETAILS"
 msgstr "Take a photo of the cheque to process it more quickly."
+
+msgid "invest.mean-payment.CHECK_DETAILS_PENDING"
+msgstr "The cheque collection is pending while the fundraising is not over."
 
 msgid "invest.mean-payment.PAY"
 msgstr "Pay"
@@ -1906,13 +1912,16 @@ msgid "form.organization-details.error.NAME"
 msgstr "The name of the organization cannot be empty."
 
 msgid "form.organization-details.error.CAPITAL"
-msgstr "The organization shared capital should be a number"
+msgstr "The organization shared capital should be a number."
 
 msgid "form.organization-details.error.ADDRESS_NUMBER"
-msgstr "The address number should be a number"
+msgstr "The address number should be a number."
 
 msgid "form.organization-details.error.ZIP_CODE"
-msgstr "The zip code should be a number"
+msgstr "The zip code should be a number."
+
+msgid "form.organization-details.error.RCS"
+msgstr "The organization RCS is not valid."
 
 # ############################## form - user-identitydocs
 # ################################
