@@ -628,6 +628,6 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 // CONTEXTE
 /******************************************************************************/	
 	public function get_form_css_classes() {
-		return 'db-form form-register v3 full';
+		return 'db-form form-register v3 full bg-white';
 	}
 }

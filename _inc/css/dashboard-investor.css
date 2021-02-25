@@ -27,7 +27,7 @@ body.template-mon-compte div#container div#content nav {
     vertical-align: top;
     width: 220px;
 	border-right: 3px solid #E1E3E2;
-	background: #FFFFFF;
+	background: #F4F2F2;
 }
 body.template-mon-compte div#container div#content nav div.nav-header {
 	padding: 16px;
@@ -58,7 +58,7 @@ body.template-mon-compte div#container div#content nav ul.nav-menu li a {
 	font-size: 0.85em;
 }
 body.template-mon-compte div#container div#content nav ul.nav-menu li.selected a {
-	background: #F4F4F4;
+	background: #ffffff;
 	border-left: 4px solid #D3EAE9;
 	width: calc( 100% - 19px );
 }
@@ -70,7 +70,7 @@ body.template-mon-compte div#container div#content nav button#swap-menu {
 body.template-mon-compte div#container div#content main {
 	display: table-cell;
     vertical-align: top;
-	background: #F4F2F2;
+	background: #ffffff;
 	padding: 10px 20px;
 }
 body.template-mon-compte div#container div#content .db-form.v3 {
