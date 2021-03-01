@@ -70,6 +70,7 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 					$this->login_init = $error_reason;
 					if ( !empty( $this->login_init ) ) {
 						$this->login_init = stripslashes( htmlentities( $this->login_init, ENT_QUOTES | ENT_HTML401 ) );
+						$this->login_init = str_replace( ' ', '+', $this->login_init );
 					}
 					break;
 			}
