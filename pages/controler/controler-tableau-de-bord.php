@@ -191,8 +191,8 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			$this->campaign_organization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
 			$this->emails = WDGWPREST_Entity_Project::get_emails( $this->campaign->get_api_id() );
 			
-			if ( file_exists( __DIR__ . '/../../../../plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' ) ) {
-				$this->campaign_contracts_url = home_url( 'wp-content/plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->get_url() . '.zip' );
+			if ( file_exists( __DIR__ . '/../../../../plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->data->post_name . '.zip' ) ) {
+				$this->campaign_contracts_url = home_url( 'wp-content/plugins/appthemer-crowdfunding/files/contracts/' . $this->campaign->ID . '-' . $this->campaign->data->post_name . '.zip' );
 			}
 		}
 	}
