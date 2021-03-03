@@ -12,8 +12,10 @@ $link = get_permalink( $campaign->ID );
 
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
+// TODO : chercher en anglais aussi
 $class_category = ( strpos( $campaign_categories_str, 'actifs' ) !== FALSE ) ? 'cat-actifs' : 'cat-entreprises';
-if ( strpos( $campaign_categories_str, 'epargne-positive' ) !== FALSE ) {
+// TODO : chercher en anglais aussi
+if ( strpos( $campaign_categories_str, 'epargne-positive' ) !== FALSE) {
 	$class_category .= ' cat-epargne-positive';
 
 	$term_positive_savings_by_slug = get_term_by( 'slug', 'epargne-positive', 'download_category' );
@@ -42,13 +44,13 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 <div class="project-container <?php echo $class_category; ?>" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
     <a class="hidden-link" href="<?php echo $link; ?>">
         <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
-			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
+			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE || strpos($campaign_categories_str, 'environmental')  !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="<?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?></span>
 			<?php endif; ?>
 			<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="<?php _e( 'project.impact.SOCIAL', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.SOCIAL', 'yproject' ); ?></span>
 			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
+			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE || strpos($campaign_categories_str, 'economic')  !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="<?php _e( 'project.impact.ECO', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ECO', 'yproject' ); ?></span>
 			<?php endif; ?>
         </div>
