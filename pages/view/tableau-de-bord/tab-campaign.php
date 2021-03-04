@@ -59,7 +59,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"editable"		=> $page_controler->can_access_admin(),
 				"admin_theme"	=> true
 			));
-			
+
 			DashboardUtility::create_field(array(
 				"id"			=> "new_organization_type",
 				"type"			=> "select",
@@ -71,63 +71,55 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				"admin_theme"	=> true
 			));
 
-		$terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
-		$term_category_id = $terms_category[0]->term_id;
-		$terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
-		$term_activity_id = $terms_activity[0]->term_id;
-		$terms_type = get_terms('download_category', array('slug' => 'types', 'hide_empty' => false));
-		if ( $terms_type ) {
-			$term_type_id = $terms_type[0]->term_id;
-		}
-		$terms_partners = get_terms('download_category', array('slug' => 'partners', 'hide_empty' => false));
-		if ( $terms_partners ) {
-			$terms_partners_id = $terms_partners[0]->term_id;
-		}
-		$terms_tousnosprojets = get_terms('download_category', array('slug' => 'tousnosprojets', 'hide_empty' => false));
-		if ( $terms_tousnosprojets ) {
-			$terms_tousnosprojets_id = $terms_tousnosprojets[0]->term_id;
-		}
-		?>
+			WDG_Languages_Helpers::switch_to_french_temp();
+
+			$terms_category = get_terms('download_category', array('slug' => 'categories', 'hide_empty' => false));
+			$term_category_id = $terms_category[0]->term_id;
+			$terms_activity = get_terms('download_category', array('slug' => 'activities', 'hide_empty' => false));
+			$term_activity_id = $terms_activity[0]->term_id;
+			$terms_type = get_terms('download_category', array('slug' => 'types', 'hide_empty' => false));
+			if ( $terms_type ) {
+				$term_type_id = $terms_type[0]->term_id;
+			}
+			$terms_partners = get_terms('download_category', array('slug' => 'partners', 'hide_empty' => false));
+			if ( $terms_partners ) {
+				$terms_partners_id = $terms_partners[0]->term_id;
+			}
+			$terms_tousnosprojets = get_terms('download_category', array('slug' => 'tousnosprojets', 'hide_empty' => false));
+			if ( $terms_tousnosprojets ) {
+				$terms_tousnosprojets_id = $terms_tousnosprojets[0]->term_id;
+			} ?>
 
 		<div class="field admin-theme">
 			<label for="categories"><?php _e("Cat&eacute;gorie", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_categories"><?php
 				include_once ABSPATH . 'wp-admin/includes/template.php';
-				wp_terms_checklist(
-					$page_controler->get_campaign_id(), 
-					array(
+			wp_terms_checklist($page_controler->get_campaign_id(), array(
 						'taxonomy' => 'download_category',
 						'descendants_and_self' => $term_category_id,
 						'checked_ontop' => false
-				) );
-			?></span>
+				) ); ?></span>
 		</div>
 
 		<div class="field admin-theme">
 			<label for="activities"><?php _e("Secteur d&apos;activit&eacute;", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_activities"><?php
-				wp_terms_checklist(
-					$page_controler->get_campaign_id(),
-					array(
+				wp_terms_checklist($page_controler->get_campaign_id(), array(
 						'taxonomy' => 'download_category',
 						'descendants_and_self' => $term_activity_id,
 						'checked_ontop' => false
-				) );
-			?></span>
+				) ); ?></span>
 		</div>
 
 		<?php if ( $terms_type ): ?>
 		<div class="field admin-theme">
 			<label for="types"><?php _e("Type de projet", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_types"><?php
-				wp_terms_checklist(
-					$page_controler->get_campaign_id(),
-					array(
+				wp_terms_checklist($page_controler->get_campaign_id(), array(
 						'taxonomy' => 'download_category',
 						'descendants_and_self' => $term_type_id,
 						'checked_ontop' => false
-				) );
-			?></span>
+				) ); ?></span>
 		</div>
 		<?php endif; ?>
 
@@ -135,14 +127,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="field admin-theme">
 			<label for="partners"><?php _e("Partenaires", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_partners"><?php
-				wp_terms_checklist(
-					$page_controler->get_campaign_id(),
-					array(
+				wp_terms_checklist($page_controler->get_campaign_id(), array(
 						'taxonomy' => 'download_category',
 						'descendants_and_self' => $terms_partners_id,
 						'checked_ontop' => false
-				) );
-			?></span>
+				) ); ?></span>
 		</div>
 		<?php endif; ?>
 
@@ -152,18 +141,17 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<div class="field admin-theme">
 			<label for="tousnosprojets"><?php _e("Cat&eacute;gorie sur le site tousnosprojets.fr", 'yproject'); ?></label>
 			<span class="field field-value" data-type="multicheck" data-id="new_project_tousnosprojets"><?php
-				wp_terms_checklist(
-					$page_controler->get_campaign_id(),
-					array(
+				wp_terms_checklist($page_controler->get_campaign_id(), array(
 						'taxonomy' => 'download_category',
 						'descendants_and_self' => $terms_tousnosprojets_id,
 						'checked_ontop' => false
-				) );
-			?></span>
+				) ); ?></span>
 		</div>
 		<?php endif; ?>
 
 		<?php
+			WDG_Languages_Helpers::switch_back_to_display_language();
+
 			$array_item_types = array();
 			$array_item_types[ '' ] = '';
 			foreach ( WDGCampaignBill::$item_types as $type_key => $type_item ) {
@@ -202,7 +190,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"description"	=> __( "Privil&eacute;giez une URL courte pour mieux communiquer", 'yproject' ),
 			'value'			=> $page_controler->get_campaign()->data->post_name
 		));
-		
+
 		$locations = atcf_get_locations();
 		DashboardUtility::create_field(array(
 			"id"			=> "new_project_location",
@@ -212,7 +200,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"options_id"	=> array_keys($locations),
 			"options_names"	=> array_values($locations)
 		));
-		
+
 		DashboardUtility::create_field( array(
 			'id'			=> 'new_website',
 			'type'			=> 'text',
@@ -240,14 +228,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'placeholder'	=> 'CompteTwitter',
 			'right_icon'	=> 'twitter'
 		));
-		
+
 		DashboardUtility::create_field(array(
 			"id"	=> "new_employees_number",
 			"type"	=> "number",
 			"label"	=> __( "Nombre d'employ&eacute;s au lancement", 'yproject' ),
 			"value"	=> $page_controler->get_campaign()->get_api_data( 'employees_number' )
 		));
-		
+
 		DashboardUtility::create_field(array(
 			"id"			=> "new_minimum_goal_display",
 			"type"			=> "select",
@@ -256,7 +244,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
 			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
 		));
-		
+
 		DashboardUtility::create_field(array(
 			"id"			=> "new_presentation_visible_only_to_investors",
 			"type"			=> "check",
@@ -266,7 +254,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'editable'		=> !$page_controler->get_campaign()->is_remaining_time,
 			'visible'		=> !$page_controler->get_campaign()->is_remaining_time()
 		));
-		
+
 		DashboardUtility::create_field(array(
 			"id"			=> "new_enable_advice_notifications",
 			"type"			=> "check",
@@ -276,7 +264,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'editable'		=> $page_controler->can_access_admin(),
 			'visible'		=> $page_controler->can_access_admin()
 		));
-		
+
 		DashboardUtility::create_field(array(
 			"id"			=> "new_advice_notifications_frequency",
 			"type"			=> "select",
@@ -298,7 +286,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'editable'		=> $page_controler->can_access_admin(),
 			'visible'		=> $page_controler->can_access_admin()
 		));
-				
+
 		DashboardUtility::create_field(array(
 			"id"			=> "new_hide_investors",
 			"type"			=> "check",
@@ -428,7 +416,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'editable'		=> $page_controler->can_access_admin(),
 			'visible'		=> $page_controler->can_access_admin()
 		));
-		
+
 		// Champs personnalisés
 		$nb_custom_fields = $page_controler->get_campaign_author()->wp_user->get('wdg-contract-nb-custom-fields');
 		if ( $nb_custom_fields > 0 ) {
@@ -436,7 +424,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				DashboardUtility::create_field(array(
 					"id"	=> 'custom_field_' . $i,
 					"type"	=> 'text',
-					"label"	=> __( "Champ personnalis&eacute; " , 'yproject') .$i,
+					"label"	=> __( "Champ personnalis&eacute; ", 'yproject') .$i,
 					"value"	=> get_post_meta( $page_controler->get_campaign_id(), 'custom_field_' . $i, TRUE)
 				));
 			}
