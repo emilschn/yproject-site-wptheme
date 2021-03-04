@@ -9,7 +9,7 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 
 <h2><?php _e( 'account.menu.MY_BANK_INFO', 'yproject' ); ?></h2>
 
-<div class="db-form v3">
+<div class="db-form v3 bg-white">
 	<?php if ( $WDGUser_displayed->has_saved_card_expiration_date() ): ?>
 	<h3><?php _e( 'account.bank.MY_BANK_CARD', 'yproject' ); ?></h3>
 

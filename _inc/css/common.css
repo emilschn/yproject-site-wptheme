@@ -249,7 +249,7 @@ form span.file-description {
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	overflow: hidden;
-	background: url("../../images/common/arrow-filter.png") no-repeat right #FFF;
+	background: url("../../images/common/arrow-filter.png") no-repeat right #E1E3E2;
 	background-size: 34px;
 	padding-right: 34px;
 }
@@ -267,7 +267,7 @@ form span.file-description {
 .db-form select,
 .db-form textarea{
     margin: 3px 0px;
-    background: none repeat scroll 0 0 #FFF;
+    background: none repeat scroll 0 0 #E1E3E2;
     border: 1px solid #FFF;
     padding: 2px 7px;
 }

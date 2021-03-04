@@ -35,7 +35,7 @@
 <br>
 
 <?php if ( $WDGUserPasswordForm ): ?>
-	<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
+	<form method="post" class="db-form form-register v3 full bg-white" enctype="multipart/form-data">
 		<h2><?php _e( 'account.parameters.PASSWORD_MODIFICATION', 'yproject' ); ?></h2>
 
 		<?php foreach ( $fields_password_hidden as $field ): ?>

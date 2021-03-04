@@ -10,7 +10,7 @@ $fields_transactions = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notif
 
 <h2><?php _e( 'account.notifications.TITLE', 'yproject' ); ?></h2>
 
-<form method="POST" enctype="multipart/form-data" class="db-form v3 full form-register">
+<form method="POST" enctype="multipart/form-data" class="db-form v3 full bg-white form-register">
 
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
