@@ -80,6 +80,20 @@ class WDG_Languages_Helpers {
 	}
 
 	/**
+	 * Fonction qui passe dans une langue spécifique temporairement
+	 * Doit s'utiliser conjointement avec la fonction switch_back_to_display_language
+	 */
+	public static function switch_to_temp_language($language_id) {
+		global $sitepress;
+		// Enregistre en statique la langue en cours
+		self::$current_locale_display = ICL_LANGUAGE_CODE;
+		// La nouvelle langue de référence
+		$new_lang = $language_id;
+		// WPML passe dans la nouvelle langue
+		$sitepress->switch_lang($new_lang);
+	}
+
+	/**
 	 * Fonction qui retourne à la langue en cours
 	 * Doit s'utiliser obligatoirement après la fonction switch_to_french_temp
 	 */
