@@ -28,7 +28,7 @@
 			<?php else: ?>
 				<!-- le composant Vue récupéré plus tôt sera injecté dans cette div -->
 				<div id="app"
-				  data-ajaxurl='<?php echo home_url('/wp-admin/admin-ajax.php'); ?>'
+				  data-ajaxurl='<?php echo admin_url( 'admin-ajax.php' ); ?>'
 				  data-firstname="<?php echo $page_controler->get_user_firstname(); ?>"
 				  data-lastname="<?php echo $page_controler->get_user_lastname(); ?>"
 				  data-phonenumber="<?php echo $page_controler->get_user_phone(); ?>"
@@ -37,7 +37,7 @@
 				  data-projectname="Projet de <?php echo $page_controler->get_organization_name(); ?>"
 				  data-existingprojects='<?php echo $existingprojects; ?>'
 				  data-existingorganisations='<?php echo $user_organisations; ?>'
-				  data-urlcgu='<?php echo home_url('/a-propos/cgu/'); ?>'
+				  data-urlcgu='<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/cgu' ); ?>'
 				  ></div> 
 			<?php endif; ?>
 		</div>

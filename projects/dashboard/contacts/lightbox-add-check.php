@@ -3,14 +3,7 @@
 <?php if ( $is_admin ): ?>
 
 <?php if (isset($_POST['action']) && $_POST['action'] == 'add-check-investment') {
-	$add_check_result = $campaign->add_investment(
-			'check', $_POST['email'], $_POST['value'], 'publish',
-			$_POST['username'], $_POST['password'],
-			$_POST['gender'], $_POST['firstname'], $_POST['lastname'],
-			$_POST['birthday_day'], $_POST['birthday_month'], $_POST['birthday_year'],
-			$_POST['birthplace'], $_POST['nationality'], $_POST['address'],
-			$_POST['postal_code'], $_POST['city'], $_POST['country'], $_POST['iban'],
-			$_POST['orga_email'], $_POST['orga_name']);
+	$add_check_result = $campaign->add_investment('check', $_POST['email'], $_POST['value'], 'publish', $_POST['username'], $_POST['password'], $_POST['gender'], $_POST['firstname'], $_POST['lastname'], $_POST['birthday_day'], $_POST['birthday_month'], $_POST['birthday_year'], $_POST['birthplace'], $_POST['nationality'], $_POST['address'], $_POST['postal_code'], $_POST['city'], $_POST['country'], $_POST['iban'], $_POST['orga_email'], $_POST['orga_name']);
 	if ($add_check_result !== FALSE) { ?>
 		<span class="success">Investissement ajouté</span>
 	<?php } else { ?>
@@ -22,7 +15,7 @@
 <div class="tab-content align-left">
 	<h3><?php _e('Ajouter un paiement par ch&egrave;que', 'yproject'); ?></h3>
 
-	<form method="POST" action="<?php echo home_url( '/tableau-de-bord/?campaign_id=' .$campaign_id. '#contacts' ); ?>">
+	<form method="POST" action="<?php echo WDG_Redirect_Engine::override_get_page_url( 'tableau-de-bord' ) . '?campaign_id=' .$campaign_id. '#contacts'; ?>">
 		
 		<div class="field">
 			<label for="add-check-input-email"><?php _e('E-mail :', 'yproject'); ?>*</label>
@@ -132,7 +125,7 @@
 	</form>
 </div>
 
-<?php 
+<?php
 $lightbox_content = ob_get_clean();
 echo do_shortcode('[yproject_lightbox id="add-check" scrolltop="1"]'.$lightbox_content.'[/yproject_lightbox]');
 ?>

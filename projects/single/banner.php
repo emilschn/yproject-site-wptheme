@@ -1,4 +1,4 @@
-<?php 
+<?php
 global $campaign, $current_user, $stylesheet_directory_uri, $can_modify, $language_list;
 
 if ( empty( $campaign ) ) {
@@ -21,8 +21,12 @@ if (is_user_logged_in()) {
 	$users = $wpdb->get_results( 'SELECT * FROM '.$table_jcrois.' WHERE campaign_id = '.$campaign->ID.' AND user_id='.$current_user->ID );
 	$btn_follow_text = (!empty($users[0]->ID)) ? __('Suivi !', 'yproject') : __('Suivre', 'yproject');
 	$btn_follow_following = (!empty($users[0]->ID)) ? '1' : '0';
-	if ($btn_follow_following == '1') { $btn_follow_classes .= ' btn-followed'; }
-	if (!empty($users[0]->ID)) { $btn_follow_href = '#'; }
+	if ($btn_follow_following == '1') {
+		$btn_follow_classes .= ' btn-followed';
+	}
+	if (!empty($users[0]->ID)) {
+		$btn_follow_href = '#';
+	}
 }
 
 $video_element = '';
@@ -33,25 +37,29 @@ if ( empty( $campaign_video_url ) ) {
 	$img_src = $campaign->get_home_picture_src();
 
 //Sinon on utilise l'objet vidéo fourni par wordpress
-} else if ( strpos( $campaign_video_url, 'youtu' ) !== FALSE || strpos( $campaign_video_url, 'dailymotion' ) !== FALSE || strpos( $campaign_video_url, 'vimeo' ) !== FALSE ) {
-	$video_element = wp_oembed_get( $campaign_video_url, array( 'height' => 400 ) );
-	
-	// Il arrive que certaines vidéos posent soucis, peut-être à cause de leur taille, dans ce cas, petit ajout de test :
-	if ( empty( $video_element ) ) {
-		$youtube_id = '';
-		if ( strpos( $campaign_video_url, 'watch?v=' ) > -1 ) {
-			$youtube_id_exploded = explode( 'watch?v=', $campaign_video_url );
-			$youtube_id = $youtube_id_exploded[ 1 ];
-		} else if ( strpos( $campaign_video_url, 'youtu.be' ) > -1 ) {
-			$youtube_id_exploded = explode( 'youtu.be/', $campaign_video_url );
-			$youtube_id = $youtube_id_exploded[ 1 ];
+} else {
+	if ( strpos( $campaign_video_url, 'youtu' ) !== FALSE || strpos( $campaign_video_url, 'dailymotion' ) !== FALSE || strpos( $campaign_video_url, 'vimeo' ) !== FALSE ) {
+		$video_element = wp_oembed_get( $campaign_video_url, array( 'height' => 400 ) );
+
+		// Il arrive que certaines vidéos posent soucis, peut-être à cause de leur taille, dans ce cas, petit ajout de test :
+		if ( empty( $video_element ) ) {
+			$youtube_id = '';
+			if ( strpos( $campaign_video_url, 'watch?v=' ) > -1 ) {
+				$youtube_id_exploded = explode( 'watch?v=', $campaign_video_url );
+				$youtube_id = $youtube_id_exploded[ 1 ];
+			} else {
+				if ( strpos( $campaign_video_url, 'youtu.be' ) > -1 ) {
+					$youtube_id_exploded = explode( 'youtu.be/', $campaign_video_url );
+					$youtube_id = $youtube_id_exploded[ 1 ];
+				}
+			}
+			$link = $campaign_video_url;
+			if ( !empty( $youtube_id ) ) {
+				$link = 'https://www.youtube.com/embed/' . $youtube_id . '?feature=oembed&rel=0&wmode=transparent';
+			}
+			$video_element = '<iframe width="578" height="325" src="' . $link . '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
 		}
-		$link = $campaign_video_url;
-		if ( !empty( $youtube_id ) ) {
-			$link = 'https://www.youtube.com/embed/' . $youtube_id . '?feature=oembed&rel=0&wmode=transparent';
-		}
-		$video_element = '<iframe width="578" height="325" src="' . $link . '" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>';
-	}		
+	}
 }
 
 $owner_str = '';
@@ -60,7 +68,7 @@ $lightbox_content = '';
 $current_organization = $campaign->get_organization();
 if (!empty($current_organization)) {
 	$wdg_organization = new WDGOrganization( $current_organization->wpref, $current_organization );
-	
+
 	$lightbox_title = $wdg_organization->get_name();
 	$owner_str = $wdg_organization->get_name();
 	$lightbox_content = '<div class="lightbox-organization-separator"></div>
@@ -71,7 +79,7 @@ if (!empty($current_organization)) {
 	if ( $wdg_organization->get_vat() != "" && $wdg_organization->get_vat() != '---' ) {
 		$lightbox_content .= '<span>'.__('Num&eacute;ro de TVA :', 'yproject').'</span> '.$wdg_organization->get_vat().'<br />';
 	}
-	$lightbox_content .= 
+	$lightbox_content .=
 		'<span>'.__('Capital social :', 'yproject').'</span> '.$wdg_organization->get_capital().' &euro;'.'<br /><br />
 		</div>
 		<div class="lightbox-organization-separator"></div>'.'<br/>
@@ -83,7 +91,9 @@ if (!empty($current_organization)) {
 } else {
 	$author = get_userdata($campaign->data->post_author);
 	$owner_str = $author->user_firstname . ' ' . $author->user_lastname;
-	if ($owner_str == ' ') { $owner_str = $author->user_login; }
+	if ($owner_str == ' ') {
+		$owner_str = $author->user_login;
+	}
 }
 
 $current_lang = get_locale();
@@ -179,7 +189,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 				}
 				?>
 				
-				<?php // cas d'un projet en cours de vote ?>
+				<?php // cas d'un projet en cours de vote?>
 				<?php if ($campaign_status == ATCF_Campaign::$campaign_status_vote): ?>
 					<?php $nbvoters = $campaign->nb_voters(); ?>
 				
@@ -229,7 +239,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 						else:
 						?>
 							<span><?php echo $time_remaining_str; ?></span>
-						<?php	
+						<?php
 						endif;
 						?>
 					</div>
@@ -268,8 +278,8 @@ $campaign_categories_str = $campaign->get_categories_str();
 					</div>
 				
 				
-				<?php // cas d'un projet en financement ?>
-				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
+				<?php // cas d'un projet en financement?>
+				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 					<?php
 					$invest_url = WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$campaign->ID. '&amp;invest_start=1';
 					$invest_url_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project&redirect-invest=' .$campaign->ID;
@@ -338,7 +348,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 							else:
 							?>
 								<span><?php echo $time_remaining_str; ?></span>
-							<?php	
+							<?php
 							endif;
 							?>
 						</div>
@@ -360,20 +370,20 @@ $campaign_categories_str = $campaign->get_categories_str();
 				
 				
 				
-				<?php // cas d'un projet terminé et financé ?>
-				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_funded || $campaign_status == ATCF_Campaign::$campaign_status_closed): ?>
+				<?php // cas d'un projet terminé et financé?>
+				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_funded || $campaign_status == ATCF_Campaign::$campaign_status_closed): ?>
 					<?php
 					$nbinvestors = $campaign->backers_count();
 					$invest_amount = $campaign->current_amount();
 					?>
 					<div class="end-sentence">
-						<?php echo $nbinvestors. " " .__("personnes","yproject"). " " .__("ont investi","yproject"). " " .$invest_amount. " " .__("pour propulser cette lev&eacute;e de fonds","yproject"); ?>
+						<?php echo $nbinvestors. " " .__("personnes", "yproject"). " " .__("ont investi", "yproject"). " " .$invest_amount. " " .__("pour propulser cette lev&eacute;e de fonds", "yproject"); ?>
 					</div>
-					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets", "yproject" ) ?></a>
 				
                                         
-				<?php // cas d'un projet terminé et non financé ?>
-				<?php elseif($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
+				<?php // cas d'un projet terminé et non financé?>
+				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
 					<div class="end-sentence">
 						<?php if ( $campaign->archive_message() == '' ): ?>
 							<?php _e( "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e", 'yproject' ); ?>
@@ -381,7 +391,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 							<?php echo $campaign->archive_message(); ?>
 						<?php endif; ?>
 					</div>
-					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets","yproject" ) ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets", "yproject" ) ?></a>
 
 				<?php endif; ?>
                                       				
@@ -392,7 +402,7 @@ $campaign_categories_str = $campaign->get_categories_str();
 	
 	<div class="clear padder">
 		<div class="hashtags">
-			<strong><?php _e( "Impacts", 'yproject' ); ?></strong> (<a href="<?php echo home_url( '/investissement/impact-investing/evaluation-des-impacts/' ); ?>" target="_blank"><?php _e( "en savoir plus", 'yproject' ); ?></a>) : <?php echo $campaign->get_subcategories_hashtags(); ?>
+			<strong><?php _e( "Impacts", 'yproject' ); ?></strong> (<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement/impact-investing/evaluation-des-impacts' ); ?>" target="_blank"><?php _e( "en savoir plus", 'yproject' ); ?></a>) : <?php echo $campaign->get_subcategories_hashtags(); ?>
 		</div>
 		<div class="subtitle">
 			<?php echo $campaign->subtitle(); ?>

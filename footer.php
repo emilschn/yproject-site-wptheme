@@ -5,10 +5,10 @@
 //CACHE FOOTER
 global $WDG_cache_plugin, $client_context, $stylesheet_directory_uri;
 $cache_footer = $WDG_cache_plugin->get_cache('footer', 3);
-if ($cache_footer !== FALSE && empty($client_context)) { echo $cache_footer; }
-else {
-	ob_start();
-?>
+if ($cache_footer !== FALSE && empty($client_context)) {
+	echo $cache_footer;
+} else {
+	ob_start(); ?>
 		<footer class="bg-dark-gray<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>">
 			<div class="footer-container">
 				<section>
@@ -49,22 +49,23 @@ else {
 						</div>
 
 						<div>
-							<a class="link" href="<?php echo home_url('/a-propos/contact/'); ?>"><?php _e( 'footer.CONTACT_US', 'yproject' ); ?></a><br>
-							<a class="link" href="<?php echo home_url('/a-propos/newsletter/'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a>
+							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/contact'); ?>"><?php _e( 'footer.CONTACT_US', 'yproject' ); ?></a><br>
+							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/newsletter'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a>
 						</div>
 
 						<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 						<?php
 						$url_suffix = '';
-						if ( isset( $_GET[ 'campaign_id' ] ) ) {
-							$url_suffix = '?campaign_id=' . $_GET[ 'campaign_id' ];
-						}
-						?>
+	if ( isset( $_GET[ 'campaign_id' ] ) ) {
+		$url_suffix = '?campaign_id=' . $_GET[ 'campaign_id' ];
+	} ?>
 						<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
 						<div class="select">
 							<select id="footer-switch-lang">
 								<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-									<option value="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" <?php if ( $language_item[ 'active' ] ) { echo 'selected="selected"'; } ?>><?php echo mb_strtoupper( $language_item[ 'native_name' ], 'UTF-8' ); ?></option>
+									<option value="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" <?php if ( $language_item[ 'active' ] ) {
+		echo 'selected="selected"';
+	} ?>><?php echo mb_strtoupper( $language_item[ 'native_name' ], 'UTF-8' ); ?></option>
 								<?php endforeach; ?>
 							</select>
 							<div class="select_arrow"></div>
@@ -127,7 +128,7 @@ else {
 	<?php $hidecookiealert = filter_input( INPUT_COOKIE, 'hidecookiealert' ); ?>
 	<?php if ( empty( $hidecookiealert ) ): ?>
 	<div id="cookies-alert" class="bg-dark-gray aligncenter">
-		<?php _e( 'footer.cookies.DESCRIPTION', 'yproject' ); ?> (<a href="<?php echo home_url( '/cgu/' ); ?>"><?php _e( 'footer.cookies.KNOW_MORE', 'yproject' ); ?></a>).
+		<?php _e( 'footer.cookies.DESCRIPTION', 'yproject' ); ?> (<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'cgu' ); ?>"><?php _e( 'footer.cookies.KNOW_MORE', 'yproject' ); ?></a>).
 		<br>
 		<button id="cookies-alert-close" class="button red"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
 	</div>

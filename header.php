@@ -1,4 +1,4 @@
-<?php 
+<?php
 	global $WDG_cache_plugin, $stylesheet_directory_uri, $is_campaign_page, $campaign, $post, $current_user, $sitepress;
 	if ($WDG_cache_plugin == null) {
 		$WDG_cache_plugin = new WDG_Cache_Plugin();
@@ -26,8 +26,8 @@
 
 		<?php /* Google Tag Manager */ ?>
 		<?php
-			/* WDG : 
-			si c'est déjà défini par le biais des controler (= si l'utilisateur est identifié), 
+			/* WDG :
+			si c'est déjà défini par le biais des controler (= si l'utilisateur est identifié),
 			on peut déjà envoyer la donnée ; sinon ce sera envoyé plus tard
 			*/
 		?>
@@ -187,7 +187,9 @@
 				<div id="submenu-switch-lang" class="submenu-style hidden">
 					<ul class="submenu-list">
 					<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-						<li <?php if ( $language_item[ 'active' ] ) { echo 'class="active"'; } ?>><a href="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
+						<li <?php if ( $language_item[ 'active' ] ) {
+					echo 'class="active"';
+				} ?>><a href="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
 					<?php endforeach; ?>
 					</ul>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" class="hidden">
@@ -197,12 +199,12 @@
 				<?php /* Affichage quand clic sur Rechercher */ ?>
 				<div id="submenu-search" class="submenu-style hidden">
 					<div class="only-inf997">
-						<a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/financement/' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/investissement/' ); ?>"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
-						<a href="<?php echo home_url( '/a-propos/vision/' ); ?>"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
+						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
+						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
+						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
+						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
+						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
+						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
 						<?php if ( is_user_logged_in() ): ?>
 							<br>
 							<a href="<?php echo wp_logout_url(); ?>"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
@@ -229,10 +231,10 @@
 					<div class="menu-connection-forms hidden">
 						<?php /* Au clic picto Compte, afficher menu connexion */ ?>
 						<div class="only-inf997">
-							<a href="<?php echo home_url( '/connexion/' ); ?>" class="box_connection_buttons button red"><span><?php _e( 'common.CONNECTION', 'yproject' ); ?></span></a>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>" class="box_connection_buttons button red"><span><?php _e( 'common.CONNECTION', 'yproject' ); ?></span></a>
 						</div>
 
-						<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
+						<form method="post" action="<?php echo WDG_Redirect_Engine::override_get_page_url( "connexion" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
 							<br>
 							<span id="title-connection"><?php _e( 'common.CONNECTION', 'yproject' ); ?></span>
 							<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e( 'login.EMAIL_OR_LOGIN', 'yproject' ); ?>" value="" />
@@ -246,7 +248,7 @@
 							</div>   
 
 							<div>
-								<a href="<?php echo home_url( '/mot-de-passe-oublie/' ); ?>" class="forgotten">(<?php _e( 'login.FORGOTTEN_PASSWORD', 'yproject' );?>)</a>
+								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mot-de-passe-oublie' ); ?>" class="forgotten">(<?php _e( 'login.FORGOTTEN_PASSWORD', 'yproject' );?>)</a>
 							</div>
 
 							<br>
@@ -269,14 +271,14 @@
 						<hr class="login-separator">
 
 						<div>
-							<a href="<?php echo home_url( '/inscription/' ); ?>" class="box_connection_buttons button red"><span><?php _e( 'login.CREATE_ACCOUNT', 'yproject' ); ?></span></a>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'inscription' ); ?>" class="box_connection_buttons button red"><span><?php _e( 'login.CREATE_ACCOUNT', 'yproject' ); ?></span></a>
 						</div>
 					</div>
 					
 					<div class="menu-connected hidden">
 						<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
 						<ul class="submenu-list">
-							<li><a href="<?php echo home_url( '/mon-compte/' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a></li>
+							<li><a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a></li>
 						</ul>
 						<div id="button-logout" class="box_connection_buttons red">
 							<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
@@ -290,9 +292,9 @@
 		<?php endif; ?>
             
                 
-		<?php 
+		<?php
 		WDGUser::check_validate_general_terms();
-		if (WDGUser::must_show_general_terms_block()): 
+		if (WDGUser::must_show_general_terms_block()):
 			global $edd_options;
 		?>
 		<div id="validate-terms" class="wdg-lightbox">

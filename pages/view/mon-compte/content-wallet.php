@@ -22,7 +22,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 			<span><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</span><br>
 			<span><?php _e( 'common.AVAILABLE.P', 'yproject' ); ?></span>
 		</div>
-		<a href="<?php echo home_url( '/les-projets/' ); ?>?source=account" class="button red half"><?php _e( 'common.INVEST', 'yproject' ); ?></a>
+		<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>?source=account" class="button red half"><?php _e( 'common.INVEST', 'yproject' ); ?></a>
 	</div>
 
 	<?php if ( !$WDGUser_displayed->is_lemonway_registered() ): ?>

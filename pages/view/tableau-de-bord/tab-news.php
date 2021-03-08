@@ -19,10 +19,9 @@ $nbposts_blog = count( $posts_blog );
 			<?php
 			foreach ( $posts_blog as $post_blog ) {
 				$link = get_permalink( $post_blog->ID );
-				$link_edit = home_url( 'editer-une-actu' ). "?campaign_id=" .$page_controler->get_campaign_id(). "&edit_post_id=" .$post_blog->ID;
+				$link_edit = WDG_Redirect_Engine::override_get_page_url( 'editer-une-actu' ). "?campaign_id=" .$page_controler->get_campaign_id(). "&edit_post_id=" .$post_blog->ID;
 				$title = $post_blog->post_title;
-				$date = ( new DateTime( $post_blog->post_date ) )->format( 'd/m/Y' );
-			?>
+				$date = ( new DateTime( $post_blog->post_date ) )->format( 'd/m/Y' ); ?>
 				<li>
 					<a class="news-title" href="<?php echo $link; ?>"><?php echo $title; ?></a><br>
 					<a class="news-title" href="<?php echo $link; ?>#responds">

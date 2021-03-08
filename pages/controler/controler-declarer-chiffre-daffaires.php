@@ -13,26 +13,26 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	private $current_declaration;
 	private $current_step;
 	private $form;
-	
+
 	private $can_access;
 	private $summary_data;
 	private $display_payment_error;
 	private $has_added_declaration;
 	private $list_registered_cards;
-	
+
 	public function __construct() {
 		parent::__construct();
-		
+
 		define( 'SKIP_BASIC_HTML', TRUE );
-		
+
 		$this->can_access = TRUE;
 		$this->display_payment_error = FALSE;
 		$this->has_added_declaration = FALSE;
 		$this->init_current_campaign();
 		$this->init_current_declaration();
-		
+
 		if ( !is_user_logged_in() ) {
-			wp_redirect( home_url( '/connexion/' ) . '?redirect-page=declarer-chiffre-daffaires&campaign_id='.$this->current_campaign->ID.'&declaration_id='.$this->current_declaration->id  );
+			wp_redirect( WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?redirect-page=declarer-chiffre-daffaires&campaign_id='.$this->current_campaign->ID.'&declaration_id='.$this->current_declaration->id  );
 			exit();
 		}
 
@@ -40,46 +40,45 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			wp_redirect( home_url() );
 			exit();
 		}
-		
+
 		$this->init_current_step();
 		$this->init_form();
 	}
-	
+
 	/**
-	 * Surcharge de WDG_Page_Controler	
+	 * Surcharge de WDG_Page_Controler
 	*/
 	public function init_show_user_pending_investment() {
 		$this->show_user_pending_investment = false;
 	}
 	/**
-	 * Surcharge de WDG_Page_Controler	
+	 * Surcharge de WDG_Page_Controler
 	*/
 	public function init_show_user_pending_preinvestment() {
 		$this->show_user_pending_preinvestment = false;
 	}
-	
-/******************************************************************************/
-// CURRENT CAMPAIGN
-/******************************************************************************/
+
+	/******************************************************************************/
+	// CURRENT CAMPAIGN
+	/******************************************************************************/
 	private function init_current_campaign() {
 		$campaign_id = filter_input( INPUT_GET, 'campaign_id' );
 		if ( empty( $campaign_id ) ) {
-			$this->can_access = FALSE; 
+			$this->can_access = FALSE;
 		} else {
 			$this->current_campaign = new ATCF_Campaign( $campaign_id );
 			$this->can_access = $this->current_campaign->current_user_can_edit();
 
 			if ( $this->current_campaign->roi_percent() == 0 ) {
-				$value_roi_percent = round($this->current_campaign->roi_percent_estimated() * $this->current_campaign->current_amount( FALSE ) / $this->current_campaign->goal( FALSE ), 10) ;
-				if( $value_roi_percent >= 0 ){
+				$value_roi_percent = round($this->current_campaign->roi_percent_estimated() * $this->current_campaign->current_amount( FALSE ) / $this->current_campaign->goal( FALSE ), 10);
+				if ( $value_roi_percent >= 0 ) {
 					update_post_meta( $campaign_id, ATCF_Campaign::$key_roi_percent, $value_roi_percent );
 					$this->current_campaign->set_api_data( 'roi_percent', $value_roi_percent );
 				}
-
 			}
 		}
 	}
-	
+
 	public function get_current_campaign() {
 		return $this->current_campaign;
 	}
@@ -87,37 +86,39 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	public function get_current_campaign_organization() {
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+
 		return $WDGOrganization;
 	}
-	
+
 	public function get_current_campaign_organization_wallet_id() {
 		$WDGOrganization = $this->get_current_campaign_organization();
+
 		return $WDGOrganization->get_lemonway_id();
 	}
-	
-/******************************************************************************/
-// CURRENT DECLARATION
-/******************************************************************************/
+
+	/******************************************************************************/
+	// CURRENT DECLARATION
+	/******************************************************************************/
 	private function init_current_declaration() {
 		$declaration_id = filter_input( INPUT_GET, 'declaration_id' );
 		if ( empty( $declaration_id ) ) {
-			$this->can_access = FALSE; 
+			$this->can_access = FALSE;
 		} else {
 			$this->current_declaration = new WDGROIDeclaration( $declaration_id );
 		}
 	}
-	
+
 	public function get_current_declaration_royalties_amount() {
 		return $this->current_declaration->get_amount_royalties();
 	}
-	
+
 	public function get_current_declaration_amount() {
 		return $this->current_declaration->get_amount_with_commission();
 	}
-	
-/******************************************************************************/
-// CURRENT STEP
-/******************************************************************************/
+
+	/******************************************************************************/
+	// CURRENT STEP
+	/******************************************************************************/
 	/**
 	 * WDGROIDeclaration::$status_declaration,
 	 * WDGROIDeclaration::$status_payment,
@@ -129,14 +130,14 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	private function init_current_step() {
 		$this->current_step = $this->current_declaration->get_status();
 	}
-	
+
 	public function get_current_step() {
 		return $this->current_step;
 	}
-	
-/******************************************************************************/
-// SUMMARY DATA
-/******************************************************************************/
+
+	/******************************************************************************/
+	// SUMMARY DATA
+	/******************************************************************************/
 	private function init_summary_data() {
 		$this->summary_data = array();
 		// prévisionnel
@@ -154,7 +155,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		}
 		// total
 		$this->summary_data[ 'turnover_total' ] = $this->current_declaration->get_turnover_total();
-		
+
 		// ajustement
 		$this->summary_data[ 'adjustments' ] = array();
 		$adjustments = $this->current_declaration->get_adjustments();
@@ -168,7 +169,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				array_push( $this->summary_data[ 'adjustments' ], $item );
 			}
 		}
-		
+
 		// commission
 		$commission = $this->current_declaration->get_commission_to_pay();
 		if ( $commission > 0 ) {
@@ -183,48 +184,46 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			// total royalties
 			$this->summary_data[ 'amount_royalties_with_adjustment' ] = $this->current_declaration->get_amount_with_adjustment();
 		}
-		
+
 		// On affiche le montant des royalties que si il diffère du montant total (autrement dit : on ne l'affiche pas pour les vieux projets
 		if ( $adjustment_value > 0 || $commission > 0 ) {
 			// royalties sur CA déclaré
 			$this->summary_data[ 'amount_royalties' ] = $this->current_declaration->get_amount_royalties();
 			$this->summary_data[ 'percent_royalties' ] = $this->current_campaign->roi_percent();
 		}
-		
+
 		// total à payer
 		$this->summary_data[ 'amount_to_pay' ] = $this->current_declaration->get_amount_with_commission();
-		
+
 		// message
 		$this->summary_data[ 'message' ] = $this->current_declaration->get_message();
 		if ( $this->current_declaration->get_is_message_rich() ) {
 			$this->summary_data[ 'message' ] = $this->current_declaration->get_message_rich_decoded();
 		}
 	}
-	
+
 	public function get_summary_data() {
 		return $this->summary_data;
 	}
-	
+
 	public function can_display_wire() {
 		$declaration_amount_to_pay = $this->current_declaration->get_amount_with_commission();
+
 		return ( $declaration_amount_to_pay >= 500 && !$this->has_sign_mandate() );
 	}
-	
+
 	public function has_commission() {
 		return ( $this->current_declaration->get_commission_to_pay() > 0 );
 	}
-	
-/******************************************************************************/
-// CURRENT FORM
-/******************************************************************************/
+
+	/******************************************************************************/
+	// CURRENT FORM
+	/******************************************************************************/
 	private function init_form() {
 		$input_close_declarations = filter_input( INPUT_POST, 'close_declarations' );
 		if ( !empty( $input_close_declarations ) ) {
-			
 			$this->add_adjustment_and_redirect();
-			
 		} else {
-		
 			// Récupération d'un éventuel post de formulaire
 			$action_posted = filter_input( INPUT_POST, 'action' );
 
@@ -248,7 +247,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			} elseif ( $this->current_step == WDGROIDeclaration::$status_payment ) {
 				$this->init_summary_data();
 				$has_tried_payment = FALSE;
-				switch( $action_posted ) {
+				switch ( $action_posted ) {
 					case 'gobacktodeclaration':
 						$this->current_declaration->status = WDGROIDeclaration::$status_declaration;
 						$this->current_declaration->save();
@@ -300,13 +299,11 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 							if ( $input_response_wkToken == 'error' || !empty( $input_has_error ) ) {
 								$has_tried_payment = TRUE;
 								$this->display_payment_error = TRUE;
-								
 							} else {
 								$return_lemonway_card = WDGFormProjects::return_lemonway_card();
 								if ( $return_lemonway_card == TRUE ) {
 									$this->current_step = WDGROIDeclaration::$status_transfer;
 									$this->start_auto_transfer();
-	
 								} elseif ( $return_lemonway_card !== FALSE ) {
 									$has_tried_payment = TRUE;
 									$this->display_payment_error = TRUE;
@@ -324,66 +321,71 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$this->has_added_declaration = $this->check_add_declaration();
 				}
 			}
-			
 		}
 	}
-	
+
 	public function get_form() {
 		return $this->form;
 	}
-	
+
 	public function get_form_errors() {
 		return $this->form->getPostErrors();
 	}
-	
+
 	public function get_form_action() {
-		$url = home_url( '/declarer-chiffre-daffaires/' );
+		$url = WDG_Redirect_Engine::override_get_page_url( 'declarer-chiffre-daffaires' );
 		$url .= '?campaign_id=' .$this->current_campaign->ID. '&declaration_id=' .$this->current_declaration->id;
+
 		return $url;
 	}
-	
+
 	public function get_form_action_to_added_declaration() {
-		$url = home_url( '/declarer-chiffre-daffaires/' );
+		$url = WDG_Redirect_Engine::override_get_page_url( 'declarer-chiffre-daffaires' );
 		$url .= '?campaign_id=' .$this->current_campaign->ID. '&declaration_id=' .$this->current_declaration->id. '&close_declarations=1';
+
 		return $url;
 	}
-	
+
 	public function get_dashboard_url() {
-		$url = home_url( '/tableau-de-bord/' );
+		$url = WDG_Redirect_Engine::override_get_page_url( 'tableau-de-bord' );
 		$url .= '?campaign_id=' .$this->current_campaign->ID;
+
 		return $url;
 	}
-	
+
 	public function can_display_payment_error() {
 		$input_has_error = filter_input( INPUT_GET, 'has_error' );
+
 		return ( $this->display_payment_error || !empty( $input_has_error ) );
 	}
-	
+
 	public function has_sign_mandate() {
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+
 		return $WDGOrganization->has_signed_mandate();
 	}
 
 	public function get_mandate_infos() {
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+
 		return $WDGOrganization->get_mandate_infos_str();
 	}
 
-	
-/******************************************************************************/
-// REGISTERED CARDS
-/******************************************************************************/
+	/******************************************************************************/
+	// REGISTERED CARDS
+	/******************************************************************************/
 	public function has_registered_cards() {
 		$registered_cards_list = $this->get_registered_cards_list();
+
 		return ( count( $registered_cards_list ) > 1 );
 	}
 
 	public function get_registered_cards_list() {
 		if ( !isset( $this->list_registered_cards ) ) {
 			$this->list_registered_cards = array();
-	
+
 			$WDGOrganization = $this->get_current_campaign_organization();
 			if ( $WDGOrganization->has_saved_card_expiration_date() ) {
 				$entity_registered_cards_list = $WDGOrganization->get_lemonway_registered_cards();
@@ -397,7 +399,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					array_push( $this->list_registered_cards, $card_item );
 				}
 			}
-	
+
 			// On ajoute toujours "autre"
 			$card_item = array(
 				'id'			=> 'other',
@@ -413,13 +415,14 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$registered_cards_list = $this->get_registered_cards_list();
 		if ( $registered_cards_list[ 0 ][ 'id' ] != 'error' ) {
 			return $registered_cards_list[ 0 ];
-		} 
+		}
+
 		return FALSE;
 	}
-	
-/******************************************************************************/
-// PAYMENT
-/******************************************************************************/
+
+	/******************************************************************************/
+	// PAYMENT
+	/******************************************************************************/
 	public function proceed_payment_card() {
 		$input_card_option_type = filter_input( INPUT_POST, 'meanofpayment-card-type' );
 		$campaign_organization_item = $this->current_campaign->get_organization();
@@ -431,7 +434,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 
 		if ( !empty( $input_card_option_type ) && $input_card_option_type != 'other' ) {
 			$transaction_result = LemonwayLib::ask_payment_registered_card( $WDGOrganization->get_lemonway_id(), $input_card_option_type, $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay() );
-			
+
 			if ( $transaction_result->STATUS == 3 ) {
 				$date_now = new DateTime();
 				$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
@@ -441,21 +444,18 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$this->start_auto_transfer();
 				NotificationsSlack::send_notification_roi_payment_success_admin( $this->current_declaration->id );
 				NotificationsEmails::send_notification_roi_payment_success_user( $this->current_declaration->id );
-				
-				LemonwayLib::ask_transfer_funds( $WDGOrganization->get_lemonway_id(), $WDGOrganization->get_royalties_lemonway_id(), $this->current_declaration->get_amount_with_adjustment() );
-				
-				$purchase_key = $transaction_result->TRANS->HPAY->ID;
 
+				LemonwayLib::ask_transfer_funds( $WDGOrganization->get_lemonway_id(), $WDGOrganization->get_royalties_lemonway_id(), $this->current_declaration->get_amount_with_adjustment() );
+
+				$purchase_key = $transaction_result->TRANS->HPAY->ID;
 			} else {
 				NotificationsSlack::send_notification_roi_payment_error_admin( $this->current_declaration->id );
 				$purchase_key = 'error';
-
 			}
 
 			$return_url .= '&response_wkToken=' . $purchase_key . '&with_registered_card=1';
 			wp_redirect( $return_url );
 			exit();
-
 		} else {
 			$input_card_option_save = filter_input( INPUT_POST, 'meanofpayment-card-save' );
 			$wk_token = LemonwayLib::make_token( '', $this->current_declaration->id );
@@ -472,14 +472,13 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 
 		return FALSE;
 	}
-	
+
 	public function proceed_payment_mandate() {
 		$buffer = FALSE;
-		
+
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
 		if ( $WDGOrganization->has_signed_mandate() ) {
-
 			$wallet_id = $WDGOrganization->get_lemonway_id();
 			$saved_mandates_list = $WDGOrganization->get_lemonway_mandates();
 			if ( !empty( $saved_mandates_list ) ) {
@@ -493,7 +492,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 
 				if ( $lw_return == 'success' ) {
 					$buffer = TRUE;
-					
+
 					// Enregistrement de l'objet Lemon Way
 					$withdrawal_post = array(
 						'post_author'   => $campaign_organization_item->wpref,
@@ -511,23 +510,22 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$this->current_declaration->payment_token = $result->TRANS->HPAY->ID;
 					$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
 					$this->current_declaration->save();
-					
+
 					NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 				}
 			}
-
 		}
-		
+
 		return $buffer;
 	}
-	
+
 	public function proceed_payment_wire() {
 		$date_now = new DateTime();
 		$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
 		$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
 		$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_wire;
 		$this->current_declaration->save();
-					
+
 		NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 	}
 
@@ -548,11 +546,10 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 
 		$this->current_declaration->init_rois_and_tax();
 	}
-	
-	
-/******************************************************************************/
-// DECLARATIONS ULTERIEURES
-/******************************************************************************/
+
+	/******************************************************************************/
+	// DECLARATIONS ULTERIEURES
+	/******************************************************************************/
 	/**
 	 * Vérifie si nécessaire d'ajouter une déclaration complémentaire
 	 */
@@ -568,7 +565,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$amount_transferred += $declaration_object[ 'total_roi' ];
 			}
 		}
-		
+
 		// On n'ajoute une déclaration que si le montant minimum de versement n'a pas été atteint
 		if ( $add_declaration && $this->current_campaign->funding_duration() > 0 ) {
 			$amount_minimum_royalties = $this->current_campaign->current_amount( FALSE ) * $this->current_campaign->minimum_profit();
@@ -576,7 +573,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$add_declaration = FALSE;
 			}
 		}
-		
+
 		if ( $add_declaration ) {
 			// Est-il nécessaire d'envoyer une notification de prolongation au porteur et aux investisseurs ?
 			// Si la durée du financement n'est pas indéterminée
@@ -587,16 +584,16 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					WDGQueue::add_contract_extension_notifications( $this->current_campaign->ID );
 				}
 			}
-				
+
 			// Ajoute une seule déclaration dans le rythme habituel
 			$month_count = 12 / $this->current_campaign->get_declararations_count_per_year();
 			$declarations_count = 1;
 			$this->current_campaign->generate_missing_declarations( $month_count, $declarations_count );
 		}
-		
+
 		return $add_declaration;
 	}
-	
+
 	/**
 	 * Retourne vrai si une déclaration a été ajoutée
 	 * @return boolean
@@ -604,13 +601,13 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	public function can_display_has_added_declaration() {
 		return $this->has_added_declaration;
 	}
-	
+
 	private function add_adjustment_and_redirect() {
 		// On récupère la dernière déclaration
 		$existing_roi_declarations = $this->current_campaign->get_roi_declarations();
 		$count_existing_roi_declarations = count( $existing_roi_declarations );
 		$last_declaration_item = $existing_roi_declarations[ $count_existing_roi_declarations - 1 ];
-		
+
 		// Calcul du montant de l'ajustement
 		$amount_transferred = 0;
 		foreach ( $existing_roi_declarations as $declaration_object ) {
@@ -619,7 +616,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			}
 		}
 		$amount_minimum_royalties = $this->current_campaign->current_amount( FALSE ) * $this->current_campaign->minimum_profit();
-		
+
 		// On lui ajoute un ajustement correspondant
 		$WDGAdjustment = new WDGAdjustment();
 		$WDGAdjustment->id_api_campaign = $this->current_campaign->get_api_id();
@@ -627,11 +624,10 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$WDGAdjustment->amount = $amount_minimum_royalties - $amount_transferred;
 		$WDGAdjustment->type = WDGAdjustment::$type_fixed_amount;
 		$WDGAdjustment->create();
-		
+
 		// On redirige vers la déclaration
-		$url = home_url( '/declarer-chiffre-daffaires/' );
+		$url = WDG_Redirect_Engine::override_get_page_url( 'declarer-chiffre-daffaires' );
 		$url .= '?campaign_id=' .$this->current_campaign->ID. '&declaration_id=' .$last_declaration_item[ 'id' ];
 		wp_redirect( $url );
 	}
-	
 }
