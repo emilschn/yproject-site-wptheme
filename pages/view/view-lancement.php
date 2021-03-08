@@ -28,7 +28,7 @@
 			<?php else: ?>
 				<!-- le composant Vue récupéré plus tôt sera injecté dans cette div -->
 				<div id="app"
-				  data-ajaxurl='<?php echo home_url('/wp-admin/admin-ajax.php'); ?>'
+				  data-ajaxurl='<?php echo admin_url('admin-ajax.php'); ?>'
 				  data-firstname="<?php echo $page_controler->get_user_firstname(); ?>"
 				  data-lastname="<?php echo $page_controler->get_user_lastname(); ?>"
 				  data-phonenumber="<?php echo $page_controler->get_user_phone(); ?>"
