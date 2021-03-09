@@ -11,6 +11,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<br /><br />
 		<div class="align-center">
 			<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+			<input type="hidden" name="campaign_locale" value="<?php echo WDG_Languages_Helpers::get_current_locale_id(); ?>" />
 			<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer le contrat vierge", 'yproject' ); ?></button>
 			
 			<?php
@@ -43,7 +44,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			$file_name_exploded = explode('.', $file_name_contract_orga);
 			$ext = $file_name_exploded[count($file_name_exploded) - 1];
 			$file_name_contract_orga = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_orga;
-	
+
 			DashboardUtility::create_field(array(
 				"id"				=> "new_backoffice_contract_orga",
 				"type"				=> "upload",
@@ -149,7 +150,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
-
 		// Prime
 		// Récupération des posts de textes de configuration qui permettent de le définir
 		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_premium );
@@ -179,7 +179,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
-
 		// Garantie
 		// Récupération des posts de textes de configuration qui permettent de le définir
 		$configtext_post_list = WDGConfigTexts::get_config_text_list_by_category_slug( WDGConfigTexts::$category_warranty );
@@ -208,8 +207,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'admin_theme'	=> $page_controler->can_access_admin(),
 			"editable"		=> $page_controler->can_access_admin()
 		));
-
-		
 
 		DashboardUtility::create_field(array(
 			"id"			=> "new_contract_budget_type",
@@ -261,9 +258,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"editable"		=> $page_controler->can_access_admin()
 		));
 
-
 		if ( $page_controler->can_access_admin() ) {
-
 			DashboardUtility::create_field(array(
 				"id"			=> "new_override_contract",
 				"type"			=> "editor",
@@ -315,13 +310,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php endif; ?>
 
 	<?php
-	$can_add_contract = $page_controler->can_access_admin() && 
-		( 
-			$page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_collecte
+	$can_add_contract = $page_controler->can_access_admin() &&
+		($page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_collecte
 			|| $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded
 			|| $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed
-			|| $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_archive
-		);
+			|| $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_archive);
 	?>	
 	<?php if ( $page_controler->can_access_admin() && $can_add_contract ): ?>
 		<br><br>
@@ -370,16 +363,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<label><?php _e( "Contenu", 'yproject' ); ?></label>
 					<div class="field-container">
 						<?php
-						wp_editor( '', 'contract_model_content',
-							array(
+						wp_editor( '', 'contract_model_content', array(
 								'media_buttons' => true,
 								'quicktags' => false,
 								'tinymce' => array(
 									'plugins' => 'wordpress, paste, wplink, textcolor',
 									'paste_remove_styles' => true
 								)
-							)
-						);
+							));
 						?>
 					</div>
 				</div>
@@ -404,16 +395,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					<label><?php _e( "Contenu", 'yproject' ); ?></label>
 					<div class="field-container">
 						<?php
-						wp_editor( '', 'contract_edit_model_content',
-							array(
+						wp_editor( '', 'contract_edit_model_content', array(
 								'media_buttons' => true,
 								'quicktags' => false,
 								'tinymce' => array(
 									'plugins' => 'wordpress, paste, wplink, textcolor',
 									'paste_remove_styles' => true
 								)
-							)
-						);
+							));
 						?>
 					</div>
 				</div>
@@ -456,7 +445,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 					"admin_theme"	=> $page_controler->can_access_admin(),
 					"visible"		=> $page_controler->can_access_admin(),
 					"options_id"	=> array( 0, 1 ),
-					"options_names"	=> array( 
+					"options_names"	=> array(
 						__( "Non", 'yproject' ),
 						__( "Oui", 'yproject' )
 					)
@@ -484,7 +473,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php endif; ?>
 
 
-	<?php 
+	<?php
 	//Si il n'y a pas de RIB enregistré, demander d'éditer l'organisation
 	//TODO : permettre l'édition du RIB directement ici
 	$keep_going = true;
@@ -532,10 +521,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		 * 9 	rejeté
 		 */
 		?>
-		<?php if ( $last_mandate_status == 0 ): //Si 0, proposer de signer ?>
+		<?php if ( $last_mandate_status == 0 ): //Si 0, proposer de signer?>
 			<?php $phone_number = $page_controler->get_campaign_author()->get_phone_number(); ?>
 
-			<?php 
+			<?php
 			//Indication pour rappeler qu'ils se sont engagés dans le contrat à autoriser les prélévements automatiques
 			?>
 			<?php if ( $page_controler->get_campaign()->is_forced_mandate() ): ?>
@@ -556,7 +545,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			</form>
 			<?php endif; ?>
 
-		<?php elseif ( $last_mandate_status == 5 || $last_mandate_status == 6 ): //Si 5 ou 6, afficher que OK ?>
+		<?php elseif ( $last_mandate_status == 5 || $last_mandate_status == 6 ): //Si 5 ou 6, afficher que OK?>
 			<?php if ( $page_controler->get_campaign_organization()->is_mandate_b2b() ): ?>
 				<?php _e( "Merci d'avoir sign&eacute; l'autorisation de pr&eacute;l&egrave;vement (mandat de type B2B).", 'yproject' ); ?>
 
@@ -581,7 +570,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 							'label'			=> "Mandat sign&eacute;",
 							"admin_theme"	=> true
 						) );
-						
+
 						$mandate_b2b_is_approved_by_bank_ids = array( 0, 1 );
 						$mandate_b2b_is_approved_by_bank_names = array( 'Non', 'Oui' );
 						DashboardUtility::create_field( array(
@@ -593,13 +582,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 							"options_id"	=> $mandate_b2b_is_approved_by_bank_ids,
 							"options_names"	=> $mandate_b2b_is_approved_by_bank_names,
 						) );
-						
+
 						DashboardUtility::create_field( array(
 							'id'			=> 'organization_id',
 							'type'			=> 'hidden',
 							'value'			=> $page_controler->get_campaign_organization()->get_wpref()
 						) );
-						
+
 						DashboardUtility::create_field( array(
 							'id'			=> 'campaign_id',
 							'type'			=> 'hidden',
@@ -662,10 +651,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 
 
-		<?php elseif ( $last_mandate_status == 8 ): //Si 8, demander de nous contacter ?>
+		<?php elseif ( $last_mandate_status == 8 ): //Si 8, demander de nous contacter?>
 			<?php _e( "L'autorisation de pr&eacute;l&egrave;vement automatique a &eacute;t&eacute; d&eacute;sactiv&eacute;e. Merci de nous contacter.", 'yproject' ); ?>
 
-		<?php elseif ( $last_mandate_status == 9 ): //Si 9, demander de nous contacter ?>
+		<?php elseif ( $last_mandate_status == 9 ): //Si 9, demander de nous contacter?>
 			<?php _e( "L'autorisation de pr&eacute;l&egrave;vement automatique a &eacute;t&eacute; rejet&eacute;e. Merci de nous contacter.", 'yproject' ); ?>
 
 		<?php endif; ?>
