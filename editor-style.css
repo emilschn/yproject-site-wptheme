@@ -1,14 +1,90 @@
 html .mce-content-body {
-    font-family: Arial, sans-serif !important;
+	font-family: Arial, sans-serif !important;
 }
 html .mce-content-body ul {
-    margin-left: 10px;
+	margin-left: 10px;
 }
 html .mce-content-body img.alignleft {
-    float: left;
-    margin: 5px 20px 20px 0;
+	float: left;
+	margin: 5px 20px 20px 0;
 }
 html .mce-content-body img.alignright {
-    float: right;
-    margin: 5px 0 20px 20px;
+	float: right;
+	margin: 5px 0 20px 20px;
+}
+
+/*******************************************************************************
+* GESTION CLASSES DE COULEURS PERSONNALISEES EN PROVENANCE DE WP / GUTENBERG
+*******************************************************************************/
+.has-rouge-background-color {
+	background-color: #EA4F51 !important;
+}
+.has-rouge-color {
+	color: #EA4F51 !important;
+}
+.has-bleu-background-color {
+	background-color: #00879B !important;
+}
+.has-bleu-color {
+	color: #00879B !important;
+}
+.has-bleu-clair-background-color {
+	background-color: #B3DAE1 !important;
+}
+.has-bleu-clair-color {
+	color: #B3DAE1 !important;
+}
+.has-jaune-background-color {
+	background-color: #EBCE67 !important;
+}
+.has-jaune-color {
+	color: #EBCE67 !important;
+}
+.has-jaune-clair-background-color {
+	background-color: #F9F0D1 !important;
+}
+.has-jaune-clair-color {
+	color: #F9F0D1 !important;
+}
+.has-vert-background-color {
+	background-color: #5EB82C !important;
+}
+.has-vert-color {
+	color: #5EB82C !important;
+}
+.has-vert-clair-background-color {
+	background-color: #CEE9C0 !important;
+}
+.has-vert-clair-color {
+	color: #CEE9C0 !important;
+}
+.has-rose-background-color {
+	background-color: #F8CACA !important;
+}
+.has-rose-color {
+	color: #F8CACA !important;
+}
+.has-noir-background-color {
+	background-color: #333333 !important;
+}
+.has-noir-color {
+	color: #333333 !important;
+}
+.has-gris-background-color {
+	background-color: #C2C2C2 !important;
+}
+.has-gris-color {
+	color: #C2C2C2 !important;
+}
+.has-gris-clair-background-color {
+	background-color: #EBEBEB !important;
+}
+.has-gris-clair-color {
+	color: #EBEBEB !important;
+}
+.has-blanc-background-color {
+	background-color: #ffffff !important;
+}
+.has-blanc-clair-color {
+	color: #ffffff !important;
 }
