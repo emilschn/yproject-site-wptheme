@@ -18,7 +18,7 @@ if ( $WDGUser_current->has_voted_on_campaign( $post->ID ) && !$WDGUser_current->
 	<?php _e( "Pour authentifier votre compte, il suffit de compl&eacute;ter les informations de votre compte personnel et d'y d&eacute;poser une copie de votre carte d'identit&eacute; ou passeport, ainsi qu'un justificatif de domicile.", 'yproject' ); ?>
 	<br>
 	<p class="align-center">
-		<a href="<?php echo home_url( '/mon-compte/' ); ?>" class="button red"><?php _e( "Je compl&egrave;te mon compte", 'yproject' ); ?></a>
+		<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>" class="button red"><?php _e( "Je compl&egrave;te mon compte", 'yproject' ); ?></a>
 	</p>
 	<br><br><br>
 <?php endif; ?>

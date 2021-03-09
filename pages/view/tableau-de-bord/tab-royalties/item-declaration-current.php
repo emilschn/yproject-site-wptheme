@@ -7,14 +7,13 @@ $date_due = new DateTime( $declaration->date_due );
 $date_interval = $today_date->diff( $date_due );
 $is_future = $date_due > $today_date && $date_interval->format( '%a' ) > $date_due->format( 'd' );
 
-
 if ( $is_future ) {
 	$class_status = 'single-line';
 	$label_status = __( "A venir", 'yproject' );
 } else {
 	$class_status = ( $date_due < $today_date ) ? 'error' : '';
 	$label_status = ( $date_due < $today_date ) ? __( "En retard", 'yproject' ) : __( "En cours", 'yproject' );
-	
+
 	$label_button = __( "D&eacute;clarer", 'yproject' );
 	if ( $declaration->get_status() == WDGROIDeclaration::$status_payment ) {
 		$label_status .= "<br>" . __( "En attente de paiement", 'yproject' );
@@ -25,7 +24,6 @@ if ( $is_future ) {
 		} else {
 			$label_status .= "<br>" . __( "En attente de pr&eacute;l&egrave;vement", 'yproject' );
 		}
-
 	} elseif ( $declaration->get_status() == WDGROIDeclaration::$status_transfer ) {
 		$label_status .= "<br>" . __( "En cours de versement", 'yproject' );
 	} else {
@@ -70,7 +68,7 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 	<?php if ( !$is_future ): ?>
 		<?php if ( $declaration->get_status() != WDGROIDeclaration::$status_transfer && $declaration->get_status() != WDGROIDeclaration::$status_waiting_transfer ): ?>			
 			<div class="single-line">
-				<a href="<?php echo home_url( '/declarer-chiffre-daffaires/?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id ); ?>" class="button red force-size"><?php echo $label_button; ?></a>
+				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'declarer-chiffre-daffaires' ) . '?campaign_id=' .$page_controler->get_campaign()->ID. '&declaration_id=' .$declaration->id; ?>" class="button red force-size"><?php echo $label_button; ?></a>
 			</div>			
 		<?php elseif ( $page_controler->can_access_admin() ): ?>
 			<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>

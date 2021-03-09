@@ -9,7 +9,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php _e( 'invest.cancel-not-validated.YOU_CAN_INVEST', 'yproject' ); ?>
 	</p>
 	
-	<a href="<?php echo home_url( '/mon-compte/' ); ?>" class="button blue"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
+	<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>" class="button blue"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
 	<br><br>
 	<a href="<?php echo $page_controler->get_current_campaign()->get_public_url(); ?>" class="button blue"><?php _e( 'invest.cancel-not-validated.VIEW_PROJECT', 'yproject' ); ?></a>
 	<br><br>

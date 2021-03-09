@@ -28,7 +28,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 							?>
 							<?php foreach ( $project_list_slider as $project_item ): ?>
 								<?php $i++; ?>
-								<div class="slider-item slide-1button" id="slide-<?php echo $i?>" style="<?php if ($i > 1){ ?>display: none;<?php } else { ?>left: 0px;<?php } ?>">
+								<div class="slider-item slide-1button" id="slide-<?php echo $i?>" style="<?php if ($i > 1) { ?>display: none;<?php } else { ?>left: 0px;<?php } ?>">
 									<img class="slide" id="img-slide-<?php echo $i?>" src="<?php echo $project_item[ 'img' ]; ?>"/> 
 
 									<div class="message-banner">
@@ -245,7 +245,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<h2 class="standard">/ <?php _e( 'projects.POSITIVE_SAVINGS', 'yproject' ); ?> /</h2>
 				<div class="projects-title-precisions">
 					<?php _e( 'projects.POSITIVE_SAVINGS_DESCRIPTION', 'yproject' ); ?><br>
-					<a href="<?php echo home_url( '/epargne-positive/' ); ?>"><?php _e( 'projects.POSITIVE_SAVINGS_KNOW_MORE', 'yproject' ); ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'projects.POSITIVE_SAVINGS_KNOW_MORE', 'yproject' ); ?></a>
 				</div>
 
 
