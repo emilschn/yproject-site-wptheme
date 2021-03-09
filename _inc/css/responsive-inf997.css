@@ -94,29 +94,6 @@
 	footer > .footer-container div.term-links {
 		padding: 1px 32px 0px;
 	}
-	
-	body.home section.project-stats > div div.left {
-		width: 100%;
-		margin-bottom: 25px;
-		margin-left: 0px;
-		text-align: center;
-	}
-	body.home section.project-stats > div div.left img {
-		margin-right: 0px;
-		float: none;
-	}
-	body.home section.project-stats > div div.left > span {
-		display: block;
-	}
-        
-	#home-video .home_video .video-container, .home_video .button-video {
-		-moz-box-shadow: 0px 0px;
-		-webkit-box-shadow: 0px 0px;
-		-o-box-shadow: 0px 0px;
-		box-shadow: 0px 0px;
-		filter:progid:DXImageTransform.Microsoft.Shadow(color=#656565, Direction=0, Strength=0);
-		height: auto;
-	}
 
 	body.template-les-projets header { display: none; }
 	body.template-les-projets nav#project-filter {

@@ -2788,10 +2788,6 @@ msgstr "Completed"
 msgid "Termin&eacute;"
 msgstr "Finished"
 
-# THEME - projects/single/pitch.php
-msgid "R&eacute;sum&eacute; du projet"
-msgstr "Summary of the project"
-
 # THEME - projects/single/rewards.php
 msgid "Retour sur investissement"
 msgstr "Return on investment"

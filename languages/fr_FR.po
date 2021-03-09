@@ -2552,10 +2552,6 @@ msgstr "Financ&eacute;"
 msgid "Termin&eacute;"
 msgstr "Termin&eacute;"
 
-# THEME - projects/single/pitch.php
-msgid "R&eacute;sum&eacute; du projet"
-msgstr "R&eacute;sum&eacute; du projet"
-
 # THEME - projects/single/rewards.php
 msgid "Retour sur investissement"
 msgstr "Retour sur investissement"
