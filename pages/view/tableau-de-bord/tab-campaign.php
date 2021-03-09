@@ -449,7 +449,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				if (!empty($file_name)) {
 					$file_name_exploded = explode('.', $file_name);
 					$ext = $file_name_exploded[count($file_name_exploded) - 1];
-					$file_name = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $file_name;
+					$file_name = site_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/kyc/' . $file_name;
 				}
 				DashboardUtility::create_field(array(
 					"id"				=> "new_backoffice_businessplan",
