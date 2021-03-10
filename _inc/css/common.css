@@ -1180,7 +1180,7 @@ footer > .footer-container > div.licence a{
 }
 
 /* BANDEAU COOKIES */
-#cookies-alert {
+#cookies-alert, #cookies-params {
 	position: fixed;
 	z-index: 3;
 	bottom: 0px;
@@ -1193,6 +1193,10 @@ footer > .footer-container > div.licence a{
 	height: 56px;
 	margin: 24px auto 0px;
 	padding: 0px;
+}
+#cookies-params .read-more {
+	width: 400px;
+	height: 50px;
 }
 
 @media screen and (min-width: 998px) and (max-width: 1140px) {

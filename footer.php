@@ -125,19 +125,53 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 //*******************
 ?>
 
-	<?php $hidecookiealert = filter_input( INPUT_COOKIE, 'hidecookiealert' ); ?>
-	<?php if ( empty( $hidecookiealert ) ): ?>
-	<div id="cookies-alert" class="bg-dark-gray aligncenter">
-		<?php _e( 'footer.cookies.DESCRIPTION', 'yproject' ); ?> (<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'cgu' ); ?>"><?php _e( 'footer.cookies.KNOW_MORE', 'yproject' ); ?></a>).
-		<br>
-		<button id="cookies-alert-close" class="button red"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
-	</div>
-	<script>
-		var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
-		if ( hidecookiealert === '1' ) {
-			$( '#cookies-alert' ).hide();
-		}
-	</script>
+	<?php $cookie_small_text = WDGConfigTexts::get_config_text_by_name( 'cgu-cookies-retracte' ); ?>
+	<?php $cookie_long_text = WDGConfigTexts::get_config_text_by_name( 'cgu-cookies-etendu' ); ?>
+
+	<?php if ( !empty( $cookie_small_text ) ): ?>
+		<div id="cookies-params" class="bg-dark-gray">
+			<div class="center">
+				<div class="small">
+					<?php echo apply_filters( 'the_content', nl2br( $cookie_small_text ) ); ?>
+				</div>
+				<div class="long hidden">
+					<?php echo apply_filters( 'the_content', nl2br( $cookie_long_text ) ); ?>
+				</div>
+
+				<div class="align-center">
+					<button type="button" class="button red read-more"><?php _e( 'common.READ_MORE', 'yproject' ); ?></button>
+					<br><br>
+				</div>
+
+				<form class="db-form v3">
+					<button type="button" class="button half left red refuse"><?php _e( 'common.REFUSE', 'yproject' ); ?></button>
+					<button type="button" class="button half right red accept"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
+				</form>
+			</div>
+		</div>
+		<script>
+			/*var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
+			if ( hidecookiealert === '1' ) {
+				$( '#cookies-alert' ).hide();
+			}*/
+		</script>
+
+	<?php else: ?>
+		<?php $hidecookiealert = filter_input( INPUT_COOKIE, 'hidecookiealert' ); ?>
+		<?php if ( empty( $hidecookiealert ) ): ?>
+			<div id="cookies-alert" class="bg-dark-gray aligncenter">
+				<?php _e( 'footer.cookies.DESCRIPTION', 'yproject' ); ?> (<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'cgu' ); ?>"><?php _e( 'footer.cookies.KNOW_MORE', 'yproject' ); ?></a>).
+				<br>
+				<button id="cookies-alert-close" class="button red"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
+			</div>
+			<script>
+				var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
+				if ( hidecookiealert === '1' ) {
+					$( '#cookies-alert' ).hide();
+				}
+			</script>
+
+		<?php endif; ?>
 	<?php endif; ?>
 
 	<?php wp_footer(); ?>

@@ -109,6 +109,9 @@ msgstr "Connexion"
 msgid "common.VALIDATE"
 msgstr "Valider"
 
+msgid "common.REFUSE"
+msgstr "Refuser"
+
 msgid "common.ACCEPT"
 msgstr "Accepter"
 
