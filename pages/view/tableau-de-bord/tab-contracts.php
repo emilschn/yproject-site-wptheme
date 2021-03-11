@@ -19,7 +19,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			if ( !empty( $file_name_contract_agreement ) ) {
 				$file_name_exploded = explode('.', $file_name_contract_agreement);
 				$ext = $file_name_exploded[count($file_name_exploded) - 1];
-				$file_name_contract_agreement = home_url( '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_agreement );
+				$file_name_contract_agreement = site_url( '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_agreement );
 			}
 			?>
 			<?php if ( !empty( $file_name_contract_agreement ) ): ?>
@@ -43,7 +43,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		if (!empty($file_name_contract_orga)) {
 			$file_name_exploded = explode('.', $file_name_contract_orga);
 			$ext = $file_name_exploded[count($file_name_exploded) - 1];
-			$file_name_contract_orga = home_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_orga;
+			$file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' . $file_name_contract_orga;
 
 			DashboardUtility::create_field(array(
 				"id"				=> "new_backoffice_contract_orga",

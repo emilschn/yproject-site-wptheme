@@ -9,12 +9,10 @@ if ( $WDG_cache_plugin == null ) {
 $cache_project_list = $WDG_cache_plugin->get_cache( 'WDGUser::get_projects_by_id(' .$WDGUser_current->get_wpref(). ', TRUE)', 1 );
 if ( $cache_project_list !== FALSE ) {
 	$project_list = json_decode( $cache_project_list );
-	
 } else {
 	$project_list = WDGUser::get_projects_by_id( $WDGUser_current->get_wpref(), TRUE );
 	$WDG_cache_plugin->set_cache( 'WDGUser::get_projects_by_id(' .$WDGUser_current->get_wpref(). ', TRUE)', json_encode( $project_list ), 60*10, 1 ); //MAJ 10min
 }
-
 
 $organizations_list = $WDGUser_current->get_organizations_list();
 
@@ -39,7 +37,7 @@ if ($organizations_list) {
 	</div>
 <?php endif; ?>
 
-<form id="newproject_form" class="db-form v3 full form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()){ ?>style="display: none;"<?php } ?>>
+<form id="newproject_form" class="db-form v3 full form-register" method="post" action="<?php echo admin_url( 'admin-post.php?action=create_project_form'); ?>" <?php if (!is_user_logged_in()) { ?>style="display: none;"<?php } ?>>
     <?php
 	$input_error = filter_input( INPUT_GET, 'error' );
 	$errors_submit_new = $_SESSION[ 'newproject-errors-submit' ];
@@ -71,7 +69,7 @@ if ($organizations_list) {
 
 	<?php if ( !empty( $project_list ) ): ?>
 		<?php
-		$page_dashboard = home_url( '/tableau-de-bord/' );
+		$page_dashboard = WDG_Redirect_Engine::override_get_page_url( 'tableau-de-bord' );
 		$project_string = '';
 		?>
 		<?php foreach ( $project_list as $project_id ): ?>
@@ -120,7 +118,7 @@ if ($organizations_list) {
 
     echo '<hr class="form-separator"/>';
 
-	if(!empty($organizations_list)){
+	if (!empty($organizations_list)) {
 		DashboardUtility::create_field(array(
 			"id"			=> "company-name",
 			"type"			=> "select",
@@ -136,7 +134,6 @@ if ($organizations_list) {
 			"label"		=> "Nom de mon entreprise *",
 			"value"		=> "",
 		));
-		
 	} else {
 		DashboardUtility::create_field(array(
 			"id"		=> "company-name",
@@ -145,7 +142,6 @@ if ($organizations_list) {
 			"value"		=> "",
 		));
 	}
-	
 
 	DashboardUtility::create_field(array(
 		"id"		=> "email-organization",
@@ -172,7 +168,7 @@ if ($organizations_list) {
 	?>
 
 	<div class="align-left">
-	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="<?php echo home_url('/a-propos/cgu/conditions-particulieres/'); ?>" target="_blank">conditions particuli&egrave;res</a></label><br />
+	<label for="project-terms"><input type="checkbox" id="project-terms" name="project-terms" /><span></span> Je valide les <a href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/cgu/conditions-particulieres'); ?>" target="_blank">conditions particuli&egrave;res</a></label><br />
 	</div>
 	<br /><br />
 	

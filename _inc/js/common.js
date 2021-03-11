@@ -140,12 +140,15 @@ YPUIFunctions = (function ($) {
 
 				$('#cookies-params button.refuse').click(function () {
 					$('#cookies-params').hide();
-					// TODO : gérer cookie refuser Hubspot
+					YPUIFunctions.setHubspotCookie('refused');
+					YPUIFunctions.closeCookieParam();
 				});
 
 				$('#cookies-params button.accept').click(function () {
 					$('#cookies-params').hide();
-					// TODO : gérer cookie accepter Hubspot
+					YPUIFunctions.setHubspotCookie('accepted');
+					YPUIFunctions.closeCookieParam();
+					$.getScript('//js.hs-scripts.com/1860698.js');
 				});
 			}
 
@@ -419,6 +422,21 @@ YPUIFunctions = (function ($) {
 					costs[s2.length] = lastValue;
 			}
 			return costs[s2.length];
+		},
+
+		closeCookieParam() {
+			var date = new Date();
+			var days = 180;
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			var expires = '; expires=' + date.toGMTString();
+			document.cookie = 'hidecookieparams=1' + expires + '; path=/';
+		},
+		setHubspotCookie(sStatus) {
+			var date = new Date();
+			var days = 180;
+			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+			var expires = '; expires=' + date.toGMTString();
+			document.cookie = 'hubspotcookies=' + sStatus + expires + '; path=/';
 		}
 	};
 

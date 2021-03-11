@@ -129,7 +129,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 	<?php $cookie_long_text = WDGConfigTexts::get_config_text_by_name( 'cgu-cookies-etendu' ); ?>
 
 	<?php if ( !empty( $cookie_small_text ) ): ?>
-		<div id="cookies-params" class="bg-dark-gray">
+		<div id="cookies-params" class="has-gris-clair-background-color has-noir-color">
 			<div class="center">
 				<div class="small">
 					<?php echo apply_filters( 'the_content', nl2br( $cookie_small_text ) ); ?>
@@ -138,22 +138,23 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 					<?php echo apply_filters( 'the_content', nl2br( $cookie_long_text ) ); ?>
 				</div>
 
-				<div class="align-center">
-					<button type="button" class="button red read-more"><?php _e( 'common.READ_MORE', 'yproject' ); ?></button>
-					<br><br>
-				</div>
-
 				<form class="db-form v3">
-					<button type="button" class="button half left red refuse"><?php _e( 'common.REFUSE', 'yproject' ); ?></button>
-					<button type="button" class="button half right red accept"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
+					<button type="button" class="button left transparent read-more"><?php _e( 'common.READ_MORE', 'yproject' ); ?></button>
+					<button type="button" class="button left red refuse"><?php _e( 'common.REFUSE', 'yproject' ); ?></button>
+					<button type="button" class="button right red accept"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
 				</form>
 			</div>
 		</div>
 		<script>
-			/*var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
-			if ( hidecookiealert === '1' ) {
-				$( '#cookies-alert' ).hide();
-			}*/
+			var hidecookieparams = YPUIFunctions.getCookie( 'hidecookieparams' );
+			if ( hidecookieparams === '1' ) {
+				$( '#cookies-params' ).hide();
+			}
+
+			var hubspotcookies = YPUIFunctions.getCookie( 'hubspotcookies' );
+			if ( hubspotcookies === 'accepted' ) {
+				$.getScript( '//js.hs-scripts.com/1860698.js' );
+			}
 		</script>
 
 	<?php else: ?>
@@ -172,13 +173,14 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 			</script>
 
 		<?php endif; ?>
+
+		<?php if (!WP_IS_DEV_SITE): ?>
+		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1860698.js"></script>
+		<?php endif; ?>
 	<?php endif; ?>
+		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1860698.js"></script>
 
 	<?php wp_footer(); ?>
-
-	<?php if (!WP_IS_DEV_SITE): ?>
-	<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1860698.js"></script>
-	<?php endif; ?>
 	
 	</body>
 </html>

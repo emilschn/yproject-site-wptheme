@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-10 17:41+0100\n"
+"PO-Revision-Date: 2021-03-11 14:23+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/"
 "en/)\n"
@@ -1304,6 +1304,9 @@ msgstr "Your investment has been accounted for, thank you!"
 
 msgid "invest.share.THANK_YOU_SIGNING"
 msgstr "Thank you for your electronic signature!"
+
+msgid "invest.share.THANK_YOU_INVESTING"
+msgstr "Thank you for your investment!"
 
 msgid "invest.share.SHARE_POSITIVE_SAVINGS"
 msgstr ""
