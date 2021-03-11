@@ -299,6 +299,14 @@ div#item-body-home #situation #situation-amount > div:nth-child(1) > div:nth-chi
 	color: #e1e3e2;;
 }
 
+div#item-body-home #campaign_form.db-form.v3 .field span.tooltiptext {
+	width: 98%;
+	font-weight: normal;
+	font-size: 16px;
+	height: auto;
+	line-height: normal;
+}
+
 /*******************************************************************************
 * STATS
 *******************************************************************************/

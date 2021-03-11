@@ -44,10 +44,9 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	}
 
 	private function get_cache_html_key_suffix() {
-		global $locale;
 		$suffix = '';
-		if ( $locale != 'fr_FR' && $locale != 'fr' ) {
-			$suffix = '_' . $locale;
+		if ( !WDG_Languages_Helpers::is_french_displayed() ) {
+			$suffix = '_' . WDG_Languages_Helpers::get_current_locale_id();
 		}
 
 		return $suffix;
@@ -190,7 +189,9 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 	private function prepare_positive_savings_projects() {
 		$this->positive_savings_projects_html = $this->get_db_cached_elements( WDG_Page_Controler_ProjectList::$positive_savings_projects_html_key . $this->get_cache_html_key_suffix(), WDG_Page_Controler_ProjectList::$positive_savings_projects_html_version );
 		if ( empty( $this->positive_savings_projects_html ) ) {
+			WDG_Languages_Helpers::switch_to_french_temp();
 			$this->positive_savings_projects_list = ATCF_Campaign::get_list_positive_savings( 0 );
+			WDG_Languages_Helpers::switch_back_to_display_language();
 		}
 	}
 
