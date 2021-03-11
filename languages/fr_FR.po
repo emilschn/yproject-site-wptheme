@@ -1184,6 +1184,9 @@ msgstr "Votre investissement a bien &eacute;t&eacute; pris en compte, merci !"
 msgid "invest.share.THANK_YOU_SIGNING"
 msgstr "Merci pour votre signature &eacute;lectronique !"
 
+msgid "invest.share.THANK_YOU_INVESTING"
+msgstr "Merci pour votre investissement !"
+
 msgid "invest.share.SHARE_POSITIVE_SAVINGS"
 msgstr "Pour d&eacute;multiplier mon impact et permettre &agrave; plus de projets positifs de voir le jour, je passe le mot sur :"
 
