@@ -287,6 +287,7 @@ div#item-body-home #situation #situation-amount #situation-amount-data{
 	padding-bottom: 15px;
 }
 div#item-body-home #situation #situation-amount .situation-amount-number {
+	font-family: Trebuchet MS, sans-serif;
     font-size: 22px;
     padding-bottom: 15px;
 	font-weight: bold;

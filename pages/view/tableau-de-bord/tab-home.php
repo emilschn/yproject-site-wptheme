@@ -568,55 +568,59 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 	$campaign_id = $page_controler->get_campaign()->ID;
 	$investment_results = WDGCampaignInvestments::get_list( $campaign_id );
 	?>
-	<div id="situation">
-		<h2><?php _e('Situation', 'yproject'); ?></h2>
-		<div id="situation-amount">
-			<div id="situation-amount-data">
-				<div class="situation-amount-number"><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance( 'campaign' ) ); ?> €</div> 
-				<?php 
-					if ( $status == ATCF_Campaign::$campaign_status_vote ){
-						_e( "pré-investissements validés ", 'yproject' );
-					} 
-					_e( "dans votre porte-monnaie de projet", 'yproject' );				
-				?>
-			</div>
-			<div id="situation-amount-data">
-				<div class="situation-amount-number"><?php echo UIHelpers::format_number( $page_controler->get_campaign()->current_amount( false ) ); ?> €</div> 
-				<?php _e( "lev&eacute;s en phase d'investissement", 'yproject' ); ?>
-			</div>
-			<div id="situation-amount-data">
-				<div class="situation-amount-number"><?php echo UIHelpers::format_number( $investment_results[ 'amount_not_validate_investments' ] ); ?> €</div> 
-				<?php 
-					if ( $status == ATCF_Campaign::$campaign_status_vote ){
-						_e( "de pré-investissements non validés ", 'yproject' );
-					} else {
-						_e( "en attente de validation", 'yproject' );
-					} 
-				?>
-				
-			</div>
-		</div>
-		
-		<ul>
-			<?php if ( $roi_percent > 0 ): ?>
-				<li><strong><?php echo $page_controler->get_campaign()->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
-				<?php if ( $page_controler->get_campaign()->roi_percent_remaining() != $roi_percent ): ?>
-					<li><?php _e( "Suite &agrave; des modifications sur vos contrats, il restera" ); ?> <strong><?php echo $page_controler->get_campaign()->roi_percent_remaining(); ?> %</strong> <?php _e( "du CA &agrave; verser.", 'yproject' ); ?></li>
+	<?php if ($status != ATCF_Campaign::$campaign_status_preparing && $status != ATCF_Campaign::$campaign_status_validated): ?>
+		<div id="situation">
+			<h2><?php _e('Situation', 'yproject'); ?></h2>
+			<div id="situation-amount">
+				<div id="situation-amount-data">
+					<div class="situation-amount-number"><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance( 'campaign' ) ); ?> €</div> 
+					<?php 
+						if ( $status == ATCF_Campaign::$campaign_status_vote ){
+							_e( "pré-investissements validés ", 'yproject' );
+						} 
+						_e( "dans votre porte-monnaie de projet", 'yproject' );				
+					?>
+				</div>
+				<?php if ($status != ATCF_Campaign::$campaign_status_vote): ?>
+					<div id="situation-amount-data">
+						<div class="situation-amount-number"><?php echo UIHelpers::format_number( $page_controler->get_campaign()->current_amount( false ) ); ?> €</div> 
+						<?php _e( "lev&eacute;s", 'yproject' ); ?>
+					</div>
 				<?php endif; ?>
-			<?php else: ?>
-				<li><strong><?php echo $page_controler->get_campaign()->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
-			<?php endif; ?>
+				<div id="situation-amount-data">
+					<div class="situation-amount-number"><?php echo UIHelpers::format_number( $investment_results[ 'amount_not_validate_investments' ] ); ?> €</div> 
+					<?php 
+						if ( $status == ATCF_Campaign::$campaign_status_vote ){
+							_e( "de pré-investissements non validés ", 'yproject' );
+						} else {
+							_e( "en attente de validation", 'yproject' );
+						} 
+					?>
+					
+				</div>
+			</div>
+			
+			<ul>
+				<?php if ( $roi_percent > 0 ): ?>
+					<li><strong><?php echo $page_controler->get_campaign()->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+					<?php if ( $page_controler->get_campaign()->roi_percent_remaining() != $roi_percent ): ?>
+						<li><?php _e( "Suite &agrave; des modifications sur vos contrats, il restera" ); ?> <strong><?php echo $page_controler->get_campaign()->roi_percent_remaining(); ?> %</strong> <?php _e( "du CA &agrave; verser.", 'yproject' ); ?></li>
+					<?php endif; ?>
+				<?php else: ?>
+					<li><strong><?php echo $page_controler->get_campaign()->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+				<?php endif; ?>
 
-			<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $page_controler->get_campaign()->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>
-			<li>
-				<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_turnover_amount(); ?> €</strong> <?php _e( "de CA d&eacute;clar&eacute;", 'yproject' ); ?>
-			</li>
-			<li>
-				<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_roi_amount(); ?> €</strong> <?php _e( "de royalties vers&eacute;es", 'yproject' ); ?>
-			</li>
-		</ul>
-	</div>
-	<br>
+				<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $page_controler->get_campaign()->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>
+				<li>
+					<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_turnover_amount(); ?> €</strong> <?php _e( "de CA d&eacute;clar&eacute;", 'yproject' ); ?>
+				</li>
+				<li>
+					<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_roi_amount(); ?> €</strong> <?php _e( "de royalties vers&eacute;es", 'yproject' ); ?>
+				</li>
+			</ul>
+		</div>
+		<br>
+	<?php endif; ?>
 
 
 	<h2><?php _e('Historique', 'yproject'); ?></h2>
