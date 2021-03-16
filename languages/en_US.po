@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-11 14:23+0100\n"
+"PO-Revision-Date: 2021-03-16 14:41+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/"
 "en/)\n"
@@ -187,6 +187,9 @@ msgstr "Contact us"
 
 msgid "footer.SUBSCRIBE_NEWSLETTER"
 msgstr "Subscribe to the newsletter"
+
+msgid "footer.MODIFY_COOKIE_CHOICES"
+msgstr "View my cookies parameters"
 
 msgid "footer.REGISTERED_ORIAS"
 msgstr "Registered with ORIAS under number"

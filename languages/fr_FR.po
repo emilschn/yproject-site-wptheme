@@ -179,6 +179,9 @@ msgstr "Contactez-nous"
 msgid "footer.SUBSCRIBE_NEWSLETTER"
 msgstr "S'inscrire &agrave; la newsletter"
 
+msgid "footer.MODIFY_COOKIE_CHOICES"
+msgstr "Voir mes paramètres de cookies"
+
 msgid "footer.REGISTERED_ORIAS"
 msgstr "Immatricul&eacute;e &agrave; l'ORIAS sous le num&eacute;ro"
 

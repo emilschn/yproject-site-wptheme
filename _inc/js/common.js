@@ -150,6 +150,11 @@ YPUIFunctions = (function ($) {
 					YPUIFunctions.closeCookieParam();
 					$.getScript('//js.hs-scripts.com/1860698.js');
 				});
+
+				$('a.link.change-cookies').click(function (e) {
+					e.preventDefault();
+					$('#cookies-params').show(200);
+				});
 			}
 
 			if ($("#fundingproject").val()) {
@@ -430,6 +435,7 @@ YPUIFunctions = (function ($) {
 			date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
 			var expires = '; expires=' + date.toGMTString();
 			document.cookie = 'hidecookieparams=1' + expires + '; path=/';
+			$('a.link.change-cookies').show();
 		},
 		setHubspotCookie(sStatus) {
 			var date = new Date();

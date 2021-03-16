@@ -17,32 +17,44 @@ $i=1;
 ?>
 <div id="status-list">
 	
-	<div class="perso <?php if($status==ATCF_Campaign::$campaign_status_preparing){echo ' preparing ';}?>"></div>
+	<div class="perso <?php if ($status==ATCF_Campaign::$campaign_status_preparing) {
+	echo ' preparing ';
+}?>"></div>
 	
 	<?php foreach ($status_list as $status_key => $name): ?>
 	
-		<?php if ( 
+		<?php if (
 			( $status_key != ATCF_Campaign::$campaign_status_preview )
-			&& ( 
-				( $status == ATCF_Campaign::$campaign_status_archive && $status_key == ATCF_Campaign::$campaign_status_archive )
-				|| 
+			&& (( $status == ATCF_Campaign::$campaign_status_archive && $status_key == ATCF_Campaign::$campaign_status_archive )
+				||
 				( $status != ATCF_Campaign::$campaign_status_archive && $status_key == ATCF_Campaign::$campaign_status_closed )
-				|| 
-				( $status_key != ATCF_Campaign::$campaign_status_closed && $status_key != ATCF_Campaign::$campaign_status_archive )
-				) ): ?>
+				||
+				( $status_key != ATCF_Campaign::$campaign_status_closed && $status_key != ATCF_Campaign::$campaign_status_archive )) ): ?>
 		<div class="status
-				<?php   if($i==1){echo "begin ";}
-						if($i==$nb_status){echo "end ";}?>"
-			   <?php if($status_key==$status){echo 'id="current"';}?>>
+				<?php   if ($i==1) {
+					echo "begin ";
+				}
+						if ($i==$nb_status) {
+							echo "end ";
+						}?>"
+			   <?php if ($status_key==$status) {
+							echo 'id="current"';
+						}?>>
 			<div class="line
-				<?php   if($i==1){echo "begin ";}
-						if($i==$nb_status){echo "end ";}
-						if($i>$nb_status){echo "none ";}?>">
+				<?php   if ($i==1) {
+							echo "begin ";
+						}
+						if ($i==$nb_status) {
+							echo "end ";
+						}
+						if ($i>$nb_status) {
+							echo "none ";
+						}?>">
 
 			</div>
 			
 			<?php
-			switch ($status_key){
+			switch ($status_key) {
 				case ATCF_Campaign::$campaign_status_validated:
 					?><div class="linetoright"></div><?php
 					break;
@@ -58,28 +70,28 @@ $i=1;
 			
 			<div class="name">
 				<?php echo $name.'<br/>';
-				switch ($status_key){
+				switch ($status_key) {
 					case ATCF_Campaign::$campaign_status_preparing:
-						DashboardUtility::get_infobutton("R&eacute;sumez votre projet et transmettez les informations n&eacute;cessaires au comit&eacute; de s&eacute;lection.",true);
+						DashboardUtility::get_infobutton("R&eacute;sumez votre projet et transmettez les informations n&eacute;cessaires au comit&eacute; de s&eacute;lection.", true);
 						break;
 					case ATCF_Campaign::$campaign_status_validated:
-						DashboardUtility::get_infobutton("Nous vous conseillons sur votre campagne de communication et la pr&eacute;sentation de votre projet.",true);
+						DashboardUtility::get_infobutton("Nous vous conseillons sur votre campagne de communication et la pr&eacute;sentation de votre projet.", true);
 						break;
 					case ATCF_Campaign::$campaign_status_preview:
-						DashboardUtility::get_infobutton("L'avant-première permet de faire d&eacute;couvrir votre projet sur le site. Cette &eacute;tape est facultative",true);
+						DashboardUtility::get_infobutton("L'avant-première permet de faire d&eacute;couvrir votre projet sur le site. Cette &eacute;tape est facultative", true);
 						break;
 					case ATCF_Campaign::$campaign_status_vote:
-						DashboardUtility::get_infobutton("Testez votre communication et &eacute;valuez votre capacit&eacute; à f&eacute;d&eacute;rer vos cercles d'investisseurs.",true);
+						DashboardUtility::get_infobutton("Testez votre communication et &eacute;valuez votre capacit&eacute; à f&eacute;d&eacute;rer vos cercles d'investisseurs.", true);
 						break;
 					case ATCF_Campaign::$campaign_status_collecte:
-						DashboardUtility::get_infobutton("Mobilisez des investisseurs pour atteindre votre seuil de validation de levée de fonds et le d&eacute;passer !",true);
+						DashboardUtility::get_infobutton("Mobilisez des investisseurs pour atteindre votre seuil de validation de levée de fonds et le d&eacute;passer !", true);
 						break;
 					case ATCF_Campaign::$campaign_status_funded:
-						DashboardUtility::get_infobutton("Versez les royalties &agrave; vos investisseurs en fonction de votre chiffre d'affaires et tenez-les inform&eacute;s des avanc&eacute;es de votre projet.",true);
+						DashboardUtility::get_infobutton("Versez les royalties &agrave; vos investisseurs en fonction de votre chiffre d'affaires et tenez-les inform&eacute;s des avanc&eacute;es de votre projet.", true);
 						break;
 					case ATCF_Campaign::$campaign_status_closed:
 					case ATCF_Campaign::$campaign_status_archive:
-						DashboardUtility::get_infobutton("Votre contrat est arriv&eacute; &agrave; son terme.",true);
+						DashboardUtility::get_infobutton("Votre contrat est arriv&eacute; &agrave; son terme.", true);
 						break;
 				}
 				?>
@@ -108,14 +120,18 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 	<div id="block-stats" class="large-block">
 		<div class="data-blocks">
 
-			<?php if( $status == ATCF_Campaign::$campaign_status_vote ): ?>
+			<?php if ( $status == ATCF_Campaign::$campaign_status_vote ): ?>
 				<?php $big_number_class = ( $vote_results['sum_invest_ready'] > 10000 ) ? 'less-big' : ''; ?>
 				<div id="stats-vote">
 					<div class="quart-card">
 						<div class="stat-big-number"><?php echo $nb_votes; ?></div>
 						<div class="stat-little-number">sur <?php echo ATCF_Campaign::$voters_min_required?> requis</div>
 						<div class="details-card">
-							<strong><?php echo $nb_votes; ?></strong> personne<?php if($nb_votes>1){echo 's ont';}else{echo ' a';} echo ' évalué';?>
+							<strong><?php echo $nb_votes; ?></strong> personne<?php if ($nb_votes>1) {
+	echo 's ont';
+} else {
+	echo ' a';
+} echo ' évalué';?>
 						</div>
 					</div>
 					<div class="quart-card">
@@ -141,7 +157,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 					<a class="button blue half switch-tab" href="#stats"><?php _e( "Voir les statistiques d'&eacute;valuation", 'yproject' ); ?></a>
 				</div>
 
-			<?php elseif( $status == ATCF_Campaign::$campaign_status_collecte ): ?>
+			<?php elseif ( $status == ATCF_Campaign::$campaign_status_collecte ): ?>
 				<?php $big_number_class = ( $page_controler->get_campaign()->current_amount(false) > 10000 ) ? 'less-big' : ''; ?>
 				<div id="stats-invest">
 					<div class="half-card">
@@ -149,7 +165,9 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 						<div class="stat-little-number">sur <?php echo $page_controler->get_campaign()->minimum_goal(false) / 1; ?> &euro; requis</div>
 						<div class="details-card">
 							<strong><?php echo $page_controler->get_campaign()->current_amount(); ?></strong> investis par
-							<strong><?php echo $nb_invests; ?></strong> personne<?php if( $nb_invests > 1 ){ echo 's'; } ?>
+							<strong><?php echo $nb_invests; ?></strong> personne<?php if ( $nb_invests > 1 ) {
+	echo 's';
+} ?>
 						</div>
 					</div><div class="half-card">
 						<div class="stat-big-number"><?php echo $page_controler->get_campaign()->time_remaining_str();?><br/></div>
@@ -168,7 +186,9 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 					<div class="stat-little-number">levés sur <?php echo $page_controler->get_campaign()->minimum_goal(false) / 1; ?> &euro;</div>
 					<div class="details-card">
 						<strong><?php echo $page_controler->get_campaign()->current_amount(); ?></strong> investis par
-						<strong><?php echo $nb_invests; ?></strong> personne<?php if($nb_invests>1){echo 's';}?>
+						<strong><?php echo $nb_invests; ?></strong> personne<?php if ($nb_invests>1) {
+	echo 's';
+}?>
 					</div>
 				</div>
 				<div class="db-form v3 padding-top">
@@ -383,7 +403,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 						<input type="number" id="innbdayvote" name="innbdayvote" min="10" max="45" value="45" style="width: 40px;">
 					</label>
 					Fin de l'évaluation : <span id="previewenddatevote"></span>
-					<?php //TODO : choisir l'heure de fin de vote ?>
+					<?php //TODO : choisir l'heure de fin de vote?>
 				</li>
 
 
@@ -432,7 +452,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 						<input type="number" id="inendh" name="inendh" min="0" max="23" value="12" style="width: 40px;">h
 						<input type="number" id="inendm" name="inendm" min="0" max="59" value="00" style="width: 40px;">
 					</label>
-					<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 21h.",true); ?>
+					<?php DashboardUtility::get_infobutton("Veillez &agrave; d&eacute;finir l'heure de fin &agrave; un moment o&ugrave; vous pourrez toucher des investisseurs et encore mener des action de communication. Nous vous conseillons 21h.", true); ?>
 				</li>
 			<?php endif; ?>
 		</ul>
@@ -561,44 +581,75 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 	<?php endif; ?>
 		
 	
-	<?php 
+	<?php
 	$finished_declarations = $page_controler->get_campaign()->get_roi_declarations_by_status( WDGROIDeclaration::$status_finished );
 	$nb_finished_declarations = count( $finished_declarations );
 	$roi_percent = $page_controler->get_campaign()->roi_percent();
 	$campaign_id = $page_controler->get_campaign()->ID;
-	$investment_results = WDGCampaignInvestments::get_list( $campaign_id );
 	?>
-	<h2><?php _e('Situation', 'yproject'); ?></h2>
-	<ul>
-		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance( 'campaign' ) ); ?> €</strong> <?php _e( "dans votre porte-monnaie de projet", 'yproject' ); ?></li>
-		<li><strong><?php echo UIHelpers::format_number( $page_controler->get_campaign()->current_amount( false ) ); ?> €</strong> <?php _e( "lev&eacute;s", 'yproject' ); ?></li>
-		<li><strong><?php echo UIHelpers::format_number( $investment_results[ 'amount_not_validate_investments' ] ); ?> €</strong> <?php _e( "en attente de validation", 'yproject' ); ?></li>
+	<?php if ($status != ATCF_Campaign::$campaign_status_preparing && $status != ATCF_Campaign::$campaign_status_validated): ?>
+		<?php
+		if ($status == ATCF_Campaign::$campaign_status_vote) {
+			$vote_results = WDGCampaignVotes::get_results( $campaign_id );
+		} else {
+			$investment_results = WDGCampaignInvestments::get_list( $campaign_id );
+		}
+		?>
+		<div id="situation">
+			<h2><?php _e('Situation', 'yproject'); ?></h2>
+			<div id="situation-amount">
+				<div id="situation-amount-data">
+					<div class="situation-amount-number"><?php echo UIHelpers::format_number( $page_controler->get_campaign_organization()->get_lemonway_balance( 'campaign' ) ); ?> €</div> 
+					<?php _e( "dans votre porte-monnaie de projet", 'yproject' ); ?>
+				</div>
+				<div id="situation-amount-data">
+					<?php if ($status == ATCF_Campaign::$campaign_status_vote): ?>
+						<div class="situation-amount-number"><?php echo UIHelpers::format_number( $vote_results[ 'amount_preinvestments' ] ); ?> €</div>
+						<?php _e( "de pré-investissements validés", 'yproject' ); ?>
+					<?php else: ?>
+						<div class="situation-amount-number"><?php echo UIHelpers::format_number( $page_controler->get_campaign()->current_amount( false ) ); ?> €</div>
+						<?php _e( "lev&eacute;s", 'yproject' ); ?>
+					<?php endif; ?>
+				</div>
+				<div id="situation-amount-data">
+					<?php if ($status == ATCF_Campaign::$campaign_status_vote): ?>
+						<div class="situation-amount-number"><?php echo UIHelpers::format_number( $vote_results[ 'amount_not_validate_investments' ] ); ?> €</div>
+						<?php _e( "de pré-investissements en attente de validation", 'yproject' ); ?>
+					<?php else: ?>
+						<div class="situation-amount-number"><?php echo UIHelpers::format_number( $investment_results[ 'amount_not_validate_investments' ] ); ?> €</div>
+						<?php _e( "en attente de validation", 'yproject' ); ?>
+					<?php endif; ?>
+				</div>
+			</div>
+			
+			<ul>
+				<?php if ( $roi_percent > 0 ): ?>
+					<li><strong><?php echo $page_controler->get_campaign()->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+					<?php if ( $page_controler->get_campaign()->roi_percent_remaining() != $roi_percent ): ?>
+						<li><?php _e( "Suite &agrave; des modifications sur vos contrats, il restera" ); ?> <strong><?php echo $page_controler->get_campaign()->roi_percent_remaining(); ?> %</strong> <?php _e( "du CA &agrave; verser.", 'yproject' ); ?></li>
+					<?php endif; ?>
+				<?php else: ?>
+					<li><strong><?php echo $page_controler->get_campaign()->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
+				<?php endif; ?>
 
-		<?php if ( $roi_percent > 0 ): ?>
-			<li><strong><?php echo $page_controler->get_campaign()->roi_percent(); ?> %</strong> <?php _e( "du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
-			<?php if ( $page_controler->get_campaign()->roi_percent_remaining() != $roi_percent ): ?>
-				<li><?php _e( "Suite &agrave; des modifications sur vos contrats, il restera" ); ?> <strong><?php echo $page_controler->get_campaign()->roi_percent_remaining(); ?> %</strong> <?php _e( "du CA &agrave; verser.", 'yproject' ); ?></li>
-			<?php endif; ?>
-		<?php else: ?>
-			<li><strong><?php echo $page_controler->get_campaign()->roi_percent_estimated(); ?> %</strong> <?php _e( "maximum du CA &agrave; verser pendant", 'yproject' ); ?> <strong><?php echo $page_controler->get_campaign()->funding_duration(); ?> <?php _e( "ans", 'yproject' ); ?></strong></li>
-		<?php endif; ?>
-
-		<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $page_controler->get_campaign()->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>
-		<li>
-			<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_turnover_amount(); ?> €</strong> <?php _e( "de CA d&eacute;clar&eacute;", 'yproject' ); ?>
-		</li>
-		<li>
-			<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_roi_amount(); ?> €</strong> <?php _e( "de royalties vers&eacute;es", 'yproject' ); ?>
-		</li>
-	</ul>
-	<br>
+				<li><strong><?php echo count( $finished_declarations ); ?> / <?php echo $page_controler->get_campaign()->get_roi_declarations_number(); ?></strong> <?php _e( "&eacute;ch&eacute;ances", 'yproject' ); ?></li>
+				<li>
+					<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_turnover_amount(); ?> €</strong> <?php _e( "de CA d&eacute;clar&eacute;", 'yproject' ); ?>
+				</li>
+				<li>
+					<strong><?php echo $page_controler->get_campaign()->get_roi_declarations_total_roi_amount(); ?> €</strong> <?php _e( "de royalties vers&eacute;es", 'yproject' ); ?>
+				</li>
+			</ul>
+		</div>
+		<br>
+	<?php endif; ?>
 
 
 	<h2><?php _e('Historique', 'yproject'); ?></h2>
 	<?php if ( $nb_finished_declarations > 0 ): ?>
 
 		<ul>
-		<?php foreach( $finished_declarations as $declaration_item ): ?>
+		<?php foreach ( $finished_declarations as $declaration_item ): ?>
 			<li>Déclaration du <?php echo $declaration_item->date_due; ?> : <?php echo $declaration_item->get_amount_with_adjustment(); ?> € de royalties
 				<?php if ( $declaration_item->get_amount_with_adjustment() > 0 ): ?>
 				payées le <?php echo $declaration_item->get_formatted_date( 'paid' ); ?>
@@ -627,8 +678,10 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 				$status_str = 'En cours';
 				if ($post_status == 'publish') {
 					$status_str = 'Termin&eacute;';
-				} else if ($post_status == 'draft') {
-					$status_str = 'Annul&eacute;';
+				} else {
+					if ($post_status == 'draft') {
+						$status_str = 'Annul&eacute;';
+					}
 				}
 				?>
 				<li id="<?php echo $transfer_post->post_content; ?>"><?php echo $transfer_post->post_date; ?> : <?php echo UIHelpers::format_number( $post_amount ); ?>&euro; -- Termin&eacute;</li>
@@ -644,7 +697,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 
 
 	<h2><?php _e( 'Porte-monnaie', 'yproject' ); ?></h2>
-	<?php // Porte-monnaie LW ?>
+	<?php // Porte-monnaie LW?>
 	<?php $lemonway_balance = $page_controler->get_campaign_organization()->get_lemonway_balance( 'campaign' ); ?>
 	Vous disposez de <?php echo $lemonway_balance; ?>&euro; dans votre porte-monnaie.<br /><br />
 

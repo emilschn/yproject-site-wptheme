@@ -50,7 +50,8 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 
 						<div>
 							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/contact'); ?>"><?php _e( 'footer.CONTACT_US', 'yproject' ); ?></a><br>
-							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/newsletter'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a>
+							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/newsletter'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a><br>
+							<a class="link change-cookies" href="#"><?php _e( 'footer.MODIFY_COOKIE_CHOICES', 'yproject' ); ?></a>
 						</div>
 
 						<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
@@ -149,6 +150,8 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 			var hidecookieparams = YPUIFunctions.getCookie( 'hidecookieparams' );
 			if ( hidecookieparams === '1' ) {
 				$( '#cookies-params' ).hide();
+			} else {
+				$( 'a.link.change-cookies' ).hide();
 			}
 
 			var hubspotcookies = YPUIFunctions.getCookie( 'hubspotcookies' );
