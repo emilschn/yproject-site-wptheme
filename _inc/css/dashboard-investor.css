@@ -302,9 +302,17 @@ body.template-mon-compte div#container div#content .investment-item {
 	display: flex;
 	justify-content: space-around;
 	margin-bottom: 8px;
-	padding: 24px;
+	padding-top: 24px;
+	padding-bottom: 24px;
+	padding-left: 24px;
 	background: #FFFFFF;
 	flex-wrap: wrap;
+	font-size: 16px;
+	border: 1px solid #EBEBEB;
+}
+body.template-mon-compte div#container div#content .investment-item .investment-item-child {
+	border-right: 1px solid #EBEBEB;
+	flex: 1;
 }
 body.template-mon-compte div#container div#content .investment-item .amount-date {
 	min-width: 150px;

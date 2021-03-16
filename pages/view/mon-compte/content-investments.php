@@ -114,6 +114,7 @@ if ( $WDGUser_current->is_admin() ) {
 	<span id="invest-trans-investiement_duration_starting"><?php _e( 'account.investments.INVESTMENT_DURATION_STARTING', 'yproject' ); ?></span>
 	<span id="invest-trans-royalties_received"><?php _e( 'account.investments.ROYALTIES_RECEIVED_A', 'yproject' ); ?></span>
 	<span id="invest-trans-return_on_investment"><?php _e( 'account.investments.RETURN_ON_INVESTMENT', 'yproject' ); ?></span>
+	<span id="invest-trans-see_contract"><?php _e( 'account.investments.SEE_CONTRACT', 'yproject' ); ?></span>
 	<span id="invest-trans-contract"><?php _e( 'invest.header.steps.CONTRACT', 'yproject' ); ?></span>
 	<span id="invest-trans-finish_investment"><?php _e( 'account.investments.FINISH_INVESTMENT', 'yproject' ); ?></span>
 	<span id="invest-trans-inaccessible"><?php _e( 'account.investments.INACCESSIBLE', 'yproject' ); ?></span>
