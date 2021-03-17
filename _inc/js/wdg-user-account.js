@@ -509,3 +509,18 @@ $(function(){
 		new UserAccountDashboard();
 	} );
 });
+
+/**
+ * Animation de chargement au click d'un bouton rafraichissant la page
+ */
+
+buttonAnimation();
+
+function buttonAnimation() {
+	$(document).ready(function () {
+		$( '#save' ).click(function () {
+			$(this).hide();
+			$( '#image' ).show();
+		});
+	});
+}

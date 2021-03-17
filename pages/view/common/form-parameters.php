@@ -57,21 +57,20 @@
 
     <div id="user-details-form-buttons">
     <img style="display: none; margin:auto"  id="image" src="http://wedogood.local/wp-content/themes/yproject/images/loading.gif" />
-        <div id="disappears">
-            <button type="submit"  class="button save red" onclick="hiddenBtn(); picture();"<?php if ($page_controler->get_controler_name() == 'tableau-de-bord' && !$page_controler->get_campaign()->is_preparing()){ ?>confirm<?php } ?>">
+            <button type="submit"  id="save" class="button save red" <?php if ($page_controler->get_controler_name() == 'tableau-de-bord' && !$page_controler->get_campaign()->is_preparing()){ ?>confirm<?php } ?>">
                 <?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
             </button>
         </div>
     </div>
 </form>
-<script>
-    function hiddenBtn() {
-        document.getElementById("disappears").innerHTML = "";
-      }
-      function picture() {
-        var img = document.getElementById("image");
-        img.style.display = "block";
-      }
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+  $(document).ready(function () {
+    $( "#save" ).click(function () {
+      $(this).hide();
+      $( "#image" ).show();
+    });
+  });
 </script>
 
     
