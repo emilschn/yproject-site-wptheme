@@ -120,6 +120,7 @@ if ( $page_controler->is_iban_validated() ): ?>
 			</p>
 
 			<div id="user-bank-form-buttons">
+				<img style="display: none; margin:auto"  id="image" src="http://wedogood.local/wp-content/themes/yproject/images/loading.gif" />
 				<button type="submit" class="button save red"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
 			</div>
 		</div>
@@ -206,6 +207,7 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 		</p>
 	
 		<div id="user-bank-form-buttons">
+			<img style="display: none; margin:auto"  id="image" src="http://wedogood.local/wp-content/themes/yproject/images/loading.gif" />
 			<button type="submit" class="button save red"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
 		</div>
 

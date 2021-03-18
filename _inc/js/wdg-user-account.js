@@ -2,6 +2,7 @@ function UserAccountDashboard() {
 	this.initWithHash();
 	this.initMenu();
 	this.initPhoneNotification();
+	this.initLoadingAnimation();
 }
 
 /**
@@ -504,23 +505,20 @@ UserAccountDashboard.prototype.initPhoneNotification = function(){
 	} );
 };
 
+/**
+ * Animation au click d'un bouton d'enregistrement
+ */
+
+ UserAccountDashboard.prototype.initLoadingAnimation = function(){
+		$( '.save' ).click(function () {
+			$(this).hide();
+			$( '#image' ).show();
+	  });
+ }
+
 $(function(){
 	jQuery(document).ready( function($) {
 		new UserAccountDashboard();
 	} );
 });
 
-/**
- * Animation de chargement au click d'un bouton rafraichissant la page
- */
-
-buttonAnimation();
-
-function buttonAnimation() {
-	$(document).ready(function () {
-		$( '#save' ).click(function () {
-			$(this).hide();
-			$( '#image' ).show();
-		});
-	});
-}

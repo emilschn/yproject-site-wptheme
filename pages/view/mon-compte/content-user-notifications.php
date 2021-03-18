@@ -39,6 +39,7 @@ $fields_transactions = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notif
 	<?php endforeach; ?>
 
 	<div id="user-notifications-form-buttons">
+		<img style="display: none; margin:auto"  id="image" src="http://wedogood.local/wp-content/themes/yproject/images/loading.gif" />
 		<button type="submit" class="button save red"><?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?></button>
 	</div>
 	

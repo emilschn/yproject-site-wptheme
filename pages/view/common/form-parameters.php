@@ -55,22 +55,13 @@
         * <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
     </p>
 
+    
     <div id="user-details-form-buttons">
     <img style="display: none; margin:auto"  id="image" src="http://wedogood.local/wp-content/themes/yproject/images/loading.gif" />
-            <button type="submit"  id="save" class="button save red" <?php if ($page_controler->get_controler_name() == 'tableau-de-bord' && !$page_controler->get_campaign()->is_preparing()){ ?>confirm<?php } ?>">
+            <button type="submit" class="button save red" <?php if ($page_controler->get_controler_name() == 'tableau-de-bord' && !$page_controler->get_campaign()->is_preparing()){ ?>confirm<?php } ?>">
                 <?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
             </button>
         </div>
     </div>
 </form>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script type="text/javascript">
-  $(document).ready(function () {
-    $( "#save" ).click(function () {
-      $(this).hide();
-      $( "#image" ).show();
-    });
-  });
-</script>
-
     

@@ -49,6 +49,7 @@
 		<?php endforeach; ?>
 
 		<div id="user-details-form-buttons">
+			<img style="display: none; margin:auto"  id="image" src="http://wedogood.local/wp-content/themes/yproject/images/loading.gif" />
 			<button type="submit" class="button save red"><?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?></button>
 		</div>
 	</form>
@@ -68,6 +69,7 @@
 		<?php endforeach; ?>
 
 		<div id="user-details-form-buttons">
+			<img style="display: none; margin:auto"  id="image" src="http://wedogood.local/wp-content/themes/yproject/images/loading.gif" />
 			<button type="submit" class="button save red"><?php _e( 'account.parameters.UNLINK_FACEBOOK_APPLY_PASSWORD', 'yproject' ); ?></button>
 		</div>
 	</form>
@@ -93,6 +95,7 @@
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
 			<div id="user-details-form-buttons">
+				<img style="display: none; margin:auto"  id="image" src="http://wedogood.local/wp-content/themes/yproject/images/loading.gif" />
 				<button type="submit" class="button save red">Supprimer ce compte utilisateur</button>
 			</div>
 		</form>
