@@ -239,7 +239,7 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 					sCampaignBuffer += '<div class="investment-item">';
 
 					sCampaignBuffer += '<div class="investment-item-child amount-date">';
-					sCampaignBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
+					sCampaignBuffer += '<span class="amount-amount"><strong>' + oInvestmentItem[ 'amount' ] + ' €</strong></span><br>';
 					sCampaignBuffer += oInvestmentItem[ 'date' ] + '<br>';
 					sCampaignBuffer += oInvestmentItem[ 'hour' ];
 					sCampaignBuffer += '</div>';
@@ -313,8 +313,6 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 						sCampaignBuffer += '</div>';
 						
 						sCampaignBuffer += '<div class="royalties-list align-center hidden" id="royalties-list-'+nCampaignID+'-'+nIndex+'">';
-						
-						sCampaignBuffer += '<hr>';
 						
 						sCampaignBuffer += '<div>'+$('#invest-trans-quarterly_payments').text()+'</div>';
 						
