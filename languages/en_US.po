@@ -852,18 +852,16 @@ msgid "account.investments.RELOAD"
 msgstr "Reload"
 
 msgid "account.investments.LOADING_PROBLEM"
-msgstr "Probl&egrave;me de chargement"
+msgstr "Loading problem"
 
 msgid "account.investments.NO_INVESTMENTS"
-msgstr "Aucun investissement valid&eacute; pour l&apos;instant."
+msgstr "No investment validated for the moment."
 
 msgid "account.investments.NO_INVESTMENTS_IF_VOTE"
-msgstr ""
-"Si vous avez investi sur un projet en cours d&apos;&eacute;valuation, cet "
-"investissement est encore en attente de validation."
+msgstr "If you have invested in a project under evaluation, the validation of this investment is still pending."
 
 msgid "account.investments.MY_INVESTMENTS_ON"
-msgstr "Mes investissements sur"
+msgstr "My investments on"
 
 msgid "account.investments.INVESTMENT_DURATION"
 msgstr "Contract for "
@@ -878,51 +876,46 @@ msgid "account.investments.ROYALTIES_RECEIVED_A"
 msgstr "Royalties received"
 
 msgid "account.investments.RETURN_ON_INVESTMENT"
-msgstr "Multiple revers&eacute;"
+msgstr "Multiple refunded"
 
 msgid "account.investments.FIRST_PAYMENT"
-msgstr "Premier versement :"
+msgstr "First payment:"
 
 msgid "account.investments.NEXT_PAYMENT"
-msgstr "Prochain versement :"
+msgstr "Next payment:"
 
 msgid "account.investments.STARTED_CONTRACT"
-msgstr "Contrat d&eacute;marr&eacute;"
+msgstr "Contract started"
 
 msgid "account.investments.SEE_CONTRACT"
-msgstr "Voir le contrat"
+msgstr "See the contract"
 
 msgid "account.investments.FINISH_INVESTMENT"
-msgstr "Finaliser l'investissement"
+msgstr "Finalize the investment "
 
 msgid "account.investments.INACCESSIBLE"
 msgstr "inaccessible"
 
 msgid "account.investments.QUARTERLY_PAYMENTS"
-msgstr "Versements trimestriels"
+msgstr "Quarterly payments"
 
 msgid "account.investments.YEARS"
 msgstr "Years"
 
 msgid "account.investments.TURNOVER"
-msgstr "Chiffre d&apos;affaires"
+msgstr "Turnover"
 
 msgid "account.investments.ROYALTIES"
 msgstr "Royalties"
 
 msgid "account.investments.OTHER_COMMITMENTS"
-msgstr ""
-"Autres &eacute;ch&eacute;ances &eacute;ventuelles jusqu&apos;&agrave; "
-"remboursement"
+msgstr "Other possible deadlines until reimbursement"
 
 msgid "account.investments.COMPANY_IS_COMMITED"
-msgstr ""
-"L&apos;entreprise est engag&eacute;e &agrave; vous verser des royalties "
-"jusqu&apos;&agrave; remboursement, sauf en cas d&apos;arr&ecirc;t d&eacute;"
-"finitif de l&apos;activit&eacute;."
+msgstr "The company is committed to pay you royalties until reimbursement, except in the event of permanent cessation of activity "
 
 msgid "account.investments.ESTIMATED"
-msgstr "pr&eacute;visionnel"
+msgstr "estimated"
 
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"

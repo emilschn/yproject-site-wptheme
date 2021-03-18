@@ -245,7 +245,6 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 					sCampaignBuffer += '</div>';
 
 					var bCountInGlobalStat = true;
-					// var sStatusStr = oInvestmentItem[ 'status_str' ];
 					if ( oInvestmentItem[ 'status' ] === 'pending' ) {
 						bCountInGlobalStat = false;
 						nInvestmentPendingCount++;
