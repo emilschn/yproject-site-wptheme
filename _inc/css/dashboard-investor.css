@@ -51,7 +51,7 @@ body.template-mon-compte div#container div#content nav ul.nav-menu li a {
 	width: calc( 100% - 15px );
 	height: auto;
 	line-height: 16px;
-	font-size: 12px;
+	font-size: 13px;
 	padding: 5px 0px 5px 15px;
 	text-transform: uppercase;
 	color: #333333;
@@ -581,6 +581,10 @@ body.template-mon-compte div#container div#content div#item-body-bank div.user-r
 		left: 0px;
 		border-bottom: 3px solid #E1E3E2;
 		z-index: 2;
+	}
+	body.template-mon-compte div#container div#content nav ul.nav-menu li a {
+		font-size: 17px;
+		min-height: 25px;
 	}
 	body.template-mon-compte div#container div#content nav.visible button#swap-menu {
 		left: -2px;
