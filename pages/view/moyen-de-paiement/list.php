@@ -108,14 +108,27 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 	</div>
 	
-	<form id="form-navigation" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
+	<form id="form-navigation" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white investment-form">
 
 		<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
 		<input type="hidden" id="input-meanofpayment-card-type" name="meanofpayment-card-type" value="">
 		<input type="hidden" id="input-meanofpayment-card-save" name="meanofpayment-card-save" value="">
-		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( 'common.PREVIOUS', 'yproject' ); ?></button>
-		<button type="submit" class="button half right red hidden"><?php _e( 'invest.mean-payment.PAY', 'yproject' ); ?></button>
-
+		<button type="submit" name="nav" value="previous" class="button half left transparent">
+			<span class="button-text">
+				<?php _e( 'common.PREVIOUS', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" />
+			</span>
+		</button>
+		<button type="submit" class="button half right red hidden">
+			<span class="button-text">
+				<?php _e( 'invest.mean-payment.PAY', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" />
+			</span>
+		</button>
 		<div class="clear"></div>
 	</form>
 	

@@ -34,6 +34,49 @@ var WDGInvestPageFunctions = (function($) {
 				} );
 			}
 			
+			
+			// if ( $( '.payment-next-button' ).length > 0 ) {
+			// 	$( '.payment-next-button' ).click( function( e ) {
+			// 		if ($(this).hasClass("disabled")) {
+			// 			e.preventDefault();
+			// 		}
+			// 		$(this).addClass("disabled");
+			// 		$(this).parent().siblings('span.loading').show();
+			// 	} );
+			// }		
+			// if ( $( '#form-navigation' ).length > 0 ) {
+			// 	$( '#button-meanofpayment-pay' ).click( function( e ) {
+			// 		$(this).find(".button-text").hide();
+			// 		$(this).find(".button-loading").show();
+			// 		if ($(this).hasClass("disabled")) {
+			// 			e.preventDefault();
+			// 		}
+			// 		$(this).addClass("disabled");
+			// 	} );
+			// }				
+			if ( $( '.investment-form' ).length > 0 ) {
+				$( 'div :submit' ).click( function( e ) {
+					$(this).find(".button-text").hide();
+					$(this).find(".button-loading").show();
+					if ($(this).hasClass("disabled")) {
+						e.preventDefault();
+					}
+					$(this).addClass("disabled");
+				} );
+				
+				$( '.investment-button' ).click( function( e ) {
+					$(this).find(".button-text").hide();
+					$(this).find(".button-loading").show();
+					if ($(this).hasClass("disabled")) {
+						e.preventDefault();
+					}
+					$(this).addClass("disabled");
+				} );
+			}	
+
+
+			
+
 			if ( $( '.mean-payment-button' ).length > 0 ) {
 				$( '.mean-payment-button' ).click( function( e ) {
 					e.preventDefault();
