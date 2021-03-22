@@ -56,7 +56,6 @@ $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_fil
 
 		<?php _e( 'account.bank.BANK_DETAILS_TO_BE_CHECKED', 'yproject' ); ?><br>
 		<?php _e( 'account.bank.BANK_DETAILS_WITH_YOUR_NAME', 'yproject' ); ?><br>
-		<?php _e( 'account.bank.ONLINE_BANK_ACCOUNT_AUTHENTICATION', 'yproject' ); ?><br>
 		
 		<br>
 	</p>
