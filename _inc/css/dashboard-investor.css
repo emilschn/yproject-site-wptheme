@@ -302,12 +302,24 @@ body.template-mon-compte div#container div#content .investment-item {
 	display: flex;
 	justify-content: space-around;
 	margin-bottom: 8px;
-	padding: 24px;
+	padding-top: 24px;
+	padding-bottom: 24px;
+	padding-left: 24px;
 	background: #FFFFFF;
 	flex-wrap: wrap;
+	font-size: 16px;
+	border: 1px solid #EBEBEB;
+	align-items: center;
+}
+body.template-mon-compte div#container div#content .investment-item .investment-item-child {
+	border-right: 1px solid #EBEBEB;
+	flex: 1;
 }
 body.template-mon-compte div#container div#content .investment-item .amount-date {
 	min-width: 150px;
+}
+body.template-mon-compte div#container div#content .investment-item .amount-amount {
+	font-size: 20px;
 }
 body.template-mon-compte div#container div#content .investment-item .single-line {
 	min-width: 92px;
@@ -328,6 +340,22 @@ body.template-mon-compte div#container div#content .investment-item .single-line
 }
 body.template-mon-compte div#container div#content .investment-item a.button {
 	padding: 16px 16px;
+}
+
+@media screen and (max-width: 767px) {
+	body.template-mon-compte div#container div#content .investment-item {
+		flex-direction: column;
+		padding-left: 0px;
+		justify-content: center;
+	}
+	body.template-mon-compte div#container div#content .investment-item .investment-item-child {
+		padding: 16px 16px;
+		border-right: 0px;
+		border-bottom: 1px solid #EBEBEB;
+	}
+	body.template-mon-compte div#container div#content .investment-item .amount-date {
+		text-align: center;
+	}
 }
 
 body.template-mon-compte div#container div#content .vote-intentions h4 {
@@ -356,7 +384,6 @@ body.template-mon-compte div#container div#content .button-hide-royalties-list {
 }
 body.template-mon-compte div#container div#content .royalties-list {
 	background: #FFF;
-	margin-top: -24px;
 	padding: 16px;
 }
 body.template-mon-compte div#container div#content .royalties-list > div {
