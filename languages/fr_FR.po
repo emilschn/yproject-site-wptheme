@@ -794,19 +794,31 @@ msgid "account.investments.MY_INVESTMENTS_ON"
 msgstr "Mes investissements sur"
 
 msgid "account.investments.INVESTMENT_DURATION"
-msgstr "Investissement sur"
+msgstr "Contrat sur"
 
 msgid "account.investments.INVESTMENT_DURATION_YEARS"
 msgstr "ans"
 
 msgid "account.investments.INVESTMENT_DURATION_STARTING"
-msgstr "&agrave; compter du"
+msgstr "d&eacute;marr&eacute; en "
 
 msgid "account.investments.ROYALTIES_RECEIVED_A"
-msgstr "Royalties re&ccedil;ues :"
+msgstr "Royalties re&ccedil;ues"
 
 msgid "account.investments.RETURN_ON_INVESTMENT"
-msgstr "Retour sur investissement :"
+msgstr "Multiple revers&eacute;"
+
+msgid "account.investments.FIRST_PAYMENT"
+msgstr "Premier versement :"
+
+msgid "account.investments.NEXT_PAYMENT"
+msgstr "Prochain versement :"
+
+msgid "account.investments.STARTED_CONTRACT"
+msgstr "Contrat d&eacute;marr&eacute;"
+
+msgid "account.investments.SEE_CONTRACT"
+msgstr "Voir le contrat"
 
 msgid "account.investments.FINISH_INVESTMENT"
 msgstr "Finaliser l'investissement"
