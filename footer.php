@@ -126,8 +126,8 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 //*******************
 ?>
 
-	<?php $cookie_small_text = WDGConfigTexts::get_config_text_by_name( 'cgu-cookies-retracte' ); ?>
-	<?php $cookie_long_text = WDGConfigTexts::get_config_text_by_name( 'cgu-cookies-etendu' ); ?>
+	<?php $cookie_small_text = WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_term_cookies_retracted ); ?>
+	<?php $cookie_long_text = WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_term_cookies_extended ); ?>
 
 	<?php if ( !empty( $cookie_small_text ) ): ?>
 		<div id="cookies-params" class="has-gris-clair-background-color has-noir-color">
