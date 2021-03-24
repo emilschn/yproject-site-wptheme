@@ -133,10 +133,12 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 		<div id="cookies-params" class="has-gris-clair-background-color has-noir-color">
 			<div class="center">
 				<div class="small">
-					<?php echo apply_filters( 'the_content', nl2br( $cookie_small_text ) ); ?>
+					<?php echo nl2br( $cookie_small_text ); ?>
+					<br><br>
 				</div>
 				<div class="long hidden">
-					<?php echo apply_filters( 'the_content', nl2br( $cookie_long_text ) ); ?>
+					<?php echo nl2br( $cookie_long_text ); ?>
+					<br><br>
 				</div>
 
 				<form class="db-form v3">
@@ -159,29 +161,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 				$.getScript( '//js.hs-scripts.com/1860698.js' );
 			}
 		</script>
-
-	<?php else: ?>
-		<?php $hidecookiealert = filter_input( INPUT_COOKIE, 'hidecookiealert' ); ?>
-		<?php if ( empty( $hidecookiealert ) ): ?>
-			<div id="cookies-alert" class="bg-dark-gray aligncenter">
-				<?php _e( 'footer.cookies.DESCRIPTION', 'yproject' ); ?> (<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'cgu' ); ?>"><?php _e( 'footer.cookies.KNOW_MORE', 'yproject' ); ?></a>).
-				<br>
-				<button id="cookies-alert-close" class="button red"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
-			</div>
-			<script>
-				var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
-				if ( hidecookiealert === '1' ) {
-					$( '#cookies-alert' ).hide();
-				}
-			</script>
-
-		<?php endif; ?>
-
-		<?php if (!WP_IS_DEV_SITE): ?>
-		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1860698.js"></script>
-		<?php endif; ?>
 	<?php endif; ?>
-		<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1860698.js"></script>
 
 	<?php wp_footer(); ?>
 	

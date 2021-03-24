@@ -116,21 +116,6 @@ YPUIFunctions = (function ($) {
 				$(sContainer).show();
 			});
 
-			if ($('#cookies-alert').length > 0) {
-				var hidecookiealert = YPUIFunctions.getCookie('hidecookiealert');
-				if (hidecookiealert === '1') {
-					$('#cookies-alert').hide();
-				}
-				$('#cookies-alert-close').click(function () {
-					$('#cookies-alert').hide();
-					var date = new Date();
-					var days = 100;
-					date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-					var expires = '; expires=' + date.toGMTString();
-					document.cookie = 'hidecookiealert=1' + expires + '; path=/';
-				});
-			}
-
 			if ($('#cookies-params').length > 0) {
 				$('#cookies-params button.read-more').click(function () {
 					$('#cookies-params button.read-more').hide();
