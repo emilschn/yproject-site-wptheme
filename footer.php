@@ -50,7 +50,8 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 
 						<div>
 							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/contact'); ?>"><?php _e( 'footer.CONTACT_US', 'yproject' ); ?></a><br>
-							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/newsletter'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a>
+							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/newsletter'); ?>"><?php _e( 'footer.SUBSCRIBE_NEWSLETTER', 'yproject' ); ?></a><br>
+							<a class="link change-cookies" href="#"><?php _e( 'footer.MODIFY_COOKIE_CHOICES', 'yproject' ); ?></a>
 						</div>
 
 						<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
@@ -125,26 +126,44 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 //*******************
 ?>
 
-	<?php $hidecookiealert = filter_input( INPUT_COOKIE, 'hidecookiealert' ); ?>
-	<?php if ( empty( $hidecookiealert ) ): ?>
-	<div id="cookies-alert" class="bg-dark-gray aligncenter">
-		<?php _e( 'footer.cookies.DESCRIPTION', 'yproject' ); ?> (<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'cgu' ); ?>"><?php _e( 'footer.cookies.KNOW_MORE', 'yproject' ); ?></a>).
-		<br>
-		<button id="cookies-alert-close" class="button red"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
-	</div>
-	<script>
-		var hidecookiealert = YPUIFunctions.getCookie( 'hidecookiealert' );
-		if ( hidecookiealert === '1' ) {
-			$( '#cookies-alert' ).hide();
-		}
-	</script>
+	<?php $cookie_small_text = WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_term_cookies_retracted ); ?>
+	<?php $cookie_long_text = WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_term_cookies_extended ); ?>
+
+	<?php if ( !empty( $cookie_small_text ) ): ?>
+		<div id="cookies-params" class="has-gris-clair-background-color has-noir-color">
+			<div class="center">
+				<div class="small">
+					<?php echo nl2br( $cookie_small_text ); ?>
+					<br><br>
+				</div>
+				<div class="long hidden">
+					<?php echo nl2br( $cookie_long_text ); ?>
+					<br><br>
+				</div>
+
+				<form class="db-form v3">
+					<button type="button" class="button left transparent read-more"><?php _e( 'common.READ_MORE', 'yproject' ); ?></button>
+					<button type="button" class="button left red refuse"><?php _e( 'common.REFUSE', 'yproject' ); ?></button>
+					<button type="button" class="button right red accept"><?php _e( 'common.ACCEPT', 'yproject' ); ?></button>
+				</form>
+			</div>
+		</div>
+		<script>
+			var hidecookieparams = YPUIFunctions.getCookie( 'hidecookieparams' );
+			if ( hidecookieparams === '1' ) {
+				$( '#cookies-params' ).hide();
+			} else {
+				$( 'a.link.change-cookies' ).hide();
+			}
+
+			var hubspotcookies = YPUIFunctions.getCookie( 'hubspotcookies' );
+			if ( hubspotcookies === 'accepted' ) {
+				$.getScript( '//js.hs-scripts.com/1860698.js' );
+			}
+		</script>
 	<?php endif; ?>
 
 	<?php wp_footer(); ?>
-
-	<?php if (!WP_IS_DEV_SITE): ?>
-	<script type="text/javascript" id="hs-script-loader" async defer src="//js.hs-scripts.com/1860698.js"></script>
-	<?php endif; ?>
 	
 	</body>
 </html>
