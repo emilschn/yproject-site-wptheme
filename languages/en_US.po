@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-03-24 14:17+0100\n"
+"PO-Revision-Date: 2021-03-25 14:48+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -236,6 +236,9 @@ msgstr "social impact"
 
 msgid "project.impact.ECO"
 msgstr "economic impact"
+
+msgid "project.impact.ENGAGEMENT"
+msgstr "commited company impact"
 
 msgid "project.FOLLOW.P"
 msgstr "follow the project"

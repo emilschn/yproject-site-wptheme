@@ -229,6 +229,9 @@ msgstr "impact social"
 msgid "project.impact.ECO"
 msgstr "impact &eacute;conomique"
 
+msgid "project.impact.ENGAGEMENT"
+msgstr "impact entreprise engagée"
+
 msgid "project.FOLLOW.P"
 msgstr "suivent le projet"
 
