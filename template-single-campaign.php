@@ -26,11 +26,6 @@
 <?php get_header(); ?>
 <div id="content" <?php echo 'class="'.$classes.'"'; ?>>
     
-	<?php if ($classes != '') {
-	locate_template( array("clients/myphotoreporter/menu.php"), true ); 
-	display_photoreporter_menu();
-	} ?>
-    
 	<div class="padder">
 
 		<div class="page" id="blog-single" role="main">
