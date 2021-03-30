@@ -10,7 +10,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
             <?php _e( 'invest.mean-payment.error.WALLET_TRANSFER_RESTART', 'yproject' ); ?>
         </span>
         <span class="button-loading loading align-center hidden">
-            <img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" />
+            <img src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" />
         </span>
     </a>.
 </div>

@@ -118,7 +118,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<?php _e( 'common.PREVIOUS', 'yproject' ); ?>
 			</span>
 			<span class="button-loading loading align-center hidden">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" />
 			</span>
 		</button>
 		<button type="submit" class="button half right red hidden">
@@ -126,7 +126,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<?php _e( 'invest.mean-payment.PAY', 'yproject' ); ?>
 			</span>
 			<span class="button-loading loading align-center hidden">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" />
 			</span>
 		</button>
 		<div class="clear"></div>

@@ -27,7 +27,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<?php _e( 'common.SEND', 'yproject' ); ?>
 			</span>
 			<span class="button-loading loading align-center hidden">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" />
 			</span>
 		</button>
 		<input type="hidden" name="action" value="post_invest_check" />
@@ -48,7 +48,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<?php _e( 'invest.mean-payment.check-form.SEND_LATER', 'yproject' ); ?>
 			</span>
 			<span class="button-loading loading align-center hidden">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" />
 			</span>
 		</button>
 		<input type="hidden" name="action" value="post_confirm_check" />

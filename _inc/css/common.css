@@ -223,8 +223,8 @@ button.red {
     padding: 15px 30px;
 }
 .button.disabled {
-    background: #e1e3e2;
-    border: 0px solid #e1e3e2 !important;
+    background: #EBEBEB;
+    border: 0px solid #EBEBEB !important;
     color: #333333;
     cursor: default;
 }
