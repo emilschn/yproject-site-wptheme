@@ -161,13 +161,16 @@ $campaign_categories_str = $campaign->get_categories_str();
 				<div class="project-banner-info-actions">
 					<div class="impacts-container" id="impacts-<?php echo $post->ID; ?>">
 						<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact environnemental', 'yproject')?></span>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENVIRONMENT', 'yproject')?></span>
 						<?php endif; ?>
 						<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact social', 'yproject')?></span>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.SOCIAL"', 'yproject')?></span>
 						<?php endif; ?>
 						<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('impact &eacute;conomique', 'yproject')?></span>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ECO', 'yproject')?></span>
+						<?php endif; ?>
+						<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="impact engagement" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENGAGEMENT', 'yproject')?></span>
 						<?php endif; ?>
 					</div>
 

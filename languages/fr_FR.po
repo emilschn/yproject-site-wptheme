@@ -124,6 +124,9 @@ msgstr "Connexion"
 msgid "common.VALIDATE"
 msgstr "Valider"
 
+msgid "common.REFUSE"
+msgstr "Refuser"
+
 msgid "common.ACCEPT"
 msgstr "Accepter"
 
@@ -191,6 +194,9 @@ msgstr "Contactez-nous"
 msgid "footer.SUBSCRIBE_NEWSLETTER"
 msgstr "S'inscrire &agrave; la newsletter"
 
+msgid "footer.MODIFY_COOKIE_CHOICES"
+msgstr "Voir mes paramètres de cookies"
+
 msgid "footer.REGISTERED_ORIAS"
 msgstr "Immatricul&eacute;e &agrave; l'ORIAS sous le num&eacute;ro"
 
@@ -237,6 +243,9 @@ msgstr "impact social"
 
 msgid "project.impact.ECO"
 msgstr "impact &eacute;conomique"
+
+msgid "project.impact.ENGAGEMENT"
+msgstr "impact entreprise engagée"
 
 msgid "project.FOLLOW.P"
 msgstr "suivent le projet"
@@ -803,19 +812,31 @@ msgid "account.investments.MY_INVESTMENTS_ON"
 msgstr "Mes investissements sur"
 
 msgid "account.investments.INVESTMENT_DURATION"
-msgstr "Investissement sur"
+msgstr "Contrat sur"
 
 msgid "account.investments.INVESTMENT_DURATION_YEARS"
 msgstr "ans"
 
 msgid "account.investments.INVESTMENT_DURATION_STARTING"
-msgstr "&agrave; compter du"
+msgstr "d&eacute;marr&eacute; en "
 
 msgid "account.investments.ROYALTIES_RECEIVED_A"
-msgstr "Royalties re&ccedil;ues :"
+msgstr "Royalties re&ccedil;ues"
 
 msgid "account.investments.RETURN_ON_INVESTMENT"
-msgstr "Retour sur investissement :"
+msgstr "Multiple revers&eacute;"
+
+msgid "account.investments.FIRST_PAYMENT"
+msgstr "Premier versement :"
+
+msgid "account.investments.NEXT_PAYMENT"
+msgstr "Prochain versement :"
+
+msgid "account.investments.STARTED_CONTRACT"
+msgstr "Contrat d&eacute;marr&eacute;"
+
+msgid "account.investments.SEE_CONTRACT"
+msgstr "Voir le contrat"
 
 msgid "account.investments.FINISH_INVESTMENT"
 msgstr "Finaliser l'investissement"

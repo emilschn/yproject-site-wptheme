@@ -55,11 +55,6 @@ if (isset($_GET['delete_post_id'])){
 
 <div id="content" <?php echo 'class="'.$classes.'"'; ?>>
     
-	<?php if ($client_context != '') {
-		locate_template( array("clients/myphotoreporter/menu.php"), true ); 
-		display_photoreporter_menu();
-	} ?>
-    
 	<div class="padder">
 
 	<div class="page" id="blog-archives" role="main">

@@ -300,6 +300,10 @@ div.mean-payment-list a, div.mean-payment-list p, div.mean-payment-list div.mean
 	color: #333333;
 	cursor: pointer;
 }
+div.mean-payment-list a {
+	text-decoration: none;
+	font-weight: normal;
+}
 div.mean-payment-list a.selected, div.mean-payment-list div.mean-payment.selected {
 	background: #F4F4F4;
 }
