@@ -103,6 +103,21 @@ msgstr "Modifier"
 msgid "common.SEND"
 msgstr "Envoyer"
 
+msgid "common.SENDING"
+msgstr "Envoi..."
+
+msgid "common.VALIDATION"
+msgstr "Validation..."
+
+msgid "common.PAYING"
+msgstr "Paiement..."
+
+msgid "common.REGISTERING"
+msgstr "Enregistrement..."
+
+msgid "common.RESTARTING"
+msgstr "Redémarrage..."
+
 msgid "common.CONNECTION"
 msgstr "Connexion"
 

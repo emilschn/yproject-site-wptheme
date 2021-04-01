@@ -24,7 +24,7 @@ $viban = $page_controler->get_investor_iban();
 			<?php _e( 'common.NEXT', 'yproject' ); ?>
 		</span>
 		<span class="button-loading loading align-center hidden">
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" />
+			<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.NEXT', 'yproject' ); ?>...
 		</span>
 	</a>		
 </div>
