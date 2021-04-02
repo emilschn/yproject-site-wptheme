@@ -330,11 +330,9 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 				$this->form_declaration_bill_list[ $declaration->id ] = $new_form;
 			} else if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration || $declaration->get_status() == WDGROIDeclaration::$status_payment ) {
 				if ( $first_declaration_to_pay == null ){
-					$declaration->set_is_first_declaration_to_pay();
+					$declaration->set_is_payable( TRUE );
 					$first_declaration_to_pay = $declaration;
 				}	
-				ypcf_debug_log( 'controler-tableau-de-bord.php :: $declaration->set_is_first_declaration_to_pay() '.json_encode($declaration->is_first_declaration_to_pay()));			
-
 			}
 		}
 	}
