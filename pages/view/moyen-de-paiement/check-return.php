@@ -34,8 +34,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	38 rue des Olivettes<br>
 	44000 Nantes<br><br>
 
-	<div class="db-form v3 full">
-		<a class="button transparent" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e( 'common.NEXT', 'yproject' ); ?></a>
+	<div class="db-form v3 full investment-form">
+		<a class="button transparent investment-button" href="<?php echo $page_controler->get_success_next_link(); ?>">			
+			<span class="button-text">
+				<?php _e( 'common.NEXT', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" /><?php _e( 'common.NEXT', 'yproject' ); ?>...
+			</span>
+		</a>
 	</div>
 	<br><br>
 </div>

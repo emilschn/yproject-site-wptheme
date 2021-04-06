@@ -131,7 +131,7 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
 	color: #FFFFFF;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a.disabled {
-	background: #e1e3e2;
+	background: #EBEBEB;
 	padding: 21px 40px;
 	color: #333333;
 }
@@ -139,7 +139,7 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.action-item div.
 	height: 20px;
 	padding: 20px 40px;
 	text-transform: uppercase;
-	background: #e1e3e2;
+	background: #EBEBEB;
 }
 
 /*******************************************************************************
