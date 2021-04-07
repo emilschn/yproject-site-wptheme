@@ -168,7 +168,12 @@ img.alignleft {
     float: left;
     margin: 5px 20px 20px 0;
 }
-
+img.alignverticalmiddle {
+	vertical-align: middle;
+}
+img.marginright {
+	margin-right: 10px;
+}
 
 div.admin-theme{
     border-left: 3px solid #F1A074;
@@ -223,8 +228,8 @@ button.red {
     padding: 15px 30px;
 }
 .button.disabled {
-    background: #e1e3e2;
-    border: 0px solid #e1e3e2 !important;
+    background: #EBEBEB;
+    border: 0px solid #EBEBEB !important;
     color: #333333;
     cursor: default;
 }

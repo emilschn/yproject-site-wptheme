@@ -20,9 +20,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php _e( 'invest.mean-payment.check-form.CHECK_CONTRACT_IF_RECEIVED', 'yproject' ); ?><br><br>
 	<?php endif; ?>
 
-	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST" enctype="multipart/form-data">
+	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST" enctype="multipart/form-data" class="investment-form">
 		<input type="file" name="check_picture" />
-		<button type="submit" class="button red"><?php _e( 'common.SEND', 'yproject' ); ?></button>
+		<button type="submit" class="button red">			
+			<span class="button-text">
+				<?php _e( 'common.SEND', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>
+			</span>
+		</button>
 		<input type="hidden" name="action" value="post_invest_check" />
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_current_campaign()->ID; ?>" />
 	</form>
@@ -35,8 +42,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<br><br>
 
-	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST" class="db-form v3 full">
-		<button type="submit" class="button transparent"><?php _e( 'invest.mean-payment.check-form.SEND_LATER', 'yproject' ); ?></button>
+	<form action="<?php echo admin_url( 'admin-post.php' ); ?>" method="POST" class="db-form v3 full investment-form">
+		<button type="submit" class="button transparent">		
+			<span class="button-text">
+				<?php _e( 'invest.mean-payment.check-form.SEND_LATER', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>
+			</span>
+		</button>
 		<input type="hidden" name="action" value="post_confirm_check" />
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_current_campaign()->ID; ?>" />
 	</form>
