@@ -490,11 +490,12 @@ var WDGNavFunctions = (function ($) {
 							}
 
 						}).done(function (result) {
-							var aProjectList = JSON.parse(result);
+							var result_json = JSON.parse(result);
+							var aProjectList = result_json.projects;
 							var nProjects = aProjectList.length;
 							for (var i = 0; i < nProjects; i++) {
 								$('#submenu-search ul.submenu-list').append(
-									'<li class="hidden"><a href="https://www.wedogood.co/' + aProjectList[i].url + '">' + aProjectList[i].name + '<span class="hidden">' + aProjectList[i].url + ' ' + aProjectList[i].organization_name + '</span></a></li>'
+									'<li class="hidden"><a href="' + result_json.home_url + aProjectList[i].url + '">' + aProjectList[i].name + '<span class="hidden">' + aProjectList[i].url + ' ' + aProjectList[i].organization_name + '</span></a></li>'
 								);
 							}
 							$("#submenu-search-input").trigger('keyup');

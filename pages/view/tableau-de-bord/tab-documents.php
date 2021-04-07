@@ -9,7 +9,7 @@ $today_date = new DateTime();
 		<br>
 		<strong><?php _e( "Documents g&eacute;n&eacute;raux :", 'yproject' ); ?></strong>
 		<br><br>
-		<a href="https://www.wedogood.co/wp-content/uploads/2018/08/WDG-kit-expert-comptable-2.pdf" target="_blank"><?php _e( "Kit pour expert comptable", 'yproject' ); ?></a>
+		<a href="<?php echo site_url(); ?>/wp-content/uploads/2018/08/WDG-kit-expert-comptable-2.pdf" target="_blank"><?php _e( "Kit pour expert comptable", 'yproject' ); ?></a>
 		<br><br><br><br>
 	</div>
 	
