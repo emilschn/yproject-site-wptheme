@@ -1012,10 +1012,6 @@ footer section a{
 	font-weight: normal;
 	color: #FFF;
 }
-footer section a::before {
-	content: "/";
-	margin-right: 30px;
-}
 footer section a.social_network::before{
 	display: none;
 }
@@ -1040,22 +1036,17 @@ footer > .footer-container .select select {
 	height: 50px;
 	padding: 8px 24px 8px 8px;
 	outline: 0;
-	border: 1px solid #ffffff;
+	border: 1px solid #333;
 	border-radius: 0px;
-	background: #333333;
-	color: #ffffff;
+	color: #333;
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	text-transform: uppercase;
+	background: #EBEBEB;
 }
 footer > .footer-container .select select::-ms-expand {
 	display: none;
-}
-footer > .footer-container .select select:hover,
-footer > .footer-container .select select:focus {
-	color: #FFFFFF;
-	background: #333333;
 }
 footer > .footer-container .select select:disabled {
 	opacity: 0.5;
@@ -1067,16 +1058,12 @@ footer > .footer-container .select_arrow {
     right: 10px;
     width: 0px;
     height: 0px;
-    border: solid #ffffff;
+    border: solid #333;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-}
-footer > .footer-container .select select:hover ~ .select_arrow,
-footer > .footer-container .select select:focus ~ .select_arrow {
-    border-color: #ffffff;
 }
 footer > .footer-container .select select:disabled ~ .select_arrow {
     border-top-color: #cccccc;
