@@ -989,7 +989,8 @@ footer > .footer-container {
 	max-width: 1280px;
 	margin: 0 auto;
 	background-repeat: no-repeat;
-	padding: 0% 1.1%;
+	padding: 30px 0px;
+	line-height: 1.5;
 }
 
 footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
@@ -1007,7 +1008,7 @@ footer section li {
 	margin: 8px 0px;
 }
 footer section a{
-	font-size: 13pt;
+	font-size: 16px;
 	text-transform: uppercase;
 	font-weight: normal;
 	color: #FFF;
