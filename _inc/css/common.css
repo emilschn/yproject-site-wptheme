@@ -143,6 +143,8 @@ body h3 {
 .only-inf997 { display: none; }
 
 .bg-dark-gray { background: #333333; color: #FFF; }
+.bg-light-grey { background: #EBEBEB; }
+.bg-light-grey a, footer section span.footer-subtitle { color: #333; }
 .uppercase { text-transform: uppercase; }
 
 .margin-height { margin: 8px 0px; }
@@ -983,10 +985,6 @@ div.login-separator-label span {
 /*******************************************************************************
 * FOOTER
 *******************************************************************************/
-footer.bg-dark-gray {
-	background-image: url("../../images/footer/trame-footer.png");
-	background-repeat: no-repeat;
-}
 footer > .footer-container {
 	max-width: 1280px;
 	margin: 0 auto;
@@ -995,12 +993,11 @@ footer > .footer-container {
 }
 
 footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
-footer > .footer-container > div { background: #FFFFFF; }
 footer section span.footer-subtitle {
 	font-size: 16pt;
 	font-weight: bold;
 	text-transform: uppercase;
-	color: #FFF;
+	font-family: 'Trebuchet MS', sans-serif;
 }
 footer section ul {
 	padding-left: 0px;
@@ -1090,6 +1087,9 @@ footer form img {
 }
 
 /* Footer 2nd partie*/
+footer > .footer-container > .logo-list {
+	border-top: 1px solid #C2C2C2;
+}
 footer > .footer-container > div.logo-list {
 	padding: 24px 64px;
     display: -webkit-flex;

@@ -9,7 +9,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 	echo $cache_footer;
 } else {
 	ob_start(); ?>
-		<footer class="bg-dark-gray<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>">
+		<footer class="bg-light-grey<?php if (!empty($client_context)) { ?> theme-<?php echo $client_context; ?><?php } ?>">
 			<div class="footer-container">
 				<section>
 
