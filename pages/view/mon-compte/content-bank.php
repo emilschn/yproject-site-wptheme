@@ -167,7 +167,7 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 		</div>
 	<?php endif; ?>
 
-	<form method="POST" enctype="multipart/form-data" class="db-form v3 full">
+	<form method="POST" enctype="multipart/form-data" class="db-form v3 full account-form">
 
 		<?php foreach ( $fields_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
@@ -204,10 +204,16 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 			* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
 		</p>
 	
-		<div id="user-bank-form-buttons">
-			<button type="submit" class="button save red"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
-		</div>
-
+		<div id="user-notifications-form-buttons">
+		<button type="submit" class="button save red">
+			<span class="button-text">
+				<?php _e( 'common.SAVE', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
+			</span>
+		</button>
+	</div>
 	</form>
 <?php endif; ?>
 
