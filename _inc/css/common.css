@@ -1017,7 +1017,7 @@ footer section a.social_network::before{
 	display: none;
 }
 footer section a.social_network{
-	margin-right: 20px;
+	margin-right: 10px;
 }
 footer > .footer-container > section > div {
 	float: left;

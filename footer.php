@@ -19,6 +19,13 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 							<ul>
 								<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
 							</ul>
+
+							<div style="margin: 16px 0px;">
+								<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook" style="width: 30px;"/></a>
+								<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter" style="width: 30px;"/></a>
+								<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin" style="width: 30px;"/></a>
+								<a class="social_network" href="<?php echo site_url(); ?>/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e( 'footer.RSS_FEED', 'yproject' ); ?>" style="width: 30px;"/></a>
+							</div>
 						</div>
 					<?php endif; ?>
 
@@ -40,13 +47,6 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 
 					<div>
 						<span class="footer-subtitle"><?php _e( 'footer.FOLLOW_US', 'yproject' ); ?></span>
-
-						<div style="margin: 16px 0px;">
-							<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook"/></a>
-							<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter"/></a>
-							<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin"/></a>
-							<a class="social_network" href="<?php echo site_url(); ?>/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e( 'footer.RSS_FEED', 'yproject' ); ?>"/></a>
-						</div>
 
 						<div>
 							<a class="link" href="<?php echo WDG_Redirect_Engine::override_get_page_url('a-propos/contact'); ?>"><?php _e( 'footer.CONTACT_US', 'yproject' ); ?></a><br>
