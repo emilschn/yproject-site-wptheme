@@ -76,6 +76,13 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 				</section>
 
 				<div class="logo-list clear">
+					<div class="licence aligncenter" role="contentinfo">
+						<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/" target="_blank">
+							<img alt="Licence Creative Commons" width="36" height="36" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc-01.png" /> 
+							<span>Some rights reserved</span>
+						</a>
+					</div>
+
 					<div>
 						<a href="https://acpr.banque-france.fr/agrements-et-autorisations/le-financement-participatif-crowdfunding.html" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/ifp.png" alt="logo label IFP" width="160"></a>
 						<span><?php _e( 'footer.REGISTERED_ORIAS', 'yproject' ); ?> <strong>17002712</strong></span>
@@ -108,11 +115,6 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 					<?php endif; ?>
 				</div>
 
-				<div class="licence aligncenter" role="contentinfo">
-					<a rel="license" href="http://creativecommons.org/licenses/by-sa/3.0/fr/" target="_blank">
-						<img alt="Licence Creative Commons" width="25" height="25" style="vertical-align: middle" src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/cc-01.png" /> Some rights reserved
-					</a>
-				</div>
 			</div>
 		</footer>
 
