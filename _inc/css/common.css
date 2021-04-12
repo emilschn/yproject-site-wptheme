@@ -989,11 +989,15 @@ footer > .footer-container {
 	max-width: 1280px;
 	margin: 0 auto;
 	background-repeat: no-repeat;
-	padding: 30px 0px;
+	padding: 50px 0px 30px;
 	line-height: 1.5;
 }
+footer > .footer-container > section {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+}
 
-footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
 footer section span.footer-subtitle {
 	font-size: 16pt;
 	font-weight: bold;
@@ -1019,16 +1023,10 @@ footer section a.social_network::before{
 footer section a.social_network{
 	margin-right: 10px;
 }
-footer > .footer-container > section > div {
-	float: left;
-	width: 32%;
-	margin: 0% 0.5%;
-}
 
 footer > .footer-container .select {
 	position: relative;
 	display: inline-block;
-	margin: 16px 0px;
 }
 footer > .footer-container .select select {
 	display: inline-block;

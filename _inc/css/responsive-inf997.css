@@ -51,7 +51,11 @@
                 max-height: 200px; /*hauteur max pour mobile 320*480px*/
         }
 	
-	footer > .footer-container { background-image: none; }
+	footer > .footer-container { 
+		background-image: none; 
+		padding: 20px;
+		line-height: 1.8;
+	}
 	footer > .footer-container > section:nth-child(1) > div {
 		float: none;
 		width: 98%;
@@ -63,12 +67,12 @@
 		margin: 0px 0px 30px;
 	}
 	footer > .footer-container > section:nth-child(1) a {
-		font-size: 20pt;
+		font-size: 18px;
 	}
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle {
 		margin: 0px;
 		padding: 10px 0px;
-		font-size: 25pt;
+		font-size: 22px;
 	}
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.border-hidden {
 		border-top: 0px;
