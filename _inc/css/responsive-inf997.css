@@ -53,13 +53,12 @@
 	
 	footer > .footer-container { 
 		background-image: none; 
-		padding: 20px;
+		padding: 30px;
 		line-height: 1.8;
+		font-size: 20px;
 	}
-	footer > .footer-container > section:nth-child(1) > div {
-		float: none;
-		width: 98%;
-		margin: 0% 1%;
+	footer > .footer-container > section {
+		flex-direction: column;
 	}
 	footer > .footer-container > section:nth-child(1) ul { margin: 0px; }
 	footer > .footer-container > section:nth-child(1) > div > ul {
@@ -72,7 +71,6 @@
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle {
 		margin: 0px;
 		padding: 10px 0px;
-		font-size: 22px;
 	}
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.border-hidden {
 		border-top: 0px;
@@ -82,18 +80,49 @@
 	}
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable::after {
 		content: "+";
-		right: 1%;
+		right: 5%;
 		position: absolute;
 	}
 	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable.expanded::after {
 		content: "-";
 	}
+	footer > .footer-container .select {
+		margin-top: 16px;
+	}
 	footer > .footer-container > div.logo-list {
-		padding: 24px 16px;
+		margin-top: 30px;
+		padding: 24px 0px;
 		flex-wrap: wrap;
 	}
-	footer > .footer-container > div.logo-list > div {
-		margin: 0px auto 16px
+	footer > .footer-container > div.logo-list div {
+		margin: 5px auto;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(2) span {
+		width: 100%;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(2) img {
+		width: 80px;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(3) img {
+		width: 60px;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(4) img {
+		width: 120px;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(5) {
+		order: 6;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(5) img {
+		width: 120px;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(5) p {
+		width: 180px;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(6) {
+		order: 5;
+	}
+	footer > .footer-container > div.logo-list > div:nth-child(6) img {
+		width: 40px;
 	}
 	footer > .footer-container div.term-links {
 		padding: 1px 32px 0px;
