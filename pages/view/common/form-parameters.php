@@ -57,12 +57,12 @@
 
     <div id="user-details-form-buttons">
         <button type="submit" class="button save red <?php if ($page_controler->get_controler_name() == 'tableau-de-bord' && !$page_controler->get_campaign()->is_preparing()){ ?>confirm<?php } ?>">
-        <span class="button-text">
-            <?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
-        </span>
-        <span class="button-loading loading align-center hidden">
-			<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
-		</span>
+            <span class="button-text">
+                <?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
+            </span>
+            <span class="button-loading loading align-center hidden">
+			    <img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
+		    </span>
         </button>
     </div>
     
