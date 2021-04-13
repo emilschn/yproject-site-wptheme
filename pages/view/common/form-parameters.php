@@ -1,5 +1,5 @@
-
 <?php
+    global $stylesheet_directory_uri;
     $page_controler = WDG_Templates_Engine::instance()->get_controler();
     $WDGUserDetailsForm = $page_controler->get_user_details_form();
     $fields_hidden = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field_group_hidden );

@@ -1,10 +1,13 @@
+
 <?php
+	global $stylesheet_directory_uri;
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	$WDGUserIdentityDocsForm = $page_controler->get_user_identitydocs_form();
 	$fields_hidden = $WDGUserIdentityDocsForm->getFields(WDG_Form_User_Identity_Docs::$field_group_hidden );
 	$fields_files = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
 	$fields_phone_notification = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_notification );
 	$fields_phone_number = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_number );
+	
 ?>
 
 <form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?> account-form">

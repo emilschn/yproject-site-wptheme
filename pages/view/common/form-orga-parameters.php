@@ -1,5 +1,6 @@
-<?php global $WDGOrganization; ?>
 <?php
+	global $WDGOrganization;
+	global $stylesheet_directory_uri;
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	$WDGOrganizationDetailsForm = new WDG_Form_Organization_Details( $WDGOrganization->get_wpref(), TRUE );
 	$fields_hidden = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_hidden );

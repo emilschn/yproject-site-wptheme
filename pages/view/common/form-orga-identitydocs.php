@@ -1,5 +1,6 @@
-<?php global $WDGOrganization; ?>
 <?php
+	global $WDGOrganization;
+	global $stylesheet_directory_uri;
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	$WDGOrganizationIdentityDocsForm = new WDG_Form_User_Identity_Docs( $WDGOrganization->get_wpref(), TRUE );
 	$fields_hidden = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_hidden );

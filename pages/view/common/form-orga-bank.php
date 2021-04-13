@@ -1,5 +1,6 @@
 <?php
 	global $WDGOrganization;
+	global $stylesheet_directory_uri;
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	$WDGUserBankForm = new WDG_Form_User_Bank( $WDGOrganization->get_wpref(), TRUE );
 	$fields_hidden = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_hidden );
@@ -90,7 +91,7 @@
 					<?php _e( 'common.SAVE', 'yproject' ); ?>
 				</span>
 				<span class="button-loading loading align-center hidden">
-					<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.NEXT', 'yproject' ); ?>			
+					<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
 				</span>
 			</button>
 		</div>

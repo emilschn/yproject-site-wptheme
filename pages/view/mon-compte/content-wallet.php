@@ -30,7 +30,6 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.NEXT', 'yproject' ); ?>			
 			</span>
 		</a>
-
 	</div>
 
 	<?php if ( !$WDGUser_displayed->is_lemonway_registered() ): ?>
