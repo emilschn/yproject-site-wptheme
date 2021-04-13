@@ -1030,6 +1030,9 @@ footer > .footer-container .select {
 	position: relative;
 	display: inline-block;
 }
+footer > .footer-container .select select:focus { /* focus visible sur le menu déroulant pour l'accessibilité */
+	outline: dotted #333 1px;
+}
 footer > .footer-container .select select {
 	display: inline-block;
 	cursor: pointer;
