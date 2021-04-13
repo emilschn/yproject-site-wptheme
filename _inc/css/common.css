@@ -142,7 +142,6 @@ body h3 {
 .center-lg { max-width: 1300px; margin: auto; }
 .only-inf997 { display: none; }
 
-.bg-dark-gray { background: #333333; color: #FFF; }
 .bg-light-grey { background: #EBEBEB; }
 .bg-light-grey a, footer section span.footer-subtitle { color: #333; }
 .uppercase { text-transform: uppercase; }
@@ -1022,6 +1021,9 @@ footer section a.social_network::before{
 }
 footer section a.social_network{
 	margin-right: 10px;
+}
+footer > .footer-container > section > div:first-of-type > ul > div {
+	margin: 16px 0px;
 }
 
 footer > .footer-container .select {

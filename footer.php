@@ -19,7 +19,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 							<ul>
 								<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
 
-								<div style="margin: 16px 0px;">
+								<div>
 									<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook" style="width: 30px;"/></a>
 									<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter" style="width: 30px;"/></a>
 									<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin" style="width: 30px;"/></a>
@@ -107,16 +107,6 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 						<a href="https://bcorporation.net/directory/we-do-good" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/bcorp.png" alt="logo BCorp" width="120"></a>
 					</div>
 				</div>
-
-				<!-- <div class="term-links aligncenter">
-					<?php if ( is_active_sidebar( 'fourth-footer-widget-area' ) ) : ?>
-						<hr>
-						<ul>
-							<?php dynamic_sidebar( 'fourth-footer-widget-area' ); ?>
-						</ul>
-					<?php endif; ?>
-				</div> -->
-
 			</div>
 		</footer>
 
