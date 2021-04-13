@@ -1170,6 +1170,7 @@ footer > .footer-container > div.licence a{
 	width: calc( 100% - 200px );
 	padding: 24px 100px;
 	font-size: 18px;
+	border-top: 1.5px solid #C2C2C2;
 }
 #cookies-alert-close {
 	width: 240px;
