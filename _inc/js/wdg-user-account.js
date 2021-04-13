@@ -2,6 +2,7 @@ function UserAccountDashboard() {
 	this.initWithHash();
 	this.initMenu();
 	this.initPhoneNotification();
+	this.initLoadingAnimation();
 }
 
 /**
@@ -508,6 +509,29 @@ UserAccountDashboard.prototype.initPhoneNotification = function(){
 		}
 	} );
 };
+
+
+
+UserAccountDashboard.prototype.initLoadingAnimation = function(){
+	if ( $( '.account-form' ).length > 0 ) {
+		$( 'div :submit' ).click( function( e ) {
+			$(this).find(".button-text").hide();
+			$(this).find(".button-loading").show();
+			if ($(this).hasClass("disabled")) {
+				e.preventDefault();
+			}
+			$(this).addClass("disabled");
+		} );
+	}	
+	$( '.account-button' ).click( function( e ) {
+		$(this).find(".button-text").hide();
+		$(this).find(".button-loading").show();
+		if ($(this).hasClass("disabled")) {
+			e.preventDefault();
+		}
+		$(this).addClass("disabled");
+	} );
+}
 
 $(function(){
 	jQuery(document).ready( function($) {
