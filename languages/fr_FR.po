@@ -174,7 +174,10 @@ msgstr "J&apos;accepte les conditions g&eacute;n&eacute;rales d&apos;utilisation
 
 # ############################## FOOTER - MENU ################################
 msgid "footer.WHO_WE_ARE"
-msgstr "Qui sommes-nous&nbsp;?"
+msgstr "À propos de WE DO GOOD"
+
+msgid "footer.LEGAL_INFO"
+msgstr "Informations légales"
 
 msgid "footer.ENTREPRENEURS"
 msgstr "Entrepreneurs"

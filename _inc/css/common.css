@@ -142,7 +142,8 @@ body h3 {
 .center-lg { max-width: 1300px; margin: auto; }
 .only-inf997 { display: none; }
 
-.bg-dark-gray { background: #333333; color: #FFF; }
+.bg-light-grey { background: #EBEBEB; }
+.bg-light-grey a, footer section span.footer-subtitle { color: #333; }
 .uppercase { text-transform: uppercase; }
 
 .margin-height { margin: 8px 0px; }
@@ -983,24 +984,24 @@ div.login-separator-label span {
 /*******************************************************************************
 * FOOTER
 *******************************************************************************/
-footer.bg-dark-gray {
-	background-image: url("../../images/footer/trame-footer.png");
-	background-repeat: no-repeat;
-}
 footer > .footer-container {
 	max-width: 1280px;
 	margin: 0 auto;
 	background-repeat: no-repeat;
-	padding: 0% 1.1%;
+	padding: 50px 0px 30px;
+	line-height: 1.5;
+}
+footer > .footer-container > section {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
 }
 
-footer > .footer-container > section:first-child { padding: 25px 0px 35px; }
-footer > .footer-container > div { background: #FFFFFF; }
 footer section span.footer-subtitle {
 	font-size: 16pt;
 	font-weight: bold;
 	text-transform: uppercase;
-	color: #FFF;
+	font-family: 'Trebuchet MS', sans-serif;
 }
 footer section ul {
 	padding-left: 0px;
@@ -1010,31 +1011,27 @@ footer section li {
 	margin: 8px 0px;
 }
 footer section a{
-	font-size: 13pt;
+	font-size: 16px;
 	text-transform: uppercase;
 	font-weight: normal;
 	color: #FFF;
-}
-footer section a::before {
-	content: "/";
-	margin-right: 30px;
 }
 footer section a.social_network::before{
 	display: none;
 }
 footer section a.social_network{
-	margin-right: 20px;
+	margin-right: 10px;
 }
-footer > .footer-container > section > div {
-	float: left;
-	width: 32%;
-	margin: 0% 0.5%;
+footer > .footer-container > section > div:first-of-type > ul > div {
+	margin: 16px 0px;
 }
 
 footer > .footer-container .select {
 	position: relative;
 	display: inline-block;
-	margin: 16px 0px;
+}
+footer > .footer-container .select select:focus { /* focus visible sur le menu déroulant pour l'accessibilité */
+	outline: dotted #333 1px;
 }
 footer > .footer-container .select select {
 	display: inline-block;
@@ -1043,22 +1040,17 @@ footer > .footer-container .select select {
 	height: 50px;
 	padding: 8px 24px 8px 8px;
 	outline: 0;
-	border: 1px solid #ffffff;
+	border: 1px solid #333;
 	border-radius: 0px;
-	background: #333333;
-	color: #ffffff;
+	color: #333;
 	appearance: none;
 	-webkit-appearance: none;
 	-moz-appearance: none;
 	text-transform: uppercase;
+	background: #EBEBEB;
 }
 footer > .footer-container .select select::-ms-expand {
 	display: none;
-}
-footer > .footer-container .select select:hover,
-footer > .footer-container .select select:focus {
-	color: #FFFFFF;
-	background: #333333;
 }
 footer > .footer-container .select select:disabled {
 	opacity: 0.5;
@@ -1070,16 +1062,12 @@ footer > .footer-container .select_arrow {
     right: 10px;
     width: 0px;
     height: 0px;
-    border: solid #ffffff;
+    border: solid #333;
     border-width: 0 3px 3px 0;
     display: inline-block;
     padding: 3px;
     transform: rotate(45deg);
     -webkit-transform: rotate(45deg);
-}
-footer > .footer-container .select select:hover ~ .select_arrow,
-footer > .footer-container .select select:focus ~ .select_arrow {
-    border-color: #ffffff;
 }
 footer > .footer-container .select select:disabled ~ .select_arrow {
     border-top-color: #cccccc;
@@ -1090,61 +1078,54 @@ footer form img {
 }
 
 /* Footer 2nd partie*/
+footer > .footer-container > .logo-list {
+	border-top: 1px solid #C2C2C2;
+}
 footer > .footer-container > div.logo-list {
-	padding: 24px 64px;
     display: -webkit-flex;
 	display: flex;
     -webkit-justify-content: space-between;
 	justify-content: space-between;
+	align-items: center;
+	padding: 16px 0px;
 }
-footer > .footer-container > div.logo-list > div:nth-child(1){
-	width: 180px;
+footer > .footer-container > div.logo-list > div:nth-child(1), footer > .footer-container > div.logo-list > div:nth-child(2), footer > .footer-container > div.logo-list > div:nth-child(5) {
+	display: flex;
+	align-items: center;
 }
-footer > .footer-container > div.logo-list > div:nth-child(1) img{
-	margin: 10px;
-}
-footer > .footer-container > div.logo-list > div:nth-child(1) span{
-	display: inline-block;
-	border-top: 2px solid #333333;
-	border-bottom: 2px solid #333333;
-	padding: 4px 0px;
-	font-size: 13px;
-	text-align: justify;
-	color: #333333;
-}
-footer > .footer-container > div.logo-list > div:nth-child(2){
-	width: 140px;
+footer > .footer-container > div.logo-list > div:nth-child(1) img {
+	margin-right: 6px;
 }
 footer > .footer-container > div.logo-list > div:nth-child(2) img{
-	margin-top: 16px;
+	width: 120px;
 }
-footer > .footer-container > div.logo-list > div:nth-child(3){
-	position: relative;
-	width: 200px;
+footer > .footer-container > div.logo-list > div:nth-child(2) span {
+	width: 60px;
+}
+footer > .footer-container > div.logo-list > div:nth-child(1) span, footer > .footer-container > div.logo-list > div:nth-child(2) span, footer > .footer-container > div.logo-list > div:nth-child(5) p.lines{
+	display: inline-block;
+	border-left: 1px solid #333333;
+	padding: 4px 10px;
+	font-size: 11px;
+	color: #333333;
+	font-weight: 300;
+	text-align: left;
 }
 footer > .footer-container > div.logo-list > div:nth-child(3) img{
-	margin-top: 48px;
-}
-footer > .footer-container > div.logo-list > div:nth-child(4){
-	width: 258px;
+	width: 90px;
 }
 footer > .footer-container > div.logo-list > div:nth-child(4) img{
-	margin-top: 0px;
+	width: 160px;
 }
-footer > .footer-container > div.logo-list > div:nth-child(4) p {
-	font-size: 13px;
+footer > .footer-container > div.logo-list > div:nth-child(5) img {
+	width: 180px;
 }
-footer > .footer-container > div.logo-list > div:nth-child(4) p.lines, footer div.lines {
-	border-top: 2px solid #333333;
-	border-bottom: 2px solid #333333;
-	padding: 4px 0px;
-	text-align: justify;
-	color: #333333;
-	line-height: 150%;
-	margin-left: 12px;
+footer > .footer-container > div.logo-list > div:nth-child(5) p {
+	font-size: 12px;
+	width: 170px;
 }
-footer > .footer-container > div.logo-list > div:nth-child(5){
-	width: 120px;
+footer > .footer-container > div.logo-list > div:nth-child(6) img{
+	width: 60px;
 }
 
 footer > .footer-container div.term-links {
@@ -1192,6 +1173,7 @@ footer > .footer-container > div.licence a{
 	width: calc( 100% - 200px );
 	padding: 24px 100px;
 	font-size: 18px;
+	border-top: 1.5px solid #C2C2C2;
 }
 #cookies-alert-close {
 	width: 240px;
