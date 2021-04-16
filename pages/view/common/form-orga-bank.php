@@ -1,5 +1,6 @@
 <?php
 	global $WDGOrganization;
+	global $stylesheet_directory_uri;
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	$WDGUserBankForm = new WDG_Form_User_Bank( $WDGOrganization->get_wpref(), TRUE );
 	$fields_hidden = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_hidden );
@@ -63,7 +64,7 @@
 		<?php echo $WDGOrganization->get_document_lemonway_error( LemonwayDocument::$document_type_bank ); ?><br>
 	<?php endif; ?>
 
-	<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_bank' ); ?>">
+	<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?> account-form" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_bank' ); ?>">
 			
 		<?php foreach ( $fields_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
@@ -85,7 +86,14 @@
 		</p>
 
 		<div id="user-bank-form-buttons">
-			<button type="submit" class="button save red"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
+			<button type="submit" class="button save red">
+				<span class="button-text">
+					<?php _e( 'common.SAVE', 'yproject' ); ?>
+				</span>
+				<span class="button-loading loading align-center hidden">
+					<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
+				</span>
+			</button>
 		</div>
 		
 	</form>

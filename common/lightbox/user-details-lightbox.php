@@ -13,7 +13,7 @@ $fields_complete = $WDGUserDetailsForm->getFields( WDG_Form_User_Details::$field
 <?php ob_start(); ?>
 <div id="user-details-form" class="wdg-lightbox-ref">
 	
-	<form method="post" class="sidebar-login-form db-form v3 full ajax-form">
+	<form method="post" class="sidebar-login-form db-form v3  full ajax-form">
 		
 		<?php foreach ( $fields_hidden as $field ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>

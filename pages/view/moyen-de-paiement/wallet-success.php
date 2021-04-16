@@ -37,8 +37,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php _e( "invest.mean-payment.success.PREINVESTMENT_ALERT_3", 'yproject' ); ?><br><br>
 	<?php endif; ?>
 
-	<div class="db-form full v3">
-		<a class="button half right transparent" href="<?php echo $page_controler->get_success_next_link(); ?>"><?php _e( "common.NEXT", 'yproject' ); ?></a>
+	<div class="db-form full v3 investment-form">
+		<a class="button half right transparent investment-button" href="<?php echo $page_controler->get_success_next_link(); ?>">
+			<span class="button-text">
+				<?php _e( 'common.NEXT', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" /><?php _e( 'common.NEXT', 'yproject' ); ?>...
+			</span>
+		</a>
 		<div class="clear"></div>
 	</div>
 </div>

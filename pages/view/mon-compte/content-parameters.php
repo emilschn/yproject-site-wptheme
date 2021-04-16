@@ -35,7 +35,7 @@
 <br>
 
 <?php if ( $WDGUserPasswordForm ): ?>
-	<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
+	<form method="post" class="db-form form-register v3 full bg-white account-form" enctype="multipart/form-data">
 		<h2><?php _e( 'account.parameters.PASSWORD_MODIFICATION', 'yproject' ); ?></h2>
 
 		<?php foreach ( $fields_password_hidden as $field ): ?>
@@ -49,7 +49,14 @@
 		<?php endforeach; ?>
 
 		<div id="user-details-form-buttons">
-			<button type="submit" class="button save red"><?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?></button>
+			<button type="submit" class="button save red">
+				<span class="button-text">
+					<?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
+				</span>
+				<span class="button-loading loading align-center hidden">
+					<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
+				</span>
+			</button>
 		</div>
 	</form>
 

@@ -66,7 +66,7 @@
     position: relative;
     line-height: 100%;
     font-size: 50px;
-    font-family: wedogood;
+    font-family: Arial, Helvetica, sans-serif;
     text-align: left;
     color: #FFFFFF;
 }
@@ -304,10 +304,10 @@
     top: 375px;
     width: 100%;
     margin-top: 15px;
-    letter-spacing: 0.125em;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
     border-right: 2px solid #333;
+	line-height: 1;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers,
 .wdg-component-projects-preview .project-container .project-framed .progress-info .progress-days,
@@ -326,22 +326,27 @@ body.template-les-projets .wdg-component-projects-preview .project-container.cat
 	display: block;
     text-transform: uppercase;
     text-align: center;
-    font-size: 12pt;
+    font-size: 0.9em;
     font-weight: bold;
     margin: 0;
 }
 .wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
     text-transform: uppercase;
     text-align: center;
-    font-size: 9pt;
+    font-size: 0.7em;
     margin: 0;
+}
+
+@media screen and (max-width: 1070px) and (min-width: 998px) { /** réduction de la taille de la police en responsive **/
+	.wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
+		font-size: 11px;
+	}
 }
 
 .wdg-component-projects-preview .home-button-project{
     display: inline-block;
     text-align: center;
-    font-size: 0.938em;
-    letter-spacing: 0.063em;
+    font-size: 0.9em;
     text-transform: uppercase;   
     padding: 20px 0%;
     bottom: 0%;
@@ -421,20 +426,11 @@ body.template-les-projets .wdg-component-projects-preview .project-container .pr
     border: solid 4px transparent; 
     color: #FFFFFF;
     cursor: pointer;
-    margin: 0px 1px;
+	margin: 0px 1px;
+	border: 4px solid white;
 }
 .wdg-component-projects-preview .impacts-container .impact-logo {
 	transition: all .2s linear;
-}
-/* Dégradés de couleurs pour les impacts */
-.impacts-container .impact-ecologic{
-    background: linear-gradient(45deg, #8BC79C, #00879B);
-}
-.impacts-container .impact-social{
-    background: linear-gradient(45deg, #E2C80D, #EA4F51);
-}
-.impacts-container .impact-economic{
-    background: linear-gradient(45deg, #00879B, #005663);
 }
 
 .wdg-component-projects-preview .impacts-container .impact-logo:hover {
@@ -637,6 +633,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
+	font-size: 1.5em;
 }
 .wdg-lightbox .wdg-lightbox-padder h3 {
 	text-transform: uppercase;
@@ -667,6 +664,33 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 .wdg-lightbox.cornered.msg-valid .wdg-lightbox-button-close a {
 	color: #FFFFFF;
+}
+
+@media screen and (max-width: 600px) {
+	.wdg-lightbox.cornered .db-form.v3 a.button.half {
+		width: -webkit-calc(100% - 2px);
+		width: -moz-calc(100% - 2px);
+		width: calc(100% - 2px);
+	}
+
+	.wdg-lightbox.cornered .db-form.v3.button-list {
+		display: -webkit-flex;
+		display: flex;
+		flex-direction: column;
+	}
+
+	.wdg-lightbox.cornered .db-form.v3.button-list a.button.red {
+		order: 1;
+		margin-bottom: 16px;
+	}
+	.wdg-lightbox.cornered .db-form.v3.button-list a.button.transparent {
+		order: 2;
+		margin-bottom: 16px;
+	}
+	.wdg-lightbox.cornered .db-form.v3.button-list a:nth-child(5) {
+		order: 3;
+		margin-bottom: 16px;
+	}
 }
 
 #validate-terms .validate-terms-excerpt {

@@ -22,20 +22,23 @@ $status = $page_controler->get_campaign_status();
 		<h3>Tableau des objectifs</h3>
 		<table class="tablo">
 			<tr class="txt-center">
-				<th width="30%">&nbsp;</th>
-				<th width="20%">En cours</th>
+				<th width="20%">&nbsp;</th>
+				<th width="20%">Validés</th>
+				<th width="20%">En attente de validation</th>
 				<th width="20%">Moyenne pour une collecte de <?php echo UIHelpers::format_number($average_median_for_campaign); ?> €</th>
 				<th width="20%">Médiane pour une collecte de <?php echo UIHelpers::format_number($average_median_for_campaign); ?> €</th>
 			</tr>
 			<tr class="txt-center">
 				<td>Nb d’investissements</td>
 				<td><?php echo $funding_nb_investment['current']; ?></td>
+				<td><?php echo $funding_nb_investment['not_validated']; ?></td>
 				<td><?php echo $funding_nb_investment['average']; ?></td>
 				<td><?php echo $funding_nb_investment['median']; ?></td>
 			</tr>
 			<tr class="txt-center">
 				<td>Valeur des investissements</td>
-			<td><?php echo UIHelpers::format_number($funding_amount_investment['current']); ?> €</td>
+				<td><?php echo UIHelpers::format_number($funding_amount_investment['current']); ?> €</td>
+				<td><?php echo UIHelpers::format_number($funding_amount_investment['not_validated']); ?> €</td>
 				<td><?php echo UIHelpers::format_number($funding_amount_investment['average']); ?> €</td>
 				<td><?php echo UIHelpers::format_number($funding_amount_investment['median']); ?> €</td>
 			</tr>

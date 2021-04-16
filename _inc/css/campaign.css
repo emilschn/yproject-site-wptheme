@@ -88,6 +88,7 @@ div#content.version-3 nav.project-navigation ul li a {
 	color: #333333;
 	text-transform: uppercase;
 	font-size: 11pt;
+	text-decoration: none;
 }
 
 div#content.version-3 nav.project-navigation ul.menu-project li.project-navigation-logo:after {
@@ -130,7 +131,7 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
 	color: #FFFFFF;
 }
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a.disabled {
-	background: #e1e3e2;
+	background: #EBEBEB;
 	padding: 21px 40px;
 	color: #333333;
 }
@@ -138,7 +139,7 @@ div#content.version-3 nav.project-navigation ul.menu-actions li.action-item div.
 	height: 20px;
 	padding: 20px 40px;
 	text-transform: uppercase;
-	background: #e1e3e2;
+	background: #EBEBEB;
 }
 
 /*******************************************************************************
@@ -159,6 +160,7 @@ div#content.version-3 div.project-admin > a, div#content.version-3 div.project-a
 	color: #000000;
 	background-color: #D3EAE9;
 	text-align: right;
+	text-decoration: none;
 }
 .edit-button, .move-button, .cancel-button, .wait-button, #wdg-edit-project-add-lang button.add-button {
 	background-color: #D3EAE9;
@@ -546,20 +548,6 @@ div#content.version-3 #wdg-move-picture-head {
 }
 div#content.version-3.editing #wdg-move-picture-head {
     display: block;
-}
-
-/*******************************************************************************
-* TIMELINE
-*******************************************************************************/
-div#content.version-3 div.project-timeline {
-	margin: 20px 5px 20px 5px;
-	text-align: center;
-}
-div#content.version-3 div.project-timeline span.greater {
-	padding: 5px;
-}
-div#content.version-3 div.project-timeline span.selected {
-	font-weight: bold;
 }
 
 /*******************************************************************************
@@ -1015,7 +1003,6 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-admin #wdg-edit-project { top: 105px; }
 	div#content.version-3 div.separator-title span { font-size: 28px; }
 	div#content.version-3 div.project-banner-img, div#content.version-3 div.project-banner-deco { display: none; }
-	div#content.version-3 div.project-timeline { display: none; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left,
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right {
 		float: none;
@@ -1037,7 +1024,6 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item span.hidden { display: inline; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item img { width: 40px; display: block; margin: auto; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.logos_zone.vote { margin: 15px auto 0px; width: 320px; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.logos_zone.vote div.post_bottom_infos_item { display: inline-block !important; width: 50px; margin: 0px 5px; text-align: center; }
 	div#content.version-3 div.project-banner div.project-banner-content { height: auto; }
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left span:last-child { font-size: 11pt; }
 	div#content.version-3 div.project-banner div.subtitle { display: none; }

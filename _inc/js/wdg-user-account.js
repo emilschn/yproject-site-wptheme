@@ -2,6 +2,7 @@ function UserAccountDashboard() {
 	this.initWithHash();
 	this.initMenu();
 	this.initPhoneNotification();
+	this.initLoadingAnimation();
 }
 
 /**
@@ -238,13 +239,13 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 					var oInvestmentItem = aCampaignInvestments[ nIndex ];
 					sCampaignBuffer += '<div class="investment-item">';
 
-					sCampaignBuffer += '<div class="amount-date">';
-					sCampaignBuffer += '<strong>' + oInvestmentItem[ 'amount' ] + ' €</strong><br>';
-					sCampaignBuffer += oInvestmentItem[ 'date' ];
+					sCampaignBuffer += '<div class="investment-item-child amount-date">';
+					sCampaignBuffer += '<span class="amount-amount"><strong>' + oInvestmentItem[ 'amount' ] + ' €</strong></span><br>';
+					sCampaignBuffer += oInvestmentItem[ 'date' ] + '<br>';
+					sCampaignBuffer += oInvestmentItem[ 'hour' ];
 					sCampaignBuffer += '</div>';
 
 					var bCountInGlobalStat = true;
-					var sStatusStr = oInvestmentItem[ 'status_str' ];
 					if ( oInvestmentItem[ 'status' ] === 'pending' ) {
 						bCountInGlobalStat = false;
 						nInvestmentPendingCount++;
@@ -257,42 +258,49 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 						nAmountInvested += Number( oInvestmentItem[ 'amount' ] );
 						nAmountReceived += Number( oInvestmentItem[ 'roi_amount' ] );
 					}
-					sCampaignBuffer += '<div class="single-line ' +oInvestmentItem[ 'status' ]+ ' campaign-' +oCampaignItem[ 'status' ]+ '">';
-					sCampaignBuffer += sStatusStr;
-					sCampaignBuffer += '</div>';
-
-					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem[ 'funding_duration' ] + ' '+$('#invest-trans-investiement_duration_years').text()+'<br>';
-					if ( oCampaignItem[ 'start_date' ] !== '' ) {
-						sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem[ 'start_date' ];
+					sCampaignBuffer += '<div class="investment-item-child align-center">';
+					sCampaignBuffer += '<strong>' + oInvestmentItem[ 'status_str' ]+ '</strong>';
+					if ( oInvestmentItem[ 'payment_str' ] && oInvestmentItem[ 'payment_str' ] !== '' ) {
+						sCampaignBuffer +=  '<br>' + oInvestmentItem[ 'payment_str' ];
+					}
+					if ( oInvestmentItem[ 'payment_date' ] && oInvestmentItem[ 'payment_date' ] !== '' ) {
+						sCampaignBuffer +=  '<br>' + oInvestmentItem[ 'payment_date' ];
 					}
 					sCampaignBuffer += '</div>';
 
-					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += $('#invest-trans-royalties_received').text() + '<br><strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong>';
+					sCampaignBuffer += '<div class="investment-item-child align-center">';
+					sCampaignBuffer += '<strong>' + oInvestmentItem[ 'roi_amount' ] + ' €</strong><br>' + $('#invest-trans-royalties_received').text() ;
 					sCampaignBuffer += '</div>';
 
-					sCampaignBuffer += '<div class="align-center">';
-					sCampaignBuffer += $('#invest-trans-return_on_investment').text() + '<br><strong>' + oInvestmentItem[ 'roi_return' ] + ' %</strong>';
+					sCampaignBuffer += '<div class="investment-item-child align-center">';
+					sCampaignBuffer += '<strong>' + oInvestmentItem[ 'roi_return' ] + '</strong><br>' + $('#invest-trans-return_on_investment').text();
 					sCampaignBuffer += '</div>';
 
 					if ( oInvestmentItem[ 'contract_file_path' ] != '' ) {
-						sCampaignBuffer += '<div class="align-center single-line">';
-						sCampaignBuffer += '<a href="' +oInvestmentItem[ 'contract_file_path' ]+ '" download="' +oInvestmentItem[ 'contract_file_name' ]+ '" class="button blue-pale" title="T&eacute;l&eacute;charger le contrat">';
-						sCampaignBuffer += $('#invest-trans-contract').text();
+						sCampaignBuffer += '<div class="investment-item-child align-center">';
+						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem[ 'funding_duration' ] + ' '+$('#invest-trans-investiement_duration_years').text() + '<br>';
+						if ( oCampaignItem[ 'start_date' ] !== '' ) {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem[ 'start_date' ] + '<br>';
+						}
+						sCampaignBuffer += '<a href="' +oInvestmentItem[ 'contract_file_path' ]+ '" download="' +oInvestmentItem[ 'contract_file_name' ]+ '" title="T&eacute;l&eacute;charger le contrat">';
+						sCampaignBuffer += $('#invest-trans-see_contract').text();
 						sCampaignBuffer += '</a>';
 						sCampaignBuffer += '<div class="clear"></div>';
 						sCampaignBuffer += '</div>';
 					} else if ( oInvestmentItem[ 'conclude-investment-url' ] != '' ) {
-						sCampaignBuffer += '<div class="align-center single-line">';
+						sCampaignBuffer += '<div class="investment-item-child align-center single-line">';
 						sCampaignBuffer += '<a href="' +oInvestmentItem[ 'conclude-investment-url' ]+ '" class="button red" title="Finaliser investissement">';
 						sCampaignBuffer += $('#invest-trans-finish_investment').text();
 						sCampaignBuffer += '</a>';
 						sCampaignBuffer += '<div class="clear"></div>';
 						sCampaignBuffer += '</div>';
 					} else {
-						sCampaignBuffer += '<div class="align-center">';
-						sCampaignBuffer += $('#invest-trans-contract').text() + '<br>' + $('#invest-trans-inaccessible').text();
+						sCampaignBuffer += '<div class="investment-item-child align-center">';
+						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem[ 'funding_duration' ] + ' '+$('#invest-trans-investiement_duration_years').text()+'<br>';
+						if ( oCampaignItem[ 'start_date' ] !== '' ) {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem[ 'start_date' ] + '<br>';
+						}
+						sCampaignBuffer += $('#invest-trans-contract').text() + ' ' + $('#invest-trans-inaccessible').text();
 						sCampaignBuffer += '<div class="clear"></div>';
 						sCampaignBuffer += '</div>';
 					}
@@ -306,8 +314,6 @@ UserAccountDashboard.prototype.displayUserInvestments = function( result, userID
 						sCampaignBuffer += '</div>';
 						
 						sCampaignBuffer += '<div class="royalties-list align-center hidden" id="royalties-list-'+nCampaignID+'-'+nIndex+'">';
-						
-						sCampaignBuffer += '<hr>';
 						
 						sCampaignBuffer += '<div>'+$('#invest-trans-quarterly_payments').text()+'</div>';
 						
@@ -503,6 +509,29 @@ UserAccountDashboard.prototype.initPhoneNotification = function(){
 		}
 	} );
 };
+
+
+
+UserAccountDashboard.prototype.initLoadingAnimation = function(){
+	if ( $( '.account-form' ).length > 0 ) {
+		$( 'div :submit' ).click( function( e ) {
+			$(this).find(".button-text").hide();
+			$(this).find(".button-loading").show();
+			if ($(this).hasClass("disabled")) {
+				e.preventDefault();
+			}
+			$(this).addClass("disabled");
+		} );
+	}	
+	$( '.account-button' ).click( function( e ) {
+		$(this).find(".button-text").hide();
+		$(this).find(".button-loading").show();
+		if ($(this).hasClass("disabled")) {
+			e.preventDefault();
+		}
+		$(this).addClass("disabled");
+	} );
+}
 
 $(function(){
 	jQuery(document).ready( function($) {

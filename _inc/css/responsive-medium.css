@@ -33,7 +33,6 @@
 	#head-content #title, #head-content #subtitle { margin-left: 5px; }
 	#white-background { width: 260px !important; }
 	#projects-stats-content { width: 260px !important; }
-	#project_vote_zone textarea { width: 100% !important; }
 	#projects-stats-content .project_full_progressbg { 
 		margin-left: 5px !important;
 		width: 250px !important;
@@ -47,7 +46,6 @@
 		color: #FFF;
 		font-size: 21px !important;
 	}
-	#projects-stats-content .project_full_progressbar { display: none; }
 	#invest-button .description-discover { padding: 14px 0px !important; }
 	#projects-left-desc {
 		width: 420px !important;

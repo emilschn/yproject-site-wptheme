@@ -13,10 +13,10 @@ $pending_wire_investments = $WDGOrganization->get_pending_wire_investments();
 		<strong><?php _e( "Attention, il y a des virements de 0&euro; &agrave; corriger : ", 'yproject' ); ?></strong><br>
 		<?php foreach ( $pending_wire_investments as $wire_investment ): ?>
 			<br>
-			<?php 
-				$WDGInvestment = new WDGInvestment( $wire_investment->ID ); 	
+			<?php
+				$WDGInvestment = new WDGInvestment( $wire_investment->ID );
 				$post_campaign = atcf_get_campaign_post_by_payment_id($wire_investment->ID);
-				$campaign = atcf_get_campaign($post_campaign);				
+				$campaign = atcf_get_campaign($post_campaign);
 			?>
 			<strong><?php _e( "Identifiants du virement :", 'yproject' ); ?></strong><br>
 			<?php echo $campaign->get_name(); ?><br>
@@ -24,7 +24,7 @@ $pending_wire_investments = $WDGOrganization->get_pending_wire_investments();
 			<?php $lw_wallet_amount = intval($WDGInvestment->get_saved_amount()) ?>
 			<form action="" method="POST" enctype="multipart/form-data" class="db-form align-left">
 				<input type="hidden" name="action" value="change_wire_value">
-				<input type="hidden" name="user_id" value="<?php echo $WDGUser_displayed->get_wpref(); ?>">
+				<input type="hidden" name="user_id" value="<?php echo $WDGUser_current->get_wpref(); ?>">
 				<input type="hidden" name="investment_id" value="<?php echo $wire_investment->ID; ?>">
 				<input type="hidden" name="payment_key" value="<?php echo $WDGInvestment->get_payment_key(); ?>">
 				<input type="hidden" name="campaign_id" value="<?php echo $campaign->ID; ?>">

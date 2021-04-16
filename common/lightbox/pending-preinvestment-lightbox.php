@@ -24,9 +24,9 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_preinvestm
 	</p>
 	
 	<form class="db-form v3">
-		<a href="<?php echo home_url( '/terminer-preinvestissement/?validate=1' ) . '&investment_id=' . $WDGUserPendingPreinvestment->get_id(); ?>" class="button red"><?php _e( 'invest.lightbox.CONFIRM', 'yproject' ); ?></a>
+		<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'terminer-preinvestissement' ) . '?validate=1&investment_id=' . $WDGUserPendingPreinvestment->get_id(); ?>" class="button red"><?php _e( 'invest.lightbox.CONFIRM', 'yproject' ); ?></a>
 		<br><br>
-		<a href="<?php echo home_url( '/terminer-preinvestissement/?cancel=1' ) . '&investment_id=' . $WDGUserPendingPreinvestment->get_id(); ?>" class="button transparent"><?php _e( 'invest.lightbox.CANCEL', 'yproject' ); ?></a>
+		<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'terminer-preinvestissement' ) . '?cancel=1&investment_id=' . $WDGUserPendingPreinvestment->get_id(); ?>" class="button transparent"><?php _e( 'invest.lightbox.CANCEL', 'yproject' ); ?></a>
 	</form>
 	
 </div>

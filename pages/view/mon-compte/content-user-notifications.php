@@ -1,4 +1,5 @@
 <?php
+global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
 $WDGUserNotificationsForm = $page_controler->get_user_notifications_form();
@@ -10,7 +11,7 @@ $fields_transactions = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notif
 
 <h2><?php _e( 'account.notifications.TITLE', 'yproject' ); ?></h2>
 
-<form method="POST" enctype="multipart/form-data" class="db-form v3 full form-register">
+<form method="POST" enctype="multipart/form-data" class="db-form v3 full bg-white form-register account-form">
 
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
@@ -39,7 +40,13 @@ $fields_transactions = $WDGUserNotificationsForm->getFields( WDG_Form_User_Notif
 	<?php endforeach; ?>
 
 	<div id="user-notifications-form-buttons">
-		<button type="submit" class="button save red"><?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?></button>
+		<button type="submit" class="button save red">
+			<span class="button-text">
+				<?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
+			</span>
+		</button>
 	</div>
-	
 </form>

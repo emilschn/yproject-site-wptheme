@@ -1,5 +1,6 @@
-<?php global $WDGOrganization; ?>
 <?php
+	global $WDGOrganization;
+	global $stylesheet_directory_uri;
 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
 	$WDGOrganizationDetailsForm = new WDG_Form_Organization_Details( $WDGOrganization->get_wpref(), TRUE );
 	$fields_hidden = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_hidden );
@@ -15,7 +16,7 @@
 	}
 ?>
 
-<form method="POST" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>" novalidate>
+<form method="POST" class="<?php echo $page_controler->get_form_css_classes();?> account-form" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_details' ); ?>" novalidate>
 		
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
@@ -65,7 +66,12 @@
 
 	<div id="organization-details-form-buttons">
 		<button type="submit" class="button save red <?php if ( $page_controler->get_campaign() !== FALSE && !$page_controler->get_campaign()->is_preparing() ) { ?>confirm<?php } ?>">
-			<?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
+			<span class="button-text">
+				<?php _e( 'common.SAVE_MODIFICATION', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
+			</span>
 		</button>
 	</div>
 	

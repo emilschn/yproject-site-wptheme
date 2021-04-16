@@ -1,7 +1,7 @@
 <?php
 global $campaign, $language_list;
 $WDGUser_current = WDGUser::current();
-$page_dashboard = home_url( '/tableau-de-bord/?campaign_id=' . $campaign->ID );	// Tableau de bord
+$page_dashboard = WDG_Redirect_Engine::override_get_page_url( 'tableau-de-bord' ) . '?campaign_id=' . $campaign->ID;	// Tableau de bord
 $lang_list = $campaign->get_lang_list();
 ?>
 <div class="project-admin">

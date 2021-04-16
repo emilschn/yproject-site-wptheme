@@ -220,7 +220,6 @@ ob_end_clean();
 echo do_shortcode('[yproject_lightbox_cornered id="user-details-vote" title="'.__( "&Eacute;valuation de ", 'yproject' ).$campaign_title.'"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
 // *****************************************************************************
 
-
 // *****************************************************************************
 // Lightbox d'avertissement de pré-investissement
 // *****************************************************************************
@@ -240,7 +239,7 @@ $campaign = new ATCF_Campaign( $post->ID );
 			
 			<button type="button" class="button half left transparent" data-redirecturl="<?php echo $campaign->get_public_url() . '#vote-share'; ?>"><?php _e( "Plus tard", 'yproject' ); ?></button>
 
-			<button type="button" class="button redirect half right red" data-redirecturl="<?php echo home_url( '/investir/' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Continuer", 'yproject' ); ?></button>
+			<button type="button" class="button redirect half right red" data-redirecturl="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$post->ID. '&invest_start=1'; ?>"><?php _e( "Continuer", 'yproject' ); ?></button>
 			
 		</div>
 		

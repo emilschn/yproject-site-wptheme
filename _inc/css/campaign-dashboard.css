@@ -34,6 +34,7 @@ body.template-tableau-de-bord div#container div#content nav ul.nav-menu li {
 	background: #F4F4F4;
 	font-weight: bold;
 	border-bottom: 1px solid #E1E3E2;
+
 }
 body.template-tableau-de-bord div#container div#content nav ul.nav-menu li a {
 	display: inline-block;
@@ -43,6 +44,7 @@ body.template-tableau-de-bord div#container div#content nav ul.nav-menu li a {
 	text-transform: uppercase;
 	font-weight: normal;
 	color: #000000;
+	text-decoration: none;
 }
 body.template-tableau-de-bord div#container div#content nav ul.nav-menu li.selected {
 	background: #FFFFFF;
@@ -62,8 +64,8 @@ body.template-tableau-de-bord div#container div#content main div#item-body-loadi
 }
 
 body.template-tableau-de-bord div#container div#content main h2 {
-	margin: 5px 0px;
-	font-size: 35px;
+	margin: 8px 0px 16px;
+	font-size: 30px;
 	text-transform: uppercase;
 	text-align: center;
 }
@@ -269,6 +271,41 @@ div#item-body-home .data-blocks .stat-little-number-top {
     padding-bottom: 0px;
     margin-bottom: -40px;
     padding-top: 5px;
+}
+/* Situation */
+div#item-body-home #situation #situation-amount {
+	display: flex;
+	justify-content: space-around;
+	flex-wrap: wrap;
+    padding: 10px 40px;
+    min-width: 200px;
+	border-bottom: 1px solid #e1e3e2;
+}
+div#item-body-home #situation #situation-amount #situation-amount-data{
+	flex:1;
+	text-align: center;
+	padding-bottom: 15px;
+}
+div#item-body-home #situation #situation-amount .situation-amount-number {
+	font-family: Trebuchet MS, sans-serif;
+    font-size: 22px;
+    padding-bottom: 15px;
+	font-weight: bold;
+}
+
+div#item-body-home #situation #situation-amount > div:nth-child(1) > div:nth-child(1){
+	color:#00879b;
+}
+#situation > hr:nth-child(4){
+	color: #e1e3e2;;
+}
+
+div#item-body-home #campaign_form.db-form.v3 .field span.tooltiptext {
+	width: 98%;
+	font-weight: normal;
+	font-size: 16px;
+	height: auto;
+	line-height: normal;
 }
 
 /*******************************************************************************

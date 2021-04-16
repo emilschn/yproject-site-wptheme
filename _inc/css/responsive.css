@@ -151,10 +151,8 @@
 		background: #FFF;
 		text-align: left;
 	}
-	#projects-stats-content .project_full_progressbar { display: none; }
 	#projects-stats-content .logos_zone { margin-top: -100px; }
 	#projects-stats-content .logos_zone.vote { margin-top: 0px; }
-	#projects-stats-content .logos_zone .post_bottom_infos_item { display: inline-block !important; }
 	#projects-left-desc, #project-summary-container #projects-summary {
 		width: 100% !important;
 		height: auto !important;
@@ -193,15 +191,6 @@
 		text-transform: none;
 	}
 	.mobile-share { text-align: center; }
-	.mobile-share .jy-crois .stats_btn {
-		background-position: 10px 0px;
-		vertical-align: top;
-		background-size: 75%;
-		height: 75px !important;
-		margin-right: 0px;
-	}
-	.mobile-share .jy-crois .stats_btn #jy-crois-txt { top: 35px; left: -10px; }
-	.mobile-share .jy-crois .stats_btn p { top: 55px; }
 	.reward-zone {
 		background-color: #EEECED;
 		padding: 20px;
