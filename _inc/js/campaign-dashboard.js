@@ -932,7 +932,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 					visible: false
 				},
 				{
-					className: 'select-checkbox',
+					className: 'select-checkbox min-tablet',
 					targets : 0,
 					orderable: false,
 				}

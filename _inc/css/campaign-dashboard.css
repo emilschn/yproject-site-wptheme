@@ -406,6 +406,12 @@ div#container div#content main #item-body-contacts .authentication-more-info spa
     padding: 5px 5px;
 }
 
+
+#item-body-contacts .wdg-datatable table.dataTable tbody th:hover,
+#item-body-contacts .wdg-datatable table.dataTable tbody td:hover {
+    cursor: pointer;
+}
+
 #item-body-contacts .wdg-datatable table.dataTable tfoot th,
 #item-body-contacts .wdg-datatable table.dataTable tfoot td {
     padding: 8px 8px 15px;
