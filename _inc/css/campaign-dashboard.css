@@ -331,23 +331,26 @@ div#container div#content main #item-body-contacts table {
 	font-size: 12px;
 }
 
-div#container div#content main #item-body-contacts table span.payment-status-confirm {
-	color: #8BC79C;
-}
-div#container div#content main #item-body-contacts table span.payment-status-error::after, div#container div#content main #item-body-contacts table span.payment-status-success::after {
-	position: relative;
-	display: inline-block;
+div#container div#content main #item-body-contacts table span.payment-status-error::before {
+	background-image: url(../../images/pastille_ko.png);
 	content: "";
-	width: 10px;
-	height: 10px;
-	margin-top: -10px;
-	left: 10px;
-	line-height: 10px;
-	border-radius: 50%;
-	background: #EACDCB;
+	float: left;
+	width: 13px;
+	height: 13px;
+	background-size: 100%;
+	margin-right: 5px;
+	margin-top: 1px;
 }
-div#container div#content main #item-body-contacts table span.payment-status-success::after {
-	background: #8BC79C;
+div#container div#content main #item-body-contacts table span.payment-status-confirm::before,
+div#container div#content main #item-body-contacts table span.payment-status-success::before {
+	background-image: url(../../images/pastille_ok.png);
+	content: "";
+	float: left;
+	width: 13px;
+	height: 12px;
+	background-size: 100%;
+	margin-right: 5px;
+	margin-top: 1px;
 }
 
 div#container div#content main #item-body-contacts #direct-mail {
@@ -393,11 +396,20 @@ div#container div#content main #item-body-contacts .authentication-more-info spa
 #item-body-contacts .wdg-datatable table.dataTable thead td {
     padding: 5px 17px 5px 8px;
     cursor: move;
+	border-bottom: 3px solid #B3DAE1;
+	text-align: left;
+	font-family: Trebuchet MS, sans-serif;
 }
 
 #item-body-contacts .wdg-datatable table.dataTable tbody th,
 #item-body-contacts .wdg-datatable table.dataTable tbody td {
     padding: 5px 5px;
+}
+
+
+#item-body-contacts .wdg-datatable table.dataTable tbody th:hover,
+#item-body-contacts .wdg-datatable table.dataTable tbody td:hover {
+    cursor: pointer;
 }
 
 #item-body-contacts .wdg-datatable table.dataTable tfoot th,

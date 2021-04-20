@@ -932,13 +932,9 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 					visible: false
 				},
 				{
-					className: 'select-checkbox',
+					className: 'select-checkbox min-tablet',
 					targets : 0,
 					orderable: false,
-				},{
-					width: "30px",
-					className: "dt-body-center nopadding",
-					targets: [3,4,5]
 				}
 			],
 
@@ -1051,7 +1047,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function(inv_data, campaign_id
 		self.table.columns.adjust();		
 		self.table.responsive.recalc();
 		
-		// on réinitialise les toolti quand on change les colonnes affichées
+		// on réinitialise les tooltip quand on change les colonnes affichées
 		self.table.on( 'column-visibility.dt', function ( e, settings, column, state ) {
 			self.initQtip();
 		} );
