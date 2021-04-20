@@ -3,6 +3,7 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
+<img class="grenade-festif-overlay" src="<?php echo $stylesheet_directory_uri; ?>/images/gif-festif-grenade.gif">
 <div class="center align-justify padding-top padding-bottom">
 
 	<?php if ( $page_controler->get_current_investment()->get_session_amount() > 1500 ): ?>

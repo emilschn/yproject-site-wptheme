@@ -5,6 +5,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <div class="center align-justify">
 	<br><br>
+<div class="grenade-festif-overlay"></div>
 	<?php _e( 'invest.mean-payment.check-return.THANK_YOU', 'yproject' ); ?>
 	<?php echo $page_controler->get_current_investment()->get_session_amount(); ?> &euro;
 	<?php _e( 'invest.mean-payment.check-return.BY_CHECK', 'yproject' ); ?>
