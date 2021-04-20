@@ -187,7 +187,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			'id'			=> 'new_project_url',
 			'type'			=> 'text',
 			'label'			=> __( "URL du projet", 'yproject' ),
-			"description"	=> __( "Privil&eacute;giez une URL courte pour mieux communiquer", 'yproject' ),
+			"description"	=> __( "Privil&eacute;giez une URL courte pour mieux communiquer, en minuscules et sans caractères spéciaux", 'yproject' ),
 			'value'			=> $page_controler->get_campaign()->data->post_name
 		));
 
