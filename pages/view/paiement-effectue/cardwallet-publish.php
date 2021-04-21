@@ -4,6 +4,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
 
 <div class="center align-justify padding-bottom">
+	<div class="grenade-festif-overlay"></div>
 	<br><br>
 
 	<?php _e( 'invest.mean-payment.success.ACCOUNT_DEBIT', 'yproject' ); ?><br>
