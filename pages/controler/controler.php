@@ -1,6 +1,5 @@
 <?php
 class WDG_Page_Controler {
-	
 	private $db_cache_manager;
 	private $page_title;
 	private $page_description;
@@ -11,11 +10,11 @@ class WDG_Page_Controler {
 	private $show_user_pending_investment;
 	private $show_user_needs_authentication;
 	protected $controler_name;
-	
+
 	public function __construct() {
 		ypcf_session_start();
 		date_default_timezone_set("Europe/Paris");
-		include_once( __DIR__ . '/../../functions/assets-version.php' );
+		include_once __DIR__ . '/../../functions/assets-version.php';
 		global $stylesheet_directory_uri;
 		$stylesheet_directory_uri = get_stylesheet_directory_uri();
 		$this->db_cache_manager = new WDG_Cache_Plugin();
@@ -27,7 +26,7 @@ class WDG_Page_Controler {
 			$this->init_override_languages();
 		}
 		$this->init_analytics_data();
-		
+
 		if ( is_user_logged_in() && ATCF_CrowdFunding::get_platform_context() == 'wedogood' ) {
 			$this->init_show_user_pending_preinvestment();
 			$this->init_show_user_pending_investment();
@@ -35,16 +34,16 @@ class WDG_Page_Controler {
 			$this->init_show_user_needs_authentication();
 		}
 	}
-	
-	public function get_db_cached_elements( $key, $version ) {
+
+	public function get_db_cached_elements($key, $version) {
 		return $this->db_cache_manager->get_cache( $key, $version );
 	}
-	
-	public function set_db_cached_elements( $key, $value, $duration, $version ) {
+
+	public function set_db_cached_elements($key, $value, $duration, $version) {
 		$this->db_cache_manager->set_cache( $key, $value, $duration, $version );
 	}
-	
-	public function get_controler_name () {
+
+	public function get_controler_name() {
 		return $this->controler_name;
 	}
 
@@ -55,57 +54,57 @@ class WDG_Page_Controler {
 	public function get_page_title() {
 		return $this->page_title;
 	}
-	
+
 	private function init_page_title() {
 		if ( is_home() || is_front_page() ) {
 			global $post;
 			$this->page_title = $post->post_title;
-			
-		} else if ( is_category() ) {
-			global $cat;
-			$this_category = get_category($cat);
-			$this_category_name = $this_category->name;
-			$name_exploded = explode('cat', $this_category_name);
-			$campaign_post = get_post($name_exploded[1]);
-			$this->page_title = 'Actualit&eacute;s du projet ' . (is_object($campaign_post) ? $campaign_post->post_title : '') . ' | ' . get_bloginfo( 'name' );
-			
 		} else {
-			$this->page_title = wp_title( '|', false, 'right' ) . get_bloginfo( 'name' );
+			if ( is_category() ) {
+				global $cat;
+				$this_category = get_category($cat);
+				$this_category_name = $this_category->name;
+				$name_exploded = explode('cat', $this_category_name);
+				$campaign_post = get_post($name_exploded[1]);
+				$this->page_title = 'Actualit&eacute;s du projet ' . (is_object($campaign_post) ? $campaign_post->post_title : '') . ' | ' . get_bloginfo( 'name' );
+			} else {
+				$this->page_title = wp_title( '|', false, 'right' ) . get_bloginfo( 'name' );
+			}
 		}
 	}
-	
+
 	/**
 	 * Récupère les keywords à partir des tags
 	 */
 	public function get_page_meta_keywords() {
 		return $this->page_meta_keywords;
 	}
-	
+
 	private function init_page_meta_keywords() {
 		$this->page_meta_keywords = '';
-		if ( have_posts() ){
+		if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
 				$posttags = get_the_tags();
 				if ( $posttags ) {
-					foreach( (array) $posttags as $tag) {
+					foreach ( (array) $posttags as $tag) {
 						$this->page_meta_keywords .= $tag->name . ',';
 					}
 				}
 			}
 		}
 	}
-	
+
 	/**
 	 * Récupère la description de la page (champs personnalisé)
 	 */
 	public function get_page_description() {
 		return $this->page_description;
 	}
-	
+
 	private function init_page_description() {
 		$this->page_description = "WE DO GOOD est le leader français des levées de fonds en royalties et du crowdinvesting. Investissez en ligne à partir de 10 € dans les projets qui vous parlent.";
-		if ( have_posts() ){
+		if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
 				global $post;
@@ -129,9 +128,14 @@ class WDG_Page_Controler {
 		if ( is_user_logged_in() ) {
 			$WDG_user_current = WDGUser::current();
 			$this->page_analytics_data[ 'user_id' ] = $WDG_user_current->get_wpref();
+
+			ypcf_session_start();
+			if ( !empty( $_SESSION['send_creation_event'] ) && $_SESSION['send_creation_event'] === 1 ) {
+				$this->page_analytics_data[ 'event' ] = 'creation-compte-ok';
+			}
 		}
 	}
-	
+
 	/**
 	 * Détermine si la navigation est visible ou non
 	 * @return boolean
@@ -140,7 +144,7 @@ class WDG_Page_Controler {
 		return ( ATCF_CrowdFunding::get_platform_context() == 'wedogood' );
 	}
 
-//******************************************************************************
+	//******************************************************************************
 	/**
 	 * Gestion multilingue : nécessaire pour mettre à jour les liens vers les pages particulières (projets)
 	 */
@@ -148,7 +152,7 @@ class WDG_Page_Controler {
 		add_filter( 'wpml_active_languages', 'WDG_Page_Controler::override_languages', 10 );
 	}
 
-	public static function override_languages( $languages ) {
+	public static function override_languages($languages) {
 		$buffer = array();
 
 		global $post, $locale, $wpml_request_handler;
@@ -169,33 +173,32 @@ class WDG_Page_Controler {
 		return $buffer;
 	}
 
-//******************************************************************************
+	//******************************************************************************
 	/**
 	 * Chargement script et style de datatable
 	 */
-	protected function enqueue_datatable( $cdn = false ) {
+	protected function enqueue_datatable($cdn = false) {
 		if ( $cdn ) {
 			wp_enqueue_style( 'datatable-css', 'https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css', null, false, 'all' );
-	
+
 			wp_enqueue_script( 'datatable-script', 'https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js', array( 'jquery', 'wdg-script' ), true, true );
 			wp_enqueue_script( 'datatable-buttons', 'https://cdn.datatables.net/buttons/1.6.2/js/dataTables.buttons.min.js', array( 'jquery', 'wdg-script' ), true, true );
 			wp_enqueue_script( 'datatable-jszip', 'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js', array( 'jquery', 'wdg-script' ), true, true );
 			wp_enqueue_script( 'datatable-fonts', 'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js', array( 'jquery', 'wdg-script' ), true, true );
 			wp_enqueue_script( 'datatable-buttons-html5', 'https://cdn.datatables.net/buttons/1.6.2/js/buttons.html5.min.js', array( 'jquery', 'wdg-script' ), true, true );
-		
 		} else {
 			wp_enqueue_script( 'datatable-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/jquery.dataTables.min.js', array( 'jquery', 'wdg-script' ), true, true );
 			wp_enqueue_style( 'datatable-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/jquery.dataTables.min.css', null, false, 'all' );
-	
+
 			wp_enqueue_script( 'datatable-colreorder-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.colReorder.min.js', array( 'datatable-script' ), true, true );
 			wp_enqueue_style( 'datatable-colreorder-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/colReorder.dataTables.min.css', null, false, 'all' );
-	
+
 			wp_enqueue_script( 'datatable-responsive-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.responsive.min.js', array( 'datatable-script' ), true, true );
 			wp_enqueue_style( 'datatable-responsive-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/responsive.dataTables.min.css', null, false, 'all' );
-	
+
 			wp_enqueue_script( 'datatable-select-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.select.min.js', array( 'datatable-script' ), true, true );
 			wp_enqueue_style('datatable-select-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/select.dataTables.min.css', null, false, 'all' );
-	
+
 			wp_enqueue_script( 'datatable-buttons-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/dataTables.buttons.min.js', array( 'datatable-script' ), true, true );
 			wp_enqueue_script( 'datatable-buttons-colvis-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/buttons.colVis.min.js', array( 'datatable-script' ), true, true );
 			wp_enqueue_script( 'datatable-buttons-html5-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/buttons.html5.min.js', array( 'datatable-script' ), true, true );
@@ -204,9 +207,8 @@ class WDG_Page_Controler {
 			wp_enqueue_style( 'datatable-buttons-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all' );
 		}
 	}
-	
-	
-//******************************************************************************
+
+	//******************************************************************************
 	/**
 	 * Détermine si il est nécessaire d'afficher la lightbox de confirmation d'information à l'utilisateur
 	 */
@@ -223,13 +225,12 @@ class WDG_Page_Controler {
 			}
 		}
 	}
-	
+
 	public function get_show_user_details_confirmation() {
 		return $this->show_user_details_confirmation;
 	}
-	
-	
-//******************************************************************************
+
+	//******************************************************************************
 	public function init_show_user_pending_preinvestment() {
 		if ( !isset( $this->show_user_pending_preinvestment ) ) {
 			$this->show_user_pending_preinvestment = false;
@@ -241,7 +242,7 @@ class WDG_Page_Controler {
 						$WDG_user_current = new WDGUser( $input_user_id );
 					}
 				}
-				
+
 				if ( $WDG_user_current->has_pending_preinvestments() ) {
 					ypcf_debug_log( 'WDG_Page_Controler::init_show_user_pending_preinvestment has_pending_preinvestments' );
 					$this->show_user_pending_preinvestment = $WDG_user_current->get_first_pending_preinvestment();
@@ -260,13 +261,12 @@ class WDG_Page_Controler {
 			}
 		}
 	}
-	
+
 	public function get_show_user_pending_preinvestment() {
 		return $this->show_user_pending_preinvestment;
 	}
-	
-	
-//******************************************************************************
+
+	//******************************************************************************
 	public function init_show_user_pending_investment() {
 		if ( !isset( $this->show_user_pending_investment ) ) {
 			$this->show_user_pending_investment = false;
@@ -278,7 +278,7 @@ class WDG_Page_Controler {
 						$WDG_user_current = new WDGUser( $input_user_id );
 					}
 				}
-				
+
 				if ( $WDG_user_current->is_lemonway_registered() ) {
 					if ( $WDG_user_current->has_pending_not_validated_investments() ) {
 						$this->show_user_pending_investment = $WDG_user_current->get_first_pending_not_validated_investment();
@@ -299,13 +299,12 @@ class WDG_Page_Controler {
 			}
 		}
 	}
-	
+
 	public function get_show_user_pending_investment() {
 		return $this->show_user_pending_investment;
 	}
-	
-	
-//******************************************************************************
+
+	//******************************************************************************
 	public function init_show_user_needs_authentication() {
 		if ( !isset( $this->show_user_needs_authentication ) ) {
 			$this->show_user_needs_authentication = false;
@@ -315,9 +314,8 @@ class WDG_Page_Controler {
 			}
 		}
 	}
-	
+
 	public function get_show_user_needs_authentication() {
 		return $this->show_user_needs_authentication;
 	}
-	
 }
