@@ -395,16 +395,6 @@ div.grenade-festif-overlay {
     background-size: 250px;
     background-repeat:no-repeat;
     background-position:center;
-    animation: fadeOut 3s normal forwards step-end;
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-    }
-    100% {
-        opacity: 0;
-    }
 }
 
 /**
