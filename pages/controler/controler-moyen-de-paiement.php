@@ -29,6 +29,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 	private $can_use_wallet;
 	private $can_use_card_and_wallet;
 	private $list_registered_cards;
+	private $viban;
 	
 	private $display_error;
 	
@@ -318,6 +319,7 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 				
 				case WDGInvestment::$meanofpayment_wire:
 					$this->current_view = 'wire';
+					$this->init_investor_viban();
 					break;
 				
 				case WDGInvestment::$meanofpayment_check:
@@ -381,6 +383,26 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 			$lemonway_id = $organization->get_lemonway_id();
 		}
 		return $lemonway_id;
+	}
+
+	private function init_investor_viban() {
+		$result = FALSE;
+		if ( $this->current_investment->get_session_user_type() != 'user' ) {
+			$organization = new WDGOrganization( $this->current_investment->get_session_user_type() );
+			$result = $organization->get_viban();
+			
+		} else {
+			$WDGUser_current = WDGUser::current();
+			$result = $WDGUser_current->get_viban();
+		}
+
+		if ( !empty( $result ) ) {
+			$this->viban = $result;
+		}
+	}
+
+	public function get_investor_iban() {
+		return $this->viban;
 	}
 	
 	public function is_investor_lemonway_registered() {

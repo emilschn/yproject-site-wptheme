@@ -2,7 +2,7 @@
 if ( is_user_logged_in() ) {
 	wp_redirect( home_url() );
 }
-$page_forgot_password = home_url( '/mot-de-passe-oublie/' );
+$page_forgot_password = WDG_Redirect_Engine::override_get_page_url( 'mot-de-passe-oublie' );
 $init_username = '';
 if ( isset( $_POST[ 'user_login' ] ) ) {
 	$init_username = htmlentities( $_POST['user_login'] );
@@ -45,23 +45,24 @@ if ( !empty( $init_username ) ) {
 		}
 	} else {
 		array_push( $error, "Nous n'avons pas trouvé l'utilisateur correspondant sur le site." );
-	}	
-	
-} else if (isset($_POST["new_password"]) && isset($_POST["new_password_confirm"]) && isset($_POST["login"]) && isset($_POST["key"])) {
-	$feedback = '';
-	if ($_POST["new_password"] != '' && $_POST["new_password"] == $_POST["new_password_confirm"]) {
-		$key = preg_replace('/[^a-z0-9]/i', '', $_POST["key"]);
-		$user = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->users WHERE user_activation_key = %s AND user_login = %s", $key, $_POST["login"]));
-		if (isset($user, $user->user_login)) {
-			wp_update_user( array ( 'ID' => $user->ID, 'user_pass' => $_POST["new_password"], 'user_status' => 0, 'user_activation_key' => '' ) );
-			$WDGUser = new WDGUser( $user->ID );
-			NotificationsAPI::user_password_change( $WDGUser->get_email(), $WDGUser->get_firstname() );
+	}
+} else {
+	if (isset($_POST["new_password"]) && isset($_POST["new_password_confirm"]) && isset($_POST["login"]) && isset($_POST["key"])) {
+		$feedback = '';
+		if ($_POST["new_password"] != '' && $_POST["new_password"] == $_POST["new_password_confirm"]) {
+			$key = preg_replace('/[^a-z0-9]/i', '', $_POST["key"]);
+			$user = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->users WHERE user_activation_key = %s AND user_login = %s", $key, $_POST["login"]));
+			if (isset($user, $user->user_login)) {
+				wp_update_user( array( 'ID' => $user->ID, 'user_pass' => $_POST["new_password"], 'user_status' => 0, 'user_activation_key' => '' ) );
+				$WDGUser = new WDGUser( $user->ID );
+				NotificationsAPI::user_password_change( $WDGUser->get_email(), $WDGUser->get_firstname() );
+			} else {
+				array_push( $error, "La clé ne correspond pas à cet utilisateur." );
+			}
+			$feedback = "Votre mot de passe a été mis à jour.";
 		} else {
-			array_push( $error, "La clé ne correspond pas à cet utilisateur." );
+			array_push( $error, "Erreur de saisie des mots de passe." );
 		}
-		$feedback = "Votre mot de passe a été mis à jour.";
-	} else {
-		array_push( $error, "Erreur de saisie des mots de passe." );
 	}
 }
 ?>
@@ -78,12 +79,12 @@ if ( !empty( $init_username ) ) {
 			<?php if ( isset( $_GET[ 'action' ] ) && $_GET[ 'action' ] == 'rp' ): ?>
 				<?php if ( $feedback != '' ): ?>
 					Votre mot de passe a &eacute;t&eacute; mis &agrave; jour.<br />
-					Vous pouvez &agrave; pr&eacute;sent vous <a href="<?php echo home_url( '/connexion/' ); ?>">connecter</a>.<br /><br />
+					Vous pouvez &agrave; pr&eacute;sent vous <a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>">connecter</a>.<br /><br />
 
 				<?php else: ?>
 					<div class="login_fail">
 						<?php if ( isset( $error ) && is_array( $error ) && count( $error ) > 0 ): ?>
-							<?php foreach( $error as $e ): ?>
+							<?php foreach ( $error as $e ): ?>
 								<div class="wdg-message error">
 									<?php echo $e; ?>
 								</div>
@@ -91,7 +92,7 @@ if ( !empty( $init_username ) ) {
 						<?php endif; ?>
 					</div>
 
-					<form method="post" action="<?php echo home_url( '/mot-de-passe-oublie/?action=rp' ); ?>" name="resetpasswordform" id="resetpasswordform" class="sidebar-login-form db-form v3 full bg-white">
+					<form method="post" action="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mot-de-passe-oublie' ) . '?action=rp'; ?>" name="resetpasswordform" id="resetpasswordform" class="sidebar-login-form db-form v3 full bg-white">
 						<div class="field">
 							<label for="new_password"><?php _e( "Nouveau mot de passe :", 'yproject' ); ?> *</label>
 							<div class="field-container">
@@ -128,7 +129,7 @@ if ( !empty( $init_username ) ) {
 					
 				<?php if ( isset( $_POST[ 'user_login' ] ) ): ?>
 					<?php if (isset($error) && is_array($error) && count($error) > 0): ?>
-						<?php foreach( $error as $e ): ?>
+						<?php foreach ( $error as $e ): ?>
 							<div class="wdg-message error">
 								<?php echo $e; ?>
 							</div>

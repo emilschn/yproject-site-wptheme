@@ -33,7 +33,7 @@
 		<br>
 
 		<form class="db-form v3">
-			<a href="<?php echo home_url( '/investissement/' ); ?>" class="button half left transparent"><?php _e( "Non / En savoir plus", 'yproject' ); ?></a>
+			<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>" class="button half left transparent"><?php _e( "Non / En savoir plus", 'yproject' ); ?></a>
 			<button type="button" class="button half right close red" data-close="project-warning"><?php _e( "Oui / Continuer", 'yproject' ); ?></button>
 		</form>
 		<div class="clear">

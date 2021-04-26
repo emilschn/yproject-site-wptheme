@@ -1,6 +1,6 @@
 <?php
 global $campaign, $stylesheet_directory_uri, $current_user;
-$menu_project_parts = array (
+$menu_project_parts = array(
 	'banner'		=> 'R&eacute;sum&eacute;',
 	'rewards'		=> 'Investissement',
 	'description'	=> 'Pr&eacute;sentation',
@@ -8,8 +8,8 @@ $menu_project_parts = array (
 );
 
 $WDGUser_current = WDGUser::current();
-$invest_url = home_url( '/investir/?campaign_id=' .$campaign->ID. '&amp;invest_start=1' );
-$invest_url_href = home_url( '/connexion/' ) . '?source=project&redirect-invest=' .$campaign->ID;
+$invest_url = WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$campaign->ID. '&amp;invest_start=1';
+$invest_url_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project&redirect-invest=' .$campaign->ID;
 $user_name_str = '';
 
 if (is_user_logged_in()) {
@@ -17,7 +17,7 @@ if (is_user_logged_in()) {
 	if ($user_name_str == '') {
 		$user_name_str = $current_user->user_login;
 	}
-	
+
 	$invest_url_href = $invest_url;
 }
 ?>
@@ -43,7 +43,7 @@ if (is_user_logged_in()) {
 
 					<?php elseif ( $campaign->time_remaining_str() != '-' ): ?>
 						<?php if ( !is_user_logged_in() ): ?>
-							<a href="<?php echo home_url( '/connexion/' ) . '?source=project'; ?>" class="button red">
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project'; ?>" class="button red">
 								<?php _e('&Eacute;valuer', 'yproject'); ?>
 							</a>
 

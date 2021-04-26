@@ -91,8 +91,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-cheque.png" alt="<?php _e( 'invest.mean-payment.list.CHECK', 'yproject' ); ?>" width="120">
 				<div>
 					<span class="mean-payment-name"><?php _e( 'invest.mean-payment.list.CHECK', 'yproject' ); ?></span><br>
-					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS', 'yproject' ); ?></span>
-					<span><?php _e( "Le ch&egrave;que reste en attente d'encaissement jusqu'&agrave; la r&eacute;ussite de la lev&eacute;e de fonds.", 'yproject' ); ?></span>
+					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS_FRANCE', 'yproject' ); ?></span><br>
+					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS', 'yproject' ); ?></span><br>
+					<span><?php _e( 'invest.mean-payment.CHECK_DETAILS_PENDING', 'yproject' ); ?></span>
 				</div>
 			</a>
 			
@@ -107,14 +108,27 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<?php endif; ?>
 	</div>
 	
-	<form id="form-navigation" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
+	<form id="form-navigation" action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white investment-form">
 
 		<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
 		<input type="hidden" id="input-meanofpayment-card-type" name="meanofpayment-card-type" value="">
 		<input type="hidden" id="input-meanofpayment-card-save" name="meanofpayment-card-save" value="">
-		<button type="submit" name="nav" value="previous" class="button half left transparent"><?php _e( 'common.PREVIOUS', 'yproject' ); ?></button>
-		<button type="submit" class="button half right red hidden"><?php _e( 'invest.mean-payment.PAY', 'yproject' ); ?></button>
-
+		<button type="submit" name="nav" value="previous" class="button half left transparent">
+			<span class="button-text">
+				<?php _e( 'common.PREVIOUS', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" /><?php _e( 'common.PREVIOUS', 'yproject' ); ?>...
+			</span>
+		</button>
+		<button type="submit" class="button half right red hidden">
+			<span class="button-text">
+				<?php _e( 'invest.mean-payment.PAY', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.PAYING', 'yproject' ); ?>
+			</span>
+		</button>
 		<div class="clear"></div>
 	</form>
 	

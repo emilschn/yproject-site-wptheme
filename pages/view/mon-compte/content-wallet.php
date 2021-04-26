@@ -22,7 +22,14 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 			<span><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</span><br>
 			<span><?php _e( 'common.AVAILABLE.P', 'yproject' ); ?></span>
 		</div>
-		<a href="<?php echo home_url( '/les-projets/' ); ?>?source=account" class="button red half"><?php _e( 'common.INVEST', 'yproject' ); ?></a>
+		<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>?source=account" class="button red half account-button">
+			<span class="button-text">
+				<?php _e( 'common.INVEST', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.NEXT', 'yproject' ); ?>			
+			</span>
+		</a>
 	</div>
 
 	<?php if ( !$WDGUser_displayed->is_lemonway_registered() ): ?>
@@ -40,26 +47,26 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		<h3><?php _e( 'account.wallet.SEND_MONEY_TO_WALLET', 'yproject' ); ?></h3>
 		<p class="align-justify">
 			<?php _e( 'account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER', 'yproject' ); ?><br>
-			<?php _e( 'account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME', 'yproject' ); ?><br><br>
+			<?php _e( 'account.wallet.SEND_MONEY_TO_WALLET_WARNINGS', 'yproject' ); ?><br>
+			- <?php _e( 'account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME', 'yproject' ); ?><br>
+			- <?php _e( 'account.wallet.SEND_MONEY_TO_WALLET_IBAN_CHANGED', 'yproject' ); ?><br><br>
 		</p>
 
-		<strong><?php _e( 'account.wallet.RECIPIENT_BANK_ACCOUNT', 'yproject' ); ?></strong><br>
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/footer/lemonway-gris.png" class="wire-lw right" alt="logo Lemonway" width="250">
-		<strong><?php _e( 'account.bank.BANK_ACCOUNT_OWNER', 'yproject' ); ?></strong> LEMON WAY<br>
-		<strong><?php _e( 'account.bank.IBAN', 'yproject' ); ?></strong> FR76 3000 4025 1100 0111 8625 268<br>
-		<strong><?php _e( 'account.bank.BIC', 'yproject' ); ?></strong> BNPAFRPPIFE
-		<br><br>
-		
-		<p class="align-justify">
-			<strong><?php _e( 'account.wallet.TRANSFER_ID_CODE', 'yproject' ); ?></strong> <span id="clipboard-user-lw-code">wedogood-<?php echo $WDGUser_displayed->get_lemonway_id(); ?></span><br>
-			<div class="align-center">
-				<button type="button" class="button blue copy-clipboard" data-clipboard="clipboard-user-lw-code"><?php _e( 'account.wallet.COPY_CODE', 'yproject' ); ?></button>
-				<span class="hidden"><?php _e( 'account.wallet.CODE_COPIED', 'yproject' ); ?></span>
-			</div>
+		<div class="align-center" id="button-load-viban-<?php echo $WDGUser_displayed->get_wpref(); ?>">
+			<button type="button" class="button blue button-load-viban" data-iban-user="<?php echo $WDGUser_displayed->get_wpref(); ?>"><?php _e( 'account.wallet.LOAD_VIBAN', 'yproject' ); ?></button>
 			<br><br>
-			<i><?php _e( 'account.wallet.WHERE_TO_COPY_THE_CODE', 'yproject' ); ?></i>
-			<br><br>
+			<img id="ajax-viban-loader-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="hidden" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement">
+		</div>
+
+		<p id="loaded-iban-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="loaded-iban hidden">
+			<strong><?php _e( 'account.wallet.RECIPIENT_BANK_ACCOUNT', 'yproject' ); ?></strong><br>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/footer/lemonway-gris.png" class="wire-lw right" alt="logo Lemonway" width="250">
+			<strong><?php _e( 'account.bank.BANK_ACCOUNT_OWNER', 'yproject' ); ?></strong> <span class="reload-bank-owner">LEMON WAY</span><br>
+			<strong><?php _e( 'account.bank.IBAN', 'yproject' ); ?></strong> <span class="reload-bank-iban"></span><br>
+			<strong><?php _e( 'account.bank.BIC', 'yproject' ); ?></strong> <span class="reload-bank-bic"></span>
+			
 		</p>
+		<br><br>
 
 		<?php if ( !$page_controler->is_iban_validated() ): ?>
 			<h3><?php _e( 'account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT', 'yproject' ); ?></h3>

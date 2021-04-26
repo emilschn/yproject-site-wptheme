@@ -7,7 +7,7 @@ $WDGUser_current = WDGUser::current();
 $list_current_organizations = $page_controler->get_current_user_organizations();
 $list_intentions_to_confirm = $page_controler->get_intentions_to_confirm();
 
-if ( $WDGUser_current->is_admin() ){
+if ( $WDGUser_current->is_admin() ) {
 	$has_pending_wire_investments = $WDGUser_displayed->has_pending_wire_investments();
 	$pending_wire_investments = $WDGUser_displayed->get_pending_wire_investments();
 }
@@ -28,10 +28,10 @@ if ( $WDGUser_current->is_admin() ){
 		<strong><?php _e( "Virements en attente: ", 'yproject' ); ?></strong><br>
 		<?php foreach ( $pending_wire_investments as $wire_investment ): ?>
 			<br>
-			<?php 
-				$WDGInvestment = new WDGInvestment( $wire_investment->ID ); 	
+			<?php
+				$WDGInvestment = new WDGInvestment( $wire_investment->ID );
 				$post_campaign = atcf_get_campaign_post_by_payment_id($wire_investment->ID);
-				$campaign = atcf_get_campaign($post_campaign);				
+				$campaign = atcf_get_campaign($post_campaign);
 			?>
 			<strong><?php _e( "Identifiants du virement :", 'yproject' ); ?></strong><br>
 			<?php echo $campaign->get_name(); ?><br>
@@ -93,7 +93,7 @@ if ( $WDGUser_current->is_admin() ){
 				<?php $status_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? __( 'account.investments.STATUS_VOTE', 'yproject' ) : __( 'account.investments.STATUS_INVESTMENT', 'yproject' ); ?>
 				<?php $button_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? __( 'common.PREINVEST', 'yproject' ) : __( 'common.INVEST', 'yproject' ); ?>
 				<h4><?php echo YPUIHelpers::display_number( $intention_item[ 'vote_amount' ], TRUE, 0 ). ' &euro; - ' .$intention_item[ 'campaign_name' ]. ' (' .$status_str. ')'; ?></h4>
-				<a href="<?php echo home_url( '/investir/?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ] ); ?>" class="button red"><?php echo $button_str; ?></a>
+				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ]; ?>" class="button red"><?php echo $button_str; ?></a>
 			<?php endif; ?>
 
 		<?php endforeach; ?>
@@ -114,6 +114,7 @@ if ( $WDGUser_current->is_admin() ){
 	<span id="invest-trans-investiement_duration_starting"><?php _e( 'account.investments.INVESTMENT_DURATION_STARTING', 'yproject' ); ?></span>
 	<span id="invest-trans-royalties_received"><?php _e( 'account.investments.ROYALTIES_RECEIVED_A', 'yproject' ); ?></span>
 	<span id="invest-trans-return_on_investment"><?php _e( 'account.investments.RETURN_ON_INVESTMENT', 'yproject' ); ?></span>
+	<span id="invest-trans-see_contract"><?php _e( 'account.investments.SEE_CONTRACT', 'yproject' ); ?></span>
 	<span id="invest-trans-contract"><?php _e( 'invest.header.steps.CONTRACT', 'yproject' ); ?></span>
 	<span id="invest-trans-finish_investment"><?php _e( 'account.investments.FINISH_INVESTMENT', 'yproject' ); ?></span>
 	<span id="invest-trans-inaccessible"><?php _e( 'account.investments.INACCESSIBLE', 'yproject' ); ?></span>

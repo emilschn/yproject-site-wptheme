@@ -14,7 +14,7 @@
 <div class="wdg-lightbox-ref">
 	<br><br>
 
-	<form action="<?php echo home_url( "/inscription/" ); ?>" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
+	<form action="<?php echo WDG_Redirect_Engine::override_get_page_url( "inscription" ); ?>" name="signup_form" id="signup_form" class="db-form v3 full form-register" method="post" enctype="multipart/form-data">
 		<?php if ( $signup_step == 'request-details' ) : ?>
 			<div class="warning">
 				<?php _e( 'signup.WARNING_1', 'yproject' ); ?>
@@ -82,7 +82,7 @@
 
 				<div class="field">
 					<label for="validate-terms-check-register" id="label-validate-terms-check-register" data-keepdefault="1" class="checkbox-parent">
-						<input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> <?php _e( 'signup.I_ACCEPT', 'yproject' ); ?> <a href="<?php echo home_url().'/cgu/';  ?>" target="_blank"><?php _e( 'signup.THE_TERMS', 'yproject' ); ?></a> *
+						<input type="checkbox" id="validate-terms-check-register" name="validate-terms-check" /><span></span> <?php _e( 'signup.I_ACCEPT', 'yproject' ); ?> <a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'cgu' );  ?>" target="_blank"><?php _e( 'signup.THE_TERMS', 'yproject' ); ?></a> *
 					</label>
 				</div>
 				<br>
@@ -110,7 +110,7 @@
 				<br><br>
 
 			</div>
-		<?php endif; // request-details signup step ?>
+		<?php endif; // request-details signup step?>
 
 
 
@@ -120,13 +120,13 @@
 			<?php _e( 'signup.ACCOUNT_CREATED', 'yproject' ); ?><br><br>
 
 			<?php if (isset($page_register) && $page_register == TRUE): ?>
-				<?php _e( 'signup.GO_TO_PROJECT_LIST', 'yproject' ); ?> <a href="<?php echo home_url( '/les-projets/' ); ?>"><?php _e( 'signup.THIS_LINK', 'yproject' ); ?></a>.
+				<?php _e( 'signup.GO_TO_PROJECT_LIST', 'yproject' ); ?> <a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'signup.THIS_LINK', 'yproject' ); ?></a>.
 			<?php endif; ?>
 
-		<?php endif; // completed-confirmation signup step ?>
+		<?php endif; // completed-confirmation signup step?>
 	</form>
 			
-	<form method="post" action="<?php echo home_url( "/connexion/" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
+	<form method="post" action="<?php echo WDG_Redirect_Engine::override_get_page_url( "connexion" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
 		<div>
 			<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
 			<button class="button transparent" type="submit"><?php _e( 'signup.ALREADY_HAVE_ACCOUNT', 'yproject' ); ?></button>

@@ -1,6 +1,6 @@
 <?php
 global $stylesheet_directory_uri, $project_id;
-/* 
+/*
  * Page pour la section des projets à afficher en page d'accueil
  *
  */
@@ -12,10 +12,13 @@ $link = get_permalink( $campaign->ID );
 
 $campaign_status = $campaign->campaign_status();
 $campaign_categories_str = $campaign->get_categories_str();
+// TODO : chercher en anglais aussi
 $class_category = ( strpos( $campaign_categories_str, 'actifs' ) !== FALSE ) ? 'cat-actifs' : 'cat-entreprises';
-if ( strpos( $campaign_categories_str, 'epargne-positive' ) !== FALSE ) {
+// TODO : chercher en anglais aussi
+if ( $campaign->is_positive_savings() ) {
 	$class_category .= ' cat-epargne-positive';
 
+	WDG_Languages_Helpers::switch_to_french_temp();
 	$term_positive_savings_by_slug = get_term_by( 'slug', 'epargne-positive', 'download_category' );
 	$id_cat_positive_savings = $term_positive_savings_by_slug->term_id;
 	$categories = get_the_terms( $campaign->ID, 'download_category' );
@@ -32,6 +35,7 @@ if ( strpos( $campaign_categories_str, 'epargne-positive' ) !== FALSE ) {
 			break;
 		}
 	}
+	WDG_Languages_Helpers::switch_back_to_display_language();
 }
 
 $percent = min(100, $campaign->percent_minimum_completed(false));
@@ -42,14 +46,17 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 <div class="project-container <?php echo $class_category; ?>" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
     <a class="hidden-link" href="<?php echo $link; ?>">
         <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
-			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
+			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE || strpos($campaign_categories_str, 'environmental')  !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="<?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?></span>
 			<?php endif; ?>
 			<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="<?php _e( 'project.impact.SOCIAL', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.SOCIAL', 'yproject' ); ?></span>
 			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
+			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE || strpos($campaign_categories_str, 'economic')  !== FALSE): ?>
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="<?php _e( 'project.impact.ECO', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ECO', 'yproject' ); ?></span>
+			<?php endif; ?>
+			<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE || strpos($campaign_categories_str, 'committed-company')  !== FALSE): ?>
+			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="<?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?></span>
 			<?php endif; ?>
         </div>
     </a>
@@ -61,15 +68,17 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
             </a>
         <?php
             $jycrois = $campaign->get_jycrois_nb();
-            if($jycrois > 1){
-                $persStatus = __( 'project.FOLLOW.P', 'yproject' );
-            }
-            else if ($jycrois == 1){
-                $persStatus = __( 'project.FOLLOW.ONE', 'yproject' );
-            }
-            else if ($jycrois == 0){ // voir si utile, car si 0 backers, on a tout de même 1 pers qui s'affiche
-                $jycrois = false;
-                $persStatus = __( 'project.FOLLOW.BE_FIRST_1', 'yproject' ) . '<br />' . __( 'project.FOLLOW.BE_FIRST_2', 'yproject' );
+            if ($jycrois > 1) {
+            	$persStatus = __( 'project.FOLLOW.P', 'yproject' );
+            } else {
+            	if ($jycrois == 1) {
+            		$persStatus = __( 'project.FOLLOW.ONE', 'yproject' );
+            	} else {
+            		if ($jycrois == 0) { // voir si utile, car si 0 backers, on a tout de même 1 pers qui s'affiche
+            			$jycrois = false;
+            			$persStatus = __( 'project.FOLLOW.BE_FIRST_1', 'yproject' ) . '<br />' . __( 'project.FOLLOW.BE_FIRST_2', 'yproject' );
+            		}
+            	}
             }
 
             //Projets en cours de collecte ou en vote
@@ -93,7 +102,6 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 						case 'M': $time_remaining_str .= __( 'project.MINUTES', 'yproject' ); break;
 					}
 				}
-				
 
                 if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte ):
                     $projectAction = __( 'project.TO_INVEST', 'yproject' );
@@ -125,7 +133,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         </a>
         <a class="hidden-link" href="<?php echo $link; ?>">
                 <div class="progress-info">
-                    <span class="progress-pers"><?php if($jycrois): ?><span class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</span><?php endif; ?><span class="info-action"><?php echo $persStatus ?></span></span>
+                    <span class="progress-pers"><?php if ($jycrois): ?><span class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</span><?php endif; ?><span class="info-action"><?php echo $persStatus ?></span></span>
                     <span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><span class="info-action"> <?php echo $projectAction ?></span></span>
                 </div>
         </a>

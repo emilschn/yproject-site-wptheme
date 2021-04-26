@@ -34,6 +34,53 @@ var WDGInvestPageFunctions = (function($) {
 				} );
 			}
 			
+			
+		
+			if ( $( '.investment-form' ).length > 0 ) {
+				$( 'div :submit' ).click( function( e ) {
+					$(this).find(".button-text").hide();
+					$(this).find(".button-loading").show();
+					if ($(this).hasClass("disabled")) {
+						e.preventDefault();
+					}
+					$(this).addClass("disabled");
+				} );
+				
+				$( '.investment-button' ).click( function( e ) {
+					$(this).find(".button-text").hide();
+					$(this).find(".button-loading").show();
+					if ($(this).hasClass("disabled")) {
+						e.preventDefault();
+					}
+					$(this).addClass("disabled");
+				} );
+			}	
+
+			if ( $( '.grenade-festif-overlay' ).length > 0 ) {
+				function toDataUrl(url, callback) {
+					var xhr = new XMLHttpRequest();
+					xhr.onload = function() {
+					  var reader = new FileReader();
+					  reader.onloadend = function() {
+						callback(reader.result);
+					  }
+					  reader.readAsDataURL(xhr.response);
+					};
+					xhr.open('GET', url);
+					xhr.responseType = 'blob';
+					xhr.send();
+				  }
+				  
+				  // Initially load the GIF once, get base64 data
+				  toDataUrl('../../wp-content/themes/yproject/images/gif-festif-grenade.gif',
+				  function(img_base64) {
+					// Set to none, then base64-encoded URL to restart the gif
+					var $div = $( '.grenade-festif-overlay' );
+					$div.css({backgroundImage: "none"});
+					$div.css({backgroundImage: "url("+img_base64.replace("image/gif","image/gif;rnd="+Math.random())+")"});
+				  });
+			}				
+
 			if ( $( '.mean-payment-button' ).length > 0 ) {
 				$( '.mean-payment-button' ).click( function( e ) {
 					e.preventDefault();

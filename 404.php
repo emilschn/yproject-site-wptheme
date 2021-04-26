@@ -1,4 +1,8 @@
-<?php get_header( ATCF_CrowdFunding::get_platform_context() ); ?>
+<?php
+load_theme_textdomain( 'yproject', get_template_directory_uri() .'/languages' );
+load_child_theme_textdomain( 'yproject', get_stylesheet_directory() . '/languages' );
+get_header( ATCF_CrowdFunding::get_platform_context() );
+?>
 
 <style type="text/css" data-type="vc_shortcodes-custom-css">.vc_custom_1504881715358{background-image: url(https://www.wedogood.co/wp-content/uploads/2019/07/guerilla-gardening-2-1024x575-compressor.jpg?id=42340) !important;background-position: center !important;background-repeat: no-repeat !important;background-size: cover !important;}.vc_custom_1487064306779{margin-right: 10px !important;margin-left: 10px !important;}.vc_custom_1504876510677{margin-top: 0px !important;border-top-width: 0px !important;padding-top: 0px !important;}.vc_custom_1504873482986{margin-top: 0px !important;border-top-width: 0px !important;padding-top: 0px !important;background-image: url(https://www.wedogood.co/wp-content/uploads/2014/12/trame.png?id=14743) !important;background-position: 0 0 !important;background-repeat: no-repeat !important;}.vc_custom_1504876349330{margin-top: 90px !important;border-top-width: 0px !important;padding-top: 0px !important;}.vc_custom_1504873653320{padding-top: 10px !important;padding-bottom: 25px !important;}</style>
 

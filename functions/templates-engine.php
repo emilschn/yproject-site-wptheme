@@ -139,6 +139,12 @@ class WDG_Templates_Engine {
 	 * - si une existe sur une page, remplace le content
 	 */
 	public static function override_content( $content ) {
+		// Si on est en back-office, on ne surcharge rien du tout, ça pourrait planter
+		if ( is_admin() ) {
+			return $content;
+		}
+
+		// Sinon, on vérifie si on a bien quelque chose à surcharger
 		$wdg_templates_engine = WDG_Templates_Engine::instance();
 		$view = $wdg_templates_engine->get_view_name();
 		if ( $view ) {
