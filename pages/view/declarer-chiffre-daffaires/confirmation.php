@@ -6,6 +6,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 <div class="center align-justify">
 	
 	<br>
+	<div class="grenade-festif-overlay"></div>
 	
 	<?php _e( "Merci pour votre d&eacute;claration de chiffre d'affaires.", 'yproject' ); ?><br>
 	<?php _e( "Le versement des royalties sera fait dans les plus brefs d&eacute;lais.", 'yproject' ); ?><br><br>
