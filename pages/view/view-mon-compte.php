@@ -1,7 +1,9 @@
-<?php 
+<?php
 WDG_Languages_Helpers::load_languages();
-$page_controler = WDG_Templates_Engine::instance()->get_controler(); 
+$page_controler = WDG_Templates_Engine::instance()->get_controler();
 ?>
+
+<?php if ( !empty( $page_controler ) ): ?>
 
 <div id="content">
 
@@ -21,3 +23,5 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php locate_template( array( 'pages/view/mon-compte/content.php'  ), true ); ?>
 	<?php endif; ?>
 </div>
+
+<?php endif; ?>

@@ -306,9 +306,11 @@ class WDG_WordPress_Events {
 	 * Gestion cache côté serveur (configuration Varnish)
 	 */
 	public static function send_headers() {
-		header('X-UA-Compatible: IE=edge');
-		header('Cache-Control: public, s-maxage=120');
-		header('Pragma: public');
+		if ( !headers_sent() ) {
+			header('X-UA-Compatible: IE=edge');
+			header('Cache-Control: public, s-maxage=120');
+			header('Pragma: public');
+		}
 		if ( !session_id() ) {
 			session_cache_limiter('');
 			session_start();
