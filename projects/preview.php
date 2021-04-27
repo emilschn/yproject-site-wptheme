@@ -44,28 +44,25 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
 
 <div class="project-container <?php echo $class_category; ?>" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
-    <a class="hidden-link" href="<?php echo $link; ?>">
-        <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
-			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE || strpos($campaign_categories_str, 'environmental')  !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="<?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?></span>
-			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="<?php _e( 'project.impact.SOCIAL', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.SOCIAL', 'yproject' ); ?></span>
-			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE || strpos($campaign_categories_str, 'economic')  !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="<?php _e( 'project.impact.ECO', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ECO', 'yproject' ); ?></span>
-			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE || strpos($campaign_categories_str, 'committed-company')  !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="<?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?></span>
-			<?php endif; ?>
-        </div>
-    </a>
         <div class="project-framed">
             <a class="hidden-link" href="<?php echo $link; ?>">
-                <h2 class="project-title"> <?php echo $title; ?> </h2>
                 <div class="project-img" <?php if ( !empty( $img ) ) { ?>style="background-image: url('<?php echo $img; ?>')"<?php } ?>></div>
-                <div class="project-summary"><?php echo $description; ?></div>
-            </a>
+                <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
+					<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE || strpos($campaign_categories_str, 'environmental')  !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="<?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?></span>
+					<?php endif; ?>
+					<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="<?php _e( 'project.impact.SOCIAL', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.SOCIAL', 'yproject' ); ?></span>
+					<?php endif; ?>
+					<?php if (strpos($campaign_categories_str, 'economique') !== FALSE || strpos($campaign_categories_str, 'economic')  !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="<?php _e( 'project.impact.ECO', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ECO', 'yproject' ); ?></span>
+					<?php endif; ?>
+					<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE || strpos($campaign_categories_str, 'committed-company')  !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="<?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?></span>
+					<?php endif; ?>
+        		</div>
+				<h2 class="project-title"> <?php echo $title; ?> </h2>
+				<div class="project-summary"><?php echo $description; ?></div>
         <?php
             $jycrois = $campaign->get_jycrois_nb();
             if ($jycrois > 1) {
@@ -107,10 +104,11 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
                     $projectAction = __( 'project.TO_INVEST', 'yproject' );
 					$buttonAction = __( 'project.INVEST_ON_PROJECT', 'yproject' );
         ?>              
-                    <div class="progress-bar">
-                        <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;<span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
-                        <span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>          
-                    </div>
+                    <div class="progress-bar"></div>
+					<div class="progress-data">
+						<span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;<span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
+                    	<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
+					</div> 
         <?php
 
                 elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote ):
