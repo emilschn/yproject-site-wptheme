@@ -139,7 +139,7 @@ $fields_poll_source = $WDGPollForm->getFields( WDG_Form_Invest_Poll::$field_grou
 			<div class="clear"></div>
 			
 			<div class="loading align-center hidden">
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="loading" />
 			</div>
 			
 		</div>
