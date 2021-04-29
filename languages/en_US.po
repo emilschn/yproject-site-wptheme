@@ -892,6 +892,9 @@ msgstr "The company is committed to pay you royalties until reimbursement, excep
 msgid "account.investments.ESTIMATED"
 msgstr "estimated"
 
+msgid "account.ACCOUNT_AUTHENTICATION"
+msgstr "Authenticate my account"
+
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
 
