@@ -76,6 +76,16 @@
 						}
 					}
 				});
+
+			<?php elseif ( !empty( $analytics_data[ 'event' ] ) ): ?>
+				dataLayer.push({
+					'event': '<?php echo $analytics_data[ 'event' ]; ?>'
+				});
+				<?php
+					ypcf_session_start();
+					$_SESSION['send_creation_event'] = '';
+					unset( $_SESSION['send_creation_event'] );
+				?>
 			<?php endif; ?>
 		</script>
 
