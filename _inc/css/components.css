@@ -212,21 +212,15 @@ div.block-projects {
 }
 
 div.project-container {
-	/* width: 100%;
-	display: flex;
-	flex-direction: row;
-	justify-content: center;
-	margin: auto; */
 	width: 370px;
 	border: 1px solid #c2c2c2;
-	margin: 0 25px;
+	margin: 50px 25px 0 25px;
 	height: 535px;
 	overflow: hidden;
+	background-color: #fff;
 }
 
-div.project-framed .project-img {
-	/* width: 100%;
-	max-height: 200px; */
+div.project-container .project-img { /* image du projet */
 	background-repeat: no-repeat;
 	background-size: cover;
 	height: 150px;
@@ -235,18 +229,16 @@ div.project-framed .project-img {
 	transition: all .2s linear;
 }
 
-div.project-framed .project-img:hover {
+div.project-container:hover .project-img { /* l'image s'agrandit au hover, à recadrer */
 	transform: scale(1.2);
 }
 
-div.project-framed .project-title {
+div.project-container .project-title {
 	font-size: 1.2rem;
 	display: block;
-	/* padding: 20px; */
-	/* text-align: center; */
 }
 
-div.project-framed .title-container {
+div.project-container .title-container { /* permet d'avoir un titre plus long sans modifier la hauteur du container */
 	display: flex;
 	height: 110px;
 	justify-content: center;
@@ -255,13 +247,13 @@ div.project-framed .title-container {
 	padding: 0 20px;
 }
 
-div.project-framed .project-summary {
+div.project-container .project-summary { 
 	text-align: left;
 	font-size: 0.85rem;
 	padding: 0 20px;
 	margin-bottom: 20px;
 	height: 80px;
-	overflow: hidden;
+	overflow: hidden; /* coupe le texte s'il dépasse une certaine hauteur */
 }
 
 div.progress-info {
@@ -288,7 +280,7 @@ div.progress-info .progress-days, div.progress-info .progress-status {
 	padding-left: 30px;
 }
 
-a.home-button-project {
+a.home-button-project { /* placement du bouton dans la div - se cale bizarrement sinon, à revoir peut-être */
 	color: #fff;
 	background-color: #EA4F51;
 	padding: 20px;
@@ -306,7 +298,7 @@ a.home-button-project {
 	position: absolute;
 	display: block;
 	z-index: 2; 
-	top: 130px;
+	top: 175px;
 	width: 370px;
 	text-align: center;
 }
@@ -326,7 +318,7 @@ a.home-button-project {
 	display: none;
 }
 
-.impacts-container .info-bulle.visible {
+.impacts-container .info-bulle.visible { /* noms des impacts au hover */
 		display: inline;
 		position: absolute;
 		z-index: 500;
@@ -348,15 +340,14 @@ a.home-button-project {
 	overflow: hidden;
 }
 
-.progress-bar .current-bar {
+.progress-bar .current-bar { /* barre de progression - à revoir */
 	background-color: #00879B;
 	display: block;
-	/* width: 10px; */
 	height: 10px;
 
 }
 
-.progress-bar .current-bar:after {
+.progress-bar .current-bar:after { /* triangle permettant l'angle de la barre */
 	content: "";
 	display: block;
 	position: relative;
@@ -378,7 +369,7 @@ a.home-button-project {
 	font-weight: 600;
 }
 
-.evaluation-bar {
+.evaluation-bar { /* barre d'évaluation */
 	background-color: #ebebeb;
 	opacity: 1;
 	background: repeating-linear-gradient( -45deg, #c2c2c2, #c2c2c2 2px, #ebebeb 2px, #ebebeb 10px );
