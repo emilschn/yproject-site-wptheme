@@ -202,352 +202,200 @@
 /*******************************************************************************
 * PROJECTS - HOME
 *******************************************************************************/
-.wdg-component-projects-preview {
-	text-align: center;
-}
-
-.wdg-component-projects-preview .project-slider {
-	margin-bottom: 48px;
-}
-.wdg-component-projects-preview .block-projects {
-    z-index: 0;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-	-webkit-flex-wrap: wrap;
-	flex-wrap: wrap;
+div.block-projects {
+	width: 1280px;
+	display: flex;
+	justify-content: space-between;
 	margin: auto;
-}
-@media screen and (min-width: 1200px) {
-	.wdg-component-projects-preview .block-projects {
-		margin: auto;
-	}
+	flex-flow: row wrap;
+	position: relative;
 }
 
-.wdg-component-projects-preview .project-container{ 
-    position: relative;
-    display: -webkit-flex;
-    display: flex;
-	width: 29%;
-    min-width: 320px;
-    max-width: 400px;
-	height: 500px;
-    -webkit-justify-content: center;
-    justify-content: center;
-}
-.wdg-component-projects-preview .project-container .project-framed{ 
-    width: 90%;
-    height: 100%;
-    border: 1px solid #c2c2c2;
-    position: relative;
-    top: 25px;
-	margin: 0% 5%;
+div.project-container {
+	/* width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	margin: auto; */
+	width: 370px;
+	border: 1px solid #c2c2c2;
+	margin: 0 25px;
+	height: 535px;
+	overflow: hidden;
 }
 
-/* .wdg-component-projects-preview .project-container .project-framed::before { 
-    border-top: 60px solid #FFFFFF; 
-    border-right: 60px solid transparent;   
-    content: ""; 
-    height: 0; 
-    left: 0; 
-    position: absolute; 
-    top: 0px; 
-    width: 0; 
-} */
-
-.wdg-component-projects-preview .project-container .project-framed .project-title{
-    display: block;
-    width: 80%;
-	max-height: 40px;
-	margin: 30px auto;
-    font-size: 13pt;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
-}
-
-.wdg-component-projects-preview .project-container .project-framed .project-img{
-    position: absolute;
-    width: 100%;
-    height: 160px;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center;
-    top: 75px;
-}
-
-.wdg-component-projects-preview .project-container .project-framed .project-summary{
-    position: absolute;
-    top: 238px;
-    max-width: 100%;
-    height: 77px;
-    overflow: hidden;
-    margin: 4px 0px 0px 0px;
-    padding: 0px 4%;
-    font-size: 10pt;
-    text-align: justify;
-}
-
-.wdg-component-projects-preview .project-container .project-framed .progress-info{
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    position: absolute;
-    -webkit-justify-content: center;
-    justify-content: center;
-    top: 375px;
-    width: 100%;
-    margin-top: 15px;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
-    border-right: 2px solid #333;
-	line-height: 1;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers,
-.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-days,
-.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-status{
-    width: 50%;
-}
-body.template-les-projets .wdg-component-projects-preview .project-container.cat-epargne-positive {
-	height: 490px;
-}
-body.template-les-projets .wdg-component-projects-preview .project-container.cat-epargne-positive .project-framed .progress-bar,
-body.template-les-projets .wdg-component-projects-preview .project-container.cat-epargne-positive .project-framed .progress-info {
-	display: none;
-}
-
-.wdg-component-projects-preview .project-container .project-framed .progress-info .info-nb{
-	display: block;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 0.9em;
-    font-weight: bold;
-    margin: 0;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 0.7em;
-    margin: 0;
-}
-
-@media screen and (max-width: 1070px) and (min-width: 998px) { /** réduction de la taille de la police en responsive **/
-	.wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
-		font-size: 11px;
-	}
-}
-
-.wdg-component-projects-preview .home-button-project{
-    display: inline-block;
-    text-align: center;
-    font-size: 0.9em;
-    text-transform: uppercase;   
-    padding: 20px 0%;
-    bottom: 0%;
-}
-.wdg-component-projects-preview .project-container .project-framed .project-button{
-	position: absolute;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    width: 100%;
-    background-color: #00879B;
-    color: #FFFFFF;
-}
-.wdg-component-projects-preview .project-container .project-framed .see-project{
-    background-color: #D3EAE9;
-    color: #333333;
-}
-.wdg-component-projects-preview .see-more {
-    position: relative;
-    width: -webkit-calc(0.26 * 100%);
-    width: -moz-calc(0.26 * 100%);
-    width: calc(0.26 * 100%);
-    padding: 20px 0px;
-    background-color: #EA4F51;
-    color: #FFFFFF;
-}
-@media screen and (max-width: 997px) {
-	.wdg-component-projects-preview .project-container {
-		width: 320px;
-		margin-bottom: 48px;
-	}
-}
-@media screen and (max-width: 1100px) {
-    .wdg-component-projects-preview .see-more {
-            width: 288px;
-    }
-}
-@media screen and (min-width: 1400px) {
-    .wdg-component-projects-preview .see-more {
-            width: 360px;
-    }
-}
-/* Ajustements spécifiques cartouche projet */
-body.template-les-projets .wdg-component-projects-preview .project-container .project-framed {
-    height: 81%;
-}
-
-/*******************************************************************************
-* IMPACTS
-*******************************************************************************/
-.impacts-container{
-    position: absolute;
-    display: -webkit-flex;
-    display: flex;
-    z-index: 2;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-	width: 90%;
-	height: 50px;
-	margin: 0% 5%;
-}
-.impacts-container .impact-logo{
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-    border: solid 4px transparent; 
-    color: #FFFFFF;
-    cursor: pointer;
-	margin: 0px 1px;
-	border: 4px solid white;
-}
-.wdg-component-projects-preview .impacts-container .impact-logo {
+div.project-framed .project-img {
+	/* width: 100%;
+	max-height: 200px; */
+	background-repeat: no-repeat;
+	background-size: cover;
+	height: 150px;
+	position: relative;
+	z-index: 1;
 	transition: all .2s linear;
 }
 
-.wdg-component-projects-preview .impacts-container .impact-logo:hover {
-    transform: scale(1.15);
-    border-color: #fff;
+div.project-framed .project-img:hover {
+	transform: scale(1.2);
 }
+
+div.project-framed .project-title {
+	font-size: 1.2rem;
+	display: block;
+	/* padding: 20px; */
+	/* text-align: center; */
+}
+
+div.project-framed .title-container {
+	display: flex;
+	height: 110px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 0 20px;
+}
+
+div.project-framed .project-summary {
+	text-align: left;
+	font-size: 0.85rem;
+	padding: 0 20px;
+	margin-bottom: 20px;
+	height: 80px;
+	overflow: hidden;
+}
+
+div.progress-info {
+	display: flex;
+	justify-content: space-between;
+	text-align: left;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	padding: 0 20px;
+	margin-top: 20px;
+}
+
+div.progress-info .info-nb {
+	font-weight: 600;
+}
+
+div.progress-info .progress-pers {
+	width: 49%;
+}
+
+div.progress-info .progress-days, div.progress-info .progress-status {
+	width: 49%;
+	border-left: 1px solid #333;
+	padding-left: 30px;
+}
+
+a.home-button-project {
+	color: #fff;
+	background-color: #EA4F51;
+	padding: 20px;
+	font-size: 0.9rem;
+	position: absolute;
+	text-transform: uppercase;
+	width: 368px;
+	margin-top: 20px;
+	text-align: center;
+}
+/*******************************************************************************
+* IMPACTS
+*******************************************************************************/
+.impacts-container {
+	position: absolute;
+	display: block;
+	z-index: 2; 
+	top: 130px;
+	width: 370px;
+	text-align: center;
+}
+
 .impacts-container .impact-logo {
-	position: relative;
+	background-color: #fff;
+	padding: 4px;
+	border-radius: 50px;
+	transition: all .2s linear;
 }
-.impacts-container .info-bulle.invisible{
+
+.impacts-container .impact-logo:hover {
+	transform: scale(1.2);
+}
+
+.impacts-container .info-bulle.invisible {
 	display: none;
 }
+
 .impacts-container .info-bulle.visible {
-	display: inline;
-	position: absolute;
-	z-index: 500;
-	top: 30px;
-	background-color: #FFFFFF;
-	border: 1px solid #333333;
-	padding: 1px 4px;
-	white-space: nowrap;
-	font-size: 9pt;
+		display: inline;
+		position: absolute;
+		z-index: 500;
+		top: 30px;
+		background-color: #FFFFFF;
+		border: 1px solid #333333;
+		padding: 1px 4px;
+		white-space: nowrap;
+		font-size: 9pt;
 }
-
-div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions div.impacts-container .impact-logo {
-	border: none;
-}
-
-
 /*******************************************************************************
 * PROGRESS BAR
 *******************************************************************************/
 .progress-bar {
-    min-width: 90%;
-    position: absolute;
-    top: 335px;
-    height: 10px;
-    background-color: #ebebeb;
-	margin: auto 15px;
+	background-color: #ebebeb;
+	height: 10px;
+	width: 90%;
+	margin: auto;
+	overflow: hidden;
 }
-.progress-bar.shortcode-context {
+
+.progress-bar .current-bar {
+	background-color: #00879B;
+	display: block;
+	/* width: 10px; */
+	height: 10px;
+
+}
+
+.progress-bar .current-bar:after {
+	content: "";
+	display: block;
 	position: relative;
-	top: 0px;
-}
-.wpb_text_column .progress-bar.shortcode-context span p {
-	margin-bottom: 15px !important;
-}
-.progress-bar .current-amount {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-    position: absolute;
-    height: 100%;
-    font-size: 13pt;
-    letter-spacing: 0.12em;
-    color: #FFFFFF;
-	background: #00879B;
-	z-index: 1;
-
-}
-/* .progress-bar .current-amount::after {
-	border: 30px solid #333; 
-	border-top: 10px solid #fff; 
-  	border-right: 10px solid #00879B;
-  	border-bottom: 0; 
-  	height: 100%; 
-  	width: 0; 
-} */
-.progress-bar .progress-percent { 
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    position: absolute;
-    height: 100%;
-    right: 3%;
-    font-size: 13pt;
-    letter-spacing: 0.12em;
-    font-weight: bold;
-    text-align: right;
-	z-index: 2;
-}
-.progress-bar .vote-status { 
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-    height: 100%; 
-    text-transform: uppercase;
-    font-style: italic;
-    background: repeating-linear-gradient(
-        -45deg,
-        #E1E3E2,
-        #E1E3E2 7px,
-        #F5F5F5 1px,
-        #E1E3E2 8px);
-}
-.progress-bar.minimum-as-step .progress-bar-separator {
-	position: absolute;
-	z-index: 2;
-	display: inline-block;
-	height: 40px;
-	border-left: 2px solid #FFFFFF;
-}
-.progress-bar.minimum-as-step .progress-bar-separator img {
-	position: absolute;
-	left: -11px;
-	top: 10px;
-}
-.progress-bar.minimum-as-step .bg-separated {
-	position: absolute;
-	display: inline-block;
-	height: 40px;
-	background: #00879B;
+	left: 10px;
+	border-top: 5px solid #00879B;
+	border-right: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	 border-left: 5px solid #00879B;
 }
 
+.progress-data {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 20px;
+	color: #00879B;
+	margin-top: 10px;
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.evaluation-bar {
+	background-color: #ebebeb;
+	opacity: 1;
+	background: repeating-linear-gradient( -45deg, #c2c2c2, #c2c2c2 2px, #ebebeb 2px, #ebebeb 10px );
+	height: 10px;
+	width: 90%;
+	margin: auto;
+}
+
+.vote-status {
+	text-align: left;
+	color: #c2c2c2;
+	text-transform: uppercase;
+	font-size: 1.2rem;
+	padding: 0 20px;
+	display: block;
+	margin-top: 10px;
+}
 /*******************************************************************************
 * LIGHTBOX
 *******************************************************************************/
