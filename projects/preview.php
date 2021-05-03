@@ -44,28 +44,26 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
 
 <div class="project-container <?php echo $class_category; ?>" id="project-<?php echo $project_id ?>" data-step="<?php echo $campaign_status; ?>" data-location="<?php echo $campaign->get_location_number(); ?>" data-categories="<?php echo $campaign_categories_str; ?>">
-    <a class="hidden-link" href="<?php echo $link; ?>">
-        <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
-			<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE || strpos($campaign_categories_str, 'environmental')  !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="<?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?></span>
-			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="<?php _e( 'project.impact.SOCIAL', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.SOCIAL', 'yproject' ); ?></span>
-			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'economique') !== FALSE || strpos($campaign_categories_str, 'economic')  !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="<?php _e( 'project.impact.ECO', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ECO', 'yproject' ); ?></span>
-			<?php endif; ?>
-			<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE || strpos($campaign_categories_str, 'committed-company')  !== FALSE): ?>
-			<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="<?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?></span>
-			<?php endif; ?>
-        </div>
-    </a>
         <div class="project-framed">
+			<div class="project-img" <?php if ( !empty( $img ) ) { ?> style="background-image: url('<?php echo $img; ?>')"<?php } ?>></div>
             <a class="hidden-link" href="<?php echo $link; ?>">
-                <h2 class="project-title"> <?php echo $title; ?> </h2>
-                <div class="project-img" <?php if ( !empty( $img ) ) { ?>style="background-image: url('<?php echo $img; ?>')"<?php } ?>></div>
-                <div class="project-summary"><?php echo $description; ?></div>
-            </a>
+                <div class="impacts-container" id="impacts-<?php echo $project_id ?>">
+					<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE || strpos($campaign_categories_str, 'environmental')  !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="<?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?></span>
+					<?php endif; ?>
+					<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="<?php _e( 'project.impact.SOCIAL', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.SOCIAL', 'yproject' ); ?></span>
+					<?php endif; ?>
+					<?php if (strpos($campaign_categories_str, 'economique') !== FALSE || strpos($campaign_categories_str, 'economic')  !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="<?php _e( 'project.impact.ECO', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ECO', 'yproject' ); ?></span>
+					<?php endif; ?>
+					<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE || strpos($campaign_categories_str, 'committed-company')  !== FALSE): ?>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="<?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?></span>
+					<?php endif; ?>
+        		</div>
+			</a>
+				<div class="title-container"><h2 class="project-title"> <?php echo $title; ?> </h2></div>
+				<div class="project-summary"><?php echo $description; ?></div>
         <?php
             $jycrois = $campaign->get_jycrois_nb();
             if ($jycrois > 1) {
@@ -108,9 +106,12 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					$buttonAction = __( 'project.INVEST_ON_PROJECT', 'yproject' );
         ?>              
                     <div class="progress-bar">
-                        <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;<span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
-                        <span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>          
-                    </div>
+						<div class="current-bar" style="min-width:<?php echo $width; ?>%"></div>
+					</div>
+					<div class="progress-data">
+						<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
+                    	<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
+					</div> 
         <?php
 
                 elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote ):
@@ -124,17 +125,14 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 						$project_status = __( 'project.EVALUATION_FINISHED', 'yproject' );
 					}
         ?>
-                    <div class="progress-bar">
-                        <span class="vote-status" style="min-width:100%">
-							&nbsp;<span><?php echo $project_status; ?></span>&nbsp;
-						</span>
-                    </div>
+                    <div class="evaluation-bar"></div>
+					<span class="vote-status" style="min-width:100%"><span><?php echo $project_status; ?></span>&nbsp;</span>
                 <?php endif; ?>
         </a>
         <a class="hidden-link" href="<?php echo $link; ?>">
                 <div class="progress-info">
-                    <span class="progress-pers"><?php if ($jycrois): ?><span class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</span><?php endif; ?><span class="info-action"><?php echo $persStatus ?></span></span>
-                    <span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><span class="info-action"> <?php echo $projectAction ?></span></span>
+                    <span class="progress-pers"><?php if ($jycrois): ?><span class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</span><br><?php endif; ?><span class="info-action"><?php echo $persStatus ?></span></span>
+                    <span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><br><span class="info-action"> <?php echo $projectAction ?></span></span>
                 </div>
         </a>
 		<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>
@@ -147,12 +145,14 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         ?>
             <a class="hidden-link" href="<?php echo $link; ?>">
                 <div class="progress-bar">
-                    <span class="current-amount" style="min-width:<?php echo $width; ?>%">&nbsp;
+                    <div class="current-bar" style="min-width:<?php echo $width; ?>%">&nbsp;</div>
+				</div>
+				<div class="progress-data">
                         <span><?php echo $campaign->current_amount(); ?> : <?php echo $campaign->percent_minimum_completed(); ?></span>&nbsp;
                     </span>        
                 </div>
                 <div class="progress-info">
-                    <span class="progress-pers"><span class="info-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("pers.", "yproject") ?></span><span class="info-action"><?php echo $persStatus ?></span></span>
+                    <span class="progress-pers"><span class="info-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("pers.", "yproject") ?><br></span><span class="info-action"><?php echo $persStatus ?></span></span>
                     <span class="progress-status"><span class="info-nb"><?php echo $projectStatus ?></span></span>
                 </div>
             </a>          
