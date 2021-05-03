@@ -9,6 +9,13 @@ $fields_declaration = $page_controler->get_form()->getFields( WDG_Form_Declarati
 ?>
 
 <form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white" novalidate>
+
+	<?php $form_errors = $page_controler->get_form_errors(); ?>
+	<?php if ( $form_errors ): ?>
+		<?php foreach ( $form_errors as $form_error ): ?>
+			<span class="invest_error"><?php echo $form_error[ 'text' ]; ?></span>
+		<?php endforeach; ?>
+	<?php endif; ?>
 	
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
