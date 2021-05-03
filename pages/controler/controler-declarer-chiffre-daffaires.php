@@ -157,10 +157,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->summary_data[ 'turnover_total' ] = $this->current_declaration->get_turnover_total();
 
 		// ajustement
+		$adjustment_value = 0;
 		$this->summary_data[ 'adjustments' ] = array();
 		$adjustments = $this->current_declaration->get_adjustments();
 		if ( !empty( $adjustments ) ) {
 			foreach ( $adjustments as $adjustment_obj ) {
+				$adjustment_value += $adjustment_obj->amount;
 				$item = array(
 					'message_organization'	=> $adjustment_obj->message_organization,
 					'turnover_difference'	=> $adjustment_obj->turnover_difference,
@@ -555,6 +557,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	 */
 	private function check_add_declaration() {
 		$add_declaration = TRUE;
+		$amount_transferred = 0;
 		// On n'ajoute une déclaration que si il n'y en a plus d'autres
 		$existing_roi_declarations = $this->current_campaign->get_roi_declarations();
 		foreach ( $existing_roi_declarations as $declaration_object ) {
