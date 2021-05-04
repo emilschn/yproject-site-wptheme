@@ -224,6 +224,19 @@ button.red {
     background: none repeat scroll 0 0 #F1A074;
     border: 0px solid #F1A074;
 }
+.button.admin-theme.round{
+	padding: 0px;
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+}
+.button.admin-theme.right.round.edit{
+	width: 32px;
+	height: 32px;
+	margin-left: -16px;
+	margin-top: -16px;
+	border-radius: 16px;
+}
 .button.big {
     font-size: 15px;
     padding: 15px 30px;
