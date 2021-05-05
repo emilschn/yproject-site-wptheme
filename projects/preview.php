@@ -131,8 +131,19 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
         </a>
         <a class="hidden-link" href="<?php echo $link; ?>">
                 <div class="progress-info">
-                    <span class="progress-pers"><?php if ($jycrois): ?><span class="info-nb"><?php echo $jycrois; ?>&nbsp;pers.</span><br><?php endif; ?><span class="info-action"><?php echo $persStatus ?></span></span>
-                    <span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><br><span class="info-action"> <?php echo $projectAction ?></span></span>
+                    <span class="progress-pers">
+						<?php if ($jycrois): ?>
+							<span class="info-nb">
+								<?php echo $jycrois; ?>
+							pers.</span>
+							<br>
+						<?php endif; ?>
+						<span class="info-action">
+							<?php echo $persStatus ?>
+						</span>
+					</span>
+                    <hr>
+					<span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><br><span class="info-action"> <?php echo $projectAction ?></span></span>
                 </div>
         </a>
 		<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>
@@ -142,7 +153,12 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
             else :
                 $projectStatus = __( 'project.CAMPAIGN_FUNDED', 'yproject' );
                 $buttonAction = __( 'project.DISCOVER_THIS_PROJECT', 'yproject' ); // vers plus d'info sur ce projet
-        ?>
+        ?>	
+			<div class="financed-banner"> 
+				<img src="wp-content/themes/yproject/images/favicon.png">
+				<p>Projet financé avec succès !</p>
+			</div>
+
             <a class="hidden-link" href="<?php echo $link; ?>">
 				<span class="info-nb financed-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("personnes ont permis de lever", "yproject") ?></span>
 				<div class="financed-data">

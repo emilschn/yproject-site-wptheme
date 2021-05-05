@@ -287,9 +287,14 @@ div.progress-info .progress-pers {
 }
 
 div.progress-info .progress-days, div.progress-info .progress-status {
-	width: 44%;
-	border-left: 1px solid #333;
-	padding-left: 20px;
+	width: 43%;
+} 
+
+div.progress-info hr{ 
+    border: none;
+    border-left: 1px solid #c2c2c2;
+    height: 30px;
+    width:1px;       
 }
 
 a.home-button-project { 
@@ -439,6 +444,43 @@ a.financed-link {
 	text-align: center;
 	margin-top: 20px;
 }
+
+div.financed-banner {
+	position: absolute;
+	z-index: 3;
+	background-color: #B3DAE1;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	margin-top: -385px;
+	margin-left: -20px;
+	padding: 10px 15px;
+}
+
+div.financed-banner img {
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+}
+
+div.financed-banner p {
+	text-transform: uppercase;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+div.financed-banner:before {
+	content: "";
+	display: block;
+	position: absolute;
+	margin-top: 76px;
+	margin-left: -15px;
+	border-top: 20px solid #00879B;
+	border-bottom: 20px solid transparent;
+	border-left: 20px solid transparent;
+}
+
 /*******************************************************************************
 * LIGHTBOX
 *******************************************************************************/
