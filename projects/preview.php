@@ -144,19 +144,13 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
                 $buttonAction = __( 'project.DISCOVER_THIS_PROJECT', 'yproject' ); // vers plus d'info sur ce projet
         ?>
             <a class="hidden-link" href="<?php echo $link; ?>">
-                <div class="progress-bar">
-                    <div class="current-bar" style="min-width:<?php echo $width; ?>%">&nbsp;</div>
-				</div>
-				<div class="progress-data">
-                        <span><?php echo $campaign->current_amount(); ?> : <?php echo $campaign->percent_minimum_completed(); ?></span>&nbsp;
+				<span class="info-nb financed-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("personnes ont permis de lever", "yproject") ?></span>
+				<div class="financed-data">
+                        <span><?php echo $campaign->current_amount(); ?></span><hr><span><?php echo $campaign->percent_minimum_completed(); ?></span>
                     </span>        
                 </div>
-                <div class="progress-info">
-                    <span class="progress-pers"><span class="info-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("pers.", "yproject") ?><br></span><span class="info-action"><?php echo $persStatus ?></span></span>
-                    <span class="progress-status"><span class="info-nb"><?php echo $projectStatus ?></span></span>
-                </div>
             </a>          
-                <a class="home-button-project project-button see-project" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>  
+                <a class="financed-link" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>  
         <?php endif; ?>
                 
         </div> <!-- .project-framed -->

@@ -180,10 +180,10 @@
 		align-content: center;
 	}
 
-	.wdg-component-projects-preview .project-container {
+	/* .wdg-component-projects-preview .project-container {
 		width: 300px;
 		height: 552px;
-	}
+	} */
 
 	.wdg-component-projects-preview .impacts-container {
 		width: 300px;

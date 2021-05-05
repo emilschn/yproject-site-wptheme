@@ -401,6 +401,44 @@ a.home-button-project {
 	display: block;
 	margin-top: 10px;
 }
+
+/*******************************************************************************
+* PROJETS FINANCES
+*******************************************************************************/
+
+span.financed-nb {
+	display: block;
+	text-align: center !important;
+	font-size: 16px !important;
+	border-top: 1px solid #c2c2c2;
+	padding: 25px 0px 5px 0px;
+	width: 90%;
+	margin: auto;
+}
+
+div.financed-data {
+	color: #00879B;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 600;
+	width: 60%;
+	margin: auto;
+}
+
+div.financed-data hr{ 
+    border:         none;
+    border-left:    1px solid #c2c2c2;
+    height:         30px;
+    width:          1px;       
+}
+
+a.financed-link {
+	display: block;
+	text-align: center;
+	margin-top: 20px;
+}
 /*******************************************************************************
 * LIGHTBOX
 *******************************************************************************/
