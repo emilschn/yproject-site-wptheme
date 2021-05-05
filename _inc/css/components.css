@@ -203,7 +203,7 @@
 * PROJECTS - HOME
 *******************************************************************************/
 div.block-projects {
-	width: 1280px;
+	max-width: 1280px;
 	display: flex;
 	margin: auto;
 	justify-content: center;

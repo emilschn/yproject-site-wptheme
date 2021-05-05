@@ -175,28 +175,24 @@
 	body.template-les-projets .wdg-component-projects-preview .project-slider {
 		margin-bottom: 15px;
 	}
-	.wdg-component-projects-preview .block-projects {
+
+	/* LISTE DES PROJETS */
+
+	div.block-projects {
 		display: flex;
+		flex-direction: column;
 		align-content: center;
+		width: 80vw;
 	}
 
-	/* .wdg-component-projects-preview .project-container {
-		width: 300px;
-		height: 552px;
-	} */
-
-	.wdg-component-projects-preview .impacts-container {
-		width: 300px;
+	div.block-projects .project-container {
+		width: 100%;
 	}
 
 	body.template-les-projets .button.more-content {
 		display: none;
 	}
 
-	a.home-button-project {
-		width: 300px;
-	}
-	
 	#cookies-alert {
 		width: 96%;
 		padding: 24px 2%;
