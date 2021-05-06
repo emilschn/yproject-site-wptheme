@@ -203,34 +203,38 @@
 * PROJECTS - HOME
 *******************************************************************************/
 div.block-projects {
-	width: 1280px;
+	max-width: 1280px;
 	display: flex;
-	justify-content: space-between;
 	margin: auto;
+	justify-content: center;
 	flex-flow: row wrap;
 	position: relative;
 }
 
 div.project-container {
-	width: 370px;
+	width: 29%;
 	border: 1px solid #c2c2c2;
-	margin: 50px 25px 0 25px;
-	height: 535px;
+	margin: 25px 25px 25px 25px;
 	overflow: hidden;
 	background-color: #fff;
 }
 
 div.project-container .project-img { /* image du projet */
 	background-repeat: no-repeat;
-	background-size: cover;
+	background-size: 100%;
+	background-position: center;
 	height: 150px;
 	position: relative;
 	z-index: 1;
-	transition: all .2s linear;
+	transition: background-size 0.2s ease-in;
+	-moz-transition: background-size 0.2s ease-in;
+	ms-transition: background-size 0.2s ease-in;
+	-o-transition: background-size 0.2s ease-in;
+	-webkit-transition: background-size 0.2s ease-in;
 }
 
-div.project-container:hover .project-img { /* l'image s'agrandit au hover, à recadrer */
-	transform: scale(1.2);
+div.project-container:hover .project-img { /* l'image s'agrandit au hover */
+	background-size: 120%;
 }
 
 div.project-container .project-title {
@@ -240,7 +244,7 @@ div.project-container .project-title {
 
 div.project-container .title-container { /* permet d'avoir un titre plus long sans modifier la hauteur du container */
 	display: flex;
-	height: 110px;
+	height: 95px;
 	justify-content: center;
 	align-items: center;
 	text-align: center;
@@ -253,7 +257,13 @@ div.project-container .project-summary {
 	padding: 0 20px;
 	margin-bottom: 20px;
 	height: 80px;
-	overflow: hidden; /* coupe le texte s'il dépasse une certaine hauteur */
+	/* coupe le texte s'il dépasse une certaine hauteur */
+	display: block;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
 div.progress-info {
@@ -264,6 +274,8 @@ div.progress-info {
 	font-size: 0.9rem;
 	padding: 0 20px;
 	margin-top: 20px;
+	height: 50px;
+	align-items: center;
 }
 
 div.progress-info .info-nb {
@@ -271,35 +283,41 @@ div.progress-info .info-nb {
 }
 
 div.progress-info .progress-pers {
-	width: 49%;
+	width: 44%;
 }
 
 div.progress-info .progress-days, div.progress-info .progress-status {
-	width: 49%;
-	border-left: 1px solid #333;
-	padding-left: 30px;
+	width: 43%;
+} 
+
+div.progress-info hr{ 
+    border: none;
+    border-left: 1px solid #c2c2c2;
+    height: 30px;
+    width:1px;       
 }
 
-a.home-button-project { /* placement du bouton dans la div - se cale bizarrement sinon, à revoir peut-être */
+a.home-button-project { 
 	color: #fff;
 	background-color: #EA4F51;
-	padding: 20px;
 	font-size: 0.9rem;
-	position: absolute;
 	text-transform: uppercase;
-	width: 368px;
+	height: 60px;
+	width: 100%;
 	margin-top: 20px;
 	text-align: center;
+	line-height: 60px;
+	display: block;
 }
 /*******************************************************************************
 * IMPACTS
 *******************************************************************************/
 .impacts-container {
-	position: absolute;
+	position: relative;
 	display: block;
 	z-index: 2; 
-	top: 175px;
-	width: 370px;
+	margin-top: -25px;
+	width: 100%;
 	text-align: center;
 }
 
@@ -338,13 +356,14 @@ a.home-button-project { /* placement du bouton dans la div - se cale bizarrement
 	width: 90%;
 	margin: auto;
 	overflow: hidden;
+	position: relative;
 }
 
-.progress-bar .current-bar { /* barre de progression - à revoir */
+.progress-bar .current-bar { 
 	background-color: #00879B;
 	display: block;
 	height: 10px;
-
+	position: absolute;
 }
 
 .progress-bar .current-bar:after { /* triangle permettant l'angle de la barre */
@@ -352,10 +371,10 @@ a.home-button-project { /* placement du bouton dans la div - se cale bizarrement
 	display: block;
 	position: relative;
 	left: 10px;
-	border-top: 5px solid #00879B;
-	border-right: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	 border-left: 5px solid #00879B;
+	border-top: 10px solid #00879B;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid #00879B;
 }
 
 .progress-data {
@@ -387,6 +406,81 @@ a.home-button-project { /* placement du bouton dans la div - se cale bizarrement
 	display: block;
 	margin-top: 10px;
 }
+
+/*******************************************************************************
+* PROJETS FINANCES
+*******************************************************************************/
+
+span.financed-nb {
+	display: block;
+	text-align: center !important;
+	font-size: 16px !important;
+	border-top: 1px solid #c2c2c2;
+	padding: 25px 0px 5px 0px;
+	width: 90%;
+	margin: auto;
+}
+
+div.financed-data {
+	color: #00879B;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 600;
+	width: 60%;
+	margin: auto;
+}
+
+div.financed-data hr{ 
+    border:         none;
+    border-left:    1px solid #c2c2c2;
+    height:         30px;
+    width:          1px;       
+}
+
+a.financed-link {
+	display: block;
+	text-align: center;
+	margin-top: 20px;
+}
+
+div.financed-banner {
+	position: absolute;
+	z-index: 3;
+	background-color: #B3DAE1;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	margin-top: -385px;
+	margin-left: -20px;
+	padding: 10px 15px;
+}
+
+div.financed-banner img {
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+}
+
+div.financed-banner p {
+	text-transform: uppercase;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+div.financed-banner:before {
+	content: "";
+	display: block;
+	position: absolute;
+	margin-top: 76px;
+	margin-left: -15px;
+	border-top: 20px solid #00879B;
+	border-bottom: 20px solid transparent;
+	border-left: 20px solid transparent;
+}
+
 /*******************************************************************************
 * LIGHTBOX
 *******************************************************************************/
