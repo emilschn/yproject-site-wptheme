@@ -438,6 +438,11 @@ msgstr "Probl&egrave;me de cr&eacute;ation d'utilisateur."
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
 
+
+# ############################## /validation du mail ################################
+msgid "validation.WELCOME_TO_WEDOGOOD"
+msgstr "Votre adresse mail a &eacute;t&eacute; confirm&eacute;e"
+
 # ############################## /mon-compte ################################
 msgid "account.OVERRIDE_USER_DOESNT_EXIST"
 msgstr "L'utilisateur que vous essayez d'afficher n'existe pas..."
