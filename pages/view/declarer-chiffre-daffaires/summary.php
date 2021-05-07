@@ -94,7 +94,7 @@ $summary_data = $page_controler->get_summary_data();
 	</table>
 	<br>
 
-	<h2><?php _e( "Message &agrave; transmettre aux investisseurs :", 'yproject' ); ?></h2>
+	<strong><?php _e( "Message &agrave; transmettre aux investisseurs :", 'yproject' ); ?></strong><br>
 	<?php $message = $summary_data[ 'message' ]; ?>
 	<?php if ( empty( $message ) ): ?>
 		<?php _e( "Aucun message", 'yproject' ); ?>
