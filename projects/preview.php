@@ -80,7 +80,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
             }
 
             //Projets en cours de collecte ou en vote
-            if ( $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ): ?>
+            if ( ( $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ) && !$campaign->is_positive_savings() ): ?>
 		
         <a class="hidden-link" href="<?php echo $link; ?>">
 			<?php
@@ -101,7 +101,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					}
 				}
 
-                if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte ):
+                if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte && !$campaign->is_positive_savings() ):
                     $projectAction = __( 'project.TO_INVEST', 'yproject' );
 					$buttonAction = __( 'project.INVEST_ON_PROJECT', 'yproject' );
         ?>              
@@ -114,7 +114,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					</div> 
         <?php
 
-                elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote ):
+				elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote && !$campaign->is_positive_savings() ):
 					if ( $time_remaining_str != '-' ) {
 						$projectAction = __( 'project.TO_EVALUATE', 'yproject' );
 						$buttonAction = __( 'project.EVALUATE_PROJECT', 'yproject' );
@@ -155,7 +155,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
                 $buttonAction = __( 'project.DISCOVER_THIS_PROJECT', 'yproject' ); // vers plus d'info sur ce projet
         ?>	
 			<div class="financed-banner"> 
-				<img src="wp-content/themes/yproject/images/favicon.png">
+				<img src="http://wedogood.local/wp-content/themes/yproject/images/favicon.png">
 				<p>Projet financé avec succès !</p>
 			</div>
 
