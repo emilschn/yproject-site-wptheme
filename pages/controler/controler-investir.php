@@ -360,7 +360,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 							$user_name = $WDGEntity->get_firstname();
 						}
 						if ( !$WDGEntity->has_sent_all_documents() ) {
-							NotificationsAPI::investment_authentication_needed( $WDGEntity->get_email(), $user_name, $this->current_campaign->get_name(), $this->current_campaign->get_api_id() );
+							NotificationsAPI::investment_authentication_needed( $WDGEntity, $this->current_campaign );
 							WDGQueue::add_investment_authentication_needed_reminder( $WDGEntity->get_wpref(), $WDGEntity->get_email(), $user_name, $this->current_campaign->get_name(), $this->current_campaign->get_api_id() );
 						}
 					}

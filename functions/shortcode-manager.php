@@ -11,6 +11,7 @@ class YPShortcodeManager {
 		'yproject_statsadvanced_lightbox',
 		'yproject_newproject_lightbox',
 		'wdg_home_stats',
+		'wdg_config_text',
 		'wdg_page_auto_refresh',
 		'wdg_project_vote_count',
 		'wdg_project_vote_intention_sum',
@@ -176,6 +177,20 @@ class YPShortcodeManager {
 		ob_end_clean();
 		echo do_shortcode('[yproject_lightbox_cornered id="newproject" class="wdg-lightbox-ref" title="'.__( "Lancement de levée de fonds", 'yproject' ).'"]' .$content . '[/yproject_lightbox_cornered]');
 		echo do_shortcode('[yproject_register_lightbox]');
+	}
+
+	public static function wdg_config_text($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'url'		=> ''
+		), $atts );
+
+		if ( empty( $atts[ 'url' ] ) ) {
+			return '';
+		}
+
+		$config_text_content = WDGConfigTexts::get_config_text_by_name( $atts[ 'url' ] );
+
+		return $config_text_content;
 	}
 
 	public static function wdg_home_stats($atts, $content = '') {

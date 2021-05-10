@@ -41,7 +41,7 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 						$amount = 0;
 						$lw_transaction_result = LemonwayLib::get_transaction_by_id( $payment_token );
 						$amount = $lw_transaction_result->CRED;
-						NotificationsAPI::prospect_setup_payment_method_received_card( $api_result->email, $metadata_decoded->user->name, $amount, $datetime->format( 'd/m/Y H:i:s' ), $metadata_decoded->organization->name );
+						NotificationsAPI::prospect_setup_payment_method_received_card( $api_result );
 
 						// Transfert vers le wallet de gestion de WDG
 						$orga_email = 'bonjour@wedogood.co';
@@ -82,7 +82,7 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 				// Erreur de paiement
 			} elseif ( $input_is_error === '1' || $input_is_canceled === '1' ) {
 				$draft_url = WDG_Redirect_Engine::override_get_page_url( 'financement/eligibilite' ) . '?guid=' . $input_guid;
-				NotificationsAPI::prospect_setup_payment_method_error_card( $api_result->email, $metadata_decoded->user->name, $draft_url, $metadata_decoded->organization->name );
+				NotificationsAPI::prospect_setup_payment_method_error_card( $api_result );
 			}
 		}
 
