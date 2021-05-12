@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 2.4.3\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -908,6 +908,9 @@ msgstr "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;
 
 msgid "account.parameters.orga.HEAD_OFFICE"
 msgstr "Si&egrave;ge social"
+
+msgid "account.parameters.orga.ACCOUNTANT"
+msgstr "Expert-comptable"
 
 msgid "account.wallet.TITLE"
 msgstr "Mon porte-monnaie &eacute;lectronique"
