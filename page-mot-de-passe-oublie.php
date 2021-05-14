@@ -2,7 +2,7 @@
 if ( is_user_logged_in() ) {
 	wp_redirect( home_url() );
 }
-$page_forgot_password = WDG_Redirect_Engine::override_get_page_url( 'mot-de-passe-oublie' );
+$page_forgot_password_url = WDG_Redirect_Engine::override_get_page_url( 'mot-de-passe-oublie' );
 $init_username = '';
 if ( isset( $_POST[ 'user_login' ] ) ) {
 	$init_username = htmlentities( $_POST['user_login'] );
@@ -28,15 +28,16 @@ if ( !empty( $init_username ) ) {
 			$user_login = $user->user_login;
 			$user_email = $user->user_email;
 			$user_firstname = $user->user_firstname;
+			$WDGUser = new WDGUser( $user->ID );
 			$key = $wpdb->get_var($wpdb->prepare("SELECT user_activation_key FROM $wpdb->users WHERE user_login = %s", $user_login));
 			if ( empty($key) ) {
 				$key = wp_generate_password(20, false);
 				do_action('retrieve_password_key', $user_login, $key);
 				$wpdb->update($wpdb->users, array('user_activation_key' => $key), array('user_login' => $user_login));
 			}
-			$link = get_permalink($page_forgot_password->ID) . "?action=rp&key=$key&login=" . rawurlencode($user_login);
+			$link = $page_forgot_password_url . "?action=rp&key=$key&login=" . rawurlencode($user_login);
 
-			if (FALSE == NotificationsAPI::password_reinit( $user_email, $user_firstname, $link ) ) {
+			if (FALSE == NotificationsAPI::password_reinit( $WDGUser, $link ) ) {
 				array_push( $error, "Problème d'envoi : l'e-mail de réinitialisation n'a pas été envoyé." );
 			}
 			$feedback = "Un message a &eacute;t&eacute; envoy&eacute; &agrave; votre adresse e-mail.";
@@ -55,7 +56,7 @@ if ( !empty( $init_username ) ) {
 			if (isset($user, $user->user_login)) {
 				wp_update_user( array( 'ID' => $user->ID, 'user_pass' => $_POST["new_password"], 'user_status' => 0, 'user_activation_key' => '' ) );
 				$WDGUser = new WDGUser( $user->ID );
-				NotificationsAPI::user_password_change( $WDGUser->get_email(), $WDGUser->get_firstname() );
+				NotificationsAPI::user_password_change( $WDGUser );
 			} else {
 				array_push( $error, "La clé ne correspond pas à cet utilisateur." );
 			}

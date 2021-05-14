@@ -6,13 +6,13 @@
 	$fields_hidden = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_hidden );
 	$fields_complete = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_complete );
 	$fields_address = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_address );
+	$fields_accountant = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_accountant );
 	$fields_admin = $WDGOrganizationDetailsForm->getFields( WDG_Form_Organization_Details::$field_group_admin );
 	$WDGUser_current = WDGUser::current();
 
 	$form_feedback = FALSE;
 	if ( !empty( $_SESSION[ 'account_organization_form_feedback_' . $WDGOrganization->get_wpref() ] ) ) {
 		$form_feedback = $_SESSION[ 'account_organization_form_feedback_' . $WDGOrganization->get_wpref() ];
-
 	}
 ?>
 
@@ -50,6 +50,14 @@
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
+
+	<?php if ( $page_controler->get_controler_name() == 'tableau-de-bord' ): ?>
+		<h2><?php _e( 'account.parameters.orga.ACCOUNTANT', 'yproject' ); ?></h2>
+		<?php foreach ( $fields_accountant as $field ): ?>
+			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+		<?php endforeach; ?>
+	<?php endif; ?>
 	
 	<?php if ( $WDGUser_current->is_admin() ): ?>		
 		<div class="field admin-theme">
