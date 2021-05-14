@@ -31,4 +31,4 @@ $WDGUserPendingPreinvestment = $page_controler->get_show_user_pending_investment
 <?php
 $lightbox_content = ob_get_contents();
 ob_end_clean();
-echo do_shortcode('[yproject_lightbox_cornered id="pending-investment" title="'.__( 'invest.lightbox.investment.TITLE', 'yproject' ).'" autoopen="1" catchclick="0"]' . $lightbox_content . '[/yproject_lightbox_cornered]');
+echo do_shortcode('[yproject_lightbox_cornered id="pending-investment" title="'.__( 'invest.lightbox.investment.TITLE', 'yproject' ).'" autoopen="1" catchclick="0" save-close="1"]' . $lightbox_content . '[/yproject_lightbox_cornered]');

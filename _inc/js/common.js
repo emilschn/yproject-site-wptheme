@@ -750,7 +750,11 @@ var WDGLightboxFunctions = (function ($) {
 			if ($(".wdg-lightbox").length > 0) {
 				$(".wdg-lightbox").each(function () {
 					if ($(this).data('autoopen') == '1') {
+						//Vérification de la présence du cookie save-close
+						if (YPUIFunctions.getCookie('save-close') != '1'){
+						
 						WDGLightboxFunctions.displaySingle($(this).attr('id').split('wdg-lightbox-')[1]);
+						}
 					}
 				});
 				$(".wdg-button-lightbox-open").not("#wdg-lightbox-newproject .wdg-button-lightbox-open").click(function () {
@@ -759,7 +763,18 @@ var WDGLightboxFunctions = (function ($) {
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function (e) {
 					e.preventDefault();
 					WDGLightboxFunctions.hideAll();
+					
+				//Permet l'ouverture d'une Pop-up une fois par jour
+				if ($(this).data('save-close') == '1') {
+					var date = new Date();
+					date.setDate(date.getDate() + 1);
+					var expires = '; expires=' + date.toGMTString();
+					document.cookie = 'save-close=1' + expires + '; path=#';
+					}
+				
 				});
+				
+				
 				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function (e) {
 					WDGLightboxFunctions.hideAll();
 				});
