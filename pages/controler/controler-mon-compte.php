@@ -596,9 +596,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private function init_intentions_to_confirm() {
 		$this->list_intentions_to_confirm = array();
 
-		if ( $this->current_user ) {
-			$this->list_intentions_to_confirm = $this->current_user->get_campaigns_current_voted();
-		}
+		
 	}
 
 	public function get_intentions_to_confirm() {
