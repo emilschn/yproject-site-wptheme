@@ -76,8 +76,10 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 				<?php endif; ?>
 			</div>
 		</a>
-		<div class="title-container"><h2 class="project-title"> <?php echo $title; ?> </h2></div>
-		<div class="project-summary"><?php echo $description; ?></div>
+		<a class="hidden-link" href="<?php echo $link; ?>">
+			<div class="title-container"><h2 class="project-title"> <?php echo $title; ?> </h2></div>
+			<div class="project-summary"><?php echo $description; ?></div>
+		</a>
 
 
 		<?php
@@ -134,9 +136,9 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 				<?php endif; ?>
 			</a>
 			<?php if ($campaign->is_funded()) : ?>
-				<div class="financed-banner"> 
+				<div class="financed-banner campaign-collecte"> 
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png">
-					<p>Projet financé avec succès !</p>
+					<p><?php _e( 'project.FUNDED_BANNER', 'yproject' ); ?></p>
 				</div>
 			<?php endif; ?>
 			<a class="hidden-link" href="<?php echo $link; ?>">
@@ -164,7 +166,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 		?>
 			<div class="financed-banner"> 
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png">
-				<p>Plusieurs éléments déjà financés !</p>
+				<p><?php _e( 'project.POSITIVE_SAVINGS_BANNER', 'yproject' ); ?></p>
 			</div>
 			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php _e( 'project.INVEST_ON_PROJECT', 'yproject' ) ?></a>
 
@@ -178,11 +180,11 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 			?>
 			<div class="financed-banner"> 
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png">
-				<p>Projet financé avec succès !</p>
+				<p><?php _e( 'project.FUNDED_BANNER', 'yproject' ); ?></p>
 			</div>
 
 			<a class="hidden-link" href="<?php echo $link; ?>">
-				<span class="info-nb financed-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e("personnes ont permis de lever", "yproject") ?></span>
+				<span class="info-nb financed-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e('project.PEOPLE_RAISE', 'yproject', "yproject") ?></span>
 				<div class="financed-data">
 						<span><?php echo $campaign->current_amount(); ?></span><hr><span><?php echo $campaign->percent_minimum_completed(); ?></span>
 					</span>

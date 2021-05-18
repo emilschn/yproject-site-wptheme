@@ -193,6 +193,10 @@
 		display: none;
 	}
 
+	div.financed-data {
+		width: 50%;
+	}
+
 	#cookies-alert {
 		width: 96%;
 		padding: 24px 2%;
@@ -208,5 +212,9 @@
 	footer > .footer-container div.term-links li ul li a:after {
 		content: "";
 		margin: 0px;
+	}
+
+	div.financed-data {
+		width: 70%;
 	}
 }

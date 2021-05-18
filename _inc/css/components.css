@@ -402,10 +402,11 @@ a.home-button-project {
 	text-align: left;
 	color: #c2c2c2;
 	text-transform: uppercase;
-	font-size: 1.2rem;
+	font-size: 1rem;
 	padding: 0 20px;
 	display: block;
-	margin-top: 10px;
+	margin-top: 9.5px;
+	height: 22.5px;
 }
 
 /*******************************************************************************
@@ -420,6 +421,10 @@ a.home-button-project {
 	height: 60px;
 }
 
+.cat-epargne-positive div.financed-banner {
+	margin-top: -360px;
+}
+
 /*******************************************************************************
 * PROJETS FINANCES
 *******************************************************************************/
@@ -432,6 +437,10 @@ span.financed-nb {
 	padding: 25px 0px 5px 0px;
 	width: 90%;
 	margin: auto;
+}
+
+a.financed-link {
+	margin-bottom: 40px;
 }
 
 div.financed-data {
@@ -494,6 +503,9 @@ div.financed-banner:before {
 	border-left: 20px solid transparent;
 }
 
+div.campaign-collecte {
+	margin-top: -422px;
+}
 /*******************************************************************************
 * LIGHTBOX
 *******************************************************************************/
