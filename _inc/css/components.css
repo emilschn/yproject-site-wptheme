@@ -214,7 +214,7 @@ div.block-projects {
 div.project-container {
 	width: 29%;
 	border: 1px solid #c2c2c2;
-	margin: 18px;
+	margin: 18px 18px 50px 18px;
 	overflow: hidden;
 	background-color: #fff;
 }
@@ -274,7 +274,7 @@ div.progress-info {
 	font-size: 0.9rem;
 	padding: 0 20px;
 	margin-top: 20px;
-	height: 50px;
+	height: 50.5px;
 	align-items: center;
 }
 
