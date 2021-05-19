@@ -1,11 +1,13 @@
-<?php 
+<?php
 global $campaign, $stylesheet_directory_uri, $is_progressbar_shortcode;
 $time_remaining_str = $campaign->time_remaining_str();
 $campaign_status = $campaign->campaign_status();
 ?>
 
 <?php if ( $campaign_status === ATCF_Campaign::$campaign_status_vote ): ?>
-<div class="evaluation-container <?php if ( !empty( $is_progressbar_shortcode ) ) { echo 'shortcode-context'; } ?>">
+<div class="evaluation-container <?php if ( !empty( $is_progressbar_shortcode ) ) {
+	echo 'shortcode-context';
+} ?>">
 	<div class="evaluation-bar"></div>
 	<span class="vote-status" style="min-width:100%"><p>
 		<?php if ($time_remaining_str != '-'): ?>
@@ -35,10 +37,13 @@ $campaign_status = $campaign->campaign_status();
 		$width_to_completed = ( $percent_minimum_completed - 100 ) * $width_to_minimum_goal / 100;
 		$file_check = 'minimum-goal-full.png';
 	}
+	$bar_width = $width_to_minimum_goal + $width_to_completed;
 	?>
-<div class="progress-bar-container minimum-as-step <?php if ( !empty( $is_progressbar_shortcode ) ) { echo 'shortcode-context'; } ?>">
+<div class="progress-bar-container minimum-as-step <?php if ( !empty( $is_progressbar_shortcode ) ) {
+		echo 'shortcode-context';
+	} ?>">
 	<div class="progress-bar project-page-bar">
-		<div class="current-bar" style="min-width:<?php echo $width_to_minimum_completed; ?>%"></div>
+		<div class="current-bar" style="min-width:<?php echo $bar_width; ?>%"></div>
 	</div>
 	<div class="progress-data project-page-data">
 		<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
@@ -56,7 +61,9 @@ $campaign_status = $campaign->campaign_status();
 	$width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 	?>
 
-	<div class="progress-bar-container <?php if ( !empty( $is_progressbar_shortcode ) ) { echo 'shortcode-context'; } ?>">
+	<div class="progress-bar-container <?php if ( !empty( $is_progressbar_shortcode ) ) {
+		echo 'shortcode-context';
+	} ?>">
 		<div class="progress-bar project-page-bar">
 			<div class="current-bar" style="min-width:<?php echo $width; ?>%"></div>
 		</div>
