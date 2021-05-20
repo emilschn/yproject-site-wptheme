@@ -78,7 +78,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 		</a>
 		<a class="hidden-link" href="<?php echo $link; ?>">
 			<div class="title-container"><h2 class="project-title"> <?php echo $title; ?> </h2></div>
-			<div class="project-summary"><?php echo $description; ?></div>
+			<div class="project-summary"><?php echo $description; ?><br><br><br><br></div>
 		</a>
 
 
