@@ -295,6 +295,15 @@ msgstr "&Eacute;valuation termin&eacute;e"
 msgid "project.CAMPAIGN_FUNDED"
 msgstr "projet<br />financ&eacute; !"
 
+msgid "project.FUNDED_BANNER"
+msgstr "projet financ&eacute; avec succ&egrave;s !"
+
+msgid "project.POSITIVE_SAVINGS_BANNER"
+msgstr "plusieurs mat&eacute;riels d&eacute;j&agrave; financ&eacute;s !"
+
+msgid "project.PEOPLE_RAISE"
+msgstr "personnes ont permis de lever"
+
 msgid "projects.THE_PROJECTS"
 msgstr "les projets"
 

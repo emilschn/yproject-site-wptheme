@@ -175,28 +175,28 @@
 	body.template-les-projets .wdg-component-projects-preview .project-slider {
 		margin-bottom: 15px;
 	}
-	body.template-les-projets .wdg-component-projects-preview .block-projects {
-		display: block;
+
+	/* LISTE DES PROJETS */
+
+	div.block-projects {
+		display: flex;
+		flex-direction: column;
+		align-content: center;
+		width: 80vw;
 	}
-	body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
-	body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container,
-	body.template-les-projets .projects-after-end-date .wdg-component-projects-preview .project-container,
-	body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {
-		display: inline-block;
-		width: 320px;
-		height: 620px;
+
+	div.block-projects .project-container {
+		width: 100%;
 	}
-	body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container {
-		height: 490px;
-	}
-	body.template-les-projets .wdg-component-projects-preview .project-container .project-framed {
-		position: absolute;
-		height: 82%;
-	}
+
 	body.template-les-projets .button.more-content {
 		display: none;
 	}
-	
+
+	div.financed-data {
+		width: 50%;
+	}
+
 	#cookies-alert {
 		width: 96%;
 		padding: 24px 2%;
@@ -212,5 +212,9 @@
 	footer > .footer-container div.term-links li ul li a:after {
 		content: "";
 		margin: 0px;
+	}
+
+	div.financed-data {
+		width: 70%;
 	}
 }
