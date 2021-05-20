@@ -38,7 +38,7 @@ if ( $campaign->is_positive_savings() ) {
 	WDG_Languages_Helpers::switch_back_to_display_language();
 }
 
-$jycrois = $campaign->get_jycrois_nb();
+$jycrois = $campaign->get_jycrois_nb(); // Personnes qui suivent le projet
 if ($jycrois > 1) {
 	$persStatus = __( 'project.FOLLOW.P', 'yproject' );
 } else {
@@ -161,7 +161,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>
 
 		<?php
-		//Projets déja financés
+		//Projets en épargne positive
 		elseif ($campaign->is_positive_savings()) :
 		?>
 			<div class="financed-banner"> 
