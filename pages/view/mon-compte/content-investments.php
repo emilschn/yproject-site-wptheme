@@ -82,10 +82,18 @@ if ( $WDGUser_current->is_admin() ) {
 	</div>
 </div>
 
-
-
-
 <div id="vote-intentions-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="vote-intentions hidden">
+	
+	<?php if ( !$WDGUser_current->is_lemonway_registered() ) : ?>
+	<div class="db-form.v3 center">
+		<div class="wdg-message error msg-authentication-alert">
+			<p>
+				<?php _e( 'account.authentication.PROVIDE_DOCUMENTS_TO_INVEST', 'yproject' ); ?>
+			</p>
+			<a href="#authentication" class="button red go-to-tab" data-tab="authentication"><?php _e( 'account.investments.ACCOUNT_AUTHENTICATION', 'yproject' ); ?></a>
+		</div>
+	</div>
+	<?php endif; ?>
 	
 	<?php if ( count( $list_intentions_to_confirm ) > 0 ): ?>
 		<h3><?php _e( 'account.investments.INVESTMENTS_TO_CONCLUDE', 'yproject' ); ?></h3>
@@ -106,15 +114,6 @@ if ( $WDGUser_current->is_admin() ) {
 	<?php endif; ?>
 	
 </div>
-
-<?php if ( !$WDGUser_current->is_lemonway_registered() ) : ?>
-<div class="wdg-message error msg-authentication-alert">
-	<p>
-		<?php _e( 'account.authentication.PROVIDE_DOCUMENTS_TO_INVEST', 'yproject' ); ?>
-	</p>
-</div>
-		<a href="#authentication" class="button blue go-to-tab" data-tab="authentication"><?php _e( 'account.investments.ACCOUNT_AUTHENTICATION', 'yproject' ); ?></a>
-<?php endif; ?>
 
 <span class="hidden">
 	<span id="invest-trans-reload"><?php _e( 'account.investments.RELOAD', 'yproject' ); ?></span>
