@@ -224,6 +224,19 @@ button.red {
     background: none repeat scroll 0 0 #F1A074;
     border: 0px solid #F1A074;
 }
+.button.admin-theme.round{
+	padding: 0px;
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+}
+.button.admin-theme.right.round.edit{
+	width: 32px;
+	height: 32px;
+	margin-left: -16px;
+	margin-top: -16px;
+	border-radius: 16px;
+}
 .button.big {
     font-size: 15px;
     padding: 15px 30px;
@@ -1400,36 +1413,16 @@ body.template-les-projets nav#project-filter select option#social {
 body.template-les-projets .projects-positive-savings {
 	background-color: rgba(51, 51, 51, .1);
 }
-body.template-les-projets .wdg-component-projects-preview .project-container {
-	height: 620px;
-	min-width: 240px;
-}
-body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
-body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container,
-body.template-les-projets .projects-after-end-date .wdg-component-projects-preview .project-container {
-	width: 33%;
-}
 body.template-les-projets div .projects-title-precisions{
 	margin-top: -16px;
 	margin-bottom: 32px;
 }
-body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {
-	width: 25%;
-}
-body.template-les-projets .wdg-component-projects-preview .block-projects {
-	height: auto;
-	margin: auto;
-	padding-top: 5px;
-	overflow-y: hidden;
-}
-
 body.template-les-projets div#content > div:last-child {
 	margin-top: -10px;
 	padding-bottom: 30px;
 	background-color: rgba(51, 51, 51, 0.05);
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .block-projects {
-	max-height: 2400px;
 	margin: auto;
 }
 body.template-les-projets div#content .projects-positive-savings .wdg-component-projects-preview .project-container .project-framed {

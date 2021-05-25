@@ -221,14 +221,16 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 	}
 	public function get_campaign_emails() {
 		$buffer = array();
-		foreach ( $this->emails as $email ) {
-			$item = array(
-				'recipient'		=> $email->recipient,
-				'date'			=> $email->date,
-				'template_id'	=> $email->template,
-				'template_str'	=> NotificationsAPI::$description_str_by_template_id[ $email->template ]
-			);
-			array_push( $buffer, $item );
+		if ( !empty( $this->emails ) ) {
+			foreach ( $this->emails as $email ) {
+				$item = array(
+					'recipient'		=> $email->recipient,
+					'date'			=> $email->date,
+					'template_id'	=> $email->template,
+					'template_str'	=> NotificationsAPI::get_description_by_template_id( $email->template )
+				);
+				array_push( $buffer, $item );
+			}
 		}
 
 		return $buffer;
@@ -328,11 +330,13 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 			if ( $declaration->get_status() == WDGROIDeclaration::$status_finished ) {
 				$new_form = new WDG_Form_Declaration_Bill( $declaration->id );
 				$this->form_declaration_bill_list[ $declaration->id ] = $new_form;
-			} else if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration || $declaration->get_status() == WDGROIDeclaration::$status_payment ) {
-				if ( $first_declaration_to_pay == null ){
-					$declaration->set_is_payable( TRUE );
-					$first_declaration_to_pay = $declaration;
-				}	
+			} else {
+				if ( $declaration->get_status() == WDGROIDeclaration::$status_declaration || $declaration->get_status() == WDGROIDeclaration::$status_payment ) {
+					if ( $first_declaration_to_pay == null ) {
+						$declaration->set_is_payable( TRUE );
+						$first_declaration_to_pay = $declaration;
+					}
+				}
 			}
 		}
 	}

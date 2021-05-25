@@ -1,6 +1,7 @@
 jQuery(document).ready(function ($) {
 	YPUIFunctions.initUI();
 	WDGFormsFunctions.init();
+	new WDGEE();
 });
 
 JSHelpers = (function ($) {
@@ -1215,3 +1216,53 @@ var WDGFormsFunctions = (function ($) {
 
 	};
 })(jQuery);
+
+
+//**********************************
+function WDGEE() {
+	if ($('body.template-les-projets').length > 0) {
+		this.initUI();
+	}
+}
+
+WDGEE.prototype.initUI = function () {
+	var self = this;
+	$('body').keydown(function (event) {
+		if (event.which === 16) {
+			$('body').addClass('shift-down');
+		}
+		if ($('body').hasClass('shift-down') && !$('body').hasClass('wdgee-started') && event.which === 82) {
+			$('body').addClass('wdgee-started');
+			self.start();
+		}
+	});
+
+	$('body').keyup(function (event) {
+		if (event.which === 16) {
+			$('body').removeClass('shift-down');
+		}
+	});
+}
+
+WDGEE.prototype.start = function () {
+	var self = this;
+	self.addAnother();
+	setInterval(function () { self.addAnother() }, 500);
+}
+
+WDGEE.prototype.addAnother = function () {
+	var randomLeft = Math.random() * $(window).width();
+	var randomSize = 25 + Math.random() * 75;
+	var newElementStr = '<div style="position: absolute; top: 0px; left: ' + randomLeft + 'px; z-index: 2000;"><img class="wdgee" style="width: ' + randomSize + 'px; height: ' + randomSize + 'px;" src="https://www.wedogood.co/wp-content/themes/yproject/images/template-project-list/ee.png"></div>';
+	var newElement = $(newElementStr);
+	$('nav#main').after(newElement);
+	newElement.animate(
+		{ top: $(window).height(), opacity: 0.25 },
+		2500,
+		"swing",
+		function () {
+			$(this).remove();
+		}
+	);
+}
+//**********************************

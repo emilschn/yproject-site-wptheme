@@ -56,16 +56,14 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 				$previous_content .= __("Merci d'avoir investi dans notre projet !", 'yproject') ."<br />";
 				$previous_content .= __("A bient&ocirc;t !", 'yproject');
 			}
-			wp_editor( $previous_content, 'mail_content',
-				array(
+			wp_editor( $previous_content, 'mail_content', array(
 					'media_buttons' => true,
 					'quicktags'     => false,
 					'tinymce'       => array(
 						'plugins'				=> 'wordpress, paste, wplink, textcolor',
 						'paste_remove_styles'   => true
 					)
-				)
-			);
+				));
 			?>
 			<br>
 
@@ -88,7 +86,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 
 <?php if ( $page_controler->can_add_check() ): ?>
 <div class="align-center margin-height">
-	<a href="#contacts" class="button-contacts-add-check button blue" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que","yproject") ?></a>
+	<a href="#contacts" class="button-contacts-add-check button blue" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que", "yproject") ?></a>
 	<br><br>
 	<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
 </div>
@@ -100,7 +98,7 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 	<div class="admin-theme-block db-form">
 		<div class="field admin-theme align-center">
 			<?php
-			$editor_params = array( 
+			$editor_params = array(
 				'media_buttons' => true,
 				'quicktags'     => true,
 				'editor_height' => 500,
@@ -115,8 +113,8 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 			?>
 			
 			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
-				<a href="#contacts" data-mailtype="preinvestment" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-investissement","yproject") ?></a>
-				<a href="#contacts" data-mailtype="prelaunch" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-lancement","yproject") ?></a>
+				<a href="#contacts" data-mailtype="preinvestment" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-investissement", "yproject") ?></a>
+				<a href="#contacts" data-mailtype="prelaunch" class="button admin-theme show-notifications"><?php _e("Envoyer les relances de pr&eacute;-lancement", "yproject") ?></a>
 			<?php endif; ?>
 			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
 				<a href="#contacts" data-mailtype="investment-2days" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement J-2", 'yproject' ); ?></a>
@@ -278,23 +276,27 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 					<td>Sexe</td>
 				</tr>
 
-				<?php foreach ( $campaign_poll_answers as $answer ): ?>
-					<?php if ( $answer->poll_slug != 'warranty' ) { continue; } ?>
-					<?php $answers_decoded = json_decode( $answer->answers ); ?>
-					<tr>
-						<td><?php echo $answer->date; ?></td>
-						<td><?php echo $answer->context; ?></td>
-						<td><?php echo $answer->context_amount; ?></td>
-						<td><?php echo $answers_decoded->{ 'would-invest-more-amount' }; ?></td>
-						<td><?php echo $answers_decoded->{ 'would-invest-amount-with-warranty' }; ?></td>
-						<td><?php echo $answers_decoded->{ 'would-invest-more-number' }; ?></td>
-						<td><?php echo $answers_decoded->{ 'would-invest-number-per-year-with-warranty' }; ?></td>
-						<td><?php echo $answer->user_email; ?></td>
-						<td><?php echo $answer->user_age; ?></td>
-						<td><?php echo $answer->user_postal_code; ?></td>
-						<td><?php echo $answer->user_gender; ?></td>
-					</tr>
-				<?php endforeach; ?>
+				<?php if (!empty( $campaign_poll_answers ) ): ?>
+					<?php foreach ( $campaign_poll_answers as $answer ): ?>
+						<?php if ( $answer->poll_slug != 'warranty' ) {
+						continue;
+					} ?>
+						<?php $answers_decoded = json_decode( $answer->answers ); ?>
+						<tr>
+							<td><?php echo $answer->date; ?></td>
+							<td><?php echo $answer->context; ?></td>
+							<td><?php echo $answer->context_amount; ?></td>
+							<td><?php echo $answers_decoded->{ 'would-invest-more-amount' }; ?></td>
+							<td><?php echo $answers_decoded->{ 'would-invest-amount-with-warranty' }; ?></td>
+							<td><?php echo $answers_decoded->{ 'would-invest-more-number' }; ?></td>
+							<td><?php echo $answers_decoded->{ 'would-invest-number-per-year-with-warranty' }; ?></td>
+							<td><?php echo $answer->user_email; ?></td>
+							<td><?php echo $answer->user_age; ?></td>
+							<td><?php echo $answer->user_postal_code; ?></td>
+							<td><?php echo $answer->user_gender; ?></td>
+						</tr>
+					<?php endforeach; ?>
+				<?php endif; ?>
 			</table>
 		</div>
 		
@@ -323,29 +325,33 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 					<td>Sexe</td>
 				</tr>
 
-				<?php foreach ( $campaign_poll_answers as $answer ): ?>
-					<?php if ( $answer->poll_slug != 'source' ) { continue; } ?>
-					<?php $answers_decoded = json_decode( $answer->answers ); ?>
-					<tr>
-						<td><?php echo $answer->date; ?></td>
-						<td><?php echo $answer->context; ?></td>
-						<td><?php echo $answer->context_amount; ?></td>
-						<td><?php echo ( $answers_decoded->motivations->{ 'know-project-manager' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->motivations->{ 'interrested-by-domain' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->motivations->{ 'diversify-savings' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->motivations->{ 'looking-for-positive-impact' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->motivations->{ 'other-motivations' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo $answers_decoded->{ 'other-motivations-to-invest' }; ?></td>
-						<td><?php echo $answers_decoded->{ 'how-the-fundraising-was-known' }; ?></td>
-						<td><?php echo $answers_decoded->{ 'other-source-to-know-the-fundraising' }; ?></td>
-						<td><?php echo $answers_decoded->{ 'where-user-come-from' }; ?></td>
-						<td><?php echo $answers_decoded->{ 'other-source-where-the-user-come-from' }; ?></td>
-						<td><?php echo $answer->user_email; ?></td>
-						<td><?php echo $answer->user_age; ?></td>
-						<td><?php echo $answer->user_postal_code; ?></td>
-						<td><?php echo $answer->user_gender; ?></td>
-					</tr>
-				<?php endforeach; ?>
+				<?php if (!empty( $campaign_poll_answers ) ): ?>
+					<?php foreach ( $campaign_poll_answers as $answer ): ?>
+						<?php if ( $answer->poll_slug != 'source' ) {
+						continue;
+					} ?>
+						<?php $answers_decoded = json_decode( $answer->answers ); ?>
+						<tr>
+							<td><?php echo $answer->date; ?></td>
+							<td><?php echo $answer->context; ?></td>
+							<td><?php echo $answer->context_amount; ?></td>
+							<td><?php echo ( $answers_decoded->motivations->{ 'know-project-manager' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->motivations->{ 'interrested-by-domain' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->motivations->{ 'diversify-savings' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->motivations->{ 'looking-for-positive-impact' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->motivations->{ 'other-motivations' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo $answers_decoded->{ 'other-motivations-to-invest' }; ?></td>
+							<td><?php echo $answers_decoded->{ 'how-the-fundraising-was-known' }; ?></td>
+							<td><?php echo $answers_decoded->{ 'other-source-to-know-the-fundraising' }; ?></td>
+							<td><?php echo $answers_decoded->{ 'where-user-come-from' }; ?></td>
+							<td><?php echo $answers_decoded->{ 'other-source-where-the-user-come-from' }; ?></td>
+							<td><?php echo $answer->user_email; ?></td>
+							<td><?php echo $answer->user_age; ?></td>
+							<td><?php echo $answer->user_postal_code; ?></td>
+							<td><?php echo $answer->user_gender; ?></td>
+						</tr>
+					<?php endforeach; ?>
+				<?php endif; ?>
 			</table>
 		</div>
 		
@@ -376,31 +382,35 @@ $send_mail_success = filter_input( INPUT_GET, 'send_mail_success' );
 					<td>Sexe</td>
 				</tr>
 
-				<?php foreach ( $campaign_poll_answers as $answer ): ?>
-					<?php if ( $answer->poll_slug != 'continuous' ) { continue; } ?>
-					<?php $answers_decoded = json_decode( $answer->answers ); ?>
-					<tr>
-						<td><?php echo $answer->date; ?></td>
-						<td><?php echo $answer->context; ?></td>
-						<td><?php echo $answer->context_amount; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'notifications' }->{ 'new-campaign' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'notifications' }->{ 'new-subject' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-ponctual' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-monthly' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-quarterly' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-campaign' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-other' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo $answers_decoded->{ 'other-invest-rythm' }; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-wedogood' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-project' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-other' } == '1' ) ? 'Oui' : 'Non'; ?></td>
-						<td><?php echo $answers_decoded->{ 'other-known-by-source' }; ?></td>
-						<td><?php echo $answer->user_email; ?></td>
-						<td><?php echo $answer->user_age; ?></td>
-						<td><?php echo $answer->user_postal_code; ?></td>
-						<td><?php echo $answer->user_gender; ?></td>
-					</tr>
-				<?php endforeach; ?>
+				<?php if (!empty( $campaign_poll_answers ) ): ?>
+					<?php foreach ( $campaign_poll_answers as $answer ): ?>
+						<?php if ( $answer->poll_slug != 'continuous' ) {
+						continue;
+					} ?>
+						<?php $answers_decoded = json_decode( $answer->answers ); ?>
+						<tr>
+							<td><?php echo $answer->date; ?></td>
+							<td><?php echo $answer->context; ?></td>
+							<td><?php echo $answer->context_amount; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'notifications' }->{ 'new-campaign' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'notifications' }->{ 'new-subject' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-ponctual' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-monthly' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-quarterly' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-campaign' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'invest-rythm' }->{ 'invest-other' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo $answers_decoded->{ 'other-invest-rythm' }; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-wedogood' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-project' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo ( $answers_decoded->{ 'known-by' }->{ 'known-by-other' } == '1' ) ? 'Oui' : 'Non'; ?></td>
+							<td><?php echo $answers_decoded->{ 'other-known-by-source' }; ?></td>
+							<td><?php echo $answer->user_email; ?></td>
+							<td><?php echo $answer->user_age; ?></td>
+							<td><?php echo $answer->user_postal_code; ?></td>
+							<td><?php echo $answer->user_gender; ?></td>
+						</tr>
+					<?php endforeach; ?>
+				<?php endif; ?>
 			</table>
 		</div>
 	</div>

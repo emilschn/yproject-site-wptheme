@@ -23,7 +23,25 @@ if ( $WDGUser_current->is_admin() ) {
 	<?php endif; ?>
 </p>
 
-<?php if ( $WDGUser_current->is_admin() && $has_pending_wire_investments ): ?>		
+<?php if ( $WDGUser_current->is_admin() ): ?>
+	<?php $change_investor_feedback = $page_controler->get_form_user_change_investor_feedback(); ?>
+	<?php if ( !empty( $change_investor_feedback[ 'errors' ] ) ): ?>
+		<?php foreach ( $change_investor_feedback[ 'errors' ] as $error_item ): ?>
+			<div class="wdg-message error">
+				<?php echo $error_item[ 'text' ]; ?>
+			</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
+
+	<?php if ( !empty( $change_investor_feedback[ 'success' ] ) ): ?>
+		<div class="wdg-message confirm">
+			<?php echo $change_investor_feedback[ 'success' ]; ?>
+		</div>
+	<?php endif; ?>
+<?php endif; ?>
+
+
+<?php if ( $WDGUser_current->is_admin() && $has_pending_wire_investments ): ?>
 	<div class="admin-theme">
 		<strong><?php _e( "Virements en attente: ", 'yproject' ); ?></strong><br>
 		<?php foreach ( $pending_wire_investments as $wire_investment ): ?>
