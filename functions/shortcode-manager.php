@@ -65,7 +65,8 @@ class YPShortcodeManager {
 			'class'		=> '',
 			'msgtype'	=> '', // valid / error
 			'autoopen'	=> '0',
-			'catchclick'=> '1'
+			'catchclick'=> '1',
+			'save-close'=> '0'
 		), $atts );
 
 		$msgtype_lightbox = '';
@@ -81,8 +82,8 @@ class YPShortcodeManager {
 			<div class="wdg-lightbox-click-catcher <?php echo $catcher_classes; ?>"></div>
 			<div class="wdg-lightbox-corner">
 				<div class="wdg-lightbox-button-close">
-					<?php if ( $atts['catchclick'] == '1' ): ?>
-					<a href="#" class="button">X</a>
+					<?php if ( $atts['catchclick'] == '1'): ?> 
+					<a data-save-close="<?php echo $atts['save-close'] ?>" href="#" class="button">X</a>
 					<?php endif; ?>
 				</div>
 				<h2><?php echo $atts[ 'title' ]; ?></h2>

@@ -877,6 +877,9 @@ msgstr "L&apos;entreprise est engag&eacute;e &agrave; vous verser des royalties 
 msgid "account.investments.ESTIMATED"
 msgstr "pr&eacute;visionnel"
 
+msgid "account.investments.ACCOUNT_AUTHENTICATION"
+msgstr "Authentifier mon compte"
+
 msgid "account.notifications.TITLE"
 msgstr "Notifications en provenance de WE DO GOOD"
 
