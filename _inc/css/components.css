@@ -9,7 +9,6 @@
     position: relative;
     overflow: hidden;
 }
-
 .wdg-component-slider .slider-container #slider .slider-item {
     width: 100%;
     height: 100%;
@@ -202,346 +201,311 @@
 /*******************************************************************************
 * PROJECTS - HOME
 *******************************************************************************/
-.wdg-component-projects-preview {
-	text-align: center;
-}
 
-.wdg-component-projects-preview .project-slider {
-	margin-bottom: 48px;
-}
-.wdg-component-projects-preview .block-projects {
-    z-index: 0;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-	-webkit-flex-wrap: wrap;
-	flex-wrap: wrap;
+div.block-projects {
+	max-width: 1280px;
+	display: flex;
 	margin: auto;
-}
-@media screen and (min-width: 1200px) {
-	.wdg-component-projects-preview .block-projects {
-		margin: auto;
-	}
+	justify-content: center;
+	flex-flow: row wrap;
+	position: relative;
 }
 
-.wdg-component-projects-preview .project-container{ 
-    position: relative;
-    display: -webkit-flex;
-    display: flex;
+div.project-container {
 	width: 29%;
-    min-width: 320px;
-    max-width: 400px;
-	height: 500px;
-    -webkit-justify-content: center;
-    justify-content: center;
-    font-family: Trebuchet MS, sans-serif;
-}
-.wdg-component-projects-preview .project-container .project-framed{ 
-    width: 90%;
-    height: 100%;
-    background-color: rgba(51, 51, 51, 0.05);
-    position: relative;
-    top: 25px;
-	margin: 0% 5%;
-}
-
-.wdg-component-projects-preview .project-container .project-framed::before { 
-    border-top: 60px solid #FFFFFF; 
-    border-right: 60px solid transparent;   
-    content: ""; 
-    height: 0; 
-    left: 0; 
-    position: absolute; 
-    top: 0px; 
-    width: 0; 
-}
-
-.wdg-component-projects-preview .project-container .project-framed .project-title{
-    position: relative;
-    width: 80%;
-	max-height: 40px;
+	border: 1px solid #c2c2c2;
+	margin: 18px 18px 50px 18px;
 	overflow: hidden;
-    top: 20px;
-	margin: 15px auto;
-	margin-left: 30px;/* pour tenir compte du coin coupé du cartouche*/
-    font-size: 13pt;
-    font-weight: bold;
-    text-transform: uppercase;
-    text-align: center;
+	background-color: #fff;
 }
 
-.wdg-component-projects-preview .project-container .project-framed .project-img{
-    position: absolute;
-    width: 100%;
-    height: 160px;
-    -webkit-background-size: cover;
-    background-size: cover;
-    background-position: center;
-    top: 75px;
+div.project-container .project-img { /* image du projet */
+	background-repeat: no-repeat;
+	background-size: 100%;
+	background-position: center;
+	height: 150px;
+	position: relative;
+	z-index: 1;
+	transition: background-size 0.2s ease-in;
+	-moz-transition: background-size 0.2s ease-in;
+	ms-transition: background-size 0.2s ease-in;
+	-o-transition: background-size 0.2s ease-in;
+	-webkit-transition: background-size 0.2s ease-in;
 }
 
-.wdg-component-projects-preview .project-container .project-framed .project-summary{
-    position: absolute;
-    top: 238px;
-    max-width: 100%;
-    height: 77px;
-    overflow: hidden;
-    margin: 4px 0px 0px 0px;
-    padding: 0px 4%;
-    font-size: 10pt;
-    text-align: justify;
+div.project-container:hover .project-img { /* l'image s'agrandit au hover */
+	background-size: 120%;
 }
 
-.wdg-component-projects-preview .project-container .project-framed .progress-info{
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    position: absolute;
-    -webkit-justify-content: center;
-    justify-content: center;
-    top: 375px;
-    width: 100%;
-    margin-top: 15px;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers{
-    border-right: 2px solid #333;
-	line-height: 1;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-pers,
-.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-days,
-.wdg-component-projects-preview .project-container .project-framed .progress-info .progress-status{
-    width: 50%;
-}
-body.template-les-projets .wdg-component-projects-preview .project-container.cat-epargne-positive {
-	height: 490px;
-}
-body.template-les-projets .wdg-component-projects-preview .project-container.cat-epargne-positive .project-framed .progress-bar,
-body.template-les-projets .wdg-component-projects-preview .project-container.cat-epargne-positive .project-framed .progress-info {
-	display: none;
-}
-
-.wdg-component-projects-preview .project-container .project-framed .progress-info .info-nb{
+div.project-container .project-title {
+	font-size: 1.2rem;
 	display: block;
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 0.9em;
-    font-weight: bold;
-    margin: 0;
-}
-.wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
-    text-transform: uppercase;
-    text-align: center;
-    font-size: 0.7em;
-    margin: 0;
 }
 
-@media screen and (max-width: 1070px) and (min-width: 998px) { /** réduction de la taille de la police en responsive **/
-	.wdg-component-projects-preview .project-container .project-framed .progress-info .info-action{
-		font-size: 11px;
-	}
+div.project-container .title-container { /* permet d'avoir un titre plus long sans modifier la hauteur du container */
+	display: flex;
+	height: 95px;
+	justify-content: center;
+	align-items: center;
+	text-align: center;
+	padding: 0 20px;
 }
 
-.wdg-component-projects-preview .home-button-project{
-    display: inline-block;
-    text-align: center;
-    font-size: 0.9em;
-    text-transform: uppercase;   
-    padding: 20px 0%;
-    bottom: 0%;
-}
-.wdg-component-projects-preview .project-container .project-framed .project-button{
-	position: absolute;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: center;
-    justify-content: center;
-    width: 100%;
-    background-color: #00879B;
-    color: #FFFFFF;
-}
-.wdg-component-projects-preview .project-container .project-framed .see-project{
-    background-color: #D3EAE9;
-    color: #333333;
-}
-.wdg-component-projects-preview .see-more {
-    position: relative;
-    width: -webkit-calc(0.26 * 100%);
-    width: -moz-calc(0.26 * 100%);
-    width: calc(0.26 * 100%);
-    padding: 20px 0px;
-    background-color: #EA4F51;
-    color: #FFFFFF;
-}
-@media screen and (max-width: 997px) {
-	.wdg-component-projects-preview .project-container {
-		width: 320px;
-		margin-bottom: 48px;
-	}
-}
-@media screen and (max-width: 1100px) {
-    .wdg-component-projects-preview .see-more {
-            width: 288px;
-    }
-}
-@media screen and (min-width: 1400px) {
-    .wdg-component-projects-preview .see-more {
-            width: 360px;
-    }
-}
-/* Ajustements spécifiques cartouche projet */
-body.template-les-projets .wdg-component-projects-preview .project-container .project-framed {
-    height: 81%;
+div.project-container .project-summary { 
+	text-align: left;
+	font-size: 0.85rem;
+	padding: 0 20px;
+	margin-bottom: 20px;
+	max-height: 80px;
+	/* coupe le texte s'il dépasse une certaine hauteur */
+	display: block;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 
+div.progress-info {
+	display: flex;
+	justify-content: space-between;
+	text-align: left;
+	text-transform: uppercase;
+	font-size: 0.9rem;
+	padding: 0 20px;
+	margin-top: 20px;
+	height: 50.5px;
+	align-items: center;
+}
+
+div.progress-info .info-nb {
+	font-weight: 600;
+}
+
+div.progress-info .progress-pers {
+	width: 44%;
+}
+
+div.progress-info .progress-days, div.progress-info .progress-status {
+	width: 43%;
+} 
+
+div.progress-info hr{ 
+    border: none;
+    border-left: 1px solid #c2c2c2;
+    height: 30px;
+    width:1px;       
+}
+
+a.home-button-project { 
+	color: #fff;
+	background-color: #EA4F51;
+	font-size: 0.9rem;
+	text-transform: uppercase;
+	height: 60px;
+	width: 100%;
+	margin-top: 20px;
+	text-align: center;
+	line-height: 60px;
+	display: block;
+}
 /*******************************************************************************
 * IMPACTS
 *******************************************************************************/
-.impacts-container{
-    position: absolute;
-    display: -webkit-flex;
-    display: flex;
-    z-index: 2;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-	width: 90%;
-	height: 50px;
-	margin: 0% 5%;
+.impacts-container {
+	position: relative;
+	display: block;
+	z-index: 2; 
+	margin-top: -25px;
+	width: 100%;
+	text-align: center;
+	height: 42px;
 }
-.impacts-container .impact-logo{
-    display: -webkit-flex;
-    display: flex;
-    -webkit-justify-content: center;
-    justify-content: center;
-    -webkit-align-items: center;
-    align-items: center;
-    width: 42px;
-    height: 42px;
-    border-radius: 100%;
-    border: solid 4px transparent; 
-    color: #FFFFFF;
-    cursor: pointer;
-	margin: 0px 1px;
-	border: 4px solid white;
-}
-.wdg-component-projects-preview .impacts-container .impact-logo {
+
+.impacts-container .impact-logo {
+	background-color: #fff;
+	padding: 4px;
+	border-radius: 50px;
 	transition: all .2s linear;
 }
 
-.wdg-component-projects-preview .impacts-container .impact-logo:hover {
-    transform: scale(1.15);
-    border-color: #fff;
+.impacts-container .impact-logo:hover {
+	transform: scale(1.2);
 }
-.impacts-container .impact-logo {
-	position: relative;
-}
-.impacts-container .info-bulle.invisible{
+
+.impacts-container .info-bulle.invisible {
 	display: none;
 }
-.impacts-container .info-bulle.visible {
-	display: inline;
-	position: absolute;
-	z-index: 500;
-	top: 30px;
-	background-color: #FFFFFF;
-	border: 1px solid #333333;
-	padding: 1px 4px;
-	white-space: nowrap;
-	font-size: 9pt;
+
+.impacts-container .info-bulle.visible { /* noms des impacts au hover */
+		display: inline;
+		position: absolute;
+		z-index: 500;
+		top: 52px;
+		background-color: #FFFFFF;
+		border: 1px solid #c2c2c2;
+		padding: 1px 4px;
+		white-space: nowrap;
+		font-size: 9pt;
 }
-
-div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions div.impacts-container .impact-logo {
-	border: none;
-}
-
-
 /*******************************************************************************
 * PROGRESS BAR
 *******************************************************************************/
 .progress-bar {
-    min-width: 100%;
-    position: absolute;
-    top: 335px;
-    height: 40px;
-    background-color: #E1E3E2;
-}
-.progress-bar.shortcode-context {
+	background-color: #ebebeb;
+	height: 10px;
+	width: 90%;
+	margin: auto;
+	overflow: hidden;
 	position: relative;
-	top: 0px;
-}
-.wpb_text_column .progress-bar.shortcode-context span p {
-	margin-bottom: 15px !important;
-}
-.progress-bar .current-amount {
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-    position: absolute;
-    height: 100%;
-    font-size: 13pt;
-    letter-spacing: 0.12em;
-    color: #FFFFFF;
-	background: linear-gradient( 45deg, #59cee0, #00879B );
-	z-index: 1;
-}
-.progress-bar .progress-percent { 
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    position: absolute;
-    height: 100%;
-    right: 3%;
-    font-size: 13pt;
-    letter-spacing: 0.12em;
-    font-weight: bold;
-    text-align: right;
-	z-index: 2;
-}
-.progress-bar .vote-status { 
-    display: -webkit-flex;
-    display: flex;
-    -webkit-align-items: center;
-    align-items: center;
-    -webkit-justify-content: space-around;
-    justify-content: space-around;
-    height: 100%; 
-    text-transform: uppercase;
-    font-style: italic;
-    background: repeating-linear-gradient(
-        -45deg,
-        #E1E3E2,
-        #E1E3E2 7px,
-        #F5F5F5 1px,
-        #E1E3E2 8px);
-}
-.progress-bar.minimum-as-step .progress-bar-separator {
-	position: absolute;
-	z-index: 2;
-	display: inline-block;
-	height: 40px;
-	border-left: 2px solid #FFFFFF;
-}
-.progress-bar.minimum-as-step .progress-bar-separator img {
-	position: absolute;
-	left: -11px;
-	top: 10px;
-}
-.progress-bar.minimum-as-step .bg-separated {
-	position: absolute;
-	display: inline-block;
-	height: 40px;
-	background: #00879B;
 }
 
+.progress-bar .current-bar { 
+	background-color: #00879B;
+	display: block;
+	height: 10px;
+	position: absolute;
+}
+
+.progress-bar .current-bar:after { /* triangle permettant l'angle de la barre */
+	content: "";
+	display: block;
+	position: relative;
+	left: 10px;
+	border-top: 10px solid #00879B;
+	border-right: 10px solid transparent;
+	border-bottom: 10px solid transparent;
+	border-left: 10px solid #00879B;
+}
+
+.progress-data {
+	display: flex;
+	justify-content: space-between;
+	padding: 0 20px;
+	color: #00879B;
+	margin-top: 10px;
+	font-family: 'Trebuchet MS', sans-serif;
+	font-size: 1.2rem;
+	font-weight: 600;
+}
+
+.evaluation-bar { /* barre d'évaluation */
+	background-color: #ebebeb;
+	opacity: 1;
+	background: repeating-linear-gradient( -45deg, #c2c2c2, #c2c2c2 2px, #ebebeb 2px, #ebebeb 10px );
+	height: 10px;
+	width: 90%;
+	margin: auto;
+}
+
+.vote-status {
+	text-align: left;
+	color: #c2c2c2;
+	text-transform: uppercase;
+	font-size: 1rem;
+	padding: 0 20px;
+	display: block;
+	margin-top: 9.5px;
+	height: 22.5px;
+}
+
+/*******************************************************************************
+* EPARGNE POSITIVE
+*******************************************************************************/
+
+.cat-epargne-positive .progress-bar, .cat-epargne-positive .progress-data, .cat-epargne-positive div.progress-info {
+	display: none;
+}
+
+.cat-epargne-positive div.project-summary {
+	height: 60px;
+}
+
+.cat-epargne-positive div.financed-banner {
+	margin-top: -360px;
+}
+
+/*******************************************************************************
+* PROJETS FINANCES
+*******************************************************************************/
+
+span.financed-nb {
+	display: block;
+	text-align: center !important;
+	font-size: 16px !important;
+	border-top: 1px solid #c2c2c2;
+	padding: 25px 0px 5px 0px;
+	width: 90%;
+	margin: auto;
+}
+
+a.financed-link {
+	margin-bottom: 40px;
+}
+
+div.financed-data {
+	color: #00879B;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 24px;
+	font-weight: 600;
+	width: 60%;
+	margin: auto;
+}
+
+div.financed-data hr{ 
+    border: none;
+    border-left: 1px solid #c2c2c2;
+    height: 30px;
+    width: 1px;       
+}
+
+a.financed-link {
+	display: block;
+	text-align: center;
+	margin-top: 20px;
+}
+
+div.financed-banner {
+	position: absolute;
+	z-index: 3;
+	background-color: #B3DAE1;
+	display: flex;
+	flex-flow: row nowrap;
+	align-items: center;
+	margin-top: -380px;
+	margin-left: -20px;
+	padding: 10px 15px;
+}
+
+div.financed-banner img {
+	width: 16px;
+	height: 16px;
+	margin-right: 10px;
+}
+
+div.financed-banner p {
+	text-transform: uppercase;
+	font-size: 12px;
+	margin: 0;
+	padding: 0;
+}
+
+div.financed-banner:before {
+	content: "";
+	display: block;
+	position: absolute;
+	margin-top: 76px;
+	margin-left: -15px;
+	border-top: 20px solid #00879B;
+	border-bottom: 20px solid transparent;
+	border-left: 20px solid transparent;
+}
+
+div.campaign-collecte {
+	margin-top: -422px;
+}
 /*******************************************************************************
 * LIGHTBOX
 *******************************************************************************/
@@ -568,7 +532,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	position: relative;
 	max-width: 600px;
     height: 0px;
-    border-bottom: 60px solid #F2F2F2;
+    border-bottom: 60px solid #ffffff;
     border-left: 60px solid transparent;
 	margin: 5vh auto 0px;
     padding-right: 60px;
@@ -589,7 +553,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	max-height: 75vh;
 	margin: 5vh auto;
 	padding: 50px;
-	background-color: #F2F2F2;
+	background-color: #ffffff;
 	overflow-y: auto;
 	z-index: 4002;
 }
@@ -621,7 +585,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	text-align: center;
 }
 .wdg-lightbox .wdg-lightbox-padder > div {
-	background-color: #F2F2F2 !important;
+	background-color: #ffffff !important;
 }
 
 

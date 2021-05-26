@@ -300,6 +300,15 @@ msgstr "Evaluation completed"
 msgid "project.CAMPAIGN_FUNDED"
 msgstr "project funded!"
 
+msgid "project.FUNDED_BANNER"
+msgstr "successfully funded project !"
+
+msgid "project.POSITIVE_SAVINGS_BANNER"
+msgstr "several materials already financed !"
+
+msgid "project.PEOPLE_RAISE"
+msgstr "people raised"
+
 msgid "projects.THE_PROJECTS"
 msgstr "projects"
 
@@ -891,6 +900,9 @@ msgstr "The company is committed to pay you royalties until reimbursement, excep
 
 msgid "account.investments.ESTIMATED"
 msgstr "estimated"
+
+msgid "account.investments.ACCOUNT_AUTHENTICATION"
+msgstr "Authenticate my account"
 
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
