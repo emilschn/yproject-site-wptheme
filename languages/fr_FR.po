@@ -447,10 +447,33 @@ msgstr "Probl&egrave;me de cr&eacute;ation d'utilisateur."
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
 
+# ############################## /activer-compte ################################
+msgid "validation.YOUR_EMAIL_IS_VALIDATED"
+msgstr "Nous vous confirmons que votre adresse e-mail est bien validée :"
 
-# ############################## /validation du mail ################################
-msgid "validation.WELCOME_TO_WEDOGOOD"
-msgstr "Votre adresse mail a &eacute;t&eacute; confirm&eacute;e"
+msgid "validation.WE_WILL_REDIRECT_IN_A_FEW_SECONDS"
+msgstr "Nous vous redirigerons automatiquement d'ici quelques secondes."
+
+msgid "validation.CLICK_TO_GET_AWAY"
+msgstr "Si vous souhaitez accélérer votre redirection, vous pouvez cliquer sur"
+
+msgid "validation.THIS_LINK"
+msgstr "ce lien"
+
+msgid "validation.CURRENT_ACCOUNT_MATCHES_EMAIL"
+msgstr "Le compte connecté correspond à l'adresse e-mail"
+
+msgid "validation.EMAIL_HAS_BEEN_VALIDATED"
+msgstr "Cette adresse a déjà été validée précédemment."
+
+msgid "validation.CODE_DOESNT_MATCH"
+msgstr "Cependant, le code de validation ne correspond pas."
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL"
+msgstr "Nous pouvons vous renvoyer un e-mail de validation à cette adresse, si vous cliquez sur le bouton ci-dessous :"
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL_BUTTON"
+msgstr "Envoyer un e-mail pour valider mon compte"
 
 # ############################## /mon-compte ################################
 msgid "account.OVERRIDE_USER_DOESNT_EXIST"
