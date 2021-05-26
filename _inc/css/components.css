@@ -533,7 +533,7 @@ div.campaign-collecte {
 	position: relative;
 	max-width: 600px;
     height: 0px;
-    border-bottom: 60px solid #F2F2F2;
+    border-bottom: 60px solid #ffffff;
     border-left: 60px solid transparent;
 	margin: 5vh auto 0px;
     padding-right: 60px;
@@ -554,7 +554,7 @@ div.campaign-collecte {
 	max-height: 75vh;
 	margin: 5vh auto;
 	padding: 50px;
-	background-color: #F2F2F2;
+	background-color: #ffffff;
 	overflow-y: auto;
 	z-index: 4002;
 }
@@ -586,7 +586,7 @@ div.campaign-collecte {
 	text-align: center;
 }
 .wdg-lightbox .wdg-lightbox-padder > div {
-	background-color: #F2F2F2 !important;
+	background-color: #ffffff !important;
 }
 
 
