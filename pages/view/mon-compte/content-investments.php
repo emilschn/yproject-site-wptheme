@@ -102,7 +102,7 @@ if ( $WDGUser_current->is_admin() ) {
 
 <div id="vote-intentions-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="vote-intentions hidden">
 	
-	<?php if ( !$WDGUser_current->is_lemonway_registered() ) : ?>
+	<?php if ( !$WDGUser_displayed->is_lemonway_registered() ) : ?>
 	<div class="db-form.v3 center">
 		<div class="wdg-message error msg-authentication-alert">
 			<p>
@@ -122,7 +122,7 @@ if ( $WDGUser_current->is_admin() ) {
 				<?php $status_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? __( 'account.investments.STATUS_VOTE', 'yproject' ) : __( 'account.investments.STATUS_INVESTMENT', 'yproject' ); ?>
 				<?php $button_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? __( 'common.PREINVEST', 'yproject' ) : __( 'common.INVEST', 'yproject' ); ?>
 				<h4><?php echo YPUIHelpers::display_number( $intention_item[ 'vote_amount' ], TRUE, 0 ). ' &euro; - ' .$intention_item[ 'campaign_name' ]. ' (' .$status_str. ')'; ?></h4>
-				<?php if ( $WDGUser_current->is_lemonway_registered() ) : ?>
+				<?php if ( $WDGUser_displayed->is_lemonway_registered() ) : ?>
 					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ]; ?>" class="button red"><?php echo $button_str; ?></a>
 				<?php endif; ?>
 			<?php endif; ?>
