@@ -3,6 +3,7 @@ $template_engine = WDG_Templates_Engine::instance();
 $template_engine->set_controler( new WDG_Page_Controler_Validation_Email() );
 
 class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
+	private static $view_email_validated_old_account = 'email-validated-old-account';
 	private static $view_email_validated = 'email-validated';
 	private static $view_email_already_validated = 'email-already-validated';
 	private static $view_email_validation_error = 'email-validation-error';
@@ -59,23 +60,27 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 
 		$input_action = filter_input( INPUT_GET, 'action' );
 		$input_code = filter_input( INPUT_GET, 'validation-code' );
+		$input_is_new_account = filter_input( INPUT_GET, 'is-new-account' );
 
 		// Si l'utilisateur connecté n'est pas encore validé, qu'il demande la validation et que le code correspond
 		$user_validation_code = $this->current_user->get_email_validation_code();
 		if ( $input_action == 'validate' && !empty( $input_code ) && wp_is_uuid( $user_validation_code ) && $input_code == $user_validation_code ) {
 			// On valide l'adresse e-mail
-			$this->current_user->set_email_is_validated( TRUE );
-			// On affiche le message de confirmation
+			$this->current_user->set_email_is_validated();
+			// On affiche le message de confirmation (différent selon si c'est un nouveau ou un ancien compte)
 			$this->current_view = self::$view_email_validated;
+			if ( $input_is_new_account !== '1' ) {
+				$this->current_view = self::$view_email_validated_old_account;
+			}
 			// Redirection
-			// Dans un premier temps, on redirige vers la page où la personne était précédemment
+			// On redirige vers la page où la personne était précédemment
 			$this->current_auto_redirect_link = WDGUser::get_login_redirect_page();
-
 			// TODO : A venir :
 			// Si c'est un nouvel inscrit, on le redirige vers le parcours d'authentification
-			// Si c'est un ancien inscrit, on le redirige vers la page où il était avant de se connecter.
-			// Si on ne trouve pas cette page, on le redirige vers mon compte
-
+			/*
+			if ( $input_is_new_account === '1' ) {
+			}
+			*/
 			return;
 		}
 

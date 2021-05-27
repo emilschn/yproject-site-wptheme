@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-05-26 17:55+0200\n"
+"PO-Revision-Date: 2021-05-27 16:35+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -455,6 +455,24 @@ msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Please check the box to confirm you are not a robot."
 
 # ############################## /activer-compte ################################
+msgid "validation.WELCOME_TO_WEDOGOOD"
+msgstr "Welcome to WE DO GOOD !"
+
+msgid "validation.HELLO_WELCOME_TO_WEDOGOOD"
+msgstr "Hello and welcome on WE DO GOOD!"
+
+msgid "validation.ACCOUNT_IS_CREATED"
+msgstr "Your account has been created."
+
+msgid "validation.YOU_NEED_TO_COMPLETE"
+msgstr "To invest on a project, you need to complete your profile."
+
+msgid "validation.YOU_CAN_LEAVE_WHEN_YOU_WANT"
+msgstr "You can leave this course and come back where you stopped whenever you want!"
+
+msgid "validation.COMPLETE_MY_PROFILE"
+msgstr "Complete my profile"
+
 msgid "validation.YOUR_EMAIL_IS_VALIDATED"
 msgstr "Your e-mail address has been validated:"
 

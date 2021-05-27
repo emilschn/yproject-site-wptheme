@@ -448,6 +448,24 @@ msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
 
 # ############################## /activer-compte ################################
+msgid "validation.WELCOME_TO_WEDOGOOD"
+msgstr "Bienvenue sur WE DO GOOD !"
+
+msgid "validation.HELLO_WELCOME_TO_WEDOGOOD"
+msgstr "Bonjour et bienvenue sur WE DO GOOD !"
+
+msgid "validation.ACCOUNT_IS_CREATED"
+msgstr "Votre compte est désormais créé."
+
+msgid "validation.YOU_NEED_TO_COMPLETE"
+msgstr "Pour investir sur un projet, vous devez compléter votre profil."
+
+msgid "validation.YOU_CAN_LEAVE_WHEN_YOU_WANT"
+msgstr "Vous pouvez à tout moment quitter le parcours et revenir pour reprendre là où vous en étiez !"
+
+msgid "validation.COMPLETE_MY_PROFILE"
+msgstr "Compléter mon profil"
+
 msgid "validation.YOUR_EMAIL_IS_VALIDATED"
 msgstr "Nous vous confirmons que votre adresse e-mail est bien validée :"
 

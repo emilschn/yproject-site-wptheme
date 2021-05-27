@@ -1449,3 +1449,25 @@ body.template-les-projets div#content > div:last-child .wdg-component-projects-p
     top: auto;
     margin: auto;
 }
+
+/*******************************************************************************
+* Validation de compte
+*******************************************************************************/
+body.template-activer-compte .center_small {
+	width: 650px;
+}
+
+div.activate-account h1 {
+	text-align: center;
+}
+
+div.activate-account div.info {
+	margin: 16px 0px;
+	padding: 32px;
+	background: #ebebeb;
+}
+
+div.activate-account div.timer {
+	margin: 16px 0px;
+	padding: 32px; 
+}
