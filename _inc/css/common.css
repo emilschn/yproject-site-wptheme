@@ -876,16 +876,16 @@ ul.project-list a.needs-authentication:after {
 /*******************************************************************************
 * CONNEXION PAGE
 *******************************************************************************/
-.template-connexion, .template-inscription, .template-lancement {
+.template-connexion1, .template-inscription, .template-lancement {
 	background-color: #f2f2f2;
 }
-.template-connexion .center, .template-inscription .center {
+.template-connexion1 .center, .template-inscription .center {
 	width: 100%;
 }
 .login-page-container {
 	padding-top: 90px;
 }
-.template-connexion h1, .template-inscription h1 {
+.template-connexion1 h1, .template-inscription h1 {
 	text-align: center;
 	margin: 0px;
 	font-family: Trebuchet MS,sans-serif;
@@ -941,7 +941,7 @@ div.login-separator-label span {
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
-.template-connexion #content #connect-form .wdg-button-lightbox-open
+.template-connexion1 #content #connect-form .wdg-button-lightbox-open
 #newproject-register-user .wdg-button-lightbox-open {
 	border: none;
 	background: none;

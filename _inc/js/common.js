@@ -688,7 +688,7 @@ var WDGNavFunctions = (function ($) {
 			}).done(function (result) {
 				if (result === '0') {
 					$('#submenu-user.not-connected .menu-loading-init').hide();
-					$('#submenu-user.not-connected .menu-connection-forms').show();
+					window.location = $('#submenu-user.not-connected .menu-loading-init').data('redirect');
 				} else {
 					var infoDecoded = JSON.parse(result);
 					$('#menu .btn-user').addClass('connected').removeClass('not-connected');
@@ -752,9 +752,9 @@ var WDGLightboxFunctions = (function ($) {
 				$(".wdg-lightbox").each(function () {
 					if ($(this).data('autoopen') == '1') {
 						//Vérification de la présence du cookie save-close
-						if (YPUIFunctions.getCookie('save-close') != '1'){
-						
-						WDGLightboxFunctions.displaySingle($(this).attr('id').split('wdg-lightbox-')[1]);
+						if (YPUIFunctions.getCookie('save-close') != '1') {
+
+							WDGLightboxFunctions.displaySingle($(this).attr('id').split('wdg-lightbox-')[1]);
 						}
 					}
 				});
@@ -764,18 +764,18 @@ var WDGLightboxFunctions = (function ($) {
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function (e) {
 					e.preventDefault();
 					WDGLightboxFunctions.hideAll();
-					
-				//Permet l'ouverture d'une Pop-up une fois par jour
-				if ($(this).data('save-close') == '1') {
-					var date = new Date();
-					date.setDate(date.getDate() + 1);
-					var expires = '; expires=' + date.toGMTString();
-					document.cookie = 'save-close=1' + expires + '; path=#';
+
+					//Permet l'ouverture d'une Pop-up une fois par jour
+					if ($(this).data('save-close') == '1') {
+						var date = new Date();
+						date.setDate(date.getDate() + 1);
+						var expires = '; expires=' + date.toGMTString();
+						document.cookie = 'save-close=1' + expires + '; path=#';
 					}
-				
+
 				});
-				
-				
+
+
 				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function (e) {
 					WDGLightboxFunctions.hideAll();
 				});
