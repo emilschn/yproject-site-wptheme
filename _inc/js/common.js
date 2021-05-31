@@ -297,7 +297,8 @@ YPUIFunctions = (function ($) {
 				'data': {
 					'action': 'get_investments_data',
 					'id_campaign': campaign_id,
-					'is_short_version': bShortVersion ? '1' : '0'
+					'is_short_version': bShortVersion ? '1' : '0',
+					'show_failed_payments': bShortVersion ? '0' : '1'
 				}
 			}).done(function (result) {
 				YPUIFunctions.currentRequest = '';
