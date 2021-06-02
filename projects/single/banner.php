@@ -8,12 +8,6 @@ if ( empty( $campaign ) ) {
 	}
 }
 
-// Pour les projets masqués, on enregistre en session pour que l'utilisateur puisse le retrouver
-// (uniquement pour les utilisateurs qui ne modifient pas la page)
-if ( $campaign->is_hidden() && !$can_modify ) {
-	setcookie( 'hidden_project_visited', $campaign->ID, time() + 10 * DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
-}
-
 $btn_follow_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';

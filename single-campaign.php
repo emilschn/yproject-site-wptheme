@@ -15,6 +15,14 @@ if (!empty($campaign)) {
 
 	$classes .= 'version-3';
 }
+
+// Pour les projets masqués, on enregistre en session pour que l'utilisateur puisse le retrouver
+// (uniquement pour les utilisateurs qui ne modifient pas la page)
+if ( $campaign->is_hidden() && !$campaign->current_user_can_edit() ) {
+	setcookie( 'hidden_project_visited', $campaign->ID, time() + 10 * DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
+	setcookie( 'hidden_project_visited_title', $campaign->get_name(), time() + 10 * DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
+	setcookie( 'hidden_project_visited_url', $campaign->get_public_url(), time() + 10 * DAY_IN_SECONDS, COOKIEPATH, COOKIE_DOMAIN );
+}
 ?>
 			
 <?php get_header(); ?>
