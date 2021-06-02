@@ -81,6 +81,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->init_current_user( $reload );
 		$this->init_project_list();
 		$this->init_intentions_to_confirm();
+		$this->init_show_user_hidden_visited_project();
 		$this->init_form_user_details();
 		$this->init_form_change_investment_owner();
 		$this->init_form_user_identitydocs();
@@ -616,11 +617,20 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 
 		if ( $this->current_user ) {
 			$this->list_intentions_to_confirm = $this->current_user->get_campaigns_current_voted();
-		}	
+		}
 	}
 
 	public function get_intentions_to_confirm() {
 		return $this->list_intentions_to_confirm;
+	}
+
+	/******************************************************************************/
+	// PROJETS PRIVES VISITES
+	/******************************************************************************/
+	public function init_show_user_hidden_visited_project() {
+		if ( !empty( $_COOKIE[ 'hidden_project_visited' ] ) ) {
+			$this->show_user_hidden_project_visited = $_COOKIE[ 'hidden_project_visited' ];
+		}
 	}
 
 	/******************************************************************************/

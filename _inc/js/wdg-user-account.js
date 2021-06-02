@@ -123,6 +123,16 @@ UserAccountDashboard.prototype.initMenu = function () {
 			});
 		});
 	}
+
+	if ($('#wdg-lightbox-hidden-project-visited').length > 0) {
+		$('#wdg-lightbox-hidden-project-visited a.button.transparent').click(function () {
+			WDGLightboxFunctions.hideAll();
+			var date = new Date();
+			date.setTime(date.getTime() + (10));
+			var expires = '; expires=' + date.toGMTString();
+			document.cookie = 'hidden_project_visited=' + expires + '; path=/';
+		});
+	}
 };
 
 /**
