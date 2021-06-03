@@ -7,6 +7,7 @@ if ( empty( $campaign ) ) {
 		exit( 'Access error current campaign - AECC1431' );
 	}
 }
+
 $btn_follow_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';

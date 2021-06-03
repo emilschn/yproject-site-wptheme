@@ -753,9 +753,9 @@ var WDGLightboxFunctions = (function ($) {
 				$(".wdg-lightbox").each(function () {
 					if ($(this).data('autoopen') == '1') {
 						//Vérification de la présence du cookie save-close
-						if (YPUIFunctions.getCookie('save-close') != '1'){
-						
-						WDGLightboxFunctions.displaySingle($(this).attr('id').split('wdg-lightbox-')[1]);
+						if (YPUIFunctions.getCookie('save-close') != '1') {
+
+							WDGLightboxFunctions.displaySingle($(this).attr('id').split('wdg-lightbox-')[1]);
 						}
 					}
 				});
@@ -765,18 +765,18 @@ var WDGLightboxFunctions = (function ($) {
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function (e) {
 					e.preventDefault();
 					WDGLightboxFunctions.hideAll();
-					
-				//Permet l'ouverture d'une Pop-up une fois par jour
-				if ($(this).data('save-close') == '1') {
-					var date = new Date();
-					date.setDate(date.getDate() + 1);
-					var expires = '; expires=' + date.toGMTString();
-					document.cookie = 'save-close=1' + expires + '; path=#';
+
+					//Permet l'ouverture d'une Pop-up une fois par jour
+					if ($(this).data('save-close') == '1') {
+						var date = new Date();
+						date.setDate(date.getDate() + 1);
+						var expires = '; expires=' + date.toGMTString();
+						document.cookie = 'save-close=1' + expires + '; path=#';
 					}
-				
+
 				});
-				
-				
+
+
 				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function (e) {
 					WDGLightboxFunctions.hideAll();
 				});
@@ -899,6 +899,17 @@ var WDGLightboxFunctions = (function ($) {
 
 			}
 
+			if ($('body.template-les-projets').length > 0) {
+				var cookieVisited = YPUIFunctions.getCookie('hidden_project_visited');
+				if (cookieVisited !== '') {
+					var cookieVisitedUrl = YPUIFunctions.getCookie('hidden_project_visited_url');
+					var cookieVisitedTitle = YPUIFunctions.getCookie('hidden_project_visited_title');
+					$('div.previously-visited-hidden-project').show();
+					$('div.previously-visited-hidden-project a').attr('href', decodeURIComponent(cookieVisitedUrl));
+					$('div.previously-visited-hidden-project a').text(decodeURIComponent(cookieVisitedTitle.replace(/\+/g, '%20')));
+
+				}
+			}
 		},
 
 		displaySingle: function (sLightboxId) {

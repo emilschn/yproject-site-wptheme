@@ -353,4 +353,8 @@
 			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
+		<?php if ( $page_controler->get_show_user_hidden_project_visited() ): ?>
+			<?php locate_template( array( 'common/lightbox/hidden-project-visited-lightbox.php' ), true ); ?>
+		<?php endif; ?>
+		
 		<div id="container"> 

@@ -170,6 +170,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 ?>
 
+<div class="previously-visited-hidden-project hidden">
+	<div>
+		Vous aviez visité un projet privé précédemment,
+		cliquez sur ce lien pour retrourner sur la page de <a href=""></a>.
+	</div>
+</div>
+
 <?php $currentprojects_html = $page_controler->get_currentprojects_html(); ?>
 
 <?php if ( !$currentprojects_html ): ?>
