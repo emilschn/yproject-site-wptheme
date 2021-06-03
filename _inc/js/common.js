@@ -673,6 +673,10 @@ var WDGNavFunctions = (function ($) {
 			}
 			WDGNavFunctions.isConnectionChecked = true;
 
+			if ($('.account-signin').length > 0 || $('.login-page-container').length > 0 ){
+				return;
+			}
+
 			var strPageInfo = '';
 			if ($('#content').length > 0 && $('#content').data('campaignstatus') !== undefined && $('#content').data('campaignstatus') === 'funded') {
 				strPageInfo = $('#content').data('campaignid');
