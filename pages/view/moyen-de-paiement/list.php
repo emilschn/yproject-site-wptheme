@@ -113,14 +113,14 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
 		<input type="hidden" id="input-meanofpayment-card-type" name="meanofpayment-card-type" value="">
 		<input type="hidden" id="input-meanofpayment-card-save" name="meanofpayment-card-save" value="">
-		<button type="submit" name="nav" value="previous" class="button half left transparent">
+		<a href="<?php echo $page_controler->get_previous_url(); ?>" class="button half left transparent">
 			<span class="button-text">
 				<?php _e( 'common.PREVIOUS', 'yproject' ); ?>
 			</span>
 			<span class="button-loading loading align-center hidden">
 				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="chargement" /><?php _e( 'common.PREVIOUS', 'yproject' ); ?>...
 			</span>
-		</button>
+		</a>
 		<button type="submit" class="button half right red hidden">
 			<span class="button-text">
 				<?php _e( 'invest.mean-payment.PAY', 'yproject' ); ?>
