@@ -449,7 +449,7 @@ var WDGNavFunctions = (function ($) {
 			});
 
 			// Navbar : bouton compte utilisateur
-			$('.btn-user').click(function (e) {
+			$('#menu .btn-user').click(function (e) {
 				if ($(this).attr('href') == '#') {
 					e.preventDefault();
 					if ($('.btn-user').hasClass('active')) {
@@ -462,11 +462,17 @@ var WDGNavFunctions = (function ($) {
 						$('#submenu-search').hide();
 					}
 				}
+				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
+					WDGNavFunctions.showOkConnect();
+				}
+				if ($('.btn-user').hasClass('not-connected')) {
+					WDGNavFunctions.checkUserConnection();
+				}
 			});
 
-			if ($('nav#main .btn-user').hasClass('not-connected')) {
-				WDGNavFunctions.checkUserConnection();
-			}
+			$('.model-form #identifiant').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
+			$('.model-form #password').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
+
 
 			// Navbar : bouton recherche
 			$('#btn-search, #btn-burger').click(function (e) {
@@ -601,15 +607,6 @@ var WDGNavFunctions = (function ($) {
 				window.location = $(this).val();
 			});
 
-
-			$('#menu .btn-user').click(function () {
-				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
-					WDGNavFunctions.showOkConnect();
-				}
-			});
-			$('.model-form #identifiant').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
-			$('.model-form #password').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
-
 			//Fermeture des box connexion et recherche au clic dans la fenêtre
 			$(window).mouseup(function (e) {
 				var boxUser = $('#submenu-user');
@@ -635,29 +632,6 @@ var WDGNavFunctions = (function ($) {
 					btnBurger.removeClass('active').addClass('inactive');
 				}
 			});
-
-			$(".social_connect_login_facebook").click(function (e) {
-				e.preventDefault();
-				$(".social_connect_login_facebook_loading").show();
-				$.ajax({
-					'type': "POST",
-					'url': ajax_object.ajax_url,
-					'data': {
-						'action': 'get_connect_to_facebook_url',
-						'redirect': $('.social_connect_login_facebook').data('redirect')
-					}
-				}).done(function (result) {
-					if (result.indexOf('http') > -1) {
-						window.location = result;
-					} else {
-						alert("Facebook Connection URL Error");
-					}
-				}).fail(function () {
-					alert("Facebook Connection Error");
-				}).always(function () {
-					$(".social_connect_login_facebook_loading").hide();
-				});
-			});
 		},
 
 		//Apparition bouton OK pour connexion
@@ -672,10 +646,6 @@ var WDGNavFunctions = (function ($) {
 				return;
 			}
 			WDGNavFunctions.isConnectionChecked = true;
-
-			if ($('.account-signin').length > 0 || $('.login-page-container').length > 0 ){
-				return;
-			}
 
 			var strPageInfo = '';
 			if ($('#content').length > 0 && $('#content').data('campaignstatus') !== undefined && $('#content').data('campaignstatus') === 'funded') {
