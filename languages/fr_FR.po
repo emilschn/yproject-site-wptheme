@@ -506,6 +506,12 @@ msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
 msgid "account.HELLO"
 msgstr "Bonjour"
 
+msgid "account.lightbox.hidden-project-visited.TITLE"
+msgstr "Retourner vers un projet privé"
+
+msgid "account.lightbox.hidden-project-visited.DESCRIPTION"
+msgstr "Vous avez visité la page de %s qui est un projet privé. Voulez-vous poursuivre vers la page de ce projet ?"
+
 msgid "account.lightbox.VALIDATE_INFORMATION"
 msgstr "Validation de vos informations"
 

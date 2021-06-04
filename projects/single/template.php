@@ -1,4 +1,4 @@
-<?php 
+<?php
 global $campaign, $can_modify;
 $can_modify = $campaign->current_user_can_edit();
 $client_context = $campaign->get_client_context();
@@ -63,7 +63,7 @@ $can_display_presentation = $can_modify
 
 <?php endif; ?>
 
-<?php 
+<?php
 $custom_footer_code = $campaign->custom_footer_code();
 if ( !empty( $custom_footer_code ) ) {
 	echo $custom_footer_code;

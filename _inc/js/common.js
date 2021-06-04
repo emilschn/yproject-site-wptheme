@@ -297,7 +297,8 @@ YPUIFunctions = (function ($) {
 				'data': {
 					'action': 'get_investments_data',
 					'id_campaign': campaign_id,
-					'is_short_version': bShortVersion ? '1' : '0'
+					'is_short_version': bShortVersion ? '1' : '0',
+					'show_failed_payments': bShortVersion ? '0' : '1'
 				}
 			}).done(function (result) {
 				YPUIFunctions.currentRequest = '';
@@ -898,6 +899,17 @@ var WDGLightboxFunctions = (function ($) {
 
 			}
 
+			if ($('body.template-les-projets').length > 0) {
+				var cookieVisited = YPUIFunctions.getCookie('hidden_project_visited');
+				if (cookieVisited !== '') {
+					var cookieVisitedUrl = YPUIFunctions.getCookie('hidden_project_visited_url');
+					var cookieVisitedTitle = YPUIFunctions.getCookie('hidden_project_visited_title');
+					$('div.previously-visited-hidden-project').show();
+					$('div.previously-visited-hidden-project a').attr('href', decodeURIComponent(cookieVisitedUrl));
+					$('div.previously-visited-hidden-project a').text(decodeURIComponent(cookieVisitedTitle.replace(/\+/g, '%20')));
+
+				}
+			}
 		},
 
 		displaySingle: function (sLightboxId) {
