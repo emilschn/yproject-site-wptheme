@@ -437,11 +437,10 @@ YPUIFunctions = (function ($) {
 var WDGNavFunctions = (function ($) {
 	return {
 
-		isConnectionChecked: false,
+		currentUserInfo: false,
 		currentHref: '',
 
 		init: function () {
-			WDGNavFunctions.checkUserIsConnected();
 
 			$("nav#main a.lines").click(function (e) {
 				$("nav#main a.lines").removeClass("current");
@@ -466,10 +465,11 @@ var WDGNavFunctions = (function ($) {
 				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
 					WDGNavFunctions.showOkConnect();
 				}
-				if ($('.btn-user').hasClass('not-connected')) {
-					WDGNavFunctions.displaySubmenuUser();
-				}
+				// au clic, changement du sous-menu
+				WDGNavFunctions.displaySubmenuUser();
 			});
+			// on charge les informations utilisateurs
+			WDGNavFunctions.checkUserConnection();
 
 			$('.model-form #identifiant').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
 			$('.model-form #password').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
@@ -604,10 +604,6 @@ var WDGNavFunctions = (function ($) {
 				});
 			});
 
-			
-			if ($(".project-banner").length > 0) {
-				WDGNavFunctions.displayProjectAdminMenu();
-			}
 			$('#footer-switch-lang').change(function () {
 				window.location = $(this).val();
 			});
@@ -646,70 +642,12 @@ var WDGNavFunctions = (function ($) {
 			$('.model-form input.connect').addClass('ok_valid');
 		},
 
-		checkUserIsConnected: function () {
-			$.ajax({
-				'type': "POST",
-				'url': ajax_object.ajax_url,
-				'data': {
-					'action': 'get_current_user_id'
-				},
-				'timeout': 30000 // sets timeout to 30 seconds
-			}).done(function (result) {
-				if (result === '0') {
-				} else {
-					var infoDecoded = JSON.parse(result);
-					$('#menu .btn-user').addClass('connected').removeClass('not-connected');
-					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-						$('#menu .btn-user').addClass('needs-authentication');
-					}
-					$('#menu .btn-user img').remove();
-					$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
-					dataLayer.push({
-						'user_id': infoDecoded['userinfos']['userid']
-					});
-				}
-				wdg_gtm_call();
-			});
-		},
+		checkUserConnection: function () {		
+			// si on a déjà les infos utilisateurs (rechargées à chaque page on ne fait rien)	
+			if (WDGNavFunctions.currentUserInfo) {
+				return;
+			}
 
-		displaySubmenuUser: function () {
-			$.ajax({
-				'type': "POST",
-				'url': ajax_object.ajax_url,
-				'data': {
-					'action': 'get_current_user_info'
-				},
-				'timeout': 30000 // sets timeout to 30 seconds
-			}).done(function (result) {
-				if (result === '0') {
-					$('#submenu-user.not-connected .menu-loading-init').hide();
-					window.location = $('#submenu-user.not-connected .menu-loading-init').data('redirect');
-				} else {
-					var infoDecoded = JSON.parse(result);
-					$('#menu .btn-user').addClass('connected').removeClass('not-connected');
-					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-						$('#menu .btn-user').addClass('needs-authentication');
-					}
-					$('#menu .btn-user img').remove();
-					$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
-
-					$('#submenu-user.not-connected .menu-loading-init').hide();
-					$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
-					var lengthInfoProjects = infoDecoded['projectlist'].length;
-					for (var i = 0; i < lengthInfoProjects; i++) {
-						itemProject = infoDecoded['projectlist'][i];
-						$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
-					}
-					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-						$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
-					}
-					$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
-					$('#submenu-user.not-connected .menu-connected').show();
-				}
-			});
-		},
-
-		displayProjectAdminMenu: function () {
 			var strPageInfo = '';
 			if ($('#content').length > 0 && $('#content').data('campaignstatus') !== undefined && $('#content').data('campaignstatus') === 'funded') {
 				strPageInfo = $('#content').data('campaignid');
@@ -718,13 +656,19 @@ var WDGNavFunctions = (function ($) {
 				'type': "POST",
 				'url': ajax_object.ajax_url,
 				'data': {
-					'action': 'get_current_project_infos',
+					'action': 'get_current_user_info',
 					'pageinfo': strPageInfo
 				},
 				'timeout': 30000 // sets timeout to 30 seconds
 			}).done(function (result) {
+				// on stocke les infos utilisateurs
+				WDGNavFunctions.currentUserInfo = result;
+				// on change l'affichage du sous-menu
+				WDGNavFunctions.displaySubmenuUser();
+
 				if (result !== '0') {
 					var infoDecoded = JSON.parse(result);
+					// on affiche le menu admin de la page projet
 					if (infoDecoded['context'] != undefined && infoDecoded['context']['dashboard_url'] != undefined) {
 						if ($('#content .project-admin').length == 0) {
 							// Fix temporaire (hum...) : ne devrait pas être derrière cette condition
@@ -746,8 +690,44 @@ var WDGNavFunctions = (function ($) {
 							ProjectEditor.init();
 						}
 					}
+					// stocke l'id utilisateur pour le tracker
+					dataLayer.push({
+						'user_id': infoDecoded['userinfos']['userid']
+					});
 				}
+				wdg_gtm_call();
 			});
+		},
+
+		displaySubmenuUser: function () {
+			if (WDGNavFunctions.currentUserInfo === '0') {
+				// si on n'est pas connecté et qu'on a ouvert le menu, on redirige vers la page de connexion
+				if( !$('#submenu-user.not-connected .menu-loading-init').is(':hidden') ){
+					$('#submenu-user.not-connected .menu-loading-init').hide();
+					window.location = $('#submenu-user.not-connected .menu-loading-init').data('redirect');
+				} 
+			} else {
+				var infoDecoded = JSON.parse(WDGNavFunctions.currentUserInfo);
+				$('#menu .btn-user').addClass('connected').removeClass('not-connected');
+				if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+					$('#menu .btn-user').addClass('needs-authentication');
+				}
+				$('#menu .btn-user img').remove();
+				$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
+
+				$('#submenu-user.not-connected .menu-loading-init').hide();
+				$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
+				var lengthInfoProjects = infoDecoded['projectlist'].length;
+				for (var i = 0; i < lengthInfoProjects; i++) {
+					itemProject = infoDecoded['projectlist'][i];
+					$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+				}
+				if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+					$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
+				}
+				$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
+				$('#submenu-user.not-connected .menu-connected').show();
+			}
 		}
 	};
 })(jQuery);
