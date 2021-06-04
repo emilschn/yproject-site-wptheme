@@ -6,8 +6,10 @@ $page_forgot_password_url = WDG_Redirect_Engine::override_get_page_url( 'mot-de-
 $init_username = '';
 if ( isset( $_POST[ 'user_login' ] ) ) {
 	$init_username = htmlentities( $_POST['user_login'] );
-} else if ( isset( $_GET[ 'user_login' ] ) ) {
-	$init_username = htmlentities( $_GET['user_login'] );
+} else {
+	if ( isset( $_GET[ 'user_login' ] ) ) {
+		$init_username = htmlentities( $_GET['user_login'] );
+	}
 }
 $error = array();
 if ( !isset( $_GET[ 'action' ]) ) {
@@ -61,6 +63,7 @@ if ( !isset( $_GET[ 'action' ]) ) {
 					$feedback = "Votre mot de passe a été mis à jour et votre compte a été délié de facebook.";
 				}
 				WDGWPREST_Entity_User::update( $WDGUser );
+				$WDGUser->set_email_is_validated();
 			} else {
 				array_push( $error, "La clé ne correspond pas à cet utilisateur." );
 			}
