@@ -55,6 +55,11 @@ YPUIFunctions = (function ($) {
 			WDGLightboxFunctions.init();
 			WDGNavFunctions.init();
 
+			if ($('span#auto-redirect').length > 0) {
+				var redirectUrl = $('span#auto-redirect').data('redirect-link');
+				setTimeout(function () { window.location = redirectUrl; }, 2000);
+			}
+
 			$(document).scroll(function () {
 				if (YPUIFunctions.currentLightbox === '') {
 					if ($(document).scrollTop() > 50) {
