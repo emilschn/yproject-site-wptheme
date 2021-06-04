@@ -441,6 +441,7 @@ var WDGNavFunctions = (function ($) {
 		currentHref: '',
 
 		init: function () {
+			WDGNavFunctions.checkUserIsConnected();
 
 			$("nav#main a.lines").click(function (e) {
 				$("nav#main a.lines").removeClass("current");
@@ -466,7 +467,7 @@ var WDGNavFunctions = (function ($) {
 					WDGNavFunctions.showOkConnect();
 				}
 				if ($('.btn-user').hasClass('not-connected')) {
-					WDGNavFunctions.checkUserConnection();
+					WDGNavFunctions.displaySubmenuUser();
 				}
 			});
 
@@ -603,6 +604,10 @@ var WDGNavFunctions = (function ($) {
 				});
 			});
 
+			
+			if ($(".project-banner").length > 0) {
+				WDGNavFunctions.displayProjectAdminMenu();
+			}
 			$('#footer-switch-lang').change(function () {
 				window.location = $(this).val();
 			});
@@ -641,22 +646,38 @@ var WDGNavFunctions = (function ($) {
 			$('.model-form input.connect').addClass('ok_valid');
 		},
 
-		checkUserConnection: function () {
-			if (WDGNavFunctions.isConnectionChecked) {
-				return;
-			}
-			WDGNavFunctions.isConnectionChecked = true;
-
-			var strPageInfo = '';
-			if ($('#content').length > 0 && $('#content').data('campaignstatus') !== undefined && $('#content').data('campaignstatus') === 'funded') {
-				strPageInfo = $('#content').data('campaignid');
-			}
+		checkUserIsConnected: function () {
 			$.ajax({
 				'type': "POST",
 				'url': ajax_object.ajax_url,
 				'data': {
-					'action': 'get_current_user_info',
-					'pageinfo': strPageInfo
+					'action': 'get_current_user_id'
+				},
+				'timeout': 30000 // sets timeout to 30 seconds
+			}).done(function (result) {
+				if (result === '0') {
+				} else {
+					var infoDecoded = JSON.parse(result);
+					$('#menu .btn-user').addClass('connected').removeClass('not-connected');
+					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+						$('#menu .btn-user').addClass('needs-authentication');
+					}
+					$('#menu .btn-user img').remove();
+					$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
+					dataLayer.push({
+						'user_id': infoDecoded['userinfos']['userid']
+					});
+				}
+				wdg_gtm_call();
+			});
+		},
+
+		displaySubmenuUser: function () {
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': {
+					'action': 'get_current_user_info'
 				},
 				'timeout': 30000 // sets timeout to 30 seconds
 			}).done(function (result) {
@@ -684,7 +705,26 @@ var WDGNavFunctions = (function ($) {
 					}
 					$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
 					$('#submenu-user.not-connected .menu-connected').show();
+				}
+			});
+		},
 
+		displayProjectAdminMenu: function () {
+			var strPageInfo = '';
+			if ($('#content').length > 0 && $('#content').data('campaignstatus') !== undefined && $('#content').data('campaignstatus') === 'funded') {
+				strPageInfo = $('#content').data('campaignid');
+			}
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': {
+					'action': 'get_current_project_infos',
+					'pageinfo': strPageInfo
+				},
+				'timeout': 30000 // sets timeout to 30 seconds
+			}).done(function (result) {
+				if (result !== '0') {
+					var infoDecoded = JSON.parse(result);
 					if (infoDecoded['context'] != undefined && infoDecoded['context']['dashboard_url'] != undefined) {
 						if ($('#content .project-admin').length == 0) {
 							// Fix temporaire (hum...) : ne devrait pas être derrière cette condition
@@ -706,13 +746,7 @@ var WDGNavFunctions = (function ($) {
 							ProjectEditor.init();
 						}
 					}
-
-					dataLayer.push({
-						'user_id': infoDecoded['userinfos']['userid']
-					});
 				}
-
-				wdg_gtm_call();
 			});
 		}
 	};
