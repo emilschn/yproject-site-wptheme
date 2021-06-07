@@ -4,6 +4,7 @@ body {
 	font-size: 1.1em;
     color: #333333;
     font-family: Arial, Helvetica, sans-serif;
+	overflow-x: hidden; /* permet d'empêcher le scroll horizontal causé par WP */
 }
 body a {
 	color: #EA4F51;
