@@ -57,6 +57,7 @@ YPUIFunctions = (function ($) {
 
 			if ($('span#auto-redirect').length > 0) {
 				var redirectUrl = $('span#auto-redirect').data('redirect-link');
+				console.log("blabla"+redirectUrl);
 				setTimeout(function () { window.location = redirectUrl; }, 2000);
 			}
 
@@ -445,6 +446,7 @@ var WDGNavFunctions = (function ($) {
 
 		currentUserInfo: false,
 		currentHref: '',
+		displaySubmenuUserInterval:false,
 
 		init: function () {
 
@@ -705,34 +707,44 @@ var WDGNavFunctions = (function ($) {
 			});
 		},
 
+
 		displaySubmenuUser: function () {
-			if (WDGNavFunctions.currentUserInfo === '0') {
-				// si on n'est pas connecté et qu'on a ouvert le menu, on redirige vers la page de connexion
-				if (!$('#submenu-user.not-connected .menu-loading-init').is(':hidden')) {
+			if (WDGNavFunctions.currentUserInfo){
+				if (WDGNavFunctions.displaySubmenuUserInterval){
+					clearInterval(WDGNavFunctions.displaySubmenuUserInterval);
+				}
+				if (WDGNavFunctions.currentUserInfo === '0') {
+					// si on n'est pas connecté et qu'on a ouvert le menu, on redirige vers la page de connexion
+					if (!$('#submenu-user.not-connected .menu-loading-init').is(':hidden') && $('#submenu-user.not-connected .menu-loading-init').data('redirect') != undefined) {
+						$('#submenu-user.not-connected .menu-loading-init').hide();
+						window.location = $('#submenu-user.not-connected .menu-loading-init').data('redirect');
+					}
+				} else {
+					var infoDecoded = JSON.parse(WDGNavFunctions.currentUserInfo);
+					$('#menu .btn-user').addClass('connected').removeClass('not-connected');
+					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+						$('#menu .btn-user').addClass('needs-authentication');
+					}
+					$('#menu .btn-user img').remove();
+					$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
+
 					$('#submenu-user.not-connected .menu-loading-init').hide();
-					window.location = $('#submenu-user.not-connected .menu-loading-init').data('redirect');
+					$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
+					var lengthInfoProjects = infoDecoded['projectlist'].length;
+					for (var i = 0; i < lengthInfoProjects; i++) {
+						itemProject = infoDecoded['projectlist'][i];
+						$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+					}
+					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+						$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
+					}
+					$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
+					$('#submenu-user.not-connected .menu-connected').show();
 				}
 			} else {
-				var infoDecoded = JSON.parse(WDGNavFunctions.currentUserInfo);
-				$('#menu .btn-user').addClass('connected').removeClass('not-connected');
-				if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-					$('#menu .btn-user').addClass('needs-authentication');
+				if (!WDGNavFunctions.displaySubmenuUserInterval){
+					WDGNavFunctions.displaySubmenuUserInterval = setInterval(WDGNavFunctions.displaySubmenuUser, 1000);
 				}
-				$('#menu .btn-user img').remove();
-				$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
-
-				$('#submenu-user.not-connected .menu-loading-init').hide();
-				$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
-				var lengthInfoProjects = infoDecoded['projectlist'].length;
-				for (var i = 0; i < lengthInfoProjects; i++) {
-					itemProject = infoDecoded['projectlist'][i];
-					$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
-				}
-				if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-					$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
-				}
-				$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
-				$('#submenu-user.not-connected .menu-connected').show();
 			}
 		}
 	};
