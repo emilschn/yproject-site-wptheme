@@ -62,16 +62,16 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 		<div class="project-img" <?php if ( !empty( $img ) ) { ?> style="background-image: url('<?php echo $img; ?>')"<?php } ?>></div>
 		<a class="hidden-link" href="<?php echo $link; ?>">
 			<div class="impacts-container" id="impacts-<?php echo $project_id ?>">
-				<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE || strpos($campaign_categories_str, 'environmental')  !== FALSE): ?>
+				<?php if ( $campaign->has_impact( 'environnemental' ) || $campaign->has_impact( 'environmental' ) ): ?>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="<?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENVIRONMENT', 'yproject' ); ?></span>
 				<?php endif; ?>
-				<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
+				<?php if ( $campaign->has_impact( 'social' ) ): ?>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="<?php _e( 'project.impact.SOCIAL', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.SOCIAL', 'yproject' ); ?></span>
 				<?php endif; ?>
-				<?php if (strpos($campaign_categories_str, 'economique') !== FALSE || strpos($campaign_categories_str, 'economic')  !== FALSE): ?>
+				<?php if ( $campaign->has_impact( 'economique' ) || $campaign->has_impact( 'economic' ) ): ?>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="<?php _e( 'project.impact.ECO', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ECO', 'yproject' ); ?></span>
 				<?php endif; ?>
-				<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE || strpos($campaign_categories_str, 'committed-company')  !== FALSE): ?>
+				<?php if ( $campaign->has_impact( 'entreprise-engagee' ) || $campaign->has_impact( 'committed-company' ) ): ?>
 					<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="<?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?>" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e( 'project.impact.ENGAGEMENT', 'yproject' ); ?></span>
 				<?php endif; ?>
 			</div>
