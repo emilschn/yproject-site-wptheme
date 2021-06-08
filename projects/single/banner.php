@@ -30,6 +30,9 @@ if (is_user_logged_in()) {
 	}
 }
 
+$current_lang = get_locale();
+$campaign->set_current_lang($current_lang);
+
 $video_element = '';
 $img_src = '';
 $campaign_video_url = $campaign->video();
@@ -97,8 +100,6 @@ if (!empty($current_organization)) {
 	}
 }
 
-$current_lang = get_locale();
-$campaign->set_current_lang($current_lang);
 $lang_list = $campaign->get_lang_list();
 ?>
 	
