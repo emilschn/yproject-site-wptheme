@@ -55,6 +55,12 @@ YPUIFunctions = (function ($) {
 			WDGLightboxFunctions.init();
 			WDGNavFunctions.init();
 
+			if ($('span#auto-redirect').length > 0) {
+				var redirectUrl = $('span#auto-redirect').data('redirect-link');
+				console.log("blabla"+redirectUrl);
+				setTimeout(function () { window.location = redirectUrl; }, 2000);
+			}
+
 			$(document).scroll(function () {
 				if (YPUIFunctions.currentLightbox === '') {
 					if ($(document).scrollTop() > 50) {
@@ -438,8 +444,9 @@ YPUIFunctions = (function ($) {
 var WDGNavFunctions = (function ($) {
 	return {
 
-		isConnectionChecked: false,
+		currentUserInfo: false,
 		currentHref: '',
+		displaySubmenuUserInterval:false,
 
 		init: function () {
 
@@ -450,7 +457,7 @@ var WDGNavFunctions = (function ($) {
 			});
 
 			// Navbar : bouton compte utilisateur
-			$('.btn-user').click(function (e) {
+			$('#menu .btn-user').click(function (e) {
 				if ($(this).attr('href') == '#') {
 					e.preventDefault();
 					if ($('.btn-user').hasClass('active')) {
@@ -463,11 +470,18 @@ var WDGNavFunctions = (function ($) {
 						$('#submenu-search').hide();
 					}
 				}
+				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
+					WDGNavFunctions.showOkConnect();
+				}
+				// au clic, changement du sous-menu
+				WDGNavFunctions.displaySubmenuUser();
 			});
+			// on charge les informations utilisateurs
+			WDGNavFunctions.checkUserConnection();
 
-			if ($('nav#main .btn-user').hasClass('not-connected')) {
-				WDGNavFunctions.checkUserConnection();
-			}
+			$('.model-form #identifiant').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
+			$('.model-form #password').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
+
 
 			// Navbar : bouton recherche
 			$('#btn-search, #btn-burger').click(function (e) {
@@ -602,15 +616,6 @@ var WDGNavFunctions = (function ($) {
 				window.location = $(this).val();
 			});
 
-
-			$('#menu .btn-user').click(function () {
-				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
-					WDGNavFunctions.showOkConnect();
-				}
-			});
-			$('.model-form #identifiant').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
-			$('.model-form #password').bind("keypress click", function () { WDGNavFunctions.showOkConnect(); });
-
 			//Fermeture des box connexion et recherche au clic dans la fenêtre
 			$(window).mouseup(function (e) {
 				var boxUser = $('#submenu-user');
@@ -636,29 +641,6 @@ var WDGNavFunctions = (function ($) {
 					btnBurger.removeClass('active').addClass('inactive');
 				}
 			});
-
-			$(".social_connect_login_facebook").click(function (e) {
-				e.preventDefault();
-				$(".social_connect_login_facebook_loading").show();
-				$.ajax({
-					'type': "POST",
-					'url': ajax_object.ajax_url,
-					'data': {
-						'action': 'get_connect_to_facebook_url',
-						'redirect': $('.social_connect_login_facebook').data('redirect')
-					}
-				}).done(function (result) {
-					if (result.indexOf('http') > -1) {
-						window.location = result;
-					} else {
-						alert("Facebook Connection URL Error");
-					}
-				}).fail(function () {
-					alert("Facebook Connection Error");
-				}).always(function () {
-					$(".social_connect_login_facebook_loading").hide();
-				});
-			});
 		},
 
 		//Apparition bouton OK pour connexion
@@ -669,10 +651,10 @@ var WDGNavFunctions = (function ($) {
 		},
 
 		checkUserConnection: function () {
-			if (WDGNavFunctions.isConnectionChecked) {
+			// si on a déjà les infos utilisateurs (rechargées à chaque page on ne fait rien)	
+			if (WDGNavFunctions.currentUserInfo) {
 				return;
 			}
-			WDGNavFunctions.isConnectionChecked = true;
 
 			var strPageInfo = '';
 			if ($('#content').length > 0 && $('#content').data('campaignstatus') !== undefined && $('#content').data('campaignstatus') === 'funded') {
@@ -687,31 +669,14 @@ var WDGNavFunctions = (function ($) {
 				},
 				'timeout': 30000 // sets timeout to 30 seconds
 			}).done(function (result) {
-				if (result === '0') {
-					$('#submenu-user.not-connected .menu-loading-init').hide();
-					$('#submenu-user.not-connected .menu-connection-forms').show();
-				} else {
+				// on stocke les infos utilisateurs
+				WDGNavFunctions.currentUserInfo = result;
+				// on change l'affichage du sous-menu
+				WDGNavFunctions.displaySubmenuUser();
+
+				if (result !== '0') {
 					var infoDecoded = JSON.parse(result);
-					$('#menu .btn-user').addClass('connected').removeClass('not-connected');
-					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-						$('#menu .btn-user').addClass('needs-authentication');
-					}
-					$('#menu .btn-user img').remove();
-					$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
-
-					$('#submenu-user.not-connected .menu-loading-init').hide();
-					$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
-					var lengthInfoProjects = infoDecoded['projectlist'].length;
-					for (var i = 0; i < lengthInfoProjects; i++) {
-						itemProject = infoDecoded['projectlist'][i];
-						$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
-					}
-					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-						$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
-					}
-					$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
-					$('#submenu-user.not-connected .menu-connected').show();
-
+					// on affiche le menu admin de la page projet
 					if (infoDecoded['context'] != undefined && infoDecoded['context']['dashboard_url'] != undefined) {
 						if ($('#content .project-admin').length == 0) {
 							// Fix temporaire (hum...) : ne devrait pas être derrière cette condition
@@ -733,14 +698,54 @@ var WDGNavFunctions = (function ($) {
 							ProjectEditor.init();
 						}
 					}
-
+					// stocke l'id utilisateur pour le tracker
 					dataLayer.push({
 						'user_id': infoDecoded['userinfos']['userid']
 					});
 				}
-
 				wdg_gtm_call();
 			});
+		},
+
+
+		displaySubmenuUser: function () {
+			if (WDGNavFunctions.currentUserInfo){
+				if (WDGNavFunctions.displaySubmenuUserInterval){
+					clearInterval(WDGNavFunctions.displaySubmenuUserInterval);
+				}
+				if (WDGNavFunctions.currentUserInfo === '0') {
+					// si on n'est pas connecté et qu'on a ouvert le menu, on redirige vers la page de connexion
+					if (!$('#submenu-user.not-connected .menu-loading-init').is(':hidden') && $('#submenu-user.not-connected .menu-loading-init').data('redirect') != undefined) {
+						$('#submenu-user.not-connected .menu-loading-init').hide();
+						window.location = $('#submenu-user.not-connected .menu-loading-init').data('redirect');
+					}
+				} else {
+					var infoDecoded = JSON.parse(WDGNavFunctions.currentUserInfo);
+					$('#menu .btn-user').addClass('connected').removeClass('not-connected');
+					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+						$('#menu .btn-user').addClass('needs-authentication');
+					}
+					$('#menu .btn-user img').remove();
+					$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
+
+					$('#submenu-user.not-connected .menu-loading-init').hide();
+					$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
+					var lengthInfoProjects = infoDecoded['projectlist'].length;
+					for (var i = 0; i < lengthInfoProjects; i++) {
+						itemProject = infoDecoded['projectlist'][i];
+						$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+					}
+					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+						$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
+					}
+					$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
+					$('#submenu-user.not-connected .menu-connected').show();
+				}
+			} else {
+				if (!WDGNavFunctions.displaySubmenuUserInterval){
+					WDGNavFunctions.displaySubmenuUserInterval = setInterval(WDGNavFunctions.displaySubmenuUser, 1000);
+				}
+			}
 		}
 	};
 })(jQuery);
