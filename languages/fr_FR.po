@@ -463,6 +463,9 @@ msgstr "Mon porte-monnaie"
 msgid "account.menu.MY_INVESTMENTS"
 msgstr "Mes investissements"
 
+msgid "account.menu.MY_SUBSCRIPTIONS"
+msgstr "Mes abonnements"
+
 msgid "account.menu.MY_DOCUMENTS"
 msgstr "Mes documents"
 
@@ -486,6 +489,9 @@ msgstr "Porte-monnaie"
 
 msgid "account.menu.organization.INVESTMENTS"
 msgstr "Investissements"
+
+msgid "account.menu.organization.SUBSCRIPTIONS"
+msgstr "Abonnements"
 
 msgid "account.menu.organization.DOCUMENTS"
 msgstr "Documents"

@@ -470,6 +470,9 @@ msgstr "My wallet"
 msgid "account.menu.MY_INVESTMENTS"
 msgstr "My investments"
 
+msgid "account.menu.MY_SUBSCRIPTIONS"
+msgstr "My subscriptions"
+
 msgid "account.menu.MY_DOCUMENTS"
 msgstr "My documents"
 
@@ -493,6 +496,9 @@ msgstr "Wallet"
 
 msgid "account.menu.organization.INVESTMENTS"
 msgstr "Investments"
+
+msgid "account.menu.organization.SUBSCRIPTIONS"
+msgstr "Subscriptions"
 
 msgid "account.menu.organization.DOCUMENTS"
 msgstr "Documents"

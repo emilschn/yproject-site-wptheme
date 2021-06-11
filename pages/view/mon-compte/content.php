@@ -28,6 +28,10 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 			</div>
 			
 			<div id="item-body-documents" class="item-body-tab hidden">
+				<?php locate_template( array( 'pages/view/mon-compte/content-subscription.php' ), true ); ?>
+			</div>
+			
+			<div id="item-body-documents" class="item-body-tab hidden">
 				<?php locate_template( array( 'pages/view/mon-compte/content-documents.php' ), true ); ?>
 			</div>
 
@@ -63,6 +67,10 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-investments.php' ), true, false ); ?>
 					</div>
 			
+					<div id="item-body-orga-documents-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
+						<?php locate_template( array( 'pages/view/mon-compte/content-orga-subscription.php' ), true, false ); ?>
+					</div>
+
 					<div id="item-body-orga-documents-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-documents.php' ), true, false ); ?>
 					</div>
