@@ -1002,7 +1002,7 @@ footer > .footer-container {
 	max-width: 1280px;
 	margin: 0 auto;
 	background-repeat: no-repeat;
-	padding: 50px 0px 30px;
+	padding: 50px 50px 30px;
 	line-height: 1.5;
 }
 footer > .footer-container > section {
@@ -1101,6 +1101,7 @@ footer > .footer-container > div.logo-list {
     -webkit-justify-content: space-between;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 	padding: 16px 0px;
 }
 footer > .footer-container > div.logo-list > div:nth-child(1), footer > .footer-container > div.logo-list > div:nth-child(2), footer > .footer-container > div.logo-list > div:nth-child(5) {
