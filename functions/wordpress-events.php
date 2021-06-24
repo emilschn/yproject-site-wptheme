@@ -431,7 +431,10 @@ class WDG_WordPress_Events {
 		}
 
 		// Ajout variable JS avec l'url de la page utilisée pour les requêtes Ajax
-		wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+		wp_localize_script( 'wdg-script', 'ajax_object', array(
+			'ajax_url'			=> admin_url( 'admin-ajax.php' ),
+			'custom_ajax_url'	=> home_url( '/wp-content/plugins/appthemer-crowdfunding/includes/control/requests/custom-admin-ajax.php' )
+		));
 	}
 
 	public static function login_or_register() {
