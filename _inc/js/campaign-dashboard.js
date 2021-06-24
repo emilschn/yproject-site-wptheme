@@ -529,7 +529,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 
 	var self = this;
 	var mail_content, mail_title, originalText;
-	$("#direct-mail #mail-preview-button").click(function () {
+	$("#direct-mail #mail-preview-button").click(function ( e ) {
 		mail_content = tinyMCE.get('mail_content').getContent();
 		mail_title = $("#direct-mail #mail-title").val();
 
@@ -566,7 +566,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		}
 	});
 	
-	$("#direct-mail #mail-send-button").click(function () {
+	$("#direct-mail #mail-send-button").click(function ( e ) {
 		$(this).find(".button-text").hide();
 		$(this).find(".button-loading").show();
 		if ($(this).hasClass("disabled")) {
