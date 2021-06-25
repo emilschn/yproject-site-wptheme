@@ -21,6 +21,7 @@ class WDG_WordPress_Events {
 	public function __construct() {
 		// Chargement de page
 		add_action( 'init', 'WDG_WordPress_Events::init' );
+		add_action( 'pre_option_active_plugins', 'WDG_WordPress_Events::pre_option_active_plugins', 10 );
 		add_action( 'after_setup_theme', 'WDG_WordPress_Events::after_setup_theme', 15 );
 		add_action( 'send_headers', 'WDG_WordPress_Events::send_headers' );
 		add_action( 'wp_logout', 'WDG_WordPress_Events::wp_logout' );
@@ -216,9 +217,30 @@ class WDG_WordPress_Events {
 	}
 
 	/**
+	 * Hack de la fonction de récupération des plugins activé
+	 */
+	public static function pre_option_active_plugins() {
+		// Si c'est une requête Ajax et qu'on n'est pas en interface d'admin
+		if ( wp_doing_ajax() && !is_admin() ) {
+			// On ne charge que les plugins edd et crowdfunding
+			$buffer = array(
+				'easy-digital-downloads/easy-digital-downloads.php',
+				'appthemer-crowdfunding/crowdfunding.php'
+			);
+
+			return $buffer;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Définition du domaine pour les traductions
 	 */
 	public static function after_setup_theme() {
+		if ( wp_doing_ajax() ) {
+			WDGAjaxActions::do_action();
+		}
 		// Chargement des langues
 		load_theme_textdomain( 'yproject', get_template_directory_uri() .'/languages' );
 		load_child_theme_textdomain( 'yproject', get_stylesheet_directory() . '/languages' );
