@@ -30,6 +30,9 @@ if (is_user_logged_in()) {
 	}
 }
 
+$current_lang = get_locale();
+$campaign->set_current_lang($current_lang);
+
 $video_element = '';
 $img_src = '';
 $campaign_video_url = $campaign->video();
@@ -97,10 +100,7 @@ if (!empty($current_organization)) {
 	}
 }
 
-$current_lang = get_locale();
-$campaign->set_current_lang($current_lang);
 $lang_list = $campaign->get_lang_list();
-$campaign_categories_str = $campaign->get_categories_str();
 ?>
 	
 <div class="project-banner">
@@ -161,17 +161,17 @@ $campaign_categories_str = $campaign->get_categories_str();
 				
 				<div class="project-banner-info-actions">
 					<div class="impacts-container" id="impacts-<?php echo $post->ID; ?>">
-						<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENVIRONMENT', 'yproject')?></span>
+						<?php if ( $campaign->has_impact( 'environnemental' ) || $campaign->has_impact( 'environmental' ) ): ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENVIRONMENT', 'yproject')?></span>
 						<?php endif; ?>
-						<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.SOCIAL"', 'yproject')?></span>
+						<?php if ( $campaign->has_impact( 'social' ) ): ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.SOCIAL', 'yproject')?></span>
 						<?php endif; ?>
-						<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ECO', 'yproject')?></span>
+						<?php if ( $campaign->has_impact( 'economique' ) || $campaign->has_impact( 'economic' ) ): ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ECO', 'yproject')?></span>
 						<?php endif; ?>
-						<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="impact engagement" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENGAGEMENT', 'yproject')?></span>
+						<?php if ( $campaign->has_impact( 'entreprise-engagee' ) || $campaign->has_impact( 'committed-company' ) ): ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="impact engagement" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENGAGEMENT', 'yproject')?></span>
 						<?php endif; ?>
 					</div>
 

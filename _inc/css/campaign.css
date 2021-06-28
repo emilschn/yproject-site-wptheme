@@ -463,7 +463,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 
 div.progress-bar-container {
-	margin: 20px 0 10px 0;
+	margin-top: 30px;
 }
 
 div.progress-bar-container div.project-page-bar, div.evaluation-container div.evaluation-bar {
@@ -481,6 +481,7 @@ div.progress-bar-container span.progress-bar-separator {
 	position: relative;
 	z-index: 2;
 	margin-top: -66px;
+	margin-bottom: 30px;
 }
 
 div.progress-bar-container hr{ 
@@ -499,7 +500,7 @@ div.evaluation-container span.vote-status p {
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left {
 	width: 33.33%;
-	margin: 20px 0px;
+	margin: 20px 0 15px 0;
 	text-align: center;
 	text-transform: uppercase;
 }
