@@ -642,7 +642,15 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 			}
 		} );
 	} );
-
+	
+	$(".button-send-notification").click(function ( e ) {
+		$(this).find(".button-text").hide();
+		$(this).find(".button-loading").show();
+		if ($(this).hasClass("disabled")) {
+			e.preventDefault();
+		}
+		$(this).addClass("disabled");
+	});
 	
 	if ( $( '.button-contacts-add-check' ).length > 0 ) {
 		$( '.button-contacts-add-check' ).click( function() {

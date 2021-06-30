@@ -153,7 +153,14 @@ global $stylesheet_directory_uri;
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
 				<input type="hidden" id="mail_type" name="mail_type" value="">
 				<button type="button" name="send_option" class="button admin-theme button-test-notification">Envoyer test</button>
-				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
+				<button id="mail-send-button" type="submit"  name="send_option" class="button admin-theme button-send-notification">
+					<span class="button-text">
+						<?php _e('Envoyer le message', 'yproject'); ?>
+					</span>
+					<span class="button-loading loading align-center hidden">
+						<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
+					</span>
+				</button>
 			</form>
 
 			<br><br>
@@ -170,7 +177,14 @@ global $stylesheet_directory_uri;
 					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
 					<input type="hidden" id="mail_type" name="mail_type" value="">
 					<button type="button" name="send_option" class="button admin-theme button-test-notification">Envoyer test</button>
-					<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
+					<button id="mail-send-button" type="submit"  name="send_option" class="button admin-theme button-send-notification">
+						<span class="button-text">
+							<?php _e('Envoyer le message', 'yproject'); ?>
+						</span>
+						<span class="button-loading loading align-center hidden">
+							<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
+						</span>
+					</button>
 				</form>
 
 				<br><br>
@@ -195,7 +209,14 @@ global $stylesheet_directory_uri;
 				<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign()->ID; ?>">
 				<input type="hidden" id="mail_type" name="mail_type" value="">
 				<button type="button" name="send_option" class="button admin-theme button-test-notification">Envoyer test</button>
-				<input type="submit" name="send_option" value="Envoyer" class="button admin-theme">
+				<button id="mail-send-button" type="submit"  name="send_option" class="button admin-theme button-send-notification">
+					<span class="button-text">
+						<?php _e('Envoyer le message', 'yproject'); ?>
+					</span>
+					<span class="button-loading loading align-center hidden">
+						<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
+					</span>
+				</button>
 			</form>
 				
 		</div>
