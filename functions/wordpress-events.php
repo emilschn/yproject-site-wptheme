@@ -331,10 +331,12 @@ class WDG_WordPress_Events {
 	}
 
 	/**
-	 * Inscription à la NL lors de l'inscription
+	 * Enregistrement de la langue d'affichage lors de la création d'un compte
 	 */
 	public static function user_register($user_id) {
-		$user = get_userdata( $user_id );
+		$wdg_user = new WDGUser( $user_id );
+		$wdg_user->set_language( WDG_Languages_Helpers::get_current_locale_id() );
+		$wdg_user->update_api();
 	}
 
 	/**
