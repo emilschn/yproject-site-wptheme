@@ -2589,6 +2589,9 @@ msgstr "D&eacute;couvrir d'autres projets"
 msgid "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
 msgstr "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
 
+msgid "project.GOAL_MAX_REACHED_NO_MORE_INVEST"
+msgstr "Objectif maximum atteint : il n'est plus possible d'investir !"
+
 msgid "Impacts"
 msgstr "Impacts"
 
