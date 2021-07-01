@@ -362,7 +362,7 @@ $lang_list = $campaign->get_lang_list();
 						<?php else: ?>
 							<div class="end-sentence">
 								<?php if ( $campaign->maximum_complete_message() == '' ): ?>
-									<?php _e( "Objectif maximum atteint: il n'est plus possible d'investir !", 'yproject' ); ?>
+									<?php _e( "project.GOAL_MAX_REACHED_NO_MORE_INVEST", 'yproject' ); ?>
 								<?php else: ?>
 									<?php echo $campaign->maximum_complete_message(); ?>
 								<?php endif; ?>
