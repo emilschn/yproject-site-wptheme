@@ -57,7 +57,7 @@ YPUIFunctions = (function ($) {
 
 			if ($('span#auto-redirect').length > 0) {
 				var redirectUrl = $('span#auto-redirect').data('redirect-link');
-				console.log("blabla"+redirectUrl);
+				console.log("blabla" + redirectUrl);
 				setTimeout(function () { window.location = redirectUrl; }, 2000);
 			}
 
@@ -446,7 +446,7 @@ var WDGNavFunctions = (function ($) {
 
 		currentUserInfo: false,
 		currentHref: '',
-		displaySubmenuUserInterval:false,
+		displaySubmenuUserInterval: false,
 
 		init: function () {
 
@@ -709,8 +709,8 @@ var WDGNavFunctions = (function ($) {
 
 
 		displaySubmenuUser: function () {
-			if (WDGNavFunctions.currentUserInfo){
-				if (WDGNavFunctions.displaySubmenuUserInterval){
+			if (WDGNavFunctions.currentUserInfo) {
+				if (WDGNavFunctions.displaySubmenuUserInterval) {
 					clearInterval(WDGNavFunctions.displaySubmenuUserInterval);
 				}
 				if (WDGNavFunctions.currentUserInfo === '0') {
@@ -742,7 +742,7 @@ var WDGNavFunctions = (function ($) {
 					$('#submenu-user.not-connected .menu-connected').show();
 				}
 			} else {
-				if (!WDGNavFunctions.displaySubmenuUserInterval){
+				if (!WDGNavFunctions.displaySubmenuUserInterval) {
 					WDGNavFunctions.displaySubmenuUserInterval = setInterval(WDGNavFunctions.displaySubmenuUser, 1000);
 				}
 			}
