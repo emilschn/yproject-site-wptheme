@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-06-09 09:17+0200\n"
+"PO-Revision-Date: 2021-07-01 14:36+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -2693,6 +2693,9 @@ msgstr "Discover other projects"
 
 msgid "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
 msgstr "Sadly, this fundraising campaign has not succeeded"
+
+msgid "project.GOAL_MAX_REACHED_NO_MORE_INVEST"
+msgstr "Maximum goal reached: it is no longer possible to invest! "
 
 msgid "Impacts"
 msgstr "Impacts"

@@ -1,6 +1,8 @@
 <?php
 global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
+
+if ( !empty( $page_controler ) ) :
 ?>
 
 
@@ -387,3 +389,6 @@ ob_end_clean();
 ?>
 	
 </div><!-- #content -->
+
+<?php
+endif;

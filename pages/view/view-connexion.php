@@ -2,5 +2,7 @@
 <div
   id="app"
   data-locale='<?php echo $page_controler->get_init_locale(); ?>'
-  data-ajaxurl='<?php echo admin_url( 'admin-ajax.php' ); ?>'>
+  data-ajaxurl='<?php echo admin_url( 'admin-ajax.php' ); ?>'
+  data-customajaxurl='<?php echo home_url( '/wp-content/plugins/appthemer-crowdfunding/includes/control/requests/ajax-entry-point.php' ); ?>'
+  data-redirecturl='<?php echo wp_unslash( WDGUser::get_login_redirect_page() ); ?>'>
 </div>
