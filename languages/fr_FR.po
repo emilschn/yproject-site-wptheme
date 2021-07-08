@@ -1181,6 +1181,15 @@ msgstr "et investir plus tard"
 msgid "invest.contract.VALIDATE_CONTRACT"
 msgstr "Valider le contrat"
 
+msgid "invest.contract.COMMA.upper"
+msgstr "VIRGULE"
+
+msgid "invest.contract.ZERO.upper"
+msgstr "ZERO"
+
+msgid "invest.contract.PERCENT.upper"
+msgstr "POURCENTS"
+
 msgid "invest.cancel.YOU_CHOSE_CANCEL_PROJECT"
 msgstr "Vous avez choisi d'annuler votre investissement sur le projet %s."
 
