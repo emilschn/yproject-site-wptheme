@@ -1185,7 +1185,7 @@ msgid "invest.contract.COMMA"
 msgstr "virgule"
 
 msgid "invest.contract.ZERO"
-msgstr "zero"
+msgstr "zéro"
 
 msgid "invest.contract.PERCENT"
 msgstr "pourcents"
