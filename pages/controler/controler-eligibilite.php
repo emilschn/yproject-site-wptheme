@@ -102,11 +102,11 @@ class WDG_Page_Controler_ProspectSetup extends WDG_Page_Controler {
 	}
 
 	public function get_init_locale() {
-		global $locale;
-		if ( empty( $locale ) ) {
-			return 'fr_FR';
+		$init_locale = WDG_Languages_Helpers::get_current_locale_id();
+		if ( empty( $init_locale ) ) {
+			$init_locale = 'fr';
 		}
 
-		return $locale;
+		return $init_locale;
 	}
 }
