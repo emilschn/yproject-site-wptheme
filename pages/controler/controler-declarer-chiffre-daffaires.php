@@ -41,6 +41,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			exit();
 		}
 
+		WDG_Languages_Helpers::load_languages();
 		$this->init_current_step();
 		$this->init_form();
 	}
