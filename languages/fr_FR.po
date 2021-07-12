@@ -2247,7 +2247,20 @@ msgstr "Mauvaise personne"
 msgid "lemonway.document.details_MAIN_ID"
 msgstr "La pièce d'identité principale"
 
-# THEME - projects/common/stats-public.php
+# ############################## e-mails ################################
+msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES"
+msgstr "Ces entreprises vous ont versé des royalties :"
+
+msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES_SAMPLE"
+msgstr "dont prélèvement"
+
+msgid "email.royalties.COMPANIES_PENDING_TRANSFER"
+msgstr "Les versements de ces entreprises sont en attente :"
+
+msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
+msgstr "Ces entreprises ne sont pas encore entrées dans la phase de déclaration :"
+
+# ############################## THEME - projects/common/stats-public.php
 msgid "Votes"
 msgstr "Votes"
 

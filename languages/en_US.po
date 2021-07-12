@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-07-12 09:58+0200\n"
+"PO-Revision-Date: 2021-07-12 13:56+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -2374,7 +2374,20 @@ msgstr "Wrong owner"
 msgid "lemonway.document.details_MAIN_ID"
 msgstr "The main ID"
 
-# THEME - projects/common/stats-public.php
+# ############################## e-mails ################################
+msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES"
+msgstr "These companies paid you royalties:"
+
+msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES_SAMPLE"
+msgstr "in which were sampled"
+
+msgid "email.royalties.COMPANIES_PENDING_TRANSFER"
+msgstr "Payments from these companies are pending:"
+
+msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
+msgstr "These companies have not yet entered the declaration phase:"
+
+# ############################## THEME - projects/common/stats-public.php
 msgid "Votes"
 msgstr "Votes"
 
