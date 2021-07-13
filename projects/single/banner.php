@@ -338,9 +338,9 @@ $lang_list = $campaign->get_lang_list();
 									$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
 									$time_remaining_str_unit = $time_remaining_str_split[0];
 									switch ($time_remaining_str_split[0]) {
-										case 'J': $time_remaining_str .= 'jours'; break;
-										case 'H': $time_remaining_str .= 'heures'; break;
-										case 'M': $time_remaining_str .= 'minutes'; break;
+										case 'J': $time_remaining_str .= __('jours', 'yproject'); break;
+										case 'H': $time_remaining_str .= __('heures', 'yproject'); break;
+										case 'M': $time_remaining_str .= __('minutes', 'yproject'); break;
 									}
 								?>
 									<span><?php echo $time_remaining_str; ?></span><br />
