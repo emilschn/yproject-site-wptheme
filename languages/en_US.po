@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-07-12 16:08+0200\n"
+"PO-Revision-Date: 2021-07-13 14:30+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -2373,6 +2373,63 @@ msgstr "Wrong owner"
 
 msgid "lemonway.document.details_MAIN_ID"
 msgstr "The main ID"
+
+msgid "lemonway.email.error.SECOND_ID"
+msgstr "The second ID"
+
+msgid "lemonway.email.error.MAIN_ID_BACK"
+msgstr "The back of the main ID"
+
+msgid "lemonway.email.error.ORGA_KBIS"
+msgstr "The organization KBIS"
+
+msgid "lemonway.email.error.ORGA_STATUS"
+msgstr "The organization statuses"
+
+msgid "lemonway.email.error.SECOND_ID_BACK"
+msgstr "The back of the second ID"
+
+msgid "lemonway.email.error.SELFIE"
+msgstr "The selfie (Type 13)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON"
+msgstr "The first ID of the second person (Type 16)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON_2"
+msgstr "The second ID of the second person (Type 17)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON"
+msgstr "The first ID of the third person (Type 18)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON_2"
+msgstr "The second ID of the third person (Type 19)"
+
+msgid "lemonway.email.error.CAPITAL_ALLOCATION"
+msgstr "The document of capital distribution (Type 20)"
+
+msgid "lemonway.email.error.action.REFUSED"
+msgstr "refused"
+
+msgid "lemonway.email.error.action.UNREADABLE"
+msgstr "considered unreadable"
+
+msgid "lemonway.email.error.action.EXPIRED"
+msgstr "considered expired"
+
+msgid "lemonway.email.error.action.WRONG_TYPE"
+msgstr "considered of wrong type"
+
+msgid "lemonway.email.error.action.WRONG_PERSON"
+msgstr "considered from the wrong person"
+
+msgid "lemonway.email.error.message.BLOCK_AUTHENTICATION"
+msgstr "blocks the authentication."
+
+msgid "lemonway.email.error.message.DOCUMENT_HAS_BEEN"
+msgstr "The document has been"
+
+msgid "lemonway.email.error.message.LEMONWAY_COMMENT"
+msgstr "Additional comment from Lemonway:"
 
 # ############################## e-mails ################################
 msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES"
