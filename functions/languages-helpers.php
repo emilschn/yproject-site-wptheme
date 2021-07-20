@@ -29,6 +29,36 @@ class WDG_Languages_Helpers {
 		$buffer = load_textdomain( 'yproject', $path . '/languages/' . $mofile );
 	}
 
+	public static function set_current_locale_id($locale_input = '') {
+       if (!empty($locale_input)) {
+			// Stocke en variable statique
+            self::$locale_id = substr($locale_input, 0, 2);
+			// Si on est avec WPML, on fait un switch-lang
+            if (is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
+                do_action('wpml_switch_language', self::$locale_id);
+            } else {
+				// Sinon on change l'id de locale interne à WP // pas testé
+				global $locale;
+				switch ( self::$locale_id ) {
+					case 'fr':
+						$locale = 'fr_FR';
+						break;
+
+					case 'en':
+						$locale = 'en_US';
+						break;
+
+					default:
+						$locale = self::$locale_id;
+						break;
+				}
+				setlocale( LC_CTYPE, $locale );
+            }
+        }
+
+
+    }
+
 	/**
 	 * Retourne l'id de la langue en cours (fr, en, ...)
 	 */
