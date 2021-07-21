@@ -1757,6 +1757,18 @@ msgstr "I import a file"
 msgid "forms.file.IMPORT_A_FILE"
 msgstr "Import a file"
 
+msgid "forms.file.ERROR_EXT"
+msgstr "Document format not allowed"
+
+msgid "forms.file.ERROR_SIZE"
+msgstr "File size too large"
+
+msgid "forms.file.ERROR_UPLOAD"
+msgstr "Unreadable file"
+
+msgid "forms.file.ERROR_SERVER"
+msgstr "Problem while saving the file"
+
 # ############################## form - user-bank
 # ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"

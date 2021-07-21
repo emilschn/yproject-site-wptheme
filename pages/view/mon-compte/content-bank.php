@@ -6,6 +6,7 @@ $WDGUserBankForm = $page_controler->get_user_bank_form();
 $fields_hidden = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_hidden );
 $fields_iban = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_iban );
 $fields_file = $WDGUserBankForm->getFields( WDG_Form_User_Bank::$field_group_file );
+$form_feedback = $page_controler->get_user_form_feedback();
 ?>
 
 <h2><?php _e( 'account.menu.MY_BANK_INFO', 'yproject' ); ?></h2>
@@ -105,6 +106,14 @@ if ( $page_controler->is_iban_validated() ): ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
 
+			<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
+				<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
+					<div class="wdg-message error">
+						<?php echo $error[ 'text' ]; ?>
+					</div>
+				<?php endforeach; ?>
+			<?php endif; ?>
+
 			<?php foreach ( $fields_iban as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
@@ -174,6 +183,14 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 			<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 			<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 		<?php endforeach; ?>
+		
+		<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
+			<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
+				<div class="wdg-message error">
+					<?php echo $error[ 'text' ]; ?>
+				</div>
+			<?php endforeach; ?>
+		<?php endif; ?>
 
 		<?php if ( empty( $WDGUser_lw_bank_status ) || $WDGUser_lw_bank_status == WDGUser::$iban_status_disabled || $WDGUser_lw_bank_status == WDGUser::$iban_status_rejected ): ?>
 			<?php foreach ( $fields_iban as $field ): ?>
