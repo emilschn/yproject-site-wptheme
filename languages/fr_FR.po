@@ -1654,6 +1654,18 @@ msgstr "J'importe un fichier"
 msgid "forms.file.IMPORT_A_FILE"
 msgstr "Importer un fichier"
 
+msgid "forms.file.ERROR_EXT"
+msgstr "Format de fichier non autorisé"
+
+msgid "forms.file.ERROR_SIZE"
+msgstr "Taille du fichier trop importante"
+
+msgid "forms.file.ERROR_UPLOAD"
+msgstr "Fichier illisible"
+
+msgid "forms.file.ERROR_SERVER"
+msgstr "Problème lors de l'enregistrement du fichier"
+
 # ############################## form - user-bank ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
 msgstr "Nom du propri&eacute;taire du compte"
