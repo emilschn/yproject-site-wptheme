@@ -2317,6 +2317,9 @@ msgstr "Les versements de ces entreprises sont en attente :"
 msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
 msgstr "Ces entreprises ne sont pas encore entrées dans la phase de déclaration :"
 
+msgid "email.royalties.FUNDRAISING"
+msgstr "Levée de fonds"
+
 # ############################## THEME - projects/common/stats-public.php
 msgid "Votes"
 msgstr "Votes"

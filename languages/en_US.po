@@ -2444,6 +2444,9 @@ msgstr "Payments from these companies are pending:"
 msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
 msgstr "These companies have not yet entered the declaration phase:"
 
+msgid "email.royalties.FUNDRAISING"
+msgstr "FUNDRAISING"
+
 # ############################## THEME - projects/common/stats-public.php
 msgid "Votes"
 msgstr "Votes"
