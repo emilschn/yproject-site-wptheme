@@ -1490,6 +1490,7 @@ body.template-les-projets .projects-positive-savings {
 body.template-les-projets div .projects-title-precisions{
 	margin-top: -16px;
 	margin-bottom: 32px;
+	text-align: center;
 }
 body.template-les-projets div#content > div:last-child {
 	margin-top: -10px;
