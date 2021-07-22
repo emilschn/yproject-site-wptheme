@@ -1488,8 +1488,8 @@ body.template-les-projets .projects-positive-savings {
 	background-color: rgba(51, 51, 51, .1);
 }
 body.template-les-projets div .projects-title-precisions{
-	margin-top: -16px;
-	margin-bottom: 32px;
+	margin: -17px 6px 32px 6px;
+	text-align: center;
 }
 body.template-les-projets div#content > div:last-child {
 	margin-top: -10px;

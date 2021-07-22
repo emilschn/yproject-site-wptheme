@@ -251,7 +251,7 @@ if ( !empty( $page_controler ) ) :
 	<div class="projects-positive-savings">
 		<div class="padder">
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e( 'projects.POSITIVE_SAVINGS', 'yproject' ); ?> /</h2>
+				<h2 class="standard"> <?php _e( 'projects.POSITIVE_SAVINGS', 'yproject' ); ?> </h2>
 				<div class="projects-title-precisions">
 					<?php _e( 'projects.POSITIVE_SAVINGS_DESCRIPTION', 'yproject' ); ?><br>
 					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'projects.POSITIVE_SAVINGS_KNOW_MORE', 'yproject' ); ?></a>
@@ -284,7 +284,7 @@ if ( !empty( $page_controler ) ) :
 	<div class="projects-after-end-date">
 		<div class="padder">
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e( 'projects.CLOSING_CAMPAIGNS', 'yproject' ); ?> /</h2>
+				<h2 class="standard"><?php _e( 'projects.CLOSING_CAMPAIGNS', 'yproject' ); ?></h2>
 				<div class="projects-title-precisions"><?php _e( 'projects.CLOSING_CAMPAIGNS_DESCRIPTION', 'yproject' ); ?></div>
 
 				<div class="project-slider">
@@ -330,7 +330,7 @@ ob_end_clean();
 		<div class="padder projects-funded">
 
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e( 'projects.FUNDED_CAMPAIGNS', 'yproject' ) ?> /</h2>
+				<h2 class="standard"><?php _e( 'projects.FUNDED_CAMPAIGNS', 'yproject' ) ?></h2>
 
 				<div class="project-slider">
 					<div class="block-projects">
