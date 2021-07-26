@@ -27,7 +27,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 				<?php locate_template( array( 'pages/view/mon-compte/content-investments.php' ), true ); ?>
 			</div>
 			
-			<div id="item-body-documents" class="item-body-tab hidden">
+			<div id="item-body-subscription" class="item-body-tab hidden">
 				<?php locate_template( array( 'pages/view/mon-compte/content-subscription.php' ), true ); ?>
 			</div>
 			

@@ -3,6 +3,7 @@ function UserAccountDashboard() {
 	this.initMenu();
 	this.initPhoneNotification();
 	this.initLoadingAnimation();
+	this.initSubscriptionForm();
 }
 
 /**
@@ -551,6 +552,13 @@ UserAccountDashboard.prototype.initLoadingAnimation = function () {
 			e.preventDefault();
 		}
 		$(this).addClass("disabled");
+	});
+}
+
+UserAccountDashboard.prototype.initSubscriptionForm = function () {
+	$('.add-subscription').click(function (e) {
+		$(this).hide();
+		$(".form").show();
 	});
 }
 

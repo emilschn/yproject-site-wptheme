@@ -874,6 +874,33 @@ msgstr "L&apos;entreprise est engag&eacute;e &agrave; vous verser des royalties 
 msgid "account.investments.ESTIMATED"
 msgstr "pr&eacute;visionnel"
 
+msgid "account.subscriptions.SUBSCRIPTIONS_OF"
+msgstr "Abonnements de"
+
+msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
+msgstr "Vous pouvez réinvestir les royalties que vous recevez dans les projets d'Épargne Positive."
+
+msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
+msgstr "C'est sans engagement, modifiable à tout moment et automatique."
+
+msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
+msgstr "+ Ajouter un investissement automatique"
+
+msgid "account.subscriptions.MODALITY"
+msgstr "Je souhaite investir automatiquement..."
+
+msgid "account.subscriptions.MODALITY_FIRST_CHOICE"
+msgstr "l'intégralité de mon porte-monnaie"
+
+msgid "account.subscriptions.MODALITY_SECOND_CHOICE"
+msgstr "un montant fixe"
+
+msgid "account.subscriptions.AMOUNT"
+msgstr "Montant"
+
+msgid "account.subscriptions.PROJECT"
+msgstr "Dans le projet ..."
+
 msgid "account.notifications.TITLE"
 msgstr "Notifications en provenance de WE DO GOOD"
 

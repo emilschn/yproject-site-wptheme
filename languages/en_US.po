@@ -898,6 +898,33 @@ msgstr "The company is committed to pay you royalties until reimbursement, excep
 msgid "account.investments.ESTIMATED"
 msgstr "estimated"
 
+msgid "account.subscriptions.SUBSCRIPTIONS_OF"
+msgstr "Subscriptions of"
+
+msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
+msgstr "You can reinvest the royalties you receive in Positive Savings projects."
+
+msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
+msgstr "It is without commitment, changeable at any time and automatic."
+
+msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
+msgstr "+ Add new subscription"
+
+msgid "account.subscriptions.MODALITY"
+msgstr "I want to invest automatically..."
+
+msgid "account.subscriptions.MODALITY_FIRST_CHOICE"
+msgstr "the entirety of my wallet"
+
+msgid "account.subscriptions.MODALITY_SECOND_CHOICE"
+msgstr "a fixed amount"
+
+msgid "account.subscriptions.AMOUNT"
+msgstr "Amount"
+
+msgid "account.subscriptions.PROJECT"
+msgstr "In the project ..."
+
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
 
