@@ -11,7 +11,6 @@ class WDG_Page_Controler_Connection extends WDG_Page_Controler {
 		parent::__construct();
 
 		if ( is_user_logged_in() ) {
-			ypcf_debug_log( 'WDG_Page_Controler_Connection::is_user_logged_in' );
 			wp_redirect( WDGUser::get_login_redirect_page( '#' ) );
 			exit();
 		}
