@@ -4,6 +4,7 @@ body {
 	font-size: 1.1em;
     color: #333333;
     font-family: Arial, Helvetica, sans-serif;
+	overflow-x: hidden; /* permet d'empêcher le scroll horizontal causé par WP */
 }
 body a {
 	color: #EA4F51;
@@ -606,6 +607,11 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
 	nav#main > div#menu > a {
 		margin: 0px 5px;
 		letter-spacing: 0px;
+		font-size: 13px;
+	}
+
+	div#submenu-switch-lang {
+		left: 85%; /* en pourcentage pour essayer de s'adapter à chaque taille de tablette horizontale */
 	}
 }
 @media screen and (max-width: 1070px) and (min-width: 998px) {
@@ -648,11 +654,10 @@ nav#main > div#menu > .wpml-ls {
 
 #submenu-switch-lang {
 	position: relative;
-	float: right;
 	width: 100px;
 	top: 10px;
 	border: 0px;
-	right: 90px;
+	left: 1110px;
 	text-align: center;
 }
 #submenu-switch-lang li.active a {
@@ -872,6 +877,63 @@ ul.project-list a.needs-authentication:after {
 }
 
 /*******************************************************************************
+* TABLEAU
+*******************************************************************************/
+
+.wp-block-table table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	font-size: 14px;
+	margin: auto;
+}
+
+.wp-block-table table tr td {
+	font-family: 'Arial', sans-serif;
+	vertical-align: middle;
+}
+
+.wp-block-table tr {
+	border-bottom: 1px solid #c2c2c2;
+}
+
+.wp-block-table td {
+	padding: 15px;
+	border: 1px solid #c2c2c2;
+	max-width: 25%;
+}
+
+.wp-block-table table tbody tr td:first-of-type { /* première colonne en gris */
+	background-color: #ebebeb;
+}
+
+.wp-block-table table tr:first-of-type td:first-of-type, .wp-block-table table thead tr th:first-of-type { /* cacher la première case qui est inutile */
+	background-color: #fff;
+	border: 0;
+}
+
+/* classes à ajouter aux cases sur WP pour avoir des fonds colorés */
+
+.cell-blue-background {
+	background-color: #B3DAE1;
+}
+
+.cell-yellow-background {
+	background-color: #F9F0D1;
+}
+
+.cell-green-background {
+	background-color: #CEE9C0;
+}
+
+.cell-pink-background {
+	background-color: #F8CACA;
+}
+
+.cell-grey-background {
+	background-color: #EBEBEB;
+}
+
+/*******************************************************************************
 * PAGE DE CREATION DE PROJET
 *******************************************************************************/
 .lancement-page-container {
@@ -1005,7 +1067,7 @@ footer > .footer-container {
 	max-width: 1280px;
 	margin: 0 auto;
 	background-repeat: no-repeat;
-	padding: 50px 0px 30px;
+	padding: 50px 50px 30px;
 	line-height: 1.5;
 }
 footer > .footer-container > section {
@@ -1104,6 +1166,7 @@ footer > .footer-container > div.logo-list {
     -webkit-justify-content: space-between;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 	padding: 16px 0px;
 }
 footer > .footer-container > div.logo-list > div:nth-child(1), footer > .footer-container > div.logo-list > div:nth-child(2), footer > .footer-container > div.logo-list > div:nth-child(5) {
@@ -1347,6 +1410,17 @@ body.template-les-projets header .header-container > div > div#wdg-project-defin
 	text-align: right;
 }
 
+body.template-les-projets div.previously-visited-hidden-project {
+	background-color: rgba(51, 51, 51, 0.05);
+	margin: 16px 0px 32px;
+}
+body.template-les-projets div.previously-visited-hidden-project > div {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 24px 0px;
+	text-align: center;
+}
+
 body.template-les-projets div#content > h2 {
 	padding-top: 80px;
 	background-color: rgba(51, 51, 51, 0.05);
@@ -1417,36 +1491,16 @@ body.template-les-projets nav#project-filter select option#social {
 body.template-les-projets .projects-positive-savings {
 	background-color: rgba(51, 51, 51, .1);
 }
-body.template-les-projets .wdg-component-projects-preview .project-container {
-	height: 620px;
-	min-width: 240px;
-}
-body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
-body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container,
-body.template-les-projets .projects-after-end-date .wdg-component-projects-preview .project-container {
-	width: 33%;
-}
 body.template-les-projets div .projects-title-precisions{
-	margin-top: -16px;
-	margin-bottom: 32px;
+	margin: -17px 6px 32px 6px;
+	text-align: center;
 }
-body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {
-	width: 25%;
-}
-body.template-les-projets .wdg-component-projects-preview .block-projects {
-	height: auto;
-	margin: auto;
-	padding-top: 5px;
-	overflow-y: hidden;
-}
-
 body.template-les-projets div#content > div:last-child {
 	margin-top: -10px;
 	padding-bottom: 30px;
 	background-color: rgba(51, 51, 51, 0.05);
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .block-projects {
-	max-height: 2400px;
 	margin: auto;
 }
 body.template-les-projets div#content .projects-positive-savings .wdg-component-projects-preview .project-container .project-framed {

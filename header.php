@@ -111,7 +111,8 @@
 		<?php endif; ?>
 		
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
-		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>" charset="<?php bloginfo( 'charset' ); ?>" />
+		<meta charset="<?php bloginfo( 'charset' ); ?>" />
+		<meta name="robots" content="<?php bloginfo( 'html_type' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="<?php echo $page_controler->get_page_description(); ?>" />
 		<meta name="google-site-verification" content="GKtZACFMpEC-1TO9ox4c85RJgfWRm7gNv4c0QrNKYgM" />
@@ -351,6 +352,10 @@
 		
 		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
 			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
+		<?php endif; ?>
+		
+		<?php if ( $page_controler->get_show_user_hidden_project_visited() ): ?>
+			<?php locate_template( array( 'common/lightbox/hidden-project-visited-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<div id="container"> 

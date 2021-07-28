@@ -297,7 +297,8 @@ YPUIFunctions = (function ($) {
 				'data': {
 					'action': 'get_investments_data',
 					'id_campaign': campaign_id,
-					'is_short_version': bShortVersion ? '1' : '0'
+					'is_short_version': bShortVersion ? '1' : '0',
+					'show_failed_payments': bShortVersion ? '0' : '1'
 				}
 			}).done(function (result) {
 				YPUIFunctions.currentRequest = '';
@@ -751,7 +752,11 @@ var WDGLightboxFunctions = (function ($) {
 			if ($(".wdg-lightbox").length > 0) {
 				$(".wdg-lightbox").each(function () {
 					if ($(this).data('autoopen') == '1') {
-						WDGLightboxFunctions.displaySingle($(this).attr('id').split('wdg-lightbox-')[1]);
+						//Vérification de la présence du cookie save-close
+						if (YPUIFunctions.getCookie('save-close') != '1') {
+
+							WDGLightboxFunctions.displaySingle($(this).attr('id').split('wdg-lightbox-')[1]);
+						}
 					}
 				});
 				$(".wdg-button-lightbox-open").not("#wdg-lightbox-newproject .wdg-button-lightbox-open").click(function () {
@@ -760,7 +765,18 @@ var WDGLightboxFunctions = (function ($) {
 				$(".wdg-lightbox .wdg-lightbox-button-close a").click(function (e) {
 					e.preventDefault();
 					WDGLightboxFunctions.hideAll();
+
+					//Permet l'ouverture d'une Pop-up une fois par jour
+					if ($(this).data('save-close') == '1') {
+						var date = new Date();
+						date.setDate(date.getDate() + 1);
+						var expires = '; expires=' + date.toGMTString();
+						document.cookie = 'save-close=1' + expires + '; path=#';
+					}
+
 				});
+
+
 				$(".wdg-lightbox #wdg-lightbox-welcome-close").click(function (e) {
 					WDGLightboxFunctions.hideAll();
 				});
@@ -883,6 +899,17 @@ var WDGLightboxFunctions = (function ($) {
 
 			}
 
+			if ($('body.template-les-projets').length > 0) {
+				var cookieVisited = YPUIFunctions.getCookie('hidden_project_visited');
+				if (cookieVisited !== '') {
+					var cookieVisitedUrl = YPUIFunctions.getCookie('hidden_project_visited_url');
+					var cookieVisitedTitle = YPUIFunctions.getCookie('hidden_project_visited_title');
+					$('div.previously-visited-hidden-project').show();
+					$('div.previously-visited-hidden-project a').attr('href', decodeURIComponent(cookieVisitedUrl));
+					$('div.previously-visited-hidden-project a').text(decodeURIComponent(cookieVisitedTitle.replace(/\+/g, '%20')));
+
+				}
+			}
 		},
 
 		displaySingle: function (sLightboxId) {

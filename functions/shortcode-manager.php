@@ -65,7 +65,8 @@ class YPShortcodeManager {
 			'class'		=> '',
 			'msgtype'	=> '', // valid / error
 			'autoopen'	=> '0',
-			'catchclick'=> '1'
+			'catchclick'=> '1',
+			'save-close'=> '0'
 		), $atts );
 
 		$msgtype_lightbox = '';
@@ -81,8 +82,8 @@ class YPShortcodeManager {
 			<div class="wdg-lightbox-click-catcher <?php echo $catcher_classes; ?>"></div>
 			<div class="wdg-lightbox-corner">
 				<div class="wdg-lightbox-button-close">
-					<?php if ( $atts['catchclick'] == '1' ): ?>
-					<a href="#" class="button">X</a>
+					<?php if ( $atts['catchclick'] == '1'): ?> 
+					<a data-save-close="<?php echo $atts['save-close'] ?>" href="#" class="button">X</a>
 					<?php endif; ?>
 				</div>
 				<h2><?php echo $atts[ 'title' ]; ?></h2>
@@ -401,7 +402,8 @@ class YPShortcodeManager {
 	public static function wdg_project_preview($atts, $content = '') {
 		$atts = shortcode_atts( array(
 			'project' => '',
-			'home' => ''
+			'home' => '',
+			'positivesavings' => ''
 		), $atts );
 
 		global $stylesheet_directory_uri, $project_id;
@@ -427,12 +429,20 @@ class YPShortcodeManager {
 						foreach ( $projects_list as $project_id ) {
 							locate_template( array("projects/preview.php"), true, false );
 						}
-
-						// Un projet spécifique
 					} else {
-						if ( isset( $atts[ 'project' ] ) ) {
-							$project_id = $atts[ 'project' ];
-							locate_template( array( 'projects/preview.php' ), true );
+						// Si on veut les projets d'épargne positive
+						if ( $atts[ 'positivesavings' ] == 1 ) {
+							$positive_savings_projects_list = ATCF_Campaign::get_list_positive_savings( 0 );
+							foreach ( $positive_savings_projects_list as $campaign ) {
+								$project_id = $campaign->ID;
+								locate_template( array("projects/preview.php"), true, false );
+							}
+						} else {
+							// Un projet spécifique
+							if ( isset( $atts[ 'project' ] ) ) {
+								$project_id = $atts[ 'project' ];
+								locate_template( array( 'projects/preview.php' ), true );
+							}
 						}
 					} ?>
 				</div>

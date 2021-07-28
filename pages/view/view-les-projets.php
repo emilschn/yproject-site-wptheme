@@ -1,6 +1,8 @@
 <?php
 global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
+
+if ( !empty( $page_controler ) ) :
 ?>
 
 
@@ -170,6 +172,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 /******************************************************************************/
 ?>
 
+<div class="previously-visited-hidden-project hidden">
+	<div>
+		Vous aviez visité un projet privé précédemment,
+		cliquez sur ce lien pour retrourner sur la page de <a href=""></a>.
+	</div>
+</div>
+
 <?php $currentprojects_html = $page_controler->get_currentprojects_html(); ?>
 
 <?php if ( !$currentprojects_html ): ?>
@@ -242,7 +251,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<div class="projects-positive-savings">
 		<div class="padder">
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e( 'projects.POSITIVE_SAVINGS', 'yproject' ); ?> /</h2>
+				<h2 class="standard"> <?php _e( 'projects.POSITIVE_SAVINGS', 'yproject' ); ?> </h2>
 				<div class="projects-title-precisions">
 					<?php _e( 'projects.POSITIVE_SAVINGS_DESCRIPTION', 'yproject' ); ?><br>
 					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'projects.POSITIVE_SAVINGS_KNOW_MORE', 'yproject' ); ?></a>
@@ -275,7 +284,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<div class="projects-after-end-date">
 		<div class="padder">
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e( 'projects.CLOSING_CAMPAIGNS', 'yproject' ); ?> /</h2>
+				<h2 class="standard"><?php _e( 'projects.CLOSING_CAMPAIGNS', 'yproject' ); ?></h2>
 				<div class="projects-title-precisions"><?php _e( 'projects.CLOSING_CAMPAIGNS_DESCRIPTION', 'yproject' ); ?></div>
 
 				<div class="project-slider">
@@ -321,7 +330,7 @@ ob_end_clean();
 		<div class="padder projects-funded">
 
 			<section class="wdg-component-projects-preview">
-				<h2 class="standard">/ <?php _e( 'projects.FUNDED_CAMPAIGNS', 'yproject' ) ?> /</h2>
+				<h2 class="standard"><?php _e( 'projects.FUNDED_CAMPAIGNS', 'yproject' ) ?></h2>
 
 				<div class="project-slider">
 					<div class="block-projects">
@@ -380,3 +389,6 @@ ob_end_clean();
 ?>
 	
 </div><!-- #content -->
+
+<?php
+endif;

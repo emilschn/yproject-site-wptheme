@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
-"X-Generator: Poedit 2.4.3\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -295,6 +295,15 @@ msgstr "&Eacute;valuation termin&eacute;e"
 msgid "project.CAMPAIGN_FUNDED"
 msgstr "projet<br />financ&eacute; !"
 
+msgid "project.FUNDED_BANNER"
+msgstr "projet financ&eacute; avec succ&egrave;s !"
+
+msgid "project.POSITIVE_SAVINGS_BANNER"
+msgstr "plusieurs mat&eacute;riels d&eacute;j&agrave; financ&eacute;s !"
+
+msgid "project.PEOPLE_RAISE"
+msgstr "personnes ont permis de lever"
+
 msgid "projects.THE_PROJECTS"
 msgstr "les projets"
 
@@ -450,6 +459,12 @@ msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
 
 msgid "account.HELLO"
 msgstr "Bonjour"
+
+msgid "account.lightbox.hidden-project-visited.TITLE"
+msgstr "Retourner vers un projet privé"
+
+msgid "account.lightbox.hidden-project-visited.DESCRIPTION"
+msgstr "Vous avez visité la page de %s qui est un projet privé. Voulez-vous poursuivre vers la page de ce projet ?"
 
 msgid "account.lightbox.VALIDATE_INFORMATION"
 msgstr "Validation de vos informations"
@@ -900,6 +915,8 @@ msgstr "Montant"
 
 msgid "account.subscriptions.PROJECT"
 msgstr "Dans le projet ..."
+msgid "account.investments.ACCOUNT_AUTHENTICATION"
+msgstr "Authentifier mon compte"
 
 msgid "account.notifications.TITLE"
 msgstr "Notifications en provenance de WE DO GOOD"
@@ -1195,6 +1212,51 @@ msgstr "et investir plus tard"
 
 msgid "invest.contract.VALIDATE_CONTRACT"
 msgstr "Valider le contrat"
+
+msgid "invest.contract.COMMA"
+msgstr "virgule"
+
+msgid "invest.contract.ZERO"
+msgstr "zéro"
+
+msgid "invest.contract.PERCENT"
+msgstr "pourcents"
+
+msgid "invest.email.ACCOUNT_REGISTERED_DEBIT"
+msgstr "Le compte bancaire de votre carte enregistrée a été débité."
+
+msgid "invest.email.ACCOUNT_DEBIT"
+msgstr "Votre compte a été débité."
+
+msgid "invest.email.INVESTMENT_VALIDATED_WHEN_GOAL_REACHED"
+msgstr "L'investissement ne sera définitivement validé que si le projet atteint son seuil minimal de financement."
+
+msgid "invest.email.PREINVESTMENT_CONDITIONS_1"
+msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacutes;es &agrave; l'issue de la phase d'&eacute;valuation."
+
+msgid "invest.email.PREINVESTMENT_CONDITIONS_2"
+msgstr "Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement."
+
+msgid "invest.email.PREINVESTMENT_CONDITIONS_3"
+msgstr "Si un changement devait survenir, vous devrez confirmer ou infirmer votre investissement."
+
+msgid "invest.email.WHERE_TO_FIND_CONTRACT"
+msgstr "Vous trouverez votre contrat d'investissement en pi&egrave;ce jointe et pouvez suivre vos versements de royalties en vous connectant sur votre"
+
+msgid "invest.email.PERSONAL_ACCOUNT"
+msgstr "compte personnel"
+
+msgid "invest.email.THERE_WAS_A_PROBLEM_WITH_CONTRACT_GENERATION"
+msgstr "Il y a eu un problème durant la génération du contrat. Notre équipe en a été informée."
+
+msgid "invest.email.BANK_ACCOUNT_SUMMARY_LEMONWAY"
+msgstr "Sur votre relevé de compte bancaire, vous verrez apparaître le libellé Lemonway, le nom de notre prestataire de paiement, dans le détail des opérations."
+
+msgid "invest.email.YOU_NEED_TO_SIGN_THE_CONTRACT"
+msgstr "Il vous reste encore à signer le contrat que vous devriez recevoir de la part de notre partenaire Eversign"
+
+msgid "invest.email.CHECK_SPAM"
+msgstr "Pensez à vérifier votre courrier indésirable"
 
 msgid "invest.cancel.YOU_CHOSE_CANCEL_PROJECT"
 msgstr "Vous avez choisi d'annuler votre investissement sur le projet %s."
@@ -1624,6 +1686,18 @@ msgstr "J'importe un fichier"
 msgid "forms.file.IMPORT_A_FILE"
 msgstr "Importer un fichier"
 
+msgid "forms.file.ERROR_EXT"
+msgstr "Format de fichier non autorisé"
+
+msgid "forms.file.ERROR_SIZE"
+msgstr "Taille du fichier trop importante"
+
+msgid "forms.file.ERROR_UPLOAD"
+msgstr "Fichier illisible"
+
+msgid "forms.file.ERROR_SERVER"
+msgstr "Problème lors de l'enregistrement du fichier"
+
 # ############################## form - user-bank ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
 msgstr "Nom du propri&eacute;taire du compte"
@@ -1853,35 +1927,41 @@ msgstr "K-BIS ou &eacute;quivalent &agrave; un registre du commerce"
 msgid "form.user-identitydocs.KBIS_DESCRIPTION"
 msgstr "Datant de moins de 3 mois"
 
+msgid "form.user-identitydocs.STATUS_SHORT"
+msgstr "Statuts de la soci&eacute;t&eacute;"
+
 msgid "form.user-identitydocs.STATUS"
 msgstr "Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant (faisant figurer id&eacute;alement la r&eacute;partition du capital de l'entreprise)"
 
+msgid "form.user-identitydocs.OPTIONAL"
+msgstr "(facultatif)"
+
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION"
-msgstr "Attestation de r&eacute;partition du capital (facultatif)"
+msgstr "Attestation de r&eacute;partition du capital"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
 msgstr "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON"
-msgstr "Justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)"
+msgstr "Justificatif d'identit&eacute; de la deuxi&egrave;me personne"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON_DESCRIPTION"
 msgstr "Si une deuxi&egrave;me personne physique d&eacute;tient au moins 25% du capital"
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON"
-msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la deuxi&egrave;me personne"
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON_DESCRIPTION"
 msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON"
-msgstr "Justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)"
+msgstr "Justificatif d'identit&eacute; de la troisi&egrave;me personne"
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON_DESCRIPTION"
 msgstr "Si une troisi&egrave;me personne physique d&eacute;tient au moins 25% du capital"
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON"
-msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne"
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
 msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
@@ -2217,7 +2297,80 @@ msgstr "Mauvaise personne"
 msgid "lemonway.document.details_MAIN_ID"
 msgstr "La pièce d'identité principale"
 
-# THEME - projects/common/stats-public.php
+msgid "lemonway.email.error.SECOND_ID"
+msgstr "La deuxième pièce d'identité"
+
+msgid "lemonway.email.error.MAIN_ID_BACK"
+msgstr "Le verso de la pièce d'identité principale"
+
+msgid "lemonway.email.error.ORGA_KBIS"
+msgstr "Le KBIS de l'organisation"
+
+msgid "lemonway.email.error.ORGA_STATUS"
+msgstr "Les statuts de l'organisation"
+
+msgid "lemonway.email.error.SECOND_ID_BACK"
+msgstr "Le verso de la deuxième pièce d'identité"
+
+msgid "lemonway.email.error.SELFIE"
+msgstr "Le selfie (Type 13)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON"
+msgstr "La pièce d'identité de la deuxième personne (Type 16)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON_2"
+msgstr "La deuxième pièce d'identité de la deuxième personne (Type 17)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON"
+msgstr "La pièce d'identité de la troisième personne (Type 18)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON_2"
+msgstr "La deuxième pièce d'identité de la troisième personne (Type 19)"
+
+msgid "lemonway.email.error.CAPITAL_ALLOCATION"
+msgstr "Le document de répartition du capital (Type 20)"
+
+msgid "lemonway.email.error.action.REFUSED"
+msgstr "refusé"
+
+msgid "lemonway.email.error.action.UNREADABLE"
+msgstr "considéré illisible"
+
+msgid "lemonway.email.error.action.EXPIRED"
+msgstr "considéré expiré"
+
+msgid "lemonway.email.error.action.WRONG_TYPE"
+msgstr "considéré du mauvais type"
+
+msgid "lemonway.email.error.action.WRONG_PERSON"
+msgstr "considéré comme lié à une personne qui ne correspond pas"
+
+msgid "lemonway.email.error.message.BLOCK_AUTHENTICATION"
+msgstr "bloque l'authentification."
+
+msgid "lemonway.email.error.message.DOCUMENT_HAS_BEEN"
+msgstr "Le document a été"
+
+msgid "lemonway.email.error.message.LEMONWAY_COMMENT"
+msgstr "Commentaire complémentaire de Lemonway :"
+
+# ############################## e-mails ################################
+msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES"
+msgstr "Ces entreprises vous ont versé des royalties :"
+
+msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES_SAMPLE"
+msgstr "dont prélèvement"
+
+msgid "email.royalties.COMPANIES_PENDING_TRANSFER"
+msgstr "Les versements de ces entreprises sont en attente :"
+
+msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
+msgstr "Ces entreprises ne sont pas encore entrées dans la phase de déclaration :"
+
+msgid "email.royalties.FUNDRAISING"
+msgstr "Levée de fonds"
+
+# ############################## THEME - projects/common/stats-public.php
 msgid "Votes"
 msgstr "Votes"
 
@@ -2604,6 +2757,9 @@ msgstr "D&eacute;couvrir d'autres projets"
 msgid "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
 msgstr "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
 
+msgid "project.GOAL_MAX_REACHED_NO_MORE_INVEST"
+msgstr "Objectif maximum atteint : il n'est plus possible d'investir !"
+
 msgid "Impacts"
 msgstr "Impacts"
 
@@ -2783,8 +2939,8 @@ msgstr "WE DO GOOD reconnecte la finance avec le bien commun."
 msgid "En finan&ccedil;ant l'&eacute;conomie r&eacute;elle, vous pouvez avoir un impact positif sur l'environnement et la soci&eacute;t&eacute;."
 msgstr "En finan&ccedil;ant l'&eacute;conomie r&eacute;elle, vous pouvez avoir un impact positif sur l'environnement et la soci&eacute;t&eacute;."
 
-msgid "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !"
-msgstr "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !"
+msgid "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable &agrave; l'investissement et ne prend que 2 petites minutes !"
+msgstr "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable &agrave; l'investissement et ne prend que 2 petites minutes !"
 
 msgid "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds."
 msgstr "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds."

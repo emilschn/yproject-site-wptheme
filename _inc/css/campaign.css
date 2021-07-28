@@ -447,24 +447,60 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text {
-	height: 122px;
-        margin: 10px auto;
-        text-align: justify;
-        overflow: hidden;
-        line-height: 1.25;
+    margin: 10px auto;
+    line-height: 1.25;
+	/* coupe le texte s'il dépasse une certaine hauteur */
+	display: block;
+	display: -webkit-box;
+	-webkit-line-clamp: 5;
+	-webkit-box-orient: vertical;
+	overflow: hidden;
+	text-overflow: ellipsis;
 }
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text p {
 	text-align: justify;
 	font-size: 11pt;
 }
 
-div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progress-bar {
-	position: relative;
-	top: 0px;
+div.progress-bar-container {
+	margin-top: 30px;
 }
+
+div.progress-bar-container div.project-page-bar, div.evaluation-container div.evaluation-bar {
+	width: 100%;
+}
+
+div.progress-bar-container div.project-page-data, div.evaluation-container span.vote-status {
+	padding: 0;
+}
+
+div.progress-bar-container span.progress-bar-separator {
+	display: flex;
+	flex-direction: column;
+	width: 20px;
+	position: relative;
+	z-index: 2;
+	margin-top: -66px;
+	margin-bottom: 30px;
+}
+
+div.progress-bar-container hr{ 
+    border: none;
+    border-left: 2px solid #B3DAE1;
+    height: 16px;
+    width: 2px;
+	padding: 0;
+	margin-top: -2px;
+}
+
+div.evaluation-container span.vote-status p {
+	margin: 0;
+	padding: 0;
+}
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left {
 	width: 33.33%;
-	margin: 20px 0px;
+	margin: 20px 0 15px 0;
 	text-align: center;
 	text-transform: uppercase;
 }

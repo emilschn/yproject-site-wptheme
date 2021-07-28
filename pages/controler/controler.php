@@ -8,6 +8,7 @@ class WDG_Page_Controler {
 	private $show_user_details_confirmation;
 	private $show_user_pending_preinvestment;
 	private $show_user_pending_investment;
+	protected $show_user_hidden_project_visited = FALSE;
 	private $show_user_needs_authentication;
 	protected $controler_name;
 
@@ -302,6 +303,11 @@ class WDG_Page_Controler {
 
 	public function get_show_user_pending_investment() {
 		return $this->show_user_pending_investment;
+	}
+
+	//******************************************************************************
+	public function get_show_user_hidden_project_visited() {
+		return $this->show_user_hidden_project_visited;
 	}
 
 	//******************************************************************************
