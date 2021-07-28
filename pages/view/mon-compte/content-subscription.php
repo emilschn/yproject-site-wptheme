@@ -20,11 +20,6 @@ $WDGUser_displayed = $page_controler->get_current_user();
 <?php 
 	locate_template( array( 'pages/view/common/form-subscription.php'  ), true );
 ?>
- <a class="button red">
-	<span class="button-text">
-	    <?php _e( 'common.SAVE', 'yproject' ); ?>
-	</span>
-</a>
 </div>
 </div>
 
