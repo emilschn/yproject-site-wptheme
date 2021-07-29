@@ -54,7 +54,7 @@ class WDG_Redirect_Engine {
 
 			return $page_object_translated;
 		} else {
-			ypcf_function_log( 'get_current_locale_page_object '. $page_name . ' not found' , FALSE);
+			ypcf_function_log( 'get_current_locale_page_object', $page_name . ' not found' );
 
 			return FALSE;
 		}
