@@ -4,6 +4,7 @@ function UserAccountDashboard() {
 	this.initPhoneNotification();
 	this.initLoadingAnimation();
 	this.initSubscriptionForm();
+	this.initSubscriptionAmount();
 }
 
 /**
@@ -569,6 +570,18 @@ UserAccountDashboard.prototype.initSubscriptionForm = function () {
 	$('.add-subscription').click(function (e) {
 		$(this).hide();
 		$(".form").show();
+	});
+}
+
+UserAccountDashboard.prototype.initSubscriptionAmount = function () {
+	document.getElementById('select-modality').addEventListener('change', function () {
+		if (this.value == 'part_royalties' ){
+		document.getElementById('amount');
+		$("#amount").show();
+		}
+		else{
+			$("#amount").hide();
+		}
 	});
 }
 
