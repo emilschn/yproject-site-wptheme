@@ -1721,10 +1721,10 @@ msgstr "RIB"
 # ############################## form - user-subscription ################################
 
 msgid "form.subscription.SUCCESS"
-msgstr "You have received an email confirming your investment"
+msgstr "You have received an email to confirm your investment"
 
 msgid "form.subscription.error.AMOUNT_MINIMUM"
-msgstr "The minimum valid amount is 10€%s"
+msgstr "The minimum valid amount is 10€"
 
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"
