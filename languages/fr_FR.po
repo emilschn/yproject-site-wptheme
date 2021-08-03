@@ -1723,6 +1723,14 @@ msgstr "BIC"
 msgid "form.user-bank.RIB"
 msgstr "RIB"
 
+# ############################## form - user-subscription ################################
+
+msgid "form.subscription.SUCCESS"
+msgstr "Vous avez reçu un mail afin de confirmer votre investissement"
+
+msgid "form.subscription.error.AMOUNT_MINIMUM"
+msgstr "Le montant minimum valide est de 10€"
+
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"
 msgstr "E-mail"
