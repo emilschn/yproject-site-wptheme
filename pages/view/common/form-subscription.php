@@ -5,7 +5,6 @@
     $WDGSubscriptionForm = $page_controler->get_subscription_form();
     $fields_basics = $WDGSubscriptionForm->getFields( WDG_Form_Subscription::$field_group_basics );
     $fields_hidden = $WDGSubscriptionForm->getFields( WDG_Form_Subscription::$field_group_hidden );
-    $fields_amount = $WDGSubscriptionForm->getFields( WDG_Form_Subscription::$field_group_amount );
     $form_feedback = $page_controler->get_user_form_feedback();
 ?>
 
@@ -16,19 +15,10 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 <?php endforeach; ?>
 
-<div id="#sel">
 <?php foreach ( $fields_basics as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>  
 <?php endforeach; ?>
-</div>
-
-<div id="amount" class="hidden">
-<?php foreach ( $fields_amount as $field ): ?>
-		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>  
-<?php endforeach; ?>
-</div>
 
     <div id="user-details-form-buttons">
         <button type="submit" class="button save red">

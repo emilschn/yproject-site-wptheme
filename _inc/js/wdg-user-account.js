@@ -574,13 +574,12 @@ UserAccountDashboard.prototype.initSubscriptionForm = function () {
 }
 
 UserAccountDashboard.prototype.initSubscriptionAmount = function () {
-	document.getElementById('select-modality').addEventListener('change', function () {
-		if (this.value == 'part_royalties' ){
-		document.getElementById('amount');
-		$("#amount").show();
+	$('#select-modality').change( function () {
+		if ( $(this).val() == 'part_royalties' ) {
+			$("#field-amount").show();
 		}
-		else{
-			$("#amount").hide();
+		else {
+			$("#field-amount").hide();
 		}
 	});
 }
