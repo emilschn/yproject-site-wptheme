@@ -23,6 +23,11 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 	 * URL vers laquelle on redirige l'utilisateur automatiquement
 	 */
 	private $current_auto_redirect_link;
+	/**
+	 * String
+	 * Indique si c'est une création de compte ou pas
+	 */
+	private $current_user_is_new_account;
 
 	/**
 	 * Constructeur du controler
@@ -61,6 +66,7 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 		$input_action = filter_input( INPUT_GET, 'action' );
 		$input_code = filter_input( INPUT_GET, 'validation-code' );
 		$input_is_new_account = filter_input( INPUT_GET, 'is-new-account' );
+		$this->current_user_is_new_account = $input_is_new_account;
 
 		// Si l'utilisateur connecté n'est pas encore validé, qu'il demande la validation et que le code correspond
 		$user_validation_code = $this->current_user->get_email_validation_code();
@@ -100,5 +106,13 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 
 	public function get_current_user_email() {
 		return $this->current_user->get_email();
+	}
+
+	public function get_current_user_sessionUID() {
+		return $this->current_user->get_email_validation_code();
+	}
+
+	public function get_current_user_is_new_account() {
+		return $this->current_user_is_new_account;
 	}
 }

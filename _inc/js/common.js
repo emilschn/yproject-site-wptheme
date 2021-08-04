@@ -277,6 +277,24 @@ YPUIFunctions = (function ($) {
 				$('#new-element-to-select').remove();
 				$(this).siblings('span.hidden').show();
 			});
+
+			
+			$('#send-email-validation-link').click(function (e) {
+				e.preventDefault();
+				$.ajax({
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': {
+						'action': 'account_signin_send_validation_email',
+						'sessionUID': $(this).data('sessionUID'),
+						'email-address': $(this).data('email'),
+						'is-new-account': $(this).data('isnewaccount')
+					}
+				}).always(function () {
+					console.log("mail envoyé");
+				});
+			});
+
 		},
 		/**
 		 * Fonction pour récupérer la position x,y d'un élément
