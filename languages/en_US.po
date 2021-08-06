@@ -898,21 +898,6 @@ msgstr "It is without commitment, changeable at any time and automatic."
 msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
 msgstr "+ Add new subscription"
 
-msgid "account.subscriptions.MODALITY"
-msgstr "I want to invest automatically..."
-
-msgid "account.subscriptions.MODALITY_FIRST_CHOICE"
-msgstr "the entirety of my wallet"
-
-msgid "account.subscriptions.MODALITY_SECOND_CHOICE"
-msgstr "a fixed amount"
-
-msgid "account.subscriptions.AMOUNT"
-msgstr "Amount"
-
-msgid "account.subscriptions.PROJECT"
-msgstr "In the project ..."
-
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
 
@@ -1720,11 +1705,29 @@ msgstr "RIB"
 
 # ############################## form - user-subscription ################################
 
+msgid "form.subscriptions.MODALITY"
+msgstr "I want to invest automatically..."
+
+msgid "form.subscriptions.MODALITY_FIRST_CHOICE"
+msgstr "the entirety of my wallet"
+
+msgid "form.subscriptions.MODALITY_SECOND_CHOICE"
+msgstr "a fixed amount"
+
+msgid "form.subscriptions.AMOUNT"
+msgstr "Amount"
+
+msgid "form.subscriptions.PROJECT"
+msgstr "In the project ..."
+
 msgid "form.subscription.SUCCESS"
 msgstr "You have received an email to confirm your investment"
 
 msgid "form.subscription.error.AMOUNT_MINIMUM"
 msgstr "The minimum valid amount is 10€"
+
+msgid "form.subscription.description.AMOUNT_MINIMUM"
+msgstr "The amount must be a whole number greater than 10€."
 
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"

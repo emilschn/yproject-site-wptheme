@@ -432,6 +432,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->form_user_subscription = new WDG_Form_Subscription($this->current_user->get_wpref());
 		if(isset($_SESSION[ 'account_organization_form_subscription_feedback_' . $this->current_user->get_wpref() ])){
 			$this->form_user_feedback = $_SESSION[ 'account_organization_form_subscription_feedback_' . $this->current_user->get_wpref() ];
+			$_SESSION[ 'account_organization_form_subscription_feedback_' . $this->current_user->get_wpref() ] = FALSE;
 		}
 	}
 	
