@@ -1,6 +1,8 @@
 <?php
 global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
+
+if ( !empty( $page_controler ) ) :
 ?>
 
 
@@ -169,6 +171,13 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 // CURRENT PROJECTS
 /******************************************************************************/
 ?>
+
+<div class="previously-visited-hidden-project hidden">
+	<div>
+		Vous aviez visité un projet privé précédemment,
+		cliquez sur ce lien pour retrourner sur la page de <a href=""></a>.
+	</div>
+</div>
 
 <?php $currentprojects_html = $page_controler->get_currentprojects_html(); ?>
 
@@ -380,3 +389,6 @@ ob_end_clean();
 ?>
 	
 </div><!-- #content -->
+
+<?php
+endif;

@@ -30,6 +30,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $form_user_notifications;
 	private $form_user_feedback;
 	private $form_user_tax_exemption;
+	private $form_user_change_investor_feedback;
 	private $list_intentions_to_confirm;
 	private $tax_documents;
 
@@ -80,7 +81,9 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->init_current_user( $reload );
 		$this->init_project_list();
 		$this->init_intentions_to_confirm();
+		$this->init_show_user_hidden_visited_project();
 		$this->init_form_user_details();
+		$this->init_form_change_investment_owner();
 		$this->init_form_user_identitydocs();
 		$this->init_form_user_bank();
 		$this->init_form_user_notifications();
@@ -380,6 +383,22 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	}
 
 	/******************************************************************************/
+	// INVESTMENT CHANGE INVESTOR
+	/******************************************************************************/
+	private function init_form_change_investment_owner() {
+		if ( $this->get_current_user()->is_admin() ) {
+			$core = ATCF_CrowdFunding::instance();
+			$core->include_form( 'user-change-investment-owner' );
+			$form = new WDG_Form_User_Change_Investment_Owner();
+			$this->form_user_change_investor_feedback = $form->postForm();
+		}
+	}
+
+	public function get_form_user_change_investor_feedback() {
+		return $this->form_user_change_investor_feedback;
+	}
+
+	/******************************************************************************/
 	// USER DOCUMENTS
 	/******************************************************************************/
 	private function init_form_user_identitydocs() {
@@ -596,13 +615,22 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private function init_intentions_to_confirm() {
 		$this->list_intentions_to_confirm = array();
 
-		if ( $this->current_user->is_lemonway_registered() ) {
+		if ( $this->current_user ) {
 			$this->list_intentions_to_confirm = $this->current_user->get_campaigns_current_voted();
 		}
 	}
 
 	public function get_intentions_to_confirm() {
 		return $this->list_intentions_to_confirm;
+	}
+
+	/******************************************************************************/
+	// PROJETS PRIVES VISITES
+	/******************************************************************************/
+	public function init_show_user_hidden_visited_project() {
+		if ( !empty( $_COOKIE[ 'hidden_project_visited' ] ) ) {
+			$this->show_user_hidden_project_visited = $_COOKIE[ 'hidden_project_visited' ];
+		}
 	}
 
 	/******************************************************************************/

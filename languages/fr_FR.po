@@ -11,7 +11,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr_FR\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Poedit 3.0\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -295,6 +295,15 @@ msgstr "&Eacute;valuation termin&eacute;e"
 msgid "project.CAMPAIGN_FUNDED"
 msgstr "projet<br />financ&eacute; !"
 
+msgid "project.FUNDED_BANNER"
+msgstr "projet financ&eacute; avec succ&egrave;s !"
+
+msgid "project.POSITIVE_SAVINGS_BANNER"
+msgstr "plusieurs mat&eacute;riels d&eacute;j&agrave; financ&eacute;s !"
+
+msgid "project.PEOPLE_RAISE"
+msgstr "personnes ont permis de lever"
+
 msgid "projects.THE_PROJECTS"
 msgstr "les projets"
 
@@ -438,6 +447,52 @@ msgstr "Probl&egrave;me de cr&eacute;ation d'utilisateur."
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
 
+# ############################## /activer-compte ################################
+msgid "validation.WELCOME_TO_WEDOGOOD"
+msgstr "Bienvenue sur WE DO GOOD !"
+
+msgid "validation.HELLO_WELCOME_TO_WEDOGOOD"
+msgstr "Bonjour et bienvenue sur WE DO GOOD !"
+
+msgid "validation.ACCOUNT_IS_CREATED"
+msgstr "Votre compte est désormais créé."
+
+msgid "validation.YOU_NEED_TO_COMPLETE"
+msgstr "Pour investir sur un projet, vous devez compléter votre profil."
+
+msgid "validation.YOU_CAN_LEAVE_WHEN_YOU_WANT"
+msgstr "Vous pouvez à tout moment quitter le parcours et revenir pour reprendre là où vous en étiez !"
+
+msgid "validation.COMPLETE_MY_PROFILE"
+msgstr "Compléter mon profil"
+
+msgid "validation.YOUR_EMAIL_IS_VALIDATED"
+msgstr "Nous vous confirmons que votre adresse e-mail est bien validée :"
+
+msgid "validation.WE_WILL_REDIRECT_IN_A_FEW_SECONDS"
+msgstr "Nous vous redirigerons automatiquement d'ici quelques secondes."
+
+msgid "validation.CLICK_TO_GET_AWAY"
+msgstr "Si vous souhaitez accélérer votre redirection, vous pouvez cliquer sur"
+
+msgid "validation.THIS_LINK"
+msgstr "ce lien"
+
+msgid "validation.CURRENT_ACCOUNT_MATCHES_EMAIL"
+msgstr "Le compte connecté correspond à l'adresse e-mail"
+
+msgid "validation.EMAIL_HAS_BEEN_VALIDATED"
+msgstr "Cette adresse a déjà été validée précédemment."
+
+msgid "validation.CODE_DOESNT_MATCH"
+msgstr "Cependant, le code de validation ne correspond pas."
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL"
+msgstr "Nous pouvons vous renvoyer un e-mail de validation à cette adresse, si vous cliquez sur le bouton ci-dessous :"
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL_BUTTON"
+msgstr "Envoyer un e-mail pour valider mon compte"
+
 # ############################## /mon-compte ################################
 msgid "account.OVERRIDE_USER_DOESNT_EXIST"
 msgstr "L'utilisateur que vous essayez d'afficher n'existe pas..."
@@ -450,6 +505,12 @@ msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
 
 msgid "account.HELLO"
 msgstr "Bonjour"
+
+msgid "account.lightbox.hidden-project-visited.TITLE"
+msgstr "Retourner vers un projet privé"
+
+msgid "account.lightbox.hidden-project-visited.DESCRIPTION"
+msgstr "Vous avez visité la page de %s qui est un projet privé. Voulez-vous poursuivre vers la page de ce projet ?"
 
 msgid "account.lightbox.VALIDATE_INFORMATION"
 msgstr "Validation de vos informations"
@@ -868,6 +929,9 @@ msgstr "L&apos;entreprise est engag&eacute;e &agrave; vous verser des royalties 
 msgid "account.investments.ESTIMATED"
 msgstr "pr&eacute;visionnel"
 
+msgid "account.investments.ACCOUNT_AUTHENTICATION"
+msgstr "Authentifier mon compte"
+
 msgid "account.notifications.TITLE"
 msgstr "Notifications en provenance de WE DO GOOD"
 
@@ -903,6 +967,9 @@ msgstr "Certaines erreurs ont bloqu&eacute; l'enregistrement de vos donn&eacute;
 
 msgid "account.parameters.orga.HEAD_OFFICE"
 msgstr "Si&egrave;ge social"
+
+msgid "account.parameters.orga.ACCOUNTANT"
+msgstr "Expert-comptable"
 
 msgid "account.wallet.TITLE"
 msgstr "Mon porte-monnaie &eacute;lectronique"
@@ -2568,6 +2635,9 @@ msgstr "D&eacute;couvrir d'autres projets"
 msgid "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
 msgstr "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
 
+msgid "project.GOAL_MAX_REACHED_NO_MORE_INVEST"
+msgstr "Objectif maximum atteint : il n'est plus possible d'investir !"
+
 msgid "Impacts"
 msgstr "Impacts"
 
@@ -2747,8 +2817,8 @@ msgstr "WE DO GOOD reconnecte la finance avec le bien commun."
 msgid "En finan&ccedil;ant l'&eacute;conomie r&eacute;elle, vous pouvez avoir un impact positif sur l'environnement et la soci&eacute;t&eacute;."
 msgstr "En finan&ccedil;ant l'&eacute;conomie r&eacute;elle, vous pouvez avoir un impact positif sur l'environnement et la soci&eacute;t&eacute;."
 
-msgid "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !"
-msgstr "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable à l'investissement et ne prend que 2 petites minutes !"
+msgid "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable &agrave; l'investissement et ne prend que 2 petites minutes !"
+msgstr "L'&eacute;valuation est l'&eacute;tape pr&eacute;alable &agrave; l'investissement et ne prend que 2 petites minutes !"
 
 msgid "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds."
 msgstr "Les entrepreneurs ont besoin de votre avis sur le projet pour mesurer l'int&eacute;r&ecirc;t qu'il suscite et bien lancer leur lev&eacute;e de fonds."

@@ -7,6 +7,7 @@ if ( empty( $campaign ) ) {
 		exit( 'Access error current campaign - AECC1431' );
 	}
 }
+
 $btn_follow_href = WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?source=project';
 $btn_follow_classes = 'wdg-button-lightbox-open';
 $btn_follow_data_lightbox = 'connexion';
@@ -28,6 +29,9 @@ if (is_user_logged_in()) {
 		$btn_follow_href = '#';
 	}
 }
+
+$current_lang = get_locale();
+$campaign->set_current_lang($current_lang);
 
 $video_element = '';
 $img_src = '';
@@ -96,10 +100,7 @@ if (!empty($current_organization)) {
 	}
 }
 
-$current_lang = get_locale();
-$campaign->set_current_lang($current_lang);
 $lang_list = $campaign->get_lang_list();
-$campaign_categories_str = $campaign->get_categories_str();
 ?>
 	
 <div class="project-banner">
@@ -160,17 +161,17 @@ $campaign_categories_str = $campaign->get_categories_str();
 				
 				<div class="project-banner-info-actions">
 					<div class="impacts-container" id="impacts-<?php echo $post->ID; ?>">
-						<?php if (strpos($campaign_categories_str, 'environnemental') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENVIRONMENT', 'yproject')?></span>
+						<?php if ( $campaign->has_impact( 'environnemental' ) || $campaign->has_impact( 'environmental' ) ): ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-env.png" alt="impact environnemental" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENVIRONMENT', 'yproject')?></span>
 						<?php endif; ?>
-						<?php if (strpos($campaign_categories_str, 'social') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.SOCIAL"', 'yproject')?></span>
+						<?php if ( $campaign->has_impact( 'social' ) ): ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-social.png" alt="impact social" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.SOCIAL', 'yproject')?></span>
 						<?php endif; ?>
-						<?php if (strpos($campaign_categories_str, 'economique') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ECO', 'yproject')?></span>
+						<?php if ( $campaign->has_impact( 'economique' ) || $campaign->has_impact( 'economic' ) ): ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-eco.png" alt="impact économique" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ECO', 'yproject')?></span>
 						<?php endif; ?>
-						<?php if (strpos($campaign_categories_str, 'entreprise-engagee') !== FALSE): ?>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="impact engagement" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENGAGEMENT', 'yproject')?></span>
+						<?php if ( $campaign->has_impact( 'entreprise-engagee' ) || $campaign->has_impact( 'committed-company' ) ): ?>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/impact-engagee.png" alt="impact engagement" width="42" height="42" class="impact-logo" /><span class="info-bulle invisible"><?php _e('project.impact.ENGAGEMENT', 'yproject')?></span>
 						<?php endif; ?>
 					</div>
 
@@ -302,70 +303,72 @@ $campaign_categories_str = $campaign->get_categories_str();
 							
 							
 					<?php else: ?>
-						<?php
-						$nbinvestors = $campaign->backers_count();
-						?>
-
-						<div class="left">
-							<?php
-							$number = $nbinvestors;
-							$text = __("investisseur", 'yproject');
-							if ($nbinvestors == 0) {
-								$number = __("aucun", 'yproject');
-							} elseif ($nbinvestors > 1) {
-								$text = __("investisseurs", 'yproject');
-							}
-							?>
-							<span><?php echo $number; ?></span><br />
-							<span><?php echo $text; ?></span>
-						</div>
-						<div class="left bordered">
-							<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
-								<span></span>
-								<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
-								<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; MAX</span>
-							<?php else: ?>
-								<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro;</span><br />
-								<span><?php _e('Objectif minimum', 'yproject'); ?></span>
-							<?php endif; ?>
-						</div>
-						<div class="left">
-							<?php
-							if ($time_remaining_str != '-'):
-								$time_remaining_str_split = explode('-', $time_remaining_str);
-								$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
-								$time_remaining_str_unit = $time_remaining_str_split[0];
-								switch ($time_remaining_str_split[0]) {
-									case 'J': $time_remaining_str .= 'jours'; break;
-									case 'H': $time_remaining_str .= 'heures'; break;
-									case 'M': $time_remaining_str .= 'minutes'; break;
-								}
-							?>
-								<span><?php echo $time_remaining_str; ?></span><br />
-								<?php if ($time_remaining_str_unit == 'J'): ?>
-								<span><?php _e('Restants', 'yproject'); ?></span>
-								<?php else: ?>
-								<span><?php _e('Restantes', 'yproject'); ?></span>
-								<?php endif; ?>
-							<?php
-							else:
-							?>
-								<span><?php echo $time_remaining_str; ?></span>
-							<?php
-							endif;
-							?>
-						</div>
-
 						<?php if ( $campaign->percent_completed( false ) < 100 ): ?>
+							<?php
+							$nbinvestors = $campaign->backers_count();
+							?>
+
+							<div class="left">
+								<?php
+								$number = $nbinvestors;
+								$text = __("investisseur", 'yproject');
+								if ($nbinvestors == 0) {
+									$number = __("aucun", 'yproject');
+								} elseif ($nbinvestors > 1) {
+									$text = __("investisseurs", 'yproject');
+								}
+								?>
+								<span><?php echo $number; ?></span><br />
+								<span><?php echo $text; ?></span>
+							</div>
+							<div class="left bordered">
+								<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
+									<span></span>
+									<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
+									<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; MAX</span>
+								<?php else: ?>
+									<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro;</span><br />
+									<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+								<?php endif; ?>
+							</div>
+							<div class="left">
+								<?php
+								if ($time_remaining_str != '-'):
+									$time_remaining_str_split = explode('-', $time_remaining_str);
+									$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
+									$time_remaining_str_unit = $time_remaining_str_split[0];
+									switch ($time_remaining_str_split[0]) {
+										case 'J': $time_remaining_str .= __('jours', 'yproject'); break;
+										case 'H': $time_remaining_str .= __('heures', 'yproject'); break;
+										case 'M': $time_remaining_str .= __('minutes', 'yproject'); break;
+									}
+								?>
+									<span><?php echo $time_remaining_str; ?></span><br />
+									<?php if ($time_remaining_str_unit == 'J'): ?>
+									<span><?php _e('Restants', 'yproject'); ?></span>
+									<?php else: ?>
+									<span><?php _e('Restantes', 'yproject'); ?></span>
+									<?php endif; ?>
+								<?php
+								else:
+								?>
+									<span><?php echo $time_remaining_str; ?></span>
+								<?php
+								endif;
+								?>
+							</div>
+
 							<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 						<?php else: ?>
 							<div class="end-sentence">
 								<?php if ( $campaign->maximum_complete_message() == '' ): ?>
-									<?php _e( "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !", 'yproject' ); ?>
+									<?php _e( "project.GOAL_MAX_REACHED_NO_MORE_INVEST", 'yproject' ); ?>
 								<?php else: ?>
 									<?php echo $campaign->maximum_complete_message(); ?>
 								<?php endif; ?>
 							</div>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets", "yproject" ) ?></a>
+				
 						<?php endif; ?>
 				
 					<?php endif; ?>

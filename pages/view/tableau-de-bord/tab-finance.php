@@ -56,7 +56,7 @@
 				"options_names"	=> array_values( ATCF_Campaign::$maximum_profit_list ),
 				"prefix"		=> '*',
 				"admin_theme"	=> true,
-				"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+				"editable"		=> $page_controler->can_access_admin()
 			));
 
 			DashboardUtility::create_field(array(
@@ -65,7 +65,7 @@
 				"label"			=> "Pr&eacute;cision pour le gain maximum (apr&egrave;s la virgule, nombre entier positif)",
 				"value"			=> $page_controler->get_campaign()->maximum_profit_precision(),
 				"admin_theme"	=> true,
-				"editable"		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+				"editable"		=> $page_controler->can_access_admin()
 			));
 
 			DashboardUtility::create_field(array(
@@ -293,7 +293,7 @@
 					<td><?php _e( "CA pr&eacute;visionnel", 'yproject' ); ?></td>
 					<td>
 						<?php _e( "Montant des Royalties reversées", 'yproject' ); ?><br>
-						<?php _e( "pour", 'yproject' ); ?> <span id="total-funding">---</span>&nbsp;&euro; <?php _e( "investis", 'yproject' ); ?>
+						<?php _e( "pour", 'yproject' ); ?> <span id="total-funding">---</span> <?php _e( "investis", 'yproject' ); ?>
 					</td>
 				</tr>
 			</thead>

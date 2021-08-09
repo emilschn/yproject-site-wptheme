@@ -23,7 +23,25 @@ if ( $WDGUser_current->is_admin() ) {
 	<?php endif; ?>
 </p>
 
-<?php if ( $WDGUser_current->is_admin() && $has_pending_wire_investments ): ?>		
+<?php if ( $WDGUser_current->is_admin() ): ?>
+	<?php $change_investor_feedback = $page_controler->get_form_user_change_investor_feedback(); ?>
+	<?php if ( !empty( $change_investor_feedback[ 'errors' ] ) ): ?>
+		<?php foreach ( $change_investor_feedback[ 'errors' ] as $error_item ): ?>
+			<div class="wdg-message error">
+				<?php echo $error_item[ 'text' ]; ?>
+			</div>
+		<?php endforeach; ?>
+	<?php endif; ?>
+
+	<?php if ( !empty( $change_investor_feedback[ 'success' ] ) ): ?>
+		<div class="wdg-message confirm">
+			<?php echo $change_investor_feedback[ 'success' ]; ?>
+		</div>
+	<?php endif; ?>
+<?php endif; ?>
+
+
+<?php if ( $WDGUser_current->is_admin() && $has_pending_wire_investments ): ?>
 	<div class="admin-theme">
 		<strong><?php _e( "Virements en attente: ", 'yproject' ); ?></strong><br>
 		<?php foreach ( $pending_wire_investments as $wire_investment ): ?>
@@ -84,6 +102,17 @@ if ( $WDGUser_current->is_admin() ) {
 
 <div id="vote-intentions-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="vote-intentions hidden">
 	
+	<?php if ( !$WDGUser_displayed->is_lemonway_registered() ) : ?>
+	<div class="db-form.v3 center">
+		<div class="wdg-message error msg-authentication-alert">
+			<p>
+				<?php _e( 'account.authentication.PROVIDE_DOCUMENTS_TO_INVEST', 'yproject' ); ?>
+			</p>
+			<a href="#authentication" class="button red go-to-tab" data-tab="authentication"><?php _e( 'account.investments.ACCOUNT_AUTHENTICATION', 'yproject' ); ?></a>
+		</div>
+	</div>
+	<?php endif; ?>
+	
 	<?php if ( count( $list_intentions_to_confirm ) > 0 ): ?>
 		<h3><?php _e( 'account.investments.INVESTMENTS_TO_CONCLUDE', 'yproject' ); ?></h3>
 	
@@ -93,7 +122,9 @@ if ( $WDGUser_current->is_admin() ) {
 				<?php $status_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? __( 'account.investments.STATUS_VOTE', 'yproject' ) : __( 'account.investments.STATUS_INVESTMENT', 'yproject' ); ?>
 				<?php $button_str = ( $intention_item[ 'status' ] == ATCF_Campaign::$campaign_status_vote ) ? __( 'common.PREINVEST', 'yproject' ) : __( 'common.INVEST', 'yproject' ); ?>
 				<h4><?php echo YPUIHelpers::display_number( $intention_item[ 'vote_amount' ], TRUE, 0 ). ' &euro; - ' .$intention_item[ 'campaign_name' ]. ' (' .$status_str. ')'; ?></h4>
-				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ]; ?>" class="button red"><?php echo $button_str; ?></a>
+				<?php if ( $WDGUser_displayed->is_lemonway_registered() ) : ?>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investir' ) . '?campaign_id=' .$intention_item[ 'campaign_id' ]. '&invest_start=1&init_invest=' .$intention_item[ 'vote_amount' ]; ?>" class="button red"><?php echo $button_str; ?></a>
+				<?php endif; ?>
 			<?php endif; ?>
 
 		<?php endforeach; ?>
@@ -101,7 +132,6 @@ if ( $WDGUser_current->is_admin() ) {
 	<?php endif; ?>
 	
 </div>
-
 
 <span class="hidden">
 	<span id="invest-trans-reload"><?php _e( 'account.investments.RELOAD', 'yproject' ); ?></span>

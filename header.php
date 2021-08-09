@@ -111,7 +111,8 @@
 		<?php endif; ?>
 		
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
-		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>" charset="<?php bloginfo( 'charset' ); ?>" />
+		<meta charset="<?php bloginfo( 'charset' ); ?>" />
+		<meta name="robots" content="<?php bloginfo( 'html_type' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="description" content="<?php echo $page_controler->get_page_description(); ?>" />
 		<meta name="google-site-verification" content="GKtZACFMpEC-1TO9ox4c85RJgfWRm7gNv4c0QrNKYgM" />
@@ -231,58 +232,11 @@
 				</div>
 				
 				<div id="submenu-user" class="not-connected submenu-style hidden">
-					<div class="menu-loading-init align-center">
+					<div class="menu-loading-init align-center" data-redirect="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>">
 						<br>
 						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
 						<br>
 						<br>
-					</div>
-					
-					<div class="menu-connection-forms hidden">
-						<?php /* Au clic picto Compte, afficher menu connexion */ ?>
-						<div class="only-inf997">
-							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>" class="box_connection_buttons button red"><span><?php _e( 'common.CONNECTION', 'yproject' ); ?></span></a>
-						</div>
-
-						<form method="post" action="<?php echo WDG_Redirect_Engine::override_get_page_url( "connexion" ); ?>" name="login-form" class="sidebar-login-form model-form hidden-inf997">
-							<br>
-							<span id="title-connection"><?php _e( 'common.CONNECTION', 'yproject' ); ?></span>
-							<input class="input_connection" id="identifiant" type="text" name="log" placeholder="<?php _e( 'login.EMAIL_OR_LOGIN', 'yproject' ); ?>" value="" />
-							<br>
-
-							<input class="input_connection" id="password" type="password" name="pwd" placeholder="<?php _e( 'common.PASSWORD', 'yproject' ); ?>" value="" />
-							<div class="submit-center" style="display: none;">
-								<input type="submit" name="wp-submit" class="input_submit button red" id="connect" value="OK"/>
-								<input type="hidden" class="redirect-page" name="redirect-page" value="<?php echo WDGUser::get_login_redirect_page(); ?>" />
-								<input type="hidden" name="login-form" value="1" />
-							</div>   
-
-							<div>
-								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mot-de-passe-oublie' ); ?>" class="forgotten">(<?php _e( 'login.FORGOTTEN_PASSWORD', 'yproject' );?>)</a>
-							</div>
-
-							<br>
-							<label class="checkbox-parent">
-								<input id="rememberme" type="checkbox" name="rememberme" value="forever" />
-								<?php _e( 'login.REMEMBER_ME', 'yproject' ); ?>
-							</label>
-							<br><br>
-						</form>
-
-						<hr class="login-separator">
-
-						<div class="box_connection_buttons blue">
-							<a href="#" class="social_connect_login_facebook" data-redirect="<?php echo WDGUser::get_login_redirect_page(); ?>"><span><?php _e( 'login.LOG_IN_FACEBOOK', 'yproject' ); ?></span></a>
-						</div>
-						<div class="social_connect_login_facebook_loading align-center hidden">
-							<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" />
-						</div>
-
-						<hr class="login-separator">
-
-						<div>
-							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'inscription' ); ?>" class="box_connection_buttons button red"><span><?php _e( 'login.CREATE_ACCOUNT', 'yproject' ); ?></span></a>
-						</div>
 					</div>
 					
 					<div class="menu-connected hidden">
@@ -351,6 +305,10 @@
 		
 		<?php if ( $page_controler->get_show_user_details_confirmation() ): ?>
 			<?php locate_template( array( 'common/lightbox/user-details-lightbox.php' ), true ); ?>
+		<?php endif; ?>
+		
+		<?php if ( $page_controler->get_show_user_hidden_project_visited() ): ?>
+			<?php locate_template( array( 'common/lightbox/hidden-project-visited-lightbox.php' ), true ); ?>
 		<?php endif; ?>
 		
 		<div id="container"> 

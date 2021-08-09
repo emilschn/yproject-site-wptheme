@@ -141,6 +141,11 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 		return $page_url . '?campaign_id=' .$this->current_campaign->ID;
 	}
 	
+	public function get_previous_url() {
+		$page_url = WDG_Redirect_Engine::override_get_page_url( 'investir' );
+		return $page_url . '?campaign_id=' .$this->current_campaign->ID;
+	}
+
 	public function get_lemonway_amount() {
 		if ( $this->current_investment->get_session_user_type() == 'user' ) {
 			$WDGUser_current = WDGUser::current();

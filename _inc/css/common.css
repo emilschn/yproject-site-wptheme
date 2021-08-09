@@ -4,6 +4,7 @@ body {
 	font-size: 1.1em;
     color: #333333;
     font-family: Arial, Helvetica, sans-serif;
+	overflow-x: hidden; /* permet d'empêcher le scroll horizontal causé par WP */
 }
 body a {
 	color: #EA4F51;
@@ -224,6 +225,19 @@ button.red {
     background: none repeat scroll 0 0 #F1A074;
     border: 0px solid #F1A074;
 }
+.button.admin-theme.round{
+	padding: 0px;
+	width: 16px;
+	height: 16px;
+	border-radius: 8px;
+}
+.button.admin-theme.right.round.edit{
+	width: 32px;
+	height: 32px;
+	margin-left: -16px;
+	margin-top: -16px;
+	border-radius: 16px;
+}
 .button.big {
     font-size: 15px;
     padding: 15px 30px;
@@ -266,7 +280,7 @@ button.red {
 	color: #FFFFFF;
 }
 .wdg-message.error {
-	background: #EACDCB;
+	border: 1px solid #f8caca;
 	color: #333333;
 }
 .wdg-message.notification {
@@ -843,6 +857,18 @@ ul.project-list a.needs-authentication:after {
 #submenu-user div#button-logout {
 	bottom: 0px;
 }
+
+#resetpasswordform .field .field-container .field-value input {
+	border-bottom: 3px solid #00879B;
+	background: none;
+	height: 40px;
+	color: #00879B;
+}
+
+#resetpasswordform .field {
+	margin-top: 20px;
+}
+
 @media screen and (max-width: 1300px) {
 	#submenu-user { right: 10px; }
 }
@@ -855,7 +881,64 @@ ul.project-list a.needs-authentication:after {
 }
 
 /*******************************************************************************
-<<<<<<< HEAD
+* TABLEAU
+*******************************************************************************/
+
+.wp-block-table table {
+	border-collapse: collapse;
+	table-layout: fixed;
+	font-size: 14px;
+	margin: auto;
+}
+
+.wp-block-table table tr td {
+	font-family: 'Arial', sans-serif;
+	vertical-align: middle;
+}
+
+.wp-block-table tr {
+	border-bottom: 1px solid #c2c2c2;
+}
+
+.wp-block-table td {
+	padding: 15px;
+	border: 1px solid #c2c2c2;
+	max-width: 25%;
+}
+
+.wp-block-table table tbody tr td:first-of-type { /* première colonne en gris */
+	background-color: #ebebeb;
+}
+
+.wp-block-table table tr:first-of-type td:first-of-type, .wp-block-table table thead tr th:first-of-type { /* cacher la première case qui est inutile */
+	background-color: #fff;
+	border: 0;
+}
+
+/* classes à ajouter aux cases sur WP pour avoir des fonds colorés */
+
+.cell-blue-background {
+	background-color: #B3DAE1;
+}
+
+.cell-yellow-background {
+	background-color: #F9F0D1;
+}
+
+.cell-green-background {
+	background-color: #CEE9C0;
+}
+
+.cell-pink-background {
+	background-color: #F8CACA;
+}
+
+.cell-grey-background {
+	background-color: #EBEBEB;
+}
+
+/*******************************************************************************
+>>>>>>> 5a0f1bcff962247bf5dcf45def54e6e0bd479b33
 * PAGE DE CREATION DE PROJET
 =======
 * PAGE DE CREATION DE PROJET 
@@ -867,20 +950,82 @@ ul.project-list a.needs-authentication:after {
 /*******************************************************************************
 * CONNEXION PAGE
 *******************************************************************************/
-.template-connexion, .template-inscription, .template-lancement {
+.template-connexion1, .template-inscription, .template-lancement {
 	background-color: #f2f2f2;
 }
 .template-connexion .alert-connect-project, .template-inscription .alert-connect-project {
 	width: 480px;
 	margin: auto;
 }
+.template-connexion1 .center, .template-inscription .center {
+	width: 100%;
+}
 .login-page-container {
 	padding-top: 90px;
+}
+.template-connexion1 h1, .template-inscription h1 {
+	text-align: center;
+	margin: 0px;
+	font-family: Trebuchet MS,sans-serif;
+	font-size: 28px;
+	font-weight: bold;
+	letter-spacing: .125em;
+}
+
+
+.post_bottom_buttons_connexion div { 
+    border-bottom: 1px solid #FFFFFF;
+    font-family: Arial, sans-serif;
+    font-size: 9pt;
+    text-transform: uppercase;
+    width: 200px;
+    height: 25px;
+    background-color: #333333;
+}
+
+.login_fail { color : red; margin-bottom: 10px; }
+
+hr.login-separator {
+	margin: 50px 0px 25px;
+	-moz-border-bottom-colors: none;
+	-moz-border-left-colors: none;
+	-moz-border-right-colors: none;
+	-moz-border-top-colors: none;
+	border-color: -moz-use-text-color;
+	border-image: none;
+	border-right: 0 none;
+	border-style: solid none none;
+	border-width: 2px 0 0;
+	color: #000000;
+}
+nav hr.login-separator {
+	margin: 20px 5%;
+}
+div.login-separator-label {
+	margin-top: -38px;
+	margin-bottom: 30px;
+}
+div.login-separator-label span {
+	background: #f2f2f2;
+	padding: 0px 5px;
+}
+
+.sidebar-login-form a.forgotten {
+    color: #606060;
+    font-style: italic;
+    font-size: 11px;
 }
 
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
+.template-connexion1 #content #connect-form .wdg-button-lightbox-open
+#newproject-register-user .wdg-button-lightbox-open {
+	border: none;
+	background: none;
+	font-size: 12pt;
+}
+
 .form-register .on-focus input { margin-left: 110px; }
 .form-register .on-focus .tool-tip { width: 110px; margin-top: -20px; }
 
@@ -934,7 +1079,7 @@ footer > .footer-container {
 	max-width: 1280px;
 	margin: 0 auto;
 	background-repeat: no-repeat;
-	padding: 50px 0px 30px;
+	padding: 50px 50px 30px;
 	line-height: 1.5;
 }
 footer > .footer-container > section {
@@ -1033,6 +1178,7 @@ footer > .footer-container > div.logo-list {
     -webkit-justify-content: space-between;
 	justify-content: space-between;
 	align-items: center;
+	flex-wrap: wrap;
 	padding: 16px 0px;
 }
 footer > .footer-container > div.logo-list > div:nth-child(1), footer > .footer-container > div.logo-list > div:nth-child(2), footer > .footer-container > div.logo-list > div:nth-child(5) {
@@ -1276,6 +1422,17 @@ body.template-les-projets header .header-container > div > div#wdg-project-defin
 	text-align: right;
 }
 
+body.template-les-projets div.previously-visited-hidden-project {
+	background-color: rgba(51, 51, 51, 0.05);
+	margin: 16px 0px 32px;
+}
+body.template-les-projets div.previously-visited-hidden-project > div {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 24px 0px;
+	text-align: center;
+}
+
 body.template-les-projets div#content > h2 {
 	padding-top: 80px;
 	background-color: rgba(51, 51, 51, 0.05);
@@ -1346,36 +1503,16 @@ body.template-les-projets nav#project-filter select option#social {
 body.template-les-projets .projects-positive-savings {
 	background-color: rgba(51, 51, 51, .1);
 }
-body.template-les-projets .wdg-component-projects-preview .project-container {
-	height: 620px;
-	min-width: 240px;
-}
-body.template-les-projets .projects-current .wdg-component-projects-preview .project-container,
-body.template-les-projets .projects-positive-savings .wdg-component-projects-preview .project-container,
-body.template-les-projets .projects-after-end-date .wdg-component-projects-preview .project-container {
-	width: 33%;
-}
 body.template-les-projets div .projects-title-precisions{
 	margin-top: -16px;
 	margin-bottom: 32px;
 }
-body.template-les-projets .projects-funded .wdg-component-projects-preview .project-container {
-	width: 25%;
-}
-body.template-les-projets .wdg-component-projects-preview .block-projects {
-	height: auto;
-	margin: auto;
-	padding-top: 5px;
-	overflow-y: hidden;
-}
-
 body.template-les-projets div#content > div:last-child {
 	margin-top: -10px;
 	padding-bottom: 30px;
 	background-color: rgba(51, 51, 51, 0.05);
 }
 body.template-les-projets div#content > div:last-child .wdg-component-projects-preview .block-projects {
-	max-height: 2400px;
 	margin: auto;
 }
 body.template-les-projets div#content .projects-positive-savings .wdg-component-projects-preview .project-container .project-framed {
@@ -1401,4 +1538,26 @@ body.template-les-projets div#content > div:last-child .wdg-component-projects-p
     max-width: 95%;
     top: auto;
     margin: auto;
+}
+
+/*******************************************************************************
+* Validation de compte
+*******************************************************************************/
+body.template-activer-compte .center_small {
+	width: 650px;
+}
+
+div.activate-account h1 {
+	text-align: center;
+}
+
+div.activate-account div.info {
+	margin: 16px 0px;
+	padding: 32px;
+	background: #ebebeb;
+}
+
+div.activate-account div.timer {
+	margin: 16px 0px;
+	padding: 32px; 
 }
