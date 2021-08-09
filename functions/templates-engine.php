@@ -144,7 +144,7 @@ class WDG_Templates_Engine {
 		// Sinon, on vérifie si on a bien quelque chose à surcharger
 		$wdg_templates_engine = WDG_Templates_Engine::instance();
 		$view = $wdg_templates_engine->get_view_name();
-		if ( $view ) {
+		if ( $view && in_the_loop() ) {
 			ob_start();
 			locate_template( WDG_Templates_Engine::$view_path. 'view-' .$view. '.php', TRUE );
 			$content = ob_get_contents();
