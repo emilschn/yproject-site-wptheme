@@ -574,7 +574,7 @@ UserAccountDashboard.prototype.initSubscriptionForm = function () {
 }
 
 UserAccountDashboard.prototype.initSubscriptionAmount = function () {
-	$('#select-modality').change( function () {
+	$('#select-amount_type').change( function () {
 		if ( $(this).val() == 'part_royalties' ) {
 			$("#field-amount").show();
 		}
