@@ -603,6 +603,11 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
 	nav#main > div#menu > a {
 		margin: 0px 5px;
 		letter-spacing: 0px;
+		font-size: 13px;
+	}
+
+	div#submenu-switch-lang {
+		left: 85%; /* en pourcentage pour essayer de s'adapter à chaque taille de tablette horizontale */
 	}
 }
 @media screen and (max-width: 1070px) and (min-width: 998px) {
@@ -645,11 +650,10 @@ nav#main > div#menu > .wpml-ls {
 
 #submenu-switch-lang {
 	position: relative;
-	float: right;
 	width: 100px;
 	top: 10px;
 	border: 0px;
-	right: 90px;
+	left: 1110px;
 	text-align: center;
 }
 #submenu-switch-lang li.active a {
@@ -1504,8 +1508,8 @@ body.template-les-projets .projects-positive-savings {
 	background-color: rgba(51, 51, 51, .1);
 }
 body.template-les-projets div .projects-title-precisions{
-	margin-top: -16px;
-	margin-bottom: 32px;
+	margin: -17px 6px 32px 6px;
+	text-align: center;
 }
 body.template-les-projets div#content > div:last-child {
 	margin-top: -10px;

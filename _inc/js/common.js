@@ -277,7 +277,7 @@ YPUIFunctions = (function ($) {
 				$('#new-element-to-select').remove();
 				$(this).siblings('span.hidden').show();
 			});
-			
+
 			$('#send-email-validation-link').click(function (e) {
 				e.preventDefault();
 				$.ajax({
@@ -629,8 +629,19 @@ var WDGNavFunctions = (function ($) {
 				});
 			});
 
-			$('#footer-switch-lang').change(function () {
-				window.location = $(this).val();
+			$('#footer-switch-lang').change(function (e) {
+				var key = e.target.options[e.target.selectedIndex].dataset.key;
+				WDGNavFunctions.currentHref = $(this).val();
+				$.ajax({
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': {
+						'action': 'save_user_language',
+						'language_key': key
+					}
+				}).always(function () {
+					window.location = WDGNavFunctions.currentHref;
+				});
 			});
 
 			//Fermeture des box connexion et recherche au clic dans la fenêtre

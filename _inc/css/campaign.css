@@ -1120,5 +1120,6 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-description div.project-description-item { margin: 25px 2%; }
 	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 34%; top: -45px; border-radius: 0% 0% 100% 100%; }
 	div#content.version-3 div.project-description div.projects-desc-content h3 { margin-top: 65px; }
-	div#content.version-3 div.project-description div.projects-desc-content { margin: 0px 0px 40px 0px; background-color: #F4F4F4 }
+	div#content.version-3 div.project-description div.projects-desc-content { margin: 0px 0px 40px 0px; background-color: #FFF }
+	div.project-description div#project-content-description>h3, div#project-content-societal_challenge>h3, div#project-content-added_value>h3, div#project-content-economic_model>h3, div#project-content-implementation>h3, div#project-content-statistics>h3 { padding-bottom: 20px; border-bottom: 1px solid #c2c2c2; }
 }

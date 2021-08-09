@@ -66,7 +66,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 						<div class="select">
 							<select id="footer-switch-lang">
 								<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-									<option value="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" <?php if ( $language_item[ 'active' ] ) {
+									<option value="<?php echo $language_item[ 'url' ] . $url_suffix; ?>"  data-key="<?php echo $language_key; ?>" <?php if ( $language_item[ 'active' ] ) {
 		echo 'selected="selected"';
 	} ?>><?php echo mb_strtoupper( $language_item[ 'native_name' ], 'UTF-8' ); ?></option>
 								<?php endforeach; ?>
