@@ -144,6 +144,9 @@ msgstr "Ce fichier est trop lourd."
 msgid "meta.title.PROJECT"
 msgstr " : levée de fonds en royalties"
 
+msgid "meta.description.PROJECT"
+msgstr "Financement de projets en fonds propres et sans dilution du capital dans"
+
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
 msgstr "Les projets"
