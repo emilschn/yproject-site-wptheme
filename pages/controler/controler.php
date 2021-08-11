@@ -61,13 +61,18 @@ class WDG_Page_Controler {
 			global $post;
 			$this->page_title = $post->post_title;
 		} else {
-			if ( is_category() ) {
+			global $post;
+			if ( is_single() && $post->post_type == 'download' ) {
+				$this->page_title = $post->post_title . __('meta.title.PROJECT', 'yproject');
+			
+			} else if ( is_category() ) {
 				global $cat;
 				$this_category = get_category($cat);
 				$this_category_name = $this_category->name;
 				$name_exploded = explode('cat', $this_category_name);
 				$campaign_post = get_post($name_exploded[1]);
 				$this->page_title = 'Actualit&eacute;s du projet ' . (is_object($campaign_post) ? $campaign_post->post_title : '') . ' | ' . get_bloginfo( 'name' );
+			
 			} else {
 				$this->page_title = wp_title( '|', false, 'right' ) . get_bloginfo( 'name' );
 			}
