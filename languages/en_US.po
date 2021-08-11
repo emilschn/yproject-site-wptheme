@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-08-11 10:53+0200\n"
+"PO-Revision-Date: 2021-08-11 17:37+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -150,7 +150,7 @@ msgid "meta.title.PROJECT"
 msgstr ": fundraising with royalties"
 
 msgid "meta.description.PROJECT"
-msgstr "Financement de projets en fonds propres et sans dilution du capital dans"
+msgstr "Financing of projects in equity and without dilution of capital in"
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
