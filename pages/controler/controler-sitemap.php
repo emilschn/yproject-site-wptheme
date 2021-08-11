@@ -332,7 +332,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			}
 		}
 
-		// Ajout des projets en vote
+		// Ajout des projets en évaluation
 		$campaignlist_vote = ATCF_Campaign::get_list_vote();
 		foreach ( $campaignlist_vote as $campaign_post ) {
 			$campaign_id = $campaign_post->ID;
@@ -340,10 +340,11 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 				"<loc>". get_permalink( $campaign_id ) ."</loc>".
 				"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
 				"<changefreq>daily</changefreq>".
-				"<priority>0.5</priority>".
+				"<priority>0.2</priority>".
 			"</url>\n";
 		}
 
+		// Ajout des projets en cours de financement
 		$campaignlist_funding = ATCF_Campaign::get_list_funding();
 		foreach ( $campaignlist_funding as $campaign_post ) {
 			$campaign_id = $campaign_post->ID;
@@ -351,11 +352,12 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 				"<loc>". get_permalink( $campaign_id ) ."</loc>".
 				"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
 				"<changefreq>hourly</changefreq>".
-				"<priority>0.5</priority>".
+				"<priority>0.2</priority>".
 			"</url>\n";
 		}
 
-		$campaignlist_funded = ATCF_Campaign::get_list_funded( 80 );
+		// Ajout de 40 projets (publics) financés
+		$campaignlist_funded = ATCF_Campaign::get_list_funded( 40 );
 		foreach ( $campaignlist_funded as $campaign_post ) {
 			$campaign_id = $campaign_post->ID;
 			$page_modified_exploded = explode( ' ', $campaign_post->post_modified );
@@ -363,7 +365,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 				"<loc>". get_permalink( $campaign_id ) ."</loc>".
 				"<lastmod>". $page_modified_exploded[0] ."</lastmod>".
 				"<changefreq>monthly</changefreq>".
-				"<priority>0.5</priority>".
+				"<priority>0.1</priority>".
 			"</url>\n";
 		}
 
