@@ -140,6 +140,13 @@ msgstr "Ce fichier n'est pas au bon format."
 msgid "common.forms.error.FILE_TOO_BIG"
 msgstr "Ce fichier est trop lourd."
 
+# ############################## HEADER - META ################################
+msgid "meta.title.PROJECT"
+msgstr " : levée de fonds en royalties"
+
+msgid "meta.description.PROJECT"
+msgstr "Financement de projets en fonds propres et sans dilution du capital dans"
+
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
 msgstr "Les projets"
