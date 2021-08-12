@@ -5,6 +5,9 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 
 <form class="db-form v3 full bg-white enlarge">
+	<div id="contract-intro">
+		<?php echo $page_controler->get_contract_warning(); ?>
+	</div>
 	
 	<div id="contract-preview">
 		<?php echo $page_controler->get_current_investment_contract_preview(); ?>
