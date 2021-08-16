@@ -207,13 +207,14 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.8
 			'/epargne-positive/electronique/'				=> '0.8',
 			'/epargne-positive/mobilite-durable/'			=> '0.8',
+			'/epargne-positive/solaire-rural/'				=> '0.8',
 			'/epargne-positive/tourisme-durable/'			=> '0.8',
 			'/epargne-positive/zero-pesticide/'				=> '0.8',
-			'/financement/entreprises/'				=> '0.8',
+			'/financement/entreprises/'						=> '0.8',
 			'/financement/royalties/levee-de-fonds-privee/'	=> '0.8',
-//			'/financement/solutions/'				=> '0.8',
-			'/investissement/comparatif-risque/'	=> '0.8',
-			'/investissement/start-up/'				=> '0.8',
+//			'/financement/solutions/'						=> '0.8',
+			'/investissement/comparatif-risque/'			=> '0.8',
+			'/investissement/start-up/'						=> '0.8',
 			// 0.7
 			'/financement/automatise/'						=> '0.7',
 //			'/financement/entreprises/B2B/'					=> '0.7',
