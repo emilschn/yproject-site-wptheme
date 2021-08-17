@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-08-11 16:56+0200\n"
+"PO-Revision-Date: 2021-08-17 10:27+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -144,6 +144,13 @@ msgstr "This file is in the wrong format."
 
 msgid "common.forms.error.FILE_TOO_BIG"
 msgstr "This file is too big."
+
+# ############################## HEADER - META ################################
+msgid "meta.title.PROJECT"
+msgstr ": fundraising with royalties"
+
+msgid "meta.description.PROJECT"
+msgstr "Financing of projects in equity and without dilution of capital in"
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
