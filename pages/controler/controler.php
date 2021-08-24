@@ -74,7 +74,7 @@ class WDG_Page_Controler {
 				$this->page_title = 'Actualit&eacute;s du projet ' . (is_object($campaign_post) ? $campaign_post->post_title : '') . ' | ' . get_bloginfo( 'name' );
 			
 			} else {
-				$this->page_title = wp_title( '|', false, 'right' ) . get_bloginfo( 'name' );
+				$this->page_title = wp_title( '|', false, 'right' );
 			}
 		}
 	}
