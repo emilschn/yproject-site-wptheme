@@ -1740,6 +1740,15 @@ msgstr "The minimum valid amount is 10€"
 msgid "form.subscription.description.AMOUNT_MINIMUM"
 msgstr "The amount must be a whole number greater than 10€."
 
+msgid "invest.contract.VALIDATE_SUBSCRIPTION"
+msgstr "Validate the subscription"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_ERROR"
+msgstr "An error occurred when saving your subscription"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
+msgstr "You cancelled your subscription"
+
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"
 msgstr "E-mail"

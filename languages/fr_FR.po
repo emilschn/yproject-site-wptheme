@@ -1735,6 +1735,15 @@ msgstr "Le montant minimum valide est de 10€"
 msgid "form.subscription.description.AMOUNT_MINIMUM"
 msgstr "Le montant doit être un nombre entier supérieur à 10€."
 
+msgid "invest.contract.VALIDATE_SUBSCRIPTION"
+msgstr "Valider l'abonnement"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_ERROR"
+msgstr "Une erreur est survenue lors de l'enregistrement de votre abonnement"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
+msgstr "Vous avez renoncé à la signature du contrat d'abonnement"
+
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"
 msgstr "E-mail"
