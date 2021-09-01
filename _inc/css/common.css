@@ -869,63 +869,6 @@ ul.project-list a.needs-authentication:after {
 }
 
 /*******************************************************************************
-* TABLEAU
-*******************************************************************************/
-
-.wp-block-table table {
-	border-collapse: collapse;
-	table-layout: fixed;
-	font-size: 14px;
-	margin: auto;
-}
-
-.wp-block-table table tr td {
-	font-family: 'Arial', sans-serif;
-	vertical-align: middle;
-}
-
-.wp-block-table tr {
-	border-bottom: 1px solid #c2c2c2;
-}
-
-.wp-block-table td {
-	padding: 15px;
-	border: 1px solid #c2c2c2;
-	max-width: 25%;
-}
-
-.wp-block-table table tbody tr td:first-of-type { /* première colonne en gris */
-	background-color: #ebebeb;
-}
-
-.wp-block-table table tr:first-of-type td:first-of-type, .wp-block-table table thead tr th:first-of-type { /* cacher la première case qui est inutile */
-	background-color: #fff;
-	border: 0;
-}
-
-/* classes à ajouter aux cases sur WP pour avoir des fonds colorés */
-
-.cell-blue-background {
-	background-color: #B3DAE1;
-}
-
-.cell-yellow-background {
-	background-color: #F9F0D1;
-}
-
-.cell-green-background {
-	background-color: #CEE9C0;
-}
-
-.cell-pink-background {
-	background-color: #F8CACA;
-}
-
-.cell-grey-background {
-	background-color: #EBEBEB;
-}
-
-/*******************************************************************************
 * PAGE DE CREATION DE PROJET
 *******************************************************************************/
 .lancement-page-container {
