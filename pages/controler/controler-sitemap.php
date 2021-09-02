@@ -207,13 +207,14 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			// 0.8
 			'/epargne-positive/electronique/'				=> '0.8',
 			'/epargne-positive/mobilite-durable/'			=> '0.8',
+			'/epargne-positive/solaire-rural/'				=> '0.8',
 			'/epargne-positive/tourisme-durable/'			=> '0.8',
 			'/epargne-positive/zero-pesticide/'				=> '0.8',
-			'/financement/entreprises/'				=> '0.8',
+			'/financement/entreprises/'						=> '0.8',
 			'/financement/royalties/levee-de-fonds-privee/'	=> '0.8',
-//			'/financement/solutions/'				=> '0.8',
-			'/investissement/comparatif-risque/'	=> '0.8',
-			'/investissement/start-up/'				=> '0.8',
+//			'/financement/solutions/'						=> '0.8',
+			'/investissement/comparatif-risque/'			=> '0.8',
+			'/investissement/start-up/'						=> '0.8',
 			// 0.7
 			'/financement/automatise/'						=> '0.7',
 //			'/financement/entreprises/B2B/'					=> '0.7',
@@ -332,7 +333,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			}
 		}
 
-		// Ajout des projets en vote
+		// Ajout des projets en évaluation
 		$campaignlist_vote = ATCF_Campaign::get_list_vote();
 		foreach ( $campaignlist_vote as $campaign_post ) {
 			$campaign_id = $campaign_post->ID;
@@ -340,10 +341,11 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 				"<loc>". get_permalink( $campaign_id ) ."</loc>".
 				"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
 				"<changefreq>daily</changefreq>".
-				"<priority>0.5</priority>".
+				"<priority>0.2</priority>".
 			"</url>\n";
 		}
 
+		// Ajout des projets en cours de financement
 		$campaignlist_funding = ATCF_Campaign::get_list_funding();
 		foreach ( $campaignlist_funding as $campaign_post ) {
 			$campaign_id = $campaign_post->ID;
@@ -351,11 +353,12 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 				"<loc>". get_permalink( $campaign_id ) ."</loc>".
 				"<lastmod>". $current_date->format( 'Y-m-d' ) ."</lastmod>".
 				"<changefreq>hourly</changefreq>".
-				"<priority>0.5</priority>".
+				"<priority>0.2</priority>".
 			"</url>\n";
 		}
 
-		$campaignlist_funded = ATCF_Campaign::get_list_funded( 80 );
+		// Ajout de 40 projets (publics) financés
+		$campaignlist_funded = ATCF_Campaign::get_list_funded( 40 );
 		foreach ( $campaignlist_funded as $campaign_post ) {
 			$campaign_id = $campaign_post->ID;
 			$page_modified_exploded = explode( ' ', $campaign_post->post_modified );
@@ -363,7 +366,7 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 				"<loc>". get_permalink( $campaign_id ) ."</loc>".
 				"<lastmod>". $page_modified_exploded[0] ."</lastmod>".
 				"<changefreq>monthly</changefreq>".
-				"<priority>0.5</priority>".
+				"<priority>0.1</priority>".
 			"</url>\n";
 		}
 
