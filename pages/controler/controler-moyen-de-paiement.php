@@ -333,9 +333,6 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 						// Stock avant destruction
 						$this->current_investment->get_session_amount();
 						$this->current_investment->get_session_user_type();
-						if ( !$this->current_investment->needs_signature() ) {
-							WDGInvestment::unset_session();
-						}
 						WDGInvestment::unset_session();
 						$this->current_view = 'check-return';
 					} else {
