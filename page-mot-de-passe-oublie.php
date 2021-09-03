@@ -59,11 +59,11 @@ if ( !isset( $_GET[ 'action' ]) ) {
 				$facebook_meta = get_user_meta($user->ID, 'social_connect_facebook_id', true);
 				if (isset($facebook_meta)) {
 					delete_user_meta($WDGUser->get_wpref(), 'social_connect_facebook_id');
-					$WDGUser->set_authentification_mode(WDGUser::$key_authentication_account);
 					$feedback = "Votre mot de passe a été mis à jour et votre compte a été délié de facebook.";
 				}
-				WDGWPREST_Entity_User::update( $WDGUser );
+				$WDGUser->set_authentification_mode(WDGUser::$key_authentication_account);
 				$WDGUser->set_email_is_validated();
+				WDGWPREST_Entity_User::update( $WDGUser );
 			} else {
 				array_push( $error, "La clé ne correspond pas à cet utilisateur." );
 			}
