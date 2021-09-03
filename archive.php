@@ -116,12 +116,30 @@ if (isset($_GET['delete_post_id'])){
 					<?php _e('Relayez cette actualit&eacute; sur vos r&eacute;seaux sociaux et pr&eacute;venez WE DO GOOD pour une communication d&eacute;cupl&eacute;e !', 'yproject'); ?><br /><br />
 					
 					<button type="submit" name="action" value="ypcf-campaign-preview-news" class="button"><?php _e('Prévisualisation', 'yproject'); ?></button>
-					<button type="submit" name="action" value="ypcf-campaign-add-news" class="button"><?php _e('Publier', 'yproject'); ?></button><br /><br />
+					<button type="submit" name="action" value="ypcf-campaign-add-news" class="button">
+						<span class="button-text">
+							<?php _e('Publier', 'yproject'); ?>
+						</span>
+						<span class="button-loading loading align-center hidden">
+							<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
+						</span>
+					</button><br /><br />
 					<?php wp_nonce_field('ypcf-campaign-add-news'); ?>
 					<?php wp_nonce_field('ypcf-campaign-preview-news'); ?>
                                         
 					<hr>
-
+					
+					<?php /* Je n'assume pas trop cette modification, mais je ne sais pas trop où le mettre proprement. common.js ? */ ?>
+					<script type="text/javascript">
+						$('form button[value="ypcf-campaign-add-news"]').click(function (e) {
+							$(this).find(".button-text").hide();
+							$(this).find(".button-loading").show();
+							if ($(this).hasClass("disabled")) {
+								e.preventDefault();
+							}
+							$(this).addClass("disabled");
+						});
+					</script>
 				</form>
 
 			<?php endif; ?>

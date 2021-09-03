@@ -331,6 +331,9 @@ div#container div#content main #item-body-contacts table {
 	font-size: 12px;
 }
 
+div#container div#content main #item-body-contacts table span.payment-status-waiting::before {
+	background-image: url(../../images/pastille_wait.png);
+}
 div#container div#content main #item-body-contacts table span.payment-status-failed::before {
 	background-image: url(../../images/pastille_failed.png);
 }
@@ -343,6 +346,7 @@ div#container div#content main #item-body-contacts table span.payment-status-pub
 div#container div#content main #item-body-contacts table span.payment-status-success::before {
 	background-image: url(../../images/pastille_ok.png);
 }
+div#container div#content main #item-body-contacts table span.payment-status-waiting::before,
 div#container div#content main #item-body-contacts table span.payment-status-failed::before,
 div#container div#content main #item-body-contacts table span.payment-status-pending::before,
 div#container div#content main #item-body-contacts table span.payment-status-error::before,

@@ -331,10 +331,12 @@ class WDG_WordPress_Events {
 	}
 
 	/**
-	 * Inscription à la NL lors de l'inscription
+	 * Enregistrement de la langue d'affichage lors de la création d'un compte
 	 */
 	public static function user_register($user_id) {
-		$user = get_userdata( $user_id );
+		$wdg_user = new WDGUser( $user_id );
+		$wdg_user->set_language( WDG_Languages_Helpers::get_current_locale_id() );
+		$wdg_user->update_api();
 	}
 
 	/**
@@ -431,7 +433,10 @@ class WDG_WordPress_Events {
 		}
 
 		// Ajout variable JS avec l'url de la page utilisée pour les requêtes Ajax
-		wp_localize_script( 'wdg-script', 'ajax_object', array( 'ajax_url' => admin_url( 'admin-ajax.php' )) );
+		wp_localize_script( 'wdg-script', 'ajax_object', array(
+			'ajax_url'			=> admin_url( 'admin-ajax.php' ),
+			'custom_ajax_url'	=> home_url( '/wp-content/plugins/appthemer-crowdfunding/includes/control/requests/ajax-entry-point.php' )
+		));
 	}
 
 	public static function login_or_register() {

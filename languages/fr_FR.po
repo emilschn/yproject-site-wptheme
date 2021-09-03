@@ -140,6 +140,13 @@ msgstr "Ce fichier n'est pas au bon format."
 msgid "common.forms.error.FILE_TOO_BIG"
 msgstr "Ce fichier est trop lourd."
 
+# ############################## HEADER - META ################################
+msgid "meta.title.PROJECT"
+msgstr " : levée de fonds en royalties"
+
+msgid "meta.description.PROJECT"
+msgstr "Financement de projets en fonds propres et sans dilution du capital dans"
+
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
 msgstr "Les projets"
@@ -446,6 +453,52 @@ msgstr "Probl&egrave;me de cr&eacute;ation d'utilisateur."
 
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
+
+# ############################## /activer-compte ################################
+msgid "validation.WELCOME_TO_WEDOGOOD"
+msgstr "Bienvenue sur WE DO GOOD !"
+
+msgid "validation.HELLO_WELCOME_TO_WEDOGOOD"
+msgstr "Bonjour et bienvenue sur WE DO GOOD !"
+
+msgid "validation.ACCOUNT_IS_CREATED"
+msgstr "Votre compte est désormais créé."
+
+msgid "validation.YOU_NEED_TO_COMPLETE"
+msgstr "Pour investir sur un projet, vous devez compléter votre profil."
+
+msgid "validation.YOU_CAN_LEAVE_WHEN_YOU_WANT"
+msgstr "Vous pouvez à tout moment quitter le parcours et revenir pour reprendre là où vous en étiez !"
+
+msgid "validation.COMPLETE_MY_PROFILE"
+msgstr "Compléter mon profil"
+
+msgid "validation.YOUR_EMAIL_IS_VALIDATED"
+msgstr "Nous vous confirmons que votre adresse e-mail est bien validée :"
+
+msgid "validation.WE_WILL_REDIRECT_IN_A_FEW_SECONDS"
+msgstr "Nous vous redirigerons automatiquement d'ici quelques secondes."
+
+msgid "validation.CLICK_TO_GET_AWAY"
+msgstr "Si vous souhaitez accélérer votre redirection, vous pouvez cliquer sur"
+
+msgid "validation.THIS_LINK"
+msgstr "ce lien"
+
+msgid "validation.CURRENT_ACCOUNT_MATCHES_EMAIL"
+msgstr "Le compte connecté correspond à l'adresse e-mail"
+
+msgid "validation.EMAIL_HAS_BEEN_VALIDATED"
+msgstr "Cette adresse a déjà été validée précédemment."
+
+msgid "validation.CODE_DOESNT_MATCH"
+msgstr "Cependant, le code de validation ne correspond pas."
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL"
+msgstr "Nous pouvons vous renvoyer un e-mail de validation à cette adresse, si vous cliquez sur le bouton ci-dessous :"
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL_BUTTON"
+msgstr "Envoyer un e-mail pour valider mon compte"
 
 # ############################## /mon-compte ################################
 msgid "account.OVERRIDE_USER_DOESNT_EXIST"
@@ -1181,6 +1234,51 @@ msgstr "et investir plus tard"
 msgid "invest.contract.VALIDATE_CONTRACT"
 msgstr "Valider le contrat"
 
+msgid "invest.contract.COMMA"
+msgstr "virgule"
+
+msgid "invest.contract.ZERO"
+msgstr "zéro"
+
+msgid "invest.contract.PERCENT"
+msgstr "pourcents"
+
+msgid "invest.email.ACCOUNT_REGISTERED_DEBIT"
+msgstr "Le compte bancaire de votre carte enregistrée a été débité."
+
+msgid "invest.email.ACCOUNT_DEBIT"
+msgstr "Votre compte a été débité."
+
+msgid "invest.email.INVESTMENT_VALIDATED_WHEN_GOAL_REACHED"
+msgstr "L'investissement ne sera définitivement validé que si le projet atteint son seuil minimal de financement."
+
+msgid "invest.email.PREINVESTMENT_CONDITIONS_1"
+msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacutes;es &agrave; l'issue de la phase d'&eacute;valuation."
+
+msgid "invest.email.PREINVESTMENT_CONDITIONS_2"
+msgstr "Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement."
+
+msgid "invest.email.PREINVESTMENT_CONDITIONS_3"
+msgstr "Si un changement devait survenir, vous devrez confirmer ou infirmer votre investissement."
+
+msgid "invest.email.WHERE_TO_FIND_CONTRACT"
+msgstr "Vous trouverez votre contrat d'investissement en pi&egrave;ce jointe et pouvez suivre vos versements de royalties en vous connectant sur votre"
+
+msgid "invest.email.PERSONAL_ACCOUNT"
+msgstr "compte personnel"
+
+msgid "invest.email.THERE_WAS_A_PROBLEM_WITH_CONTRACT_GENERATION"
+msgstr "Il y a eu un problème durant la génération du contrat. Notre équipe en a été informée."
+
+msgid "invest.email.BANK_ACCOUNT_SUMMARY_LEMONWAY"
+msgstr "Sur votre relevé de compte bancaire, vous verrez apparaître le libellé Lemonway, le nom de notre prestataire de paiement, dans le détail des opérations."
+
+msgid "invest.email.YOU_NEED_TO_SIGN_THE_CONTRACT"
+msgstr "Il vous reste encore à signer le contrat que vous devriez recevoir de la part de notre partenaire Eversign"
+
+msgid "invest.email.CHECK_SPAM"
+msgstr "Pensez à vérifier votre courrier indésirable"
+
 msgid "invest.cancel.YOU_CHOSE_CANCEL_PROJECT"
 msgstr "Vous avez choisi d'annuler votre investissement sur le projet %s."
 
@@ -1609,6 +1707,18 @@ msgstr "J'importe un fichier"
 msgid "forms.file.IMPORT_A_FILE"
 msgstr "Importer un fichier"
 
+msgid "forms.file.ERROR_EXT"
+msgstr "Format de fichier non autorisé"
+
+msgid "forms.file.ERROR_SIZE"
+msgstr "Taille du fichier trop importante"
+
+msgid "forms.file.ERROR_UPLOAD"
+msgstr "Fichier illisible"
+
+msgid "forms.file.ERROR_SERVER"
+msgstr "Problème lors de l'enregistrement du fichier"
+
 # ############################## form - user-bank ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
 msgstr "Nom du propri&eacute;taire du compte"
@@ -1838,38 +1948,44 @@ msgstr "K-BIS ou &eacute;quivalent &agrave; un registre du commerce"
 msgid "form.user-identitydocs.KBIS_DESCRIPTION"
 msgstr "Datant de moins de 3 mois"
 
+msgid "form.user-identitydocs.STATUS_SHORT"
+msgstr "Statuts de la soci&eacute;t&eacute;"
+
 msgid "form.user-identitydocs.STATUS"
 msgstr "Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant (faisant figurer id&eacute;alement la r&eacute;partition du capital de l'entreprise)"
 
+msgid "form.user-identitydocs.OPTIONAL"
+msgstr "(facultatif)"
+
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION"
-msgstr "Attestation de r&eacute;partition du capital (facultatif)"
+msgstr "Attestation de r&eacute;partition du capital"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
 msgstr "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON"
-msgstr "Justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)"
+msgstr "Justificatif d'identité de la deuxième personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON_DESCRIPTION"
-msgstr "Si une deuxi&egrave;me personne physique d&eacute;tient au moins 25% du capital"
+msgstr "Ce fichier est nécessaire si un associé détient plus de 25% du capital. Les documents acceptés sont la carte d'identité ou le passeport."
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON"
-msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la deuxi&egrave;me personne (facultatif)"
+msgstr "Deuxi&egrave;me justificatif d'identité de la deuxième personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON_DESCRIPTION"
-msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
+msgstr "M&ecirc;mes types que pour le premier document. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON"
-msgstr "Justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)"
+msgstr "Justificatif d'identit&eacute; de la troisi&egrave;me personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON_DESCRIPTION"
-msgstr "Si une troisi&egrave;me personne physique d&eacute;tient au moins 25% du capital"
+msgstr "Ce fichier est nécessaire si un troisième associé détient plus de 25% du capital. Les documents acceptés sont la carte d'identité ou le passeport."
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON"
-msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne (facultatif)"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
-msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
+msgstr "M&ecirc;mes types que pour le premier document. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
 
 msgid "form.user-identitydocs.ID_BACK"
 msgstr "Verso du justificatif d'identit&eacute;"
@@ -2202,7 +2318,222 @@ msgstr "Mauvaise personne"
 msgid "lemonway.document.details_MAIN_ID"
 msgstr "La pièce d'identité principale"
 
-# THEME - projects/common/stats-public.php
+msgid "lemonway.email.error.SECOND_ID"
+msgstr "La deuxième pièce d'identité"
+
+msgid "lemonway.email.error.MAIN_ID_BACK"
+msgstr "Le verso de la pièce d'identité principale"
+
+msgid "lemonway.email.error.ORGA_KBIS"
+msgstr "Le KBIS de l'organisation"
+
+msgid "lemonway.email.error.ORGA_STATUS"
+msgstr "Les statuts de l'organisation"
+
+msgid "lemonway.email.error.SECOND_ID_BACK"
+msgstr "Le verso de la deuxième pièce d'identité"
+
+msgid "lemonway.email.error.SELFIE"
+msgstr "Le selfie (Type 13)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON"
+msgstr "La pièce d'identité de la deuxième personne (Type 16)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON_2"
+msgstr "La deuxième pièce d'identité de la deuxième personne (Type 17)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON"
+msgstr "La pièce d'identité de la troisième personne (Type 18)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON_2"
+msgstr "La deuxième pièce d'identité de la troisième personne (Type 19)"
+
+msgid "lemonway.email.error.CAPITAL_ALLOCATION"
+msgstr "Le document de répartition du capital (Type 20)"
+
+msgid "lemonway.email.error.action.REFUSED"
+msgstr "refusé"
+
+msgid "lemonway.email.error.action.UNREADABLE"
+msgstr "considéré illisible"
+
+msgid "lemonway.email.error.action.EXPIRED"
+msgstr "considéré expiré"
+
+msgid "lemonway.email.error.action.WRONG_TYPE"
+msgstr "considéré du mauvais type"
+
+msgid "lemonway.email.error.action.WRONG_PERSON"
+msgstr "considéré comme lié à une personne qui ne correspond pas"
+
+msgid "lemonway.email.error.message.BLOCK_AUTHENTICATION"
+msgstr "bloque l'authentification."
+
+msgid "lemonway.email.error.message.DOCUMENT_HAS_BEEN"
+msgstr "Le document a été"
+
+msgid "lemonway.email.error.message.LEMONWAY_COMMENT"
+msgstr "Commentaire complémentaire de Lemonway :"
+
+# ############################## /lemonway-errors ################################
+msgid "lemonway.error_01_03"
+msgstr "Notre prestataire de paiement nous signale une erreur de configuration."
+
+msgid "lemonway.error_01_05"
+msgstr "Votre paiement a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement."
+
+msgid "lemonway.error_01_12"
+msgstr "La transaction n'a pas pu &ecirc;tre valid&eacute;e par notre prestataire de paiement."
+
+msgid "lemonway.error_01_14"
+msgstr "Les coordonn&eacute;es bancaires ou le cryptogramme visuel sont invalides. Merci de renouveler l'op&eacute;ration."
+
+msgid "lemonway.error_01_17"
+msgstr "Votre investissement a &eacute;t&eacute; annul&eacute;."
+
+msgid "lemonway.error_01_34"
+msgstr "Notre prestataire de paiement nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+
+msgid "lemonway.error_01_54"
+msgstr "La date de validit&eacute; de la carte bancaire est d&eacute;pass&eacute;e. Veuillez v&eacute;rifier vos informations, utiliser une autre carte bancaire ou choisir un autre mode de paiement."
+
+msgid "lemonway.error_01_63"
+msgstr "La transaction n'a pas &eacute;t&eacute; autoris&eacute;e. Nous vous conseillons de vous rapprocher de votre banque pour en conna&icirc;tre les raisons ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_01_75"
+msgstr "Votre tentative d'investissement a &eacute;chou&eacute; car le code de s&eacute;curit&eacute; 3-D Secure transmis par votre banque n'a pas &eacute;t&eacute; renseign&eacute; dans les temps ou sa saisie est incorrecte. Veuillez renouveler l'op&eacute;ration."
+
+msgid "lemonway.error_01_90"
+msgstr "Le service de paiement est temporairement indisponible."
+
+msgid "lemonway.error_01_99"
+msgstr "Le service de paiement est temporairement indisponible."
+
+msgid "lemonway.error_02_02"
+msgstr "Nous sommes tr&egrave;s heureux de voir que vous &ecirc;tes un investisseur engag&eacute; pour l'impact positif ! N&eacute;anmoins, pour des raisons de s&eacute;curit&eacute;, le nombre d'investissements par jour est limit&eacute; &agrave; 3. Il vous faudra attendre 24h avant votre prochain investissement !"
+
+msgid "lemonway.error_02_03"
+msgstr "Vous ne pouvez pas investir avec cette carte car elle est sur la liste grise de notre prestataire de paiement Lemon Way, merci de choisir un autre mode de paiement."
+
+msgid "lemonway.error_02_05"
+msgstr "Le pays d'&eacute;mission de votre carte bancaire n'est pas reconnu par notre prestataire de paiement Lemon Way. Merci de v&eacute;rifier vos informations, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_02_06"
+msgstr "Le pays d'émission de votre carte bancaire n'est pas autoris&eacute; par notre prestataire de paiement Lemon Way. Merci d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_02_07"
+msgstr "L'e-carte de paiement n'est pas autoris&eacute;e par notre prestataire de paiement Lemon Way. Merci d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_02_08"
+msgstr "Le pays d'&eacute;mission de votre carte bancaire n'est pas autoris&eacute; par notre prestataire de paiement Lemon Way. Merci d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_02_17"
+msgstr "Votre tentative d'investissement a &eacute;chou&eacute; car le code de s&eacute;curit&eacute; 3-D Secure transmis par votre banque n'a pas &eacute;t&eacute; renseign&eacute; dans les temps ou sa saisie est incorrecte. Veuillez renouveler l’op&eacute;ration."
+
+msgid "lemonway.error_02_99"
+msgstr "Notre prestataire de paiement Lemon Way nous fait part d'un probl&egrave;me technique."
+
+msgid "lemonway.error_03_04"
+msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_05"
+msgstr "La transaction n'a pas &eacute;t&eacute; autoris&eacute;e par notre prestataire de paiement. Nous vous conseillons de vous rapprocher de votre banque pour en connaître les raisons en leur communiquant la date et le montant ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_07"
+msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_12"
+msgstr "La transaction est invalide."
+
+msgid "lemonway.error_03_13"
+msgstr "La transaction est invalide."
+
+msgid "lemonway.error_03_14"
+msgstr "Notre prestataire de paiement Lemon Way ne reconna&icirc;t pas le num&eacute;ro de porteur."
+
+msgid "lemonway.error_03_15"
+msgstr "Notre prestataire de paiement Lemon Way ne reconna&icirc;t pas l'&eacute;metteur de la carte."
+
+msgid "lemonway.error_03_30"
+msgstr "Notre prestataire de paiement nous signale une erreur de format. Veuillez r&eacute;essayer ou choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_33"
+msgstr "La date de validit&eacute; de la carte bancaire est d&eacute;pass&eacute;e. Merci de v&eacute;rifier vos informations, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_34"
+msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_41"
+msgstr "Le paiement a &eacute;t&eacute; bloqu&eacute; car la carte utilis&eacute;e pour le paiement semble avoir &eacute;t&eacute; d&eacute;clar&eacute;e comme perdue par son propriétaire. Veuillez contacter votre banque. En parall&egrave;le, vous pouvez utiliser une autre carte bancaire ou choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_43"
+msgstr "Le paiement a &eacute;t&eacute; bloqu&eacute; car la carte utilis&eacute;e pour le paiement semble avoir &eacute;t&eacute; d&eacute;clar&eacute;e comme vol&eacute;e par son propriétaire. Veuillez contacter votre banque. En parall&egrave;le, vous pouvez utiliser une autre carte bancaire ou choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_51"
+msgstr "La provision de votre compte bancaire semble insuffisante pour valider l'investissement ou le plafond de paiement de votre carte a &eacute;t&eacute; d&eacute;pass&eacute;. Nous vous conseillons de vous rapprocher de votre banque ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_54"
+msgstr "La date de validit&eacute; de la carte bancaire est d&eacute;pass&eacute;e. Merci de v&eacute;rifier vos informations, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_56"
+msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur technique pour le paiement avec cette carte. Merci de v&eacute;rifier vos informations, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_57"
+msgstr "Selon notre prestataire de paiement, la transaction n'a pas &eacute;t&eacute; permise par votre banque. Nous vous conseillons de vous rapprocher de votre banque pour en conna&icirc;tre les raisons en leur communiquant la date et le montant ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_59"
+msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_61"
+msgstr "La provision de votre compte bancaire semble insuffisante pour valider l'investissement ou le plafond de paiement de votre carte a &eacute;t&eacute; d&eacute;pass&eacute;. Merci de prendre contact avec votre banque ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_63"
+msgstr "Notre prestataire de paiement Lemon Way nous signale que les r&egrave;gles de s&eacute;curit&eacute; n'ont pas &eacute;t&eacute; respect&eacute;es. Merci de prendre contact avec votre banque ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_68"
+msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur technique. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_90"
+msgstr "Le service de paiement est temporairement indisponible."
+
+msgid "lemonway.error_03_91"
+msgstr "Selon notre prestataire de paiement Lemon Way, l'&eacute;metteur de cette carte est inaccessible. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_96"
+msgstr "Le service de paiement est temporairement indisponible."
+
+msgid "lemonway.error_03_97"
+msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur technique. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error_03_98"
+msgstr "Le service de paiement est temporairement indisponible."
+
+msgid "lemonway.error_03_99"
+msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur technique. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error.RAW"
+msgstr "Il y a eu un probl&egrave;me lors de votre investissement. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+
+msgid "lemonway.error.GENERIC"
+msgstr "Si besoin, nous sommes &agrave; votre disposition sur le chat en ligne ou &agrave; l'adresse suivante : investir@wedogood.co. Merci de nous pr&eacute;ciser le code d'erreur ci-dessous."
+
+# ############################## e-mails ################################
+msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES"
+msgstr "Ces entreprises vous ont versé des royalties :"
+
+msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES_SAMPLE"
+msgstr "dont prélèvement"
+
+msgid "email.royalties.COMPANIES_PENDING_TRANSFER"
+msgstr "Les versements de ces entreprises sont en attente :"
+
+msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
+msgstr "Ces entreprises ne sont pas encore entrées dans la phase de déclaration :"
+
+msgid "email.royalties.FUNDRAISING"
+msgstr "Levée de fonds"
+
+# ############################## THEME - projects/common/stats-public.php
 msgid "Votes"
 msgstr "Votes"
 
@@ -2588,6 +2919,9 @@ msgstr "D&eacute;couvrir d'autres projets"
 
 msgid "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
 msgstr "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e"
+
+msgid "project.GOAL_MAX_REACHED_NO_MORE_INVEST"
+msgstr "Objectif maximum atteint : il n'est plus possible d'investir !"
 
 msgid "Impacts"
 msgstr "Impacts"

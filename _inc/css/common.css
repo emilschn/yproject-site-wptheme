@@ -280,7 +280,7 @@ button.red {
 	color: #FFFFFF;
 }
 .wdg-message.error {
-	background: #EACDCB;
+	border: 1px solid #f8caca;
 	color: #333333;
 }
 .wdg-message.notification {
@@ -603,6 +603,11 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
 	nav#main > div#menu > a {
 		margin: 0px 5px;
 		letter-spacing: 0px;
+		font-size: 13px;
+	}
+
+	div#submenu-switch-lang {
+		left: 85%; /* en pourcentage pour essayer de s'adapter à chaque taille de tablette horizontale */
 	}
 }
 @media screen and (max-width: 1070px) and (min-width: 998px) {
@@ -645,11 +650,10 @@ nav#main > div#menu > .wpml-ls {
 
 #submenu-switch-lang {
 	position: relative;
-	float: right;
 	width: 100px;
 	top: 10px;
 	border: 0px;
-	right: 90px;
+	left: 1110px;
 	text-align: center;
 }
 #submenu-switch-lang li.active a {
@@ -857,6 +861,18 @@ ul.project-list a.needs-authentication:after {
 #submenu-user div#button-logout {
 	bottom: 0px;
 }
+
+#resetpasswordform .field .field-container .field-value input {
+	border-bottom: 3px solid #00879B;
+	background: none;
+	height: 40px;
+	color: #00879B;
+}
+
+#resetpasswordform .field {
+	margin-top: 20px;
+}
+
 @media screen and (max-width: 1300px) {
 	#submenu-user { right: 10px; }
 }
@@ -877,16 +893,16 @@ ul.project-list a.needs-authentication:after {
 /*******************************************************************************
 * CONNEXION PAGE
 *******************************************************************************/
-.template-connexion, .template-inscription, .template-lancement {
+.template-connexion1, .template-inscription, .template-lancement {
 	background-color: #f2f2f2;
 }
-.template-connexion .center, .template-inscription .center {
+.template-connexion1 .center, .template-inscription .center {
 	width: 100%;
 }
 .login-page-container {
 	padding-top: 90px;
 }
-.template-connexion h1, .template-inscription h1 {
+.template-connexion1 h1, .template-inscription h1 {
 	text-align: center;
 	margin: 0px;
 	font-family: Trebuchet MS,sans-serif;
@@ -942,7 +958,7 @@ div.login-separator-label span {
 /*******************************************************************************
 * REGISTER PAGE / REGISTER LIGHTBOX
 *******************************************************************************/
-.template-connexion #content #connect-form .wdg-button-lightbox-open
+.template-connexion1 #content #connect-form .wdg-button-lightbox-open
 #newproject-register-user .wdg-button-lightbox-open {
 	border: none;
 	background: none;
@@ -1427,8 +1443,8 @@ body.template-les-projets .projects-positive-savings {
 	background-color: rgba(51, 51, 51, .1);
 }
 body.template-les-projets div .projects-title-precisions{
-	margin-top: -16px;
-	margin-bottom: 32px;
+	margin: -17px 6px 32px 6px;
+	text-align: center;
 }
 body.template-les-projets div#content > div:last-child {
 	margin-top: -10px;
@@ -1461,4 +1477,26 @@ body.template-les-projets div#content > div:last-child .wdg-component-projects-p
     max-width: 95%;
     top: auto;
     margin: auto;
+}
+
+/*******************************************************************************
+* Validation de compte
+*******************************************************************************/
+body.template-activer-compte .center_small {
+	width: 650px;
+}
+
+div.activate-account h1 {
+	text-align: center;
+}
+
+div.activate-account div.info {
+	margin: 16px 0px;
+	padding: 32px;
+	background: #ebebeb;
+}
+
+div.activate-account div.timer {
+	margin: 16px 0px;
+	padding: 32px; 
 }

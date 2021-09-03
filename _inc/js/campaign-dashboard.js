@@ -529,7 +529,7 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 
 	var self = this;
 	var mail_content, mail_title, originalText;
-	$("#direct-mail #mail-preview-button").click(function () {
+	$("#direct-mail #mail-preview-button").click(function ( e ) {
 		mail_content = tinyMCE.get('mail_content').getContent();
 		mail_title = $("#direct-mail #mail-title").val();
 
@@ -538,7 +538,12 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 		} else {
 			self.removeFieldError($("#direct-mail #mail-title"));
 			originalText = $(this).html();
-			$(this).html('<i class="fa fa-spinner fa-spin fa-1x fa-fw"></i>');
+			$(this).find(".button-text").hide();
+			$(this).find(".button-loading").show();
+			if ($(this).hasClass("disabled")) {
+				e.preventDefault();
+			}
+			$(this).addClass("disabled");
 
 			$.ajax({
 				'type' : "POST",
@@ -559,6 +564,15 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 				$("#direct-mail #mail-preview-button").html(originalText);
 			})
 		}
+	});
+	
+	$("#direct-mail #mail-send-button").click(function ( e ) {
+		$(this).find(".button-text").hide();
+		$(this).find(".button-loading").show();
+		if ($(this).hasClass("disabled")) {
+			e.preventDefault();
+		}
+		$(this).addClass("disabled");
 	});
 
 	$("#direct-mail #mail-back-button").click(function () {
@@ -628,7 +642,15 @@ WDGCampaignDashboard.prototype.initContacts = function() {
 			}
 		} );
 	} );
-
+	
+	$(".button-send-notification").click(function ( e ) {
+		$(this).find(".button-text").hide();
+		$(this).find(".button-loading").show();
+		if ($(this).hasClass("disabled")) {
+			e.preventDefault();
+		}
+		$(this).addClass("disabled");
+	});
 	
 	if ( $( '.button-contacts-add-check' ).length > 0 ) {
 		$( '.button-contacts-add-check' ).click( function() {

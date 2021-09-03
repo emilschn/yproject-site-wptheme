@@ -30,7 +30,7 @@ $lang_list = $campaign->get_lang_list();
 		<?php if ( $WDGUser_current->is_admin() ): ?>
 		<button id="wdg-send-project-notification-to-project" class="wdg-send-project-notification"><?php _e( "J'ai fini ma relecture", 'yproject'); ?></button>
 		<?php elseif ( WDGCampaignNotifications::can_ask_proofreading( $campaign->ID ) ): ?>
-		<button id="wdg-send-project-notification-to-wdg" class="wdg-send-project-notification"><?php _e( "J'ai fini ma présentation", 'yproject'); ?></button>
+		<button id="wdg-send-project-notification-to-wdg" class="wdg-send-project-notification"><?php _e( "Je demande une relecture", 'yproject'); ?></button>
 		<?php endif; ?>
 	<?php endif; ?>
 </div>

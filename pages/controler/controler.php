@@ -61,15 +61,20 @@ class WDG_Page_Controler {
 			global $post;
 			$this->page_title = $post->post_title;
 		} else {
-			if ( is_category() ) {
+			global $post;
+			if ( is_single() && $post->post_type == 'download' ) {
+				$this->page_title = $post->post_title . __('meta.title.PROJECT', 'yproject');
+			
+			} else if ( is_category() ) {
 				global $cat;
 				$this_category = get_category($cat);
 				$this_category_name = $this_category->name;
 				$name_exploded = explode('cat', $this_category_name);
 				$campaign_post = get_post($name_exploded[1]);
 				$this->page_title = 'Actualit&eacute;s du projet ' . (is_object($campaign_post) ? $campaign_post->post_title : '') . ' | ' . get_bloginfo( 'name' );
+			
 			} else {
-				$this->page_title = wp_title( '|', false, 'right' ) . get_bloginfo( 'name' );
+				$this->page_title = wp_title( '|', false, 'right' );
 			}
 		}
 	}
@@ -105,7 +110,13 @@ class WDG_Page_Controler {
 
 	private function init_page_description() {
 		$this->page_description = "WE DO GOOD est le leader français des levées de fonds en royalties et du crowdinvesting. Investissez en ligne à partir de 10 € dans les projets qui vous parlent.";
-		if ( have_posts() ) {
+		global $post;
+		if ( is_single() && $post->post_type == 'download' ) {
+			$campaign = new ATCF_Campaign( $post->ID );
+			$project_activity = $campaign->get_categories_by_type( 'activities', TRUE );
+			$this->page_description = __('meta.description.PROJECT', 'yproject') . ' ' . $project_activity;
+
+		} else if ( have_posts() ) {
 			while ( have_posts() ) {
 				the_post();
 				global $post;
