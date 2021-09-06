@@ -8,7 +8,8 @@
     $form_feedback = $page_controler->get_user_form_feedback();
 ?>
 
-<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_subscription' ); ?>">
+<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>" 
+action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_subscription' ); ?>">
 
 <?php foreach ( $fields_hidden as $field ): ?>
 	<?php global $wdg_current_field; $wdg_current_field = $field; ?>
@@ -26,7 +27,9 @@
             <?php _e( 'common.SAVE', 'yproject' ); ?>
         </span>
         <span class="button-loading loading align-center hidden">
-			<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.REGISTERING', 'yproject' ); ?>			
+			<img class="alignverticalmiddle marginright" 
+            src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" />
+            <?php _e( 'common.REGISTERING', 'yproject' ); ?>			
 		</span>
     </button>
 </div>

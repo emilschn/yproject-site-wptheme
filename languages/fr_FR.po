@@ -1744,6 +1744,15 @@ msgstr "Une erreur est survenue lors de l'enregistrement de votre abonnement"
 msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
 msgstr "Vous avez renoncé à la signature du contrat d'abonnement"
 
+msgid "form.user-contract-subscription.ALL_ROYALTIES"
+msgstr "l'intégralité de mon porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)."
+
+msgid "form.user-contract-subscription.PART_ROYALTIES"
+msgstr "€ venant de mon porte-monnaie électronique (si le montant est disponible)."
+
+msgid "form.user-contract-subscription.MODALITY"
+msgstr "trimestres"
+
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"
 msgstr "E-mail"

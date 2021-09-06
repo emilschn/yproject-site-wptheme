@@ -14,8 +14,10 @@ class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
 
     public function __construct() {
         parent::__construct();
+		global $WDGSubscription;
 		$id_subscription = filter_input(INPUT_GET,'id_subscription');
 		$this->subscription = new WDGSUBSCRIPTION($id_subscription);
+		$WDGSubscription  = $this->subscription;
 		$id_project = $this->subscription->id_project;
 		$this->campaign = new ATCF_Campaign(false, $id_project);
 		$this->current_user = WDGUser::current();
@@ -49,27 +51,10 @@ class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
 	// RECAP ABONNEMENT
 	/******************************************************************************/
     public function get_contract_warning() {
-		echo ('</br>');
-		if ($this->subscription->amount_type == 'all_royalties')
-		echo ('Je confirme que je souhaite investir la totalité de mes royalties ');
-		else{
-			echo ('Je confirme que je souhaite investir '.$this->subscription->amount.' €');
-		}
-		$this->subscription->start_date = new DateTime();
-		echo (' tous les trimestres ');
-		echo (' à partir du '.$this->subscription->start_date->format('d/m/Y '));
-		echo ('et venant de mon porte-monnaie électronique ');
-		
-		echo ('dans la thématique '.$this->campaign->data->post_title);
+		WDG_PDF_Generator::add_shortcodes();
+		$subscription_terms = WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_subscription_terms, 'subscription_terms' );
 
-		echo (' aux conditions du contrat type ci-après.');
-		echo ('</br></br>');
-		echo ('Vous pouvez résilier cet abonnement à tout moment.');
-
-		// WDG_PDF_Generator::add_shortcodes();
-		// $investment_terms = WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_investment_terms, 'investment_terms' );
-
-		// return wpautop( $investment_terms );
+		return wpautop( $subscription_terms );
 	}
 
 

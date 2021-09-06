@@ -1749,6 +1749,15 @@ msgstr "An error occurred when saving your subscription"
 msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
 msgstr "You cancelled your subscription"
 
+msgid "form.user-contract-subscription.ALL_ROYALTIES"
+msgstr "the entirety of my e-wallet (if the amount available is at least equal to €10)."
+
+msgid "form.user-contract-subscription.PART_ROYALTIES"
+msgstr "€ from my e-wallet (if available)."
+
+msgid "form.user-contract-subscription.MODALITY"
+msgstr "quarters"
+
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"
 msgstr "E-mail"
