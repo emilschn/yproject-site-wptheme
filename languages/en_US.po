@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-08-03 16:45+0200\n"
+"PO-Revision-Date: 2021-08-17 10:27+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -144,6 +144,13 @@ msgstr "This file is in the wrong format."
 
 msgid "common.forms.error.FILE_TOO_BIG"
 msgstr "This file is too big."
+
+# ############################## HEADER - META ################################
+msgid "meta.title.PROJECT"
+msgstr ": fundraising with royalties"
+
+msgid "meta.description.PROJECT"
+msgstr "Financing of projects in equity and without dilution of capital in"
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
@@ -451,6 +458,52 @@ msgstr "There was a problem while creating your user account."
 
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Please check the box to confirm you are not a robot."
+
+# ############################## /activer-compte ################################
+msgid "validation.WELCOME_TO_WEDOGOOD"
+msgstr "Welcome to WE DO GOOD !"
+
+msgid "validation.HELLO_WELCOME_TO_WEDOGOOD"
+msgstr "Hello and welcome on WE DO GOOD!"
+
+msgid "validation.ACCOUNT_IS_CREATED"
+msgstr "Your account has been created."
+
+msgid "validation.YOU_NEED_TO_COMPLETE"
+msgstr "To invest on a project, you need to complete your profile."
+
+msgid "validation.YOU_CAN_LEAVE_WHEN_YOU_WANT"
+msgstr "You can leave this course and come back where you stopped whenever you want!"
+
+msgid "validation.COMPLETE_MY_PROFILE"
+msgstr "Complete my profile"
+
+msgid "validation.YOUR_EMAIL_IS_VALIDATED"
+msgstr "Your e-mail address has been validated:"
+
+msgid "validation.WE_WILL_REDIRECT_IN_A_FEW_SECONDS"
+msgstr "We will redirect this webpage in a few seconds."
+
+msgid "validation.CLICK_TO_GET_AWAY"
+msgstr "If you want to speed the process up, please click on"
+
+msgid "validation.THIS_LINK"
+msgstr "this link"
+
+msgid "validation.CURRENT_ACCOUNT_MATCHES_EMAIL"
+msgstr "The logged in account matches the e-mail address"
+
+msgid "validation.EMAIL_HAS_BEEN_VALIDATED"
+msgstr "This e-mail address has previously been validated."
+
+msgid "validation.CODE_DOESNT_MATCH"
+msgstr "However, the validation code doesn't match the expected code."
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL"
+msgstr "We can send you a new validation e-mail if you click on the button below:"
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL_BUTTON"
+msgstr "Send a new validation e-mail"
 
 # ############################## /mon-compte ################################
 msgid "account.OVERRIDE_USER_DOESNT_EXIST"

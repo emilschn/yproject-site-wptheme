@@ -140,6 +140,13 @@ msgstr "Ce fichier n'est pas au bon format."
 msgid "common.forms.error.FILE_TOO_BIG"
 msgstr "Ce fichier est trop lourd."
 
+# ############################## HEADER - META ################################
+msgid "meta.title.PROJECT"
+msgstr " : levée de fonds en royalties"
+
+msgid "meta.description.PROJECT"
+msgstr "Financement de projets en fonds propres et sans dilution du capital dans"
+
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
 msgstr "Les projets"
@@ -446,6 +453,52 @@ msgstr "Probl&egrave;me de cr&eacute;ation d'utilisateur."
 
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Merci de cocher la case confirmant que vous n'&ecirc;tes pas un robot."
+
+# ############################## /activer-compte ################################
+msgid "validation.WELCOME_TO_WEDOGOOD"
+msgstr "Bienvenue sur WE DO GOOD !"
+
+msgid "validation.HELLO_WELCOME_TO_WEDOGOOD"
+msgstr "Bonjour et bienvenue sur WE DO GOOD !"
+
+msgid "validation.ACCOUNT_IS_CREATED"
+msgstr "Votre compte est désormais créé."
+
+msgid "validation.YOU_NEED_TO_COMPLETE"
+msgstr "Pour investir sur un projet, vous devez compléter votre profil."
+
+msgid "validation.YOU_CAN_LEAVE_WHEN_YOU_WANT"
+msgstr "Vous pouvez à tout moment quitter le parcours et revenir pour reprendre là où vous en étiez !"
+
+msgid "validation.COMPLETE_MY_PROFILE"
+msgstr "Compléter mon profil"
+
+msgid "validation.YOUR_EMAIL_IS_VALIDATED"
+msgstr "Nous vous confirmons que votre adresse e-mail est bien validée :"
+
+msgid "validation.WE_WILL_REDIRECT_IN_A_FEW_SECONDS"
+msgstr "Nous vous redirigerons automatiquement d'ici quelques secondes."
+
+msgid "validation.CLICK_TO_GET_AWAY"
+msgstr "Si vous souhaitez accélérer votre redirection, vous pouvez cliquer sur"
+
+msgid "validation.THIS_LINK"
+msgstr "ce lien"
+
+msgid "validation.CURRENT_ACCOUNT_MATCHES_EMAIL"
+msgstr "Le compte connecté correspond à l'adresse e-mail"
+
+msgid "validation.EMAIL_HAS_BEEN_VALIDATED"
+msgstr "Cette adresse a déjà été validée précédemment."
+
+msgid "validation.CODE_DOESNT_MATCH"
+msgstr "Cependant, le code de validation ne correspond pas."
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL"
+msgstr "Nous pouvons vous renvoyer un e-mail de validation à cette adresse, si vous cliquez sur le bouton ci-dessous :"
+
+msgid "validation.SEND_NEW_VALIDATION_EMAIL_BUTTON"
+msgstr "Envoyer un e-mail pour valider mon compte"
 
 # ############################## /mon-compte ################################
 msgid "account.OVERRIDE_USER_DOESNT_EXIST"
@@ -1973,28 +2026,28 @@ msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
 msgstr "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON"
-msgstr "Justificatif d'identit&eacute; de la deuxi&egrave;me personne"
+msgstr "Justificatif d'identité de la deuxième personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON_DESCRIPTION"
-msgstr "Si une deuxi&egrave;me personne physique d&eacute;tient au moins 25% du capital"
+msgstr "Ce fichier est nécessaire si un associé détient plus de 25% du capital. Les documents acceptés sont la carte d'identité ou le passeport."
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON"
-msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la deuxi&egrave;me personne"
+msgstr "Deuxi&egrave;me justificatif d'identité de la deuxième personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON_DESCRIPTION"
-msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
+msgstr "M&ecirc;mes types que pour le premier document. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON"
-msgstr "Justificatif d'identit&eacute; de la troisi&egrave;me personne"
+msgstr "Justificatif d'identit&eacute; de la troisi&egrave;me personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON_DESCRIPTION"
-msgstr "Si une troisi&egrave;me personne physique d&eacute;tient au moins 25% du capital"
+msgstr "Ce fichier est nécessaire si un troisième associé détient plus de 25% du capital. Les documents acceptés sont la carte d'identité ou le passeport."
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON"
-msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
-msgstr "M&ecirc;mes types que pour le premier. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
+msgstr "M&ecirc;mes types que pour le premier document. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
 
 msgid "form.user-identitydocs.ID_BACK"
 msgstr "Verso du justificatif d'identit&eacute;"

@@ -6,10 +6,13 @@ $page_forgot_password_url = WDG_Redirect_Engine::override_get_page_url( 'mot-de-
 $init_username = '';
 if ( isset( $_POST[ 'user_login' ] ) ) {
 	$init_username = htmlentities( $_POST['user_login'] );
+} else {
+	if ( isset( $_GET[ 'user_login' ] ) ) {
+		$init_username = htmlentities( $_GET['user_login'] );
+	}
 }
-
 $error = array();
-if ( !empty( $init_username ) ) {
+if ( !isset( $_GET[ 'action' ]) ) {
 	$user = get_user_by( 'login', $init_username);
 	if ( !isset( $user, $user->user_login, $user->user_status ) ) {
 		$username = str_replace( '&', '&amp;', stripslashes( $init_username ) );
@@ -22,28 +25,23 @@ if ( !empty( $init_username ) ) {
 	}
 
 	if (isset($user, $user->user_login)) {
-		$facebook_meta = $user->get( 'social_connect_facebook_id' );
-		if (!isset($facebook_meta) || $facebook_meta == "") {
-			global $wpdb;
-			$user_login = $user->user_login;
-			$user_email = $user->user_email;
-			$user_firstname = $user->user_firstname;
-			$WDGUser = new WDGUser( $user->ID );
-			$key = $wpdb->get_var($wpdb->prepare("SELECT user_activation_key FROM $wpdb->users WHERE user_login = %s", $user_login));
-			if ( empty($key) ) {
-				$key = wp_generate_password(20, false);
-				do_action('retrieve_password_key', $user_login, $key);
-				$wpdb->update($wpdb->users, array('user_activation_key' => $key), array('user_login' => $user_login));
-			}
-			$link = $page_forgot_password_url . "?action=rp&key=$key&login=" . rawurlencode($user_login);
-
-			if (FALSE == NotificationsAPI::password_reinit( $WDGUser, $link ) ) {
-				array_push( $error, "Problème d'envoi : l'e-mail de réinitialisation n'a pas été envoyé." );
-			}
-			$feedback = "Un message a &eacute;t&eacute; envoy&eacute; &agrave; votre adresse e-mail.";
-		} else {
-			array_push( $error, "Cet utilisateur est lié par son compte Facebook et nous ne pouvons donc pas renouveler son mot de passe. Merci de nous contacter par e-mail, &agrave; l'adresse investir@wedogood.co, si vous souhaitez d&eacute;lier le compte Facebook." );
+		global $wpdb;
+		$user_login = $user->user_login;
+		$user_email = $user->user_email;
+		$user_firstname = $user->user_firstname;
+		$WDGUser = new WDGUser( $user->ID );
+		$key = $wpdb->get_var($wpdb->prepare("SELECT user_activation_key FROM $wpdb->users WHERE user_login = %s", $user_login));
+		if ( empty($key) ) {
+			$key = wp_generate_password(20, false);
+			do_action('retrieve_password_key', $user_login, $key);
+			$wpdb->update($wpdb->users, array('user_activation_key' => $key), array('user_login' => $user_login));
 		}
+		$link = $page_forgot_password_url . "?action=rp&key=$key&user_login=" . rawurlencode($user_login);
+
+		if (FALSE == NotificationsAPI::password_reinit( $WDGUser, $link ) ) {
+			array_push( $error, "Problème d'envoi : l'e-mail de réinitialisation n'a pas été envoyé." );
+		}
+		$feedback = "Un message a &eacute;t&eacute; envoy&eacute; &agrave; votre adresse e-mail.";
 	} else {
 		array_push( $error, "Nous n'avons pas trouvé l'utilisateur correspondant sur le site." );
 	}
@@ -57,10 +55,18 @@ if ( !empty( $init_username ) ) {
 				wp_update_user( array( 'ID' => $user->ID, 'user_pass' => $_POST["new_password"], 'user_status' => 0, 'user_activation_key' => '' ) );
 				$WDGUser = new WDGUser( $user->ID );
 				NotificationsAPI::user_password_change( $WDGUser );
+				$feedback = "Votre mot de passe a été mis à jour.";
+				$facebook_meta = get_user_meta($user->ID, 'social_connect_facebook_id', true);
+				if (isset($facebook_meta)) {
+					delete_user_meta($WDGUser->get_wpref(), 'social_connect_facebook_id');
+					$feedback = "Votre mot de passe a été mis à jour et votre compte a été délié de facebook.";
+				}
+				$WDGUser->set_authentification_mode(WDGUser::$key_authentication_account);
+				$WDGUser->set_email_is_validated();
+				WDGWPREST_Entity_User::update( $WDGUser );
 			} else {
 				array_push( $error, "La clé ne correspond pas à cet utilisateur." );
 			}
-			$feedback = "Votre mot de passe a été mis à jour.";
 		} else {
 			array_push( $error, "Erreur de saisie des mots de passe." );
 		}
@@ -112,7 +118,7 @@ if ( !empty( $init_username ) ) {
 							</div>
 						</div>
 
-						<input type="hidden" name="login" value="<?php echo $_REQUEST[ 'login' ]; ?>">
+						<input type="hidden" name="login" value="<?php echo $_REQUEST[ 'user_login' ]; ?>">
 						<input type="hidden" name="key" value="<?php echo $_REQUEST[ 'key' ]; ?>">
 
 						<button class="button save red" type="submit"><?php _e( "Enregistrer le nouveau mot de passe", 'yproject' ); ?></button>

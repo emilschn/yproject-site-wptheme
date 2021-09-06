@@ -12,7 +12,7 @@
 	</div>
 	<?php endif; ?>
     
-		<form method="post" action="<?php echo WDG_Redirect_Engine::override_get_page_url( "connexion" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
+		<form method="post" action="<?php echo WDG_Redirect_Engine::override_get_page_url( "connexion1" ); ?>" name="login-form" class="sidebar-login-form db-form v3 full form-register">
 			<div class="field">
 				<label for="signin_username"><?php _e( 'login.EMAIL_OR_LOGIN', 'yproject' ); ?> *</label>
 				<div class="field-container">
