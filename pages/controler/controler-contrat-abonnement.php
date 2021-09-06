@@ -15,11 +15,14 @@ class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
     public function __construct() {
         parent::__construct();
 		global $WDGSubscription;
+
 		$id_subscription = filter_input(INPUT_GET,'id_subscription');
 		$this->subscription = new WDGSUBSCRIPTION($id_subscription);
 		$WDGSubscription  = $this->subscription;
+
 		$id_project = $this->subscription->id_project;
 		$this->campaign = new ATCF_Campaign(false, $id_project);
+		
 		$this->current_user = WDGUser::current();
 		
 		if ( empty( $this->subscription->id ) ) {
