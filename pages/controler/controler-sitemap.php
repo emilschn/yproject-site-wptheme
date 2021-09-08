@@ -73,12 +73,18 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		WDG_Cache_Plugin::initialize_home_stats();
 	}
 
+	private function daily_team_question() {
+		locate_template( 'functions/team-coffee-questions.php', true );
+		WDGCoffeeMachine::get_funky();
+	}
+
 	private function clean_sms_lists() {
 		// Tous les jours, suppression de listes de SMS qui s'accumulent
 		WDGWPRESTLib::call_get_wdg( 'sms/clean' );
 	}
 
 	private function summary_call() {
+		$this->daily_team_question();
 		$yesterday_date = new DateTime();
 		$yesterday_date->sub( new DateInterval( 'P1D' ) );
 		$args = [
