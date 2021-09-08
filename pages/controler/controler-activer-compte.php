@@ -78,9 +78,16 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 			if ( $input_is_new_account !== '1' ) {
 				$this->current_view = self::$view_email_validated_old_account;
 			}
+
 			// Redirection
 			// On redirige vers la page où la personne était précédemment
 			$this->current_auto_redirect_link = WDGUser::get_login_redirect_page();
+			$meta_redirect = get_user_meta( $this->current_user->get_wpref(), 'redirect_url_after_validation', TRUE );
+			if ( !empty( $meta_redirect ) ) {
+				$this->current_auto_redirect_link = $meta_redirect;
+				delete_user_meta( $this->current_user->get_wpref(), 'redirect_url_after_validation' );
+			}
+
 			// TODO : A venir :
 			// Si c'est un nouvel inscrit, on le redirige vers le parcours d'authentification
 			/*
