@@ -36,8 +36,10 @@ $campaign_status = $campaign->campaign_status();
 	if ( $percent_minimum_completed >= 100 ) {
 		$width_to_completed = ( $percent_minimum_completed - 100 ) * $width_to_minimum_goal / 100;
 		$file_check = 'minimum-goal-full.png';
+		$bar_width = $width_to_minimum_goal + $width_to_completed;
+	} else {
+		$bar_width = $percent_minimum_completed * $width_to_minimum_goal / 100;
 	}
-	$bar_width = $width_to_minimum_goal + $width_to_completed;
 	?>
 <div class="progress-bar-container minimum-as-step <?php if ( !empty( $is_progressbar_shortcode ) ) {
 		echo 'shortcode-context';

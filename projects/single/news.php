@@ -11,7 +11,7 @@ $posts_in_category = $campaign->get_news_posts();
 			<a href="<?php echo get_permalink($cat_post->ID); ?>"><?php echo $cat_post->post_title; ?></a><br />
 			<span class="project-news-item-date"><?php echo get_the_date( get_option( 'date_format' ), $cat_post ); ?></span><br />
 			<p class="project-news-item-excerpt">
-				<?php echo apply_filters( 'the_excerpt', $cat_post->post_content ); ?>
+				<?php echo apply_filters( 'the_excerpt', apply_filters( 'the_content', $cat_post->post_content ) ); ?>
 			</p>
 			<div class="clear"></div>
 			<a href="<?php echo get_permalink($cat_post->ID); ?>" class="button blue-pale"><?php _e("En savoir plus", 'yproject'); ?></a>
