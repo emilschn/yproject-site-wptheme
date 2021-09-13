@@ -53,4 +53,9 @@ class WDG_Page_Controler_AccountSignin extends WDG_Page_Controler {
 	public function get_init_locale() {
 		return WDG_Languages_Helpers::get_current_locale_id();
 	}
+
+	public function get_param_validation_code() {
+		$input_code = filter_input( INPUT_GET, 'validation-code' );
+		return !empty( $input_code ) ? '1' : '0';
+	}
 }
