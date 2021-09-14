@@ -54,6 +54,10 @@ class WDG_Page_Controler_AccountSignin extends WDG_Page_Controler {
 		return WDG_Languages_Helpers::get_current_locale_id();
 	}
 
+	/**
+	 * Si il y a un code de validation transmis via l'URL, c'est qu'on vient de la page d'activation de compte en étant déconnecté
+	 * On transmet l'information à Vue pour que l'app redirige directement vers la page d'activation, au lieu de renvoyer un mail
+	 */
 	public function get_param_validation_code() {
 		$input_code = filter_input( INPUT_GET, 'validation-code' );
 		return !empty( $input_code ) ? '1' : '0';
