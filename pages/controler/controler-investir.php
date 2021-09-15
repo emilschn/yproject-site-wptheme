@@ -275,7 +275,7 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 						}
 					}
 					if ( $can_cancel ) {
-						$investment_to_cancel->cancel();
+						$investment_to_cancel->cancel( 'canceled' );
 					}
 				}
 			}
