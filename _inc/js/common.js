@@ -278,7 +278,7 @@ YPUIFunctions = (function ($) {
 				$(this).siblings('span.hidden').show();
 			});
 
-			
+
 			$('#send-email-validation-link').click(function (e) {
 				e.preventDefault();
 				$.ajax({
@@ -463,6 +463,7 @@ var WDGNavFunctions = (function ($) {
 	return {
 
 		currentUserInfo: false,
+		isMenuUserInit: false,
 		currentHref: '',
 		displaySubmenuUserInterval: false,
 
@@ -749,25 +750,28 @@ var WDGNavFunctions = (function ($) {
 						window.location = $('#submenu-user.not-connected .menu-loading-init').data('redirect');
 					}
 				} else {
-					var infoDecoded = JSON.parse(WDGNavFunctions.currentUserInfo);
-					$('#menu .btn-user').addClass('connected').removeClass('not-connected');
-					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-						$('#menu .btn-user').addClass('needs-authentication');
-					}
-					$('#menu .btn-user img').remove();
-					$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
+					if (!WDGNavFunctions.isMenuUserInit) {
+						WDGNavFunctions.isMenuUserInit = true;
+						var infoDecoded = JSON.parse(WDGNavFunctions.currentUserInfo);
+						$('#menu .btn-user').addClass('connected').removeClass('not-connected');
+						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+							$('#menu .btn-user').addClass('needs-authentication');
+						}
+						$('#menu .btn-user img').remove();
+						$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
 
-					$('#submenu-user.not-connected .menu-loading-init').hide();
-					$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
-					var lengthInfoProjects = infoDecoded['projectlist'].length;
-					for (var i = 0; i < lengthInfoProjects; i++) {
-						itemProject = infoDecoded['projectlist'][i];
-						$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+						$('#submenu-user.not-connected .menu-loading-init').hide();
+						$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
+						var lengthInfoProjects = infoDecoded['projectlist'].length;
+						for (var i = 0; i < lengthInfoProjects; i++) {
+							itemProject = infoDecoded['projectlist'][i];
+							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+						}
+						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
+							$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
+						}
+						$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
 					}
-					if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
-						$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
-					}
-					$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
 					$('#submenu-user.not-connected .menu-connected').show();
 				}
 			} else {
