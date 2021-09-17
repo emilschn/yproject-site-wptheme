@@ -16,12 +16,21 @@ class WDG_Redirect_Engine {
 	 * Surcharge la recherche de la bonne URL
 	 */
 	public static function override_get_page_url($page_name) {
-		// Si on est en français, on fait une simple redirection d'url
-		if ( WDG_Languages_Helpers::is_french_displayed() ) {
+		global $force_language_to_translate_to;
+		
+		// Si on est en français (et qu'on n'a pas forcé une autre langue), on fait une simple redirection d'url
+		if ( WDG_Languages_Helpers::is_french_displayed() && empty( $force_language_to_translate_to ) ) {
 			return home_url( '/' .$page_name. '/' );
+
 		// Sinon, on va chercher la page sur la langue correspondante
 		} else {
+			if ( !empty( $force_language_to_translate_to ) ) {
+				WDG_Languages_Helpers::switch_to_temp_language( $force_language_to_translate_to );
+			}
 			$translated_post_url = self::get_current_locale_page_url( $page_name );
+			if ( !empty( $force_language_to_translate_to ) ) {
+				WDG_Languages_Helpers::switch_back_to_display_language();
+			}
 
 			return $translated_post_url;
 		}
@@ -44,6 +53,10 @@ class WDG_Redirect_Engine {
 	private static function get_current_locale_page_object($page_name) {
 		// Récupération de la langue en cours
 		$locale_id = WDG_Languages_Helpers::get_current_locale_id();
+		global $force_language_to_translate_to;
+		if ( !empty( $force_language_to_translate_to ) ) {
+			$locale_id = $force_language_to_translate_to;
+		}
 		// Récupération de l'objet page initial (en français)
 		$page_object_init = get_page_by_path( $page_name );
 		// Récupération de l'id d'objet page traduit
