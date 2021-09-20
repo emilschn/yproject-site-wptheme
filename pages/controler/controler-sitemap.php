@@ -74,6 +74,11 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	}
 
 	private function daily_team_question() {
+		// Si on est samedi ou dimanche, on n'envoie pas les questions sur Slack
+		$today_date = new DateTime();
+		if ( $today_date->format( 'N' ) == 6 || $today_date->format( 'N' ) == 7 ) {
+			return;
+		}
 		locate_template( 'functions/team-coffee-questions.php', true );
 		WDGCoffeeMachine::get_funky();
 	}
