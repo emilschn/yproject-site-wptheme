@@ -2,6 +2,7 @@
 // Interne WDG : une question est posée dans un chan Slack à une ou plusieurs personnes
 class WDGCoffeeMachine {
 	private static $channel = "challenge-quotidien-automatique";
+	private static $user_list;
 
 	private static $list_question = array(
 		"Pouvez-vous citer",
@@ -29,6 +30,7 @@ class WDGCoffeeMachine {
 		'une peinture',
 		'une personne de votre entourage',
 		'un dessin animé',
+		'une chanteuse ou un chanteur',
 	);
 
 	private static $list_actions = array(
@@ -40,6 +42,8 @@ class WDGCoffeeMachine {
 		'que vous aimiez jeunes mais plus maintenant',
 		'qui est un super souvenir',
 		'qui vous file la pêche',
+		'que vous voulez faire découvrir à %s',
+		'qui ne plairait pas à %s',
 	);
 
 	private static function send($message) {
@@ -85,10 +89,12 @@ class WDGCoffeeMachine {
 
 	private static function get_user_list( $nb ) {
 		$buffer = array();
-		$user_list = explode( ',', YP_SLACK_COFFEE_USERS );
+		if ( empty( self::$user_list ) ) {
+			self::$user_list = explode( ',', YP_SLACK_COFFEE_USERS );
+		}
 		for ( $i = 0; $i < $nb; $i++ ) {
-			$index_random = rand( 0, count( $user_list ) - 1 );
-			$item = array_splice( $user_list, $index_random, 1 );
+			$index_random = rand( 0, count( self::$user_list ) - 1 );
+			$item = array_splice( self::$user_list, $index_random, 1 );
 			array_push( $buffer, $item[ 0 ] );
 		}
 		return $buffer;
@@ -106,7 +112,10 @@ class WDGCoffeeMachine {
 
 	private static function get_action() {
 		$index_random = rand( 0, count( self::$list_actions ) - 1 );
-		return self::$list_actions[ $index_random ];
+		$action_str = self::$list_actions[ $index_random ];
+		$user_target = self::get_user_list( 1 );
+		$action_str = str_replace( '%s', '<@' . $user_target[ 0 ] . '>', $action_str );
+		return $action_str;
 	}
 
 }
