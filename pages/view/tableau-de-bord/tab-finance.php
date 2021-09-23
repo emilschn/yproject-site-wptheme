@@ -46,6 +46,15 @@
 		));
 
 		if ( $page_controler->can_access_admin() ) {
+			DashboardUtility::create_field(array(
+				"id"			=> "new_funding_duration_infinite_estimation",
+				"type"			=> "number",
+				"label"			=> "Durée prévisionnelle (pour durée de financement infinie)",
+				"description"	=> "Saisir un nombre d'années prévisionnel",
+				"value"			=> $page_controler->get_campaign()->funding_duration_infinite_estimation(),
+				"admin_theme"	=> true,
+				"editable"		=> $page_controler->can_access_admin()
+			));
 
 			DashboardUtility::create_field(array(
 				"id"			=> "new_maximum_profit",
