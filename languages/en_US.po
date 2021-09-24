@@ -536,6 +536,9 @@ msgstr "My wallet"
 msgid "account.menu.MY_INVESTMENTS"
 msgstr "My investments"
 
+msgid "account.menu.MY_SUBSCRIPTIONS"
+msgstr "My subscriptions"
+
 msgid "account.menu.MY_DOCUMENTS"
 msgstr "My documents"
 
@@ -559,6 +562,9 @@ msgstr "Wallet"
 
 msgid "account.menu.organization.INVESTMENTS"
 msgstr "Investments"
+
+msgid "account.menu.organization.SUBSCRIPTIONS"
+msgstr "Subscriptions"
 
 msgid "account.menu.organization.DOCUMENTS"
 msgstr "Documents"
@@ -943,6 +949,18 @@ msgstr "forecast"
 
 msgid "account.investments.ACCOUNT_AUTHENTICATION"
 msgstr "Authenticate my account"
+
+msgid "account.subscriptions.SUBSCRIPTIONS_OF"
+msgstr "Subscriptions of"
+
+msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
+msgstr "You can reinvest the royalties you receive in Positive Savings projects."
+
+msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
+msgstr "It is without commitment, changeable at any time and automatic."
+
+msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
+msgstr "+ Add new subscription"
 
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
@@ -1748,6 +1766,50 @@ msgstr "BIC"
 
 msgid "form.user-bank.RIB"
 msgstr "RIB"
+
+# ############################## form - user-subscription ################################
+
+msgid "form.subscriptions.MODALITY"
+msgstr "I want to invest automatically..."
+
+msgid "form.subscriptions.MODALITY_FIRST_CHOICE"
+msgstr "the entirety of my wallet"
+
+msgid "form.subscriptions.MODALITY_SECOND_CHOICE"
+msgstr "a fixed amount"
+
+msgid "form.subscriptions.AMOUNT"
+msgstr "Amount"
+
+msgid "form.subscriptions.PROJECT"
+msgstr "In the project ..."
+
+msgid "form.subscription.SUCCESS"
+msgstr "You have received an email to confirm your investment"
+
+msgid "form.subscription.error.AMOUNT_MINIMUM"
+msgstr "The minimum valid amount is 10€"
+
+msgid "form.subscription.description.AMOUNT_MINIMUM"
+msgstr "The amount must be a whole number greater than 10€."
+
+msgid "invest.contract.VALIDATE_SUBSCRIPTION"
+msgstr "Validate the subscription"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_ERROR"
+msgstr "An error occurred when saving your subscription"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
+msgstr "You cancelled your subscription"
+
+msgid "form.user-contract-subscription.ALL_ROYALTIES"
+msgstr "the entirety of my e-wallet (if the amount available is at least equal to €10)."
+
+msgid "form.user-contract-subscription.PART_ROYALTIES"
+msgstr "€ from my e-wallet (if available)."
+
+msgid "form.user-contract-subscription.MODALITY"
+msgstr "quarters"
 
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"

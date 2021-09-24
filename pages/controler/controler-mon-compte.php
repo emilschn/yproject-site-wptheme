@@ -26,6 +26,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $form_user_password;
 	private $form_user_delete;
 	private $form_user_identitydocs;
+	private $form_user_subscription;
 	private $form_user_bank;
 	private $form_user_notifications;
 	private $form_user_feedback;
@@ -65,6 +66,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$core->include_form( 'user-password' );
 		$core->include_form( 'user-unlink-facebook' );
 		$core->include_form( 'user-identitydocs' );
+		$core->include_form( 'user-subscription' );
 		$core->include_form( 'user-bank' );
 		$core->include_form( 'user-notifications' );
 		$WDGUser_current = WDGUser::current();
@@ -84,6 +86,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->init_show_user_hidden_visited_project();
 		$this->init_form_user_details();
 		$this->init_form_change_investment_owner();
+		$this->init_form_subscription();
 		$this->init_form_user_identitydocs();
 		$this->init_form_user_bank();
 		$this->init_form_user_notifications();
@@ -420,6 +423,21 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 
 	public function get_kyc_duplicates() {
 		return $this->user_kyc_duplicates;
+	}
+
+	/******************************************************************************/
+	// SUBSCRIPTION
+	/******************************************************************************/
+	private function init_form_subscription() {
+		$this->form_user_subscription = new WDG_Form_Subscription($this->current_user->get_wpref());
+		if(isset($_SESSION[ 'account_organization_form_subscription_feedback_' . $this->current_user->get_wpref() ])){
+			$this->form_user_feedback = $_SESSION[ 'account_organization_form_subscription_feedback_' . $this->current_user->get_wpref() ];
+			$_SESSION[ 'account_organization_form_subscription_feedback_' . $this->current_user->get_wpref() ] = FALSE;
+		}
+	}
+	
+	public function get_subscription_form() {
+		return $this->form_user_subscription;
 	}
 
 	/******************************************************************************/
