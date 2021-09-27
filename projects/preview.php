@@ -164,10 +164,12 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 		//Projets en épargne positive
 		elseif ($campaign->is_positive_savings()) :
 		?>
+			<?php if ( $campaign->get_duplicate_campaigns_id() ): ?>
 			<div class="financed-banner"> 
 				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png">
 				<p><?php _e( 'project.POSITIVE_SAVINGS_BANNER', 'yproject' ); ?></p>
 			</div>
+			<?php endif; ?>
 			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php _e( 'project.INVEST_ON_PROJECT', 'yproject' ) ?></a>
 
 		<?php
