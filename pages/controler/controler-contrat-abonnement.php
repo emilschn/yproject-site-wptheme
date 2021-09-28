@@ -3,7 +3,7 @@ $template_engine = WDG_Templates_Engine::instance();
 $template_engine->set_controler( new WDG_Page_Controler_contrat_abonnement() );
 
 class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
-   
+
 	private $campaign;
 	private $subscription;
 	private $current_user;
@@ -12,8 +12,8 @@ class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
 	private $form_user_subscription_contract;
 	private $form_user_feedback;
 
-    public function __construct() {
-        parent::__construct();
+	public function __construct() {
+		parent::__construct();
 		global $WDGSubscription;
 
 		$id_subscription = filter_input(INPUT_GET,'id_subscription');
@@ -31,7 +31,7 @@ class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
 		else{
 			$this->init_form_subscription_contract();
 		}
-    }
+	}
 
 
 	private function init_form_subscription_contract() {
@@ -53,7 +53,7 @@ class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
     /******************************************************************************/
 	// RECAP ABONNEMENT
 	/******************************************************************************/
-    public function get_contract_warning() {
+	public function get_contract_warning() {
 		WDG_PDF_Generator::add_shortcodes();
 		$subscription_terms = WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_subscription_terms, 'subscription_terms' );
 
@@ -64,10 +64,13 @@ class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
     /******************************************************************************/
 	// AFFICHAGE DU CONTRAT
 	/******************************************************************************/
-    public function get_current_investment_contract_preview() {
+	public function get_current_investment_contract_preview() {
 		$current_user = wp_get_current_user();
 		$part_value = $this->campaign->part_value();
 		$amount = $this->subscription->amount;
+		if ( $amount == 0 ) {
+			$amount = 10;
+		}
 		$amount_part = ( $amount === FALSE ) ? 0 : $amount / $part_value;
 
 		$invest_data = array(
@@ -89,9 +92,8 @@ class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
     /******************************************************************************/
 	// VALIDATION DU CONTRAT
 	/******************************************************************************/
-    public function get_form_action() {
-
-		$this->id_subscription = filter_input(INPUT_GET,'id_subscription');
+	public function get_form_action() {
+		$this->id_subscription = filter_input( INPUT_GET, 'id_subscription' );
 		return admin_url( 'admin-post.php?action=user_account_organization_contract_subscription&id_subscription='.$this->id_subscription);
 	}
 }

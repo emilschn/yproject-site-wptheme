@@ -17,12 +17,12 @@
 	<?php endforeach; ?>
 
 	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
-        <?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
+		<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
 			<div class="wdg-message error">
 				<?php echo $error[ 'text' ]; ?>
 			</div>
 		<?php endforeach; ?>
-    <?php endif; ?>
+	<?php endif; ?>
 
 	<div id="contract-intro">
 		<?php echo $page_controler->get_contract_warning(); ?>
@@ -33,13 +33,12 @@
 	</div>
 	
 	<div id="contract-buttons">
-		<br><br><br>
-		<button type="submit" class="button right red" name="contract-action" value="validate-contract-subscription">
-			<?php _e( 'invest.contract.VALIDATE_SUBSCRIPTION', 'yproject' ); ?>
-		</button>
-		<br><br><br>
-		<button class="button left transparent" name="contract-action" value="previous-contract-subscription"> 
+		<br><br>
+		<button class="button half left transparent" name="contract-action" value="previous-contract-subscription"> 
 			<?php _e( 'common.PREVIOUS', 'yproject' ); ?>
+		</button>
+		<button type="submit" class="button half right red" name="contract-action" value="validate-contract-subscription">
+			<?php _e( 'invest.contract.VALIDATE_SUBSCRIPTION', 'yproject' ); ?>
 		</button>
 		<div class="clear"></div>
 	</div>

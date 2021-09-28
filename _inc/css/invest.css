@@ -1,6 +1,10 @@
 div.center {
 	width: 500px;
 }
+body.template-contrat-abonnement div.center {
+	width: 700px;
+}
+
 h2 {
 	font-size: 14px;
 }

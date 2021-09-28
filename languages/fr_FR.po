@@ -1763,20 +1763,22 @@ msgid "form.user-bank.RIB"
 msgstr "RIB"
 
 # ############################## form - user-subscription ################################
-
-msgid "form.subscriptions.MODALITY"
+msgid "form.subscription.MODALITY"
 msgstr "Je souhaite investir automatiquement..."
 
-msgid "form.subscriptions.MODALITY_FIRST_CHOICE"
+msgid "form.subscription.MODALITY_FIRST_CHOICE"
 msgstr "l'intégralité de mon porte-monnaie"
 
-msgid "form.subscriptions.MODALITY_SECOND_CHOICE"
+msgid "form.subscription.MODALITY_SECOND_CHOICE"
 msgstr "un montant fixe"
 
-msgid "form.subscriptions.AMOUNT"
+msgid "form.subscription.AMOUNT"
 msgstr "Montant"
 
-msgid "form.subscriptions.PROJECT"
+msgid "form.subscription.AMOUNT_DESCRIPTION"
+msgstr "Le montant doit être un nombre entier supérieur à 10€."
+
+msgid "form.subscription.PROJECT"
 msgstr "Dans le projet ..."
 
 msgid "form.subscription.SUCCESS"
@@ -1801,7 +1803,7 @@ msgid "form.user-contract-subscription.ALL_ROYALTIES"
 msgstr "l'intégralité de mon porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)."
 
 msgid "form.user-contract-subscription.PART_ROYALTIES"
-msgstr "€ venant de mon porte-monnaie électronique (si le montant est disponible)."
+msgstr "%s € venant de mon porte-monnaie électronique (si le montant est disponible)."
 
 msgid "form.user-contract-subscription.MODALITY"
 msgstr "trimestres"
