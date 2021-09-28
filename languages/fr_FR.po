@@ -1782,7 +1782,7 @@ msgid "form.subscription.PROJECT"
 msgstr "Dans le projet ..."
 
 msgid "form.subscription.SUCCESS"
-msgstr "Vous avez reçu un mail afin de confirmer votre investissement"
+msgstr "Votre abonnement a été enregistré avec succès."
 
 msgid "form.subscription.error.AMOUNT_MINIMUM"
 msgstr "Le montant minimum valide est de 10€"
