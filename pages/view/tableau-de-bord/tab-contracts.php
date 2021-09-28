@@ -200,7 +200,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"editable"		=> $page_controler->can_access_admin()
 		));
 		DashboardUtility::create_field(array(
-			"id"			=> "new_contract_warranty",
+			"id"			=> "new_project_contract_warranty",
 			"type"			=> "editor",
 			"label"			=> __( "Garantie", 'yproject' ),
 			"value"			=> $page_controler->get_campaign()->contract_warranty(),
