@@ -1,13 +1,12 @@
 <?php
- 	global $WDGOrganization;        
-	global $stylesheet_directory_uri;
-	global $shortcode_subscription_obj;
- 	$page_controler = WDG_Templates_Engine::instance()->get_controler();
- 	$WDGContractSubscriptionForm = $page_controler->get_contract_subscription_form();
- 	$fields_hidden = $WDGContractSubscriptionForm->getFields( WDG_Form_Subscription_Contract::$field_group_hidden );
-	$form_feedback = $page_controler->get_user_form_feedback();
+global $WDGOrganization;        
+global $stylesheet_directory_uri;
+global $shortcode_subscription_obj;
+$page_controler = WDG_Templates_Engine::instance()->get_controler();
+$WDGContractSubscriptionForm = $page_controler->get_contract_subscription_form();
+$fields_hidden = $WDGContractSubscriptionForm->getFields( WDG_Form_Subscription_Contract::$field_group_hidden );
+$form_feedback = $page_controler->get_user_form_feedback();
 ?>
-
 
 <form class="db-form v3 full bg-white enlarge" action="<?php echo $page_controler->get_form_action(); ?>" method = "post">
 

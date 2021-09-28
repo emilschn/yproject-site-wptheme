@@ -1,9 +1,8 @@
 <?php
 $template_engine = WDG_Templates_Engine::instance();
-$template_engine->set_controler( new WDG_Page_Controler_contrat_abonnement() );
+$template_engine->set_controler( new WDG_Page_Controler_Subscription_Contract() );
 
-class WDG_Page_Controler_contrat_abonnement extends WDG_Page_Controler {
-
+class WDG_Page_Controler_Subscription_Contract extends WDG_Page_Controler {
 	private $campaign;
 	private $subscription;
 	private $current_user;
