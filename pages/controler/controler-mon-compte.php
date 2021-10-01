@@ -27,6 +27,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	private $form_user_delete;
 	private $form_user_identitydocs;
 	private $form_user_subscription;
+	private $list_active_subscriptions;
 	private $form_user_bank;
 	private $form_user_notifications;
 	private $form_user_feedback;
@@ -87,6 +88,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 		$this->init_form_user_details();
 		$this->init_form_change_investment_owner();
 		$this->init_form_subscription();
+		$this->init_active_subscriptions_list();
 		$this->init_form_user_identitydocs();
 		$this->init_form_user_bank();
 		$this->init_form_user_notifications();
@@ -438,6 +440,18 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	
 	public function get_subscription_form() {
 		return $this->form_user_subscription;
+	}
+
+	private function init_active_subscriptions_list() {
+		$this->list_active_subscriptions = $this->current_user->get_active_subscriptions();
+	}
+
+	public function has_active_subscriptions() {
+		return ( count( $this->list_active_subscriptions ) > 0 );
+	}
+
+	public function get_active_subscriptions_list() {
+		return $this->list_active_subscriptions;
 	}
 
 	/******************************************************************************/

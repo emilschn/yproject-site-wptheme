@@ -951,8 +951,41 @@ msgstr "Vous pouvez réinvestir les royalties que vous recevez dans les projets 
 msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
 msgstr "C'est sans engagement, modifiable à tout moment et automatique."
 
+msgid "account.subscriptions.VIEW_INVESTMENTS"
+msgstr "Voir l'historique des investissements"
+
 msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
 msgstr "+ Ajouter un investissement automatique"
+
+msgid "account.subscriptions.item.I_INVEST"
+msgstr "J'investis"
+
+msgid "account.subscriptions.item.MODALITY_QUARTER"
+msgstr "tous les trimestres"
+
+msgid "account.subscriptions.item.IN_THE_THEMATIC"
+msgstr "dans la thématique"
+
+msgid "account.subscriptions.item.INVESTMENT_CONDITION"
+msgstr "Sous réserve que mon porte-monnaie atteigne cette somme à la date du paiement."
+
+msgid "account.subscriptions.item.INACTIVE_STATUS"
+msgstr "Abonnement inactif"
+
+msgid "account.subscriptions.item.NEXT_PAYMENT"
+msgstr "Prochain paiement :"
+
+msgid "account.subscriptions.item.FEBRUARY_1ST"
+msgstr "1er février"
+
+msgid "account.subscriptions.item.MAY_1ST"
+msgstr "1er mai"
+
+msgid "account.subscriptions.item.AUGUST_1ST"
+msgstr "1er août"
+
+msgid "account.subscriptions.item.NOVEMBER_1ST"
+msgstr "1er novembre"
 
 msgid "account.investments.ACCOUNT_AUTHENTICATION"
 msgstr "Authentifier mon compte"

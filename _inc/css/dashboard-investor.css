@@ -484,6 +484,20 @@ body.template-mon-compte div#container div#content .royalties-list .roi-table tr
 	border-color: #333 transparent transparent transparent;
 }
 
+
+body.template-mon-compte div#container div#content div.subscription-item {
+	padding: 24px;
+	border: 1px solid #EBEBEB;
+}
+body.template-mon-compte div#container div#content div.subscription-item h3 {
+	color: #333;
+}
+body.template-mon-compte div#container div#content div.subscription-item hr {
+	border: 1px solid #EBEBEB;
+	border-top: none;
+	margin: 24px 0px;
+}
+
 body.template-mon-compte div#container div#content div.authentication-items {
     display: -webkit-flex;
 	display: flex;

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-09-28 17:05+0200\n"
+"PO-Revision-Date: 2021-10-01 10:49+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -956,11 +956,44 @@ msgstr "Subscriptions of"
 msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
 msgstr "You can reinvest the royalties you receive in Positive Savings projects."
 
+msgid "account.subscriptions.VIEW_INVESTMENTS"
+msgstr "View investments history"
+
 msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
 msgstr "It is without commitment, changeable at any time and automatic."
 
 msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
 msgstr "+ Add new subscription"
+
+msgid "account.subscriptions.item.I_INVEST"
+msgstr "I'm investing"
+
+msgid "account.subscriptions.item.MODALITY_QUARTER"
+msgstr "each quarter"
+
+msgid "account.subscriptions.item.IN_THE_THEMATIC"
+msgstr "in the thematic"
+
+msgid "account.subscriptions.item.INVESTMENT_CONDITION"
+msgstr "If the amount in your wallet is enough at the date of the payment."
+
+msgid "account.subscriptions.item.INACTIVE_STATUS"
+msgstr "Inactive subscription"
+
+msgid "account.subscriptions.item.NEXT_PAYMENT"
+msgstr "Next payment:"
+
+msgid "account.subscriptions.item.FEBRUARY_1ST"
+msgstr "February 1st"
+
+msgid "account.subscriptions.item.MAY_1ST"
+msgstr "May 1st"
+
+msgid "account.subscriptions.item.AUGUST_1ST"
+msgstr "August 1st"
+
+msgid "account.subscriptions.item.NOVEMBER_1ST"
+msgstr "November 1st"
 
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"

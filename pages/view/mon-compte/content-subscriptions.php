@@ -10,6 +10,20 @@ $form_feedback = $page_controler->get_user_form_feedback();
 	<?php _e( 'account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS', 'yproject' ); ?>
 </p>
 
+<?php if ( $page_controler->has_active_subscriptions() ): ?>
+	<p class="align-center">
+		<a href="#investments" class="go-to-tab" data-tab="investments"><?php _e( 'account.subscriptions.VIEW_INVESTMENTS', 'yproject' ); ?></a>
+	</p>
+
+	<div class="center">
+		<?php global $subscription_item; ?>
+		<?php $list_subscriptions = $page_controler->get_active_subscriptions_list(); ?>
+		<?php foreach ( $list_subscriptions as $subscription_item ): ?>
+			<?php locate_template( array( 'pages/view/mon-compte/partial-subscription.php'  ), true ); ?>
+		<?php endforeach; ?>
+	</div>
+<?php endif; ?>
+
 <div class="db-form v3">
 	<div class ="<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?> hidden <?php endif; ?>">
 		<a class="button red add-subscription">
@@ -37,4 +51,3 @@ $form_feedback = $page_controler->get_user_form_feedback();
 		<?php locate_template( array( 'pages/view/common/form-subscription.php'  ), true ); ?>
 	</div>
 </div>
-
