@@ -299,25 +299,11 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 					if ( empty( $return ) ) {
 						$this->current_view = 'wallet-error';
 					} else {
-						$this->current_view = 'wallet-success';
-						
-						// Envoi des données à Analytics
-						$this->page_analytics_data[ 'payment' ] = array();
-						// ID de la transaction
-						$this->page_analytics_data[ 'payment' ][ 'event_label' ] = $this->current_investment->get_id();
-						// Montant total de l'investissement
-						$this->page_analytics_data[ 'payment' ][ 'value' ] = $this->current_investment->get_session_amount();
-						// Titre du projet
-						$this->page_analytics_data[ 'payment' ][ 'product_name' ] = $this->get_current_campaign()->get_name();
-						// ID du projet
-						$this->page_analytics_data[ 'payment' ][ 'product_id' ] = $this->get_current_campaign()->ID;
-						// Nom de la société qui porte le projet
-						$this->page_analytics_data[ 'payment' ][ 'product_brand' ] = $this->get_campaign_organization_name();
-						// Catégorie du projet
-						$this->page_analytics_data[ 'payment' ][ 'product_category' ] = 'Entreprises';
-						if ( $this->get_current_campaign()->is_positive_savings() ) {
-							$this->page_analytics_data[ 'payment' ][ 'product_category' ] = 'Epargne positive';
-						}
+						// $this->current_view = 'wallet-success';
+						$page_url = WDG_Redirect_Engine::override_get_page_url( 'paiement-effectue' );
+						$page_url .= '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=wallet&payment_return=publish';
+						wp_redirect( $page_url );
+						exit();
 					}
 					break;
 					
