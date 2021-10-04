@@ -1290,7 +1290,7 @@ div.project-rewards-content table tr:first-child {
     font-weight: bold;
 }
 div.project-rewards-content table tr td {
-    min-width: 75px;
+    min-width: 50px;
     text-align: center;
 	vertical-align: bottom;
 }
