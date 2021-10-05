@@ -1014,6 +1014,7 @@ body input[type=text], body input[type=number], body input[type=email], body sel
 }
 .db-form.v3 button,
 .db-form.v3 a.button {
+	display: none;
     width: -webkit-calc(100% - 2px);
     width: -moz-calc(100% - 2px);
     width: calc(100% - 2px);
@@ -1230,7 +1231,7 @@ nav.wdg-breadcrumb {
 * REWARDS
 *******************************************************************************/
 div.project-rewards-content {
-	padding: 20px;
+	padding: 30px;
 	border: 1px solid #c2c2c2;
 }
 div.project-rewards-content div.project-rewards-padder {
