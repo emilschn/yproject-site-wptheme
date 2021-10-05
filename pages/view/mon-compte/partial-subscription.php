@@ -11,6 +11,10 @@
 	<br><br>
 
 	<i><?php _e( 'account.subscriptions.item.INVESTMENT_CONDITION', 'yproject' ); ?></i>
+	<br><br>
+
+	<?php _e( 'account.subscriptions.item.CONTRACT_RECEPTION', 'yproject' ); ?>
+	<a href="<?php echo $subscription_item->get_model_contract_url(); ?>" target="_blank"><?php _e( 'account.subscriptions.item.ACCESS_CONTRACT_TYPE', 'yproject' ); ?></a>
 	<br>
 
 	<hr>

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-01 10:49+0200\n"
+"PO-Revision-Date: 2021-10-05 11:46+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -995,6 +995,12 @@ msgstr "August 1st"
 msgid "account.subscriptions.item.NOVEMBER_1ST"
 msgstr "November 1st"
 
+msgid "account.subscriptions.item.CONTRACT_RECEPTION"
+msgstr "With each payment, I will automatically receive an investment contract by e-mail, which will also be available in the list of my investments."
+
+msgid "account.subscriptions.item.ACCESS_CONTRACT_TYPE"
+msgstr "Access the model contract"
+
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
 
@@ -1804,10 +1810,10 @@ msgstr "RIB"
 msgid "form.subscription.MODALITY"
 msgstr "I want to invest automatically..."
 
-msgid "form.subscription.MODALITY_FIRST_CHOICE"
+msgid "form.subscription.MODALITY_ALL_ROYALTIES"
 msgstr "the entirety of my wallet"
 
-msgid "form.subscription.MODALITY_SECOND_CHOICE"
+msgid "form.subscription.MODALITY_FIXED_AMOUNT"
 msgstr "a fixed amount"
 
 msgid "form.subscription.AMOUNT"
@@ -1817,7 +1823,7 @@ msgid "form.subscription.AMOUNT_DESCRIPTION"
 msgstr "The amount must be an integer superior to 10 €."
 
 msgid "form.subscription.PROJECT"
-msgstr "In the project ..."
+msgstr "In the thematic ..."
 
 msgid "form.subscription.SUCCESS"
 msgstr "Your subscription has successfully been registered."

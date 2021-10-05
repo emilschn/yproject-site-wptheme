@@ -4,7 +4,6 @@ function UserAccountDashboard() {
 	this.initPhoneNotification();
 	this.initLoadingAnimation();
 	this.initSubscriptionForm();
-	this.initSubscriptionAmount();
 }
 
 /**
@@ -569,13 +568,15 @@ UserAccountDashboard.prototype.initLoadingAnimation = function () {
 UserAccountDashboard.prototype.initSubscriptionForm = function () {
 	$('.add-subscription').click(function (e) {
 		$(this).hide();
-		$(".form").show();
+		$(".form-add-subscription").show();
+		$('.form-add-subscription #select-amount_type').change();
 	});
+	this.initSubscriptionAmount();
 }
 
 UserAccountDashboard.prototype.initSubscriptionAmount = function () {
-	$('#select-amount_type').change( function () {
-		if ( $(this).val() == 'part_royalties' ) {
+	$('#select-amount_type').change(function () {
+		if ($(this).val() == 'part_royalties') {
 			$("#field-amount").show();
 		}
 		else {

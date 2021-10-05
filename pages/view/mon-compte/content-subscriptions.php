@@ -47,7 +47,7 @@ $form_feedback = $page_controler->get_user_form_feedback();
 		</div>
 	<?php endif; ?>
 
-	<div class="form <?php if ( empty( $form_feedback[ 'errors' ] ) ): ?> hidden <?php endif; ?>">
+	<div class="form form-add-subscription <?php if ( empty( $form_feedback[ 'errors' ] ) ): ?> hidden <?php endif; ?>">
 		<?php locate_template( array( 'pages/view/common/form-subscription.php'  ), true ); ?>
 	</div>
 </div>

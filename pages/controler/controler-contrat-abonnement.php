@@ -64,6 +64,7 @@ class WDG_Page_Controler_Subscription_Contract extends WDG_Page_Controler {
 	// AFFICHAGE DU CONTRAT
 	/******************************************************************************/
 	public function get_current_investment_contract_preview() {
+		/*
 		$current_user = wp_get_current_user();
 		$part_value = $this->campaign->part_value();
 		$amount = $this->subscription->amount;
@@ -84,8 +85,14 @@ class WDG_Page_Controler_Subscription_Contract extends WDG_Page_Controler {
 		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
 			$organization = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
 		}
+		*/
 
-		return fillPDFHTMLDefaultContent( $current_user, $this->campaign, $invest_data, $organization, true );
+		$organization = FALSE;
+		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
+			$organization = 'orga';
+		}
+
+		return fillPDFHTMLDefaultContent( 'user', $this->campaign, FALSE, $organization, true );
 	}
 
     /******************************************************************************/

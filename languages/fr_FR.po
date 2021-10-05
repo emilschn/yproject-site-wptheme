@@ -987,6 +987,12 @@ msgstr "1er août"
 msgid "account.subscriptions.item.NOVEMBER_1ST"
 msgstr "1er novembre"
 
+msgid "account.subscriptions.item.CONTRACT_RECEPTION"
+msgstr "A chaque paiement, je recevrai un contrat d'investissement automatiquement par e-mail, qui sera aussi disponible dans la liste de mes investissements."
+
+msgid "account.subscriptions.item.ACCESS_CONTRACT_TYPE"
+msgstr "Accéder au contrat type"
+
 msgid "account.investments.ACCOUNT_AUTHENTICATION"
 msgstr "Authentifier mon compte"
 
@@ -1799,10 +1805,10 @@ msgstr "RIB"
 msgid "form.subscription.MODALITY"
 msgstr "Je souhaite investir automatiquement..."
 
-msgid "form.subscription.MODALITY_FIRST_CHOICE"
+msgid "form.subscription.MODALITY_ALL_ROYALTIES"
 msgstr "l'intégralité de mon porte-monnaie"
 
-msgid "form.subscription.MODALITY_SECOND_CHOICE"
+msgid "form.subscription.MODALITY_FIXED_AMOUNT"
 msgstr "un montant fixe"
 
 msgid "form.subscription.AMOUNT"
@@ -1812,7 +1818,7 @@ msgid "form.subscription.AMOUNT_DESCRIPTION"
 msgstr "Le montant doit être un nombre entier supérieur à 10€."
 
 msgid "form.subscription.PROJECT"
-msgstr "Dans le projet ..."
+msgstr "Dans la thématique ..."
 
 msgid "form.subscription.SUCCESS"
 msgstr "Votre abonnement a été enregistré avec succès."
