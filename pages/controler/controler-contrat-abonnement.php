@@ -64,29 +64,6 @@ class WDG_Page_Controler_Subscription_Contract extends WDG_Page_Controler {
 	// AFFICHAGE DU CONTRAT
 	/******************************************************************************/
 	public function get_current_investment_contract_preview() {
-		/*
-		$current_user = wp_get_current_user();
-		$part_value = $this->campaign->part_value();
-		$amount = $this->subscription->amount;
-		if ( $amount == 0 ) {
-			$amount = 10;
-		}
-		$amount_part = ( $amount === FALSE ) ? 0 : $amount / $part_value;
-
-		$invest_data = array(
-			"amount_part"					=> $amount_part,
-			"amount"						=> $amount,
-			"total_parts_company"			=> $this->campaign->total_parts(),
-			"total_minimum_parts_company"	=> $this->campaign->total_minimum_parts(),
-			"ip"							=> filter_input( INPUT_SERVER, 'REMOTE_ADDR' )
-		);
-
-		$organization = false;
-		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
-			$organization = new WDGOrganization( $_SESSION[ 'redirect_current_user_type' ] );
-		}
-		*/
-
 		$organization = FALSE;
 		if ( $_SESSION[ 'redirect_current_user_type' ] != 'user' ) {
 			$organization = 'orga';
@@ -100,6 +77,6 @@ class WDG_Page_Controler_Subscription_Contract extends WDG_Page_Controler {
 	/******************************************************************************/
 	public function get_form_action() {
 		$this->id_subscription = filter_input( INPUT_GET, 'id_subscription' );
-		return admin_url( 'admin-post.php?action=user_account_organization_contract_subscription&id_subscription='.$this->id_subscription);
+		return admin_url( 'admin-post.php?action=user_account_validate_contract_subscription&id_subscription='.$this->id_subscription);
 	}
 }

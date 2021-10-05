@@ -6,7 +6,7 @@ $fields_basics = $WDGSubscriptionForm->getFields( WDG_Form_Subscription::$field_
 $fields_hidden = $WDGSubscriptionForm->getFields( WDG_Form_Subscription::$field_group_hidden );
 ?>
 
-<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_subscription' ); ?>">
+<form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?>" action="<?php echo admin_url( 'admin-post.php?action=user_account_add_subscription' ); ?>">
 
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>

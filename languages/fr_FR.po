@@ -955,7 +955,7 @@ msgid "account.subscriptions.VIEW_INVESTMENTS"
 msgstr "Voir l'historique des investissements"
 
 msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
-msgstr "+ Ajouter un investissement automatique"
+msgstr "+ Ajouter un investissement par abonnement"
 
 msgid "account.subscriptions.item.I_INVEST"
 msgstr "J'investis"
@@ -992,6 +992,12 @@ msgstr "A chaque paiement, je recevrai un contrat d'investissement automatiqueme
 
 msgid "account.subscriptions.item.ACCESS_CONTRACT_TYPE"
 msgstr "Accéder au contrat type"
+
+msgid "account.subscriptions.item.END_THE_SUBSCRIPTION"
+msgstr "Mettre fin à l'abonnement"
+
+msgid "account.subscriptions.item.ARE_YOU_SURE_TO_DELETE"
+msgstr "Êtes-vous sûr de vouloir mettre fin à l'abonnement ?"
 
 msgid "account.investments.ACCOUNT_AUTHENTICATION"
 msgstr "Authentifier mon compte"

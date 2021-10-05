@@ -437,7 +437,7 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 			$_SESSION[ 'account_organization_form_subscription_feedback_' . $this->current_user->get_wpref() ] = FALSE;
 		}
 	}
-	
+
 	public function get_subscription_form() {
 		return $this->form_user_subscription;
 	}
@@ -452,6 +452,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 
 	public function get_active_subscriptions_list() {
 		return $this->list_active_subscriptions;
+	}
+
+	public function get_end_subscription_link() {
+		return admin_url( 'admin-post.php?action=user_account_end_subscription&id_subscription=' );
 	}
 
 	/******************************************************************************/

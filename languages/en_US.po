@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-05 11:46+0200\n"
+"PO-Revision-Date: 2021-10-05 15:23+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1000,6 +1000,12 @@ msgstr "With each payment, I will automatically receive an investment contract b
 
 msgid "account.subscriptions.item.ACCESS_CONTRACT_TYPE"
 msgstr "Access the model contract"
+
+msgid "account.subscriptions.item.END_THE_SUBSCRIPTION"
+msgstr "End the subscription"
+
+msgid "account.subscriptions.item.ARE_YOU_SURE_TO_DELETE"
+msgstr "Are you sure that you want to end this subscription?"
 
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"

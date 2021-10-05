@@ -497,6 +497,14 @@ body.template-mon-compte div#container div#content div.subscription-item hr {
 	border-top: none;
 	margin: 24px 0px;
 }
+body.template-mon-compte div#container div#content div.subscription-item .button-options {
+	margin: 20px 0px;
+	text-align: center;
+}
+body.template-mon-compte div#container div#content div.subscription-item .button-options a.button {
+	padding: 20px 40px;
+}
+
 
 body.template-mon-compte div#container div#content div.authentication-items {
     display: -webkit-flex;
