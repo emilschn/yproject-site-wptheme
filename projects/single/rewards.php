@@ -22,6 +22,63 @@ $estimated_turnover = $campaign->estimated_turnover();
 	<?php endif; ?>
     
 	<div class="project-rewards-content">
+
+	<div style="position: relative; height:300px; width:500px; margin: auto;">
+        <canvas id="calculateurRoyalties"></canvas>
+
+        <script>
+            const labels = [
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+            ];
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: '€',
+                    fill: true,
+                    backgroundColor: 'rgb(179, 218, 225)',
+                    borderColor: 'rgb(0, 135, 155)',
+                    data: [0, 10, 5, 2, 20, 30, 45],
+                }]
+            };
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Années',
+                            },
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '€',
+                            },
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    }
+                }
+            };
+
+            var myChart = new Chart(
+                document.getElementById('calculateurRoyalties'),
+                config
+            );
+        </script>
+    </div>
+
 		
 		<?php // CAPITAL // ?>
 		<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
