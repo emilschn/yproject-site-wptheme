@@ -22,6 +22,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 	<?php endif; ?>
     
 	<div class="project-rewards-content">
+		
 		<?php // CAPITAL // ?>
 		<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			<div class="left">
@@ -171,3 +172,5 @@ $estimated_turnover = $campaign->estimated_turnover();
 		<?php endif; ?>
 	</div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
