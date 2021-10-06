@@ -7,7 +7,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<h3><?php echo $subscription_item->get_campaign_name(); ?></h3>
 
 	<?php _e( 'account.subscriptions.item.I_INVEST', 'yproject' ); ?>
-	<strong><?php echo $subscription_item->amount; ?>&nbsp;&euro;</strong>
+	<strong><?php echo $subscription_item->get_amount_str(); ?></strong>
 	<?php echo $subscription_item->get_modality_str(); ?>
 	<?php _e( 'account.subscriptions.item.IN_THE_THEMATIC', 'yproject' ); ?>
 	<strong><?php echo $subscription_item->get_campaign_name(); ?></strong>

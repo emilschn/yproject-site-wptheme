@@ -1845,13 +1845,19 @@ msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
 msgstr "Vous avez renoncé à la signature du contrat d'abonnement"
 
 msgid "form.user-contract-subscription.ALL_ROYALTIES"
-msgstr "l'intégralité de mon porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)."
+msgstr "l'intégralité de mon porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)"
 
 msgid "form.user-contract-subscription.PART_ROYALTIES"
-msgstr "%s € venant de mon porte-monnaie électronique (si le montant est disponible)."
+msgstr "%s € venant de mon porte-monnaie électronique (si le montant est disponible)"
 
 msgid "form.user-contract-subscription.MODALITY"
 msgstr "trimestres"
+
+msgid "form.user-contract-subscription.notification.ALL_ROYALTIES"
+msgstr "l'intégralité de votre porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)"
+
+msgid "form.user-contract-subscription.notification.PART_ROYALTIES"
+msgstr "%s € (si le montant est disponible)"
 
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"

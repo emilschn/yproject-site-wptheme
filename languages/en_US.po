@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-05 15:23+0200\n"
+"PO-Revision-Date: 2021-10-06 16:05+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1857,6 +1857,12 @@ msgstr "%s € from my e-wallet (if available)."
 
 msgid "form.user-contract-subscription.MODALITY"
 msgstr "quarters"
+
+msgid "form.user-contract-subscription.notification.ALL_ROYALTIES"
+msgstr "l'intégralité de votre porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)"
+
+msgid "form.user-contract-subscription.notification.PART_ROYALTIES"
+msgstr "%s € (si le montant est disponible)"
 
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"

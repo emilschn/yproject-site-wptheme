@@ -19,7 +19,7 @@ $form_feedback = $page_controler->get_user_form_feedback();
 		<?php global $subscription_item; ?>
 		<?php $list_subscriptions = $page_controler->get_active_subscriptions_list(); ?>
 		<?php foreach ( $list_subscriptions as $subscription_item ): ?>
-			<?php locate_template( array( 'pages/view/mon-compte/partial-subscription.php'  ), true ); ?>
+			<?php locate_template( array( 'pages/view/mon-compte/partial-subscription.php'  ), true, false ); ?>
 		<?php endforeach; ?>
 	</div>
 <?php endif; ?>

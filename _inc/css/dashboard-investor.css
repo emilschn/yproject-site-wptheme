@@ -486,6 +486,7 @@ body.template-mon-compte div#container div#content .royalties-list .roi-table tr
 
 
 body.template-mon-compte div#container div#content div.subscription-item {
+	margin-bottom: 24px;
 	padding: 24px;
 	border: 1px solid #EBEBEB;
 }
