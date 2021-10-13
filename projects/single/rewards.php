@@ -22,6 +22,64 @@ $estimated_turnover = $campaign->estimated_turnover();
 	<?php endif; ?>
     
 	<div class="project-rewards-content">
+
+	<div style="position: relative; height:300px; width:500px; margin: auto;">
+        <canvas id="calculateurRoyalties"></canvas>
+
+        <script>
+            const labels = [
+                '1',
+                '2',
+                '3',
+                '4',
+                '5',
+            ];
+            const data = {
+                labels: labels,
+                datasets: [{
+                    label: '€',
+                    fill: true,
+                    backgroundColor: 'rgb(179, 218, 225)',
+                    borderColor: 'rgb(0, 135, 155)',
+                    data: [0, 10, 5, 2, 20, 30, 45],
+                }]
+            };
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Années',
+                            },
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: '€',
+                            },
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false,
+                        }
+                    }
+                }
+            };
+
+            var myChart = new Chart(
+                document.getElementById('calculateurRoyalties'),
+                config
+            );
+        </script>
+    </div>
+
+		
 		<?php // CAPITAL // ?>
 		<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			<div class="left">
@@ -83,7 +141,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 							$campaign_periodicity = $campaign->get_declaration_periodicity();
 							$campaign_periodicity_str = __( ATCF_Campaign::$declaration_period_list_plural[ $campaign_periodicity ], 'yproject' );
 						?>
-						<label for="init_invest"><?php echo sprintf( __( "Je recevrais tous les %s :", 'yproject' ), $campaign_periodicity_str ); ?></label>
+						<label for="init_invest" style="text-align: left;"><?php echo sprintf( __( "Je recevrais tous les %s :", 'yproject' ), $campaign_periodicity_str ); ?></label>
 						<div class="field-container align-left">
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
@@ -130,14 +188,14 @@ $estimated_turnover = $campaign->estimated_turnover();
 
 				<?php endif; ?>
 					
-				<div class="align-left">
-					<strong><?php _e( "Retour sur investissement vis&eacute; :", 'yproject' ); ?></strong><br>
-					+ <span><span class="roi_percent_total">...</span> %</span> <?php echo __( "de votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?><br>
-					(<?php _e( "soit", 'yproject' ); ?> <span>x<span class="roi_ratio_on_total">...</span></span> <?php echo __( "votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?>)
+				<div class="align-left" style="font-size: 14px;">
+					<?php _e( "Retour sur investissement vis&eacute; :", 'yproject' ); ?><br>
+					<strong><span>x<span class="roi_ratio_on_total">... </span></span></strong> <?php echo __( "votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?>
+					(<?php _e( "soit", 'yproject' ); ?> + <span><span class="roi_percent_total">...</span> %</span>)
 				</div>
 					
 				
-				<div class="project-rewards-alert align-left">
+				<div class="project-rewards-alert align-left" style="font-size: 14px;">
 					<?php echo sprintf( __( "Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", 'yproject' ), $campaign->maximum_profit_str() ); ?><br>
 					* <?php _e( "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;.", 'yproject' ); ?><br>
 					<?php if ($campaign->is_positive_savings() ): ?>	
@@ -171,3 +229,5 @@ $estimated_turnover = $campaign->estimated_turnover();
 		<?php endif; ?>
 	</div>
 </div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

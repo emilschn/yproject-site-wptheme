@@ -592,7 +592,6 @@ div#content.version-3.editing #wdg-move-picture-head {
 div#content.version-3 div.project-rewards-content {
 	max-width: 580px;
 	margin: 0px auto 40px;
-	padding: 0px;
 	font-size: 15px;
 }
 div#content.version-3 div.project-rewards-content .db-form {
@@ -601,14 +600,25 @@ div#content.version-3 div.project-rewards-content .db-form {
 div#content.version-3 div.project-rewards-content .db-form .field-container {
 	white-space: normal;
 }
+div#content.version-3 div.project-rewards-content .db-form .field-container .field-value input {
+	background-color: #fff;
+	border-bottom: 3px solid #00879B;
+	margin: auto;
+	color: #00879B;
+}
+div#content.version-3 div.project-rewards-content .db-form .field-container .field-value .field-money {
+	color: #00879B;
+}
 div#content.version-3 div.project-rewards-content .db-form .field-container.field-init-invest {
 	white-space: nowrap;
+	text-align: center;
 }
 div#content.version-3 div.project-rewards-content label {
-	font-size: 20px;
-	font-weight: normal;
+	font-size: 14px;
+	font-weight: bold;
 	text-transform: uppercase;
-	color: #00879b;
+	color: #333;
+	text-align: center;
 }
 div#content.version-3 div.project-rewards-content div.roi_amount_base {
 	height: 5px;
