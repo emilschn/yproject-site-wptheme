@@ -1014,7 +1014,6 @@ body input[type=text], body input[type=number], body input[type=email], body sel
 }
 .db-form.v3 button,
 .db-form.v3 a.button {
-	display: none;
     width: -webkit-calc(100% - 2px);
     width: -moz-calc(100% - 2px);
     width: calc(100% - 2px);

@@ -402,7 +402,7 @@ class WDG_WordPress_Events {
 
 		// Chargement de la lib de graphs (uniquement en liaison avec les projets)
 		if ( ( $is_campaign || $is_campaign_page ) && !$is_dashboard_page ) {
-			wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
+			wp_enqueue_script( 'chart-script', 'https://cdn.jsdelivr.net/npm/chart.js', array('wdg-script'), '1' );
 		}
 		if ( $is_dashboard_page ) {
 			wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));

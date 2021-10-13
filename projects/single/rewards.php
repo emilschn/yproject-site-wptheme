@@ -23,61 +23,102 @@ $estimated_turnover = $campaign->estimated_turnover();
     
 	<div class="project-rewards-content">
 
-	<div style="position: relative; height:300px; width:500px; margin: auto;">
-        <canvas id="calculateurRoyalties"></canvas>
+		<div style="position: relative; height:300px; width:500px; margin: auto;">
+			<canvas id="calculateurRoyalties"></canvas>
 
-        <script>
-            const labels = [
-                '1',
-                '2',
-                '3',
-                '4',
-                '5',
-            ];
-            const data = {
-                labels: labels,
-                datasets: [{
-                    label: '€',
-                    fill: true,
-                    backgroundColor: 'rgb(179, 218, 225)',
-                    borderColor: 'rgb(0, 135, 155)',
-                    data: [0, 10, 5, 2, 20, 30, 45],
-                }]
-            };
-            const config = {
-                type: 'line',
-                data: data,
-                options: {
-                    scales: {
-                        x: {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: 'Années',
-                            },
-                        },
-                        y: {
-                            display: true,
-                            title: {
-                                display: true,
-                                text: '€',
-                            },
-                        }
-                    },
-                    plugins: {
-                        legend: {
-                            display: false,
-                        }
-                    }
-                }
-            };
+			<script>
+				// options de configurations : https://www.chartjs.org/docs/latest/charts/line.html
+				const labelsRoyaltiesChart = [
+					<?php $index_label = 1; ?>
+					<?php foreach ( $estimated_turnover as $i => $value ): ?>
+						<?php echo $index_label++; ?>,
+					<?php endforeach; ?>
+				];
+				
+				const dataRoyaltiesChart = {
+					labels: labelsRoyaltiesChart,
+					datasets: [
+						// Voir line styling : https://www.chartjs.org/docs/latest/charts/line.html#line-styling
+						{
+							data: Array.apply(null, new Array(8)).map(Number.prototype.valueOf, 6000),
+							fill: false,
+							radius: 0,
+							backgroundColor: "rgba(0,0,0,0.1)",
+							borderDash: [10, 10]
+						},
+						{
+							data: Array.apply(null, new Array(8)).map(Number.prototype.valueOf, 15000),
+							fill: false,
+							radius: 0,
+							backgroundColor: "rgba(0,0,0,0.1)",
+							borderDash: [10, 10]
+						},
+						{
+							label: '€',
+							fill: true,
+							backgroundColor: 'rgb(179, 218, 225)',
+							borderColor: 'rgb(0, 135, 155)',
+							data: [
+								<?php foreach ( $estimated_turnover as $i => $value ): ?>
+									<?php echo $value; ?>,
+								<?php endforeach; ?>
+							],
+						}
+					]
+				};
+				const configRoyaltiesChart = {
+					type: 'line',
+					data: dataRoyaltiesChart,
+					options: {
+						// Supprimer les points ?
+						pointRadius: 0,
+						scales: {
+							x: {
+								display: true,
+								title: {
+									display: true,
+									text: 'Années',
+								},
+								grid: {
+									// Masque la grille du fond
+									display: false
+								}
+							},
+							y: {
+								display: true,
+								title: {
+									display: true,
+									text: '€'
+								},
+								ticks: {
+									// Ne pas afficher les chiffres en légende horizontale
+									display: false
+								},
+								grid: {
+									// Masque la grille du fond
+									display: false
+								}
+							}
+						},
+						plugins: {
+							legend: {
+								display: false,
+							},
+							// Pas réussi à le faire fonctionner : placer la légende en haut de l'écran
+							title: {
+								position: 'top',
+								align: 'end'
+							}
+						}
+					}
+				};
 
-            var myChart = new Chart(
-                document.getElementById('calculateurRoyalties'),
-                config
-            );
-        </script>
-    </div>
+				var royaltiesChart = new Chart(
+					document.getElementById('calculateurRoyalties'),
+					configRoyaltiesChart
+				);
+			</script>
+		</div>
 
 		
 		<?php // CAPITAL // ?>
@@ -229,5 +270,3 @@ $estimated_turnover = $campaign->estimated_turnover();
 		<?php endif; ?>
 	</div>
 </div>
-
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
