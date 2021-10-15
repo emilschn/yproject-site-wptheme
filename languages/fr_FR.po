@@ -1547,7 +1547,7 @@ msgid "invest.mean-payment.success.TWO_EMAILS"
 msgstr "Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse"
 
 msgid "invest.mean-payment.success.TWO_EMAILS_CHECK_SPAM"
-msgstr "(pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable) :"
+msgstr "(pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable)"
 
 msgid "invest.mean-payment.success.TWO_EMAILS_LIST_1"
 msgstr "un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement,"
