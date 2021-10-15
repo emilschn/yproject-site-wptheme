@@ -25,9 +25,8 @@ class WDG_Page_Controler_Subscription_Contract extends WDG_Page_Controler {
 		$this->current_user = WDGUser::current();
 		
 		if ( empty( $this->subscription->id ) ) {
-			echo 'Une erreur est survenue lors de la mise en place de votre contrat';
-		}
-		else{
+			ypcf_debug_log( 'WDG_Page_Controler_Subscription_Contract error empty $this->subscription->id' );
+		} else {
 			$this->init_form_subscription_contract();
 		}
 	}
