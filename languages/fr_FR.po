@@ -681,6 +681,9 @@ msgstr "IBAN :"
 msgid "account.bank.BIC"
 msgstr "BIC :"
 
+msgid "account.bank.CODE"
+msgstr "Code à indiquer pour identifier votre paiement (Libellé bénéficiaire ou Code destinataire) :"
+
 msgid "account.bank.MODIFY_BANK_DETAILS"
 msgstr "Modifier mon RIB"
 
