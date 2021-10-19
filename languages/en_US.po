@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-15 17:08+0200\n"
+"PO-Revision-Date: 2021-10-19 21:41+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -691,6 +691,9 @@ msgstr "IBAN:"
 
 msgid "account.bank.BIC"
 msgstr "BIC:"
+
+msgid "account.bank.CODE"
+msgstr "Code to transmit to identify your transfer:"
 
 msgid "account.bank.MODIFY_BANK_DETAILS"
 msgstr "Modify my bank details"
