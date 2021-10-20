@@ -1,6 +1,10 @@
 div.center {
 	width: 500px;
 }
+body.template-contrat-abonnement div.center {
+	width: 700px;
+}
+
 h2 {
 	font-size: 14px;
 }
@@ -224,12 +228,17 @@ div#content div#contract-intro {
 div#content div#contract-preview {
 	height: 400px;
 	overflow: scroll;
+	overflow-x: hidden;
 	margin-top: 20px;
 	padding: 10px;
 	clear: both;
 	border: 1px solid grey;
 	text-align: left;
 }
+div#content div#contract-preview page_footer {
+	display: none;
+}
+
 div#content #field-confirm-subscription label {
 	font-weight: normal;
 }
