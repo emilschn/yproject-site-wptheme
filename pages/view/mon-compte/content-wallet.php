@@ -63,7 +63,8 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 			<img src="<?php echo $stylesheet_directory_uri; ?>/images/footer/lemonway-gris.png" class="wire-lw right" alt="logo Lemonway" width="250">
 			<strong><?php _e( 'account.bank.BANK_ACCOUNT_OWNER', 'yproject' ); ?></strong> <span class="reload-bank-owner">LEMON WAY</span><br>
 			<strong><?php _e( 'account.bank.IBAN', 'yproject' ); ?></strong> <span class="reload-bank-iban"></span><br>
-			<strong><?php _e( 'account.bank.BIC', 'yproject' ); ?></strong> <span class="reload-bank-bic"></span>
+			<strong><?php _e( 'account.bank.BIC', 'yproject' ); ?></strong> <span class="reload-bank-bic"></span><br>
+			<span class="reload-bank-lwid-container"><strong><?php _e( 'account.bank.CODE', 'yproject' ); ?></strong> <span class="reload-bank-lwid"></span></span>
 			
 		</p>
 		<br><br>

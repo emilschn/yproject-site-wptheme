@@ -629,7 +629,7 @@ div#content.version-3 div.project-rewards-content table:before {
 	border-top: 1px solid;
 }
 div#content.version-3 div.project-rewards-content table tr td {
-    min-width: 75px;
+    min-width: 50px;
 	text-align: center;
 	border: 0px;
 }

@@ -130,7 +130,10 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 // CURRENT MEAN OF PAYMENT RETURN
 /******************************************************************************/
 	private function init_payment_result() {
-		$payment_return = $this->current_investment->payment_return( $this->current_meanofpayment );
+		$payment_return = filter_input( INPUT_GET, 'payment_return' );
+		if ( empty( $payment_return ) ) {
+			$payment_return = $this->current_investment->payment_return( $this->current_meanofpayment );
+		}
 		if ( empty( $payment_return ) ) {
 			$payment_return = 'error-contact';
 		}
@@ -141,7 +144,7 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 					$payment_return == 'pending'
 					&&
 					( $this->current_meanofpayment == WDGInvestment::$meanofpayment_wire || $this->current_meanofpayment == WDGInvestment::$meanofpayment_check )
-				) 
+				)
 			) {
 			$this->page_analytics_data[ 'payment' ] = array();
 			// ID de la transaction

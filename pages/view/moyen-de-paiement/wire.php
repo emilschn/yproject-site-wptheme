@@ -9,9 +9,12 @@ $viban = $page_controler->get_investor_iban();
 
 <?php _e( 'invest.mean-payment.wire.INFORMATION', 'yproject' ); ?><br>
 <ul>
-	<li><strong><?php _e( 'invest.mean-payment.wire.ACCOUNT_OWNER', 'yproject' ); ?></strong> <?php echo $viban->HOLDER; ?></li>
-	<li><strong>IBAN :</strong> <?php echo $viban->DATA; ?></li>
-	<li><strong>BIC :</strong> <?php echo $viban->SWIFT; ?></li>
+	<li><strong><?php _e( 'invest.mean-payment.wire.ACCOUNT_OWNER', 'yproject' ); ?></strong> <?php echo $viban[ 'holder' ]; ?></li>
+	<li><strong>IBAN :</strong> <?php echo $viban[ 'iban' ]; ?></li>
+	<li><strong>BIC :</strong> <?php echo $viban[ 'bic' ]; ?></li>
+	<?php if ( !empty( $viban[ 'backup' ] ) && !empty( $viban[ 'backup' ][ 'lemonway_id' ] ) ): ?>
+		<li><strong><?php _e( 'account.bank.CODE', 'yproject' ); ?></strong> <?php echo $viban[ 'backup' ][ 'lemonway_id' ]; ?></li>
+	<?php endif; ?>
 </ul>
 <br><br>
 

@@ -43,10 +43,19 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 	 * Vérifie les redirections et éléments à afficher
 	 */
 	private function check_validation_action() {
+		$input_code = filter_input( INPUT_GET, 'validation-code' );
+		$input_is_new_account = filter_input( INPUT_GET, 'is-new-account' );
+
 		// Si l'utilisateur n'est pas connecté, on redirige vers le formulaire de connexion
 		if ( !is_user_logged_in() ) {
-			// TODO : il faudrait transmettre les éléments qui permettraient ensuite de re-tenter de valider le compte
-			wp_redirect( WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?redirect-page=activer-compte' );
+			// Transmission du code de validation à Vue
+			$params_validate = '';
+			if ( !empty( $input_code ) ) {
+				$params_validate = '&validation-code=' . $input_code;
+				$params_validate .= '&is-new-account=' . $input_is_new_account;
+			}
+			// Redirection vers page de login
+			wp_redirect( WDG_Redirect_Engine::override_get_page_url( 'connexion' ) . '?redirect-page=activer-compte' . $params_validate );
 			exit();
 		}
 
@@ -64,8 +73,6 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 		}
 
 		$input_action = filter_input( INPUT_GET, 'action' );
-		$input_code = filter_input( INPUT_GET, 'validation-code' );
-		$input_is_new_account = filter_input( INPUT_GET, 'is-new-account' );
 		$this->current_user_is_new_account = $input_is_new_account;
 
 		// Si l'utilisateur connecté n'est pas encore validé, qu'il demande la validation et que le code correspond
@@ -77,10 +84,21 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 			$this->current_view = self::$view_email_validated;
 			if ( $input_is_new_account !== '1' ) {
 				$this->current_view = self::$view_email_validated_old_account;
+			} else {
+				// Envoi de l'évènement à Analytics pour dire qu'un compte a été créé
+				ypcf_session_start();
+				$_SESSION['send_creation_event'] = 1;
 			}
+
 			// Redirection
 			// On redirige vers la page où la personne était précédemment
 			$this->current_auto_redirect_link = WDGUser::get_login_redirect_page();
+			$meta_redirect = get_user_meta( $this->current_user->get_wpref(), 'redirect_url_after_validation', TRUE );
+			if ( !empty( $meta_redirect ) ) {
+				$this->current_auto_redirect_link = $meta_redirect;
+				delete_user_meta( $this->current_user->get_wpref(), 'redirect_url_after_validation' );
+			}
+
 			// TODO : A venir :
 			// Si c'est un nouvel inscrit, on le redirige vers le parcours d'authentification
 			/*

@@ -887,7 +887,6 @@ ul.project-list a.needs-authentication:after {
 /*******************************************************************************
 * TABLEAU
 *******************************************************************************/
-
 .wp-block-table table {
 	border-collapse: collapse;
 	table-layout: fixed;
@@ -942,11 +941,7 @@ ul.project-list a.needs-authentication:after {
 }
 
 /*******************************************************************************
->>>>>>> 5a0f1bcff962247bf5dcf45def54e6e0bd479b33
-* PAGE DE CREATION DE PROJET
-=======
 * PAGE DE CREATION DE PROJET 
->>>>>>> 09ea1720f682c07b5f5ebe87c9b4430671d06227
 *******************************************************************************/
 .lancement-page-container {
 	padding-top: 90px;
