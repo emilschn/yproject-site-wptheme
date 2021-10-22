@@ -4,7 +4,7 @@ $campaign_id = $campaign->ID;
 $campaign_status = $campaign->campaign_status();
 $funding_duration = $campaign->funding_duration();
 $funding_duration_str = ( $funding_duration == 0 ) ? __( "une dur&eacute;e ind&eacute;termin&eacute;e", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
-$funding_duration_str_2 = ( $funding_duration == 0 ) ? '5 ' .__( "ans", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
+$funding_duration_str_2 = ( $funding_duration == 0 ) ? $campaign->funding_duration_infinite_estimation() . ' ' .__( "ans", 'yproject' ) : $funding_duration. " " .__( "ans", 'yproject' );
 $firstpayment_date = new DateTime( $campaign->first_payment_date() );
 $firstpayment_year = $firstpayment_date->format( 'Y' );
 $estimated_turnover = $campaign->estimated_turnover();
