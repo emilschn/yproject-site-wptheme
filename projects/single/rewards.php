@@ -29,38 +29,53 @@ $estimated_turnover = $campaign->estimated_turnover();
 			<script>
 				// options de configurations : https://www.chartjs.org/docs/latest/charts/line.html
 				const labelsRoyaltiesChart = [
+					0,
 					<?php $index_label = 1; ?>
 					<?php foreach ( $estimated_turnover as $i => $value ): ?>
 						<?php echo $index_label++; ?>,
 					<?php endforeach; ?>
 				];
 				
+				<?php
+				$estimated_turnover_length = count( $estimated_turnover ) + 1;
+				$amount_to_consider = max( $campaign->minimum_goal(), $campaign->current_amount( FALSE ) );
+				$turnover_to_reach_investment = ceil( $amount_to_consider / $campaign->roi_percent_estimated() * 100 );
+				$turnover_to_reach_maximum_profit = 0;
+				if ( $campaign->maximum_profit() != 'infinite' ) {
+					$turnover_to_reach_maximum_profit = ceil( $campaign->maximum_profit_amount() / $campaign->roi_percent_estimated() * 100 );
+				}
+				?>
 				const dataRoyaltiesChart = {
 					labels: labelsRoyaltiesChart,
 					datasets: [
 						// Voir line styling : https://www.chartjs.org/docs/latest/charts/line.html#line-styling
 						{
-							data: Array.apply(null, new Array(8)).map(Number.prototype.valueOf, 6000),
+							data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_investment; ?>),
 							fill: false,
 							radius: 0,
 							backgroundColor: "rgba(0,0,0,0.1)",
 							borderDash: [10, 10]
 						},
+						<?php if ( $turnover_to_reach_maximum_profit > 0 ): ?>
 						{
-							data: Array.apply(null, new Array(8)).map(Number.prototype.valueOf, 15000),
+							data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_maximum_profit; ?>),
 							fill: false,
 							radius: 0,
 							backgroundColor: "rgba(0,0,0,0.1)",
 							borderDash: [10, 10]
 						},
+						<?php endif; ?>
 						{
 							label: '€',
 							fill: true,
 							backgroundColor: 'rgb(179, 218, 225)',
 							borderColor: 'rgb(0, 135, 155)',
 							data: [
+								0,
+								<?php $value_inc = 0; ?>
 								<?php foreach ( $estimated_turnover as $i => $value ): ?>
-									<?php echo $value; ?>,
+									<?php $value_inc += $value; ?>
+									<?php echo $value_inc; ?>,
 								<?php endforeach; ?>
 							],
 						}
