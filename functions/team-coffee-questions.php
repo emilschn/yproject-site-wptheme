@@ -36,6 +36,8 @@ class WDGCoffeeMachine {
 		'un souvenir de jeunesse',
 		'une bêtise',
 		'un rêve',
+		'un jeu',
+		'un animal',
 	);
 
 	private static $list_actions = array(
@@ -53,6 +55,10 @@ class WDGCoffeeMachine {
 		'qui vous émeut',
 		'qui vous questionne',
 		'qui vous dégoute',
+		'qui vous inspire',
+		'de votre région ou ville natale',
+		'que tout le monde aime mais pas vous',
+		'que tout le monde déteste mais que vous adorez',
 	);
 
 	private static function send($message) {
