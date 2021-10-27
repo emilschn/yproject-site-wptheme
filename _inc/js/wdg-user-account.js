@@ -27,6 +27,10 @@ UserAccountDashboard.prototype.initMenu = function () {
 	$('ul.nav-menu li a').each(function () {
 		$(this).click(function () {
 			self.switchTab($(this).data('tab'), this);
+			if ($('nav').hasClass('visible')) {
+				$('nav').removeClass('visible');
+				$('nav button#swap-menu').html('&gt;');
+			}
 		});
 	});
 	$('a.go-to-tab').each(function () {

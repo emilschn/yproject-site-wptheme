@@ -78,6 +78,11 @@ body.template-mon-compte div#container div#content .db-form.v3 {
 	max-width: 600px;
 	margin: 0px auto;
 }
+@media screen and (max-width: 500px) {
+	body.template-mon-compte div#container div#content .db-form.v3 {
+		padding: 30px 10px;
+	}
+}
 body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview {
 	background: #FFFFFF;
 	padding: 16px;
@@ -504,6 +509,20 @@ body.template-mon-compte div#container div#content div.subscription-item .button
 }
 body.template-mon-compte div#container div#content div.subscription-item .button-options a.button {
 	padding: 20px 40px;
+}
+@media screen and (max-width: 500px) {
+	body.template-mon-compte div#container div#content div.subscription-item .button-options a.button {
+		display: inline-block;
+		padding: 20px 10px;
+		max-width: 100%;
+	}
+
+	body.template-mon-compte div#container div#content a.button.add-subscription {
+		height: auto;
+		padding: 20px 0px;
+		white-space: normal;
+		line-height: normal;
+	}
 }
 
 

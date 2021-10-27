@@ -470,7 +470,7 @@ form span.file-description {
     cursor: initial;
 }
 
-.db-form, .add-subscription {
+.db-form {
     padding: 50px;
 }
 

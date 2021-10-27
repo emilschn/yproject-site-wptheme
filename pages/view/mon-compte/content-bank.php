@@ -90,9 +90,11 @@ if ( $page_controler->is_iban_validated() ): ?>
 		$current_file_bank = $current_filelist_bank[0];
 		$bank_file_path = ( empty( $current_file_bank ) ) ? '' : $current_file_bank->get_public_filepath();
 		?>
+		<?php if ( !empty( $bank_file_path ) ): ?>
 		<div class="align-center">
 			<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( 'common.PREVIEW', 'yproject' ); ?></a>
 		</div>
+		<?php endif; ?>
 
 		<br><br>
 		<div class="align-center">
@@ -154,9 +156,39 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 	$current_file_bank = $current_filelist_bank[0];
 	$bank_file_path = ( empty( $current_file_bank ) ) ? '' : $current_file_bank->get_public_filepath();
 	?>
-	<div class="align-center">
-		<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( 'common.PREVIEW', 'yproject' ); ?></a>
-	</div>
+	<?php if ( !empty( $bank_file_path ) ): ?>
+		<div class="align-center">
+			<a href="<?php echo $bank_file_path; ?>" target="_blank"><?php _e( 'common.PREVIEW', 'yproject' ); ?></a>
+		</div>
+	<?php else: ?>
+		<form method="POST" enctype="multipart/form-data" class="db-form v3 full">
+			<?php foreach ( $fields_hidden as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
+				<?php foreach ( $form_feedback[ 'errors' ] as $error ): ?>
+					<div class="wdg-message error">
+						<?php echo $error[ 'text' ]; ?>
+					</div>
+				<?php endforeach; ?>
+			<?php endif; ?>
+
+			<?php foreach ( $fields_file as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+
+			<p class="align-left">
+				* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
+			</p>
+
+			<div id="user-bank-form-buttons">
+				<button type="submit" class="button save red"><?php _e( 'common.SAVE', 'yproject' ); ?></button>
+			</div>
+		</form>
+	<?php endif; ?>
 	
 
 <?php else: ?>

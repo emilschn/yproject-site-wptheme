@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-20 11:42+0200\n"
+"PO-Revision-Date: 2021-10-27 13:50+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1817,7 +1817,7 @@ msgstr "RIB"
 
 # ############################## form - user-subscription ################################
 msgid "form.subscription.MODALITY"
-msgstr "I want to invest automatically..."
+msgstr "Every quarter, I want to invest automatically..."
 
 msgid "form.subscription.MODALITY_ALL_ROYALTIES"
 msgstr "the entirety of my wallet"
@@ -1853,7 +1853,7 @@ msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
 msgstr "You cancelled your subscription"
 
 msgid "form.user-contract-subscription.ALL_ROYALTIES"
-msgstr "the entirety of my e-wallet (if the amount available is at least equal to €10)."
+msgstr "the entirety of my e-wallet (if the available amount is at least equal to 10 €)."
 
 msgid "form.user-contract-subscription.PART_ROYALTIES"
 msgstr "%s € from my e-wallet (if available)."
@@ -1862,10 +1862,10 @@ msgid "form.user-contract-subscription.MODALITY"
 msgstr "quarters"
 
 msgid "form.user-contract-subscription.notification.ALL_ROYALTIES"
-msgstr "l'intégralité de votre porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)"
+msgstr "the entirety of your e-wallet (if the available amount is at least equal to 10 €)"
 
 msgid "form.user-contract-subscription.notification.PART_ROYALTIES"
-msgstr "%s € (si le montant est disponible)"
+msgstr "%s € (if the amount is available)"
 
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"

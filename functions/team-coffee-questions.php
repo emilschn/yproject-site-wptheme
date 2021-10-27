@@ -31,6 +31,13 @@ class WDGCoffeeMachine {
 		'une personne de votre entourage',
 		'un dessin animé',
 		'une chanteuse ou un chanteur',
+		'un collègue',
+		'un souvenir d’enfance',
+		'un souvenir de jeunesse',
+		'une bêtise',
+		'un rêve',
+		'un jeu',
+		'un animal',
 	);
 
 	private static $list_actions = array(
@@ -44,6 +51,14 @@ class WDGCoffeeMachine {
 		'qui vous file la pêche',
 		'que vous voulez faire découvrir à %s',
 		'qui ne plairait pas à %s',
+		'qui vous rend dingue',
+		'qui vous émeut',
+		'qui vous questionne',
+		'qui vous dégoute',
+		'qui vous inspire',
+		'de votre région ou ville natale',
+		'que tout le monde aime mais pas vous',
+		'que tout le monde déteste mais que vous adorez',
 	);
 
 	private static function send($message) {
