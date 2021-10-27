@@ -1812,7 +1812,7 @@ msgstr "RIB"
 
 # ############################## form - user-subscription ################################
 msgid "form.subscription.MODALITY"
-msgstr "Je souhaite investir automatiquement..."
+msgstr "Tous les trimestres, je souhaite investir automatiquement..."
 
 msgid "form.subscription.MODALITY_ALL_ROYALTIES"
 msgstr "l'intégralité de mon porte-monnaie"
