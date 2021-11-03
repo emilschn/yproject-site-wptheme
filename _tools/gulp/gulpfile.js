@@ -3,7 +3,6 @@ var gulp = require( 'gulp' );
 var plugins = require( 'gulp-load-plugins' )();
 var concat = require( 'gulp-concat' );
 const terser = require('gulp-terser');
-// var uglify = require( 'gulp-uglifyes' );
 
 // Variables de chemins
 var source = '../../'; // (=> yproject)

@@ -70,7 +70,6 @@
 		}
 	?>
 	<?php if ( !empty( $wdg_current_field[ 'value' ]) && !empty( $list_select) ): ?>
-		<!-- on fait apparaitre le select et cette phrase dans tous les cas où seulement si le fichier n'est pas validé par LW -->
 		<?php _e( 'forms.file.REPLACE_SENT_FILE', 'yproject' ); ?><br>
 		<select id="select-<?php echo $wdg_current_field[ 'name' ]; ?>" name="select-<?php echo $wdg_current_field[ 'name' ]; ?>">
 			<option value="undefined" <?php selected( "undefined", $api_type ); ?>><?php _e( 'lemonway.document.type.UNDEFINED', 'yproject' ); ?></option>
