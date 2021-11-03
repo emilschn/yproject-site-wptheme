@@ -117,7 +117,7 @@ UserAccountDashboard.prototype.initMenu = function () {
 				$('#loaded-iban-' + user_id + ' span.reload-bank-owner').html(parsedResults['holder']);
 				$('#loaded-iban-' + user_id + ' span.reload-bank-iban').html(parsedResults['iban']);
 				$('#loaded-iban-' + user_id + ' span.reload-bank-bic').html(parsedResults['bic']);
-				if (parsedResults['backup']['lemonway_id'] != undefined && parsedResults['backup']['lemonway_id'] != '') {
+				if (parsedResults['backup'] != undefined && parsedResults['backup']['lemonway_id'] != undefined && parsedResults['backup']['lemonway_id'] != '') {
 					$('#loaded-iban-' + user_id + ' span.reload-bank-lwid-container').show();
 					$('#loaded-iban-' + user_id + ' span.reload-bank-lwid').html(parsedResults['backup']['lemonway_id']);
 				}
