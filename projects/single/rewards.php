@@ -23,119 +23,6 @@ $estimated_turnover = $campaign->estimated_turnover();
     
 	<div class="project-rewards-content">
 
-		<div style="position: relative; height:300px; width:500px; margin: auto;">
-			<canvas id="calculateurRoyalties"></canvas>
-
-			<script>
-				// options de configurations : https://www.chartjs.org/docs/latest/charts/line.html
-				const labelsRoyaltiesChart = [
-					0,
-					<?php $index_label = 1; ?>
-					<?php foreach ( $estimated_turnover as $i => $value ): ?>
-						<?php echo $index_label++; ?>,
-					<?php endforeach; ?>
-				];
-				
-				<?php
-				$estimated_turnover_length = count( $estimated_turnover ) + 1;
-				$amount_to_consider = max( $campaign->minimum_goal(), $campaign->current_amount( FALSE ) );
-				$turnover_to_reach_investment = ceil( $amount_to_consider / $campaign->roi_percent_estimated() * 100 );
-				$turnover_to_reach_maximum_profit = 0;
-				if ( $campaign->maximum_profit() != 'infinite' ) {
-					$turnover_to_reach_maximum_profit = ceil( $campaign->maximum_profit_amount() / $campaign->roi_percent_estimated() * 100 );
-				}
-				?>
-				const dataRoyaltiesChart = {
-					labels: labelsRoyaltiesChart,
-					datasets: [
-						// Voir line styling : https://www.chartjs.org/docs/latest/charts/line.html#line-styling
-						{
-							data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_investment; ?>),
-							fill: false,
-							radius: 0,
-							backgroundColor: "rgba(0,0,0,0.1)",
-							borderDash: [10, 10]
-						},
-						<?php if ( $turnover_to_reach_maximum_profit > 0 ): ?>
-						{
-							data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_maximum_profit; ?>),
-							fill: false,
-							radius: 0,
-							backgroundColor: "rgba(0,0,0,0.1)",
-							borderDash: [10, 10]
-						},
-						<?php endif; ?>
-						{
-							label: '€',
-							fill: true,
-							backgroundColor: 'rgb(179, 218, 225)',
-							borderColor: 'rgb(0, 135, 155)',
-							data: [
-								0,
-								<?php $value_inc = 0; ?>
-								<?php foreach ( $estimated_turnover as $i => $value ): ?>
-									<?php $value_inc += $value; ?>
-									<?php echo $value_inc; ?>,
-								<?php endforeach; ?>
-							],
-						}
-					]
-				};
-				const configRoyaltiesChart = {
-					type: 'line',
-					data: dataRoyaltiesChart,
-					options: {
-						// Supprimer les points ?
-						pointRadius: 0,
-						scales: {
-							x: {
-								display: true,
-								title: {
-									display: true,
-									text: 'Années',
-								},
-								grid: {
-									// Masque la grille du fond
-									display: false
-								}
-							},
-							y: {
-								display: true,
-								title: {
-									display: true,
-									text: '€'
-								},
-								ticks: {
-									// Ne pas afficher les chiffres en légende horizontale
-									display: false
-								},
-								grid: {
-									// Masque la grille du fond
-									display: false
-								}
-							}
-						},
-						plugins: {
-							legend: {
-								display: false,
-							},
-							// Pas réussi à le faire fonctionner : placer la légende en haut de l'écran
-							title: {
-								position: 'top',
-								align: 'end'
-							}
-						}
-					}
-				};
-
-				var royaltiesChart = new Chart(
-					document.getElementById('calculateurRoyalties'),
-					configRoyaltiesChart
-				);
-			</script>
-		</div>
-
-		
 		<?php // CAPITAL // ?>
 		<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			<div class="left">
@@ -218,6 +105,131 @@ $estimated_turnover = $campaign->estimated_turnover();
 							<?php endif; ?>
 						</div>
 					</div>
+
+					<div class="calculateurRoyaltiesContainer" style="position: relative; height:auto; width:90%; margin: auto;">
+						<canvas id="calculateurRoyalties"></canvas>
+					</div>
+
+				<script>
+					// options de configurations : https://www.chartjs.org/docs/latest/charts/line.html
+					const labelsRoyaltiesChart = [
+						0,
+						<?php $index_label = 1; ?>
+						<?php foreach ( $estimated_turnover as $i => $value ): ?>
+							<?php echo $index_label++; ?>,
+						<?php endforeach; ?>
+					];
+				
+					<?php
+					$estimated_turnover_length = count( $estimated_turnover ) + 1;
+					$amount_to_consider = max( $campaign->minimum_goal(), $campaign->current_amount( FALSE ) );
+					$turnover_to_reach_investment = ceil( $amount_to_consider / $campaign->roi_percent_estimated() * 100 );
+					$turnover_to_reach_maximum_profit = 0;
+					if ( $campaign->maximum_profit() != 'infinite' ) {
+						$turnover_to_reach_maximum_profit = ceil( $campaign->maximum_profit_amount() / $campaign->roi_percent_estimated() * 100 );
+					}
+					?>
+					const dataRoyaltiesChart = {
+						labels: labelsRoyaltiesChart,
+						datasets: [
+							// Voir line styling : https://www.chartjs.org/docs/latest/charts/line.html#line-styling
+							{
+								data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_investment; ?>),
+								fill: false,
+								radius: 0,
+								borderColor: "rgba(0,0,0,0.1)",
+								borderDash: [6, 3],
+								borderWidth: 2,
+								label: 'Montant investi',
+							},
+							<?php // if ( $turnover_to_reach_maximum_profit > 0 ): ?>
+							{
+								data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_maximum_profit; ?>),
+								fill: false,
+								radius: 0,
+								borderColor: "rgba(51,51,51,1)",
+								borderDash: [6, 3],
+								borderWidth: 1,
+								label: 'Retour sur investissement maximum'
+							},
+							<?php // endif; ?>
+							{
+								label: '€',
+								fill: true,
+								backgroundColor: 'rgb(179, 218, 225)',
+								borderColor: 'rgb(0, 135, 155)',
+								pointBackgroundColor: 'rgba(0,135,155,1)',
+								data: [
+									0,
+									<?php $value_inc = 0; ?>
+									<?php foreach ( $estimated_turnover as $i => $value ): ?>
+										<?php $value_inc += $value; ?>
+										<?php echo $value_inc; ?>,
+									<?php endforeach; ?>
+								],
+							}
+						]
+					};
+					const configRoyaltiesChart = {
+						type: 'line',
+						data: dataRoyaltiesChart,
+						options: {
+							// Supprimer les points ?
+							// pointRadius: 0,
+							responsive: true,
+							maintainAspectRatio: true,
+							scales: {
+								x: {
+									display: true,
+									title: {
+										display: true,
+										text: 'Années',
+									},
+									grid: {
+										// Masque la grille du fond
+										display: false
+									}
+								},
+								y: {
+									display: true,
+									title: {
+										display: true,
+										text: '€'
+									},
+									ticks: {
+										// Ne pas afficher les chiffres en légende horizontale
+										display: false
+									},
+									grid: {
+										// Masque la grille du fond
+										display: false
+									}
+								}
+							},
+							plugins: {
+								legend: {
+									display: true,
+									position: 'bottom',
+									labels: {
+   										boxHeight: 1,
+										boxWidth: 25,
+										padding: 25,
+									}
+								},
+								// Pas réussi à le faire fonctionner : placer la légende en haut de l'écran
+								title: {
+									position: 'top',
+									align: 'end'
+								}
+							}
+						}
+					};
+
+					var royaltiesChart = new Chart(
+						document.getElementById('calculateurRoyalties'),
+						configRoyaltiesChart
+					);
+				</script>
 
 					<?php if ( count( $estimated_turnover ) > 0 ): ?>
 						<div class="margin-bottom">
