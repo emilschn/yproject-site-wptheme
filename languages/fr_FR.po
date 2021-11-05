@@ -1014,6 +1014,9 @@ msgstr "Compte bancaire de destination"
 msgid "account.wallet.LOAD_VIBAN"
 msgstr "Obtenir les coordonn&eacute;es bancaires de destination"
 
+msgid "account.wallet.LOAD_VIBAN_ALERT"
+msgstr "En cliquant sur ce bouton, vous attribuez un compte bancaire virtuel (RIB) à votre porte-monnaie électronique. Cette opération est utile si vous souhaitez alimenter votre porte-monnaie électronique par virement bancaire. Souhaitez-vous continuer ?"
+
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Virer vers mon compte bancaire"
 

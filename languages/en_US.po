@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-15 11:55+0200\n"
+"PO-Revision-Date: 2021-11-05 12:29+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -1008,16 +1008,19 @@ msgid "account.wallet.SEND_MONEY_TO_WALLET_WARNINGS"
 msgstr "Warning:"
 
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME"
-msgstr "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom."
+msgstr "The bank transfer should be executed from a bank account in your name."
 
 msgid "account.wallet.SEND_MONEY_TO_WALLET_IBAN_CHANGED"
-msgstr "Les coordonn&eacute;es bancaires ont chang&eacute; depuis janvier 2021."
+msgstr "Bank details have changed since january 2021."
 
 msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
 msgstr "Recipient bank account"
 
 msgid "account.wallet.LOAD_VIBAN"
 msgstr "Get the bank account details"
+
+msgid "account.wallet.LOAD_VIBAN_ALERT"
+msgstr "By clicking this button, you assign a virtual bank account (iban) to your wallet. This operation is useful if you wish to transfer money to your wallet through a bank transfer. Would you like to continue?"
 
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Transfer to my bank account"
@@ -1026,7 +1029,7 @@ msgid "account.wallet.RIB_AWAITING_VALIDATION"
 msgstr "Our payment provider is analyzing your RIB. Please come back in 48h to make sure of its validation."
 
 msgid "account.wallet.RIB_REJECTED"
-msgstr "Your Bank details have been rejected by our payment provider."
+msgstr "Your bank details have been rejected by our payment provider."
 
 msgid "account.wallet.INPUT_YOUR_BANK_ACCOUNT_DETAILS"
 msgstr "Please type in your bank account details to transfer your royalties."
