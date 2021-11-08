@@ -22,41 +22,32 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			$input_force_daily_call = filter_input( INPUT_GET, 'force_daily_call' );
 			$input_force_clean_sms_lists = filter_input( INPUT_GET, 'clean_sms_lists' );
 			$input_force_daily_notifications = filter_input( INPUT_GET, 'force_daily_notifications' );
+			$input_init_quarterly_subscriptions = filter_input( INPUT_GET, 'init_quarterly_subscriptions' );
 
 			if ( !empty( $input_queue ) && $input_queue == '1' ) {
 				$nb_done = WDGQueue::execute_next( 10 );
 				exit( $nb_done . ' queued actions executed.' );
-			} else {
-				if ( !empty( $input_rss ) && $input_rss == '1' ) {
-					$input_campaign = filter_input( INPUT_GET, 'campaign' );
-					if ( !empty( $input_campaign ) ) {
-						WDGCronActions::make_campaign_xml( $input_campaign );
-					} else {
-						WDGCronActions::make_projects_rss();
-					}
+			} else if ( !empty( $input_rss ) && $input_rss == '1' ) {
+				$input_campaign = filter_input( INPUT_GET, 'campaign' );
+				if ( !empty( $input_campaign ) ) {
+					WDGCronActions::make_campaign_xml( $input_campaign );
 				} else {
-					if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
-						WDGCronActions::make_projects_rss( FALSE );
-					} else {
-						if ( !empty( $input_force_summary_call ) && $input_force_summary_call == '1' ) {
-							$this->summary_call();
-						} else {
-							if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
-								$this->daily_call();
-							} else {
-								if ( !empty( $input_force_clean_sms_lists ) && $input_force_clean_sms_lists == '1' ) {
-									$this->clean_sms_lists();
-								} else {
-									if ( !empty( $input_force_daily_notifications ) && $input_force_daily_notifications == '1' ) {
-										WDGCronActions::send_notifications();
-									} else {
-										$this->hourly_call();
-									}
-								}
-							}
-						}
-					}
+					WDGCronActions::make_projects_rss();
 				}
+			} else if ( !empty( $input_make_finished_xml ) && $input_make_finished_xml == '1' ) {
+				WDGCronActions::make_projects_rss( FALSE );
+			} else if ( !empty( $input_force_summary_call ) && $input_force_summary_call == '1' ) {
+				$this->summary_call();
+			} else if ( !empty( $input_force_daily_call ) && $input_force_daily_call == '1' ) {
+				$this->daily_call();
+			} else if ( !empty( $input_force_clean_sms_lists ) && $input_force_clean_sms_lists == '1' ) {
+				$this->clean_sms_lists();
+			} else if ( !empty( $input_force_daily_notifications ) && $input_force_daily_notifications == '1' ) {
+				WDGCronActions::send_notifications();
+			} else if ( !empty( $input_init_quarterly_subscriptions ) && $input_init_quarterly_subscriptions == '1' ) {
+				WDGCronActions::init_quarterly_subscriptions();
+			} else {
+				$this->hourly_call();
 			}
 			exit();
 		}
