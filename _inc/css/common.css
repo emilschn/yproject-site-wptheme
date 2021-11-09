@@ -612,10 +612,6 @@ nav#main div#menu .wpml-ls {
 	display: inline-block;
 }
 
-.submenu-style{
-    background-color: #FFFFFF; 
-    border: 4px solid #E1E3E2;
-}
 .submenu-style ul.submenu-list {
 	max-height: 400px;
 	overflow-y: auto;
@@ -624,20 +620,30 @@ nav#main div#menu .wpml-ls {
 	list-style: none;
 	font-size: 10pt;
 	text-transform: uppercase;
-	border-top: 2px solid #E1E3E2;
+	width: 200px;
+	background-color: #fff;
 }
-.submenu-style ul.submenu-list li a {
+nav#main > div#menu .submenu-style ul.submenu-list li a {
 	display: block;
 	color: #333333;
+	height: auto;
+	line-height: 20px;
 	padding: 10px 10px;
 	border-bottom: 2px solid #E1E3E2;
 }
-.submenu-style ul.submenu-list li a:hover {
-	background: #E1E3E2;
+nav#main > div#menu .submenu-style ul.submenu-list li a:hover {
+	background: #ebebeb; 
 }
 .submenu-style .empty-list-info {
 	text-transform: none;
-	padding: 8px;
+	padding: 10px;
+}
+
+nav#main > div#menu .submenu-style .empty-list-info a {
+	text-transform: none;
+	color: #EA4F51;
+	padding-left: 0;
+	margin-left: 0;
 }
 
 /* LANGUE */
@@ -668,39 +674,30 @@ nav#main div#menu a#btn-search {
 nav#main div#menu a#btn-search img {
     vertical-align:  middle;
 }
-nav#main div#menu a#btn-search.active {
+/* nav#main div#menu a#btn-search.active {
 	position: relative;
 	height: 60px;
 	margin: -10px -10px -10px 0px;
 	padding: 0px 15px;
     background-color: #E1E3E2;
-}
-nav#main div#menu a#btn-search.active img {
+} */
+/* nav#main div#menu a#btn-search.active img {
 	margin-top: 20px;
 	margin-right: 2px;
-}
+} */
 
 #submenu-search {
-	position: absolute;
-	top: 60px;
-	right: 75px;
-	width: -webkit-calc(62px + (100% - 1280px) / 2);
-	width: -moz-calc(62px + (100% - 1280px) / 2);
-	width: 285px;
+	order: -1;
 	font-size: 8pt;
 	text-align: left;
 }
 #submenu-search-input {
-	border: 0px;
-	background: #E1E3E2;
-	margin: 10px;
-	width: -webkit-calc(100% - 50px);
-	width: -moz-calc(100% - 50px);
-	width: calc(100% - 50px);
-	height: -webkit-calc(100% - 50px);
-	height: -moz-calc(100% - 50px);
-	height: calc(100% - 50px);
-	padding: 15px;
+	border: 0;
+	border-bottom: 3px solid #00879B;
+	padding: 10px;
+}
+#submenu-search-input:focus {
+	outline: none;
 }
 /*Pour éviter backgroung yellow quand champ prérempli sur chrome*/
 input:-webkit-autofill {
@@ -879,7 +876,7 @@ ul.project-list a.needs-authentication:after {
 }
 @media screen and (min-width: 1301px) {
 	#submenu-user { position: relative; top: 10px; left: 977px; }
-	#submenu-search { position: relative; top: 10px; left: 912px; }
+	/* #submenu-search { position: relative; top: 10px; left: 912px; } */
 }
 @media screen and (max-width: 1020px) and (min-width: 998px) {
 	nav#main > div#menu > a:nth-child(3) { display: none; }
