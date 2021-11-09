@@ -14,7 +14,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 
 <h2><?php _e( 'account.wallet.TITLE', 'yproject' ); ?></h2>
 
-<div class="db-form v3 align-left"  id="item-body-wallet">
+<div class="db-form v3 align-left">
 
 	<div class="wallet-preview">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-invest/picto-porte-monnaie.png" alt="porte-monnaie" width="100" height="69">
@@ -53,7 +53,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 		</p>
 
 		<div class="align-center" id="button-load-viban-<?php echo $WDGUser_displayed->get_wpref(); ?>">
-			<button type="button" class="button blue button-load-viban" data-iban-user="<?php echo $WDGUser_displayed->get_wpref(); ?>"><?php _e( 'account.wallet.LOAD_VIBAN', 'yproject' ); ?></button>
+			<button type="button" class="button blue button-load-viban" data-iban-user="<?php echo $WDGUser_displayed->get_wpref(); ?>" data-alert="<?php _e( 'account.wallet.LOAD_VIBAN_ALERT', 'yproject' ); ?>"><?php _e( 'account.wallet.LOAD_VIBAN', 'yproject' ); ?></button>
 			<br><br>
 			<img id="ajax-viban-loader-<?php echo $WDGUser_displayed->get_wpref(); ?>" class="hidden" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement">
 		</div>

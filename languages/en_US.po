@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-15 11:55+0200\n"
+"PO-Revision-Date: 2021-11-08 16:29+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -536,6 +536,9 @@ msgstr "My wallet"
 msgid "account.menu.MY_INVESTMENTS"
 msgstr "My investments"
 
+msgid "account.menu.MY_SUBSCRIPTIONS"
+msgstr "My subscriptions"
+
 msgid "account.menu.MY_DOCUMENTS"
 msgstr "My documents"
 
@@ -559,6 +562,9 @@ msgstr "Wallet"
 
 msgid "account.menu.organization.INVESTMENTS"
 msgstr "Investments"
+
+msgid "account.menu.organization.SUBSCRIPTIONS"
+msgstr "Subscriptions"
 
 msgid "account.menu.organization.DOCUMENTS"
 msgstr "Documents"
@@ -947,6 +953,63 @@ msgstr "forecast"
 msgid "account.investments.ACCOUNT_AUTHENTICATION"
 msgstr "Authenticate my account"
 
+msgid "account.subscriptions.SUBSCRIPTIONS_OF"
+msgstr "Subscriptions of"
+
+msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
+msgstr "You can reinvest the royalties you receive in Positive Savings projects."
+
+msgid "account.subscriptions.VIEW_INVESTMENTS"
+msgstr "View investments history"
+
+msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
+msgstr "It is without commitment, changeable at any time and automatic."
+
+msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
+msgstr "+ Add new subscription"
+
+msgid "account.subscriptions.item.I_INVEST"
+msgstr "I'm investing"
+
+msgid "account.subscriptions.item.MODALITY_QUARTER"
+msgstr "each quarter"
+
+msgid "account.subscriptions.item.IN_THE_THEMATIC"
+msgstr "in the thematic"
+
+msgid "account.subscriptions.item.INVESTMENT_CONDITION"
+msgstr "If the amount in your wallet is enough at the date of the payment."
+
+msgid "account.subscriptions.item.INACTIVE_STATUS"
+msgstr "Inactive subscription"
+
+msgid "account.subscriptions.item.NEXT_PAYMENT"
+msgstr "Next payment:"
+
+msgid "account.subscriptions.item.FEBRUARY_1ST"
+msgstr "February 1st"
+
+msgid "account.subscriptions.item.MAY_1ST"
+msgstr "May 1st"
+
+msgid "account.subscriptions.item.AUGUST_1ST"
+msgstr "August 1st"
+
+msgid "account.subscriptions.item.NOVEMBER_1ST"
+msgstr "November 1st"
+
+msgid "account.subscriptions.item.CONTRACT_RECEPTION"
+msgstr "With each payment, I will automatically receive an investment contract by e-mail, which will also be available in the list of my investments."
+
+msgid "account.subscriptions.item.ACCESS_CONTRACT_TYPE"
+msgstr "Access the model contract"
+
+msgid "account.subscriptions.item.END_THE_SUBSCRIPTION"
+msgstr "End the subscription"
+
+msgid "account.subscriptions.item.ARE_YOU_SURE_TO_DELETE"
+msgstr "Are you sure that you want to end this subscription?"
+
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
 
@@ -1008,16 +1071,19 @@ msgid "account.wallet.SEND_MONEY_TO_WALLET_WARNINGS"
 msgstr "Warning:"
 
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME"
-msgstr "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom."
+msgstr "The bank transfer should be executed from a bank account in your name."
 
 msgid "account.wallet.SEND_MONEY_TO_WALLET_IBAN_CHANGED"
-msgstr "Les coordonn&eacute;es bancaires ont chang&eacute; depuis janvier 2021."
+msgstr "Bank details have changed since january 2021."
 
 msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
 msgstr "Recipient bank account"
 
 msgid "account.wallet.LOAD_VIBAN"
 msgstr "Get the bank account details"
+
+msgid "account.wallet.LOAD_VIBAN_ALERT"
+msgstr "By clicking this button, you assign a virtual bank account (iban) to your wallet. This operation is useful if you wish to transfer money to your wallet through a bank transfer. Would you like to continue?"
 
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Transfer to my bank account"
@@ -1026,7 +1092,7 @@ msgid "account.wallet.RIB_AWAITING_VALIDATION"
 msgstr "Our payment provider is analyzing your RIB. Please come back in 48h to make sure of its validation."
 
 msgid "account.wallet.RIB_REJECTED"
-msgstr "Your Bank details have been rejected by our payment provider."
+msgstr "Your bank details have been rejected by our payment provider."
 
 msgid "account.wallet.INPUT_YOUR_BANK_ACCOUNT_DETAILS"
 msgstr "Please type in your bank account details to transfer your royalties."
@@ -1751,6 +1817,58 @@ msgstr "BIC"
 
 msgid "form.user-bank.RIB"
 msgstr "RIB"
+
+# ############################## form - user-subscription ################################
+msgid "form.subscription.MODALITY"
+msgstr "Every quarter, I want to invest automatically..."
+
+msgid "form.subscription.MODALITY_ALL_ROYALTIES"
+msgstr "the entirety of my wallet"
+
+msgid "form.subscription.MODALITY_FIXED_AMOUNT"
+msgstr "a fixed amount"
+
+msgid "form.subscription.AMOUNT"
+msgstr "Amount"
+
+msgid "form.subscription.AMOUNT_DESCRIPTION"
+msgstr "The amount must be an integer superior to 10 €."
+
+msgid "form.subscription.PROJECT"
+msgstr "In the thematic ..."
+
+msgid "form.subscription.SUCCESS"
+msgstr "Your subscription has successfully been registered."
+
+msgid "form.subscription.error.AMOUNT_MINIMUM"
+msgstr "The minimum valid amount is 10€"
+
+msgid "form.subscription.description.AMOUNT_MINIMUM"
+msgstr "The amount must be a whole number greater than 10€."
+
+msgid "invest.contract.VALIDATE_SUBSCRIPTION"
+msgstr "Validate the subscription"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_ERROR"
+msgstr "An error occurred when saving your subscription"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
+msgstr "You cancelled your subscription"
+
+msgid "form.user-contract-subscription.ALL_ROYALTIES"
+msgstr "the entirety of my e-wallet (if the available amount is at least equal to 10 €)."
+
+msgid "form.user-contract-subscription.PART_ROYALTIES"
+msgstr "%s € from my e-wallet (if available)."
+
+msgid "form.user-contract-subscription.MODALITY"
+msgstr "quarters"
+
+msgid "form.user-contract-subscription.notification.ALL_ROYALTIES"
+msgstr "the entirety of your e-wallet (if the available amount is at least equal to 10 €)"
+
+msgid "form.user-contract-subscription.notification.PART_ROYALTIES"
+msgstr "%s € (if the amount is available)"
 
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"
