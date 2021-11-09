@@ -92,7 +92,7 @@ var WDGProjectViewer = (function ($) {
 			$("button.init_invest_count").click(function (e) {
 				e.preventDefault();
 			});
-			$("input#init_invest").change(function () {
+			$("input#init_invest").on('input', function () {
 				if ($(".project-rewards-padder div.hidden").length > 0) {
 					$(".project-rewards-padder div.hidden").show();
 
@@ -178,7 +178,18 @@ var WDGProjectViewer = (function ($) {
 							var amountOfTORound = Math.round(amountOfTO * 100) / 100;
 							var amountOfTORoundStr = amountOfTORound.toString().replace('.', ',');
 							$("span.roi_amount_user" + index).html(amountOfTORoundStr + '&nbsp;&euro;');
+
+							royaltiesChart.data.datasets[2].data[index + 1] = amountOfGoal;
 						});
+
+						// Mise à jour des charts
+						var inputValMax = $('#roi_maximum_profit').val() * inputVal;
+						var dataLength = royaltiesChart.data.datasets[0].data.length;
+						for (var iData = 0; iData < dataLength; iData++) {
+							royaltiesChart.data.datasets[0].data[iData] = inputVal;
+							royaltiesChart.data.datasets[1].data[iData] = inputValMax;
+						}
+						royaltiesChart.update();
 
 						if (needHeightRefresh) {
 							maxRoiRemaining = maxRoi;
