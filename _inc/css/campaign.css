@@ -597,6 +597,7 @@ div#content.version-3 div.project-rewards-content {
 }
 div#content.version-3 div.project-rewards-content .db-form {
 	text-align: left;
+	padding: 20px;
 }
 div#content.version-3 div.project-rewards-content .db-form .field-container {
 	white-space: normal;
@@ -682,6 +683,12 @@ div#content.version-3 div.project-rewards-content ul li span {
 	color: #93626D;
 }
 
+div#content.version-3 div.project-rewards-content .calculateurRoyaltiesContainer {
+	min-height: 300px;
+}
+div#content.version-3 div.project-rewards-content .align-left, div#content.version-3 div.project-rewards-content .button {
+	margin-top: 30px;
+}
 /*******************************************************************************
 * DESCRIPTION
 *******************************************************************************/
@@ -1077,7 +1084,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-pitch div.project-pitch-title { display: none; }
 	div#content.version-3 div.project-pitch div.project-pitch-text { margin: 5px 1%; width: 98%; height: auto; }
 	div#content.version-3 div.project-pitch div.project-pitch-video { margin: 5px 1%; width: 98%; }
-	div#content.version-3 div.project-rewards-content { width: 98%; margin: 0% auto; padding-top: 0px; }
+	div#content.version-3 div.project-rewards-content { width: auto; margin: 0% auto; padding-top: 0px; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder { width: 100%; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder p { width: 100%; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div { float: none; }
@@ -1085,6 +1092,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div:first-child img { width: 50px; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder button.init_invest_count { display: block; margin: 7px auto; }
 	div#content.version-3 div.project-rewards-content table tr td { min-width: 40px; padding: 0px 3px; }
+	div#content.version-3 div.project-rewards-content .calculateurRoyaltiesContainer { min-height: 300px; }
 	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 80px 2% 0px 2%; }
 	/*div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { top: -60px; }*/
 	div#content.version-3 div.project-description div.project-description-item img.grey-triangle { display: none; }
@@ -1121,7 +1129,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 * RESPONSIVE MOBILE
 *******************************************************************************/
 @media screen and (max-width: 400px) {
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: 98% !important; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: auto !important; }
 	div#content.version-3 div.project-description { padding-bottom: 0px; background-color: #FFFFFF; }
 	div#content.version-3 div.project-description div.project-description-item { margin: 25px 2%; }
 	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 34%; top: -45px; border-radius: 0% 0% 100% 100%; }
