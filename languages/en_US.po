@@ -154,7 +154,7 @@ msgstr "Financing of projects in equity and without dilution of capital in"
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
-msgstr "The projects"
+msgstr "See the projects"
 
 msgid "menu.POSITIVE_SAVINGS"
 msgstr "Positive savings"
@@ -163,7 +163,7 @@ msgid "menu.FUND_PROJECT"
 msgstr "Finance my project"
 
 msgid "menu.INVEST"
-msgstr "Invest in royalties"
+msgstr "Invest in royalties ?"
 
 msgid "menu.VISION"
 msgstr "Vision"

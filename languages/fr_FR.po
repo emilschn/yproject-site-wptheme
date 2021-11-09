@@ -149,7 +149,7 @@ msgstr "Financement de projets en fonds propres et sans dilution du capital dans
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
-msgstr "Les projets"
+msgstr "Voir les projets"
 
 msgid "menu.POSITIVE_SAVINGS"
 msgstr "&Eacute;pargne positive"
@@ -158,7 +158,7 @@ msgid "menu.FUND_PROJECT"
 msgstr "Financer mon projet"
 
 msgid "menu.INVEST"
-msgstr "Investir en royalties"
+msgstr "Investir en royalties ?"
 
 msgid "menu.VISION"
 msgstr "Vision"

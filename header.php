@@ -167,90 +167,94 @@
 		<?php if ( $page_controler->get_header_nav_visible() ): ?>
 		<nav id="main">
 			<div id="menu">
-				<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
-				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="lines"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
-				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>" class="lines"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
-				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>" class="lines"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
-				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>" class="lines"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
-				<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>" class="lines"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
+				<div id="menu-links">
+					<a href="<?php echo home_url(); ?>"><img id="logo_wdg" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/logo-wdg.png" alt="WE DO GOOD" width="178" height="33" /></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="lines"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>" class="lines"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>" class="lines"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
+					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>" class="lines"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
+				</div>
+				
+				<div id="menu-right-items">
+					<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
+				
+					<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+						<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
+						<a href="#" id="btn-switch-lang">
+						<?php foreach ( $active_languages as $language_key => $language_item ): if ( $language_item[ 'active' ] ): ?>
+							<?php echo $language_item[ 'code' ]; ?>
+						<?php endif; endforeach; ?>
+						</a>
+					<?php endif; ?>
 
-				<a href="#" id="btn-search"><img class="search inactive" src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/recherche-icon.png" alt="SEARCH" /></a>
+					<div class="menu-separator-bar"></div>
 				
-				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
-					<?php $active_languages = apply_filters( 'wpml_active_languages', NULL ); ?>
-					<a href="#" id="btn-switch-lang">
-					<?php foreach ( $active_languages as $language_key => $language_item ): if ( $language_item[ 'active' ] ): ?>
-						<?php echo $language_item[ 'code' ]; ?>
-					<?php endif; endforeach; ?>
-					</a>
-				<?php endif; ?>
+					<a href="#" class="btn-user not-connected inactive"><?php _e( 'common.CONNECTION', 'yproject' ); ?></a>
+					<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
 				
-				<a href="#" class="btn-user not-connected inactive"><?php _e( 'common.CONNECTION', 'yproject' ); ?></a>
-				<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
-				
-				<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
-				<?php
-				$url_suffix = '';
-				if ( isset( $_GET[ 'campaign_id' ] ) ) {
-					$url_suffix = '?campaign_id=' . $_GET[ 'campaign_id' ];
-				}
-				?>
-				<div id="submenu-switch-lang" class="submenu-style hidden">
-					<ul class="submenu-list">
-					<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-						<li <?php if ( $language_item[ 'active' ] ) {
-					echo 'class="active"';
-				} ?>><a href="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
-					<?php endforeach; ?>
-					</ul>
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" class="hidden">
-				</div>
-				<?php endif; ?>
-				
-				<?php /* Affichage quand clic sur Rechercher */ ?>
-				<div id="submenu-search" class="submenu-style hidden">
-					<div class="only-inf997">
-						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
-						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
-						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
-						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
-						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
-						<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
-						<?php if ( is_user_logged_in() ): ?>
-							<br>
-							<a href="<?php echo wp_logout_url(); ?>"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
-						<?php endif; ?>
-					</div>
-					
-					<input type="text" id="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
-					<ul class="submenu-list">
-							<div class="empty-list-info hidden">
-								<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
-								<a href="https://support.wedogood.co/lev%C3%A9es-de-fonds-priv%C3%A9es" target="_blank"><?php _e( "En savoir plus.", 'yproject' ); ?></a>
-							</div>
-					</ul>
-				</div>
-				
-				<div id="submenu-user" class="not-connected submenu-style hidden">
-					<div class="menu-loading-init align-center" data-redirect="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>">
-						<br>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
-						<br>
-						<br>
-					</div>
-					
-					<div class="menu-connected hidden">
-						<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
+					<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
+					<?php
+					$url_suffix = '';
+					if ( isset( $_GET[ 'campaign_id' ] ) ) {
+						$url_suffix = '?campaign_id=' . $_GET[ 'campaign_id' ];
+					}
+					?>
+					<div id="submenu-switch-lang" class="submenu-style hidden">
 						<ul class="submenu-list">
-							<li><a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a></li>
+						<?php foreach ( $active_languages as $language_key => $language_item ): ?>
+							<li <?php if ( $language_item[ 'active' ] ) {
+						echo 'class="active"';
+					} ?>><a href="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
+						<?php endforeach; ?>
 						</ul>
-						<div id="button-logout" class="box_connection_buttons red">
-							<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
-						</div>
+						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" class="hidden">
 					</div>
-
-				</div>
+					<?php endif; ?>
 				
+					<?php /* Affichage quand clic sur Rechercher */ ?>
+					<div id="submenu-search" class="submenu-style hidden">
+						<div class="only-inf997">
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
+							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
+							<?php if ( is_user_logged_in() ): ?>
+								<br>
+								<a href="<?php echo wp_logout_url(); ?>"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
+							<?php endif; ?>
+						</div>
+					
+						<input type="text" id="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
+						<ul class="submenu-list">
+								<div class="empty-list-info hidden">
+									<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
+									<a href="https://support.wedogood.co/lev%C3%A9es-de-fonds-priv%C3%A9es" target="_blank"><?php _e( "En savoir plus.", 'yproject' ); ?></a>
+								</div>
+						</ul>
+					</div>
+				
+					<div id="submenu-user" class="not-connected submenu-style hidden">
+						<div class="menu-loading-init align-center" data-redirect="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>">
+							<br>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
+							<br>
+							<br>
+						</div>
+					
+						<div class="menu-connected hidden">
+							<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
+							<ul class="submenu-list">
+								<li><a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a></li>
+							</ul>
+							<div id="button-logout" class="box_connection_buttons red">
+								<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
+							</div>
+						</div>
+
+					</div>
+				</div>
 			</div>
 		</nav>
 		<?php endif; ?>
