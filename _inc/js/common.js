@@ -1083,6 +1083,10 @@ var WDGFormsFunctions = (function ($) {
 		},
 
 		initFileInput: function () {
+			$('.field-file select').on('change', function (e) {
+				var div_add_file = $(this).parent().parent().find('div#add-file');
+				div_add_file.show();
+			});
 			$('.field-file input').on('change', function (e) {
 				var label_element = $(this).next('label');
 				var labelVal = label_element.html();

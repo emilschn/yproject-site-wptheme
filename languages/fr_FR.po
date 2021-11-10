@@ -205,7 +205,7 @@ msgid "footer.SUBSCRIBE_NEWSLETTER"
 msgstr "S'inscrire &agrave; la newsletter"
 
 msgid "footer.MODIFY_COOKIE_CHOICES"
-msgstr "Voir mes paramètres de cookies"
+msgstr "Voir mes param&egrave;tres de cookies"
 
 msgid "footer.REGISTERED_ORIAS"
 msgstr "Immatricul&eacute;e &agrave; l'ORIAS sous le num&eacute;ro"
@@ -221,7 +221,7 @@ msgstr "en savoir plus"
 
 # ############################## ACCUEIL ################################
 msgid "common.ROYALTIZE_DEFINITION"
-msgstr "*ROYALTISER, v. intr. XXIe siècle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""
+msgstr "*ROYALTISER, v. intr. XXIe si&egrave;cle. d'apr. angl. Verser une partie de son chiffre d'affaires à ses merveilleux investisseurs. \"Un projet qui royaltise plus que prévu\""
 
 msgid "common.WEDOGOOD_IS"
 msgstr "WE DO GOOD c'est :"
@@ -807,8 +807,8 @@ msgstr "Ils sont d'abord analys&eacute;s par des services automatiques puis par 
 msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_3"
 msgstr "En cas d'erreur manifeste de l'analyse de vos documents, vous pouvez nous contacter &agrave; l'adresse investir@wedogood.co ou sur le chat en ligne."
 
-msgid "account.identitydocs.orga.FOURTH_PERSON"
-msgstr "Si une quatri&egrave;me personne ou une personne morale d&eacute;tient au moins 25% de votre capital, merci de nous le signaler sur support@wedogood.co."
+msgid "account.identitydocs.orga.LEGAL_ENTITY"
+msgstr "Si une personne morale d&eacute;tient au moins 25% de votre capital, merci de nous le signaler sur support@wedogood.co."
 
 msgid "account.investments.INVESTMENTS_OF"
 msgstr "Investissements de"
@@ -1077,6 +1077,9 @@ msgstr "Compte bancaire de destination"
 msgid "account.wallet.LOAD_VIBAN"
 msgstr "Obtenir les coordonn&eacute;es bancaires de destination"
 
+msgid "account.wallet.LOAD_VIBAN_ALERT"
+msgstr "En cliquant sur ce bouton, vous attribuez un compte bancaire virtuel (RIB) à votre porte-monnaie électronique. Cette opération est utile si vous souhaitez alimenter votre porte-monnaie électronique par virement bancaire. Souhaitez-vous continuer ?"
+
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Virer vers mon compte bancaire"
 
@@ -1334,7 +1337,7 @@ msgid "invest.email.PERSONAL_ACCOUNT"
 msgstr "compte personnel"
 
 msgid "invest.email.THERE_WAS_A_PROBLEM_WITH_CONTRACT_GENERATION"
-msgstr "Il y a eu un problème durant la génération du contrat. Notre équipe en a été informée."
+msgstr "Il y a eu un probl&egrave;me durant la génération du contrat. Notre équipe en a été informée."
 
 msgid "invest.email.BANK_ACCOUNT_SUMMARY_LEMONWAY"
 msgstr "Sur votre relevé de compte bancaire, vous verrez apparaître le libellé Lemonway, le nom de notre prestataire de paiement, dans le détail des opérations."
@@ -1463,13 +1466,13 @@ msgid "invest.mean-payment.WIRE_DETAILS"
 msgstr "Le RIB de notre prestataire sera indiqu&eacute; sur la page suivante, ainsi qu'un code destinataire sp&eacute;cifique &agrave; transmettre imp&eacute;rativement lors du virement."
 
 msgid "invest.mean-payment.CHECK_DETAILS_FRANCE"
-msgstr "Le chèque doit être émis depuis un compte bancaire en France."
+msgstr "Le ch&egrave;que doit être émis depuis un compte bancaire en France."
 
 msgid "invest.mean-payment.CHECK_DETAILS"
-msgstr "Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce chèque."
+msgstr "Pour une comptabilisation plus rapide, munissez-vous d'une photo de ce ch&egrave;que."
 
 msgid "invest.mean-payment.CHECK_DETAILS_PENDING"
-msgstr "Le chèque reste en attente d'encaissement jusqu'à la réussite de la levée de fonds."
+msgstr "Le ch&egrave;que reste en attente d'encaissement jusqu'à la réussite de la levée de fonds."
 
 msgid "invest.mean-payment.PAY"
 msgstr "Payer"
@@ -1499,7 +1502,7 @@ msgid "invest.mean-payment.check-form.LATER_2"
 msgstr "vous pouvez confirmer votre investissement"
 
 msgid "invest.mean-payment.check-form.LATER_3"
-msgstr "et nous envoyer ce chèque &agrave; l'adresse investir@wedogood.co quand ce sera possible."
+msgstr "et nous envoyer ce ch&egrave;que &agrave; l'adresse investir@wedogood.co quand ce sera possible."
 
 msgid "invest.mean-payment.check-form.SEND_LATER"
 msgstr "Confirmer et envoyer plus tard"
@@ -1679,13 +1682,13 @@ msgid "invest.contract.FOR_FIRST_QUARTER"
 msgstr "pour le premier trimestre"
 
 msgid "invest.contract.FOR_SECOND_QUARTER"
-msgstr "pour le deuxième trimestre"
+msgstr "pour le deuxi&egrave;me trimestre"
 
 msgid "invest.contract.FOR_THIRD_QUARTER"
-msgstr "pour le troisième trimestre"
+msgstr "pour le troisi&egrave;me trimestre"
 
 msgid "invest.contract.FOR_FOURTH_QUARTER"
-msgstr "pour le quatrième trimestre"
+msgstr "pour le quatri&egrave;me trimestre"
 
 msgid "invest.contract.PERIODICITY_MONTH"
 msgstr "mensuelle"
@@ -1713,13 +1716,13 @@ msgstr "an"
 
 # ############################## share-buttons ################################
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
-msgstr "Faites comme moi, épargnez positif dès 10 € pour soutenir"
+msgstr "Faites comme moi, épargnez positif d&egrave;s 10 € pour soutenir"
 
 msgid "share-buttons.HASHTAGS_POSITIVE_SAVINGS"
 msgstr "épargne,impact,investissement,royalties"
 
 msgid "share-buttons.DO_LIKE_ME_PROJECT"
-msgstr "Faites comme moi, investissez dès 10 € sur le projet"
+msgstr "Faites comme moi, investissez d&egrave;s 10 € sur le projet"
 
 msgid "share-buttons.HASHTAGS_PROJECT"
 msgstr "royaltycrowdfunding,finpart,investissement"
@@ -1783,7 +1786,7 @@ msgid "forms.file.ERROR_UPLOAD"
 msgstr "Fichier illisible"
 
 msgid "forms.file.ERROR_SERVER"
-msgstr "Problème lors de l'enregistrement du fichier"
+msgstr "Probl&egrave;me lors de l'enregistrement du fichier"
 
 # ############################## form - user-bank ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
@@ -2066,9 +2069,6 @@ msgstr "K-BIS ou &eacute;quivalent &agrave; un registre du commerce"
 msgid "form.user-identitydocs.KBIS_DESCRIPTION"
 msgstr "Datant de moins de 3 mois"
 
-msgid "form.user-identitydocs.STATUS_SHORT"
-msgstr "Statuts de la soci&eacute;t&eacute;"
-
 msgid "form.user-identitydocs.STATUS"
 msgstr "Statuts de la soci&eacute;t&eacute;, certifi&eacute;s conformes à l'original par le g&eacute;rant (faisant figurer id&eacute;alement la r&eacute;partition du capital de l'entreprise)"
 
@@ -2082,13 +2082,13 @@ msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
 msgstr "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON"
-msgstr "Justificatif d'identité de la deuxième personne détenant au moins 25% du capital"
+msgstr "Justificatif d'identité de la deuxi&egrave;me personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON_DESCRIPTION"
 msgstr "Ce fichier est nécessaire si un associé détient plus de 25% du capital. Les documents acceptés sont la carte d'identité ou le passeport."
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON"
-msgstr "Deuxi&egrave;me justificatif d'identité de la deuxième personne détenant au moins 25% du capital"
+msgstr "Deuxi&egrave;me justificatif d'identité de la deuxi&egrave;me personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON_DESCRIPTION"
 msgstr "M&ecirc;mes types que pour le premier document. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
@@ -2097,12 +2097,24 @@ msgid "form.user-identitydocs.ID_THIRD_PERSON"
 msgstr "Justificatif d'identit&eacute; de la troisi&egrave;me personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON_DESCRIPTION"
-msgstr "Ce fichier est nécessaire si un troisième associé détient plus de 25% du capital. Les documents acceptés sont la carte d'identité ou le passeport."
+msgstr "Ce fichier est nécessaire si un troisi&egrave;me associé détient plus de 25% du capital. Les documents acceptés sont la carte d'identité ou le passeport."
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON"
 msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la troisi&egrave;me personne détenant au moins 25% du capital"
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
+msgstr "M&ecirc;mes types que pour le premier document. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
+
+msgid "form.user-identitydocs.ID_FOURTH_PERSON"
+msgstr "Justificatif d'identit&eacute; de la quatri&egrave;me personne détenant au moins 25% du capital"
+
+msgid "form.user-identitydocs.ID_FOURTH_PERSON_DESCRIPTION"
+msgstr "Ce fichier est nécessaire si un quatri&egrave;me associé détient plus de 25% du capital. Les documents acceptés sont la carte d'identité ou le passeport."
+
+msgid "form.user-identitydocs.SECOND_ID_FOURTH_PERSON"
+msgstr "Deuxi&egrave;me justificatif d'identit&eacute; de la quatri&egrave;me personne détenant au moins 25% du capital"
+
+msgid "form.user-identitydocs.SECOND_ID_FOURTH_PERSON_DESCRIPTION"
 msgstr "M&ecirc;mes types que pour le premier document. Sinon le permis de conduire ou le dernier avis d'imposition peuvent &ecirc;tre fournis."
 
 msgid "form.user-identitydocs.ID_BACK"
@@ -2391,23 +2403,92 @@ msgstr "Le document a &eacute;t&eacute; refus&eacute; par notre prestataire car 
 msgid "lemonway.document.ADDITIONAL_COMMENT"
 msgstr "Commentaire compl&eacute;mentaire de Lemon Way :"
 
+msgid "lemonway.document.type.UNDEFINED"
+msgstr "Non d&eacute;fini"
+
 msgid "lemonway.document.type.ID"
-msgstr "Pi&egrave;ce d'identit&eacute;"
+msgstr "La pi&egrave;ce d'identit&eacute;"
 
 msgid "lemonway.document.type.PROOF_ADDRESS"
-msgstr "Justificatif de domicile"
+msgstr "Le justificatif de domicile"
 
 msgid "lemonway.document.type.RIB"
-msgstr "RIB"
-
-msgid "lemonway.document.type.PASSPORT"
-msgstr "Passeport"
+msgstr "Le RIB"
 
 msgid "lemonway.document.type.RESIDENCY_PERMIT"
-msgstr "Permis de r&eacute;sidence"
+msgstr "Le permis de r&eacute;sidence"
 
 msgid "lemonway.document.type.KBIS"
-msgstr "KBIS"
+msgstr "Le KBIS"
+
+msgid "lemonway.document.type.CARD_ID"
+msgstr "La carte d'identit&eacute;"
+
+msgid "lemonway.document.type.CARD_ID_BACK"
+msgstr "Le verso de la carte d'identit&eacute;"
+
+msgid "lemonway.document.type.TAX"
+msgstr "L'avis d'imposition"
+
+msgid "lemonway.document.type.WELFARE"
+msgstr "La carte vitale"
+
+msgid "lemonway.document.type.FAMILY"
+msgstr "Le livret de famille"
+
+msgid "lemonway.document.type.BIRTH"
+msgstr "L'acte de naissance"
+
+msgid "lemonway.document.type.PASSPORT"
+msgstr "Le passeport"
+
+msgid "lemonway.document.type.PASSPORT_BACK"
+msgstr "Le verso du passeport"
+
+msgid "lemonway.document.type.DRIVING_LICENSE"
+msgstr "Le permis de conduire"
+
+msgid "lemonway.document.type.MAIN_ID"
+msgstr "La pi&egrave;ce d'identit&eacute; principale"
+
+msgid "lemonway.document.type.SECOND_ID"
+msgstr "La deuxi&egrave;me pi&egrave;ce d'identit&eacute;"
+
+msgid "lemonway.document.type.MAIN_ID_BACK"
+msgstr "Le verso de la pi&egrave;ce d'identit&eacute; principale"
+
+msgid "lemonway.document.type.ORGA_KBIS"
+msgstr "Le KBIS de l'organisation"
+
+msgid "lemonway.document.type.ORGA_STATUS"
+msgstr "Les statuts de l'organisation"
+
+msgid "lemonway.document.type.SECOND_ID_BACK"
+msgstr "Le verso de la deuxi&egrave;me pi&egrave;ce d'identit&eacute;"
+
+msgid "lemonway.document.type.SELFIE"
+msgstr "Le selfie"
+
+msgid "lemonway.document.type.ID_SECOND_PERSON"
+msgstr "La pi&egrave;ce d'identit&eacute;de la deuxi&egrave;me personne"
+
+msgid "lemonway.document.type.ID_SECOND_PERSON_2"
+msgstr "La deuxi&egrave;me pi&egrave;ce d'identit&eacute; de la deuxi&egrave;me personne"
+
+msgid "lemonway.document.type.ID_THIRD_PERSON"
+msgstr "La pi&egrave;ce d'identit&eacute;de la troisi&egrave;me personne"
+
+msgid "lemonway.document.type.ID_THIRD_PERSON_2"
+msgstr "La deuxi&egrave;me pi&egrave;ce d'identit&eacute;de la troisi&egrave;me personne"
+
+msgid "lemonway.document.type.ID_FOURTH_PERSON"
+msgstr "La pi&egrave;ce d'identit&eacute;de la troisi&egrave;me personne"
+
+msgid "lemonway.document.type.ID_FOURTH_PERSON_2"
+msgstr "La deuxi&egrave;me pi&egrave;ce d'identit&eacute;de la troisi&egrave;me personne"
+
+msgid "lemonway.document.type.CAPITAL_ALLOCATION"
+msgstr "Le document de r&eacute;partition du capital"
 
 msgid "lemonway.document.status.WAITING"
 msgstr "En attente de v&eacute;rification"
@@ -2432,42 +2513,6 @@ msgstr "Mauvais type"
 
 msgid "lemonway.document.status.WRONG_OWNER"
 msgstr "Mauvaise personne"
-
-msgid "lemonway.document.details_MAIN_ID"
-msgstr "La pièce d'identité principale"
-
-msgid "lemonway.email.error.SECOND_ID"
-msgstr "La deuxième pièce d'identité"
-
-msgid "lemonway.email.error.MAIN_ID_BACK"
-msgstr "Le verso de la pièce d'identité principale"
-
-msgid "lemonway.email.error.ORGA_KBIS"
-msgstr "Le KBIS de l'organisation"
-
-msgid "lemonway.email.error.ORGA_STATUS"
-msgstr "Les statuts de l'organisation"
-
-msgid "lemonway.email.error.SECOND_ID_BACK"
-msgstr "Le verso de la deuxième pièce d'identité"
-
-msgid "lemonway.email.error.SELFIE"
-msgstr "Le selfie (Type 13)"
-
-msgid "lemonway.email.error.ID_SECOND_PERSON"
-msgstr "La pièce d'identité de la deuxième personne (Type 16)"
-
-msgid "lemonway.email.error.ID_SECOND_PERSON_2"
-msgstr "La deuxième pièce d'identité de la deuxième personne (Type 17)"
-
-msgid "lemonway.email.error.ID_THIRD_PERSON"
-msgstr "La pièce d'identité de la troisième personne (Type 18)"
-
-msgid "lemonway.email.error.ID_THIRD_PERSON_2"
-msgstr "La deuxième pièce d'identité de la troisième personne (Type 19)"
-
-msgid "lemonway.email.error.CAPITAL_ALLOCATION"
-msgstr "Le document de répartition du capital (Type 20)"
 
 msgid "lemonway.email.error.action.REFUSED"
 msgstr "refusé"
@@ -2640,7 +2685,7 @@ msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES"
 msgstr "Ces entreprises vous ont versé des royalties :"
 
 msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES_SAMPLE"
-msgstr "dont prélèvement"
+msgstr "dont prél&egrave;vement"
 
 msgid "email.royalties.COMPANIES_PENDING_TRANSFER"
 msgstr "Les versements de ces entreprises sont en attente :"

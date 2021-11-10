@@ -3,7 +3,6 @@ var gulp = require( 'gulp' );
 var plugins = require( 'gulp-load-plugins' )();
 var concat = require( 'gulp-concat' );
 const terser = require('gulp-terser');
-var uglify = require( 'gulp-uglifyes' );
 
 // Variables de chemins
 var source = '../../'; // (=> yproject)
@@ -141,7 +140,7 @@ gulp.task( 'minify-css-projectdb-stats', function() {
 } );
 gulp.task( 'minify-js-common', gulp.series('concat-js-common', function() {
 	return gulp.src(destination+'concatCommonScripts.js')
-		.pipe( uglify() ) // minify
+		.pipe( terser() ) // minify
 		.pipe( plugins.rename( { // rename .min.css  
 			dirname: "",
 			basename: "common",
@@ -152,7 +151,7 @@ gulp.task( 'minify-js-common', gulp.series('concat-js-common', function() {
 } ));
 gulp.task( 'minify-js-projectdb', gulp.series('concat-js-projectdb', function() {
 	return gulp.src(destination+'concatProjectDBScripts.js')
-		.pipe( uglify() ) // minify
+		.pipe( terser() ) // minify
 		.pipe( plugins.rename( { // rename .min.css  
 			dirname: "",
 			basename: "campaign-dashboard",
@@ -163,7 +162,7 @@ gulp.task( 'minify-js-projectdb', gulp.series('concat-js-projectdb', function() 
 } ));
 gulp.task( 'minify-js-projectdb-graphs', function() {
 	return gulp.src(jsProjectDashboardGraphsFileList[0] )
-		.pipe( uglify().on('error', console.error) ) // minify
+		.pipe( terser().on('error', console.error) ) // minify
 		.pipe( plugins.rename( { // rename .min.css  
 			dirname: "",
 			basename: "campaign-dashboard-graphs",
