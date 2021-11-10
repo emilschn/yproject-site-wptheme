@@ -392,6 +392,7 @@ class YPShortcodeManager {
 		ob_start(); ?>
 		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-campaign.js?d=<?php echo ASSETS_VERSION; ?>"></script>
+		<link rel="stylesheet" type="text/css" media="screen" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/campaign.min.css?d=<?php echo ASSETS_VERSION; ?>">
 		<?php
 		locate_template( array( 'projects/single/rewards.php' ), true );
 		$buffer = ob_get_contents();

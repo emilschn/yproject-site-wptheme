@@ -587,6 +587,112 @@ div#content.version-3.editing #wdg-move-picture-head {
 }
 
 /*******************************************************************************
+* REWARDS
+*******************************************************************************/
+div.project-rewards-content {
+	max-width: 580px;
+	margin: 0px auto 40px;
+	font-size: 15px;
+}
+div#content.version-3 div.project-rewards-content .db-form {
+	text-align: left;
+	padding: 20px;
+}
+div#content.version-3 div.project-rewards-content .db-form .field-container {
+	white-space: normal;
+}
+div.project-rewards-content .db-form .field-container .field-value input {
+	background-color: #fff;
+	border-bottom: 3px solid #00879B;
+	margin: auto;
+	color: #00879B;
+}
+div#content.version-3 div.project-rewards-content .db-form .field-container .field-value .field-money {
+	color: #00879B;
+}
+div#content.version-3 div.project-rewards-content .db-form .field-container.field-init-invest {
+	white-space: nowrap;
+	text-align: center;
+}
+div.project-rewards-content label, div.project-rewards-content .db-form.v3.full .field label {
+	font-size: 14px;
+	font-weight: bold;
+	text-transform: uppercase;
+	color: #333;
+	text-align: center;
+}
+div#content.version-3 div.project-rewards-content div.roi_amount_base {
+	height: 5px;
+	margin-bottom: 5px;
+	background-color: #333;
+}
+div#content.version-3 div.project-rewards-content table {
+    margin: 30px auto 15px;
+}
+div#content.version-3 div.project-rewards-content table:before {
+	position: relative;
+	top: 70px;
+	border-top: 1px solid;
+}
+div#content.version-3 div.project-rewards-content table tr td {
+    min-width: 50px;
+	text-align: center;
+	border: 0px;
+}
+div#content.version-3 div.project-rewards-content table tr td:nth-child(1) {
+    vertical-align: bottom;
+}
+div#content.version-3 div.project-rewards-content table tr td > div {
+	margin: auto;
+	width: 40px;
+	height: 70px;
+	background: #93626D;
+}
+div#content.version-3 div.project-rewards-content table tr td > div > div {
+	background: #FFF;
+	vertical-align: bottom;
+}
+div#content.version-3 div.project-rewards-content table tr:last-child td span.roi_amount_user_container {
+	position: relative;
+	top: -20px;
+	font-size: 8pt;
+}
+div#content.version-3 div.project-rewards-content ul {
+	margin: 0px;
+	padding: 0px;
+}
+div#content.version-3 div.project-rewards-content ul li {
+	list-style: none;
+	margin: 0px;
+	padding: 0px;
+}
+div#content.version-3 div.project-rewards-content ul li:before {
+	content: '';
+	position: relative;
+	display: inline-block;
+	width: 0;
+	height: 0;
+	top: 2px;
+	margin-right: 5px;
+	border-top: 8px solid transparent;
+	border-bottom: 8px solid transparent;
+	border-left: 16px solid #333333;
+}
+div.project-rewards-content .align-left {
+	margin-top: 15px;
+}
+div.project-rewards-content .button {
+	margin-top: 30px;
+}
+div.project-rewards-content .calculateurRoyaltiesContainer {
+	min-height: 300px !important; /* pris en compte par les projets et l'EP */
+}
+
+div.padder div.project-rewards-content .db-form {
+	padding: 30px;
+}
+
+/*******************************************************************************
 * DESCRIPTION
 *******************************************************************************/
 div#content.version-3 div.project-expander {
