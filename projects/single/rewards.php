@@ -164,7 +164,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 							data: dataRoyaltiesChart,
 							options: {
 								responsive: true,
-								maintainAspectRatio: true,
+								maintainAspectRatio: false,
 								scales: {
 									x: {
 										display: true,
