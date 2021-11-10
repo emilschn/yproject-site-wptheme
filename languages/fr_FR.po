@@ -531,6 +531,9 @@ msgstr "Mon porte-monnaie"
 msgid "account.menu.MY_INVESTMENTS"
 msgstr "Mes investissements"
 
+msgid "account.menu.MY_SUBSCRIPTIONS"
+msgstr "Mes abonnements"
+
 msgid "account.menu.MY_DOCUMENTS"
 msgstr "Mes documents"
 
@@ -554,6 +557,9 @@ msgstr "Porte-monnaie"
 
 msgid "account.menu.organization.INVESTMENTS"
 msgstr "Investissements"
+
+msgid "account.menu.organization.SUBSCRIPTIONS"
+msgstr "Abonnements"
 
 msgid "account.menu.organization.DOCUMENTS"
 msgstr "Documents"
@@ -680,6 +686,9 @@ msgstr "IBAN :"
 
 msgid "account.bank.BIC"
 msgstr "BIC :"
+
+msgid "account.bank.CODE"
+msgstr "Code à indiquer pour identifier votre paiement (Libellé bénéficiaire ou Code destinataire) :"
 
 msgid "account.bank.MODIFY_BANK_DETAILS"
 msgstr "Modifier mon RIB"
@@ -936,6 +945,63 @@ msgstr "L&apos;entreprise est engag&eacute;e &agrave; vous verser des royalties 
 msgid "account.investments.ESTIMATED"
 msgstr "pr&eacute;visionnel"
 
+msgid "account.subscriptions.SUBSCRIPTIONS_OF"
+msgstr "Abonnements de"
+
+msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
+msgstr "Vous pouvez réinvestir les royalties que vous recevez dans les projets d'Épargne Positive."
+
+msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
+msgstr "C'est sans engagement, modifiable à tout moment et automatique."
+
+msgid "account.subscriptions.VIEW_INVESTMENTS"
+msgstr "Voir l'historique des investissements"
+
+msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
+msgstr "+ Ajouter un investissement par abonnement"
+
+msgid "account.subscriptions.item.I_INVEST"
+msgstr "J'investis"
+
+msgid "account.subscriptions.item.MODALITY_QUARTER"
+msgstr "tous les trimestres"
+
+msgid "account.subscriptions.item.IN_THE_THEMATIC"
+msgstr "dans la thématique"
+
+msgid "account.subscriptions.item.INVESTMENT_CONDITION"
+msgstr "Sous réserve que mon porte-monnaie atteigne cette somme à la date du paiement."
+
+msgid "account.subscriptions.item.INACTIVE_STATUS"
+msgstr "Abonnement inactif"
+
+msgid "account.subscriptions.item.NEXT_PAYMENT"
+msgstr "Prochain paiement :"
+
+msgid "account.subscriptions.item.FEBRUARY_1ST"
+msgstr "1er février"
+
+msgid "account.subscriptions.item.MAY_1ST"
+msgstr "1er mai"
+
+msgid "account.subscriptions.item.AUGUST_1ST"
+msgstr "1er août"
+
+msgid "account.subscriptions.item.NOVEMBER_1ST"
+msgstr "1er novembre"
+
+msgid "account.subscriptions.item.CONTRACT_RECEPTION"
+msgstr "A chaque paiement, je recevrai un contrat d'investissement automatiquement par e-mail, qui sera aussi disponible dans la liste de mes investissements."
+
+msgid "account.subscriptions.item.ACCESS_CONTRACT_TYPE"
+msgstr "Accéder au contrat type"
+
+msgid "account.subscriptions.item.END_THE_SUBSCRIPTION"
+msgstr "Mettre fin à l'abonnement"
+
+msgid "account.subscriptions.item.ARE_YOU_SURE_TO_DELETE"
+msgstr "Êtes-vous sûr de vouloir mettre fin à l'abonnement ?"
+
 msgid "account.investments.ACCOUNT_AUTHENTICATION"
 msgstr "Authentifier mon compte"
 
@@ -1010,6 +1076,9 @@ msgstr "Compte bancaire de destination"
 
 msgid "account.wallet.LOAD_VIBAN"
 msgstr "Obtenir les coordonn&eacute;es bancaires de destination"
+
+msgid "account.wallet.LOAD_VIBAN_ALERT"
+msgstr "En cliquant sur ce bouton, vous attribuez un compte bancaire virtuel (RIB) à votre porte-monnaie électronique. Cette opération est utile si vous souhaitez alimenter votre porte-monnaie électronique par virement bancaire. Souhaitez-vous continuer ?"
 
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Virer vers mon compte bancaire"
@@ -1484,7 +1553,7 @@ msgid "invest.mean-payment.success.TWO_EMAILS"
 msgstr "Vous allez recevoir deux e-mails cons&eacute;cutifs &agrave; l&apos;adresse"
 
 msgid "invest.mean-payment.success.TWO_EMAILS_CHECK_SPAM"
-msgstr "(pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable) :"
+msgstr "(pensez &agrave; v&eacute;rifier votre dossier de courrier ind&eacute;sirable)"
 
 msgid "invest.mean-payment.success.TWO_EMAILS_LIST_1"
 msgstr "un e-mail envoy&eacute; par WEDOGOOD pour la confirmation de votre paiement,"
@@ -1743,6 +1812,58 @@ msgstr "BIC"
 
 msgid "form.user-bank.RIB"
 msgstr "RIB"
+
+# ############################## form - user-subscription ################################
+msgid "form.subscription.MODALITY"
+msgstr "Tous les trimestres, je souhaite investir automatiquement..."
+
+msgid "form.subscription.MODALITY_ALL_ROYALTIES"
+msgstr "l'intégralité de mon porte-monnaie"
+
+msgid "form.subscription.MODALITY_FIXED_AMOUNT"
+msgstr "un montant fixe"
+
+msgid "form.subscription.AMOUNT"
+msgstr "Montant"
+
+msgid "form.subscription.AMOUNT_DESCRIPTION"
+msgstr "Le montant doit être un nombre entier supérieur à 10€."
+
+msgid "form.subscription.PROJECT"
+msgstr "Dans la thématique ..."
+
+msgid "form.subscription.SUCCESS"
+msgstr "Votre abonnement a été enregistré avec succès."
+
+msgid "form.subscription.error.AMOUNT_MINIMUM"
+msgstr "Le montant minimum valide est de 10€"
+
+msgid "form.subscription.description.AMOUNT_MINIMUM"
+msgstr "Le montant doit être un nombre entier supérieur à 10€."
+
+msgid "invest.contract.VALIDATE_SUBSCRIPTION"
+msgstr "Valider l'abonnement"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_ERROR"
+msgstr "Une erreur est survenue lors de l'enregistrement de votre abonnement"
+
+msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
+msgstr "Vous avez renoncé à la signature du contrat d'abonnement"
+
+msgid "form.user-contract-subscription.ALL_ROYALTIES"
+msgstr "l'intégralité de mon porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)"
+
+msgid "form.user-contract-subscription.PART_ROYALTIES"
+msgstr "%s € venant de mon porte-monnaie électronique (si le montant est disponible)"
+
+msgid "form.user-contract-subscription.MODALITY"
+msgstr "trimestres"
+
+msgid "form.user-contract-subscription.notification.ALL_ROYALTIES"
+msgstr "l'intégralité de votre porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)"
+
+msgid "form.user-contract-subscription.notification.PART_ROYALTIES"
+msgstr "%s € (si le montant est disponible)"
 
 # ############################## form - user-details ################################
 msgid "form.user-details.EMAIL"

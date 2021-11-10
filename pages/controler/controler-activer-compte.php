@@ -84,6 +84,10 @@ class WDG_Page_Controler_Validation_Email extends WDG_Page_Controler {
 			$this->current_view = self::$view_email_validated;
 			if ( $input_is_new_account !== '1' ) {
 				$this->current_view = self::$view_email_validated_old_account;
+			} else {
+				// Envoi de l'évènement à Analytics pour dire qu'un compte a été créé
+				ypcf_session_start();
+				$_SESSION['send_creation_event'] = 1;
 			}
 
 			// Redirection

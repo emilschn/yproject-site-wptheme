@@ -470,6 +470,10 @@ form span.file-description {
     cursor: initial;
 }
 
+.db-form {
+    padding: 50px;
+}
+
 .db-form .feedback_save{
     text-align: center;
     font-style: italic;

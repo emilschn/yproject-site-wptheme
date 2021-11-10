@@ -299,7 +299,11 @@ class WDG_Page_Controler_MeanPayment extends WDG_Page_Controler {
 					if ( empty( $return ) ) {
 						$this->current_view = 'wallet-error';
 					} else {
-						$this->current_view = 'wallet-success';
+						// $this->current_view = 'wallet-success';
+						$page_url = WDG_Redirect_Engine::override_get_page_url( 'paiement-effectue' );
+						$page_url .= '?campaign_id=' .$this->current_campaign->ID. '&meanofpayment=wallet&payment_return=publish';
+						wp_redirect( $page_url );
+						exit();
 					}
 					break;
 					
