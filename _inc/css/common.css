@@ -653,18 +653,30 @@ nav#main div#menu a#btn-switch-lang {
 	padding: 0 10px;
 	display: inline;
 }
+nav#main div#menu a#btn-switch-lang:after {
+	content: url("../../images/chevron-down.svg");
+	vertical-align: middle;
+}
 #submenu-switch-lang {
 	position: relative;
-	width: 100px;
-	top: 10px;
+	left: -240px;
+	width: 0;
+	top: 50px;
 	border: 0px;
-	left: 1110px;
 	text-align: center;
 }
 #submenu-switch-lang li.active a {
 	font-weight: bold;
 }
 
+#submenu-switch-lang ul.submenu-list {
+	width: 150px;
+}
+
+#submenu-switch-lang .lang-loader-container {
+	width: 150px;
+	background-color: #fff;
+}
 	
 	
 /* RECHERCHE */

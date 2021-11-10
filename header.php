@@ -207,7 +207,9 @@
 					} ?>><a href="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
 						<?php endforeach; ?>
 						</ul>
-						<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" class="hidden">
+						<div class="lang-loader-container">
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading" class="hidden">
+						</div>
 					</div>
 					<?php endif; ?>
 				
