@@ -390,6 +390,7 @@ class YPShortcodeManager {
 		$is_simulator_shortcode = TRUE;
 
 		ob_start(); ?>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 		<script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/wdg-campaign.js?d=<?php echo ASSETS_VERSION; ?>"></script>
 		<?php
 		locate_template( array( 'projects/single/rewards.php' ), true );
