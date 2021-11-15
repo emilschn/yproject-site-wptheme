@@ -150,7 +150,7 @@
 		<meta property="og:image" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:secure_url" content="<?php echo $imageFacebook ?>" />
 		<meta property="og:image:type" content="image/png" />
-		<meta property="fb:app_id" content="<?php echo YP_FB_APP_ID; ?>" />
+		<meta property="fb:app_id" content="<?php echo YP_FB_APP_ID; ?>" /> 
 	</head>
 
 	<body <?php body_class(get_locale()); ?>>
