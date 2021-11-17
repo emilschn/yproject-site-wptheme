@@ -6,7 +6,11 @@
 	$fields_hidden = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_hidden );
 	$fields_files = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
 	$fields_files_orga = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files_orga );
-	$form_errors = $WDGOrganizationIdentityDocsForm->get_form_errors();
+
+	$form_feedback = FALSE;
+	if ( !empty( $_SESSION[ 'account_organization_identitydocs_form_feedback_' . $WDGOrganization->get_wpref() ] ) ) {
+		$form_feedback = $_SESSION[ 'account_organization_identitydocs_form_feedback_' . $WDGOrganization->get_wpref() ];
+	}
 ?>
 
 <form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?> account-form" action="<?php echo admin_url( 'admin-post.php?action=user_account_organization_identitydocs' ); ?>">
@@ -27,11 +31,10 @@
 		</div>
 	<?php endif; ?>
 
-	<?php if ( $WDGUserIdentityDocsForm->hasErrors() ): ?>
+	<?php if ( !empty( $form_feedback[ 'errors' ] ) ): ?>
 		<div class="wdg-message error">
-			<?php $form_errors = $WDGUserIdentityDocsForm->getPostErrors(); ?>
-			<?php foreach ( $form_errors as $form_error ): ?>
-				<?php echo $form_error[ 'text' ]; ?>
+			<?php foreach ( $form_feedback[ 'errors' ] as $form_error ): ?>
+				<?php _e( $form_error[ 'code' ], 'yproject' ); ?>
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>
