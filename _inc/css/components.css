@@ -928,11 +928,9 @@ body input[type=text], body input[type=number], body input[type=email], body sel
 	background: #E1E3E2;
 }
 .db-form.v3.full .field-container input[type=text], .db-form.v3.full .field-container input[type=password], .db-form.v3.full .field-container input[type=number], .db-form.v3.full .field-container input[type=email] {
-	width: 96%;
     width: -webkit-calc(100% - 16px);
     width: -moz-calc(100% - 16px);
     width: calc(100% - 16px);
-	height: 50px;
 	margin: 0px;
 	padding: 3px 8px;
 }
@@ -1233,7 +1231,8 @@ nav.wdg-breadcrumb {
 * REWARDS
 *******************************************************************************/
 div.project-rewards-content {
-	padding: 0px;
+	padding: 30px;
+	border: 1px solid #c2c2c2;
 }
 div.project-rewards-content div.project-rewards-padder {
 	position: relative;
@@ -1271,7 +1270,7 @@ div.project-rewards-content div.project-rewards-padder p {
 div.project-rewards-content span.roi_percent_user, div.project-rewards-content span.roi_amount_user {
 	font-size: 22px;
 	font-weight: bold;
-	color: #93626D;
+	color: #00879B;
 }
 div.project-rewards-content div.roi_amount_base {
 	height: 5px;

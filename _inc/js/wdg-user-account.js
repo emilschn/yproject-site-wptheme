@@ -3,6 +3,7 @@ function UserAccountDashboard() {
 	this.initMenu();
 	this.initPhoneNotification();
 	this.initLoadingAnimation();
+	this.initSubscriptionForm();
 }
 
 /**
@@ -26,6 +27,10 @@ UserAccountDashboard.prototype.initMenu = function () {
 	$('ul.nav-menu li a').each(function () {
 		$(this).click(function () {
 			self.switchTab($(this).data('tab'), this);
+			if ($('nav').hasClass('visible')) {
+				$('nav').removeClass('visible');
+				$('nav button#swap-menu').html('&gt;');
+			}
 		});
 	});
 	$('a.go-to-tab').each(function () {
@@ -567,6 +572,26 @@ UserAccountDashboard.prototype.initLoadingAnimation = function () {
 			e.preventDefault();
 		}
 		$(this).addClass("disabled");
+	});
+}
+
+UserAccountDashboard.prototype.initSubscriptionForm = function () {
+	$('.add-subscription').click(function (e) {
+		$(this).hide();
+		$(".form-add-subscription").show();
+		$('.form-add-subscription #select-amount_type').change();
+	});
+	this.initSubscriptionAmount();
+}
+
+UserAccountDashboard.prototype.initSubscriptionAmount = function () {
+	$('#select-amount_type').change(function () {
+		if ($(this).val() == 'part_royalties') {
+			$("#field-amount").show();
+		}
+		else {
+			$("#field-amount").hide();
+		}
 	});
 }
 

@@ -402,7 +402,7 @@ class WDG_WordPress_Events {
 
 		// Chargement de la lib de graphs (uniquement en liaison avec les projets)
 		if ( ( $is_campaign || $is_campaign_page ) && !$is_dashboard_page ) {
-			wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
+			wp_enqueue_script( 'chart-script', 'https://cdn.jsdelivr.net/npm/chart.js', array('wdg-script'), '1' );
 		}
 		if ( $is_dashboard_page ) {
 			wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
@@ -421,7 +421,7 @@ class WDG_WordPress_Events {
 		}
 
 		// Styles et scripts liés aux pages d'investissements
-		$pages_investment = array( 'investir', 'moyen-de-paiement', 'paiement-effectue', 'paiement-partager', 'terminer-preinvestissement', 'declarer-chiffre-daffaires' );
+		$pages_investment = array( 'investir', 'moyen-de-paiement', 'paiement-effectue', 'paiement-partager', 'terminer-preinvestissement', 'declarer-chiffre-daffaires', 'contrat-abonnement' );
 		if ( in_array( $post_name, $pages_investment ) ) {
 			wp_enqueue_style( 'invest-css', dirname( get_bloginfo( 'stylesheet_url' ) ).'/_inc/css/invest.min.css', null, ASSETS_VERSION, 'all' );
 			wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-campaign-invest.js', array('jquery'), ASSETS_VERSION );

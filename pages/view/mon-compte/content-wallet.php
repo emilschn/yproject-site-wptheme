@@ -14,7 +14,7 @@ $pending_amount = $WDGUser_displayed->get_pending_rois_amount();
 
 <h2><?php _e( 'account.wallet.TITLE', 'yproject' ); ?></h2>
 
-<div class="db-form v3 align-left"  id="item-body-wallet">
+<div class="db-form v3 align-left">
 
 	<div class="wallet-preview">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-invest/picto-porte-monnaie.png" alt="porte-monnaie" width="100" height="69">

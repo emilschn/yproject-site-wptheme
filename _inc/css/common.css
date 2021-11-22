@@ -470,6 +470,10 @@ form span.file-description {
     cursor: initial;
 }
 
+.db-form {
+    padding: 50px;
+}
+
 .db-form .feedback_save{
     text-align: center;
     font-style: italic;
@@ -606,6 +610,7 @@ nav#main div#menu a.lines.current::before, nav#main div#menu a.lines.current::af
 
 nav#main div#menu div#menu-right-items {
 	display: flex;
+	/* max-width: 270px; */
 }
 
 nav#main div#menu .wpml-ls {
@@ -737,18 +742,15 @@ nav#main div#menu div.menu-separator-bar {
 	margin: 0 15px 0 5px;
 }
 nav#main div#menu a.btn-user.active {
-	border-left: 2px solid #E1E3E2;
+	display: inline-block;
     background-color: #E1E3E2;
-	margin-top: -10px;
-	height: 60px;
-	line-height: 60px;
-	padding-right: 15px;
-	margin-right: -10px;
-	margin-bottom: -10px;
+	/* padding-right: 15px; */
+	margin: 0;
+	padding: 0 15px;
 }
-nav#main div#menu a.btn-user.active:before {
+/* nav#main div#menu a.btn-user.active:before {
 	border-left: 0px;
-}
+} */
 nav#main div#menu a.btn-user.connected.needs-authentication:after, #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after, table.authentication-list a.needs-authentication:after, ul.project-list a.needs-authentication:after {
 	content: "!";
 	font-size: 17px;
@@ -787,20 +789,6 @@ table.authentication-list a.needs-authentication.needs-authentication-parameters
 ul.project-list a.needs-authentication:after {
 	position: absolute;
 	margin-left: 5px;
-}
-
-#submenu-user {
-	position: absolute;
-    top: 60px;
-    right: 10px;
-	width: -webkit-calc((100% - 1280px) / 2);
-	width: -moz-calc((100% - 1280px) / 2);
-	width: 285px;
-    font-size: 8pt;
-	text-align: left;
-}
-#submenu-user span {
-    text-transform: uppercase;  
 }
 
 .box_connection_buttons {
