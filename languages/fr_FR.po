@@ -513,6 +513,12 @@ msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
 msgid "account.HELLO"
 msgstr "Bonjour"
 
+msgid "account.ACCOUNT_HEADER"
+msgstr "Mon compte personnel"
+
+msgid "account.WALLET_HEADER"
+msgstr "dans votre porte-monnaie"
+
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Retourner vers un projet privé"
 

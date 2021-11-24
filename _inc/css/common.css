@@ -634,7 +634,7 @@ nav#main > div#menu .submenu-style ul.submenu-list li a {
 	height: auto;
 	line-height: 20px;
 	padding: 10px 10px;
-	border-bottom: 2px solid #E1E3E2;
+	border-bottom: 1px solid #c2c2c2;
 }
 nav#main > div#menu .submenu-style ul.submenu-list li a:hover {
 	background: #ebebeb; 
@@ -746,7 +746,7 @@ nav#main div#menu a.btn-user.active {
     background-color: #E1E3E2;
 	/* padding-right: 15px; */
 	margin: 0;
-	padding: 0 15px;
+	/* padding: 0 15px; */
 }
 nav#main div#menu div#menu-right-items a.connected {
 	display: flex;
@@ -815,62 +815,6 @@ ul.project-list a.needs-authentication:after {
 .box_connection_buttons.transparent { background: none repeat scroll 0 0 transparent; border: 2px solid #333; color: #333; }
 .box_connection_buttons span { color: #FFF; }
 
-#submenu-user form.sidebar-login-form {
-	width: 255px;
-	margin: 0 auto;
-	text-align: left;
-}
-#submenu-user form.sidebar-login-form span#title-connection {
-	display: block;
-	font-size: 11pt;
-}
-#submenu-user form.sidebar-login-form label {
-    font-size: 10pt;
-    margin-left: 5px;
-    text-transform: uppercase;
-}
-
-#submenu-user form.sidebar-login-form label.checkbox-parent {
-	margin-left: 0px;
-	cursor: pointer;
-}
-
-#submenu-user form.sidebar-login-form .input_connection {
-    margin: 7px 0px;
-    width: 246px;
-    height: 40px; 
-    border: none;
-    background-color: #E1E3E2;
-    color: #6F777D;
-    letter-spacing: 1px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 5px;
-}
-#submenu-user form.sidebar-login-form .pwd_submit {
-    width: calc( 100% - 65px );
-    margin-right: 0px;
-}  
-#submenu-user form.sidebar-login-form input.button.red {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-}  
-
-#submenu-user span#submenu-user-hello {
-	display: inline-block;
-	margin: 10px;
-	font-size: 10pt;
-	font-weight: bold;
-	text-transform: none;
-}
-#submenu-user span#submenu-user-hello span {
-	text-transform: none;
-}
-
-#submenu-user div#button-logout {
-	bottom: 0px;
-}
-
 #resetpasswordform .field .field-container .field-value input {
 	border-bottom: 3px solid #00879B;
 	background: none;
@@ -881,23 +825,61 @@ ul.project-list a.needs-authentication:after {
 #resetpasswordform .field {
 	margin-top: 20px;
 }
-
-@media screen and (max-width: 1300px) {
-	#submenu-user { right: 10px; }
-}
-@media screen and (min-width: 1301px) {
-	#submenu-user { position: relative; top: 10px; left: 977px; }
-	/* #submenu-search { position: relative; top: 10px; left: 912px; } */
-}
 @media screen and (max-width: 1020px) and (min-width: 998px) {
 	nav#main > div#menu > a:nth-child(3) { display: none; }
+}
+
+/* SOUS MENU DEPLIANT */
+#submenu-user {
+	position: absolute;
+	top: 69px;
+	right: 0;
+	background-color: #fff;
+	text-align: left;
+	padding: 20px;
+	width: 270px;
+	height: 100vh;
+	border-left: 1px solid #c2c2c2;
+}
+#submenu-user #submenu-user-hello {
+	color: #c2c2c2;
+	font-size: 14px;
+	font-weight: bold;
+	border-bottom: 1px solid #c2c2c2;
+	padding-bottom: 15px;
+	display: block;
+}
+#submenu-user ul.submenu-list {
+	width: auto;
+	overflow-y: auto;
+	max-height: none;
+}
+nav#main > div#menu #submenu-user ul.submenu-list li {
+	border-bottom: 1px solid #c2c2c2;
+	padding: 15px 0 15px 10px;
+}
+nav#main > div#menu #submenu-user ul.submenu-list li a {
+	margin: 0;
+	border-bottom: 0;
+	line-height: auto;
+}
+nav#main > div#menu #submenu-user ul.submenu-list li:first-of-type a {
+	padding: 0;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .wallet-amount-header {
+	text-transform: none;
+	color: #c2c2c2;
+}
+nav#main > div#menu #submenu-user a.button {
+	color: #fff;
+	margin-top: 15px;
+	margin-left: 0;
 }
 
 /* MENU BURGER */
 nav#main div#menu a.only-inf997 {
 	display: none;
 }
-
 /*******************************************************************************
 * PAGE DE CREATION DE PROJET
 *******************************************************************************/
