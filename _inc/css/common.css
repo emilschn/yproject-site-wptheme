@@ -748,9 +748,20 @@ nav#main div#menu a.btn-user.active {
 	margin: 0;
 	padding: 0 15px;
 }
-/* nav#main div#menu a.btn-user.active:before {
-	border-left: 0px;
-} */
+nav#main div#menu div#menu-right-items a.connected {
+	display: flex;
+	flex-direction: column;
+	line-height: normal;
+	font-size: 11px;
+	margin-top: 3px;
+}
+nav#main div#menu div#menu-right-items a.connected:before {
+	content: url("../../images/burger.png");
+	margin-bottom: 3px;
+}
+nav#main div#menu div#menu-right-items a.connected.active {
+	background-color: #fff;
+}
 nav#main div#menu a.btn-user.connected.needs-authentication:after, #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after, table.authentication-list a.needs-authentication:after, ul.project-list a.needs-authentication:after {
 	content: "!";
 	font-size: 17px;

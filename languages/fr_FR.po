@@ -95,7 +95,7 @@ msgid "common.PREVIOUS"
 msgstr "Pr&eacute;c&eacute;dent"
 
 msgid "common.MY_ACCOUNT"
-msgstr "Mon compte"
+msgstr "Compte"
 
 msgid "common.MODIFY"
 msgstr "Modifier"

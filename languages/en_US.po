@@ -100,7 +100,7 @@ msgid "common.PREVIOUS"
 msgstr "Previous"
 
 msgid "common.MY_ACCOUNT"
-msgstr "My account"
+msgstr "Account"
 
 msgid "common.MODIFY"
 msgstr "Modify"
