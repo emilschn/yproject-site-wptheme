@@ -216,7 +216,11 @@
 					<?php /* Affichage quand clic sur Rechercher */ ?>
 					<div id="submenu-search" class="submenu-style hidden">
 						<div class="only-inf997">
-							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
+							<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
+								<ul class="submenu-list">
+									<li><a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
+									<span class="wallet-amount-header"><b><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span></li>
+								</ul>
 							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
 							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
 							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
@@ -250,7 +254,6 @@
 							<ul class="submenu-list">
 								<li><a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
 								<span class="wallet-amount-header"><b><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span></li>
-								<!-- <li class="subtitle-header"><?php _e( 'account.HELLO', 'yproject' ); ?></li> -->
 							</ul>
 							<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
 						</div>

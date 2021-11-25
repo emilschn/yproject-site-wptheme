@@ -522,7 +522,7 @@ msgid "account.ACCOUNT_HEADER"
 msgstr "My personal account"
 
 msgid "account.WALLET_HEADER"
-msgstr "in your wallet"
+msgstr "in my wallet"
 
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Return to a private project"

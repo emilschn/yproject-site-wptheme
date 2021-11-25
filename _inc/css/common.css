@@ -744,9 +744,7 @@ nav#main div#menu div.menu-separator-bar {
 nav#main div#menu a.btn-user.active {
 	display: inline-block;
     background-color: #E1E3E2;
-	/* padding-right: 15px; */
 	margin: 0;
-	/* padding: 0 15px; */
 }
 nav#main div#menu div#menu-right-items a.connected {
 	display: flex;
@@ -836,7 +834,7 @@ ul.project-list a.needs-authentication:after {
 	right: 0;
 	background-color: #fff;
 	text-align: left;
-	padding: 20px;
+	padding: 26px;
 	width: 270px;
 	height: 100vh;
 	border-left: 1px solid #c2c2c2;

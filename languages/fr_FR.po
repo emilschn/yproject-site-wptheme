@@ -517,7 +517,7 @@ msgid "account.ACCOUNT_HEADER"
 msgstr "Mon compte personnel"
 
 msgid "account.WALLET_HEADER"
-msgstr "dans votre porte-monnaie"
+msgstr "dans mon porte-monnaie"
 
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Retourner vers un projet privé"
