@@ -765,6 +765,14 @@ var WDGNavFunctions = (function ($) {
 							itemProject = infoDecoded['projectlist'][i];
 							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
 						}
+
+						var lengthInfoOrganizations = infoDecoded['organizationlist'].length;
+						for (var i = 0; i < lengthInfoOrganizations; i++) {
+							itemOrganization = infoDecoded['organizationlist'][i];
+							// itemOrganization['wpref']
+							// itemOrganization['name']
+						}
+
 						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
 							$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
 						}
