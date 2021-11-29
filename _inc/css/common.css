@@ -515,64 +515,52 @@ form span.file-description {
 nav#main {
 	position: fixed;
 	z-index: 180;
-	top: 0px;
-	margin: 10px 0px;
 	width: 100%;
 	height: 60px;
 }
 
 nav#main > div#menu {
-	width: -webkit-calc(100% - 40px);
-	width: -moz-calc(100% - 40px);
-	width: calc(100% - 40px);
-	max-width: 1260px; 
 	height: 40px;
 	margin: auto;
-	padding: 10px;
+	padding: 14px;
 	background: #FFFFFF;
-	-moz-box-shadow: 1px 1px 5px #E4E4E4;
-	-webkit-box-shadow: 1px 1px 5px #E4E4E4;
-	-o-box-shadow: 1px 1px 5px #E4E4E4;
-	box-shadow: 1px 1px 5px #E4E4E4;
-	text-align: right;
+	display: flex;
+	justify-content: space-between;
+	border-bottom: 1px solid #c2c2c2;
+}
+
+nav#main > div#menu > div#menu-links a:first-of-type{
+	margin-right: 30px;
 }
 
 nav#main > div#menu img#logo_wdg {
     margin-top: 3px;
 }
 
-nav#main > div#menu > a {
+nav#main > div#menu a {
 	display: inline-block;
-	margin: 0px 7px;
+	margin: 0px 14px;
 	line-height: 40px;
 	height: 40px;
 	vertical-align: middle;
-	font-size: 15px;
+	font-size: 14px;
 	text-transform: uppercase;
 	color: #333333;
 	-webkit-transition: color 0.4s;
 	transition: color 0.4s;
 }
-
-nav#main > div#menu > a.only-inf997 {
-	display: none;
-}
-nav#main > div#menu > a:nth-child(1) {
-	float: left;
-	height: 40px;
-}
-nav#main > div#menu > a.lines {
+nav#main div#menu a.lines {
 	display: inline-block;
 	position: relative;
 }
-nav#main > div#menu > a.lines.current, nav#main > div#menu > a.lines:hover, nav#main > div#menu > a.lines:focus {
+nav#main div#menu a.lines.current, nav#main div#menu a.lines:hover, nav#main div#menu a.lines:focus {
 	color: #000000;
 }
-nav#main > div#menu > a.lines.select-nav{ /* à faire appliquer dans le JS */
+nav#main div#menu a.lines.select-nav{ /* à faire appliquer dans le JS */
     color: #000000;
 }
 
-nav#main > div#menu > a.lines::before, nav#main > div#menu > a.lines::after {
+nav#main div#menu a.lines::before, nav#main div#menu a.lines::after {
     content: '';
     position: absolute;
     left: 0;
@@ -584,17 +572,17 @@ nav#main > div#menu > a.lines::before, nav#main > div#menu > a.lines::after {
     -webkit-transition: -webkit-transform 0.2s;
     transition: transform 0.2s;
 }
-nav#main > div#menu > a.lines::before {
+nav#main div#menu a.lines::before {
     top: 0;
     -webkit-transform-origin: 0 50%;
     transform-origin: 0 50%;
 }
-nav#main > div#menu > a.lines::after {
+nav#main div#menu a.lines::after {
     bottom: 0;
     -webkit-transform-origin: 100% 50%;
     transform-origin: 100% 50%;
 }
-nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.current::after {
+nav#main div#menu a.lines.current::before, nav#main div#menu a.lines.current::after {
     -webkit-transform: scale3d(1, 1, 1);
     transform: scale3d(1, 1, 1);
     -webkit-transition-timing-function: cubic-bezier(0.22, 0.61, 0.36, 1);
@@ -620,14 +608,15 @@ nav#main > div#menu > a.lines.current::before, nav#main > div#menu > a.lines.cur
 	}
 }
 
-nav#main > div#menu > .wpml-ls {
+nav#main div#menu div#menu-right-items {
+	display: flex;
+	/* max-width: 270px; */
+}
+
+nav#main div#menu .wpml-ls {
 	display: inline-block;
 }
 
-.submenu-style{
-    background-color: #FFFFFF; 
-    border: 4px solid #E1E3E2;
-}
 .submenu-style ul.submenu-list {
 	max-height: 400px;
 	overflow-y: auto;
@@ -636,76 +625,96 @@ nav#main > div#menu > .wpml-ls {
 	list-style: none;
 	font-size: 10pt;
 	text-transform: uppercase;
-	border-top: 2px solid #E1E3E2;
+	width: 200px;
+	background-color: #fff;
 }
-.submenu-style ul.submenu-list li a {
+nav#main > div#menu .submenu-style ul.submenu-list li a {
 	display: block;
 	color: #333333;
+	height: auto;
+	line-height: 20px;
 	padding: 10px 10px;
-	border-bottom: 2px solid #E1E3E2;
+	border-bottom: 1px solid #c2c2c2;
 }
-.submenu-style ul.submenu-list li a:hover {
-	background: #E1E3E2;
+nav#main > div#menu .submenu-style ul.submenu-list li a:hover {
+	background: #ebebeb; 
 }
 .submenu-style .empty-list-info {
 	text-transform: none;
-	padding: 8px;
+	padding: 10px;
 }
 
+nav#main > div#menu .submenu-style .empty-list-info a {
+	text-transform: none;
+	color: #EA4F51;
+	padding-left: 0;
+	margin-left: 0;
+}
+
+/* LANGUE */
+
+nav#main div#menu a#btn-switch-lang {
+	border: 1px solid #333;
+	padding: 0 10px;
+	display: inline;
+}
+nav#main div#menu a#btn-switch-lang:after {
+	content: url("../../images/chevron-down.svg");
+	vertical-align: middle;
+}
 #submenu-switch-lang {
 	position: relative;
-	width: 100px;
-	top: 10px;
+	left: -240px;
+	width: 0;
+	top: 50px;
 	border: 0px;
-	left: 1110px;
 	text-align: center;
 }
 #submenu-switch-lang li.active a {
 	font-weight: bold;
 }
 
+#submenu-switch-lang ul.submenu-list {
+	width: 150px;
+}
+
+#submenu-switch-lang .lang-loader-container {
+	width: 150px;
+	background-color: #fff;
+}
 	
 	
 /* RECHERCHE */
-nav#main > div#menu > a#btn-search {
-	margin-left: 15px;
+nav#main div#menu a#btn-search {
+	margin: 0px 7px;
 }
-nav#main > div#menu > a#btn-search > img {
+nav#main div#menu a#btn-search img {
     vertical-align:  middle;
 }
-nav#main > div#menu > a#btn-search.active {
+/* nav#main div#menu a#btn-search.active {
 	position: relative;
 	height: 60px;
 	margin: -10px -10px -10px 0px;
 	padding: 0px 15px;
     background-color: #E1E3E2;
-}
-nav#main > div#menu > a#btn-search.active > img {
+} */
+/* nav#main div#menu a#btn-search.active img {
 	margin-top: 20px;
 	margin-right: 2px;
-}
+} */
 
 #submenu-search {
-	position: absolute;
-	top: 60px;
-	right: 75px;
-	width: -webkit-calc(62px + (100% - 1280px) / 2);
-	width: -moz-calc(62px + (100% - 1280px) / 2);
-	width: 285px;
+	order: -1;
 	font-size: 8pt;
 	text-align: left;
 }
 #submenu-search-input {
-	border: 0px;
-	background: #E1E3E2;
-	margin: 10px;
-	width: -webkit-calc(100% - 50px);
-	width: -moz-calc(100% - 50px);
-	width: calc(100% - 50px);
-	height: -webkit-calc(100% - 50px);
-	height: -moz-calc(100% - 50px);
-	height: calc(100% - 50px);
-	padding: 15px;
+	border: 0;
+	border-bottom: 3px solid #00879B;
+	padding: 10px;
+}
+#submenu-search-input:focus {
+	outline: none;
 }
 /*Pour éviter backgroung yellow quand champ prérempli sur chrome*/
 input:-webkit-autofill {
@@ -715,35 +724,43 @@ input:-webkit-autofill {
 
 
 /* CONNEXION */
-nav#main > div#menu > a.btn-user {
+nav#main div#menu a.btn-user {
     display: inline-block;
     margin: 0;
     text-align: center;
 	padding-right: 5px;
     background: none;
 }
-nav#main > div#menu > a.btn-user:before {
-	content: "";
-	border-left: 2px solid #333333;
-	margin-right: 15px;
-	height: 30px;
-	padding-top: 3px;
-	padding-bottom: 3px;
+nav#main div#menu a.not-connected {
+	background-color: #EA4F51;
+	color: #fff;
+	padding: 0 15px;
 }
-nav#main > div#menu > a.btn-user.active {
-	border-left: 2px solid #E1E3E2;
+nav#main div#menu div.menu-separator-bar {
+	width: 1px;
+	background-color: #c2c2c2;
+	margin: 0 15px 0 5px;
+}
+nav#main div#menu a.btn-user.active {
+	display: inline-block;
     background-color: #E1E3E2;
-	margin-top: -10px;
-	height: 60px;
-	line-height: 60px;
-	padding-right: 15px;
-	margin-right: -10px;
-	margin-bottom: -10px;
+	margin: 0;
 }
-nav#main > div#menu > a.btn-user.active:before {
-	border-left: 0px;
+nav#main div#menu div#menu-right-items a.connected {
+	display: flex;
+	flex-direction: column;
+	line-height: normal;
+	font-size: 11px;
+	margin-top: 3px;
 }
-nav#main > div#menu > a.btn-user.connected.needs-authentication:after, #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after, table.authentication-list a.needs-authentication:after, ul.project-list a.needs-authentication:after {
+nav#main div#menu div#menu-right-items a.connected:before {
+	content: url("../../images/burger.png");
+	margin-bottom: 3px;
+}
+nav#main div#menu div#menu-right-items a.connected.active {
+	background-color: #fff;
+}
+nav#main div#menu a.btn-user.connected.needs-authentication:after, #submenu-user li a.needs-authentication:after, nav ul.nav-menu li a.needs-authentication:after, table.authentication-list a.needs-authentication:after, ul.project-list a.needs-authentication:after {
 	content: "!";
 	font-size: 17px;
 	background: #ea4f51;
@@ -755,10 +772,10 @@ nav#main > div#menu > a.btn-user.connected.needs-authentication:after, #submenu-
 	border-radius: 50%;
 	text-align: center;
 }
-nav#main > div#menu > a.btn-user.connected.needs-authentication.active:after, nav ul.nav-menu li.selected a.needs-authentication:after {
+nav#main div#menu a.btn-user.connected.needs-authentication.active:after, nav ul.nav-menu li.selected a.needs-authentication:after {
 	display: none;
 }
-nav#main > div#menu > a.btn-user.connected.needs-authentication:after {
+nav#main div#menu a.btn-user.connected.needs-authentication:after {
 	position: absolute;
 	top: 2px;
 	margin-left: -15px;
@@ -783,20 +800,6 @@ ul.project-list a.needs-authentication:after {
 	margin-left: 5px;
 }
 
-#submenu-user {
-	position: absolute;
-    top: 60px;
-    right: 10px;
-	width: -webkit-calc((100% - 1280px) / 2);
-	width: -moz-calc((100% - 1280px) / 2);
-	width: 285px;
-    font-size: 8pt;
-	text-align: left;
-}
-#submenu-user span {
-    text-transform: uppercase;  
-}
-
 .box_connection_buttons {
 	display: block;
     width: 225px;
@@ -810,62 +813,6 @@ ul.project-list a.needs-authentication:after {
 .box_connection_buttons.transparent { background: none repeat scroll 0 0 transparent; border: 2px solid #333; color: #333; }
 .box_connection_buttons span { color: #FFF; }
 
-#submenu-user form.sidebar-login-form {
-	width: 255px;
-	margin: 0 auto;
-	text-align: left;
-}
-#submenu-user form.sidebar-login-form span#title-connection {
-	display: block;
-	font-size: 11pt;
-}
-#submenu-user form.sidebar-login-form label {
-    font-size: 10pt;
-    margin-left: 5px;
-    text-transform: uppercase;
-}
-
-#submenu-user form.sidebar-login-form label.checkbox-parent {
-	margin-left: 0px;
-	cursor: pointer;
-}
-
-#submenu-user form.sidebar-login-form .input_connection {
-    margin: 7px 0px;
-    width: 246px;
-    height: 40px; 
-    border: none;
-    background-color: #E1E3E2;
-    color: #6F777D;
-    letter-spacing: 1px;
-    font-family: Arial, Helvetica, sans-serif;
-    padding: 5px;
-}
-#submenu-user form.sidebar-login-form .pwd_submit {
-    width: calc( 100% - 65px );
-    margin-right: 0px;
-}  
-#submenu-user form.sidebar-login-form input.button.red {
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
-}  
-
-#submenu-user span#submenu-user-hello {
-	display: inline-block;
-	margin: 10px;
-	font-size: 10pt;
-	font-weight: bold;
-	text-transform: none;
-}
-#submenu-user span#submenu-user-hello span {
-	text-transform: none;
-}
-
-#submenu-user div#button-logout {
-	bottom: 0px;
-}
-
 #resetpasswordform .field .field-container .field-value input {
 	border-bottom: 3px solid #00879B;
 	background: none;
@@ -876,18 +823,61 @@ ul.project-list a.needs-authentication:after {
 #resetpasswordform .field {
 	margin-top: 20px;
 }
-
-@media screen and (max-width: 1300px) {
-	#submenu-user { right: 10px; }
-}
-@media screen and (min-width: 1301px) {
-	#submenu-user { position: relative; top: 10px; left: 977px; }
-	#submenu-search { position: relative; top: 10px; left: 912px; }
-}
 @media screen and (max-width: 1020px) and (min-width: 998px) {
 	nav#main > div#menu > a:nth-child(3) { display: none; }
 }
 
+/* SOUS MENU DEPLIANT */
+#submenu-user {
+	position: absolute;
+	top: 69px;
+	right: 0;
+	background-color: #fff;
+	text-align: left;
+	padding: 26px;
+	width: 270px;
+	height: 100vh;
+	border-left: 1px solid #c2c2c2;
+}
+#submenu-user #submenu-user-hello {
+	color: #c2c2c2;
+	font-size: 14px;
+	font-weight: bold;
+	border-bottom: 1px solid #c2c2c2;
+	padding-bottom: 15px;
+	display: block;
+}
+#submenu-user ul.submenu-list {
+	width: auto;
+	overflow-y: auto;
+	max-height: none;
+}
+nav#main > div#menu #submenu-user ul.submenu-list li {
+	border-bottom: 1px solid #c2c2c2;
+	padding: 15px 0 15px 10px;
+}
+nav#main > div#menu #submenu-user ul.submenu-list li a {
+	margin: 0;
+	border-bottom: 0;
+	line-height: auto;
+}
+nav#main > div#menu #submenu-user ul.submenu-list li:first-of-type a {
+	padding: 0;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .wallet-amount-header {
+	text-transform: none;
+	color: #c2c2c2;
+}
+nav#main > div#menu #submenu-user a.button {
+	color: #fff;
+	margin-top: 15px;
+	margin-left: 0;
+}
+
+/* MENU BURGER */
+nav#main div#menu a.only-inf997 {
+	display: none;
+}
 /*******************************************************************************
 * PAGE DE CREATION DE PROJET
 *******************************************************************************/

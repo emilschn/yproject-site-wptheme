@@ -70,8 +70,6 @@ YPUIFunctions = (function ($) {
 						} else {
 							$('.responsive-fixed').removeClass('fixed');
 						}
-					} else {
-						$('nav#main').css('marginTop', 10);
 					}
 				}
 			});
