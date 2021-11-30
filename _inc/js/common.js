@@ -770,8 +770,7 @@ var WDGNavFunctions = (function ($) {
 						var lengthInfoOrganizations = infoDecoded['organizationlist'].length;
 						for (var i = 0; i < lengthInfoOrganizations; i++) {
 							itemOrganization = infoDecoded['organizationlist'][i];
-							// itemOrganization['wpref']
-							// itemOrganization['name']
+							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemOrganization['wpref'] + '" class="project-list-item' + (itemOrganization['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemOrganization['name'] + '</a></li>');
 						}
 
 						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {

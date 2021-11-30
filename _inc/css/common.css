@@ -619,7 +619,7 @@ nav#main div#menu .wpml-ls {
 
 .submenu-style ul.submenu-list {
 	max-height: 400px;
-	overflow-y: auto;
+	overflow-y: scroll;
 	margin: 0px;
 	padding-left: 0px;
 	list-style: none;
@@ -835,8 +835,9 @@ ul.project-list a.needs-authentication:after {
 	text-align: left;
 	padding: 26px;
 	width: 270px;
-	height: 100vh;
+	height: 85vh;
 	border-left: 1px solid #c2c2c2;
+	overflow-y: scroll;
 }
 #submenu-user #submenu-user-hello {
 	color: #c2c2c2;
