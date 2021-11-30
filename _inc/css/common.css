@@ -633,7 +633,6 @@ nav#main > div#menu .submenu-style ul.submenu-list li a {
 	color: #333333;
 	height: auto;
 	line-height: 20px;
-	padding: 10px 10px;
 	border-bottom: 1px solid #c2c2c2;
 }
 nav#main > div#menu .submenu-style ul.submenu-list li a:hover {
@@ -854,15 +853,22 @@ ul.project-list a.needs-authentication:after {
 }
 nav#main > div#menu #submenu-user ul.submenu-list li {
 	border-bottom: 1px solid #c2c2c2;
-	padding: 15px 0 15px 10px;
+	padding: 25px 0 25px 10px;
 }
 nav#main > div#menu #submenu-user ul.submenu-list li a {
 	margin: 0;
 	border-bottom: 0;
 	line-height: auto;
 }
-nav#main > div#menu #submenu-user ul.submenu-list li:first-of-type a {
-	padding: 0;
+nav#main > div#menu #submenu-user ul.submenu-list .submenu-title {
+	display: inline-block;
+	padding-top: 10px;
+	color: #c2c2c2;
+	font-size: 14px;
+	font-weight: bold;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .hidden {
+	display: none;
 }
 nav#main > div#menu #submenu-user ul.submenu-list .wallet-amount-header {
 	text-transform: none;

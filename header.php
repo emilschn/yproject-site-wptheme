@@ -254,6 +254,7 @@
 							<ul class="submenu-list">
 								<li><a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
 								<span class="wallet-amount-header"><b><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span></li>
+								<span class="submenu-title hidden">Tableaux de bord des projets</span>
 							</ul>
 							<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
 						</div>

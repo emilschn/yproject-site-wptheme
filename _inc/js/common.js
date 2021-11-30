@@ -763,7 +763,8 @@ var WDGNavFunctions = (function ($) {
 						var lengthInfoProjects = infoDecoded['projectlist'].length;
 						for (var i = 0; i < lengthInfoProjects; i++) {
 							itemProject = infoDecoded['projectlist'][i];
-							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title').removeClass('hidden');
+							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="project-list-item' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
 						}
 
 						var lengthInfoOrganizations = infoDecoded['organizationlist'].length;
