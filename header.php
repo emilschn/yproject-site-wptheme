@@ -252,9 +252,16 @@
 						<div class="menu-connected hidden">
 							<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
 							<ul class="submenu-list">
-								<li><a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
-								<span class="wallet-amount-header"><b><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span></li>
-								<span class="submenu-title hidden">Tableaux de bord des projets</span>
+								<li>
+									<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
+									<span class="wallet-amount-header"><b><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span>
+									<div class="authentication-alert hidden">
+										<img src="<?php echo $stylesheet_directory_uri; ?>/images/exclamation-point.png" alt="loading">
+										<span><?php _e( 'account.AUTHENTICATION_HEADER', 'yproject' ); ?></span>
+										<a><?php _e( 'account.AUTHENTICATION_HEADER_LINK', 'yproject' ); ?></a>
+									</div>
+								</li>
+								<span class="submenu-title hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></span>
 							</ul>
 							<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
 						</div>

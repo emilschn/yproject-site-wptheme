@@ -524,6 +524,15 @@ msgstr "My personal account"
 msgid "account.WALLET_HEADER"
 msgstr "in my wallet"
 
+msgid "account.AUTHENTICATION_HEADER"
+msgstr "To invest on WEDOGOOD and reclaim your royalties, you must be authenticated."
+
+msgid "account.AUTHENTICATION_HEADER_LINK"
+msgstr "Continue my authentication"
+
+msgid "account.DASHBOARDS_HEADER"
+msgstr "Projects dashboards"
+
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Return to a private project"
 

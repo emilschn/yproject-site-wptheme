@@ -869,7 +869,7 @@ nav#main > div#menu #submenu-user ul.submenu-list .submenu-title {
 	font-weight: bold;
 }
 nav#main > div#menu #submenu-user ul.submenu-list .hidden {
-	display: none;
+	display: none !important;
 }
 nav#main > div#menu #submenu-user ul.submenu-list .wallet-amount-header {
 	text-transform: none;
@@ -879,6 +879,28 @@ nav#main > div#menu #submenu-user a.button {
 	color: #fff;
 	margin-top: 15px;
 	margin-left: 0;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert {
+	border: 1px solid #F8CACA;
+	padding: 15px;
+	text-transform: none;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	margin-top: 15px;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert img {
+	height: 40px;
+	margin-right: 10px;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert a {
+	color: #EA4F51;
+	text-transform: none;
+	text-decoration: underline;
+	font-size: 10pt;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert span {
+	flex: 1 0 0;
 }
 
 /* MENU BURGER */

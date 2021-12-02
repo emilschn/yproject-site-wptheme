@@ -754,6 +754,7 @@ var WDGNavFunctions = (function ($) {
 						$('#menu .btn-user').addClass('connected').removeClass('not-connected');
 						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
 							$('#menu .btn-user').addClass('needs-authentication');
+							$('#submenu-user.not-connected .menu-connected .submenu-list li div.authentication-alert').removeClass('hidden');
 						}
 						$('#menu .btn-user img').remove();
 						$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);

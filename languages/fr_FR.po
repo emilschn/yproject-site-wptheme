@@ -519,6 +519,15 @@ msgstr "Mon compte personnel"
 msgid "account.WALLET_HEADER"
 msgstr "dans mon porte-monnaie"
 
+msgid "account.AUTHENTICATION_HEADER"
+msgstr "Pour investir sur WEDOGOOD et récupérer vos royalties, vous devez être authentifié."
+
+msgid "account.AUTHENTICATION_HEADER_LINK"
+msgstr "Continuer mon authentification"
+
+msgid "account.DASHBOARDS_HEADER"
+msgstr "Tableaux de bord des projets"
+
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Retourner vers un projet privé"
 
