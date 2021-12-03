@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-11-08 16:29+0100\n"
+"PO-Revision-Date: 2021-12-03 11:50+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -700,6 +700,9 @@ msgstr "Modify my bank details"
 
 msgid "account.bank.BANK_DETAILS_AWAITING_VALIDATION"
 msgstr "Bank details awaiting validation"
+
+msgid "account.bank.BANK_DETAILS_AWAITING_FILE"
+msgstr "The file containing your IBAN has not been sent yet"
 
 msgid "account.bank.BANK_DETAILS_DISABLED"
 msgstr "Bank details disabled"
