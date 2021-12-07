@@ -116,12 +116,12 @@ if ( $page_controler->is_iban_validated() ): ?>
 				<?php endforeach; ?>
 			<?php endif; ?>
 
-			<?php foreach ( $fields_file as $field ): ?>
+			<?php foreach ( $fields_iban as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
 
-			<?php foreach ( $fields_iban as $field ): ?>
+			<?php foreach ( $fields_file as $field ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
@@ -231,6 +231,31 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 			<?php endforeach; ?>
 		<?php endif; ?>
 
+		<?php if ( empty( $WDGUser_lw_bank_status ) || $WDGUser_lw_bank_status == WDGUser::$iban_status_disabled || $WDGUser_lw_bank_status == WDGUser::$iban_status_rejected ): ?>
+			<?php foreach ( $fields_iban as $field ): ?>
+				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
+			<?php endforeach; ?>
+
+		<?php elseif ( $WDGUser_lw_bank_status == WDGUser::$iban_status_waiting ): ?>
+			<?php
+			$current_filelist_bank = WDGKYCFile::get_list_by_owner_id( $page_controler->get_current_user()->get_wpref(), WDGKYCFile::$owner_user, WDGKYCFile::$type_bank );
+			$current_file_bank = $current_filelist_bank[0];
+			$bank_file_path = ( empty( $current_file_bank ) ) ? '' : $current_file_bank->get_public_filepath();
+			?>
+			<div>
+				<?php if ( !empty( $bank_file_path ) ): ?>
+				<div class="wdg-message error">
+					<?php _e( 'account.bank.BANK_DETAILS_AWAITING_VALIDATION', 'yproject' ); ?>
+				</div>
+				<?php else: ?>
+				<div class="wdg-message error">
+					<?php _e( 'account.bank.BANK_DETAILS_AWAITING_FILE', 'yproject' ); ?>
+				</div>
+				<?php endif; ?>
+			</div>
+		<?php endif; ?>
+
 		<?php if ( $WDGUser_lw_bank_document_status == LemonwayDocument::$document_status_waiting ): ?>
 			<div>
 				<div class="wdg-message error">
@@ -242,19 +267,6 @@ elseif( $page_controler->is_iban_waiting() ): ?>
 				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 			<?php endforeach; ?>
-		<?php endif; ?>
-
-		<?php if ( empty( $WDGUser_lw_bank_status ) || $WDGUser_lw_bank_status == WDGUser::$iban_status_disabled || $WDGUser_lw_bank_status == WDGUser::$iban_status_rejected ): ?>
-			<?php foreach ( $fields_iban as $field ): ?>
-				<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-				<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
-			<?php endforeach; ?>
-		<?php elseif ( $WDGUser_lw_bank_status == WDGUser::$iban_status_waiting ): ?>
-			<div>
-				<div class="wdg-message error">
-					<?php _e( 'account.bank.BANK_DETAILS_AWAITING_VALIDATION', 'yproject' ); ?>
-				</div>
-			</div>
 		<?php endif; ?>
 		
 		<p class="align-left">
