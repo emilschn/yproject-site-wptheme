@@ -34,7 +34,6 @@ WDGCampaignTurnoverSimulator.prototype.initAdjustments = function () {
 
 	if ($('#field-documents').length > 0) {
 		$('#field-documents .select-multiple-items label.radio-label').click(function () {
-			console.log('checked');
 			// Dans un setTimeout, sinon l'événement est déclenché avant que la checkbox soit considérée comme cochée
 			setTimeout(function () { self.refreshAdjustmentDocumentsTurnover(); }, 800);
 		});
