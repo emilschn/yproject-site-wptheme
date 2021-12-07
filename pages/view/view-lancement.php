@@ -34,7 +34,6 @@
 				  data-phonenumber="<?php echo $page_controler->get_user_phone(); ?>"
 				  data-organame="<?php echo $page_controler->get_organization_name(); ?>"
 				  data-orgaemail="<?php echo $page_controler->get_organization_email(); ?>"
-				  data-projectname="Projet de <?php echo $page_controler->get_organization_name(); ?>"
 				  data-existingprojects='<?php echo $existingprojects; ?>'
 				  data-existingorganisations='<?php echo $user_organisations; ?>'
 				  data-urlcgu='<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/cgu' ); ?>'
