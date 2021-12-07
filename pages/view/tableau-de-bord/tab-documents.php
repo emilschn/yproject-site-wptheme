@@ -27,6 +27,8 @@ $today_date = new DateTime();
 				<br>
 				Champs libre : <input type="text" name="free_field" size="50" value="" placeholder="Attestation temporaire XXX ; Annule et remplace l'attestation du XX/XX/XXXX, ...">
 				<br>
+				Frais complémentaires : <input type="text" name="additionnal_fees" value="" placeholder="50"> € TTC
+				<br>
 				<button class="button red"><?php _e( "Reg&eacute;n&eacute;rer l'attestation de lev&eacute;e de fonds", 'yproject' ); ?></button>
 			</div>
 		</form>
