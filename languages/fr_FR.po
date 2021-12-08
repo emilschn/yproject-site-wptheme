@@ -696,6 +696,9 @@ msgstr "Modifier mon RIB"
 msgid "account.bank.BANK_DETAILS_AWAITING_VALIDATION"
 msgstr "Coordonn&eacute;es bancaires en attente de validation"
 
+msgid "account.bank.BANK_DETAILS_AWAITING_FILE"
+msgstr "Le fichier comprenant votre RIB n'a pas été transmis"
+
 msgid "account.bank.BANK_DETAILS_DISABLED"
 msgstr "Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es"
 
