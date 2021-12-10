@@ -114,7 +114,9 @@
 		<meta charset="<?php bloginfo( 'charset' ); ?>" />
 		<meta name="robots" content="<?php bloginfo( 'html_type' ); ?>">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<?php if ( $page_controler->get_page_description() !== FALSE ): ?>
 		<meta name="description" content="<?php echo $page_controler->get_page_description(); ?>" />
+		<?php endif; ?>
 		<meta name="google-site-verification" content="GKtZACFMpEC-1TO9ox4c85RJgfWRm7gNv4c0QrNKYgM" />
 		
 		<!--[if lt IE 9]>
