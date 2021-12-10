@@ -34,7 +34,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 							<span class="footer-subtitle clickable border-hidden"><?php _e( 'footer.LEGAL_INFO', 'yproject' ); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'fourth-footer-widget-area' ); ?>
-								<a class="link change-cookies" href="#"><?php _e( 'footer.MODIFY_COOKIE_CHOICES', 'yproject' ); ?></a>
+								<li><a class="link change-cookies" href="#"><?php _e( 'footer.MODIFY_COOKIE_CHOICES', 'yproject' ); ?></a></li>
 							</ul>
 						</div>
 					<?php endif; ?>
