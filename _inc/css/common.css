@@ -651,6 +651,13 @@ nav#main > div#menu > .wpml-ls {
 	text-transform: none;
 	padding: 8px;
 }
+.submenu-style ul.submenu-list .empty-list-info a {
+	color: #EA4F51;
+	border-bottom: none;
+}
+.submenu-style ul.submenu-list .empty-list-info a:hover {
+	background: none;
+}
 
 #submenu-switch-lang {
 	position: relative;
