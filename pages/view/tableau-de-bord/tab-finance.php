@@ -292,6 +292,30 @@
 			"admin_theme"	=> $page_controler->can_access_admin(),
 			"visible"		=> $page_controler->can_access_admin()
 		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_total_previous_funding",
+			"type"			=> "number",
+			"label"			=> "Total des fonds déjà réunis",
+			"value"			=> $page_controler->get_campaign()->total_previous_funding(),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_total_previous_funding_description",
+			"type"			=> "editor",
+			"label"			=> "Description des fonds déjà réunis",
+			"value"			=> $page_controler->get_campaign()->total_previous_funding_description(),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_turnover_previous_year",
+			"type"			=> "number",
+			"label"			=> "Chiffre d'affaires de l'année précédant la levée de fonds",
+			"value"			=> $page_controler->get_campaign()->turnover_previous_year(),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
 		?>
 
 		<table>

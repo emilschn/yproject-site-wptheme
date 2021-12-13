@@ -101,9 +101,13 @@ $implementation_content = apply_filters('the_content', $implementation);
 			<div id="project-content-economic_model" class="projects-desc-content" data-md5="<?php echo md5( $campaign->economic_model() ); ?>">
 				<h3><?php _e('Donn&eacute;es financi&egrave;res', 'yproject'); ?></h3>
 				<div class="zone-content">
-					<?php echo $economic_model_content; ?>
+					<?php if ( $campaign->get_display_automatic_economic_model() ): ?>
+						<?php locate_template( array("projects/single/description-economic-model.php"), true ); ?>
+					<?php else: ?>
+						<?php echo $economic_model_content; ?>
+					<?php endif; ?>
 				</div>
-				<?php if ($can_modify) { ?>
+				<?php if ($can_modify && !$campaign->get_display_automatic_economic_model()) { ?>
 				<div class="zone-edit hidden">
 					<?php wp_editor( $economic_model, 'wdg-input-economic_model', $editor_params ); ?>
 				</div>
