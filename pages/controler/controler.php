@@ -120,6 +120,13 @@ class WDG_Page_Controler {
 			while ( have_posts() ) {
 				the_post();
 				global $post;
+				// Si il y a une description Yoast définie, on ne rajoute pas celle de WDG
+				$yoast_description = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', TRUE );
+				if ( !empty( $yoast_description ) ) {
+					$this->page_description = FALSE;
+					return;
+				}
+				// On cherche si il y a une meta "metadescription" définie pour remplacer celle par défaut
 				$meta_description = get_post_meta( $post->ID, 'metadescription', TRUE );
 				if ( !empty( $meta_description ) ) {
 					$this->page_description = $meta_description;
