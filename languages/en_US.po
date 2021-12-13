@@ -960,13 +960,19 @@ msgid "account.subscriptions.SUBSCRIPTIONS_OF"
 msgstr "Subscriptions of"
 
 msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
-msgstr "You can reinvest the royalties you receive in Positive Savings projects."
+msgstr "Placez automatiquement le contenu de votre porte-monnaie électronique sur les livrets d'Epargne Positive de votre choix."
+
+msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
+msgstr "Votre porte-monnaie se remplit lorsque vous recevez des royalties ou que vous le rechargez par virement (y compris virement automatique). Les investissements sont déclenchés tous les trimestres uniquement si le montant disponible est supérieur à 10€."
+
+msgid "account.subscriptions.THIRD_INFORMATION_SUBSCRIPTIONS"
+msgstr "It is without commitment and changeable at any time."
+
+msgid "account.subscriptions.FOURTH_INFORMATION_SUBSCRIPTIONS"
+msgstr "Découvrir les livrets disponibles"
 
 msgid "account.subscriptions.VIEW_INVESTMENTS"
 msgstr "View investments history"
-
-msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
-msgstr "It is without commitment, changeable at any time and automatic."
 
 msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
 msgstr "+ Add new subscription"

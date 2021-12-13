@@ -119,6 +119,17 @@ $today_date = new DateTime();
 			</div>
 		</form>
 		<br><br>
+
+		<!-- TODO : limiter l'apparition de ce formulaire à un statut échec ? -->
+		<form action="<?php echo admin_url( 'admin-post.php?action=generate_recover_files'); ?>" method="post" id="generate_recover_files" class="field admin-theme">
+				<?php _e( "Test ... ", 'yproject' ); ?>
+				<div class="align-center">
+					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+					<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer une attestation de créance et une liste de l'état des versements", 'yproject' ); ?></button>
+				</div>
+			</form>
+
+
 	<?php endif; ?>
 	
 </div>

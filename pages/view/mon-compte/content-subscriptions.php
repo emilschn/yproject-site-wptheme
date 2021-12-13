@@ -8,7 +8,9 @@ $WDGUser_displayed = $page_controler->get_current_user();
 
 <p class="align-center">
 	<?php _e( 'account.subscriptions.INFORMATION_SUBSCRIPTIONS', 'yproject' ); ?><br>
-	<?php _e( 'account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS', 'yproject' ); ?>
+	<?php _e( 'account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS', 'yproject' ); ?><br>
+	<?php _e( 'account.subscriptions.THIRD_INFORMATION_SUBSCRIPTIONS', 'yproject' ); ?><br>
+	<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>" target="_blank"><?php _e( 'account.subscriptions.FOURTH_INFORMATION_SUBSCRIPTIONS', 'yproject' ); ?></a>
 </p>
 
 
