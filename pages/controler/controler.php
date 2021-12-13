@@ -124,7 +124,6 @@ class WDG_Page_Controler {
 				$yoast_description = get_post_meta( $post->ID, '_yoast_wpseo_metadesc', TRUE );
 				if ( !empty( $yoast_description ) ) {
 					$this->page_description = FALSE;
-					return;
 				}
 				// On cherche si il y a une meta "metadescription" définie pour remplacer celle par défaut
 				$meta_description = get_post_meta( $post->ID, 'metadescription', TRUE );
