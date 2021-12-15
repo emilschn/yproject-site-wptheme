@@ -120,14 +120,14 @@ $today_date = new DateTime();
 		</form>
 		<br><br>
 
-		<!-- TODO : limiter l'apparition de ce formulaire à un statut échec ? -->
-		<form action="<?php echo admin_url( 'admin-post.php?action=generate_recover_files'); ?>" method="post" id="generate_recover_files" class="field admin-theme">
-				<?php _e( "Test ... ", 'yproject' ); ?>
-				<div class="align-center">
-					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
-					<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer une attestation de créance et une liste de l'état des versements", 'yproject' ); ?></button>
-				</div>
-			</form>
+		<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+			<div class="field admin-theme">
+				<?php _e( "En cas de recouvrement", 'yproject' ); ?><br><br>
+				<?php $campaign_debt_files = new WDGCampaignDebtFiles( $page_controler->get_campaign() ); ?>
+				<a href="<?php echo $campaign_debt_files->get_recover_certificate(); ?>?time=<?php echo time(); ?>" download="debt-certificate.pdf" class="button admin-theme"><?php _e( "Attestation de cr&eacute;ance", 'yproject' ); ?></a>
+				<a href="<?php echo $campaign_debt_files->get_recover_list(); ?>?time=<?php echo time(); ?>" download="investors-list.csv" class="button admin-theme"><?php _e( "Liste de l'&eacute;tat des versements", 'yproject' ); ?></a>
+			</div>
+		<?php endif; ?>
 
 
 	<?php endif; ?>
