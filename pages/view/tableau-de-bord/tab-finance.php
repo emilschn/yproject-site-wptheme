@@ -4,7 +4,7 @@
 <h2><?php _e( "Financement", 'yproject' ); ?></h2>
 
 <div class="db-form v3 full center bg-white">
-<	<form id="projectfunding_form" class="ajax-db-form" data-action="save_project_funding" <?php if (!$page_controler->get_campaign()->is_preparing()){ ?>data-confirm="true"<?php } ?> novalidate>
+	<form id="projectfunding_form" class="ajax-db-form" data-action="save_project_funding" <?php if (!$page_controler->get_campaign()->is_preparing()){ ?>data-confirm="true"<?php } ?> novalidate>
 		<?php
 		DashboardUtility::create_field(array(
 			'id'			=> 'new_minimum_goal',
@@ -305,7 +305,7 @@
 			"id"			=> "new_total_previous_funding_description",
 			"type"			=> "editor",
 			"label"			=> "Description des fonds déjà réunis",
-			"value"			=> $page_controler->get_campaign()->total_previous_funding_description(),
+			"value"			=> html_entity_decode( $page_controler->get_campaign()->total_previous_funding_description() ),
 			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 		));
 
@@ -314,6 +314,30 @@
 			"type"			=> "number",
 			"label"			=> "Chiffre d'affaires de l'année précédant la levée de fonds",
 			"value"			=> $page_controler->get_campaign()->turnover_previous_year(),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_working_capital_sufficient",
+			"type"			=> "check",
+			"label"			=> "La société dispose d'un fonds de roulement net suffisant pour les 6 prochains mois",
+			"value"			=> $page_controler->get_campaign()->has_sufficient_working_capital(),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_working_capital_subsequent",
+			"type"			=> "editor",
+			"label"			=> "Sources de financement à l'étude pour les 6 mois ultérieurs",
+			"value"			=> html_entity_decode( $page_controler->get_campaign()->working_capital_subsequent() ),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_financial_risks_others",
+			"type"			=> "editor",
+			"label"			=> "Autres facteurs de risque",
+			"value"			=> html_entity_decode( $page_controler->get_campaign()->financial_risks_others() ),
 			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 		));
 		?>
