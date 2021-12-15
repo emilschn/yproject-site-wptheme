@@ -348,6 +348,7 @@
 				<tr>
 					<td></td>
 					<td><?php _e( "CA pr&eacute;visionnel", 'yproject' ); ?></td>
+					<td><?php _e( "Nb ventes pr&eacute;visionnelles", 'yproject' ); ?></td>
 					<td>
 						<?php _e( "Montant des Royalties reversées", 'yproject' ); ?><br>
 						<?php _e( "pour", 'yproject' ); ?> <span id="total-funding">---</span> <?php _e( "investis", 'yproject' ); ?>
@@ -357,6 +358,7 @@
 
 			<?php
 			$estimated_turnover = $page_controler->get_campaign()->estimated_turnover();
+			$estimated_sales = $page_controler->get_campaign()->estimated_sales();
 			$is_euro = ( $page_controler->get_campaign()->estimated_turnover_unit() == 'euro' );
 			$data_symbol = ( $is_euro ) ? '€' : '%';
 			?>
@@ -364,17 +366,21 @@
 				<?php if ( !empty( $estimated_turnover ) ): ?>
 					<?php $i = 0; ?>
 					<?php foreach ( $estimated_turnover as $year => $turnover ): ?>
+						<?php $sales = !empty( $estimated_sales[ $year ] ) ? $estimated_sales[ $year ] : '0'; ?>
 						<tr>
 							<td>
 								Année <span class="year"><?php echo ( $i+1 ); ?></span>
 							</td>
-							<td class="field field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>" data-type="number">
+							<td class="field field-value" data-id="new_estimated_turnover_<?php echo $i;?>" data-type="number">
 								<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
 									<input type="text" pattern="\d*" value="<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />&nbsp;<?php echo $data_symbol; ?>
 								<?php else: ?>
 									<?php echo $turnover; ?>
 									<span style="padding-right: 70px;"><?php echo $data_symbol; ?></span>
 								<?php endif; ?>
+							</td>
+							<td class="field field-value" data-id="new_estimated_sales_<?php echo $i;?>" data-type="number">
+								<input type="text" pattern="\d*" value="<?php echo $sales; ?>" id="new_estimated_sales_<?php echo $i;?>">
 							</td>
 							<td id="roi-amount-<?php echo $i;?>" class="like-input-center">
 								0 €
