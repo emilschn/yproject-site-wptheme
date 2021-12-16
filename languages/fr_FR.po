@@ -951,12 +951,6 @@ msgstr "pr&eacute;visionnel"
 msgid "account.subscriptions.SUBSCRIPTIONS_OF"
 msgstr "Abonnements de"
 
-msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
-msgstr "Vous pouvez réinvestir les royalties que vous recevez dans les projets d'Épargne Positive."
-
-msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
-msgstr "C'est sans engagement, modifiable à tout moment et automatique."
-
 msgid "account.subscriptions.VIEW_INVESTMENTS"
 msgstr "Voir l'historique des investissements"
 
