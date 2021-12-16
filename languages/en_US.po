@@ -732,7 +732,7 @@ msgid "account.documents.DOCUMENTS_OF"
 msgstr "Documents of"
 
 msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
-msgstr "My yearly transactions certificates"
+msgstr "My registered annual exemptions"
 
 msgid "account.documents.DOWNLOAD_CERTIFICATE"
 msgstr "Download the certificate"
@@ -768,10 +768,10 @@ msgid "account.documents.DOWNLOAD_EXEMPTION_FILE"
 msgstr "Download the exemption"
 
 msgid "account.documents.ASK_ANNUAL_EXEMPTION"
-msgstr "Apply for an annual exemption"
+msgstr "Apply for a new annual exemption"
 
 msgid "account.documents.SEND_ANNUAL_EXEMPTION"
-msgstr "Send my annual exemption application"
+msgstr "Import a file""
 
 msgid "account.documents.SAVE_ANNUAL_EXEMPTION"
 msgstr "Register my exemption request"

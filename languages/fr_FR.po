@@ -727,7 +727,7 @@ msgid "account.documents.DOCUMENTS_OF"
 msgstr "Documents de"
 
 msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
-msgstr "Mes attestations de transactions annuelles"
+msgstr "Mes dispenses déjà enregistrées"
 
 msgid "account.documents.DOWNLOAD_CERTIFICATE"
 msgstr "T&eacute;l&eacute;charger l'attestation"
@@ -763,10 +763,10 @@ msgid "account.documents.DOWNLOAD_EXEMPTION_FILE"
 msgstr "T&eacute;l&eacute;charger la dispense"
 
 msgid "account.documents.ASK_ANNUAL_EXEMPTION"
-msgstr "Faire ma demande de dispense annuelle"
+msgstr "Faire une nouvelle demande de dispense en ligne"
 
 msgid "account.documents.SEND_ANNUAL_EXEMPTION"
-msgstr "Envoyer ma demande de dispense annuelle"
+msgstr "Importer un fichier"
 
 msgid "account.documents.SAVE_ANNUAL_EXEMPTION"
 msgstr "Enregistrer ma demande de dispense"
