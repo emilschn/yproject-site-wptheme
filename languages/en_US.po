@@ -2653,6 +2653,12 @@ msgstr "Payments from these companies are pending:"
 msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
 msgstr "These companies have not yet entered the declaration phase:"
 
+msgid "email.royalties.WALLET_AMOUNT_1"
+msgstr "You currently have "
+
+msgid "email.royalties.WALLET_AMOUNT_2"
+msgstr " € in your e-wallet."
+
 msgid "email.royalties.FUNDRAISING"
 msgstr "FUNDRAISING"
 
