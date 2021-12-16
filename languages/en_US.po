@@ -959,14 +959,8 @@ msgstr "Authenticate my account"
 msgid "account.subscriptions.SUBSCRIPTIONS_OF"
 msgstr "Subscriptions of"
 
-msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
-msgstr "You can reinvest the royalties you receive in Positive Savings projects."
-
 msgid "account.subscriptions.VIEW_INVESTMENTS"
 msgstr "View investments history"
-
-msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
-msgstr "It is without commitment, changeable at any time and automatic."
 
 msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
 msgstr "+ Add new subscription"
