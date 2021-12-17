@@ -7,11 +7,11 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr_FR\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -3179,6 +3179,139 @@ msgstr "Afin de r&eacute;pondre aux recommandations des autorit&eacute;s financi
 
 msgid "vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet."
 msgstr "vous devez &ecirc;tre inscrit et connect&eacute; pour acc&eacute;der à la totalit&eacute; du projet."
+
+# THEME - projects/single/description-economic-model.php
+msgid "project.single.description.economic.TARGET_PROFITABILITY"
+msgstr "Rentabilité visée"
+
+msgid "project.single.description.economic.TARGET_PROFITABILITY_RATIO"
+msgstr "x%s en %s ans"
+
+msgid "project.single.description.economic.TARGET_PROFITABILITY_PERCENT"
+msgstr "(+%s %% bruts)"
+
+msgid "project.single.description.economic.TARGET_PROFITABILITY_RISK"
+msgstr "Risque de perte intégrale de l’investissement, gain maximum : %s"
+
+msgid "project.single.description.economic.TARGET_PROFITABILITY_CALCULATE"
+msgstr "Calculer mon rendement"
+
+msgid "project.single.description.economic.RISK"
+msgstr "Risque"
+
+msgid "project.single.description.economic.RISK_VOTE"
+msgstr "En cours d'évaluation"
+
+msgid "project.single.description.economic.RISK_VOTE_DESCRIPTION"
+msgstr "(le projet est en phase d’évaluation par les internautes)"
+
+msgid "project.single.description.economic.RISK_VERY_WEAK"
+msgstr "Risque très faible"
+
+msgid "project.single.description.economic.RISK_WEAK"
+msgstr "Risque faible"
+
+msgid "project.single.description.economic.RISK_MIDDLE"
+msgstr "Risque modéré"
+
+msgid "project.single.description.economic.RISK_STRONG"
+msgstr "Risque fort"
+
+msgid "project.single.description.economic.RISK_VERY_STRONG"
+msgstr "Risque très fort"
+
+msgid "project.single.description.economic.RISK_RATE_DESCRIPTION"
+msgstr "évalué à %s/5 par les internautes lors de la phase d'évaluation"
+
+msgid "project.single.description.economic.ROYALTIES_PER_QUARTER"
+msgstr "Royalties versées par trimestre"
+
+msgid "project.single.description.economic.ROYALTIES_PER_QUARTER_MAX"
+msgstr "%s %% maximum"
+
+msgid "project.single.description.economic.ROYALTIES_PER_QUARTER_MAX_DESCRIPTION"
+msgstr "%% de chiffre d’affaires versé à l’ensemble des investisseurs, pour %s € levés, proportionnel au montant levé"
+
+msgid "project.single.description.economic.PROJECT_REVENUES"
+msgstr "Revenus du projet"
+
+msgid "project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR"
+msgstr "Sur les 12 mois précédents la levée de fonds, nous avons réalisé %s € de chiffre d'affaires."
+
+msgid "project.single.description.economic.YOUR_INVESTMENT"
+msgstr "Votre investissement"
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_DESCRIPTION_1"
+msgstr "En investissant, vous souscrivez auprès de %s à une redevance sur le chiffre d'affaires de l'entreprise, proportionnelle à votre investissement."
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_DESCRIPTION_2"
+msgstr "Le total des investisseurs recevra %s %% du CA réalisé chaque année pour une levée de fonds de %s €."
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_DESCRIPTION_3"
+msgstr "Si %s réalise son prévisionnel, le rendement pour chaque investisseur sera de %s %% brut en %s ans."
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_1"
+msgstr "Que se passe-t-il si le prévisionnel n’est pas atteint ?"
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_1_ANSWER"
+msgstr "Au cas où le prévisionnel ne serait pas atteint au bout de %s ans et où l’activité continuerait, %s continuera à verser les royalties jusqu’à remboursement total de la somme investie."
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_2"
+msgstr "A partir de quand commencent les versements ?"
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_2_ANSWER"
+msgstr "La Redevance est cédée sur une durée de %s ans à compter du %s et sera versée aux investisseurs chaque trimestre."
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_YOUR_CONTRACT"
+msgstr "Tous ces éléments apparaitront dans votre contrat lors de l'investissement."
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_STANDARD_CONTRACT"
+msgstr "Accéder au contrat type"
+
+msgid "project.single.description.economic.YOUR_INVESTMENT_STANDARD_CONTRACT_DESCRIPTION"
+msgstr "Ce contrat est un modèle, il ne fait pas office de contrat réel."
+
+msgid "project.single.description.economic.TRANSFERS_TIMELINE"
+msgstr "Échéancier prévisionnel des versements"
+
+msgid "project.single.description.economic.TRANSFERS_TIMELINE_DESCRIPTION"
+msgstr "Attention : ces chiffres se basent sur une estimation de notre chiffre d’affaires. A vous d’évaluer le prévisionnel et la stratégie pour estimer si vous pouvez espérer gagner plus ou moins que le rendement annuel annoncé."
+
+msgid "project.single.description.economic.TRANSFERS_TIMELINE_TABLE_REVENUES"
+msgstr "Rémunération estimée sur les revenus de :"
+
+msgid "project.single.description.economic.TRANSFERS_TIMELINE_TABLE_DATE"
+msgstr "Date de versement"
+
+msgid "project.single.description.economic.RISKS_REASONS"
+msgstr "Facteurs de risque"
+
+msgid "project.single.description.economic.RISKS_REASONS_DESCRIPTION_1"
+msgstr "Principaux facteurs de risque liés à l'activité et au projet"
+
+msgid "project.single.description.economic.RISKS_REASONS_DESCRIPTION_2"
+msgstr "Nous avons déjà réuni %s €"
+
+msgid "project.single.description.economic.RISKS_REASON_FINANCE"
+msgstr "Risque lié à la situation financière de la société"
+
+msgid "project.single.description.economic.RISKS_REASON_FINANCE_DESCRIPTION"
+msgstr "Actuellement, avant la réalisation de la levée de fonds de la présente offre, la société %s, d’un fonds de roulement net suffisant pour faire face à ses obligations et à ses besoins de trésorerie pour les 6 prochains mois."
+
+msgid "project.single.description.economic.RISKS_REASON_FINANCE_DESCRIPTION_YES"
+msgstr "dispose"
+
+msgid "project.single.description.economic.RISKS_REASON_FINANCE_DESCRIPTION_NO"
+msgstr "ne dispose pas"
+
+msgid "project.single.description.economic.RISKS_REASON_FINANCE_SUBSEQUENT"
+msgstr "Sources de financement à l'étude en lien avec le projet présenté pour les 6 mois ultérieurs :"
+
+msgid "project.single.description.economic.RISKS_REASON_NEW_ONES"
+msgstr "N.B. : avec le temps, de nouveaux risques pourront apparaître et ceux présentés pourront évoluer."
+
+msgid "project.single.description.economic.RISKS_REASON_CONTACT"
+msgstr "Pour recevoir notre business plan détaillé, contactez-nous à %s"
 
 # THEME - projects/single/news.php
 msgid "Aucune actualit&eacute; pour le moment."
