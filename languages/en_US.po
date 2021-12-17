@@ -1554,6 +1554,9 @@ msgstr "This will identify the project in which you want to invest in."
 msgid "invest.mean-payment.wire.ONCE_WIRE_DONE"
 msgstr "Your transfer will be effective once Lemon Way receives the funds."
 
+msgid "invest.mean-payment.wire.CONFIRM_INVESTMENT"
+msgstr "Confirm my investment"
+
 msgid "invest.mean-payment.wire.CODE_EXAMPLES"
 msgstr "Example of entering the recipient code for different banks:"
 
