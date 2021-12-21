@@ -266,18 +266,6 @@
 /*******************************************************************************
 * RESPONSIVE MOBILE
 *******************************************************************************/
-@media screen and (max-width: 400px) {
-	#submenu-search {
-		width: -webkit-calc(100% - 8px);
-		width: -moz-calc(100% - 8px);
-		width: calc(100% - 8px);
-	}
-	#submenu-user {
-		width: -webkit-calc(100% - 8px);
-		width: -moz-calc(100% - 8px);
-		width: calc(100% - 8px);
-	}
-}
 
 @media screen and (max-width: 450px) {
 	#label-validate-terms-check-register {

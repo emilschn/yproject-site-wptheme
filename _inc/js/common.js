@@ -479,12 +479,18 @@ var WDGNavFunctions = (function ($) {
 					e.preventDefault();
 					if ($('.btn-user').hasClass('active')) {
 						$('.btn-user').removeClass('active').addClass('inactive');
-						$('#submenu-user').hide();
-					} else {
+						$('#submenu-search, #submenu-user').hide();
+					}
+					else {
 						$('.btn-user').addClass('active').removeClass('inactive');
-						$('#submenu-user').show();
+						if ($(window).width() < 997) {
+							$('#submenu-search').show();
+						}
+						else {
+							$('#submenu-user').show();
+						}
 						$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
-						$('#submenu-search').hide();
+
 					}
 				}
 				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
