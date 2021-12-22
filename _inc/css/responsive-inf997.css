@@ -51,6 +51,22 @@
 	.submenu-style ul.submenu-list {
                 max-height: 200px; /*hauteur max pour mobile 320*480px*/
         }
+
+	/*******************************************************************************
+	* DESCRIPTION AUTOMATIC
+	*******************************************************************************/
+	div.project-description-item div#project-content-economic_model div.zone-content {
+		flex-wrap: wrap;
+		flex-direction: column;
+		padding: 0 26px;
+	}
+	div#project-content-economic_model div.economic-intro.left {
+		width: auto;
+		border-right: 0;
+		border-bottom: 1px solid #c2c2c2;
+		margin-bottom: 20px;
+		padding-bottom: 20px;
+	}
 	
 	footer > .footer-container { 
 		background-image: none; 

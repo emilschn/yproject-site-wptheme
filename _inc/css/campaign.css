@@ -876,6 +876,9 @@ div#project-content-economic_model .campaign-risk:before {
 	font-weight: normal;
 }
 /* Tableau des revenus */
+div#project-content-economic_model .table-container {
+	overflow-x: auto;
+}
 div#project-content-economic_model table {
 	margin: 20px 0 !important;
 }

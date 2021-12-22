@@ -76,30 +76,32 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 <h4><?php _e( 'project.single.description.economic.PROJECT_REVENUES', 'yproject' ); ?></h4><br>
 <p><?php echo sprintf( __( 'project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR', 'yproject' ), UIHelpers::format_number( $campaign->turnover_previous_year() ) ); ?></p>
 
-<table>
-	<thead>
-		<tr>
-			<th></th>
-			<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
-			<th><?php _e( "Ann&eacute;e", 'yproject' ); ?> <?php echo $i; ?></th>
-			<?php endfor; ?>
-		</tr>
-	</thead>
-	<tbody>
-		<tr>
-			<th>Nombre de ventes</th>
-			<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
-			<td><?php echo $estimated_turnover[ $i ]; ?></th>
-			<?php endfor; ?>
-		</tr>
-		<tr>
-			<th>Chiffre d'affaires prévisionnel</th>
-			<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
-			<td><?php echo $estimated_sales[ $i ]; ?></th>
-			<?php endfor; ?>
-		</tr>
-	</tbody>
-</table>
+<div class="table-container">
+	<table>
+		<thead>
+			<tr>
+				<th></th>
+				<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
+				<th><?php _e( "Ann&eacute;e", 'yproject' ); ?> <?php echo $i; ?></th>
+				<?php endfor; ?>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>Nombre de ventes</th>
+				<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
+				<td><?php echo $estimated_turnover[ $i ]; ?></th>
+				<?php endfor; ?>
+			</tr>
+			<tr>
+				<th>Chiffre d'affaires prévisionnel</th>
+				<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
+				<td><?php echo $estimated_sales[ $i ]; ?></th>
+				<?php endfor; ?>
+			</tr>
+		</tbody>
+	</table>
+</div>
 
 <!-- TODO Graphique -->
 
