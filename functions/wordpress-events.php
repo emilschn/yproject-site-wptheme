@@ -432,6 +432,10 @@ class WDG_WordPress_Events {
 			wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery'), ASSETS_VERSION);
 		}
 
+		if ( $post_name == 'equipe' ) {
+			wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/ee-team.js', array('jquery'), ASSETS_VERSION );
+		}
+
 		// Ajout variable JS avec l'url de la page utilisée pour les requêtes Ajax
 		wp_localize_script( 'wdg-script', 'ajax_object', array(
 			'ajax_url'			=> admin_url( 'admin-ajax.php' ),
