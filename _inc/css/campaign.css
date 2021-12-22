@@ -819,24 +819,93 @@ div#content.version-3 .grey-triangle {
 /*******************************************************************************
 * DESCRIPTION AUTOMATIC
 *******************************************************************************/
+div#project-content-economic_model div.zone-content {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	margin-top: 40px;
+}
 div.economic-intro.left {
-	width: 32%;
-	margin-right: 5px;
+	width: 30%;
+	margin-right: 10px;
+	padding-right: 10px;
+	border-right: 1px solid #c2c2c2;
+}
+div.economic-intro.third {
+	border-right: 0;
 }
 div.economic-intro.two-cols.left {
 	width: 49%;
 }
 div.economic-intro.left h5 {
 	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 14px;
+	margin-bottom: 20px;
+	margin-top: 0;
 }
 div.economic-intro.left span.economic-data {
 	font-size: 1.2em;
 	color: #00879B;
+	font-weight: bold;
+}
+div.economic-intro span:not([economic-data]) {
+	font-size: 0.8em;
 }
 div.economic-intro.left span.economic-data-details {
 	font-size: 0.7em;
 }
-
+div#project-content-economic_model h4 {
+	font-weight: bold;
+	font-size: 20px;
+	text-align: left;
+	width: 100%;
+	margin: 50px 0 10px 0;
+}
+div#project-content-economic_model .title-question:before {
+	content: "\25B6";
+	color: #c2c2c2;
+}
+div#project-content-economic_model p {
+	width: 100%;
+	margin: 0;
+}
+div#project-content-economic_model .campaign-risk:before {
+	content: "\26A0";
+	color: #c2c2c2;
+	font-weight: normal;
+}
+/* Tableau des revenus */
+div#project-content-economic_model table {
+	margin: 20px 0 !important;
+}
+div#project-content-economic_model table tbody {
+	font-family: 'Arial', sans-serif;
+}
+div#project-content-economic_model table tbody tr th:first-of-type {
+	text-align: left;
+	font-weight: normal;
+	background-color: #ebebeb;
+}
+div#project-content-economic_model table tbody tr td, div#project-content-economic_model table tbody tr th, div#project-content-economic_model table thead th {
+	padding: 10px;
+}
+div#project-content-economic_model table tbody tr td, div#project-content-economic_model table thead th {
+	border: 1px solid #c2c2c2 !important; 
+}
+div#project-content-economic_model table tbody tr:last-of-type td {
+	color: #00879B;
+}
+div#project-content-economic_model table thead tr:first-of-type th:first-of-type {
+	border: 0 !important;
+}
+/* Tableau des échéances */
+div#project-content-economic_model table.declarations-table thead tr th:first-of-type {
+	border: 1px solid #c2c2c2 !important;
+}
+div#project-content-economic_model table.declarations-table tbody tr:last-of-type td {
+	color: #333;
+}
 /*******************************************************************************
 * NEWS
 *******************************************************************************/

@@ -25,7 +25,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 		<span class="economic-data-details"><?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_PERCENT', 'yproject' ), UIHelpers::format_number( $profitability_percent ) ); ?></span>
 	</span>
 	<br>
-	<?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_RISK', 'yproject' ), $campaign->maximum_profit_str() ); ?>
+	<span><?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_RISK', 'yproject' ), $campaign->maximum_profit_str() ); ?></span>
 	<br>
 	<a href="#"><?php _e( 'project.single.description.economic.TARGET_PROFITABILITY_CALCULATE', 'yproject' ); ?></a>
 </div>
@@ -63,7 +63,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 </div>
 <?php endif; ?>
 
-<div class="economic-intro left <?php if ( $campaign->is_hidden() ) { ?>two-cols<?php } ?>">
+<div class="economic-intro left third <?php if ( $campaign->is_hidden() ) { ?>two-cols<?php } ?>">
 	<h5><?php _e( 'project.single.description.economic.ROYALTIES_PER_QUARTER', 'yproject' ); ?></h5>
 	<span class="economic-data"><?php echo sprintf( __( 'project.single.description.economic.ROYALTIES_PER_QUARTER_MAX', 'yproject' ), UIHelpers::format_number( $campaign->roi_percent_estimated() ) ); ?></span>
 	<br>
@@ -73,7 +73,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 
 
 <?php // Revenus du projet ?>
-<h4><?php _e( 'project.single.description.economic.PROJECT_REVENUES', 'yproject' ); ?></h4>
+<h4><?php _e( 'project.single.description.economic.PROJECT_REVENUES', 'yproject' ); ?></h4><br>
 <p><?php echo sprintf( __( 'project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR', 'yproject' ), UIHelpers::format_number( $campaign->turnover_previous_year() ) ); ?></p>
 
 <table>
@@ -113,12 +113,12 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 	<?php echo sprintf( __( 'project.single.description.economic.YOUR_INVESTMENT_DESCRIPTION_3', 'yproject' ), $WDGOrganization->get_name(), UIHelpers::format_number( $profitability_percent ), $funding_duration ); ?>
 	<br>
 	<br>
-	<strong><?php _e( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_1', 'yproject' ); ?></strong>
+	<strong class="title-question"> <?php _e( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_1', 'yproject' ); ?></strong>
 	<br>
 	<?php echo sprintf( __( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_1_ANSWER', 'yproject' ), $funding_duration, $WDGOrganization->get_name() ); ?>
 	<br>
 	<br>
-	<strong><?php _e( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_2', 'yproject' ); ?></strong>
+	<strong class="title-question"> <?php _e( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_2', 'yproject' ); ?></strong>
 	<br>
 	<?php echo sprintf( __( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_2_ANSWER', 'yproject' ), $funding_duration, $contract_start_date->format( 'd/m/Y' ) ); ?>
 	<br>
@@ -128,7 +128,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 	<br>
 	<a href="<?php echo $file_name_contract_orga; ?>" target="_blank"><?php _e( 'project.single.description.economic.YOUR_INVESTMENT_STANDARD_CONTRACT', 'yproject' ); ?></a>
 	<br>
-	<?php _e( 'project.single.description.economic.YOUR_INVESTMENT_STANDARD_CONTRACT_DESCRIPTION', 'yproject' ); ?>
+	<i><?php _e( 'project.single.description.economic.YOUR_INVESTMENT_STANDARD_CONTRACT_DESCRIPTION', 'yproject' ); ?></i>
 </p>
 
 
@@ -143,7 +143,7 @@ $nb_declarations_per_year = $campaign->get_declararations_count_per_year();
 $nb_months_between_declarations = 12 / $nb_declarations_per_year;
 $timeline_length = $funding_duration * $nb_declarations_per_year;
 ?>
-<table>
+<table class="declarations-table">
 	<thead>
 		<tr>
 			<th><?php _e( 'project.single.description.economic.TRANSFERS_TIMELINE_TABLE_REVENUES', 'yproject' ); ?></th>
@@ -203,7 +203,7 @@ $timeline_length = $funding_duration * $nb_declarations_per_year;
 <?php echo html_entity_decode( $campaign->total_previous_funding_description() ); ?>
 
 <p>
-	<strong><?php _e( 'project.single.description.economic.RISKS_REASON_FINANCE', 'yproject' ); ?></strong>
+	<strong class="campaign-risk"> <?php _e( 'project.single.description.economic.RISKS_REASON_FINANCE', 'yproject' ); ?></strong>
 	<br>
 	<?php $has_finance_str = $campaign->has_sufficient_working_capital() ? __( 'project.single.description.economic.RISKS_REASON_FINANCE_DESCRIPTION_YES', 'yproject' ) : __( 'project.single.description.economic.RISKS_REASON_FINANCE_DESCRIPTION_NO', 'yproject' ); ?>
 	<?php echo sprintf( __( 'project.single.description.economic.RISKS_REASON_FINANCE_DESCRIPTION', 'yproject' ), $has_finance_str ); ?>
@@ -217,7 +217,7 @@ $timeline_length = $funding_duration * $nb_declarations_per_year;
 
 <?php echo html_entity_decode( $campaign->financial_risks_others() ); ?>
 <p>
-	<?php _e( 'project.single.description.economic.RISKS_REASON_NEW_ONES', 'yproject' ); ?>
+	<i><?php _e( 'project.single.description.economic.RISKS_REASON_NEW_ONES', 'yproject' ); ?></i>
 	<br>
 	<br>
 	<?php echo sprintf( __( 'project.single.description.economic.RISKS_REASON_CONTACT', 'yproject' ), $WDGOrganization->get_email() ); ?>
