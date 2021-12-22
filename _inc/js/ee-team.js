@@ -58,7 +58,7 @@ EasterEggTeam.prototype.startAnim = function () {
 	$('body').append('<style>' +
 		'body{ background-color: #080e21; }' +
 		'.star{ position: absolute; width: 1px; height: 1px; background: yellow; }' +
-		'.meteor { position: absolute; }' +
+		'.meteor { position: absolute; z-index: 999; }' +
 		'.meteor div { animation: meteor 2s linear; width: 25px; height: 25px; border-radius: 50%; background-color: #080e21; border-color: #080e21; }' +
 		'@keyframes meteor {' +
 		'0% { opacity: 0; margin-top: -600px; margin-left: 600px; width: 1px; height: 1px; background-color: #FFAE00; border-color: #FFAE00; }' +
