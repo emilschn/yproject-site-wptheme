@@ -18,60 +18,59 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 ?>
 
 <?php // 3 zones du haut ?>
-<p>
-	<div class="left">
-		<h5><?php _e( 'project.single.description.economic.TARGET_PROFITABILITY', 'yproject' ); ?></h5>
-		<span>
-			<?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_RATIO', 'yproject' ), UIHelpers::format_number( $profitability_ratio ), $funding_duration ); ?>
-			<span><?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_PERCENT', 'yproject' ), UIHelpers::format_number( $profitability_percent ) ); ?></span>
+<div class="economic-intro left <?php if ( $campaign->is_hidden() ) { ?>two-cols<?php } ?>">
+	<h5><?php _e( 'project.single.description.economic.TARGET_PROFITABILITY', 'yproject' ); ?></h5>
+	<span class="economic-data">
+		<?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_RATIO', 'yproject' ), UIHelpers::format_number( $profitability_ratio ), $funding_duration ); ?>
+		<span class="economic-data-details"><?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_PERCENT', 'yproject' ), UIHelpers::format_number( $profitability_percent ) ); ?></span>
+	</span>
+	<br>
+	<?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_RISK', 'yproject' ), $campaign->maximum_profit_str() ); ?>
+	<br>
+	<a href="#"><?php _e( 'project.single.description.economic.TARGET_PROFITABILITY_CALCULATE', 'yproject' ); ?></a>
+</div>
+
+<?php if ( !$campaign->is_hidden() ): ?>
+<div class="economic-intro left">
+	<h5><?php _e( 'project.single.description.economic.RISK', 'yproject' ); ?></h5>
+
+	<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
+		<span><?php _e( 'project.single.description.economic.RISK_VOTE', 'yproject' ); ?></span>
+		<br>
+		<span><?php _e( 'project.single.description.economic.RISK_VOTE_DESCRIPTION', 'yproject' ); ?></span>
+
+	<?php else: ?>
+		<?php
+		$vote_results = WDGCampaignVotes::get_results( $campaign->ID );
+		$risk_rate = round( $vote_results[ 'average_risk' ], 2 );
+		?>
+		<span class="economic-data">
+		<?php if ( $risk_rate < 1.5 ): ?>
+			<?php _e( 'project.single.description.economic.RISK_VERY_WEAK', 'yproject' ); ?>
+		<?php elseif ( $risk_rate < 2.5 ): ?>
+			<?php _e( 'project.single.description.economic.RISK_WEAK', 'yproject' ); ?>
+		<?php elseif ( $risk_rate < 3.5 ): ?>
+			<?php _e( 'project.single.description.economic.RISK_MIDDLE', 'yproject' ); ?>
+		<?php elseif ( $risk_rate < 4.5 ): ?>
+			<?php _e( 'project.single.description.economic.RISK_STRONG', 'yproject' ); ?>
+		<?php else: ?>
+			<?php _e( 'project.single.description.economic.RISK_VERY_STRONG', 'yproject' ); ?>
+		<?php endif; ?>
 		</span>
 		<br>
-		<?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_RISK', 'yproject' ), $campaign->maximum_profit_str() ); ?>
-		<br>
-		<a href="#"><?php _e( 'project.single.description.economic.TARGET_PROFITABILITY_CALCULATE', 'yproject' ); ?></a>
-	</div>
-
-	<?php if ( !$campaign->is_hidden() ): ?>
-	<div class="left">
-		<h5><?php _e( 'project.single.description.economic.RISK', 'yproject' ); ?></h5>
-
-		<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
-			<span><?php _e( 'project.single.description.economic.RISK_VOTE', 'yproject' ); ?></span>
-			<br>
-			<span><?php _e( 'project.single.description.economic.RISK_VOTE_DESCRIPTION', 'yproject' ); ?></span>
-
-		<?php else: ?>
-			<?php
-			$vote_results = WDGCampaignVotes::get_results( $campaign->ID );
-			$risk_rate = round( $vote_results[ 'average_risk' ], 2 );
-			?>
-			<span>
-			<?php if ( $risk_rate < 1.5 ): ?>
-				<?php _e( 'project.single.description.economic.RISK_VERY_WEAK', 'yproject' ); ?>
-			<?php elseif ( $risk_rate < 2.5 ): ?>
-				<?php _e( 'project.single.description.economic.RISK_WEAK', 'yproject' ); ?>
-			<?php elseif ( $risk_rate < 3.5 ): ?>
-				<?php _e( 'project.single.description.economic.RISK_MIDDLE', 'yproject' ); ?>
-			<?php elseif ( $risk_rate < 4.5 ): ?>
-				<?php _e( 'project.single.description.economic.RISK_STRONG', 'yproject' ); ?>
-			<?php else: ?>
-				<?php _e( 'project.single.description.economic.RISK_VERY_STRONG', 'yproject' ); ?>
-			<?php endif; ?>
-			</span>
-			<br>
-			<span><?php echo sprintf( __( 'project.single.description.economic.RISK_RATE_DESCRIPTION', 'yproject' ), $risk_rate ); ?></span>
-		<?php endif; ?>
-	</div>
+		<span><?php echo sprintf( __( 'project.single.description.economic.RISK_RATE_DESCRIPTION', 'yproject' ), $risk_rate ); ?></span>
 	<?php endif; ?>
+</div>
+<?php endif; ?>
 
-	<div class="left">
-		<h5><?php _e( 'project.single.description.economic.ROYALTIES_PER_QUARTER', 'yproject' ); ?></h5>
-		<span><?php echo sprintf( __( 'project.single.description.economic.ROYALTIES_PER_QUARTER_MAX', 'yproject' ), UIHelpers::format_number( $campaign->roi_percent_estimated() ) ); ?></span>
-		<br>
-		<span><?php echo sprintf( __( 'project.single.description.economic.ROYALTIES_PER_QUARTER_MAX_DESCRIPTION', 'yproject' ), UIHelpers::format_number( $campaign->goal( false ) ) ); ?></span>
-	</div>
-	<div class="clear"></div>
-</p>
+<div class="economic-intro left <?php if ( $campaign->is_hidden() ) { ?>two-cols<?php } ?>">
+	<h5><?php _e( 'project.single.description.economic.ROYALTIES_PER_QUARTER', 'yproject' ); ?></h5>
+	<span class="economic-data"><?php echo sprintf( __( 'project.single.description.economic.ROYALTIES_PER_QUARTER_MAX', 'yproject' ), UIHelpers::format_number( $campaign->roi_percent_estimated() ) ); ?></span>
+	<br>
+	<span><?php echo sprintf( __( 'project.single.description.economic.ROYALTIES_PER_QUARTER_MAX_DESCRIPTION', 'yproject' ), UIHelpers::format_number( $campaign->goal( false ) ) ); ?></span>
+</div>
+<div class="clear"></div>
+
 
 <?php // Revenus du projet ?>
 <h4><?php _e( 'project.single.description.economic.PROJECT_REVENUES', 'yproject' ); ?></h4>

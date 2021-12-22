@@ -817,6 +817,27 @@ div#content.version-3 .grey-triangle {
 }
 
 /*******************************************************************************
+* DESCRIPTION AUTOMATIC
+*******************************************************************************/
+div.economic-intro.left {
+	width: 32%;
+	margin-right: 5px;
+}
+div.economic-intro.two-cols.left {
+	width: 49%;
+}
+div.economic-intro.left h5 {
+	text-transform: uppercase;
+}
+div.economic-intro.left span.economic-data {
+	font-size: 1.2em;
+	color: #00879B;
+}
+div.economic-intro.left span.economic-data-details {
+	font-size: 0.7em;
+}
+
+/*******************************************************************************
 * NEWS
 *******************************************************************************/
 div#content.version-3 .project-news {
