@@ -650,6 +650,13 @@ nav#main > div#menu .submenu-style .empty-list-info a {
 	padding-left: 0;
 	margin-left: 0;
 }
+.submenu-style ul.submenu-list .empty-list-info a {
+	color: #EA4F51;
+	border-bottom: none;
+}
+.submenu-style ul.submenu-list .empty-list-info a:hover {
+	background: none;
+}
 
 /* LANGUE */
 

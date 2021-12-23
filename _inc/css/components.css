@@ -716,6 +716,9 @@ div.campaign-collecte {
 	padding-left: 10px;
 	margin: 20px 0px;
 }
+.wdg-lightbox .wdg-lightbox-padder .button-list {
+	padding: 10px;
+}
 @media screen and (max-width: 997px) {
 	.wdg-lightbox .wdg-lightbox-corner,
 	.wdg-lightbox.cornered .wdg-lightbox-padder,
