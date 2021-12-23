@@ -553,6 +553,23 @@ nav#main div#menu a.lines {
 	display: inline-block;
 	position: relative;
 }
+@media screen and (max-width: 1250px) and (min-width: 998px) {
+	nav#main > div#menu > div#menu-links a:first-of-type{
+		margin-right: 10px;
+	}
+	nav#main div#menu a.lines {
+		margin: 0px 5px;
+		font-size: 12px;
+	}
+}
+@media screen and (max-width: 1050px) and (min-width: 998px) {
+	nav#main > div#menu > div#menu-links a:first-of-type{
+		margin-right: 0px;
+	}
+	nav#main div#menu a.lines {
+		font-size: 11px;
+	}
+}
 nav#main div#menu a.lines.current, nav#main div#menu a.lines:hover, nav#main div#menu a.lines:focus {
 	color: #000000;
 }
@@ -697,34 +714,29 @@ nav#main div#menu a#btn-search {
 nav#main div#menu a#btn-search img {
     vertical-align:  middle;
 }
-/* nav#main div#menu a#btn-search.active {
-	position: relative;
-	height: 60px;
-	margin: -10px -10px -10px 0px;
-	padding: 0px 15px;
-    background-color: #E1E3E2;
-} */
-/* nav#main div#menu a#btn-search.active img {
-	margin-top: 20px;
-	margin-right: 2px;
-} */
-
 #submenu-search {
 	order: -1;
 	font-size: 8pt;
 	text-align: left;
 }
-#submenu-search-input {
+.submenu-search-input {
 	border: 0;
 	border-bottom: 3px solid #00879B;
 	padding: 10px;
 }
-#submenu-search-input:focus {
+.submenu-search-input:focus {
 	outline: none;
 }
 /*Pour éviter backgroung yellow quand champ prérempli sur chrome*/
 input:-webkit-autofill {
 	-webkit-box-shadow: inset 0 0 0px 9999px #E1E3E2;
+}
+
+@media screen and (max-width: 1650px) and (min-width: 998px) {
+	#submenu-search {
+		position: absolute;
+		top: 80px;
+	}
 }
 
 

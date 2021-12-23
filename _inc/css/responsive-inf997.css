@@ -35,12 +35,6 @@
 	nav#main div#menu div#menu-links .lines, nav#main div#menu a#btn-search, nav#main div#menu .menu-separator-bar {
 		display: none;
 	}
-	nav#main div#menu a.btn-user {
-		margin-right: 15px;
-	}
-	nav#main div#menu a#btn-switch-lang {
-		margin-right: 15px;
-	}
 	#submenu-switch-lang {
 		right: 170px;
 	}
@@ -52,6 +46,16 @@
 	}
 	nav#main > div#menu > div#menu-links a:first-of-type {
 		margin: 0;
+	}
+	div.menu-loading-init {
+		width: 100px;
+	}
+	div.menu-connected {
+		overflow-y: scroll;
+		height: 85vh;
+	}
+	div.menu-connected > a {
+		padding-left: 5px;
 	}
 	#submenu-search { 
 		position: absolute;
@@ -71,10 +75,7 @@
 	#submenu-search a:hover {
 		background: #E1E3E2;
 	}
-	#submenu-search-input {
-		height: -webkit-calc(100% - 150px);
-		height: -moz-calc(100% - 150px);
-		height: calc(100% - 150px);
+	.submenu-search-input {
 		margin-left: 14px;
 	}
 	.submenu-style ul.submenu-list {
@@ -83,9 +84,7 @@
 	#submenu-search #submenu-user-hello {
 		padding: 20px;
 	}
-	#submenu-search li:first-of-type {
-		margin: 0 14px;
-	}
+	
 	#submenu-search li:first-of-type a {
 		padding: 0;
 		font-weight: bold;

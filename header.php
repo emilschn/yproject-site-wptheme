@@ -192,8 +192,7 @@
 					<div class="menu-separator-bar"></div>
 				
 					<a href="#" class="btn-user not-connected inactive"><?php _e( 'common.CONNECTION', 'yproject' ); ?></a>
-					<a href="#" id="btn-burger" class="only-inf997"><img src="<?php echo $stylesheet_directory_uri; ?>/images/navbar/menu-burger.png" alt="MENU" /></a>
-				
+					
 					<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 					<?php
 					$url_suffix = '';
@@ -215,7 +214,7 @@
 				
 					<div id="submenu-search" class="submenu-style hidden">
 						<div class="hidden-inf997">
-							<input type="text" id="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
+							<input type="text" class="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
 							<ul class="submenu-list list-search">
 								<li class="empty-list-info hidden">
 									<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
@@ -225,35 +224,45 @@
 						</div>
 
 						<div class="only-inf997">
-							<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
+							<div class="menu-loading-init align-center" data-redirect="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>">
+								<br>
+								<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
+								<br>
+								<br>
+							</div>
+							
+							<div class="menu-connected hidden">
+								<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
 								<ul class="submenu-list">
 									<li>
 										<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
-										<span class="wallet-amount-header hidden"><b><span class="wallet-amount"></span> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span>
+										<span class="wallet-amount-header"><b><span class="wallet-amount"></span> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span>
 										<div class="authentication-alert hidden">
 											<img src="<?php echo $stylesheet_directory_uri; ?>/images/exclamation-point.png" alt="loading">
 											<span><?php _e( 'account.AUTHENTICATION_HEADER', 'yproject' ); ?></span>
 											<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>#authentication"><?php _e( 'account.AUTHENTICATION_HEADER_LINK', 'yproject' ); ?></a>
 										</div>
 									</li>
-									<li class="submenu-title hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></li>
+									<li class="submenu-title dashboards hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></li>
+									<li class="submenu-title organizations hidden"><?php _e( 'account.ORGANIZATIONS_HEADER', 'yproject' ); ?></li>
 								</ul>
-							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
-							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
-							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
-							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
-							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
-							<input type="text" id="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
-							<ul class="submenu-list list-search">
-								<li class="empty-list-info hidden">
-									<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
-									<a href="https://support.wedogood.co/lev%C3%A9es-de-fonds-priv%C3%A9es" target="_blank"><?php _e( "En savoir plus.", 'yproject' ); ?></a>
-								</li>
-							</ul>
-							<?php if ( is_user_logged_in() ): ?>
-								<br>
-								<a href="<?php echo wp_logout_url(); ?>" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
-							<?php endif; ?>
+								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
+								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
+								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
+								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
+								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
+								<input type="text" class="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
+								<ul class="submenu-list list-search">
+									<li class="empty-list-info hidden">
+										<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
+										<a href="https://support.wedogood.co/lev%C3%A9es-de-fonds-priv%C3%A9es" target="_blank"><?php _e( "En savoir plus.", 'yproject' ); ?></a>
+									</li>
+								</ul>
+								<?php if ( is_user_logged_in() ): ?>
+									<br>
+									<a href="<?php echo wp_logout_url(); ?>" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
+								<?php endif; ?>
+							</div>
 						</div>
 					</div>
 				
