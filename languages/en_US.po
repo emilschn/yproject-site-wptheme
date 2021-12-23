@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-12-23 10:50+0100\n"
+"PO-Revision-Date: 2021-12-23 10:52+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -523,6 +523,15 @@ msgstr "My personal account"
 
 msgid "account.WALLET_HEADER"
 msgstr "in my wallet"
+
+msgid "account.AUTHENTICATION_HEADER"
+msgstr "To invest on WEDOGOOD and reclaim your royalties, you must be authenticated."
+
+msgid "account.AUTHENTICATION_HEADER_LINK"
+msgstr "Continue my authentication"
+
+msgid "account.DASHBOARDS_HEADER"
+msgstr "Projects dashboards"
 
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Return to a private project"

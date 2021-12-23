@@ -619,7 +619,7 @@ nav#main div#menu .wpml-ls {
 
 .submenu-style ul.submenu-list {
 	max-height: 400px;
-	overflow-y: auto;
+	overflow-y: scroll;
 	margin: 0px;
 	padding-left: 0px;
 	list-style: none;
@@ -633,7 +633,6 @@ nav#main > div#menu .submenu-style ul.submenu-list li a {
 	color: #333333;
 	height: auto;
 	line-height: 20px;
-	padding: 10px 10px;
 	border-bottom: 1px solid #c2c2c2;
 }
 nav#main > div#menu .submenu-style ul.submenu-list li a:hover {
@@ -843,10 +842,11 @@ ul.project-list a.needs-authentication:after {
 	text-align: left;
 	padding: 26px;
 	width: 270px;
-	height: 100vh;
+	height: 85vh;
 	border-left: 1px solid #c2c2c2;
+	overflow-y: scroll;
 }
-#submenu-user #submenu-user-hello {
+#submenu-user #submenu-user-hello, #submenu-search #submenu-user-hello {
 	color: #c2c2c2;
 	font-size: 14px;
 	font-weight: bold;
@@ -854,36 +854,65 @@ ul.project-list a.needs-authentication:after {
 	padding-bottom: 15px;
 	display: block;
 }
-#submenu-user ul.submenu-list {
+#submenu-user ul.submenu-list, #submenu-search ul.submenu-list {
 	width: auto;
 	overflow-y: auto;
 	max-height: none;
 }
-nav#main > div#menu #submenu-user ul.submenu-list li {
+nav#main > div#menu #submenu-user ul.submenu-list li, nav#main > div#menu #submenu-search ul.submenu-list li {
 	border-bottom: 1px solid #c2c2c2;
-	padding: 15px 0 15px 10px;
+	padding: 25px 0 25px 10px;
 }
-nav#main > div#menu #submenu-user ul.submenu-list li a {
+nav#main > div#menu #submenu-user ul.submenu-list li a, nav#main > div#menu #submenu-search ul.submenu-list li a {
 	margin: 0;
 	border-bottom: 0;
 	line-height: auto;
 }
-nav#main > div#menu #submenu-user ul.submenu-list li:first-of-type a {
-	padding: 0;
+nav#main > div#menu #submenu-user ul.submenu-list .submenu-title, nav#main > div#menu #submenu-search ul.submenu-list .submenu-title {
+	display: inline-block;
+	padding-top: 10px;
+	color: #c2c2c2;
+	font-size: 14px;
+	font-weight: bold;
 }
-nav#main > div#menu #submenu-user ul.submenu-list .wallet-amount-header {
+nav#main > div#menu #submenu-user ul.submenu-list .hidden, nav#main > div#menu #submenu-search ul.submenu-list .hidden {
+	display: none !important;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .wallet-amount-header, nav#main > div#menu #submenu-search ul.submenu-list .wallet-amount-header {
 	text-transform: none;
 	color: #c2c2c2;
 }
-nav#main > div#menu #submenu-user a.button {
+nav#main > div#menu #submenu-user a.button, nav#main > div#menu #submenu-search a.button {
 	color: #fff;
 	margin-top: 15px;
 	margin-left: 0;
 }
+nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert, nav#main > div#menu #submenu-search ul.submenu-list .authentication-alert {
+	border: 1px solid #F8CACA;
+	padding: 15px;
+	text-transform: none;
+	display: flex;
+	flex-flow: row wrap;
+	align-items: center;
+	margin-top: 15px;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert img, nav#main > div#menu #submenu-search ul.submenu-list .authentication-alert img {
+	height: 40px;
+	margin-right: 10px;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert a, nav#main > div#menu #submenu-search ul.submenu-list .authentication-alert a  {
+	color: #EA4F51;
+	text-transform: none;
+	text-decoration: underline;
+	font-size: 10pt;
+}
+nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert span, nav#main > div#menu #submenu-search ul.submenu-list .authentication-alert span {
+	flex: 1 0 0;
+}
 
 /* MENU BURGER */
 nav#main div#menu a.only-inf997 {
-	display: none;
+	display: none !important;
 }
 /*******************************************************************************
 * PAGE DE CREATION DE PROJET

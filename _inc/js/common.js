@@ -479,12 +479,18 @@ var WDGNavFunctions = (function ($) {
 					e.preventDefault();
 					if ($('.btn-user').hasClass('active')) {
 						$('.btn-user').removeClass('active').addClass('inactive');
-						$('#submenu-user').hide();
-					} else {
+						$('#submenu-search, #submenu-user').hide();
+					}
+					else {
 						$('.btn-user').addClass('active').removeClass('inactive');
-						$('#submenu-user').show();
+						if ($(window).width() < 997) {
+							$('#submenu-search').show();
+						}
+						else {
+							$('#submenu-user').show();
+						}
 						$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
-						$('#submenu-search').hide();
+
 					}
 				}
 				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
@@ -762,6 +768,7 @@ var WDGNavFunctions = (function ($) {
 						$('#menu .btn-user').addClass('connected').removeClass('not-connected');
 						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
 							$('#menu .btn-user').addClass('needs-authentication');
+							$('#submenu-user.not-connected .menu-connected .submenu-list li div.authentication-alert').removeClass('hidden');
 						}
 						$('#menu .btn-user img').remove();
 						$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
@@ -771,14 +778,14 @@ var WDGNavFunctions = (function ($) {
 						var lengthInfoProjects = infoDecoded['projectlist'].length;
 						for (var i = 0; i < lengthInfoProjects; i++) {
 							itemProject = infoDecoded['projectlist'][i];
-							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title').removeClass('hidden');
+							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="project-list-item' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
 						}
 
 						var lengthInfoOrganizations = infoDecoded['organizationlist'].length;
 						for (var i = 0; i < lengthInfoOrganizations; i++) {
 							itemOrganization = infoDecoded['organizationlist'][i];
-							// itemOrganization['wpref']
-							// itemOrganization['name']
+							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemOrganization['wpref'] + '" class="project-list-item' + (itemOrganization['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemOrganization['name'] + '</a></li>');
 						}
 
 						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
