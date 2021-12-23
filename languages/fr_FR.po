@@ -528,6 +528,9 @@ msgstr "Continuer mon authentification"
 msgid "account.DASHBOARDS_HEADER"
 msgstr "Tableaux de bord des projets"
 
+msgid "account.ORGANIZATIONS_HEADER"
+msgstr "Entreprises"
+
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Retourner vers un projet privé"
 

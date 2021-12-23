@@ -204,9 +204,7 @@
 					<div id="submenu-switch-lang" class="submenu-style hidden">
 						<ul class="submenu-list">
 						<?php foreach ( $active_languages as $language_key => $language_item ): ?>
-							<li <?php if ( $language_item[ 'active' ] ) {
-						echo 'class="active"';
-					} ?>><a href="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
+							<li class="<?php echo ( $language_item[ 'active' ] ) ? 'active' : ''; ?>"><a href="<?php echo $language_item[ 'url' ] . $url_suffix; ?>" data-key="<?php echo $language_key; ?>"><?php echo $language_item[ 'native_name' ]; ?></a></li>
 						<?php endforeach; ?>
 						</ul>
 						<div class="lang-loader-container">
@@ -215,21 +213,30 @@
 					</div>
 					<?php endif; ?>
 				
-					<?php ?>
 					<div id="submenu-search" class="submenu-style hidden">
+						<div class="hidden-inf997">
+							<input type="text" id="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
+							<ul class="submenu-list list-search">
+								<li class="empty-list-info hidden">
+									<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
+									<a href="https://support.wedogood.co/lev%C3%A9es-de-fonds-priv%C3%A9es" target="_blank"><?php _e( "En savoir plus.", 'yproject' ); ?></a>
+								</li>
+							</ul>
+						</div>
+
 						<div class="only-inf997">
 							<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
 								<ul class="submenu-list">
 									<li>
 										<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
-										<span class="wallet-amount-header"><b><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span>
+										<span class="wallet-amount-header hidden"><b><span class="wallet-amount"></span> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span>
 										<div class="authentication-alert hidden">
-										<img src="<?php echo $stylesheet_directory_uri; ?>/images/exclamation-point.png" alt="loading">
-										<span><?php _e( 'account.AUTHENTICATION_HEADER', 'yproject' ); ?></span>
-										<a><?php _e( 'account.AUTHENTICATION_HEADER_LINK', 'yproject' ); ?></a>
-									</div>
+											<img src="<?php echo $stylesheet_directory_uri; ?>/images/exclamation-point.png" alt="loading">
+											<span><?php _e( 'account.AUTHENTICATION_HEADER', 'yproject' ); ?></span>
+											<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>#authentication"><?php _e( 'account.AUTHENTICATION_HEADER_LINK', 'yproject' ); ?></a>
+										</div>
 									</li>
-									<span class="submenu-title hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></span>
+									<li class="submenu-title hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></li>
 								</ul>
 							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
 							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
@@ -237,18 +244,17 @@
 							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investissement' ); ?>"><?php _e( 'menu.INVEST', 'yproject' ); ?></a>
 							<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'a-propos/vision' ); ?>"><?php _e( 'menu.VISION', 'yproject' ); ?></a>
 							<input type="text" id="submenu-search-input" placeholder="<?php _e( 'menu.SEARCH_PROJECT', 'yproject' ); ?>" />
-								<ul class="submenu-list">
-									<div class="empty-list-info hidden">
-										<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
-										<a href="https://support.wedogood.co/lev%C3%A9es-de-fonds-priv%C3%A9es" target="_blank"><?php _e( "En savoir plus.", 'yproject' ); ?></a>
-									</div>
-								</ul>
+							<ul class="submenu-list list-search">
+								<li class="empty-list-info hidden">
+									<?php _e( "Vous ne trouvez pas le projet que vous cherchez ? Il est peut-&ecirc;tre priv&eacute;.", 'yproject' ); ?><br>
+									<a href="https://support.wedogood.co/lev%C3%A9es-de-fonds-priv%C3%A9es" target="_blank"><?php _e( "En savoir plus.", 'yproject' ); ?></a>
+								</li>
+							</ul>
 							<?php if ( is_user_logged_in() ): ?>
 								<br>
 								<a href="<?php echo wp_logout_url(); ?>" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
 							<?php endif; ?>
 						</div>
-					
 					</div>
 				
 					<div id="submenu-user" class="not-connected submenu-style hidden">
@@ -264,18 +270,19 @@
 							<ul class="submenu-list">
 								<li>
 									<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
-									<span class="wallet-amount-header"><b><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span>
+									<span class="wallet-amount-header hidden"><b><span class="wallet-amount"></span> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span>
 									<div class="authentication-alert hidden">
 										<img src="<?php echo $stylesheet_directory_uri; ?>/images/exclamation-point.png" alt="loading">
 										<span><?php _e( 'account.AUTHENTICATION_HEADER', 'yproject' ); ?></span>
-										<a><?php _e( 'account.AUTHENTICATION_HEADER_LINK', 'yproject' ); ?></a>
+										<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>#authentication"><?php _e( 'account.AUTHENTICATION_HEADER_LINK', 'yproject' ); ?></a>
 									</div>
 								</li>
-								<span class="submenu-title hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></span>
+								<li class="submenu-title dashboards hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></li>
+								<li class="submenu-title organizations hidden"><?php _e( 'account.ORGANIZATIONS_HEADER', 'yproject' ); ?></li>
 							</ul>
 							<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
+							<br><br>
 						</div>
-
 					</div>
 				</div>
 			</div>

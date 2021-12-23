@@ -869,7 +869,6 @@ nav#main > div#menu #submenu-user ul.submenu-list li a, nav#main > div#menu #sub
 	line-height: auto;
 }
 nav#main > div#menu #submenu-user ul.submenu-list .submenu-title, nav#main > div#menu #submenu-search ul.submenu-list .submenu-title {
-	display: inline-block;
 	padding-top: 10px;
 	color: #c2c2c2;
 	font-size: 14px;
