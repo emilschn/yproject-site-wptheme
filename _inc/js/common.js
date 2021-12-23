@@ -479,15 +479,15 @@ var WDGNavFunctions = (function ($) {
 					e.preventDefault();
 					if ($('.btn-user').hasClass('active')) {
 						$('.btn-user').removeClass('active').addClass('inactive');
-						$('#submenu-search, #submenu-user').hide();
+						$('#submenu-search, #submenu-user').hide('fast');
 					}
 					else {
 						$('.btn-user').addClass('active').removeClass('inactive');
 						if ($(window).width() < 997) {
-							$('#submenu-search').show();
+							$('#submenu-search').show('fast');
 						}
 						else {
-							$('#submenu-user').show();
+							$('#submenu-user').show('fast');
 						}
 						$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
 
