@@ -1540,13 +1540,22 @@ msgid "invest.mean-payment.check-return.TO_THE_ADDRESS"
 msgstr "to the following address:"
 
 msgid "invest.mean-payment.wire.INFORMATION"
-msgstr "In order to proceed with the transfer, here is the banking information you will need:"
+msgstr "In order to proceed with the transfer, here is the banking information you need:"
 
 msgid "invest.mean-payment.wire.ACCOUNT_OWNER"
 msgstr "Account owner:"
 
+msgid "invest.mean-payment.wire.OWNER_EXPLICATION"
+msgstr "It is the payment service provider who secures the funds."
+
+msgid "invest.mean-payment.wire.IDENTIFY_PROJECT"
+msgstr "This will identify the project in which you want to invest in."
+
 msgid "invest.mean-payment.wire.ONCE_WIRE_DONE"
-msgstr "Once the transfer has been made, click on"
+msgstr "Your transfer will be effective once Lemon Way receives the funds."
+
+msgid "invest.mean-payment.wire.CONFIRM_INVESTMENT"
+msgstr "Confirm my investment"
 
 msgid "invest.mean-payment.wire.CODE_EXAMPLES"
 msgstr "Example of entering the recipient code for different banks:"
