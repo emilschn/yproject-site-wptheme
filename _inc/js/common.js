@@ -516,7 +516,7 @@ var WDGNavFunctions = (function ($) {
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
 
-					if ($('#submenu-search ul.submenu-list li').length == 0) {
+					if ($('#submenu-search ul.submenu-list li').length == 1) {
 						$.ajax({
 							'type': "POST",
 							'url': ajax_object.ajax_url,
