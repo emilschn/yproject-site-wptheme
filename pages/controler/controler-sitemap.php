@@ -64,23 +64,12 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 		WDG_Cache_Plugin::initialize_home_stats();
 	}
 
-	private function daily_team_question() {
-		// Si on est samedi ou dimanche, on n'envoie pas les questions sur Slack
-		$today_date = new DateTime();
-		if ( $today_date->format( 'N' ) == 6 || $today_date->format( 'N' ) == 7 ) {
-			return;
-		}
-		locate_template( 'functions/team-coffee-questions.php', true );
-		WDGCoffeeMachine::get_funky();
-	}
-
 	private function clean_sms_lists() {
 		// Tous les jours, suppression de listes de SMS qui s'accumulent
 		WDGWPRESTLib::call_get_wdg( 'sms/clean' );
 	}
 
 	private function summary_call() {
-		$this->daily_team_question();
 		$yesterday_date = new DateTime();
 		$yesterday_date->sub( new DateInterval( 'P1D' ) );
 		$args = [
@@ -201,105 +190,6 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 	}
 
 	private function rebuild_sitemap() {
-		$priority_by_url = array(
-			// 0.9
-			'/financement/'			=> '0.9',
-			'/investissement/'		=> '0.9',
-			'/epargne-positive/'	=> '0.9',
-			// 0.8
-			'/epargne-positive/electronique/'				=> '0.8',
-			'/epargne-positive/mobilite-durable/'			=> '0.8',
-			'/epargne-positive/solaire-rural/'				=> '0.8',
-			'/epargne-positive/tourisme-durable/'			=> '0.8',
-			'/epargne-positive/zero-pesticide/'				=> '0.8',
-			'/financement/entreprises/'						=> '0.8',
-			'/financement/royalties/levee-de-fonds-privee/'	=> '0.8',
-//			'/financement/solutions/'						=> '0.8',
-			'/investissement/comparatif-risque/'			=> '0.8',
-			'/investissement/start-up/'						=> '0.8',
-			// 0.7
-			'/financement/automatise/'						=> '0.7',
-//			'/financement/entreprises/B2B/'					=> '0.7',
-			'/financement/entreprises/cooperatives/'		=> '0.7',
-//			'/financement/entreprises/PME/'					=> '0.7',
-//			'/financement/entreprises/start-up/'			=> '0.7',
-			'/financement/entreprises/start-up/amorcage/'	=> '0.7',
-			'/financement/ethique/'							=> '0.7',
-			'/financement/flexible/'						=> '0.7',
-			'/financement/fonds-propres/'					=> '0.7',
-			'/financement/non-dilutif/'						=> '0.7',
-			'/financement/rapide/'							=> '0.7',
-			'/financement/royalties/'						=> '0.7',
-			'/financement/royalty-crowdfunding/'			=> '0.7',
-//			'/financement/solutions/innovation/'			=> '0.7',
-//			'/financement/solutions/investissements/'		=> '0.7',
-//			'/financement/solutions/tresorerie-bfr/'		=> '0.7',
-			'/financement/investissement/impact-investing/'	=> '0.7',
-//			'/les-projets/'									=> '0.7',
-//			'/solutions/expert-comptable/'					=> '0.7',
-			'/solutions/start-up/'							=> '0.7',
-			// 0.6
-			'/a-propos/statistiques/'						=> '0.6',
-			'/a-propos/vision/'								=> '0.6',
-			'/financement/conditions/'						=> '0.6',
-//			'/financement/entreprises/B2C/'					=> '0.6',
-			'/financement/entreprises/start-up/love-money/'	=> '0.6',
-			'/financement/label-croissance-verte/'			=> '0.6',
-			'/financement/simulateur-taux-de-royalties/'	=> '0.6',
-//			'/guide/'										=> '0.6',
-			'/investissement/comparatif-capital-pret-royalties/'		=> '0.6',
-			'/investissement/impact-investing/evaluation-des-impacts/'	=> '0.6',
-			'/solutions/'									=> '0.6',
-//			'/solutions/accelerateur/'						=> '0.6',
-//			'/solutions/entreprises/'						=> '0.6',
-//			'/solutions/fonds-investissement/'				=> '0.6',
-			'/solutions/incubateur/'						=> '0.6',
-			'/solutions/incubateurs-accelerateurs/'			=> '0.6',
-			// 0.5
-			// PROJETS
-			'/a-propos/statistiques/rapport-activite-2020/'			=> '0.5',
-			'/financement/offres/crowdfunding/'						=> '0.5',
-			'/financement/offres/crowdfunding-accompagnement/'		=> '0.5',
-			'/financement/offres/love-money/'						=> '0.5',
-			'/financement/offres/reseau/'							=> '0.5',
-//			'/financement/royalty-crowdfunding/accompagnement/'		=> '0.5',
-//			'/investissement/cooperatives/'							=> '0.5',
-			'/investissement/fiscalite-royalties/'					=> '0.5',
-			// 0.4
-			'/financement/offres/'									=> '0.4',
-//			'/financement/offres/amorcage-crowdfunding/'			=> '0.4',
-//			'/financement/offres/crowdfunding-self-service/'		=> '0.4',
-			// 0.3
-			'/a-propos/espace-presse/'			=> '0.3',
-			'/a-propos/partenaires/'			=> '0.3',
-			'/a-propos/statistiques/rapport-activite-2019/'			=> '0.3',
-			'/financement/offres/crowdfunding-accompagnement/atelier/'		=> '0.3',
-			'/financement/offres/crowdfunding-accompagnement/basique/'		=> '0.3',
-			'/financement/offres/crowdfunding-accompagnement/conseils/'		=> '0.3',
-//			'/investir/actifs/'					=> '0.3',
-			'/press-book/'						=> '0.3',
-			// 0.2
-			'/a-propos/contact/'				=> '0.2',
-			'/a-propos/equipe/'					=> '0.2',
-			'/a-propos/partenaires/des-bons-plans-pour-votre-entreprise/'	=> '0.2',
-			'/a-propos/recrutement/'			=> '0.2',
-			'/a-propos/statistiques/rapport-activite-2017/'					=> '0.2',
-			'/a-propos/statistiques/rapport-activite-2018/'					=> '0.2',
-			'/epargne-positive/mobilite-durable/investissement/'			=> '0.2',
-			'/epargne-positive/tourisme-durable/investissement/'			=> '0.2',
-			'/epargne-positive/zero-pesticide/investissement/'				=> '0.2',
-			'/initiatives-covid-19/'										=> '0.2',
-			// 0.1
-			'/placement-royalties/'				=> '0.1',
-			'/a-propos/'						=> '0.1',
-			'/a-propos/cgu/'					=> '0.1',
-			'/a-propos/cgu/conditions-particulieres/'				=> '0.1',
-			'/a-propos/cgu/confidentialite/'	=> '0.1',
-			'/a-propos/cgu/mentions-legales/'	=> '0.1',
-			'/a-propos/cgu/reclamations/'		=> '0.1',
-			'/love-money/'						=> '0.1',
-		);
-
 		$current_date = new DateTime();
 		$sitemap = "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
 		$sitemap .= "<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n";
@@ -319,19 +209,29 @@ class WDG_Page_Controler_Sitemap extends WDG_Page_Controler {
 			"<priority>0.7</priority>".
 		"</url>\n";
 
-		// Ajout de chaque page priorisée
-		foreach ( $priority_by_url as $uri => $priority ) {
-			$page_by_uri = get_page_by_path( $uri );
-			if ( $page_by_uri ) {
-				$page_modified_exploded = explode( ' ', $page_by_uri->post_modified );
-				if ( count( $page_modified_exploded ) > 0 ) {
-					$sitemap .= "<url>".
-						"<loc>". home_url( $uri ) ."</loc>".
-						"<lastmod>". $page_modified_exploded[0] ."</lastmod>".
-						"<changefreq>weekly</changefreq>".
-						"<priority>". $priority ."</priority>".
-					"</url>\n";
-				}
+		// On va chercher toutes les pages priorisées
+		$query_options = array(
+			'numberposts' => -1,
+			'post_type' => 'page',
+			'meta_query' => array(
+				array( 'key' =>'sitemap_priority', 'compare' => 'EXISTS' )
+			),
+			'orderby' => 'meta_value'
+		);
+		$posts = get_posts( $query_options );
+
+		foreach ($posts as $post) {
+			$page_modified_exploded = explode( ' ', $post->post_modified );
+			if ( count( $page_modified_exploded ) > 0 ) {
+				$uri = get_page_uri( $post->ID );
+				// on va chercher la priorité dans le champ personnalisé
+				$priority = get_post_meta($post->ID, 'sitemap_priority', TRUE ); 
+				$sitemap .= "<url>".
+					"<loc>". home_url( $uri ) ."</loc>".
+					"<lastmod>". $page_modified_exploded[0] ."</lastmod>".
+					"<changefreq>weekly</changefreq>".
+					"<priority>". $priority ."</priority>".
+				"</url>\n";
 			}
 		}
 

@@ -20,12 +20,23 @@ $adjustments = $page_controler->get_adjustment_list();
 	<?php echo UIHelpers::format_number( $sum_remaining_amount ); ?> &euro;<br><br>
 
 	<h3><?php _e( "Documents &agrave; traiter (pas encore affect&eacute;s &agrave; un ajustement)", 'yproject' ); ?></h3>
-	<?php $files = WDGWPREST_Entity_Project::get_files_unused( $page_controler->get_campaign()->get_api_id(), 'project_document' ); ?>
-	<?php foreach ( $files as $file_item ): $file_item_metadata = json_decode( $file_item->metadata ); ?>
-		<a href="<?php echo $file_item->url; ?>" target="_blank"><?php echo $file_item_metadata->name; ?></a><br>
-		<?php echo $file_item_metadata->details; ?>
-		<br><br>
-	<?php endforeach; ?>
+	<div class="adjustments-documents-list">
+		<?php $files = WDGWPREST_Entity_Project::get_files_unused( $page_controler->get_campaign()->get_api_id(), 'project_document' ); ?>
+		<?php foreach ( $files as $file_item ): $file_item_metadata = json_decode( $file_item->metadata ); ?>
+			<a href="<?php echo $file_item->url; ?>" target="_blank"><?php echo $file_item_metadata->name; ?></a>
+
+			(<?php if ( isset( $file_item_metadata->amount ) ): ?>
+				<?php _e( "Montant déclaré :", 'yproject' ); ?>
+				<span class="adjustment-document-amount-<?php echo $file_item->id; ?>" data-value="<?php echo $file_item_metadata->amount; ?>"><?php echo $file_item_metadata->amount; ?></span> €
+			<?php else: ?>
+				<?php _e( "Aucun montant déclaré", 'yproject' ); ?>
+			<?php endif; ?>)
+			<br>
+
+			<?php echo $file_item_metadata->details; ?>
+			<br><br>
+		<?php endforeach; ?>
+	</div>
 	<br>
 	
 	<h3><?php _e( "Ajustements", 'yproject' ); ?></h3>

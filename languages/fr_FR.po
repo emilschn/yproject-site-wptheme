@@ -7,11 +7,11 @@ msgstr ""
 "PO-Revision-Date: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: fr_FR\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -95,7 +95,7 @@ msgid "common.PREVIOUS"
 msgstr "Pr&eacute;c&eacute;dent"
 
 msgid "common.MY_ACCOUNT"
-msgstr "Mon compte"
+msgstr "Compte"
 
 msgid "common.MODIFY"
 msgstr "Modifier"
@@ -149,7 +149,7 @@ msgstr "Financement de projets en fonds propres et sans dilution du capital dans
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
-msgstr "Les projets"
+msgstr "Voir les projets"
 
 msgid "menu.POSITIVE_SAVINGS"
 msgstr "&Eacute;pargne positive"
@@ -158,7 +158,7 @@ msgid "menu.FUND_PROJECT"
 msgstr "Financer mon projet"
 
 msgid "menu.INVEST"
-msgstr "Investir en royalties"
+msgstr "Investir en royalties ?"
 
 msgid "menu.VISION"
 msgstr "Vision"
@@ -513,6 +513,24 @@ msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
 msgid "account.HELLO"
 msgstr "Bonjour"
 
+msgid "account.ACCOUNT_HEADER"
+msgstr "Mon compte personnel"
+
+msgid "account.WALLET_HEADER"
+msgstr "dans mon porte-monnaie"
+
+msgid "account.AUTHENTICATION_HEADER"
+msgstr "Pour investir sur WEDOGOOD et récupérer vos royalties, vous devez être authentifié."
+
+msgid "account.AUTHENTICATION_HEADER_LINK"
+msgstr "Continuer mon authentification"
+
+msgid "account.DASHBOARDS_HEADER"
+msgstr "Tableaux de bord des projets"
+
+msgid "account.ORGANIZATIONS_HEADER"
+msgstr "Entreprises"
+
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Retourner vers un projet privé"
 
@@ -696,6 +714,9 @@ msgstr "Modifier mon RIB"
 msgid "account.bank.BANK_DETAILS_AWAITING_VALIDATION"
 msgstr "Coordonn&eacute;es bancaires en attente de validation"
 
+msgid "account.bank.BANK_DETAILS_AWAITING_FILE"
+msgstr "Le fichier comprenant votre RIB n'a pas été transmis"
+
 msgid "account.bank.BANK_DETAILS_DISABLED"
 msgstr "Coordonn&eacute;es bancaires d&eacute;sactiv&eacute;es"
 
@@ -724,7 +745,7 @@ msgid "account.documents.DOCUMENTS_OF"
 msgstr "Documents de"
 
 msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
-msgstr "Mes attestations de transactions annuelles"
+msgstr "Mes dispenses déjà enregistrées"
 
 msgid "account.documents.DOWNLOAD_CERTIFICATE"
 msgstr "T&eacute;l&eacute;charger l'attestation"
@@ -760,10 +781,10 @@ msgid "account.documents.DOWNLOAD_EXEMPTION_FILE"
 msgstr "T&eacute;l&eacute;charger la dispense"
 
 msgid "account.documents.ASK_ANNUAL_EXEMPTION"
-msgstr "Faire ma demande de dispense annuelle"
+msgstr "Faire une nouvelle demande de dispense en ligne"
 
 msgid "account.documents.SEND_ANNUAL_EXEMPTION"
-msgstr "Envoyer ma demande de dispense annuelle"
+msgstr "Importer un fichier"
 
 msgid "account.documents.SAVE_ANNUAL_EXEMPTION"
 msgstr "Enregistrer ma demande de dispense"
@@ -947,12 +968,6 @@ msgstr "pr&eacute;visionnel"
 
 msgid "account.subscriptions.SUBSCRIPTIONS_OF"
 msgstr "Abonnements de"
-
-msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
-msgstr "Vous pouvez réinvestir les royalties que vous recevez dans les projets d'Épargne Positive."
-
-msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
-msgstr "C'est sans engagement, modifiable à tout moment et automatique."
 
 msgid "account.subscriptions.VIEW_INVESTMENTS"
 msgstr "Voir l'historique des investissements"
@@ -2647,6 +2662,12 @@ msgstr "Les versements de ces entreprises sont en attente :"
 
 msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
 msgstr "Ces entreprises ne sont pas encore entrées dans la phase de déclaration :"
+
+msgid "email.royalties.WALLET_AMOUNT_1"
+msgstr "Vous avez actuellement "
+
+msgid "email.royalties.WALLET_AMOUNT_2"
+msgstr " € dans votre porte-monnaie électronique."
 
 msgid "email.royalties.FUNDRAISING"
 msgstr "Levée de fonds"

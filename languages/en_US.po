@@ -8,15 +8,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-10-27 13:50+0200\n"
+"PO-Revision-Date: 2021-12-23 11:48+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 msgid "common.OR"
 msgstr "or"
@@ -100,7 +100,7 @@ msgid "common.PREVIOUS"
 msgstr "Previous"
 
 msgid "common.MY_ACCOUNT"
-msgstr "My account"
+msgstr "Account"
 
 msgid "common.MODIFY"
 msgstr "Modify"
@@ -154,7 +154,7 @@ msgstr "Financing of projects in equity and without dilution of capital in"
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
-msgstr "The projects"
+msgstr "See the projects"
 
 msgid "menu.POSITIVE_SAVINGS"
 msgstr "Positive savings"
@@ -163,7 +163,7 @@ msgid "menu.FUND_PROJECT"
 msgstr "Finance my project"
 
 msgid "menu.INVEST"
-msgstr "Invest in royalties"
+msgstr "Invest in royalties ?"
 
 msgid "menu.VISION"
 msgstr "Vision"
@@ -518,6 +518,24 @@ msgstr "The e-mail address of the physical person managing the account is:"
 msgid "account.HELLO"
 msgstr "Hello"
 
+msgid "account.ACCOUNT_HEADER"
+msgstr "My personal account"
+
+msgid "account.WALLET_HEADER"
+msgstr "in my wallet"
+
+msgid "account.AUTHENTICATION_HEADER"
+msgstr "To invest on WEDOGOOD and reclaim your royalties, you must be authenticated."
+
+msgid "account.AUTHENTICATION_HEADER_LINK"
+msgstr "Continue my authentication"
+
+msgid "account.DASHBOARDS_HEADER"
+msgstr "Projects dashboards"
+
+msgid "account.ORGANIZATIONS_HEADER"
+msgstr "Organizations"
+
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Return to a private project"
 
@@ -701,6 +719,9 @@ msgstr "Modify my bank details"
 msgid "account.bank.BANK_DETAILS_AWAITING_VALIDATION"
 msgstr "Bank details awaiting validation"
 
+msgid "account.bank.BANK_DETAILS_AWAITING_FILE"
+msgstr "The file containing your IBAN has not been sent yet"
+
 msgid "account.bank.BANK_DETAILS_DISABLED"
 msgstr "Bank details disabled"
 
@@ -729,7 +750,7 @@ msgid "account.documents.DOCUMENTS_OF"
 msgstr "Documents of"
 
 msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
-msgstr "My yearly transactions certificates"
+msgstr "My registered annual exemptions"
 
 msgid "account.documents.DOWNLOAD_CERTIFICATE"
 msgstr "Download the certificate"
@@ -765,10 +786,10 @@ msgid "account.documents.DOWNLOAD_EXEMPTION_FILE"
 msgstr "Download the exemption"
 
 msgid "account.documents.ASK_ANNUAL_EXEMPTION"
-msgstr "Apply for an annual exemption"
+msgstr "Apply for a new annual exemption"
 
 msgid "account.documents.SEND_ANNUAL_EXEMPTION"
-msgstr "Send my annual exemption application"
+msgstr "Import a file\""
 
 msgid "account.documents.SAVE_ANNUAL_EXEMPTION"
 msgstr "Register my exemption request"
@@ -956,14 +977,8 @@ msgstr "Authenticate my account"
 msgid "account.subscriptions.SUBSCRIPTIONS_OF"
 msgstr "Subscriptions of"
 
-msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
-msgstr "You can reinvest the royalties you receive in Positive Savings projects."
-
 msgid "account.subscriptions.VIEW_INVESTMENTS"
 msgstr "View investments history"
-
-msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
-msgstr "It is without commitment, changeable at any time and automatic."
 
 msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
 msgstr "+ Add new subscription"
@@ -2652,6 +2667,12 @@ msgstr "Payments from these companies are pending:"
 
 msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
 msgstr "These companies have not yet entered the declaration phase:"
+
+msgid "email.royalties.WALLET_AMOUNT_1"
+msgstr "You currently have "
+
+msgid "email.royalties.WALLET_AMOUNT_2"
+msgstr " € in your e-wallet."
 
 msgid "email.royalties.FUNDRAISING"
 msgstr "FUNDRAISING"

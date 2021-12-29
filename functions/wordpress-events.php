@@ -402,7 +402,7 @@ class WDG_WordPress_Events {
 
 		// Chargement de la lib de graphs (uniquement en liaison avec les projets)
 		if ( ( $is_campaign || $is_campaign_page ) && !$is_dashboard_page ) {
-			wp_enqueue_script( 'chart-script', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/chart.new.js', array('wdg-script'), true, true);
+			wp_enqueue_script( 'chart-script', 'https://cdn.jsdelivr.net/npm/chart.js', array('wdg-script'), '1' );
 		}
 		if ( $is_dashboard_page ) {
 			wp_enqueue_script('qtip', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/jquery.qtip.min.js', array('jquery'));
@@ -430,6 +430,10 @@ class WDG_WordPress_Events {
 		// Script lié aux pages d'admin
 		if ($is_admin_page) {
 			wp_enqueue_script( 'wdg-admin-dashboard', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/wdg-admin-dashboard.js', array('jquery'), ASSETS_VERSION);
+		}
+
+		if ( $post_name == 'equipe' ) {
+			wp_enqueue_script( 'wdg-project-invest', dirname( get_bloginfo('stylesheet_url')).'/_inc/js/ee-team.js', array('jquery'), ASSETS_VERSION );
 		}
 
 		// Ajout variable JS avec l'url de la page utilisée pour les requêtes Ajax

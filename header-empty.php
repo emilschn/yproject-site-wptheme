@@ -88,10 +88,12 @@
 		<link href="https://plus.google.com/+WedogoodCo" rel="publisher" />
 		<meta http-equiv="Content-Type" content="<?php bloginfo('html_type'); ?>; charset=<?php bloginfo('charset'); ?>" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<?php if ( $page_controler->get_page_description() !== FALSE ): ?>
 		<meta name="description" content="<?php echo $page_controler->get_page_description(); ?>" />
+		<?php endif; ?>
 
 		<!--[if lt IE 9]>
-		    <script type="text/javascript" src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
+		    <script src="<?php echo $stylesheet_directory_uri; ?>/_inc/js/html5shiv.js"></script>
 		<![endif]-->
 		<link rel="stylesheet" href="<?php echo $stylesheet_directory_uri; ?>/_inc/css/common.min.css?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />
 		<link rel="stylesheet" href="<?php bloginfo('stylesheet_url'); ?>?d=<?php echo ASSETS_VERSION; ?>" type="text/css" media="screen" />

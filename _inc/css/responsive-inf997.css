@@ -29,9 +29,41 @@
 		left: auto;
 	}
 	
-	
-	#submenu-user { top: 50px; right: 0px; }
-	#submenu-search { top: 50px; right: 0px; }
+	#submenu-user {
+		display: none;
+	}
+	nav#main div#menu div#menu-links .lines, nav#main div#menu a#btn-search, nav#main div#menu .menu-separator-bar {
+		display: none;
+	}
+	#submenu-switch-lang {
+		right: 170px;
+	}
+	#submenu-switch-lang .submenu-list li a {
+		padding: 10px 0;
+	}
+	nav#main > div#menu img#logo_wdg {
+		transform: scale(0.8);
+	}
+	nav#main > div#menu > div#menu-links a:first-of-type {
+		margin: 0;
+	}
+	div.menu-loading-init {
+		width: 100px;
+	}
+	div.menu-connected {
+		overflow-y: scroll;
+		height: 85vh;
+	}
+	div.menu-connected > a {
+		padding-left: 5px;
+	}
+	#submenu-search { 
+		position: absolute;
+		top: 51px; 
+		right: 0px;
+		background-color: #fff;
+		width: auto;
+	}
 	#submenu-search a {
 		display: block;
 		color: #333333;
@@ -43,15 +75,29 @@
 	#submenu-search a:hover {
 		background: #E1E3E2;
 	}
-	#submenu-search-input {
-		height: -webkit-calc(100% - 150px);
-		height: -moz-calc(100% - 150px);
-		height: calc(100% - 150px);
+	.submenu-search-input {
+		margin-left: 14px;
 	}
 	.submenu-style ul.submenu-list {
-                max-height: 200px; /*hauteur max pour mobile 320*480px*/
-        }
+		width: auto;
+    }
+	#submenu-search #submenu-user-hello {
+		padding: 20px;
+	}
 	
+	#submenu-search li:first-of-type a {
+		padding: 0;
+		font-weight: bold;
+	}
+	nav#main > div#menu a {
+		border-bottom: 0;
+		width: 100%;
+	}
+	nav#main div#menu #submenu-search a.button {
+		width: 150px;
+		margin: 14px;
+		text-align: center;
+	}
 	footer > .footer-container { 
 		background-image: none; 
 		padding: 30px;
@@ -204,6 +250,13 @@
 		font-size: 16px;
 	}
 }
+
+/* Responsive du calculateur de royalties
+div.project-rewards-content div.calculateurRoyaltiesContainer {
+	width: 300px !important;
+	height: 300px !important;
+} */
+
 
 @media screen and (max-width: 700px) {
 	footer > .footer-container div.term-links li ul li {

@@ -589,31 +589,40 @@ div#content.version-3.editing #wdg-move-picture-head {
 /*******************************************************************************
 * REWARDS
 *******************************************************************************/
-div#content.version-3 div.project-rewards-content {
+div.project-rewards-content {
 	max-width: 580px;
 	margin: 0px auto 40px;
-	padding: 0px;
 	font-size: 15px;
+}
+div.project-rewards-content .font-14 {
+	font-size: 14px;
 }
 div#content.version-3 div.project-rewards-content .db-form {
 	text-align: left;
+	padding: 20px;
 }
 div#content.version-3 div.project-rewards-content .db-form .field-container {
 	white-space: normal;
 }
+div.project-rewards-content .db-form .field-container .field-value input {
+	background-color: #fff;
+	border-bottom: 3px solid #00879B;
+	margin: auto;
+	color: #00879B;
+}
+div#content.version-3 div.project-rewards-content .db-form .field-container .field-value .field-money {
+	color: #00879B;
+}
 div#content.version-3 div.project-rewards-content .db-form .field-container.field-init-invest {
 	white-space: nowrap;
+	text-align: center;
 }
-div#content.version-3 div.project-rewards-content div.project-rewards-padder p.half-form-count button {
-	height: 56px;
-	font-size: 12pt;
-	letter-spacing: 0.125em;
-}
-div#content.version-3 div.project-rewards-content label {
-	font-size: 20px;
-	font-weight: normal;
+div.project-rewards-content label, div.project-rewards-content .db-form.v3.full .field label {
+	font-size: 14px;
+	font-weight: bold;
 	text-transform: uppercase;
-	color: #00879b;
+	color: #333;
+	text-align: center;
 }
 div#content.version-3 div.project-rewards-content div.roi_amount_base {
 	height: 5px;
@@ -672,8 +681,18 @@ div#content.version-3 div.project-rewards-content ul li:before {
 	border-bottom: 8px solid transparent;
 	border-left: 16px solid #333333;
 }
-div#content.version-3 div.project-rewards-content ul li span {
-	color: #93626D;
+div.project-rewards-content .align-left {
+	margin-top: 15px;
+}
+div.project-rewards-content .button {
+	margin-top: 30px;
+}
+div.project-rewards-content .calculateurRoyaltiesContainer {
+	min-height: 300px !important; /* pris en compte par les projets et l'EP */
+}
+
+div.padder div.project-rewards-content .db-form {
+	padding: 30px;
 }
 
 /*******************************************************************************
@@ -1014,8 +1033,6 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
     margin-top: 10px;
 }
 
-
-
 /*******************************************************************************
 * WIDE SCREENS
 *******************************************************************************/
@@ -1071,7 +1088,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-pitch div.project-pitch-title { display: none; }
 	div#content.version-3 div.project-pitch div.project-pitch-text { margin: 5px 1%; width: 98%; height: auto; }
 	div#content.version-3 div.project-pitch div.project-pitch-video { margin: 5px 1%; width: 98%; }
-	div#content.version-3 div.project-rewards-content { width: 98%; margin: 0% auto; padding-top: 0px; }
+	div#content.version-3 div.project-rewards-content { width: auto; margin: 0% auto; padding-top: 0px; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder { width: 100%; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder p { width: 100%; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div { float: none; }
@@ -1079,6 +1096,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div:first-child img { width: 50px; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder button.init_invest_count { display: block; margin: 7px auto; }
 	div#content.version-3 div.project-rewards-content table tr td { min-width: 40px; padding: 0px 3px; }
+	div#content.version-3 div.project-rewards-content .calculateurRoyaltiesContainer { min-height: 300px; }
 	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 80px 2% 0px 2%; }
 	/*div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { top: -60px; }*/
 	div#content.version-3 div.project-description div.project-description-item img.grey-triangle { display: none; }
@@ -1115,7 +1133,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 * RESPONSIVE MOBILE
 *******************************************************************************/
 @media screen and (max-width: 400px) {
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: 98% !important; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: auto !important; }
 	div#content.version-3 div.project-description { padding-bottom: 0px; background-color: #FFFFFF; }
 	div#content.version-3 div.project-description div.project-description-item { margin: 25px 2%; }
 	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 34%; top: -45px; border-radius: 0% 0% 100% 100%; }

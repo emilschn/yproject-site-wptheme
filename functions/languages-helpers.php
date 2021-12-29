@@ -24,6 +24,9 @@ class WDG_Languages_Helpers {
 		if ( $locale == '' ) {
 			$locale = self::get_current_locale_id();
 		}
+		if ( empty( $locale ) ) {
+			$locale = 'fr';
+		}
 		$path = get_template_directory();
 		$mofile = $locale . '.mo';
 		$buffer = load_textdomain( 'yproject', $path . '/languages/' . $mofile );
