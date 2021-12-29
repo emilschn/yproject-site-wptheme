@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-11-10 12:01+0100\n"
+"PO-Revision-Date: 2021-10-27 13:50+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "MIME-Version: 1.0\n"
@@ -812,8 +812,8 @@ msgstr "They are first analysed by automated services and then by a person in th
 msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_3"
 msgstr "In the event of an obvious error when analysing your documents, you can contact us at investir@wedogood.co or using the online chat."
 
-msgid "account.identitydocs.orga.LEGAL_ENTITY"
-msgstr "If a legal entity holds at least 25% of your capital, please let us know at support@wedogood.co."
+msgid "account.identitydocs.orga.FOURTH_PERSON"
+msgstr "If a fourth person or a legal entity holds at least 25% of your capital, please let us know at support@wedogood.co."
 
 msgid "account.investments.INVESTMENTS_OF"
 msgstr "Investments of"
@@ -1071,19 +1071,16 @@ msgid "account.wallet.SEND_MONEY_TO_WALLET_WARNINGS"
 msgstr "Warning:"
 
 msgid "account.wallet.SEND_MONEY_TO_WALLET_ONLY_BANK_TRANSFER_YOUR_NAME"
-msgstr "The bank transfer should be executed from a bank account in your name."
+msgstr "Le virement doit &ecirc;tre fait depuis un compte bancaire &agrave; votre nom."
 
 msgid "account.wallet.SEND_MONEY_TO_WALLET_IBAN_CHANGED"
-msgstr "Bank details have changed since january 2021."
+msgstr "Les coordonn&eacute;es bancaires ont chang&eacute; depuis janvier 2021."
 
 msgid "account.wallet.RECIPIENT_BANK_ACCOUNT"
 msgstr "Recipient bank account"
 
 msgid "account.wallet.LOAD_VIBAN"
 msgstr "Get the bank account details"
-
-msgid "account.wallet.LOAD_VIBAN_ALERT"
-msgstr "By clicking this button, you assign a virtual bank account (iban) to your wallet. This operation is useful if you wish to transfer money to your wallet through a bank transfer. Would you like to continue?"
 
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Transfer to my bank account"
@@ -1092,7 +1089,7 @@ msgid "account.wallet.RIB_AWAITING_VALIDATION"
 msgstr "Our payment provider is analyzing your RIB. Please come back in 48h to make sure of its validation."
 
 msgid "account.wallet.RIB_REJECTED"
-msgstr "Your bank details have been rejected by our payment provider."
+msgstr "Your Bank details have been rejected by our payment provider."
 
 msgid "account.wallet.INPUT_YOUR_BANK_ACCOUNT_DETAILS"
 msgstr "Please type in your bank account details to transfer your royalties."
@@ -2074,6 +2071,9 @@ msgstr "K-BIS or equivalent proof of company identity from a commercial register
 msgid "form.user-identitydocs.KBIS_DESCRIPTION"
 msgstr "Less than 3 months old"
 
+msgid "form.user-identitydocs.STATUS_SHORT"
+msgstr "Articles of association"
+
 msgid "form.user-identitydocs.STATUS"
 msgstr "Articles of association, certified as an accurate copy of the original by the manager (ideally showing the distribution of the company's capital)"
 
@@ -2108,18 +2108,6 @@ msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON"
 msgstr "Second proof of identity of the third person"
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
-msgstr "Same types as the first. Otherwise a driving licence or the latest tax notice can be provided."
-
-msgid "form.user-identitydocs.ID_FOURTH_PERSON"
-msgstr "Fourth person's proof of identity"
-
-msgid "form.user-identitydocs.ID_FOURTH_PERSON_DESCRIPTION"
-msgstr "If a fourth individual holds at least 25% of the capital"
-
-msgid "form.user-identitydocs.SECOND_ID_FOURTH_PERSON"
-msgstr "Second proof of identity of the fourth person"
-
-msgid "form.user-identitydocs.SECOND_ID_FOURTH_PERSON_DESCRIPTION"
 msgstr "Same types as the first. Otherwise a driving licence or the latest tax notice can be provided."
 
 msgid "form.user-identitydocs.ID_BACK"
@@ -2408,92 +2396,23 @@ msgstr "The document has been rejected by our payment provider, the document doe
 msgid "lemonway.document.ADDITIONAL_COMMENT"
 msgstr "Additional comment from Lemon Way:"
 
-msgid "lemonway.document.type.UNDEFINED"
-msgstr "Undefined"
-
 msgid "lemonway.document.type.ID"
-msgstr "The ID"
+msgstr "ID"
 
 msgid "lemonway.document.type.PROOF_ADDRESS"
-msgstr "The proof of address"
+msgstr "Proof of address"
 
 msgid "lemonway.document.type.RIB"
-msgstr "The bank details"
-
-msgid "lemonway.document.type.RESIDENCY_PERMIT"
-msgstr "The residency permit"
-
-msgid "lemonway.document.type.KBIS"
-msgstr "The company KBIS"
-
-msgid "lemonway.document.type.CARD_ID"
-msgstr "The identity card"
-
-msgid "lemonway.document.type.CARD_ID_BACK"
-msgstr "The back of the identity card"
-
-msgid "lemonway.document.type.TAX"
-msgstr "The tax assessment"
-
-msgid "lemonway.document.type.WELFARE"
-msgstr "The social insurance smart card"
-
-msgid "lemonway.document.type.FAMILY"
-msgstr "The family record book"
-
-msgid "lemonway.document.type.BIRTH"
-msgstr "The birth certificate"
+msgstr "Bank details"
 
 msgid "lemonway.document.type.PASSPORT"
-msgstr "The passport"
+msgstr "Passport"
 
-msgid "lemonway.document.type.PASSPORT_BACK"
-msgstr "The back of the passport"
+msgid "lemonway.document.type.RESIDENCY_PERMIT"
+msgstr "Residency permit"
 
-msgid "lemonway.document.type.DRIVING_LICENSE"
-msgstr "The driving license"
-
-msgid "lemonway.document.details_MAIN_ID"
-msgstr "The main ID"
-
-msgid "lemonway.document.type.SECOND_ID"
-msgstr "The second ID"
-
-msgid "lemonway.document.type.MAIN_ID_BACK"
-msgstr "The back of the main ID"
-
-msgid "lemonway.document.type.ORGA_KBIS"
-msgstr "The organization KBIS"
-
-msgid "lemonway.document.type.ORGA_STATUS"
-msgstr "The organization statuses"
-
-msgid "lemonway.document.type.SECOND_ID_BACK"
-msgstr "The back of the second ID"
-
-msgid "lemonway.document.type.SELFIE"
-msgstr "The selfie"
-
-msgid "lemonway.document.type.ID_SECOND_PERSON"
-msgstr "The first ID of the second person"
-
-msgid "lemonway.document.type.ID_SECOND_PERSON_2"
-msgstr "The second ID of the second person"
-
-msgid "lemonway.document.type.ID_THIRD_PERSON"
-msgstr "The first ID of the third person"
-
-msgid "lemonway.document.type.ID_THIRD_PERSON_2"
-msgstr "The second ID of the third person"
-
-msgid "lemonway.document.type.ID_FOURTH_PERSON"
-msgstr "The first ID of the fourth person"
-
-msgid "lemonway.document.type.ID_FOURTH_PERSON_2"
-msgstr "The second ID of the fourth person"
-
-msgid "lemonway.document.type.CAPITAL_ALLOCATION"
-msgstr "The document of capital distribution"
+msgid "lemonway.document.type.KBIS"
+msgstr "Company KBIS"
 
 msgid "lemonway.document.status.WAITING"
 msgstr "Awaiting validation"
@@ -2519,28 +2438,64 @@ msgstr "Wrong type"
 msgid "lemonway.document.status.WRONG_OWNER"
 msgstr "Wrong owner"
 
-msgid "lemonway.document.type.action.REFUSED"
+msgid "lemonway.document.details_MAIN_ID"
+msgstr "The main ID"
+
+msgid "lemonway.email.error.SECOND_ID"
+msgstr "The second ID"
+
+msgid "lemonway.email.error.MAIN_ID_BACK"
+msgstr "The back of the main ID"
+
+msgid "lemonway.email.error.ORGA_KBIS"
+msgstr "The organization KBIS"
+
+msgid "lemonway.email.error.ORGA_STATUS"
+msgstr "The organization statuses"
+
+msgid "lemonway.email.error.SECOND_ID_BACK"
+msgstr "The back of the second ID"
+
+msgid "lemonway.email.error.SELFIE"
+msgstr "The selfie (Type 13)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON"
+msgstr "The first ID of the second person (Type 16)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON_2"
+msgstr "The second ID of the second person (Type 17)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON"
+msgstr "The first ID of the third person (Type 18)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON_2"
+msgstr "The second ID of the third person (Type 19)"
+
+msgid "lemonway.email.error.CAPITAL_ALLOCATION"
+msgstr "The document of capital distribution (Type 20)"
+
+msgid "lemonway.email.error.action.REFUSED"
 msgstr "refused"
 
-msgid "lemonway.document.type.action.UNREADABLE"
+msgid "lemonway.email.error.action.UNREADABLE"
 msgstr "considered unreadable"
 
-msgid "lemonway.document.type.action.EXPIRED"
+msgid "lemonway.email.error.action.EXPIRED"
 msgstr "considered expired"
 
-msgid "lemonway.document.type.action.WRONG_TYPE"
+msgid "lemonway.email.error.action.WRONG_TYPE"
 msgstr "considered of wrong type"
 
-msgid "lemonway.document.type.action.WRONG_PERSON"
+msgid "lemonway.email.error.action.WRONG_PERSON"
 msgstr "considered from the wrong person"
 
-msgid "lemonway.document.type.message.BLOCK_AUTHENTICATION"
+msgid "lemonway.email.error.message.BLOCK_AUTHENTICATION"
 msgstr "blocks the authentication."
 
-msgid "lemonway.document.type.message.DOCUMENT_HAS_BEEN"
+msgid "lemonway.email.error.message.DOCUMENT_HAS_BEEN"
 msgstr "The document has been"
 
-msgid "lemonway.document.type.message.LEMONWAY_COMMENT"
+msgid "lemonway.email.error.message.LEMONWAY_COMMENT"
 msgstr "Additional comment from Lemonway:"
 
 # ############################## /lemonway-errors ################################

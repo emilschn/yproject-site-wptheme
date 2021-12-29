@@ -8,8 +8,6 @@
 	$fields_phone_notification = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_notification );
 	$fields_phone_number = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_number );
 	
-	$WDGUser_current = WDGUser::current();
-	$is_authentified = $WDGUser_current->is_lemonway_registered();
 ?>
 
 <form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?> account-form">
@@ -59,17 +57,15 @@
 		<?php endforeach; ?>
 	</div>
 	
-	<?php if ( $is_authentified == FALSE ): ?>
-		<div id="user-identify-docs-form-buttons">
-			<button type="submit" class="button save red">
-				<span class="button-text">
-					<?php _e( 'account.identitydocs.SEND_DOCUMENTS', 'yproject' ); ?>
-				</span>
-				<span class="button-loading loading align-center hidden">
-					<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
-				</span>
-			</button>
-		</div>
-	<?php endif; ?>
+	<div id="user-identify-docs-form-buttons">
+		<button type="submit" class="button save red">
+			<span class="button-text">
+				<?php _e( 'account.identitydocs.SEND_DOCUMENTS', 'yproject' ); ?>
+			</span>
+			<span class="button-loading loading align-center hidden">
+				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
+			</span>
+		</button>
+	</div>
 	
 </form>

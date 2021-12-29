@@ -52,7 +52,7 @@ $pending_amount = $WDGOrganization->get_pending_rois_amount();
 		</p>
 
 		<div class="align-center" id="button-load-viban-<?php echo $WDGOrganization->get_wpref(); ?>">
-			<button type="button" class="button blue button-load-viban" data-iban-user="<?php echo $WDGOrganization->get_wpref(); ?>" data-alert="<?php _e( 'account.wallet.LOAD_VIBAN_ALERT', 'yproject' ); ?>"><?php _e( 'account.wallet.LOAD_VIBAN', 'yproject' ); ?></button>
+			<button type="button" class="button blue button-load-viban" data-iban-user="<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( 'account.wallet.LOAD_VIBAN', 'yproject' ); ?></button>
 			<br><br>
 			<img id="ajax-viban-loader-<?php echo $WDGOrganization->get_wpref(); ?>" class="hidden" src="<?php echo get_stylesheet_directory_uri() ?>/images/loading.gif" alt="chargement">
 		</div>
