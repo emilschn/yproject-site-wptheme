@@ -120,7 +120,7 @@ $today_date = new DateTime();
 		</form>
 		<br><br>
 
-		<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
+		<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_archive ): ?>
 			<div class="field admin-theme">
 				<?php _e( "En cas de recouvrement", 'yproject' ); ?><br><br>
 				<?php $campaign_debt_files = new WDGCampaignDebtFiles( $page_controler->get_campaign() ); ?>
