@@ -706,7 +706,7 @@ msgid "account.bank.BIC"
 msgstr "BIC :"
 
 msgid "account.bank.CODE"
-msgstr "Code à indiquer pour identifier votre paiement (Libellé bénéficiaire ou Code destinataire) :"
+msgstr "Code à indiquer imp&eacute;rativement pour identifier votre paiement (à indiquer comme Libellé bénéficiaire ou Code destinataire) :"
 
 msgid "account.bank.MODIFY_BANK_DETAILS"
 msgstr "Modifier mon RIB"
@@ -1550,13 +1550,22 @@ msgid "invest.mean-payment.check-return.TO_THE_ADDRESS"
 msgstr "&agrave; l'adresse suivante :"
 
 msgid "invest.mean-payment.wire.INFORMATION"
-msgstr "Afin de proc&eacute;der au virement, voici les informations bancaires dont vous aurez besoin :"
+msgstr "Afin de proc&eacute;der au virement, voici les informations bancaires dont vous avez besoin :"
 
 msgid "invest.mean-payment.wire.ACCOUNT_OWNER"
 msgstr "Titulaire du compte :"
 
+msgid "invest.mean-payment.wire.OWNER_EXPLICATION"
+msgstr "Il s'agit du prestataire de paiement qui assure la s&eacute;curisation des fonds."
+
+msgid "invest.mean-payment.wire.IDENTIFY_PROJECT"
+msgstr "Cela permettra d'identifier le projet dans lequel vous souhaitez investir."
+
 msgid "invest.mean-payment.wire.ONCE_WIRE_DONE"
-msgstr "Une fois le virement effectu&eacute;, cliquez sur"
+msgstr "Votre virement sera valid&eacute; lors de la r&eacute;ception des fonds par Lemon Way."
+
+msgid "invest.mean-payment.wire.CONFIRM_INVESTMENT"
+msgstr "Confirmer mon investissement"
 
 msgid "invest.mean-payment.wire.CODE_EXAMPLES"
 msgstr "Exemple de saisie du code destinataire sur diff&eacute;rentes banques :"
