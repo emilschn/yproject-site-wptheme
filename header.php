@@ -289,7 +289,7 @@
 								<li class="submenu-title dashboards hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></li>
 								<li class="submenu-title organizations hidden"><?php _e( 'account.ORGANIZATIONS_HEADER', 'yproject' ); ?></li>
 							</ul>
-							<a href="" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
+							<a href="<?php echo wp_logout_url(); ?>" class="button red"><?php _e( 'menu.LOGOUT', 'yproject' ); ?></a>
 							<br><br>
 						</div>
 					</div>
