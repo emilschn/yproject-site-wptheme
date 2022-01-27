@@ -388,7 +388,7 @@ WDGCampaignDashboard.prototype.switchTab = function (sType) {
 		this.table.draw();
 	}
 
-	this.scrollTo($('#item-body'));
+	this.scrollTo($('#container'));
 
 };
 
