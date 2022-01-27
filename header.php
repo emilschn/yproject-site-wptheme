@@ -191,7 +191,7 @@
 
 					<div class="menu-separator-bar"></div>
 				
-					<a href="#" class="btn-user not-connected inactive"><?php _e( 'common.CONNECTION', 'yproject' ); ?></a>
+					<a href="#" class="btn-user connected inactive"><?php _e( 'common.MY_ACCOUNT', 'yproject' ); ?></a>
 					
 					<?php if ( is_plugin_active( 'sitepress-multilingual-cms/sitepress.php' ) ): ?>
 					<?php
@@ -224,16 +224,16 @@
 						</div>
 
 						<div class="only-inf997">
-							<div class="menu-loading-init align-center" data-redirect="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>">
-								<br>
-								<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
-								<br>
-								<br>
-							</div>
-							
-							<div class="menu-connected hidden">
-								<span id="submenu-user-hello"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
-								<ul class="submenu-list">
+							<div class="menu-connected">
+								<div class="menu-loading-init align-center">
+									<br>
+									<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
+									<br>
+									<br>
+								</div>
+								
+								<span id="submenu-user-hello" class="display-if-logged-in hidden" style="display: none;"><span><?php _e( 'account.HELLO', 'yproject' ); ?></span> <span class="hello-user-name"></span> !</span>
+								<ul class="submenu-list display-if-logged-in hidden">
 									<li>
 										<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte' ); ?>"><?php _e( 'account.ACCOUNT_HEADER', 'yproject' ); ?></a><br>
 										<span class="wallet-amount-header"><b><span class="wallet-amount"></span> &euro;</b> <?php _e( 'account.WALLET_HEADER', 'yproject' ); ?></span>
@@ -246,6 +246,11 @@
 									<li class="submenu-title dashboards hidden"><?php _e( 'account.DASHBOARDS_HEADER', 'yproject' ); ?></li>
 									<li class="submenu-title organizations hidden"><?php _e( 'account.ORGANIZATIONS_HEADER', 'yproject' ); ?></li>
 								</ul>
+
+								<?php if ( !is_user_logged_in() ): ?>
+									<a class="display-if-logged-out" style="display: none;" href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>"><?php _e( 'common.CONNECTION', 'yproject' ); ?></a>
+								<?php endif; ?>
+
 								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>"><?php _e( 'menu.THE_PROJECTS', 'yproject' ); ?></a>
 								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'menu.POSITIVE_SAVINGS', 'yproject' ); ?></a>
 								<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'financement' ); ?>"><?php _e( 'menu.FUND_PROJECT', 'yproject' ); ?></a>
@@ -267,7 +272,7 @@
 					</div>
 				
 					<div id="submenu-user" class="not-connected submenu-style hidden">
-						<div class="menu-loading-init align-center" data-redirect="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>">
+						<div class="menu-loading-init align-center display-if-logged-out" data-redirect="<?php echo WDG_Redirect_Engine::override_get_page_url( 'connexion' ); ?>">
 							<br>
 							<img src="<?php echo $stylesheet_directory_uri; ?>/images/loading.gif" width="30" alt="loading">
 							<br>
