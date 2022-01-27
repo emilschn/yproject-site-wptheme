@@ -137,7 +137,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 			</a>
 			<?php if ($campaign->is_funded()) : ?>
 				<div class="financed-banner campaign-collecte"> 
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png">
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" alt="logo WE DO GOOD">
 					<p><?php _e( 'project.FUNDED_BANNER', 'yproject' ); ?></p>
 				</div>
 			<?php endif; ?>
@@ -166,7 +166,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 		?>
 			<?php if ( $campaign->get_duplicate_campaigns_id() ): ?>
 			<div class="financed-banner"> 
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" alt="logo WE DO GOOD">
 				<p><?php _e( 'project.POSITIVE_SAVINGS_BANNER', 'yproject' ); ?></p>
 			</div>
 			<?php endif; ?>
@@ -181,7 +181,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 				$buttonAction = __( 'project.DISCOVER_THIS_PROJECT', 'yproject' ); // vers plus d'info sur ce projet
 			?>
 			<div class="financed-banner"> 
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png">
+				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" alt="logo WE DO GOOD">
 				<p><?php _e( 'project.FUNDED_BANNER', 'yproject' ); ?></p>
 			</div>
 

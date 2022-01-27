@@ -34,6 +34,12 @@ global $stylesheet_directory_uri;
 <div class="tab-content" id="send-mail-tab" style="display: none">
 	<h2><?php _e("Envoyer un mail", 'yproject')?></h2>
 	<form id="direct-mail" method="POST" action="<?php echo admin_url( 'admin-post.php?action=send_project_mail'); ?>" class="db-form v3 full center bg-white">
+		<?php if ( $page_controler->can_access_admin() ): ?>
+		<div class="admin-theme">
+			<?php _e( 'Ce message sera envoyé en tant que WEDOGOOD, avec l\'adresse bonjour@wedogood.co', 'yproject' ); ?>
+		</div>
+		<?php endif; ?>
+		
 		<p><?php _e("Le message sera envoyé &agrave", 'yproject')?> <strong id="nb-mailed-contacts">0</strong> personnes</p>
 		<input type="hidden" id="mail_recipients" name="mail_recipients"/>
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>"/>
@@ -133,6 +139,7 @@ global $stylesheet_directory_uri;
 			<?php endif; ?>
 			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
 				<a href="#contacts" data-mailtype="investment-2days" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement J-2", 'yproject' ); ?></a>
+				<a href="#contacts" data-mailtype="investment-3days-post-cloture" class="button admin-theme show-notifications"><?php _e( "Envoyer le mail J-3 (incitation à investir) pendant la post-cloture", 'yproject' ); ?></a>
 				<?php if ( $page_controler->is_campaign_funded() ): ?>
 				<a href="#contacts" data-mailtype="investment-100" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement 100 %", 'yproject' ); ?></a>
 				<?php else: ?>

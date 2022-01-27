@@ -7,7 +7,6 @@
 	$fields_files = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
 	$fields_phone_notification = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_notification );
 	$fields_phone_number = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_number );
-	
 ?>
 
 <form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?> account-form">
@@ -24,6 +23,15 @@
 			<?php _e( 'account.identitydocs.SOME_FILES_DOUBLE', 'yproject' ); ?><br>
 			<?php foreach ( $kyc_duplicates as $str_duplicate ): ?>
 				- <?php echo $str_duplicate; ?><br>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+
+	<?php if ( $WDGUserIdentityDocsForm->hasErrors() ): ?>
+		<div class="wdg-message error">
+			<?php $form_errors = $WDGUserIdentityDocsForm->getPostErrors(); ?>
+			<?php foreach ( $form_errors as $form_error ): ?>
+				<?php echo $form_error[ 'text' ]; ?>
 			<?php endforeach; ?>
 		</div>
 	<?php endif; ?>

@@ -83,6 +83,11 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 					<button class="button"><?php _e( "Valider la r&eacute;ception du paiement" ); ?></button>
 				</form>
+				<form action="<?php echo admin_url( 'admin-post.php?action=roi_cancel_transfer'); ?>" method="POST" class="admin-theme-block">
+					<input type="hidden" name="roi_declaration_id" value="<?php echo $declaration->id; ?>" />
+					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+					<button class="button"><?php _e( "Annuler un paiement &eacute;chou&eacute;" ); ?></button>
+				</form>
 			</div>
 			<?php endif; ?>
 		<?php endif; ?>

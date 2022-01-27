@@ -205,6 +205,13 @@
 	}
 }
 
+/* Responsive du calculateur de royalties
+div.project-rewards-content div.calculateurRoyaltiesContainer {
+	width: 300px !important;
+	height: 300px !important;
+} */
+
+
 @media screen and (max-width: 700px) {
 	footer > .footer-container div.term-links li ul li {
 		display: block;

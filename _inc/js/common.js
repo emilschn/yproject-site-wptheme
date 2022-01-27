@@ -516,7 +516,7 @@ var WDGNavFunctions = (function ($) {
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
 
-					if ($('#submenu-search ul.submenu-list li').length == 0) {
+					if ($('#submenu-search ul.submenu-list li').length == 1) {
 						$.ajax({
 							'type': "POST",
 							'url': ajax_object.ajax_url,
@@ -686,6 +686,13 @@ var WDGNavFunctions = (function ($) {
 				return;
 			}
 
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			let strSource = '';
+			if (urlParams.has('utm_source')) {
+				strSource = urlParams.get('utm_source');
+			}
+
 			var strPageInfo = '';
 			if ($('#content').length > 0 && $('#content').data('campaignstatus') !== undefined && $('#content').data('campaignstatus') === 'funded') {
 				strPageInfo = $('#content').data('campaignid');
@@ -695,7 +702,8 @@ var WDGNavFunctions = (function ($) {
 				'url': ajax_object.ajax_url,
 				'data': {
 					'action': 'get_current_user_info',
-					'pageinfo': strPageInfo
+					'pageinfo': strPageInfo,
+					'source': strSource
 				},
 				'timeout': 30000 // sets timeout to 30 seconds
 			}).done(function (result) {
