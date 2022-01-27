@@ -791,18 +791,18 @@ var WDGNavFunctions = (function ($) {
 						for (var i = 0; i < lengthInfoProjects; i++) {
 							itemProject = infoDecoded['projectlist'][i];
 							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.dashboards').removeClass('hidden');
-							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.dashboards').after('<li><a href="' + itemProject['url'] + '" class="project-list-item' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.dashboards').after('<li><a href="' + itemProject['url'] + '" class="project-list-item' + (itemProject['display_need_authentication'] === '1' ? ' needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
 							$('.only-inf997 .menu-connected .submenu-list .submenu-title.dashboards').removeClass('hidden');
-							$('.only-inf997 .menu-connected .submenu-list .submenu-title.dashboards').after('<li><a href="' + itemProject['url'] + '" class="project-list-item' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+							$('.only-inf997 .menu-connected .submenu-list .submenu-title.dashboards').after('<li><a href="' + itemProject['url'] + '" class="project-list-item' + (itemProject['display_need_authentication'] === '1' ? ' needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
 						}
 
 						var lengthInfoOrganizations = infoDecoded['organizationlist'].length;
 						for (var i = 0; i < lengthInfoOrganizations; i++) {
 							itemOrganization = infoDecoded['organizationlist'][i];
 							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.organizations').removeClass('hidden');
-							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.organizations').after('<li><a href="' + itemOrganization['url'] + '" class="project-list-item' + (itemOrganization['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemOrganization['name'] + '</a></li>');
+							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.organizations').after('<li><a href="' + itemOrganization['url'] + '" class="project-list-item' + (itemOrganization['display_need_authentication'] === '1' ? ' needs-authentication' : '') + '">' + itemOrganization['name'] + '</a></li>');
 							$('.only-inf997 .menu-connected .submenu-list .submenu-title.organizations').removeClass('hidden');
-							$('.only-inf997 .menu-connected .submenu-list .submenu-title.organizations').after('<li><a href="' + itemOrganization['url'] + '" class="project-list-item' + (itemOrganization['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemOrganization['name'] + '</a></li>');
+							$('.only-inf997 .menu-connected .submenu-list .submenu-title.organizations').after('<li><a href="' + itemOrganization['url'] + '" class="project-list-item' + (itemOrganization['display_need_authentication'] === '1' ? ' needs-authentication' : '') + '">' + itemOrganization['name'] + '</a></li>');
 						}
 
 						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
