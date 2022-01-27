@@ -139,6 +139,7 @@ global $stylesheet_directory_uri;
 			<?php endif; ?>
 			<?php if ( $page_controler->get_campaign_status() == ATCF_Campaign::$campaign_status_collecte ): ?>
 				<a href="#contacts" data-mailtype="investment-2days" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement J-2", 'yproject' ); ?></a>
+				<a href="#contacts" data-mailtype="investment-3days-post-cloture" class="button admin-theme show-notifications"><?php _e( "Envoyer le mail J-3 (incitation à investir) pendant la post-cloture", 'yproject' ); ?></a>
 				<?php if ( $page_controler->is_campaign_funded() ): ?>
 				<a href="#contacts" data-mailtype="investment-100" class="button admin-theme show-notifications"><?php _e( "Envoyer les relances d'investissement 100 %", 'yproject' ); ?></a>
 				<?php else: ?>
