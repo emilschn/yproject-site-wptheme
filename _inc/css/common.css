@@ -875,10 +875,19 @@ nav#main > div#menu #submenu-user ul.submenu-list li, nav#main > div#menu #subme
 	border-bottom: 1px solid #c2c2c2;
 	padding: 25px 0 25px 10px;
 }
+nav#main > div#menu #submenu-search ul.submenu-list li.empty-list-info {
+	padding: 25px 10px;
+}
 nav#main > div#menu #submenu-user ul.submenu-list li a, nav#main > div#menu #submenu-search ul.submenu-list li a {
 	margin: 0;
 	border-bottom: 0;
 	line-height: auto;
+}
+nav#main > div#menu #submenu-search ul.submenu-list li.empty-list-info a {
+	color: #ea4f51;
+}
+nav#main > div#menu .submenu-style ul.submenu-list li.empty-list-info a:hover {
+	background: none;
 }
 nav#main > div#menu #submenu-user ul.submenu-list .submenu-title, nav#main > div#menu #submenu-search ul.submenu-list .submenu-title {
 	padding-top: 10px;
