@@ -745,7 +745,7 @@ msgid "account.documents.DOCUMENTS_OF"
 msgstr "Documents de"
 
 msgid "account.documents.MY_YEARLY_TRANSACTIONS_CERTIFICATES"
-msgstr "Mes dispenses déjà enregistrées"
+msgstr "Mes attestations de transactions annuelle"
 
 msgid "account.documents.DOWNLOAD_CERTIFICATE"
 msgstr "T&eacute;l&eacute;charger l'attestation"
