@@ -860,7 +860,7 @@ ul.project-list a.needs-authentication:after {
 }
 #submenu-user #submenu-user-hello, #submenu-search #submenu-user-hello {
 	color: #c2c2c2;
-	font-size: 14px;
+	font-size: 13px;
 	font-weight: bold;
 	border-bottom: 1px solid #c2c2c2;
 	padding-bottom: 15px;
@@ -873,15 +873,27 @@ ul.project-list a.needs-authentication:after {
 }
 nav#main > div#menu #submenu-user ul.submenu-list li, nav#main > div#menu #submenu-search ul.submenu-list li {
 	border-bottom: 1px solid #c2c2c2;
-	padding: 25px 0 25px 10px;
+	padding: 16px 0 16px 8px;
+}
+nav#main > div#menu #submenu-search ul.submenu-list li.empty-list-info {
+	padding: 16px 8px;
 }
 nav#main > div#menu #submenu-user ul.submenu-list li a, nav#main > div#menu #submenu-search ul.submenu-list li a {
 	margin: 0;
 	border-bottom: 0;
 	line-height: auto;
 }
+nav#main > div#menu #submenu-search ul.submenu-list li.empty-list-info a {
+	color: #ea4f51;
+}
+nav#main > div#menu .submenu-style ul.submenu-list li.empty-list-info a:hover {
+	background: none;
+}
+nav#main > div#menu #submenu-user ul.submenu-list li a.project-list-item {
+	font-size: 12px;
+}
 nav#main > div#menu #submenu-user ul.submenu-list .submenu-title, nav#main > div#menu #submenu-search ul.submenu-list .submenu-title {
-	padding-top: 10px;
+	padding-bottom: 8px;
 	color: #c2c2c2;
 	font-size: 14px;
 	font-weight: bold;
@@ -895,17 +907,17 @@ nav#main > div#menu #submenu-user ul.submenu-list .wallet-amount-header, nav#mai
 }
 nav#main > div#menu #submenu-user a.button, nav#main > div#menu #submenu-search a.button {
 	color: #fff;
-	margin-top: 15px;
+	margin-top: 16px;
 	margin-left: 0;
 }
 nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert, nav#main > div#menu #submenu-search ul.submenu-list .authentication-alert {
 	border: 1px solid #F8CACA;
-	padding: 15px;
+	padding: 16px;
 	text-transform: none;
 	display: flex;
 	flex-flow: row wrap;
 	align-items: center;
-	margin-top: 15px;
+	margin-top: 16px;
 }
 nav#main > div#menu #submenu-user ul.submenu-list .authentication-alert img, nav#main > div#menu #submenu-search ul.submenu-list .authentication-alert img {
 	height: 40px;
