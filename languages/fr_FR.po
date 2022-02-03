@@ -2027,7 +2027,7 @@ msgid "form.organization-details.WEBSITE"
 msgstr "Site Web"
 
 msgid "form.organization-details.WEBSITE_DESCRIPTION"
-msgstr "Adresse de votre site Internet, commen&ccedil;ant par http ou www"
+msgstr "Adresse de votre site Internet, commen&ccedil;ant par http ou www, ou URL societe.com si inexistant"
 
 msgid "form.organization-details.ORGANIZATION_MANAGER_TITLE"
 msgstr "Fonction du repr&eacute;sentant"

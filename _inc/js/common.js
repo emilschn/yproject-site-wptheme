@@ -64,7 +64,6 @@ YPUIFunctions = (function ($) {
 			$(document).scroll(function () {
 				if (YPUIFunctions.currentLightbox === '') {
 					if ($(document).scrollTop() > 50) {
-						$('nav#main').css('marginTop', 0);
 						if ($(document).scrollTop() > 250) {
 							$('.responsive-fixed').addClass('fixed');
 						} else {
@@ -484,6 +483,7 @@ var WDGNavFunctions = (function ($) {
 						$('.btn-user').addClass('active').removeClass('inactive');
 						if ($(window).width() < 997) {
 							$('#submenu-search').show('fast');
+							WDGNavFunctions.requestSearchList();
 						}
 						else {
 							$('#submenu-user').show('fast');
@@ -518,28 +518,7 @@ var WDGNavFunctions = (function ($) {
 					$('.submenu-search-input').focus();
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
-
-					// En théorie, au départ, il y a les 2 éléments qui affichent la liste vide (pleine page et responsive)
-					if ($('#submenu-search ul.submenu-list.list-search li').length < 3) {
-						$.ajax({
-							'type': "POST",
-							'url': ajax_object.ajax_url,
-							'data': {
-								'action': 'get_searchable_projects_list'
-							}
-
-						}).done(function (result) {
-							var result_json = JSON.parse(result);
-							var aProjectList = result_json.projects;
-							var nProjects = aProjectList.length;
-							for (var i = 0; i < nProjects; i++) {
-								$('#submenu-search ul.submenu-list.list-search').append(
-									'<li class="hidden"><a href="' + result_json.home_url + aProjectList[i].url + '">' + aProjectList[i].name + '<span class="hidden">' + aProjectList[i].url + ' ' + aProjectList[i].organization_name + '</span></a></li>'
-								);
-							}
-							$(".submenu-search-input").trigger('keyup');
-						});
-					}
+					WDGNavFunctions.requestSearchList();
 				}
 			});
 			$(".submenu-search-input").keyup(function (e) {
@@ -749,6 +728,29 @@ var WDGNavFunctions = (function ($) {
 			});
 		},
 
+		requestSearchList: function () {
+			// En théorie, au départ, il y a les 2 éléments qui affichent la liste vide (pleine page et responsive)
+			if ($('#submenu-search ul.submenu-list.list-search li').length < 3) {
+				$.ajax({
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': {
+						'action': 'get_searchable_projects_list'
+					}
+
+				}).done(function (result) {
+					var result_json = JSON.parse(result);
+					var aProjectList = result_json.projects;
+					var nProjects = aProjectList.length;
+					for (var i = 0; i < nProjects; i++) {
+						$('#submenu-search ul.submenu-list.list-search, .only-inf997 #submenu-search ul.submenu-list.list-search').append(
+							'<li class="hidden"><a href="' + result_json.home_url + aProjectList[i].url + '">' + aProjectList[i].name + '<span class="hidden">' + aProjectList[i].url + ' ' + aProjectList[i].organization_name + '</span></a></li>'
+						);
+					}
+					$(".submenu-search-input").trigger('keyup');
+				});
+			}
+		},
 
 		displaySubmenuUser: function () {
 			if (WDGNavFunctions.currentUserInfo) {
