@@ -514,6 +514,7 @@ form span.file-description {
 *******************************************************************************/
 nav#main {
 	position: fixed;
+	top: 0px;
 	z-index: 180;
 	width: 100%;
 	height: 60px;
