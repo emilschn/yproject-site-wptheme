@@ -931,7 +931,7 @@ msgid "account.investments.QUARTERLY_PAYMENTS"
 msgstr "Versements trimestriels"
 
 msgid "account.investments.YEARS"
-msgstr "Ann&eacute;es"
+msgstr "Année"
 
 msgid "account.investments.TURNOVER"
 msgstr "Chiffre d&apos;affaires"
