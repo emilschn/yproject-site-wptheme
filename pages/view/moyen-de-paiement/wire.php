@@ -9,11 +9,11 @@ $viban = $page_controler->get_investor_iban();
 
 <?php _e( 'invest.mean-payment.wire.INFORMATION', 'yproject' ); ?><br>
 <ul>
-	<li><strong><?php _e( 'invest.mean-payment.wire.ACCOUNT_OWNER', 'yproject' ); ?></strong> <?php echo $viban[ 'holder' ]; ?></li>
+	<li><strong><?php _e( 'invest.mean-payment.wire.ACCOUNT_OWNER', 'yproject' ); ?></strong> <?php echo $viban[ 'holder' ]; ?><br><i><?php _e( 'invest.mean-payment.wire.OWNER_EXPLICATION', 'yproject' ); ?></i></li>
 	<li><strong>IBAN :</strong> <?php echo $viban[ 'iban' ]; ?></li>
 	<li><strong>BIC :</strong> <?php echo $viban[ 'bic' ]; ?></li>
 	<?php if ( !empty( $viban[ 'backup' ] ) && !empty( $viban[ 'backup' ][ 'lemonway_id' ] ) ): ?>
-		<li><strong><?php _e( 'account.bank.CODE', 'yproject' ); ?></strong> <?php echo $viban[ 'backup' ][ 'lemonway_id' ]; ?></li>
+		<li><strong><?php _e( 'account.bank.CODE', 'yproject' ); ?></strong> <?php echo $viban[ 'backup' ][ 'lemonway_id' ]; ?><br><i><?php _e( 'invest.mean-payment.wire.IDENTIFY_PROJECT', 'yproject' ); ?></i></li>
 	<?php endif; ?>
 </ul>
 <br><br>
@@ -24,7 +24,7 @@ $viban = $page_controler->get_investor_iban();
 	</p>
 	<a class="button red investment-button" href="<?php echo $page_controler->get_wire_next_link(); ?>">
 		<span class="button-text">
-			<?php _e( 'common.NEXT', 'yproject' ); ?>
+			<?php _e( 'invest.mean-payment.wire.CONFIRM_INVESTMENT', 'yproject' ); ?>
 		</span>
 		<span class="button-loading loading align-center hidden">
 			<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.NEXT', 'yproject' ); ?>...

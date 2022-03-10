@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2021-12-17 15:23+0100\n"
+"PO-Revision-Date: 2022-02-10 11:38+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -768,10 +768,10 @@ msgid "account.documents.DOWNLOAD_EXEMPTION_FILE"
 msgstr "Download the exemption"
 
 msgid "account.documents.ASK_ANNUAL_EXEMPTION"
-msgstr "Apply for an annual exemption"
+msgstr "Apply for a new annual exemption"
 
 msgid "account.documents.SEND_ANNUAL_EXEMPTION"
-msgstr "Send my annual exemption application"
+msgstr "Import a file\""
 
 msgid "account.documents.SAVE_ANNUAL_EXEMPTION"
 msgstr "Register my exemption request"
@@ -936,7 +936,7 @@ msgid "account.investments.QUARTERLY_PAYMENTS"
 msgstr "Quarterly payments"
 
 msgid "account.investments.YEARS"
-msgstr "years"
+msgstr "Year"
 
 msgid "account.investments.TURNOVER"
 msgstr "turnover"
@@ -1540,13 +1540,22 @@ msgid "invest.mean-payment.check-return.TO_THE_ADDRESS"
 msgstr "to the following address:"
 
 msgid "invest.mean-payment.wire.INFORMATION"
-msgstr "In order to proceed with the transfer, here is the banking information you will need:"
+msgstr "In order to proceed with the transfer, here is the banking information you need:"
 
 msgid "invest.mean-payment.wire.ACCOUNT_OWNER"
 msgstr "Account owner:"
 
+msgid "invest.mean-payment.wire.OWNER_EXPLICATION"
+msgstr "It is the payment service provider who secures the funds."
+
+msgid "invest.mean-payment.wire.IDENTIFY_PROJECT"
+msgstr "This will identify the project in which you want to invest in."
+
 msgid "invest.mean-payment.wire.ONCE_WIRE_DONE"
-msgstr "Once the transfer has been made, click on"
+msgstr "Your transfer will be effective once Lemon Way receives the funds."
+
+msgid "invest.mean-payment.wire.CONFIRM_INVESTMENT"
+msgstr "Confirm my investment"
 
 msgid "invest.mean-payment.wire.CODE_EXAMPLES"
 msgstr "Example of entering the recipient code for different banks:"
@@ -2008,7 +2017,7 @@ msgid "form.organization-details.WEBSITE"
 msgstr "Web site"
 
 msgid "form.organization-details.WEBSITE_DESCRIPTION"
-msgstr "Your website address, starting with http or www"
+msgstr "Your website address, starting with http or www, or official URL if non-existent"
 
 msgid "form.organization-details.ORGANIZATION_MANAGER_TITLE"
 msgstr "Organization manager role"
