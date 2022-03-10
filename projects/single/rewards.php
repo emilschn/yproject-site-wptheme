@@ -48,7 +48,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent_estimated(); ?>">
 				<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->goal(false); ?>">
 				<input type="hidden" id="roi_maximum_profit" value="<?php echo $campaign->maximum_profit_complete(); ?>">
-				<input type="hidden" id="estimated_turnover_unit" value="<?php echo $campaign->estimated_turnover_unit(); ?>">					
+				<input type="hidden" id="estimated_turnover_unit" value="<?php echo $campaign->estimated_turnover_unit(); ?>">
 				
 				<?php if (is_user_logged_in() && $campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 					<form method="GET" action="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investir' ); ?>" class="avoid-enter-validation">
@@ -138,17 +138,6 @@ $estimated_turnover = $campaign->estimated_turnover();
 									borderWidth: 2,
 									label: 'Montant investi',
 								},
-								<?php // if ( $turnover_to_reach_maximum_profit > 0 ): ?>
-								{
-									data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_maximum_profit; ?>),
-									fill: false,
-									radius: 0,
-									borderColor: "rgba(51,51,51,1)",
-									borderDash: [6, 3],
-									borderWidth: 1,
-									label: 'Retour sur investissement maximum'
-								},
-								<?php // endif; ?>
 								{
 									label: '€',
 									fill: true,
@@ -157,6 +146,17 @@ $estimated_turnover = $campaign->estimated_turnover();
 									pointBackgroundColor: 'rgba(0,135,155,1)',
 									data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, 0)
 								}
+								<?php if ( $campaign->maximum_profit_complete() < 100 ): ?>
+								,{
+									data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_maximum_profit; ?>),
+									fill: false,
+									radius: 0,
+									borderColor: "rgba(51,51,51,1)",
+									borderDash: [6, 3],
+									borderWidth: 1,
+									label: 'Retour sur investissement maximum'
+								}
+								<?php endif; ?>
 							]
 						};
 						const configRoyaltiesChart = {

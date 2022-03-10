@@ -10,7 +10,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 	/**
 	 * @var WDGInvestment
 	 */
-	private $current_investment;
+	private $current_investment = false;
 	private $current_step;
 	private $form;
 
@@ -23,11 +23,15 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 
 		define( 'SKIP_BASIC_HTML', TRUE );
 
-		$this->init_current_investment();
-		$this->init_current_campaign();
-		$this->check_current_preinvestment();
-		$this->init_current_step();
-		$this->init_form();
+		if ( $this->init_current_investment() ) {
+			$this->init_current_campaign();
+			$this->check_current_preinvestment();
+			$this->init_current_step();
+			$this->init_form();
+
+		} else {
+			ypcf_debug_log('controler-terminer-preinvestissement.php :: ERROR  ');
+		}
 	}
 
 	/******************************************************************************/
@@ -50,7 +54,9 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 		$investment_id = filter_input( INPUT_GET, 'investment_id' );
 		if ( !empty( $investment_id ) ) {
 			$this->current_investment = new WDGInvestment( $investment_id );
+			return true;
 		}
+		return false;
 	}
 
 	/**

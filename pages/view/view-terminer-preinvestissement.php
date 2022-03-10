@@ -6,6 +6,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 <div id="content">
 
+	<?php if ( !$page_controler->get_current_investment() ): ?>
+		ERROR - WDGVTP1
+
+	<?php else: ?>
 	<header>
 
 		<div class="center">
@@ -41,5 +45,6 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		
 		<br><br>
 	</div>
+	<?php endif; ?>
 	
 </div><!-- #content -->

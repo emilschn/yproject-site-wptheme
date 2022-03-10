@@ -4,7 +4,7 @@
 <h2><?php _e( "Financement", 'yproject' ); ?></h2>
 
 <div class="db-form v3 full center bg-white">
-<	<form id="projectfunding_form" class="ajax-db-form" data-action="save_project_funding" <?php if (!$page_controler->get_campaign()->is_preparing()){ ?>data-confirm="true"<?php } ?> novalidate>
+	<form id="projectfunding_form" class="ajax-db-form" data-action="save_project_funding" <?php if (!$page_controler->get_campaign()->is_preparing()){ ?>data-confirm="true"<?php } ?> novalidate>
 		<?php
 		DashboardUtility::create_field(array(
 			'id'			=> 'new_minimum_goal',
@@ -292,6 +292,54 @@
 			"admin_theme"	=> $page_controler->can_access_admin(),
 			"visible"		=> $page_controler->can_access_admin()
 		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_total_previous_funding",
+			"type"			=> "number",
+			"label"			=> "Total des fonds déjà réunis",
+			"value"			=> $page_controler->get_campaign()->total_previous_funding(),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_total_previous_funding_description",
+			"type"			=> "editor",
+			"label"			=> "Description des fonds déjà réunis",
+			"value"			=> html_entity_decode( $page_controler->get_campaign()->total_previous_funding_description() ),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_turnover_previous_year",
+			"type"			=> "number",
+			"label"			=> "Chiffre d'affaires de l'année précédant la levée de fonds",
+			"value"			=> $page_controler->get_campaign()->turnover_previous_year(),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_working_capital_sufficient",
+			"type"			=> "check",
+			"label"			=> "La société dispose d'un fonds de roulement net suffisant pour les 6 prochains mois",
+			"value"			=> $page_controler->get_campaign()->has_sufficient_working_capital(),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_working_capital_subsequent",
+			"type"			=> "editor",
+			"label"			=> "Sources de financement à l'étude pour les 6 mois ultérieurs",
+			"value"			=> html_entity_decode( $page_controler->get_campaign()->working_capital_subsequent() ),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
+
+		DashboardUtility::create_field(array(
+			"id"			=> "new_financial_risks_others",
+			"type"			=> "editor",
+			"label"			=> "Autres facteurs de risque",
+			"value"			=> html_entity_decode( $page_controler->get_campaign()->financial_risks_others() ),
+			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
+		));
 		?>
 
 		<table>
@@ -300,6 +348,7 @@
 				<tr>
 					<td></td>
 					<td><?php _e( "CA pr&eacute;visionnel", 'yproject' ); ?></td>
+					<td><?php _e( "Nb ventes pr&eacute;visionnelles", 'yproject' ); ?></td>
 					<td>
 						<?php _e( "Montant des Royalties reversées", 'yproject' ); ?><br>
 						<?php _e( "pour", 'yproject' ); ?> <span id="total-funding">---</span> <?php _e( "investis", 'yproject' ); ?>
@@ -309,6 +358,7 @@
 
 			<?php
 			$estimated_turnover = $page_controler->get_campaign()->estimated_turnover();
+			$estimated_sales = $page_controler->get_campaign()->estimated_sales();
 			$is_euro = ( $page_controler->get_campaign()->estimated_turnover_unit() == 'euro' );
 			$data_symbol = ( $is_euro ) ? '€' : '%';
 			?>
@@ -316,17 +366,21 @@
 				<?php if ( !empty( $estimated_turnover ) ): ?>
 					<?php $i = 0; ?>
 					<?php foreach ( $estimated_turnover as $year => $turnover ): ?>
+						<?php $sales = !empty( $estimated_sales[ $year ] ) ? $estimated_sales[ $year ] : '0'; ?>
 						<tr>
 							<td>
 								Année <span class="year"><?php echo ( $i+1 ); ?></span>
 							</td>
-							<td class="field field-value" data-type="number" data-id="new_estimated_turnover_<?php echo $i;?>" data-type="number">
+							<td class="field field-value" data-id="new_estimated_turnover_<?php echo $i;?>" data-type="number">
 								<?php if ( $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing() ): ?>
 									<input type="text" pattern="\d*" value="<?php echo $turnover; ?>" id="new_estimated_turnover_<?php echo $i;?>" class="right-icon" />&nbsp;<?php echo $data_symbol; ?>
 								<?php else: ?>
 									<?php echo $turnover; ?>
 									<span style="padding-right: 70px;"><?php echo $data_symbol; ?></span>
 								<?php endif; ?>
+							</td>
+							<td class="field field-value" data-id="new_estimated_sales_<?php echo $i;?>" data-type="number">
+								<input type="text" pattern="\d*" value="<?php echo $sales; ?>" id="new_estimated_sales_<?php echo $i;?>">
 							</td>
 							<td id="roi-amount-<?php echo $i;?>" class="like-input-center">
 								0 €

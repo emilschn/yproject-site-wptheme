@@ -278,6 +278,16 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		));
 
 		DashboardUtility::create_field(array(
+			"id"			=> "new_display_automatic_economic_model",
+			"type"			=> "check",
+			"label"			=> __( "Remplir les données financières automatiquement", 'yproject' ),
+			"value"			=> $page_controler->get_campaign()->get_display_automatic_economic_model(),
+			'admin_theme'	=> true,
+			'editable'		=> $page_controler->can_access_admin(),
+			'visible'		=> $page_controler->can_access_admin()
+		));
+
+		DashboardUtility::create_field(array(
 			"id"			=> "new_show_comments_for_everyone",
 			"type"			=> "check",
 			"label"			=> __( "Afficher les commentaires sur la page projet pour tous les visiteurs", 'yproject' ),
