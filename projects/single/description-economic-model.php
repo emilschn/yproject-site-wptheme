@@ -141,7 +141,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 </p>
 
 <?php
-$nb_declarations_per_year = $campaign->get_declararations_count_per_year();
+$nb_declarations_per_year = $campaign->get_declarations_count_per_year();
 $nb_months_between_declarations = 12 / $nb_declarations_per_year;
 $timeline_length = $funding_duration * $nb_declarations_per_year;
 ?>
