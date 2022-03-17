@@ -329,6 +329,7 @@
 			"id"			=> "new_working_capital_subsequent",
 			"type"			=> "editor",
 			"label"			=> "Sources de financement à l'étude pour les 6 mois ultérieurs",
+			'description'	=> "Par exemple : subventions, emprunts, ...",
 			"value"			=> html_entity_decode( $page_controler->get_campaign()->working_capital_subsequent() ),
 			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 		));
@@ -337,6 +338,7 @@
 			"id"			=> "new_financial_risks_others",
 			"type"			=> "editor",
 			"label"			=> "Autres facteurs de risque",
+			'description'	=> "Quels sont les autres facteurs de risques inhérents à votre activité ? Tout projet comporte des risques. Pour chaque risque identifié, pensez à rassurer en indiquant ce que vous mettez en place pour le prévenir.",
 			"value"			=> html_entity_decode( $page_controler->get_campaign()->financial_risks_others() ),
 			'editable'		=> $page_controler->can_access_admin() || $page_controler->get_campaign()->is_preparing()
 		));
