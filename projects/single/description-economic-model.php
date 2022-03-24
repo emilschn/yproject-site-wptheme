@@ -96,7 +96,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 			<tr>
 				<th><?php _e( "project.single.description.economic.ESTIMATED_TURNOVER", 'yproject' ); ?></th>
 				<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
-				<td><?php echo UIHelpers::format_number( $estimated_turnover[ $i ] ); ?> €</th>
+				<td><?php echo UIHelpers::format_number( $estimated_turnover[ $i ], 2, '&nbsp;' ); ?>&nbsp;€</th>
 				<?php endfor; ?>
 			</tr>
 		</tbody>
