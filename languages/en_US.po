@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-03-10 16:30+0100\n"
+"PO-Revision-Date: 2022-03-24 15:24+0100\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -3251,6 +3251,12 @@ msgstr "Revenus du projet"
 
 msgid "project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR"
 msgstr "Sur les 12 mois précédents la levée de fonds, nous avons réalisé %s € de chiffre d'affaires."
+
+msgid "project.single.description.economic.COUNT_SALES"
+msgstr "Nombre de ventes"
+
+msgid "project.single.description.economic.ESTIMATED_TURNOVER"
+msgstr "Chiffre d'affaires prévisionnel"
 
 msgid "project.single.description.economic.YOUR_INVESTMENT"
 msgstr "Votre investissement"

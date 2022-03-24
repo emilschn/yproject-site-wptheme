@@ -88,15 +88,15 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 		</thead>
 		<tbody>
 			<tr>
-				<th>Nombre de ventes</th>
+				<th><?php _e( "project.single.description.economic.COUNT_SALES", 'yproject' ); ?></th>
 				<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
-				<td><?php echo $estimated_turnover[ $i ]; ?></th>
+				<td><?php echo !empty($estimated_sales[ $i ]) ? $estimated_sales[ $i ] : 0; ?></th>
 				<?php endfor; ?>
 			</tr>
 			<tr>
-				<th>Chiffre d'affaires prévisionnel</th>
+				<th><?php _e( "project.single.description.economic.ESTIMATED_TURNOVER", 'yproject' ); ?></th>
 				<?php for ( $i = 1; $i <= $funding_duration; $i++ ): ?>
-				<td><?php echo $estimated_sales[ $i ]; ?></th>
+				<td><?php echo UIHelpers::format_number( $estimated_turnover[ $i ] ); ?> €</th>
 				<?php endfor; ?>
 			</tr>
 		</tbody>
