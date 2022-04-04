@@ -95,7 +95,7 @@ msgid "common.PREVIOUS"
 msgstr "Pr&eacute;c&eacute;dent"
 
 msgid "common.MY_ACCOUNT"
-msgstr "Mon compte"
+msgstr "Compte"
 
 msgid "common.MODIFY"
 msgstr "Modifier"
@@ -149,7 +149,7 @@ msgstr "Financement de projets en fonds propres et sans dilution du capital dans
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
-msgstr "Les projets"
+msgstr "Voir les projets"
 
 msgid "menu.POSITIVE_SAVINGS"
 msgstr "&Eacute;pargne positive"
@@ -158,7 +158,7 @@ msgid "menu.FUND_PROJECT"
 msgstr "Financer mon projet"
 
 msgid "menu.INVEST"
-msgstr "Investir en royalties"
+msgstr "Investir en royalties ?"
 
 msgid "menu.VISION"
 msgstr "Vision"
@@ -512,6 +512,24 @@ msgstr "L'adresse e-mail de la personne physique qui g&egrave;re ce compte est :
 
 msgid "account.HELLO"
 msgstr "Bonjour"
+
+msgid "account.ACCOUNT_HEADER"
+msgstr "Mon compte personnel"
+
+msgid "account.WALLET_HEADER"
+msgstr "dans mon porte-monnaie"
+
+msgid "account.AUTHENTICATION_HEADER"
+msgstr "Pour investir sur WEDOGOOD et récupérer vos royalties, vous devez être authentifié."
+
+msgid "account.AUTHENTICATION_HEADER_LINK"
+msgstr "Continuer mon authentification"
+
+msgid "account.DASHBOARDS_HEADER"
+msgstr "Tableaux de bord des projets"
+
+msgid "account.ORGANIZATIONS_HEADER"
+msgstr "Entreprises"
 
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Retourner vers un projet privé"

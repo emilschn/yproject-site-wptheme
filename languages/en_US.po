@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-03-24 15:24+0100\n"
+"PO-Revision-Date: 2022-04-04 14:51+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -100,7 +100,7 @@ msgid "common.PREVIOUS"
 msgstr "Previous"
 
 msgid "common.MY_ACCOUNT"
-msgstr "My account"
+msgstr "Account"
 
 msgid "common.MODIFY"
 msgstr "Modify"
@@ -154,7 +154,7 @@ msgstr "Financing of projects in equity and without dilution of capital in"
 
 # ############################## HEADER - MENU ################################
 msgid "menu.THE_PROJECTS"
-msgstr "The projects"
+msgstr "See the projects"
 
 msgid "menu.POSITIVE_SAVINGS"
 msgstr "Positive savings"
@@ -163,7 +163,7 @@ msgid "menu.FUND_PROJECT"
 msgstr "Finance my project"
 
 msgid "menu.INVEST"
-msgstr "Invest in royalties"
+msgstr "Invest in royalties ?"
 
 msgid "menu.VISION"
 msgstr "Vision"
@@ -517,6 +517,24 @@ msgstr "The e-mail address of the physical person managing the account is:"
 
 msgid "account.HELLO"
 msgstr "Hello"
+
+msgid "account.ACCOUNT_HEADER"
+msgstr "My personal account"
+
+msgid "account.WALLET_HEADER"
+msgstr "in my wallet"
+
+msgid "account.AUTHENTICATION_HEADER"
+msgstr "To invest on WEDOGOOD and reclaim your royalties, you must be authenticated."
+
+msgid "account.AUTHENTICATION_HEADER_LINK"
+msgstr "Continue my authentication"
+
+msgid "account.DASHBOARDS_HEADER"
+msgstr "Projects dashboards"
+
+msgid "account.ORGANIZATIONS_HEADER"
+msgstr "Organizations"
 
 msgid "account.lightbox.hidden-project-visited.TITLE"
 msgstr "Return to a private project"

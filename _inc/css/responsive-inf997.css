@@ -1,37 +1,107 @@
 @media screen and (max-width: 997px) {
-	.hidden-inf997 { display: none; }
-	.only-inf997 { display: block; }
-	.only-inf997.inline { display: inline; }
-	h2.standard { font-size: 24pt; }
-	#content .padder { width: 100%; }
-	
-	nav#main > div#menu {
+	.hidden-inf997 {
+		display: none;
+	}
+
+	.only-inf997 {
+		display: block;
+	}
+
+	.only-inf997.inline {
+		display: inline;
+	}
+
+	h2.standard {
+		font-size: 24pt;
+	}
+
+	#content .padder {
+		width: 100%;
+	}
+
+	nav#main>div#menu {
 		width: -webkit-calc(100% - 10px);
 		width: -moz-calc(100% - 10px);
 		width: calc(100% - 10px);
 		padding: 5px;
 	}
-	nav#main > div#menu > a, nav#main > div#menu > a.lines, nav#main > div#menu > a.btn-user { display: none; }
-	nav#main > div#menu > a:first-child, nav#main > div#menu > a#btn-switch-lang, nav#main > div#menu > a#btn-burger { display: inline-block; }
-	
-	nav#main > div#menu > a#btn-burger.active {
+
+	nav#main>div#menu>a,
+	nav#main>div#menu>a.lines,
+	nav#main>div#menu>a.btn-user {
+		display: none;
+	}
+
+	nav#main>div#menu>a:first-child,
+	nav#main>div#menu>a#btn-switch-lang,
+	nav#main>div#menu>a#btn-burger {
+		display: inline-block;
+	}
+
+	nav#main>div#menu>a#btn-burger.active {
 		margin: -5px;
 		padding: 5px 12px;
 		background-color: #E1E3E2;
 	}
-	nav#main > div#menu > a#btn-burger img {
+
+	nav#main>div#menu>a#btn-burger img {
 		vertical-align: middle;
 	}
+
 	#submenu-switch-lang {
 		position: absolute;
 		top: 50px;
 		right: 20px;
 		left: auto;
 	}
-	
-	
-	#submenu-user { top: 50px; right: 0px; }
-	#submenu-search { top: 50px; right: 0px; }
+
+	#submenu-user {
+		display: none;
+	}
+
+	nav#main div#menu div#menu-links .lines,
+	nav#main div#menu a#btn-search,
+	nav#main div#menu .menu-separator-bar {
+		display: none;
+	}
+
+	#submenu-switch-lang {
+		right: 170px;
+	}
+
+	#submenu-switch-lang .submenu-list li a {
+		padding: 10px 0;
+	}
+
+	nav#main>div#menu img#logo_wdg {
+		transform: scale(0.8);
+	}
+
+	nav#main>div#menu>div#menu-links a:first-of-type {
+		margin: 0;
+	}
+
+	div.menu-loading-init {
+		width: 100px;
+	}
+
+	div.menu-connected {
+		overflow-y: scroll;
+		height: 85vh;
+	}
+
+	div.menu-connected>a {
+		padding-left: 5px;
+	}
+
+	#submenu-search {
+		position: absolute;
+		top: 51px;
+		right: 0px;
+		background-color: #fff;
+		width: auto;
+	}
+
 	#submenu-search a {
 		display: block;
 		color: #333333;
@@ -40,112 +110,145 @@
 		text-transform: uppercase;
 		font-size: 10pt;
 	}
+
 	#submenu-search a:hover {
 		background: #E1E3E2;
 	}
-	#submenu-search-input {
-		height: -webkit-calc(100% - 150px);
-		height: -moz-calc(100% - 150px);
-		height: calc(100% - 150px);
-	}
-	.submenu-style ul.submenu-list {
-                max-height: 200px; /*hauteur max pour mobile 320*480px*/
-        }
 
-	/*******************************************************************************
-	* DESCRIPTION AUTOMATIC
-	*******************************************************************************/
-	div.project-description-item div#project-content-economic_model div.zone-content {
-		flex-wrap: wrap;
-		flex-direction: column;
-		padding: 0 26px;
+	.submenu-search-input {
+		margin-left: 14px;
 	}
-	div#project-content-economic_model div.economic-intro.left {
-		width: auto;
-		border-right: 0;
-		border-bottom: 1px solid #c2c2c2;
-		margin-bottom: 20px;
-		padding-bottom: 20px;
+
+	.submenu-style ul.submenu-list {
+		max-height: 200px;
+		/*hauteur max pour mobile 320*480px*/
 	}
-	
-	footer > .footer-container { 
-		background-image: none; 
+
+	#submenu-search #submenu-user-hello {
+		padding: 20px;
+	}
+
+	#submenu-search li:first-of-type a {
+		padding: 0;
+		font-weight: bold;
+	}
+
+	nav#main>div#menu a {
+		border-bottom: 0;
+		width: 100%;
+	}
+
+	nav#main div#menu #submenu-search a.button {
+		width: 150px;
+		margin: 14px;
+		text-align: center;
+	}
+
+	footer>.footer-container {
+		background-image: none;
 		padding: 30px;
 		line-height: 1.8;
 		font-size: 20px;
 	}
-	footer > .footer-container > section {
+
+	footer>.footer-container>section {
 		flex-direction: column;
 	}
-	footer > .footer-container > section:nth-child(1) ul { margin: 0px; }
-	footer > .footer-container > section:nth-child(1) > div > ul {
+
+	footer>.footer-container>section:nth-child(1) ul {
+		margin: 0px;
+	}
+
+	footer>.footer-container>section:nth-child(1)>div>ul {
 		display: none;
 		margin: 0px 0px 30px;
 	}
-	footer > .footer-container > section:nth-child(1) a {
+
+	footer>.footer-container>section:nth-child(1) a {
 		font-size: 18px;
 	}
-	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle {
+
+	footer>.footer-container>section:nth-child(1)>div>span.footer-subtitle {
 		margin: 0px;
 		padding: 10px 0px;
 	}
-	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.border-hidden {
+
+	footer>.footer-container>section:nth-child(1)>div>span.footer-subtitle.border-hidden {
 		border-top: 0px;
 	}
-	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable {
+
+	footer>.footer-container>section:nth-child(1)>div>span.footer-subtitle.clickable {
 		cursor: pointer;
 	}
-	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable::after {
+
+	footer>.footer-container>section:nth-child(1)>div>span.footer-subtitle.clickable::after {
 		content: "+";
 		right: 5%;
 		position: absolute;
 	}
-	footer > .footer-container > section:nth-child(1) > div > span.footer-subtitle.clickable.expanded::after {
+
+	footer>.footer-container>section:nth-child(1)>div>span.footer-subtitle.clickable.expanded::after {
 		content: "-";
 	}
-	footer > .footer-container .select {
+
+	footer>.footer-container .select {
 		margin-top: 16px;
 	}
-	footer > .footer-container > div.logo-list {
+
+	footer>.footer-container>div.logo-list {
 		margin-top: 30px;
 		padding: 24px 0px;
 		flex-wrap: wrap;
 	}
-	footer > .footer-container > div.logo-list div {
+
+	footer>.footer-container>div.logo-list div {
 		margin: 5px auto;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(2) span {
+
+	footer>.footer-container>div.logo-list>div:nth-child(2) span {
 		width: 100%;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(2) img {
+
+	footer>.footer-container>div.logo-list>div:nth-child(2) img {
 		width: 80px;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(3) img {
+
+	footer>.footer-container>div.logo-list>div:nth-child(3) img {
 		width: 60px;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(4) img {
+
+	footer>.footer-container>div.logo-list>div:nth-child(4) img {
 		width: 120px;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(5) {
+
+	footer>.footer-container>div.logo-list>div:nth-child(5) {
 		order: 6;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(5) img {
+
+	footer>.footer-container>div.logo-list>div:nth-child(5) img {
 		width: 120px;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(5) p {
+
+	footer>.footer-container>div.logo-list>div:nth-child(5) p {
 		width: 180px;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(6) {
+
+	footer>.footer-container>div.logo-list>div:nth-child(6) {
 		order: 5;
 	}
-	footer > .footer-container > div.logo-list > div:nth-child(6) img {
+
+	footer>.footer-container>div.logo-list>div:nth-child(6) img {
 		width: 40px;
 	}
-	footer > .footer-container div.term-links {
+
+	footer>.footer-container div.term-links {
 		padding: 1px 32px 0px;
 	}
 
-	body.template-les-projets header { display: none; }
+	body.template-les-projets header {
+		display: none;
+	}
+
 	body.template-les-projets nav#project-filter {
 		display: block;
 		height: auto;
@@ -153,9 +256,11 @@
 		line-height: 30px;
 		background: #FFFFFF;
 	}
+
 	body.template-les-projets nav#project-filter div.project-filter-container {
 		width: 100%;
 	}
+
 	body.template-les-projets nav#project-filter select {
 		display: none;
 		width: 100%;
@@ -163,7 +268,8 @@
 		padding-left: 5%;
 		border-bottom: 1px solid #E1E3E2;
 	}
-	body.template-les-projets nav#project-filter > span {
+
+	body.template-les-projets nav#project-filter>span {
 		display: block;
 		width: 90%;
 		padding: 10px 5%;
@@ -171,24 +277,29 @@
 		color: #FFFFFF;
 		cursor: pointer;
 	}
-	body.template-les-projets nav#project-filter > span:after {
+
+	body.template-les-projets nav#project-filter>span:after {
 		float: right;
 		content: "+";
 	}
-	body.template-les-projets nav#project-filter > span.show:after {
+
+	body.template-les-projets nav#project-filter>span.show:after {
 		content: "-";
 	}
+
 	body.template-les-projets nav#project-filter select.project-filter-select option {
 		padding: 10px 8% !important;
 	}
-	body.template-les-projets nav#project-filter select#project-filter-impact option#economique, 
-	body.template-les-projets nav#project-filter select#project-filter-impact option#environnemental, 
+
+	body.template-les-projets nav#project-filter select#project-filter-impact option#economique,
+	body.template-les-projets nav#project-filter select#project-filter-impact option#environnemental,
 	body.template-les-projets nav#project-filter select#project-filter-impact option#social {
 		padding-left: -webkit-calc(40px + 8%) !important;
 		padding-left: -moz-calc(40px + 8%) !important;
 		padding-left: calc(40px + 8%) !important;
 		background-position: 8% center;
 	}
+
 	body.template-les-projets .wdg-component-projects-preview .project-slider {
 		margin-bottom: 15px;
 	}
@@ -227,13 +338,31 @@ div.project-rewards-content div.calculateurRoyaltiesContainer {
 	height: 300px !important;
 } */
 
+/*******************************************************************************
+	* DESCRIPTION AUTOMATIC
+	*******************************************************************************/
+div.project-description-item div#project-content-economic_model div.zone-content {
+	flex-wrap: wrap;
+	flex-direction: column;
+	padding: 0 26px;
+}
+
+div#project-content-economic_model div.economic-intro.left {
+	width: auto;
+	border-right: 0;
+	border-bottom: 1px solid #c2c2c2;
+	margin-bottom: 20px;
+	padding-bottom: 20px;
+	width: auto;
+}
+
 
 @media screen and (max-width: 700px) {
-	footer > .footer-container div.term-links li ul li {
+	footer>.footer-container div.term-links li ul li {
 		display: block;
 	}
-	
-	footer > .footer-container div.term-links li ul li a:after {
+
+	footer>.footer-container div.term-links li ul li a:after {
 		content: "";
 		margin: 0px;
 	}
