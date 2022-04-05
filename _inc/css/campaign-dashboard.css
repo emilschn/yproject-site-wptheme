@@ -649,6 +649,9 @@ table.dataTable td.select-checkbox::before {
 #item-body-finance table tbody tr td:nth-child(2) {
 	min-width: 180px;
 }
+#item-body-finance table tbody tr td:nth-child(3) {
+	display: table-cell;
+}
 #item-body-finance table input[type=text] {
 	background: #E1E3E2;
 	width: 80%;
