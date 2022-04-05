@@ -19,6 +19,8 @@ $today_date = new DateTime();
 	</div>
 	<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed ): ?>
 		<a href="<?php echo $page_controler->get_campaign()->get_funded_certificate_url(); ?>?time=<?php echo time(); ?>" download="attestation-levee-fonds.pdf" class="button red"><?php _e( "Attestation de lev&eacute;e de fonds", 'yproject' ); ?></a>
+		
+		<?php if ( $page_controler->can_access_admin() ): ?>
 		<br>
 		<form action="<?php echo admin_url( 'admin-post.php?action=generate_campaign_funded_certificate'); ?>" method="post" id="generate_campaign_funded_certificate" class="field">
 			<div class="align-center">
@@ -27,9 +29,12 @@ $today_date = new DateTime();
 				<br>
 				Champs libre : <input type="text" name="free_field" size="50" value="" placeholder="Attestation temporaire XXX ; Annule et remplace l'attestation du XX/XX/XXXX, ...">
 				<br>
+				Frais complémentaires : <input type="text" name="additionnal_fees" value="" placeholder="50"> € TTC
+				<br>
 				<button class="button red"><?php _e( "Reg&eacute;n&eacute;rer l'attestation de lev&eacute;e de fonds", 'yproject' ); ?></button>
 			</div>
 		</form>
+		<?php endif; ?>
 		
 	<?php else: ?>
 		<?php _e( "Prochainement :" ); ?> <?php _e( "Attestation de lev&eacute;e de fonds", 'yproject' ); ?>
@@ -117,6 +122,17 @@ $today_date = new DateTime();
 			</div>
 		</form>
 		<br><br>
+
+		<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_archive ): ?>
+			<div class="field admin-theme">
+				<?php _e( "En cas de recouvrement", 'yproject' ); ?><br><br>
+				<?php $campaign_debt_files = new WDGCampaignDebtFiles( $page_controler->get_campaign() ); ?>
+				<a href="<?php echo $campaign_debt_files->get_recover_certificate(); ?>?time=<?php echo time(); ?>" download="debt-certificate.pdf" class="button admin-theme"><?php _e( "Attestation de cr&eacute;ance", 'yproject' ); ?></a>
+				<a href="<?php echo $campaign_debt_files->get_recover_list(); ?>?time=<?php echo time(); ?>" download="investors-list.csv" class="button admin-theme"><?php _e( "Liste de l'&eacute;tat des versements", 'yproject' ); ?></a>
+			</div>
+		<?php endif; ?>
+
+
 	<?php endif; ?>
 	
 </div>

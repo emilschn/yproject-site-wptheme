@@ -589,26 +589,40 @@ div#content.version-3.editing #wdg-move-picture-head {
 /*******************************************************************************
 * REWARDS
 *******************************************************************************/
-div#content.version-3 div.project-rewards-content {
+div.project-rewards-content {
 	max-width: 580px;
 	margin: 0px auto 40px;
-	padding: 0px;
 	font-size: 15px;
+}
+div.project-rewards-content .font-14 {
+	font-size: 14px;
 }
 div#content.version-3 div.project-rewards-content .db-form {
 	text-align: left;
+	padding: 20px;
 }
 div#content.version-3 div.project-rewards-content .db-form .field-container {
 	white-space: normal;
 }
+div.project-rewards-content .db-form .field-container .field-value input {
+	background-color: #fff;
+	border-bottom: 3px solid #00879B;
+	margin: auto;
+	color: #00879B;
+}
+div#content.version-3 div.project-rewards-content .db-form .field-container .field-value .field-money {
+	color: #00879B;
+}
 div#content.version-3 div.project-rewards-content .db-form .field-container.field-init-invest {
 	white-space: nowrap;
+	text-align: center;
 }
-div#content.version-3 div.project-rewards-content label {
-	font-size: 20px;
-	font-weight: normal;
+div.project-rewards-content label, div.project-rewards-content .db-form.v3.full .field label {
+	font-size: 14px;
+	font-weight: bold;
 	text-transform: uppercase;
-	color: #00879b;
+	color: #333;
+	text-align: center;
 }
 div#content.version-3 div.project-rewards-content div.roi_amount_base {
 	height: 5px;
@@ -667,8 +681,18 @@ div#content.version-3 div.project-rewards-content ul li:before {
 	border-bottom: 8px solid transparent;
 	border-left: 16px solid #333333;
 }
-div#content.version-3 div.project-rewards-content ul li span {
-	color: #93626D;
+div.project-rewards-content .align-left {
+	margin-top: 15px;
+}
+div.project-rewards-content .button {
+	margin-top: 30px;
+}
+div.project-rewards-content .calculateurRoyaltiesContainer {
+	min-height: 300px !important; /* pris en compte par les projets et l'EP */
+}
+
+div.padder div.project-rewards-content .db-form {
+	padding: 30px;
 }
 
 /*******************************************************************************
@@ -792,6 +816,99 @@ div#content.version-3 .grey-triangle {
     height: 250px !important;
 }
 
+/*******************************************************************************
+* DESCRIPTION AUTOMATIC
+*******************************************************************************/
+div#project-content-economic_model div.zone-content {
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: center;
+	margin-top: 40px;
+}
+div.economic-intro.left {
+	width: 30%;
+	margin-right: 10px;
+	padding-right: 10px;
+	border-right: 1px solid #c2c2c2;
+}
+div.economic-intro.third {
+	border-right: 0;
+}
+div.economic-intro.two-cols.left {
+	width: 47%;
+}
+div.economic-intro.left h5 {
+	text-transform: uppercase;
+	font-weight: normal;
+	font-size: 14px;
+	margin-bottom: 20px;
+	margin-top: 0;
+}
+div.economic-intro.left span.economic-data {
+	font-size: 1.2em;
+	color: #00879B;
+	font-weight: bold;
+}
+div.economic-intro span:not([economic-data]) {
+	font-size: 0.8em;
+}
+div.economic-intro.left span.economic-data-details {
+	font-size: 0.7em;
+}
+div#project-content-economic_model h4 {
+	font-weight: bold;
+	font-size: 20px;
+	text-align: left;
+	width: 100%;
+	margin: 50px 0 10px 0;
+}
+div#project-content-economic_model .title-question:before {
+	content: "\25B6";
+	color: #c2c2c2;
+}
+div#project-content-economic_model p {
+	width: 100%;
+	margin: 0;
+}
+div#project-content-economic_model .campaign-risk:before {
+	content: "\26A0";
+	color: #c2c2c2;
+	font-weight: normal;
+}
+/* Tableau des revenus */
+div#project-content-economic_model .table-container {
+	overflow-x: auto;
+}
+div#project-content-economic_model table {
+	margin: 20px 0 !important;
+}
+div#project-content-economic_model table tbody {
+	font-family: 'Arial', sans-serif;
+}
+div#project-content-economic_model table tbody tr th:first-of-type {
+	text-align: left;
+	font-weight: normal;
+	background-color: #ebebeb;
+}
+div#project-content-economic_model table tbody tr td, div#project-content-economic_model table tbody tr th, div#project-content-economic_model table thead th {
+	padding: 10px;
+}
+div#project-content-economic_model table tbody tr td, div#project-content-economic_model table thead th {
+	border: 1px solid #c2c2c2 !important; 
+}
+div#project-content-economic_model table tbody tr:last-of-type td {
+	color: #00879B;
+}
+div#project-content-economic_model table thead tr:first-of-type th:first-of-type {
+	border: 0 !important;
+}
+/* Tableau des échéances */
+div#project-content-economic_model table.declarations-table thead tr th:first-of-type {
+	border: 1px solid #c2c2c2 !important;
+}
+div#project-content-economic_model table.declarations-table tbody tr:last-of-type td {
+	color: #333;
+}
 /*******************************************************************************
 * NEWS
 *******************************************************************************/
@@ -1066,7 +1183,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-pitch div.project-pitch-title { display: none; }
 	div#content.version-3 div.project-pitch div.project-pitch-text { margin: 5px 1%; width: 98%; height: auto; }
 	div#content.version-3 div.project-pitch div.project-pitch-video { margin: 5px 1%; width: 98%; }
-	div#content.version-3 div.project-rewards-content { width: 98%; margin: 0% auto; padding-top: 0px; }
+	div#content.version-3 div.project-rewards-content { width: auto; margin: 0% auto; padding-top: 0px; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder { width: 100%; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder p { width: 100%; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div { float: none; }
@@ -1074,6 +1191,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div:first-child img { width: 50px; }
 	div#content.version-3 div.project-rewards-content div.project-rewards-padder button.init_invest_count { display: block; margin: 7px auto; }
 	div#content.version-3 div.project-rewards-content table tr td { min-width: 40px; padding: 0px 3px; }
+	div#content.version-3 div.project-rewards-content .calculateurRoyaltiesContainer { min-height: 300px; }
 	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 80px 2% 0px 2%; }
 	/*div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { top: -60px; }*/
 	div#content.version-3 div.project-description div.project-description-item img.grey-triangle { display: none; }
@@ -1110,7 +1228,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 * RESPONSIVE MOBILE
 *******************************************************************************/
 @media screen and (max-width: 400px) {
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: 98% !important; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: auto !important; }
 	div#content.version-3 div.project-description { padding-bottom: 0px; background-color: #FFFFFF; }
 	div#content.version-3 div.project-description div.project-description-item { margin: 25px 2%; }
 	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 34%; top: -45px; border-radius: 0% 0% 100% 100%; }

@@ -22,6 +22,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 	<?php endif; ?>
     
 	<div class="project-rewards-content">
+
 		<?php // CAPITAL // ?>
 		<?php if ($campaign->funding_type() == 'fundingdevelopment'): ?>
 			<div class="left">
@@ -47,7 +48,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 				<input type="hidden" id="roi_percent_project" value="<?php echo $campaign->roi_percent_estimated(); ?>">
 				<input type="hidden" id="roi_goal_project" value="<?php echo $campaign->goal(false); ?>">
 				<input type="hidden" id="roi_maximum_profit" value="<?php echo $campaign->maximum_profit_complete(); ?>">
-				<input type="hidden" id="estimated_turnover_unit" value="<?php echo $campaign->estimated_turnover_unit(); ?>">					
+				<input type="hidden" id="estimated_turnover_unit" value="<?php echo $campaign->estimated_turnover_unit(); ?>">
 				
 				<?php if (is_user_logged_in() && $campaign_status == ATCF_Campaign::$campaign_status_collecte): ?>
 					<form method="GET" action="<?php echo WDG_Redirect_Engine::override_get_page_url( 'investir' ); ?>" class="avoid-enter-validation">
@@ -65,10 +66,6 @@ $estimated_turnover = $campaign->estimated_turnover();
 						</div>
 					</div>
 
-					<div class="field">
-						<button class="button blue" type="button"><?php _e( "Calculer", 'yproject' ); ?></button>
-					</div>
-
 					<div id="error-maximum" class="hidden wdg-message error">
 						<?php _e( "Il n'est pas possible d'investir plus que l'objectif maximum recherch&eacute;.", 'yproject' ); ?>
 					</div>
@@ -83,7 +80,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 							$campaign_periodicity = $campaign->get_declaration_periodicity();
 							$campaign_periodicity_str = __( ATCF_Campaign::$declaration_period_list_plural[ $campaign_periodicity ], 'yproject' );
 						?>
-						<label for="init_invest"><?php echo sprintf( __( "Je recevrais tous les %s :", 'yproject' ), $campaign_periodicity_str ); ?></label>
+						<label for="init_invest" style="text-align: left;"><?php echo sprintf( __( "Je recevrais tous les %s :", 'yproject' ), $campaign_periodicity_str ); ?></label>
 						<div class="field-container align-left">
 							<?php $complementary_text = '.'; ?>
 							<?php if ( $campaign->contract_budget_type() == 'collected_funds' ): ?>
@@ -105,8 +102,124 @@ $estimated_turnover = $campaign->estimated_turnover();
 						</div>
 					</div>
 
+					<div class="calculateurRoyaltiesContainer" style="position: relative; height:auto; width:96%; margin: auto;">
+						<canvas id="calculateurRoyalties"></canvas>
+					</div>
+
+					<script>
+						// options de configurations : https://www.chartjs.org/docs/latest/charts/line.html
+						const labelsRoyaltiesChart = [
+							0,
+							<?php $index_label = 1; ?>
+							<?php foreach ( $estimated_turnover as $i => $value ): ?>
+								<?php echo $index_label++; ?>,
+							<?php endforeach; ?>
+						];
+					
+						<?php
+						$estimated_turnover_length = count( $estimated_turnover ) + 1;
+						$amount_to_consider = max( $campaign->minimum_goal(), $campaign->current_amount( FALSE ) );
+						$turnover_to_reach_investment = ceil( $amount_to_consider / $campaign->roi_percent_estimated() * 100 );
+						$turnover_to_reach_maximum_profit = 0;
+						if ( $campaign->maximum_profit() != 'infinite' ) {
+							$turnover_to_reach_maximum_profit = ceil( $campaign->maximum_profit_amount() / $campaign->roi_percent_estimated() * 100 );
+						}
+						?>
+						const dataRoyaltiesChart = {
+							labels: labelsRoyaltiesChart,
+							datasets: [
+								// Voir line styling : https://www.chartjs.org/docs/latest/charts/line.html#line-styling
+								{
+									data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_investment; ?>),
+									fill: false,
+									radius: 0,
+									borderColor: "rgba(0,0,0,0.1)",
+									borderDash: [6, 3],
+									borderWidth: 2,
+									label: 'Montant investi',
+								},
+								{
+									label: '€',
+									fill: true,
+									backgroundColor: 'rgb(179, 218, 225)',
+									borderColor: 'rgb(0, 135, 155)',
+									pointBackgroundColor: 'rgba(0,135,155,1)',
+									data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, 0)
+								}
+								<?php if ( $campaign->maximum_profit_complete() < 100 ): ?>
+								,{
+									data: Array.apply(null, new Array(<?php echo $estimated_turnover_length; ?>)).map(Number.prototype.valueOf, <?php echo $turnover_to_reach_maximum_profit; ?>),
+									fill: false,
+									radius: 0,
+									borderColor: "rgba(51,51,51,1)",
+									borderDash: [6, 3],
+									borderWidth: 1,
+									label: 'Retour sur investissement maximum'
+								}
+								<?php endif; ?>
+							]
+						};
+						const configRoyaltiesChart = {
+							type: 'line',
+							data: dataRoyaltiesChart,
+							options: {
+								responsive: true,
+								maintainAspectRatio: false,
+								scales: {
+									x: {
+										display: true,
+										title: {
+											display: true,
+											text: 'Années',
+										},
+										grid: {
+											// Masque la grille du fond
+											display: false
+										}
+									},
+									y: {
+										display: true,
+										title: {
+											// Masque la légende verticale
+											display: false
+										},
+										ticks: {
+											// Ne pas afficher les chiffres en légende verticale
+											display: false
+										},
+										grid: {
+											// Masque la grille du fond
+											display: false
+										}
+									}
+								},
+								plugins: {
+									legend: {
+										display: true,
+										position: 'bottom',
+										labels: {
+											boxHeight: 1,
+											boxWidth: 25,
+											padding: 25,
+										}
+									},
+									// Pas réussi à le faire fonctionner : placer la légende en haut de l'écran
+									title: {
+										position: 'top',
+										align: 'end'
+									}
+								}
+							}
+						};
+
+						var royaltiesChart = new Chart(
+							document.getElementById('calculateurRoyalties'),
+							configRoyaltiesChart
+						);
+					</script>
+
 					<?php if ( count( $estimated_turnover ) > 0 ): ?>
-						<div class="margin-bottom">
+						<div class="hidden">
 							<table>
 								<tr>
 									<td>
@@ -127,17 +240,15 @@ $estimated_turnover = $campaign->estimated_turnover();
 							</table>
 						</div>
 					<?php endif; ?>
-
 				<?php endif; ?>
 					
-				<div class="align-left">
-					<strong><?php _e( "Retour sur investissement vis&eacute; :", 'yproject' ); ?></strong><br>
-					+ <span><span class="roi_percent_total">...</span> %</span> <?php echo __( "de votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?><br>
-					(<?php _e( "soit", 'yproject' ); ?> <span>x<span class="roi_ratio_on_total">...</span></span> <?php echo __( "votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?>)
+				<div class="align-left font-14">
+					<?php _e( "Retour sur investissement vis&eacute; :", 'yproject' ); ?><br>
+					<strong><span>x<span class="roi_ratio_on_total">... </span></span></strong> <?php echo __( "votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?>
+					(<?php _e( "soit", 'yproject' ); ?> + <span><span class="roi_percent_total">...</span> %</span>)
 				</div>
-					
 				
-				<div class="project-rewards-alert align-left">
+				<div class="project-rewards-alert align-left font-14">
 					<?php echo sprintf( __( "Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s.", 'yproject' ), $campaign->maximum_profit_str() ); ?><br>
 					* <?php _e( "Imposition : Pr&eacute;l&egrave;vement Forfaitaire Unique (flat tax) de 30% sur le b&eacute;n&eacute;fice r&eacute;alis&eacute;.", 'yproject' ); ?><br>
 					<?php if ($campaign->is_positive_savings() ): ?>	

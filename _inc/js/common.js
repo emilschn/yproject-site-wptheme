@@ -64,14 +64,11 @@ YPUIFunctions = (function ($) {
 			$(document).scroll(function () {
 				if (YPUIFunctions.currentLightbox === '') {
 					if ($(document).scrollTop() > 50) {
-						$('nav#main').css('marginTop', 0);
 						if ($(document).scrollTop() > 250) {
 							$('.responsive-fixed').addClass('fixed');
 						} else {
 							$('.responsive-fixed').removeClass('fixed');
 						}
-					} else {
-						$('nav#main').css('marginTop', 10);
 					}
 				}
 			});
@@ -481,12 +478,19 @@ var WDGNavFunctions = (function ($) {
 					e.preventDefault();
 					if ($('.btn-user').hasClass('active')) {
 						$('.btn-user').removeClass('active').addClass('inactive');
-						$('#submenu-user').hide();
-					} else {
+						$('#submenu-search, #submenu-user').hide('fast');
+					}
+					else {
 						$('.btn-user').addClass('active').removeClass('inactive');
-						$('#submenu-user').show();
+						if ($(window).width() < 997) {
+							$('#submenu-search').show('fast');
+							WDGNavFunctions.requestSearchList();
+						}
+						else {
+							$('#submenu-user').show('fast');
+						}
 						$('#btn-search, #btn-burger').removeClass('active').addClass('inactive');
-						$('#submenu-search').hide();
+
 					}
 				}
 				if ($('.model-form #identifiant').val() !== "" && $('.model-form #password').val() !== "") {
@@ -512,33 +516,13 @@ var WDGNavFunctions = (function ($) {
 				} else {
 					$('#btn-search, #btn-burger').addClass('active').removeClass('inactive');
 					$('#submenu-search').show();
-					$('#submenu-search-input').focus();
+					$('.submenu-search-input').focus();
 					$('.btn-user').removeClass('active').addClass('inactive');
 					$('#submenu-user').hide();
-
-					if ($('#submenu-search ul.submenu-list li').length == 0) {
-						$.ajax({
-							'type': "POST",
-							'url': ajax_object.ajax_url,
-							'data': {
-								'action': 'get_searchable_projects_list'
-							}
-
-						}).done(function (result) {
-							var result_json = JSON.parse(result);
-							var aProjectList = result_json.projects;
-							var nProjects = aProjectList.length;
-							for (var i = 0; i < nProjects; i++) {
-								$('#submenu-search ul.submenu-list').append(
-									'<li class="hidden"><a href="' + result_json.home_url + aProjectList[i].url + '">' + aProjectList[i].name + '<span class="hidden">' + aProjectList[i].url + ' ' + aProjectList[i].organization_name + '</span></a></li>'
-								);
-							}
-							$("#submenu-search-input").trigger('keyup');
-						});
-					}
+					WDGNavFunctions.requestSearchList();
 				}
 			});
-			$("#submenu-search-input").keyup(function (e) {
+			$(".submenu-search-input").keyup(function (e) {
 				var keyCode = e.key;
 				if (keyCode === 'Enter') {
 					$('#submenu-search .submenu-list li a').each(function () {
@@ -550,15 +534,15 @@ var WDGNavFunctions = (function ($) {
 					});
 
 				} else {
-					var search = $("#submenu-search-input").val().toLowerCase();
-					$("#submenu-search .submenu-list li").addClass("hidden");
-					$('.empty-list-info').addClass("hidden");
+					var search = $(this).val().toLowerCase();
+					$("#submenu-search .submenu-list.list-search li").addClass("hidden");
+					$('.submenu-list.list-search .empty-list-info').addClass("hidden");
 
 					if (search != "") {
 						var bFoundProject = false;
 						// Découpe par mot recherchés (on considère les tirets comme des mots séparés)
 						var aSplitSearch = search.split('-').join(' ').split(' ');
-						$("#submenu-search .submenu-list li").each(function () {
+						$("#submenu-search .submenu-list.list-search li").each(function () {
 							var itemText = $(this).find('a').text().toLowerCase();
 							if (itemText.indexOf(search) > -1) {
 								$(this).removeClass("hidden");
@@ -588,7 +572,7 @@ var WDGNavFunctions = (function ($) {
 							}
 						});
 						if (!bFoundProject) {
-							$('.empty-list-info').removeClass("hidden");
+							$('.submenu-list.list-search .empty-list-info').removeClass("hidden");
 						}
 					}
 					$("#submenu-search").height("auto");
@@ -686,6 +670,13 @@ var WDGNavFunctions = (function ($) {
 				return;
 			}
 
+			const queryString = window.location.search;
+			const urlParams = new URLSearchParams(queryString);
+			let strSource = '';
+			if (urlParams.has('utm_source')) {
+				strSource = urlParams.get('utm_source');
+			}
+
 			var strPageInfo = '';
 			if ($('#content').length > 0 && $('#content').data('campaignstatus') !== undefined && $('#content').data('campaignstatus') === 'funded') {
 				strPageInfo = $('#content').data('campaignid');
@@ -695,7 +686,8 @@ var WDGNavFunctions = (function ($) {
 				'url': ajax_object.ajax_url,
 				'data': {
 					'action': 'get_current_user_info',
-					'pageinfo': strPageInfo
+					'pageinfo': strPageInfo,
+					'source': strSource
 				},
 				'timeout': 30000 // sets timeout to 30 seconds
 			}).done(function (result) {
@@ -737,6 +729,29 @@ var WDGNavFunctions = (function ($) {
 			});
 		},
 
+		requestSearchList: function () {
+			// En théorie, au départ, il y a les 2 éléments qui affichent la liste vide (pleine page et responsive)
+			if ($('#submenu-search ul.submenu-list.list-search li').length < 3) {
+				$.ajax({
+					'type': "POST",
+					'url': ajax_object.ajax_url,
+					'data': {
+						'action': 'get_searchable_projects_list'
+					}
+
+				}).done(function (result) {
+					var result_json = JSON.parse(result);
+					var aProjectList = result_json.projects;
+					var nProjects = aProjectList.length;
+					for (var i = 0; i < nProjects; i++) {
+						$('#submenu-search ul.submenu-list.list-search, .only-inf997 #submenu-search ul.submenu-list.list-search').append(
+							'<li class="hidden"><a href="' + result_json.home_url + aProjectList[i].url + '">' + aProjectList[i].name + '<span class="hidden">' + aProjectList[i].url + ' ' + aProjectList[i].organization_name + '</span></a></li>'
+						);
+					}
+					$(".submenu-search-input").trigger('keyup');
+				});
+			}
+		},
 
 		displaySubmenuUser: function () {
 			if (WDGNavFunctions.currentUserInfo) {
@@ -744,35 +759,75 @@ var WDGNavFunctions = (function ($) {
 					clearInterval(WDGNavFunctions.displaySubmenuUserInterval);
 				}
 				if (WDGNavFunctions.currentUserInfo === '0') {
-					// si on n'est pas connecté et qu'on a ouvert le menu, on redirige vers la page de connexion
-					if (!$('#submenu-user.not-connected .menu-loading-init').is(':hidden') && $('#submenu-user.not-connected .menu-loading-init').data('redirect') != undefined) {
-						$('#submenu-user.not-connected .menu-loading-init').hide();
-						window.location = $('#submenu-user.not-connected .menu-loading-init').data('redirect');
+					// si on n'est pas connecté et qu'on a ouvert le menu, on redirige vers la page de connexion => fonctionnement pleine page
+					if (!$('div.menu-connected .menu-loading-init').is(':hidden')) {
+						$('div.menu-connected .menu-loading-init').hide();
+					}
+					$('.display-if-logged-out').show();
+					$('.display-if-logged-in').hide();
+					if (!$('div.not-connected .menu-loading-init').is(':hidden') && $('div.not-connected .menu-loading-init').data('redirect') != undefined) {
+						window.location = $('div.not-connected .menu-loading-init').data('redirect');
 					}
 				} else {
 					if (!WDGNavFunctions.isMenuUserInit) {
 						WDGNavFunctions.isMenuUserInit = true;
+						// Pour le responsive
+						$('.only-inf997 .menu-connected .menu-loading-init').hide();
+						$('.only-inf997 .menu-connected').removeClass('hidden');
+						$('.display-if-logged-in').removeClass('hidden');
+						$('.display-if-logged-in').show();
+						$('.display-if-logged-out').hide();
+
 						var infoDecoded = JSON.parse(WDGNavFunctions.currentUserInfo);
 						$('#menu .btn-user').addClass('connected').removeClass('not-connected');
 						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
 							$('#menu .btn-user').addClass('needs-authentication');
+							$('#submenu-user.not-connected .menu-connected .submenu-list li div.authentication-alert').removeClass('hidden');
+							$('.only-inf997 .menu-connected .submenu-list li div.authentication-alert').removeClass('hidden');
 						}
 						$('#menu .btn-user img').remove();
 						$('#menu .btn-user').text(infoDecoded['userinfos']['my_account_txt']);
 
-						$('#submenu-user.not-connected .menu-loading-init').hide();
+						$('.menu-connected .menu-loading-init').hide();
 						$('#submenu-user.not-connected .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
+						$('.only-inf997 .menu-connected #submenu-user-hello .hello-user-name').html(infoDecoded['userinfos']['username']);
+
 						var lengthInfoProjects = infoDecoded['projectlist'].length;
 						for (var i = 0; i < lengthInfoProjects; i++) {
 							itemProject = infoDecoded['projectlist'][i];
-							$('#submenu-user.not-connected .menu-connected .submenu-list').append('<li><a href="' + itemProject['url'] + '" class="' + (itemProject['display_need_authentication'] === '1' ? 'needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.dashboards').removeClass('hidden');
+							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.dashboards').after('<li><a href="' + itemProject['url'] + '" class="project-list-item' + (itemProject['display_need_authentication'] === '1' ? ' needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
+							$('.only-inf997 .menu-connected .submenu-list .submenu-title.dashboards').removeClass('hidden');
+							$('.only-inf997 .menu-connected .submenu-list .submenu-title.dashboards').after('<li><a href="' + itemProject['url'] + '" class="project-list-item' + (itemProject['display_need_authentication'] === '1' ? ' needs-authentication' : '') + '">' + itemProject['name'] + '</a></li>');
 						}
+
+						var lengthInfoOrganizations = infoDecoded['organizationlist'].length;
+						for (var i = 0; i < lengthInfoOrganizations; i++) {
+							itemOrganization = infoDecoded['organizationlist'][i];
+							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.organizations').removeClass('hidden');
+							$('#submenu-user.not-connected .menu-connected .submenu-list .submenu-title.organizations').after('<li><a href="' + itemOrganization['url'] + '" class="project-list-item' + (itemOrganization['display_need_authentication'] === '1' ? ' needs-authentication' : '') + '">' + itemOrganization['name'] + '</a></li>');
+							$('.only-inf997 .menu-connected .submenu-list .submenu-title.organizations').removeClass('hidden');
+							$('.only-inf997 .menu-connected .submenu-list .submenu-title.organizations').after('<li><a href="' + itemOrganization['url'] + '" class="project-list-item' + (itemOrganization['display_need_authentication'] === '1' ? ' needs-authentication' : '') + '">' + itemOrganization['name'] + '</a></li>');
+						}
+
 						if (infoDecoded['userinfos']['display_need_authentication'] == '1') {
 							$('#submenu-user.not-connected .menu-connected #button-logout a').addClass('needs-authentication');
+							$('.only-inf997 .menu-connected #button-logout a').addClass('needs-authentication');
 						}
+						if (infoDecoded['userinfos']['wallet_amount'] > 0) {
+							$('#submenu-user.not-connected span.wallet-amount-header span.wallet-amount').text(infoDecoded['userinfos']['wallet_amount']);
+							$('.only-inf997 span.wallet-amount-header span.wallet-amount').text(infoDecoded['userinfos']['wallet_amount']);
+						} else {
+							$('#submenu-user.not-connected span.wallet-amount-header span.wallet-amount').text(0);
+							$('.only-inf997 span.wallet-amount-header span.wallet-amount').text(0);
+						}
+						$('#submenu-user.not-connected span.wallet-amount-header').removeClass('hidden');
 						$('#submenu-user.not-connected .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
+						$('.only-inf997 span.wallet-amount-header').removeClass('hidden');
+						$('.only-inf997 .menu-connected #button-logout a').attr('href', infoDecoded['userinfos']['logout_url']);
 					}
 					$('#submenu-user.not-connected .menu-connected').show();
+					$('.only-inf997 .menu-connected').show();
 				}
 			} else {
 				if (!WDGNavFunctions.displaySubmenuUserInterval) {

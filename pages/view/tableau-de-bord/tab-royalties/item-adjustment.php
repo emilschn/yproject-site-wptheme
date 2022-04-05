@@ -35,6 +35,9 @@ if ( $page_controler->can_access_admin() ) {
 		<strong><?php _e( "Type d'ajustement", 'yproject' ); ?></strong><br>
 		<?php echo WDGAdjustment::$types_str_by_id[ $adjustment_obj->type ]; ?><br><br>
 		
+		<strong><?php _e( "Montant du CA vérifié", 'yproject' ); ?></strong><br>
+		<?php echo $adjustment_obj->turnover_checked; ?> &euro;<br><br>
+		
 		<strong><?php _e( "Diff&eacute;rentiel de CA", 'yproject' ); ?></strong><br>
 		<?php echo $adjustment_obj->turnover_difference; ?> &euro;<br><br>
 		

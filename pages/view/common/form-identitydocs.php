@@ -30,6 +30,15 @@
 		</div>
 	<?php endif; ?>
 
+	<?php if ( $WDGUserIdentityDocsForm->hasErrors() ): ?>
+		<div class="wdg-message error">
+			<?php $form_errors = $WDGUserIdentityDocsForm->getPostErrors(); ?>
+			<?php foreach ( $form_errors as $form_error ): ?>
+				<?php echo $form_error[ 'text' ]; ?>
+			<?php endforeach; ?>
+		</div>
+	<?php endif; ?>
+
 	<?php foreach ( $fields_hidden as $field ): ?>
 		<?php global $wdg_current_field; $wdg_current_field = $field; ?>
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>

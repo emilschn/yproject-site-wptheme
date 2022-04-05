@@ -357,6 +357,9 @@ class DashboardUtility {
                     case 'editor':
                         echo $text_field;
                         $text_field = "";
+						if ( !empty( $params[ 'description' ] ) ) {
+							echo '<div class="field-description">' . $params[ 'description' ] . '</div>';
+						}
                         wp_editor($initial_value, $id,
                             array(
                                 'media_buttons' => true,

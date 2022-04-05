@@ -19,12 +19,12 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 							<ul>
 								<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
 
-								<div>
+								<li>
 									<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook" style="width: 30px;"/></a>
 									<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter" style="width: 30px;"/></a>
 									<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin" style="width: 30px;"/></a>
 									<a class="social_network" href="<?php echo site_url(); ?>/rss.xml" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-rss.jpg" alt="<?php _e( 'footer.RSS_FEED', 'yproject' ); ?>" style="width: 30px;"/></a>
-								</div>
+								</li>
 							</ul>
 						</div>
 					<?php endif; ?>
@@ -34,7 +34,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 							<span class="footer-subtitle clickable border-hidden"><?php _e( 'footer.LEGAL_INFO', 'yproject' ); ?></span>
 							<ul>
 								<?php dynamic_sidebar( 'fourth-footer-widget-area' ); ?>
-								<a class="link change-cookies" href="#"><?php _e( 'footer.MODIFY_COOKIE_CHOICES', 'yproject' ); ?></a>
+								<li><a class="link change-cookies" href="#"><?php _e( 'footer.MODIFY_COOKIE_CHOICES', 'yproject' ); ?></a></li>
 							</ul>
 						</div>
 					<?php endif; ?>
@@ -91,7 +91,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 					</div>
 					
 					<div>
-						<a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/membre-fpf-2021.png" alt="logo membre financement participatif France" width="140"></a>
+						<a href="http://www.financeparticipative.org/" target="_blank"><img src="<?php echo get_stylesheet_directory_uri(); ?>/images/footer/membre-fpf-2022.png" alt="logo membre financement participatif France" width="140"></a>
 					</div>
 
 					<div>					

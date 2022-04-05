@@ -7,8 +7,7 @@ $WDGUser_displayed = $page_controler->get_current_user();
 <h2><?php _e( 'account.subscriptions.SUBSCRIPTIONS_OF', 'yproject' ); ?> <?php echo $page_controler->get_user_name(); ?></h2>
 
 <p class="align-center">
-	<?php _e( 'account.subscriptions.INFORMATION_SUBSCRIPTIONS', 'yproject' ); ?><br>
-	<?php _e( 'account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS', 'yproject' ); ?>
+	<?php echo wpautop( WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_subscription_description, 'subscription_description' ) ); ?>
 </p>
 
 
