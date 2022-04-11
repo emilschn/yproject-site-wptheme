@@ -315,7 +315,12 @@ UserAccountDashboard.prototype.displayUserInvestments = function (result, userID
 
 					if (oInvestmentItem['contract_file_path'] != '') {
 						sCampaignBuffer += '<div class="investment-item-child align-center">';
-						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ' + $('#invest-trans-investiement_duration_years').text() + '<br>';
+						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ';
+						if (oCampaignItem['funding_duration'] > 1) {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_years').text() + '<br>';
+						} else {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_year').text() + '<br>';
+						}
 						if (oCampaignItem['start_date'] !== '') {
 							sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem['start_date'] + '<br>';
 						}
@@ -333,7 +338,12 @@ UserAccountDashboard.prototype.displayUserInvestments = function (result, userID
 						sCampaignBuffer += '</div>';
 					} else {
 						sCampaignBuffer += '<div class="investment-item-child align-center">';
-						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ' + $('#invest-trans-investiement_duration_years').text() + '<br>';
+						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ';
+						if (oCampaignItem['funding_duration'] > 1) {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_years').text() + '<br>';
+						} else {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_year').text() + '<br>';
+						}
 						if (oCampaignItem['start_date'] !== '') {
 							sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem['start_date'] + '<br>';
 						}

@@ -915,11 +915,14 @@ msgstr "Mes investissements sur"
 msgid "account.investments.INVESTMENT_DURATION"
 msgstr "Contrat sur"
 
+msgid "account.investments.INVESTMENT_DURATION_YEAR"
+msgstr "an"
+
 msgid "account.investments.INVESTMENT_DURATION_YEARS"
 msgstr "ans"
 
 msgid "account.investments.INVESTMENT_DURATION_STARTING"
-msgstr "d&eacute;marr&eacute; en "
+msgstr "&agrave; partir de "
 
 msgid "account.investments.ROYALTIES_RECEIVED_A"
 msgstr "Royalties re&ccedil;ues"
