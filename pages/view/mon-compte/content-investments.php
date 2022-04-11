@@ -140,6 +140,7 @@ if ( $WDGUser_current->is_admin() ) {
 	<span id="invest-trans-no_investments_if_vote"><?php _e( 'account.investments.NO_INVESTMENTS_IF_VOTE', 'yproject' ); ?></span>
 	<span id="invest-trans-my_investments_on"><?php _e( 'account.investments.MY_INVESTMENTS_ON', 'yproject' ); ?></span>
 	<span id="invest-trans-investiement_duration"><?php _e( 'account.investments.INVESTMENT_DURATION', 'yproject' ); ?></span>
+	<span id="invest-trans-investiement_duration_year"><?php _e( 'account.investments.INVESTMENT_DURATION_YEAR', 'yproject' ); ?></span>
 	<span id="invest-trans-investiement_duration_years"><?php _e( 'account.investments.INVESTMENT_DURATION_YEARS', 'yproject' ); ?></span>
 	<span id="invest-trans-investiement_duration_starting"><?php _e( 'account.investments.INVESTMENT_DURATION_STARTING', 'yproject' ); ?></span>
 	<span id="invest-trans-royalties_received"><?php _e( 'account.investments.ROYALTIES_RECEIVED_A', 'yproject' ); ?></span>

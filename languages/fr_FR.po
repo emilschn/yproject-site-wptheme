@@ -915,11 +915,14 @@ msgstr "Mes investissements sur"
 msgid "account.investments.INVESTMENT_DURATION"
 msgstr "Contrat sur"
 
+msgid "account.investments.INVESTMENT_DURATION_YEAR"
+msgstr "an"
+
 msgid "account.investments.INVESTMENT_DURATION_YEARS"
 msgstr "ans"
 
 msgid "account.investments.INVESTMENT_DURATION_STARTING"
-msgstr "d&eacute;marr&eacute; en "
+msgstr "&agrave; partir de "
 
 msgid "account.investments.ROYALTIES_RECEIVED_A"
 msgstr "Royalties re&ccedil;ues"
@@ -2103,10 +2106,10 @@ msgid "form.user-identitydocs.OPTIONAL"
 msgstr "(facultatif)"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION"
-msgstr "Attestation de r&eacute;partition du capital"
+msgstr "Formulaire des bénéficiaires effectifs"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
-msgstr "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts"
+msgstr "Disponible sur Infogreffe ou à défaut attestation de répartition du capital"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON"
 msgstr "Justificatif d'identité de la deuxième personne détenant au moins 25% du capital"
