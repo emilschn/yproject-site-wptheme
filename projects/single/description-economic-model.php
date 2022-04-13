@@ -206,6 +206,7 @@ $timeline_length = $funding_duration * $nb_declarations_per_year;
 	<?php echo sprintf( __( 'project.single.description.economic.RISKS_REASONS_DESCRIPTION_2', 'yproject' ), UIHelpers::format_number( $campaign->total_previous_funding() ) ); ?>
 </p>
 <?php echo html_entity_decode( $campaign->total_previous_funding_description() ); ?>
+<div><br></div>
 
 <p>
 	<strong class="campaign-risk"> <?php _e( 'project.single.description.economic.RISKS_REASON_FINANCE', 'yproject' ); ?></strong>
@@ -214,9 +215,9 @@ $timeline_length = $funding_duration * $nb_declarations_per_year;
 	<?php echo sprintf( __( 'project.single.description.economic.RISKS_REASON_FINANCE_DESCRIPTION', 'yproject' ), $has_finance_str ); ?>
 </p>
 <?php if ( $campaign->working_capital_subsequent() != '' ): ?>
-	<div>
+	<p>
 		<?php _e( 'project.single.description.economic.RISKS_REASON_FINANCE_SUBSEQUENT', 'yproject' ); ?>
-	</div>
+	</p>
 	<?php echo html_entity_decode( $campaign->working_capital_subsequent() ); ?>
 <?php endif; ?>
 
