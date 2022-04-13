@@ -36,7 +36,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 		<td class="left">
 			<h5><?php _e( 'project.single.description.economic.RISK', 'yproject' ); ?></h5>
 
-			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
+			<?php if ( $campaign->campaign_status() == ATCF_Campaign::$campaign_status_preparing || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_validated || $campaign->campaign_status() == ATCF_Campaign::$campaign_status_vote ): ?>
 				<span><?php _e( 'project.single.description.economic.RISK_VOTE', 'yproject' ); ?></span>
 				<br>
 				<span><?php _e( 'project.single.description.economic.RISK_VOTE_DESCRIPTION', 'yproject' ); ?></span>
