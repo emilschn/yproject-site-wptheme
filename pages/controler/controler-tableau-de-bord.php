@@ -110,6 +110,10 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		return $this->current_user;
 	}
 
+	public function get_displayed_user() {
+		return $this->get_campaign_author();
+	}
+
 	private function init_form_user_details() {
 		$this->form_user_details = new WDG_Form_User_Details( $this->campaign->post_author(), WDG_Form_User_Details::$type_extended );
 

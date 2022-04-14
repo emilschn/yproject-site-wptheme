@@ -8,7 +8,7 @@
 	$fields_phone_notification = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_notification );
 	$fields_phone_number = $WDGUserIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_phone_number );
 	
-	$WDGUser_displayed = $page_controler->get_current_user();
+	$WDGUser_displayed = $page_controler->get_displayed_user();
 	$is_authentified = $WDGUser_displayed->is_lemonway_registered();
 ?>
 
