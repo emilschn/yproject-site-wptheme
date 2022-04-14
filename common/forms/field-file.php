@@ -80,7 +80,7 @@
 	<?php endif; ?>
 </div>
 
-<div id="add-file" class="field-description <?php if (!empty( $wdg_current_field[ 'value' ])): ?>hidden<?php endif; ?>">
+<div id="add-file" class="field-description">
 	<?php _e( 'forms.file.FILE_SIZE_INFO', 'yproject' ); ?><br>
 	<?php _e( 'forms.file.FILE_TYPE_INFO', 'yproject' ); ?><br>
 	<input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="<?php echo $wdg_current_field[ 'name' ]; ?>">
