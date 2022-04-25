@@ -57,6 +57,16 @@
 			));
 
 			DashboardUtility::create_field(array(
+				"id"			=> "new_minimum_profit",
+				"type"			=> "number",
+				"label"			=> "Gain minimum",
+				"value"			=> $page_controler->get_campaign()->minimum_profit(),
+				"prefix"		=> '*',
+				"admin_theme"	=> true,
+				"editable"		=> $page_controler->can_access_admin()
+			));
+
+			DashboardUtility::create_field(array(
 				"id"			=> "new_maximum_profit",
 				"type"			=> "select",
 				"label"			=> "Gain maximum",

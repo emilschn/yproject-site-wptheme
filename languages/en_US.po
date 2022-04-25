@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-04-11 11:25+0200\n"
+"PO-Revision-Date: 2022-04-25 14:32+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -840,8 +840,8 @@ msgstr "They are first analysed by automated services and then by a person in th
 msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_3"
 msgstr "In the event of an obvious error when analysing your documents, you can contact us at investir@wedogood.co or using the online chat."
 
-msgid "account.identitydocs.orga.FOURTH_PERSON"
-msgstr "If a fourth person or a legal entity holds at least 25% of your capital, please let us know at support@wedogood.co."
+msgid "account.identitydocs.orga.LEGAL_ENTITY"
+msgstr "If a legal entity holds at least 25% of your capital, please let us know at support@wedogood.co."
 
 msgid "account.investments.INVESTMENTS_OF"
 msgstr "Investments of"
@@ -2164,6 +2164,18 @@ msgstr "Second proof of identity of the third person holding at least 25% of the
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
 msgstr "Same types as for the first document. Otherwise the driver's license or the last tax notice can be provided."
 
+msgid "form.user-identitydocs.ID_FOURTH_PERSON"
+msgstr "Fourth person's proof of identity"
+
+msgid "form.user-identitydocs.ID_FOURTH_PERSON_DESCRIPTION"
+msgstr "If a fourth individual holds at least 25% of the capital"
+
+msgid "form.user-identitydocs.SECOND_ID_FOURTH_PERSON"
+msgstr "Second proof of identity of the fourth person"
+
+msgid "form.user-identitydocs.SECOND_ID_FOURTH_PERSON_DESCRIPTION"
+msgstr "Same types as the first. Otherwise a driving licence or the latest tax notice can be provided."
+
 msgid "form.user-identitydocs.ID_BACK"
 msgstr "Reverse of proof of identity"
 
@@ -2457,23 +2469,119 @@ msgstr "The document has been rejected by our payment provider, the document doe
 msgid "lemonway.document.ADDITIONAL_COMMENT"
 msgstr "Additional comment from Lemon Way:"
 
+msgid "lemonway.document.type.UNDEFINED"
+msgstr "Undefined"
+
 msgid "lemonway.document.type.ID"
-msgstr "ID"
+msgstr "The ID"
 
 msgid "lemonway.document.type.PROOF_ADDRESS"
-msgstr "Proof of address"
+msgstr "The proof of address"
 
 msgid "lemonway.document.type.RIB"
-msgstr "Bank details"
-
-msgid "lemonway.document.type.PASSPORT"
-msgstr "Passport"
+msgstr "The bank details"
 
 msgid "lemonway.document.type.RESIDENCY_PERMIT"
-msgstr "Residency permit"
+msgstr "The residency permit"
 
 msgid "lemonway.document.type.KBIS"
-msgstr "Company KBIS"
+msgstr "The company KBIS"
+
+msgid "lemonway.document.type.CARD_ID"
+msgstr "The identity card"
+
+msgid "lemonway.document.type.CARD_ID_BACK"
+msgstr "The back of the identity card"
+
+msgid "lemonway.document.type.TAX"
+msgstr "The tax assessment"
+
+msgid "lemonway.document.type.WELFARE"
+msgstr "The social insurance smart card"
+
+msgid "lemonway.document.type.FAMILY"
+msgstr "The family record book"
+
+msgid "lemonway.document.type.BIRTH"
+msgstr "The birth certificate"
+
+msgid "lemonway.document.type.PASSPORT"
+msgstr "The passport"
+
+msgid "lemonway.document.type.PASSPORT_BACK"
+msgstr "The back of the passport"
+
+msgid "lemonway.document.type.DRIVING_LICENSE"
+msgstr "The driving license"
+
+msgid "lemonway.document.details_MAIN_ID"
+msgstr "The main ID"
+
+msgid "lemonway.email.error.SECOND_ID"
+msgstr "The second piece of identification"
+
+msgid "lemonway.document.type.SECOND_ID"
+msgstr "The second ID"
+
+msgid "lemonway.document.type.MAIN_ID_BACK"
+msgstr "The back of the main ID"
+
+msgid "lemonway.email.error.ORGA_KBIS"
+msgstr "The organization's KBIS"
+
+msgid "lemonway.email.error.ORGA_STATUS"
+msgstr "The statutes of the organization"
+
+msgid "lemonway.email.error.SECOND_ID_BACK"
+msgstr "The back of the second piece of identification"
+
+msgid "lemonway.document.type.ORGA_KBIS"
+msgstr "The organization KBIS"
+
+msgid "lemonway.document.type.ORGA_STATUS"
+msgstr "The organization statuses"
+
+msgid "lemonway.document.type.SECOND_ID_BACK"
+msgstr "The back of the second ID"
+
+msgid "lemonway.document.type.SELFIE"
+msgstr "The selfie"
+
+msgid "lemonway.document.type.ID_SECOND_PERSON"
+msgstr "The first ID of the second person"
+
+msgid "lemonway.document.type.ID_SECOND_PERSON_2"
+msgstr "The second ID of the second person"
+
+msgid "lemonway.document.type.ID_THIRD_PERSON"
+msgstr "The first ID of the third person"
+
+msgid "lemonway.document.type.ID_THIRD_PERSON_2"
+msgstr "The second ID of the third person"
+
+msgid "lemonway.document.type.ID_FOURTH_PERSON"
+msgstr "The first ID of the fourth person"
+
+msgid "lemonway.document.type.ID_FOURTH_PERSON_2"
+msgstr "The second ID of the fourth person"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON"
+msgstr "The identity document of the second person (Type 16)"
+
+msgid "lemonway.email.error.ID_SECOND_PERSON_2"
+msgstr "The second piece of identification of the second person (Type 17)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON"
+msgstr "Third person IDENTIFICATION (Type 18)"
+
+msgid "lemonway.email.error.ID_THIRD_PERSON_2"
+msgstr "The second piece of identification of the third person (Type 19)"
+
+msgid "lemonway.email.error.CAPITAL_ALLOCATION"
+msgstr "The capital allocation document (Type 20)"
+
+msgid "lemonway.document.type.CAPITAL_ALLOCATION"
+msgstr "The document of capital distribution"
 
 msgid "lemonway.document.status.WAITING"
 msgstr "Awaiting validation"
@@ -2499,49 +2607,16 @@ msgstr "Wrong type"
 msgid "lemonway.document.status.WRONG_OWNER"
 msgstr "Wrong owner"
 
-msgid "lemonway.document.details_MAIN_ID"
-msgstr "The main ID"
-
-msgid "lemonway.email.error.SECOND_ID"
-msgstr "The second piece of identification"
-
-msgid "lemonway.email.error.MAIN_ID_BACK"
-msgstr "The back of the main ID"
-
-msgid "lemonway.email.error.ORGA_KBIS"
-msgstr "The organization's KBIS"
-
-msgid "lemonway.email.error.ORGA_STATUS"
-msgstr "The statutes of the organization"
-
-msgid "lemonway.email.error.SECOND_ID_BACK"
-msgstr "The back of the second piece of identification"
-
-msgid "lemonway.email.error.SELFIE"
-msgstr "The selfie (Type 13)"
-
-msgid "lemonway.email.error.ID_SECOND_PERSON"
-msgstr "The identity document of the second person (Type 16)"
-
-msgid "lemonway.email.error.ID_SECOND_PERSON_2"
-msgstr "The second piece of identification of the second person (Type 17)"
-
-msgid "lemonway.email.error.ID_THIRD_PERSON"
-msgstr "Third person IDENTIFICATION (Type 18)"
-
-msgid "lemonway.email.error.ID_THIRD_PERSON_2"
-msgstr "The second piece of identification of the third person (Type 19)"
-
-msgid "lemonway.email.error.CAPITAL_ALLOCATION"
-msgstr "The capital allocation document (Type 20)"
-
-msgid "lemonway.email.error.action.REFUSED"
+msgid "lemonway.document.type.action.REFUSED"
 msgstr "refused"
 
 msgid "lemonway.email.error.action.UNREADABLE"
 msgstr "considered illegible"
 
-msgid "lemonway.email.error.action.EXPIRED"
+msgid "lemonway.document.type.action.UNREADABLE"
+msgstr "considered unreadable"
+
+msgid "lemonway.document.type.action.EXPIRED"
 msgstr "considered expired"
 
 msgid "lemonway.email.error.action.WRONG_TYPE"
@@ -2556,7 +2631,19 @@ msgstr "blocks authentication."
 msgid "lemonway.email.error.message.DOCUMENT_HAS_BEEN"
 msgstr "The document was"
 
-msgid "lemonway.email.error.message.LEMONWAY_COMMENT"
+msgid "lemonway.document.type.action.WRONG_TYPE"
+msgstr "considered of wrong type"
+
+msgid "lemonway.document.type.action.WRONG_PERSON"
+msgstr "considered from the wrong person"
+
+msgid "lemonway.document.type.message.BLOCK_AUTHENTICATION"
+msgstr "blocks the authentication."
+
+msgid "lemonway.document.type.message.DOCUMENT_HAS_BEEN"
+msgstr "The document has been"
+
+msgid "lemonway.document.type.message.LEMONWAY_COMMENT"
 msgstr "Additional comment from Lemonway:"
 
 # ############################## /lemonway-errors
@@ -4000,7 +4087,7 @@ msgid "J'ai l'intention d'investir :"
 msgstr "I'm thinking about investing:"
 
 msgid "Mes conseils ou encouragements pour le(s) porteur(s) de projet :"
-msgstr "My advices or cheerings to the project owner(s)"
+msgstr "My advice or encouragement  to the project owner(s)"
 
 msgid "Je souhaite que mes conseils soient publi&eacute;s sur la page de pr&eacute;sentation du projet"
 msgstr "I would like my advices to be published on the page of the project"

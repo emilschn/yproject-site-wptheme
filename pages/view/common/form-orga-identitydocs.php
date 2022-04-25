@@ -6,6 +6,7 @@
 	$fields_hidden = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_hidden );
 	$fields_files = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
 	$fields_files_orga = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files_orga );
+	$is_authentified = $WDGOrganization->is_registered_lemonway_wallet();
 
 	$form_feedback = FALSE;
 	if ( !empty( $_SESSION[ 'account_organization_identitydocs_form_feedback_' . $WDGOrganization->get_wpref() ] ) ) {
@@ -56,21 +57,23 @@
 		<?php locate_template( array( "common/forms/field.php" ), true, false );  ?>
 	<?php endforeach; ?>
 	
-	<span style="color: #EE0000;"><em>--&gt; <?php _e( 'account.identitydocs.orga.FOURTH_PERSON', 'yproject' ); ?></em></span>
+	<span style="color: #EE0000;"><em>--&gt; <?php _e( 'account.identitydocs.orga.LEGAL_ENTITY', 'yproject' ); ?></em></span>
 	<br><br>
 	
 	<p class="align-left">
 		* <?php _e( 'common.REQUIRED_FIELDS', 'yproject' ); ?><br>
 	</p>
 
-	<div id="user-identify-docs-form-buttons">
-		<button type="submit" class="button save red">
-			<span class="button-text">
-				<?php _e( 'account.identitydocs.SEND_DOCUMENTS', 'yproject' ); ?>
-			</span>
-			<span class="button-loading loading align-center hidden">
-				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
-			</span>
-		</button>
-	</div>
+	<?php if ( $is_authentified == FALSE ): ?>
+		<div id="user-identify-docs-form-buttons">
+			<button type="submit" class="button save red">
+				<span class="button-text">
+					<?php _e( 'account.identitydocs.SEND_DOCUMENTS', 'yproject' ); ?>
+				</span>
+				<span class="button-loading loading align-center hidden">
+					<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
+				</span>
+			</button>
+		</div>
+	<?php endif; ?>
 </form>
