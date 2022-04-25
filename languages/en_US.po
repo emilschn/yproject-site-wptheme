@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-04-25 14:32+0200\n"
+"PO-Revision-Date: 2022-04-25 14:36+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -3609,8 +3609,11 @@ msgstr "To authenticate your account, you have to complete your personal data an
 msgid "Je compl&egrave;te mon compte"
 msgstr "Complete my account"
 
-msgid "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !"
+msgid "Merci d'avoir &eacute;valu&eacute; ce projet, pensez &agrave; en parler autour de vous !"
 msgstr "Thank you for your evaluation, don't forget to spread the word about this project around you!"
+
+msgid "Plus tard"
+msgstr "Later"
 
 # ################################ INVEST PAGES
 # ################################

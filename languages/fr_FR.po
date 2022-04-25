@@ -3523,8 +3523,11 @@ msgstr "Pour authentifier votre compte, il suffit de compl&eacute;ter les inform
 msgid "Je compl&egrave;te mon compte"
 msgstr "Je compl&egrave;te mon compte"
 
-msgid "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !"
-msgstr "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !"
+msgid "Merci d'avoir &eacute;valu&eacute; ce projet, pensez &agrave; en parler autour de vous !"
+msgstr "Merci d'avoir &eacute;valu&eacute; ce projet, pensez &agrave; en parler autour de vous !"
+
+msgid "Plus tard"
+msgstr "Plus tard"
 
 # ################################ INVEST PAGES ################################
 # THEME - template-single-campaign-invest.php
