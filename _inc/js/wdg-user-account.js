@@ -611,10 +611,32 @@ UserAccountDashboard.prototype.initIdentityDocs = function () {
 	$('#item-body-identitydocs #field-id_2_back select').hide();
 
 	$('#item-body-identitydocs #field-id select').change(function () {
-		$('#item-body-identitydocs #field-id_back select').val($(this).val());
+		let sVal = $(this).val();
+		// Synchro du champ verso caché
+		$('#item-body-identitydocs #field-id_back select').val(sVal);
+		// Masquage de l'option dans l'autre champ
+		$('#item-body-identitydocs #field-id_2 select option').show();
+		if (sVal != undefined && sVal !== 'undefined') {
+			$('#item-body-identitydocs #field-id_2 select option').each(function () {
+				if ($(this).val() == sVal) {
+					$(this).hide();
+				}
+			});
+		}
 	});
 	$('#item-body-identitydocs #field-id_2 select').change(function () {
-		$('#item-body-identitydocs #field-id_2_back select').val($(this).val());
+		let sVal = $(this).val();
+		// Synchro du champ verso caché
+		$('#item-body-identitydocs #field-id_2_back select').val(sVal);
+		// Masquage de l'option dans l'autre champ
+		$('#item-body-identitydocs #field-id select option').show();
+		if (sVal != undefined && sVal !== 'undefined') {
+			$('#item-body-identitydocs #field-id select option').each(function () {
+				if ($(this).val() == sVal) {
+					$(this).hide();
+				}
+			});
+		}
 	});
 }
 
