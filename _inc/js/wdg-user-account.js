@@ -4,6 +4,7 @@ function UserAccountDashboard() {
 	this.initPhoneNotification();
 	this.initLoadingAnimation();
 	this.initSubscriptionForm();
+	this.initIdentityDocs();
 }
 
 /**
@@ -602,6 +603,18 @@ UserAccountDashboard.prototype.initSubscriptionAmount = function () {
 		else {
 			$("#field-amount").hide();
 		}
+	});
+}
+
+UserAccountDashboard.prototype.initIdentityDocs = function () {
+	$('#item-body-identitydocs #field-id_back select').hide();
+	$('#item-body-identitydocs #field-id_2_back select').hide();
+
+	$('#item-body-identitydocs #field-id select').change(function () {
+		$('#item-body-identitydocs #field-id_back select').val($(this).val());
+	});
+	$('#item-body-identitydocs #field-id_2 select').change(function () {
+		$('#item-body-identitydocs #field-id_2_back select').val($(this).val());
 	});
 }
 
