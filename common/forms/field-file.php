@@ -2,11 +2,13 @@
 <?php
 	$WDGUser_current = WDGUser::current();
 	$date_upload = '';
+	$display_upload = TRUE;
 	$message_instead_of_field = '';
 	$display_refused_alert = FALSE;
 	$keep_editing_for_admin = FALSE;
 	if ( isset( $wdg_current_field[ 'options' ] ) ) {
 		$date_upload = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'date_upload' ] ) ) ? $wdg_current_field[ 'options' ][ 'date_upload' ] : $wdg_current_field[ 'options' ];
+		$display_upload = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'display_upload' ] ) ) ? $wdg_current_field[ 'options' ][ 'display_upload' ] : TRUE;
 		$message_instead_of_field = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] ) ) ? $wdg_current_field[ 'options' ][ 'message_instead_of_field' ] : '';
 		$display_refused_alert = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'display_refused_alert' ] ) ) ? $wdg_current_field[ 'options' ][ 'display_refused_alert' ] : FALSE;
 		$keep_editing_for_admin = ( is_array( $wdg_current_field[ 'options' ] ) && isset( $wdg_current_field[ 'options' ][ 'keep_editing_for_admin' ] ) ) ? $wdg_current_field[ 'options' ][ 'keep_editing_for_admin' ] : FALSE;
@@ -62,51 +64,53 @@
 	<br><br>
 <?php endif; ?>
 
-<div class="field-description" >
-	<?php 
-		if ( ( $display_refused_alert || !empty( $message_instead_of_field ) &&  empty( $wdg_current_field[ 'value' ])) ) {
-			_e( 'forms.file.REPLACE_SENT_FILE', 'yproject' ); 
-			echo '<br>';
-		}
-	?>
-	<?php if ( !empty( $wdg_current_field[ 'value' ]) && !empty( $list_select) ): ?>
-		<?php _e( 'forms.file.REPLACE_SENT_FILE', 'yproject' ); ?><br>
-		<select id="select-<?php echo $wdg_current_field[ 'name' ]; ?>" name="select-<?php echo $wdg_current_field[ 'name' ]; ?>">
-			<option value="undefined" <?php selected( "undefined", $api_type ); ?>><?php _e( 'lemonway.document.type.UNDEFINED', 'yproject' ); ?></option>
-			<?php foreach ( $list_select as $option_value => $option_label ): ?>
-				<option value="<?php echo $option_value; ?>" <?php selected( $option_value, $api_type ); ?>><?php echo $option_label; ?></option>
-			<?php endforeach; ?>
-		</select>
-	<?php endif; ?>
-</div>
-
-<div id="add-file" class="field-description">
-	<?php _e( 'forms.file.FILE_SIZE_INFO', 'yproject' ); ?><br>
-	<?php _e( 'forms.file.FILE_TYPE_INFO', 'yproject' ); ?><br>
-	<input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="<?php echo $wdg_current_field[ 'name' ]; ?>">
-	<label for="<?php echo $wdg_current_field[ 'name' ]; ?>" class="file-label hidden-responsive" data-input="<?php echo $wdg_current_field[ 'name' ]; ?>">
-		<span class="hide-when-filled">
-			<?php _e( 'forms.file.DRAG_FILE_HERE', 'yproject' ); ?><br>
-			<?php _e( 'common.OR', 'yproject' ); ?><br>
-		</span>
-		<span class="button blue">
-			<?php 
-				if ( $display_refused_alert || !empty( $message_instead_of_field ) ) {
-					_e( 'forms.file.REPLACE_FILE', 'yproject' ); 
-				}else{
-					_e( 'forms.file.IMPORT_FILE', 'yproject' ); 
-				}
-			?>
-		</span>
-	</label>
-	<div class="hidden displayed-responsive">
-		<button type="button" class="button blue wdg-button-lightbox-open" data-lightbox="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>"><?php _e( 'forms.file.TAKE_PICTURE', 'yproject' ); ?></button>
-		<br>
-		<?php _e( 'common.OR', 'yproject' ); ?><br>
-		<button type="button" class="button transparent wdg-button-lightbox-open" data-lightbox="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>"><?php _e( 'forms.file.IMPORT_A_FILE', 'yproject' ); ?></button>
+<?php if ( $display_upload ): ?>
+	<div class="field-description" >
+		<?php 
+			if ( ( $display_refused_alert || !empty( $message_instead_of_field ) &&  empty( $wdg_current_field[ 'value' ])) ) {
+				_e( 'forms.file.REPLACE_SENT_FILE', 'yproject' ); 
+				echo '<br>';
+			}
+		?>
+		<?php if ( !empty( $wdg_current_field[ 'value' ]) && !empty( $list_select) ): ?>
+			<?php _e( 'forms.file.REPLACE_SENT_FILE', 'yproject' ); ?><br>
+			<select id="select-<?php echo $wdg_current_field[ 'name' ]; ?>" name="select-<?php echo $wdg_current_field[ 'name' ]; ?>">
+				<option value="undefined" <?php selected( "undefined", $api_type ); ?>><?php _e( 'lemonway.document.type.UNDEFINED', 'yproject' ); ?></option>
+				<?php foreach ( $list_select as $option_value => $option_label ): ?>
+					<option value="<?php echo $option_value; ?>" <?php selected( $option_value, $api_type ); ?>><?php echo $option_label; ?></option>
+				<?php endforeach; ?>
+			</select>
+		<?php endif; ?>
 	</div>
-</div>
-<br><br>
+
+	<div id="add-file" class="field-description">
+		<?php _e( 'forms.file.FILE_SIZE_INFO', 'yproject' ); ?><br>
+		<?php _e( 'forms.file.FILE_TYPE_INFO', 'yproject' ); ?><br>
+		<input type="file" name="<?php echo $wdg_current_field[ 'name' ]; ?>" id="<?php echo $wdg_current_field[ 'name' ]; ?>">
+		<label for="<?php echo $wdg_current_field[ 'name' ]; ?>" class="file-label hidden-responsive" data-input="<?php echo $wdg_current_field[ 'name' ]; ?>">
+			<span class="hide-when-filled">
+				<?php _e( 'forms.file.DRAG_FILE_HERE', 'yproject' ); ?><br>
+				<?php _e( 'common.OR', 'yproject' ); ?><br>
+			</span>
+			<span class="button blue">
+				<?php 
+					if ( $display_refused_alert || !empty( $message_instead_of_field ) ) {
+						_e( 'forms.file.REPLACE_FILE', 'yproject' ); 
+					}else{
+						_e( 'forms.file.IMPORT_FILE', 'yproject' ); 
+					}
+				?>
+			</span>
+		</label>
+		<div class="hidden displayed-responsive">
+			<button type="button" class="button blue wdg-button-lightbox-open" data-lightbox="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>"><?php _e( 'forms.file.TAKE_PICTURE', 'yproject' ); ?></button>
+			<br>
+			<?php _e( 'common.OR', 'yproject' ); ?><br>
+			<button type="button" class="button transparent wdg-button-lightbox-open" data-lightbox="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>"><?php _e( 'forms.file.IMPORT_A_FILE', 'yproject' ); ?></button>
+		</div>
+	</div>
+	<br><br>
+<?php endif; ?>
 
 <?php ob_start(); ?>
 <div id="lightbox-<?php echo $wdg_current_field[ 'name' ]; ?>" class="align-left">
