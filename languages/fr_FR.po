@@ -2434,7 +2434,7 @@ msgid "lemonway.document.type.UNDEFINED"
 msgstr "Non d&eacute;fini"
 
 msgid "lemonway.document.type.ID"
-msgstr "La pi&egrave;ce d'identit&eacute;"
+msgstr "La carte d'identit&eacute;"
 
 msgid "lemonway.document.type.PROOF_ADDRESS"
 msgstr "Le justificatif de domicile"
@@ -2455,7 +2455,7 @@ msgid "lemonway.document.type.CARD_ID_BACK"
 msgstr "Le verso de la carte d'identit&eacute;"
 
 msgid "lemonway.document.type.TAX"
-msgstr "L'avis d'imposition"
+msgstr "Le dernier avis d'imposition"
 
 msgid "lemonway.document.type.WELFARE"
 msgstr "La carte vitale"
