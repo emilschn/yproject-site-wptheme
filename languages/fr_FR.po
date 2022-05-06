@@ -1215,6 +1215,12 @@ msgstr "Virement :"
 msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
 msgstr "Pr&eacute;l&egrave;vement bancaire :"
 
+msgid "account.SOPHISTICATED_INVESTOR"
+msgstr "Investisseur averti"
+
+msgid "account.NONSOPHISTICATED_INVESTOR"
+msgstr "Investisseur non-averti"
+
 # ############################## /investir ################################
 msgid "invest.header.INVEST_ROYALTIES"
 msgstr "Investir en royalties"
