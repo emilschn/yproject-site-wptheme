@@ -78,6 +78,8 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 
 <?php // Revenus du projet ?>
 <h4><?php _e( 'project.single.description.economic.PROJECT_REVENUES', 'yproject' ); ?></h4><br>
+<p><?php echo sprintf( __( 'project.single.description.economic.RISKS_REASONS_DESCRIPTION_2', 'yproject' ), UIHelpers::format_number( $campaign->total_previous_funding() ) ); ?></p>
+<?php echo html_entity_decode( $campaign->total_previous_funding_description() ); ?>
 <p><?php echo sprintf( __( 'project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR', 'yproject' ), UIHelpers::format_number( $campaign->turnover_previous_year() ) ); ?></p>
 
 <div class="table-container">
@@ -203,10 +205,7 @@ $timeline_length = $funding_duration * $nb_declarations_per_year;
 <h4><?php _e( 'project.single.description.economic.RISKS_REASONS', 'yproject' ); ?></h4>
 <p>
 	<?php _e( 'project.single.description.economic.RISKS_REASONS_DESCRIPTION_1', 'yproject' ); ?>
-	<br>
-	<?php echo sprintf( __( 'project.single.description.economic.RISKS_REASONS_DESCRIPTION_2', 'yproject' ), UIHelpers::format_number( $campaign->total_previous_funding() ) ); ?>
 </p>
-<?php echo html_entity_decode( $campaign->total_previous_funding_description() ); ?>
 <div><br></div>
 
 <p>

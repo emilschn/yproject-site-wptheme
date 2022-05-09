@@ -3305,7 +3305,7 @@ msgid "project.single.description.economic.ROYALTIES_PER_QUARTER_MAX_DESCRIPTION
 msgstr "%% de chiffre d’affaires versé à l’ensemble des investisseurs, pour %s € levés, proportionnel au montant levé"
 
 msgid "project.single.description.economic.PROJECT_REVENUES"
-msgstr "Revenus du projet"
+msgstr "Revenus et financement du projet"
 
 msgid "project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR"
 msgstr "Sur les 12 mois précédents la levée de fonds, nous avons réalisé %s € de chiffre d'affaires."
