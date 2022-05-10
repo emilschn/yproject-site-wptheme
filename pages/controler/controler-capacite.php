@@ -8,17 +8,10 @@ class WDG_Page_Controler_User_Capacity extends WDG_Page_Controler {
 
 		define( 'SKIP_BASIC_HTML', TRUE );
 
+		parent::init_redirect_url_by_language();
+
 		// on récupère le composant Vue
 		$WDG_Vue_Components = WDG_Vue_Components::instance();
 		$WDG_Vue_Components->enqueue_component( WDG_Vue_Components::$component_user_investment_capacity );
-	}
-
-	public function get_init_locale() {
-		$init_locale = WDG_Languages_Helpers::get_current_locale_id();
-		if ( empty( $init_locale ) ) {
-			$init_locale = 'fr';
-		}
-
-		return $init_locale;
 	}
 }
