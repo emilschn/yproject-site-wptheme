@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-05-09 10:57+0200\n"
+"PO-Revision-Date: 2022-05-11 10:56+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -555,6 +555,9 @@ msgstr "Validation of your information"
 msgid "account.lightbox.DATA_SAVED"
 msgstr "Information recorded! Thank you!"
 
+msgid "account.menu.MY_ACCOUNT"
+msgstr "My account"
+
 msgid "account.menu.MY_WALLET"
 msgstr "My wallet"
 
@@ -582,6 +585,9 @@ msgstr "My authentication"
 msgid "account.menu.MY_NOTIFICATIONS"
 msgstr "My notifications"
 
+msgid "account.menu.organization.ACCOUNT"
+msgstr "Account"
+
 msgid "account.menu.organization.WALLET"
 msgstr "Wallet"
 
@@ -602,9 +608,6 @@ msgstr "Identification documents"
 
 msgid "account.menu.organization.BANK_INFO"
 msgstr "Bank account"
-
-msgid "account.menu.organization.AUTHENTICATION"
-msgstr "Authentication"
 
 msgid "account.menu.LINKED_PROJECTS"
 msgstr "Linked projects"
@@ -666,8 +669,8 @@ msgstr "Identity documents"
 msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
 msgstr "Edit my documents"
 
-msgid "account.authentication.orga.AUTHENTICATION_OF"
-msgstr "Authentication of"
+msgid "account.authentication.orga.ACCOUNT_OF"
+msgstr "Account of"
 
 msgid "account.bank.MY_BANK_CARD"
 msgstr "My bank card"

@@ -543,6 +543,9 @@ msgstr "Validation de vos informations"
 msgid "account.lightbox.DATA_SAVED"
 msgstr "Donn&eacute;es enregistr&eacute;es ! Merci !"
 
+msgid "account.menu.MY_ACCOUNT"
+msgstr "Mon compte"
+
 msgid "account.menu.MY_WALLET"
 msgstr "Mon porte-monnaie"
 
@@ -570,6 +573,9 @@ msgstr "Mon authentification"
 msgid "account.menu.MY_NOTIFICATIONS"
 msgstr "Mes notifications"
 
+msgid "account.menu.organization.ACCOUNT"
+msgstr "Compte"
+
 msgid "account.menu.organization.WALLET"
 msgstr "Porte-monnaie"
 
@@ -590,9 +596,6 @@ msgstr "Justificatifs d'identification"
 
 msgid "account.menu.organization.BANK_INFO"
 msgstr "Coordonn&eacute;es bancaires"
-
-msgid "account.menu.organization.AUTHENTICATION"
-msgstr "Authentification"
 
 msgid "account.menu.LINKED_PROJECTS"
 msgstr "Projets li&eacute;s"
@@ -654,8 +657,8 @@ msgstr "Justificatifs d'identit&eacute;"
 msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
 msgstr "Editer mes justificatifs"
 
-msgid "account.authentication.orga.AUTHENTICATION_OF"
-msgstr "Authentification de"
+msgid "account.authentication.orga.ACCOUNT_OF"
+msgstr "Compte de"
 
 msgid "account.bank.MY_BANK_CARD"
 msgstr "Ma carte bancaire"

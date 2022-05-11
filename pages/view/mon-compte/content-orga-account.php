@@ -2,7 +2,7 @@
 global $WDGOrganization;
 ?>
 
-<h2><?php _e( 'account.authentication.orga.AUTHENTICATION_OF', 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
+<h2><?php _e( 'account.authentication.orga.ACCOUNT_OF', 'yproject' ); ?> <?php echo $WDGOrganization->get_name(); ?></h2>
 
 <?php locate_template( array( 'pages/view/mon-compte/partial-authentication.php' ), true, false ); ?>
 

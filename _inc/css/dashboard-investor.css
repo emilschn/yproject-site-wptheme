@@ -3,6 +3,7 @@ body.template-mon-compte div#container {
 	background-image: url(../../images/common-background.png);
 	background-repeat: no-repeat;
 }
+
 body.template-mon-compte div#container div#content {
 	display: table;
 	width: 100%;
@@ -11,44 +12,52 @@ body.template-mon-compte div#container div#content {
 	margin: auto;
 	padding: 80px 0px 10px;
 }
-body.template-mon-compte div#container div#content .item-body-tab > h2 {
+
+body.template-mon-compte div#container div#content .item-body-tab>h2 {
 	margin: 8px 0px 16px;
 	font-size: 30px;
 	text-transform: uppercase;
 	text-align: center;
 }
+
 body.template-mon-compte div#container div#content h3 {
 	text-transform: uppercase;
 	text-align: left;
 	color: #00879b;
 }
+
 body.template-mon-compte div#container div#content nav {
 	display: table-cell;
-    vertical-align: top;
-    width: 220px;
+	vertical-align: top;
+	width: 220px;
 	border-right: 3px solid #E1E3E2;
 	background: #F4F2F2;
 }
+
 body.template-mon-compte div#container div#content nav div.nav-header {
 	padding: 16px;
 	font-weight: bold;
 }
+
 body.template-mon-compte div#container div#content nav div.nav-header.header-orga {
 	padding-top: 24px;
 	padding-bottom: 8px;
 }
+
 body.template-mon-compte div#container div#content nav div.nav-header ul.project-list {
 	padding-left: 0px;
 	list-style: none;
 }
+
 body.template-mon-compte div#container div#content nav ul.nav-menu {
 	margin: 0px;
 	padding-left: 0px;
 	list-style: none;
 }
+
 body.template-mon-compte div#container div#content nav ul.nav-menu li a {
 	display: inline-block;
-	width: calc( 100% - 15px );
+	width: calc(100% - 15px);
 	height: auto;
 	line-height: 16px;
 	font-size: 13px;
@@ -58,10 +67,11 @@ body.template-mon-compte div#container div#content nav ul.nav-menu li a {
 	font-weight: 300;
 	text-decoration: none;
 }
+
 body.template-mon-compte div#container div#content nav ul.nav-menu li.selected a {
 	background: #ffffff;
 	border-left: 4px solid #D3EAE9;
-	width: calc( 100% - 19px );
+	width: calc(100% - 19px);
 }
 
 body.template-mon-compte div#container div#content nav button#swap-menu {
@@ -70,39 +80,102 @@ body.template-mon-compte div#container div#content nav button#swap-menu {
 
 body.template-mon-compte div#container div#content main {
 	display: table-cell;
-    vertical-align: top;
+	vertical-align: top;
 	background: #ffffff;
 	padding: 10px 20px;
 }
+
 body.template-mon-compte div#container div#content .db-form.v3 {
 	max-width: 600px;
 	margin: 0px auto;
 }
+
 @media screen and (max-width: 500px) {
 	body.template-mon-compte div#container div#content .db-form.v3 {
 		padding: 30px 10px;
 	}
 }
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard {
+	max-width: 820px;
+	margin: 0px auto;
+	margin-top: 50px;
+	display: flex;
+	flex-flow: row wrap;
+	justify-content: space-between;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div {
+	width: 220px;
+	margin-bottom: 24px;
+	padding: 24px;
+	border: 1px solid #EBEBEB;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:first-child {
+	margin-bottom: 4px;
+	text-align: center;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:first-child img {
+	width: 50px;
+	height: 50px;
+	object-fit: contain;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div.account-dashboard-data {
+	margin-bottom: 4px;
+	font-size: 1.3em;
+	color: #93626D;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div.account-dashboard-text {
+	margin-bottom: 16px;
+	font-size: 1em;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:nth-child(4) {
+	text-align: center;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:last-child {
+	margin-top: 16px;
+	text-align: center;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div a {
+	font-size: 0.8em;
+}
+
+body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:last-child a {
+	font-size: 0.7em;
+}
+
+
 body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview {
 	background: #FFFFFF;
 	padding: 16px;
 	margin-bottom: 24px;
 	height: 72px;
 }
-body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > img {
+
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview>img {
 	float: left;
 }
-body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > div {
+
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview>div {
 	float: left;
 	text-align: left;
 	margin-left: 8px;
 	margin-top: 8px;
 }
-body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > div span:first-child {
+
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview>div span:first-child {
 	font-size: 32px;
 	color: #93626D;
 }
-body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > a {
+
+body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview>a {
 	float: right;
 	margin-top: 11px;
 }
@@ -111,19 +184,22 @@ body.template-mon-compte div#container div#content #item-body-wallet .wallet-pre
 	body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview {
 		height: 132px;
 	}
-	body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview > a {
+
+	body.template-mon-compte div#container div#content #item-body-wallet .wallet-preview>a {
 		float: none;
 		width: -webkit-calc(100% - 2px);
 		width: -moz-calc(100% - 2px);
 		width: calc(100% - 2px);
 	}
 }
+
 body.template-mon-compte div#container div#content #item-body-wallet .wdg-message {
 	margin: 16px auto;
 	padding: 16px;
 	text-transform: none;
 	text-align: justify;
 }
+
 body.template-mon-compte div#container div#content #item-body-wallet .wdg-message.error:before {
 	top: 0px;
 	left: 40px;
@@ -143,15 +219,18 @@ body.template-mon-compte div#container div#content #item-body-wallet ul.user-his
 	list-style: none;
 	background: #FFFFFF;
 }
+
 body.template-mon-compte div#container div#content #item-body-wallet ul.user-history li {
 	padding: 8px;
 	margin-bottom: 16px;
 }
+
 body.template-mon-compte div#container div#content #item-body-wallet ul.user-history li span:nth-child(1) {
 	display: inline-block;
 	width: 100px;
 	color: #00879b;
 }
+
 body.template-mon-compte div#container div#content #item-body-wallet ul.user-history li span:nth-child(2) {
 	color: #CFB7B7;
 }
@@ -164,9 +243,11 @@ body.template-mon-compte div#container div#content #item-body-subscription #fiel
 body.template-mon-compte div#container div.dataTables_length label {
 	display: none;
 }
+
 body.template-mon-compte div#container .dataTables_filter {
 	display: none;
 }
+
 body.template-mon-compte div#container .dt-button.buttons-excel.buttons-html5 {
 	width: auto;
 	padding: 10px;
@@ -176,15 +257,19 @@ body.template-mon-compte div#container .dt-button.buttons-excel.buttons-html5 {
 	text-transform: uppercase;
 	cursor: pointer;
 }
+
 body.template-mon-compte div#container table.user-transactions {
 	margin-top: 8px;
 }
+
 body.template-mon-compte div#container table.user-transactions thead tr {
 	color: #00879B;
 	font-weight: bold;
 	text-transform: uppercase;
-	background-color: #F4F2F3;;
+	background-color: #F4F2F3;
+	;
 }
+
 body.template-mon-compte div#container table.user-transactions thead td {
 	border-bottom: 2px solid #D3EAE9;
 }
@@ -193,28 +278,38 @@ body.template-mon-compte div#container table.user-transactions tbody tr td {
 	border-bottom: 1.5px solid #F4F2F3;
 	padding: 20px 0px;
 }
+
 body.template-mon-compte div#container table.user-transactions tbody tr td .date-mobile {
 	display: none;
 }
+
 body.template-mon-compte div#container table.user-transactions tbody tr td.transaction-titre {
 	text-transform: uppercase;
 	font-weight: bold;
 }
-body.template-mon-compte div#container table.user-transactions tbody tr td .organization-name, body.template-mon-compte div#container table.user-transactions tbody tr td .mean-payment-info{
+
+body.template-mon-compte div#container table.user-transactions tbody tr td .organization-name,
+body.template-mon-compte div#container table.user-transactions tbody tr td .mean-payment-info {
 	font-size: 13px;
 	text-transform: none;
 	font-weight: normal;
 }
-body.template-mon-compte div#container table.user-transactions tbody tr .transaction-date, body.template-mon-compte div#container table.user-transactions tbody tr .sorting_1 {
+
+body.template-mon-compte div#container table.user-transactions tbody tr .transaction-date,
+body.template-mon-compte div#container table.user-transactions tbody tr .sorting_1 {
 	padding-left: 16px;
 }
+
 body.template-mon-compte div#container table.user-transactions td:nth-of-type(2) {
 	padding-left: 16px;
 }
-body.template-mon-compte div#container table.user-transactions tbody td.positive, body.template-mon-compte div#container table.user-transactions tbody td.negative {
+
+body.template-mon-compte div#container table.user-transactions tbody td.positive,
+body.template-mon-compte div#container table.user-transactions tbody td.negative {
 	text-align: center;
 	font-weight: bold;
 }
+
 body.template-mon-compte div#container table.user-transactions tbody td.positive {
 	color: #8BC79C;
 }
@@ -223,28 +318,37 @@ body.template-mon-compte div#container table.user-transactions tbody td.positive
 body.template-mon-compte div#container .user-transactions-init .paginate_button {
 	border: none;
 }
+
 body.template-mon-compte div#container .user-transactions-init .paginate_button.current {
 	border: none;
 	background: #D3EAE9;
 }
-body.template-mon-compte div#container .user-transactions-init .paginate_button.current:hover, body.template-mon-compte div#container .user-transactions-init .paginate_button:hover {
+
+body.template-mon-compte div#container .user-transactions-init .paginate_button.current:hover,
+body.template-mon-compte div#container .user-transactions-init .paginate_button:hover {
 	background: #00879B;
 	border: none;
 }
 
 
 @media only screen and (max-width: 767px) {
-	body.template-mon-compte div#container table.user-transactions thead tr td:nth-of-type(2) { /* Masquer la catégorie transaction */
+	body.template-mon-compte div#container table.user-transactions thead tr td:nth-of-type(2) {
+		/* Masquer la catégorie transaction */
 		display: none;
 	}
-	body.template-mon-compte div#container table.user-transactions tbody tr td .date-mobile { /* Afficher la date dans le bloc transaction en mobile  */
+
+	body.template-mon-compte div#container table.user-transactions tbody tr td .date-mobile {
+		/* Afficher la date dans le bloc transaction en mobile  */
 		display: block;
 		font-weight: normal;
 		margin-bottom: 10px;
 	}
-	body.template-mon-compte div#container table.user-transactions tbody tr td:first-of-type { /* Masquer la colonne date */
+
+	body.template-mon-compte div#container table.user-transactions tbody tr td:first-of-type {
+		/* Masquer la colonne date */
 		display: none;
 	}
+
 	body.template-mon-compte div#container table.user-transactions tbody td.transaction-titre {
 		padding-left: 20px;
 	}
@@ -260,6 +364,7 @@ body.template-mon-compte div#container div#content a.download-certificate {
 	display: inline-block;
 	padding: 16px 32px;
 }
+
 body.template-mon-compte div#container div#content #tax-exemption-preview {
 	margin-bottom: 16px;
 	padding: 16px;
@@ -267,6 +372,7 @@ body.template-mon-compte div#container div#content #tax-exemption-preview {
 	text-align: left;
 	background: #FFF;
 }
+
 body.template-mon-compte div#container div#content h3.has-margin-top {
 	margin-top: 24px;
 }
@@ -277,30 +383,36 @@ body.template-mon-compte div#container div#content .investment-synthesis {
 	font-size: 20px;
 	margin-bottom: 24px;
 }
+
 body.template-mon-compte div#container div#content .investment-synthesis-pictos {
 	display: flex;
 	justify-content: space-between;
 	flex-wrap: wrap;
 	margin-bottom: 24px;
 }
+
 body.template-mon-compte div#container div#content .investment-synthesis-pictos.hidden {
 	display: none;
 }
-body.template-mon-compte div#container div#content .investment-synthesis-pictos > div {
+
+body.template-mon-compte div#container div#content .investment-synthesis-pictos>div {
 	width: 264px;
 	margin-bottom: 8px;
 	padding: 24px;
 	background: #FFFFFF;
 	text-align: right;
 }
-body.template-mon-compte div#container div#content .investment-synthesis-pictos > div img {
+
+body.template-mon-compte div#container div#content .investment-synthesis-pictos>div img {
 	float: left;
 }
-body.template-mon-compte div#container div#content .investment-synthesis-pictos > div span.data {
+
+body.template-mon-compte div#container div#content .investment-synthesis-pictos>div span.data {
 	font-size: 32px;
 	color: #93626D;
 }
-body.template-mon-compte div#container div#content .investment-synthesis-pictos > div span.txt {
+
+body.template-mon-compte div#container div#content .investment-synthesis-pictos>div span.txt {
 	clear: both;
 	font-size: 12px;
 	display: inline-block;
@@ -321,33 +433,42 @@ body.template-mon-compte div#container div#content .investment-item {
 	border: 1px solid #EBEBEB;
 	align-items: center;
 }
+
 body.template-mon-compte div#container div#content .investment-item .investment-item-child {
 	border-right: 1px solid #EBEBEB;
 	flex: 1;
 }
+
 body.template-mon-compte div#container div#content .investment-item .amount-date {
 	min-width: 150px;
 }
+
 body.template-mon-compte div#container div#content .investment-item .amount-amount {
 	font-size: 20px;
 }
+
 body.template-mon-compte div#container div#content .investment-item .single-line {
 	min-width: 92px;
 	line-height: 50px;
 	vertical-align: middle;
 }
+
 body.template-mon-compte div#container div#content .investment-item .single-line.publish {
 	color: #8BC79C;
 }
+
 body.template-mon-compte div#container div#content .investment-item .single-line.canceled {
 	color: #8BC79C;
 }
+
 body.template-mon-compte div#container div#content .investment-item .single-line.pending {
 	color: #cfb7b7;
 }
+
 body.template-mon-compte div#container div#content .investment-item .single-line.publish.campaign-archive {
 	color: #333333;
 }
+
 body.template-mon-compte div#container div#content .investment-item a.button {
 	padding: 16px 16px;
 }
@@ -358,11 +479,13 @@ body.template-mon-compte div#container div#content .investment-item a.button {
 		padding-left: 0px;
 		justify-content: center;
 	}
+
 	body.template-mon-compte div#container div#content .investment-item .investment-item-child {
 		padding: 16px 16px;
 		border-right: 0px;
 		border-bottom: 1px solid #EBEBEB;
 	}
+
 	body.template-mon-compte div#container div#content .investment-item .amount-date {
 		text-align: center;
 	}
@@ -372,6 +495,7 @@ body.template-mon-compte div#container div#content .vote-intentions h4 {
 	margin: 0px 0px 16px;
 	font-weight: bold;
 }
+
 body.template-mon-compte div#container div#content .vote-intentions a.button.red {
 	display: inline-block;
 	width: 250px;
@@ -386,69 +510,87 @@ body.template-mon-compte div#container div#content .button-view-royalties-list {
 	height: 42px;
 	background: #FFF;
 }
+
 body.template-mon-compte div#container div#content .button-hide-royalties-list {
 	position: relative;
 	top: 36px;
 	height: 42px;
 	background: #FFF;
 }
+
 body.template-mon-compte div#container div#content .royalties-list {
 	background: #FFF;
 	padding: 16px;
 }
-body.template-mon-compte div#container div#content .royalties-list > div {
+
+body.template-mon-compte div#container div#content .royalties-list>div {
 	font-weight: bold;
 }
+
 body.template-mon-compte div#container div#content .royalties-list hr {
 	width: 95%;
 	border: 1px solid #F4F2F2
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table {
 	margin: auto;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td {
 	text-align: left;
 	padding-bottom: 4px;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.align-right {
 	text-align: right;
 	padding-right: 16px;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.align-right:first-letter {
 	text-transform: uppercase;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td:nth-child(2) {
 	padding-left: 16px;
 	border-left: 4px solid #FFF;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr.yearly-title td {
 	font-style: italic;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr.yearly-title td:nth-child(1) {
 	width: 49%;
 	text-align: right;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr.yearly-title.year-title td {
 	padding-top: 8px;
 	font-weight: bold;
 	font-style: normal;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status {
 	border-left: 4px solid #F4F2F2;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.late {
 	border-left: 4px solid #EACDCB;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.finished {
 	border-left: 4px solid #8BC79C;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future {
 	border-left: 4px dotted #F4F2F2;
 	font-weight: normal;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future div.tooltip {
 	display: inline-block;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future div.tooltip button {
 	display: inline-block;
 	width: 22px;
@@ -462,6 +604,7 @@ body.template-mon-compte div#container div#content .royalties-list .roi-table tr
 	color: #333;
 	cursor: pointer;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future div.tooltip div.tooltip-text {
 	position: absolute;
 	display: none;
@@ -478,6 +621,7 @@ body.template-mon-compte div#container div#content .royalties-list .roi-table tr
 	background: #333;
 	color: #FFF;
 }
+
 body.template-mon-compte div#container div#content .royalties-list .roi-table tr td.status.future div.tooltip div.tooltip-text:after {
 	content: "";
 	position: absolute;
@@ -495,21 +639,26 @@ body.template-mon-compte div#container div#content div.subscription-item {
 	padding: 24px;
 	border: 1px solid #EBEBEB;
 }
+
 body.template-mon-compte div#container div#content div.subscription-item h3 {
 	color: #333;
 }
+
 body.template-mon-compte div#container div#content div.subscription-item hr {
 	border: 1px solid #EBEBEB;
 	border-top: none;
 	margin: 24px 0px;
 }
+
 body.template-mon-compte div#container div#content div.subscription-item .button-options {
 	margin: 20px 0px;
 	text-align: center;
 }
+
 body.template-mon-compte div#container div#content div.subscription-item .button-options a.button {
 	padding: 20px 40px;
 }
+
 @media screen and (max-width: 500px) {
 	body.template-mon-compte div#container div#content div.subscription-item .button-options a.button {
 		display: inline-block;
@@ -527,10 +676,10 @@ body.template-mon-compte div#container div#content div.subscription-item .button
 
 
 body.template-mon-compte div#container div#content div.authentication-items {
-    display: -webkit-flex;
+	display: -webkit-flex;
 	display: flex;
-    -webkit-justify-content: space-around; 
-    justify-content: space-around;
+	-webkit-justify-content: space-around;
+	justify-content: space-around;
 	margin: 32px 0px;
 }
 
@@ -538,7 +687,8 @@ body.template-mon-compte div#container div#content div.authentication-items div.
 	width: 300px;
 }
 
-.msg-authentication-alert:before, body.template-mon-compte div#container div#content div.authentication-items div.authentication-item.alert:before {
+.msg-authentication-alert:before,
+body.template-mon-compte div#container div#content div.authentication-items div.authentication-item.alert:before {
 	position: relative;
 	display: block;
 	content: "!";
@@ -581,19 +731,22 @@ body.template-mon-compte div#container div#content div#item-body-bank div.user-r
 	clear: both;
 	min-height: 80px;
 	padding: 5px;
-    margin: 5px;
+	margin: 5px;
 	border: 1px solid #333;
 	color: #333333;
 }
+
 body.template-mon-compte div#container div#content div#item-body-bank div.user-registered-card img {
 	float: left;
 	margin-right: 10px;
 }
+
 body.template-mon-compte div#container div#content div#item-body-bank div.user-registered-card span {
 	float: left;
-	width: calc( 100% - 230px );
+	width: calc(100% - 230px);
 	margin-top: 16px;
 }
+
 body.template-mon-compte div#container div#content div#item-body-bank div.user-registered-card form {
 	float: right;
 	width: 100px;
@@ -604,10 +757,12 @@ body.template-mon-compte div#container div#content div#item-body-bank div.user-r
 	body.template-mon-compte div#container div#content main {
 		display: block;
 	}
+
 	body.template-mon-compte div#container div#content nav {
 		position: absolute;
 		left: -223px;
 	}
+
 	body.template-mon-compte div#container div#content nav button#swap-menu {
 		position: absolute;
 		display: block;
@@ -623,16 +778,19 @@ body.template-mon-compte div#container div#content div#item-body-bank div.user-r
 		text-align: center;
 		cursor: pointer;
 	}
+
 	body.template-mon-compte div#container div#content nav.visible {
 		display: block;
 		left: 0px;
 		border-bottom: 3px solid #E1E3E2;
 		z-index: 2;
 	}
+
 	body.template-mon-compte div#container div#content nav ul.nav-menu li a {
 		font-size: 17px;
 		min-height: 25px;
 	}
+
 	body.template-mon-compte div#container div#content nav.visible button#swap-menu {
 		left: -2px;
 	}
@@ -642,12 +800,15 @@ body.template-mon-compte div#container div#content div#item-body-bank div.user-r
 	body.template-mon-compte div#container div#content main #tax-exemption-form-inprogress button {
 		width: 100%;
 	}
+
 	body.template-mon-compte div#container div#content main #tax-exemption-form-inprogress button.transparent {
 		margin-bottom: 16px;
 	}
+
 	body.template-mon-compte div#container div#content main #tax-exemption-form-next button {
 		width: 100%;
 	}
+
 	body.template-mon-compte div#container div#content main #tax-exemption-form-next button.transparent {
 		margin-bottom: 16px;
 	}
