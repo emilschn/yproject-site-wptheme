@@ -7,10 +7,15 @@ $estimated_turnover = $campaign->estimated_turnover();
 $estimated_sales = $campaign->estimated_sales();
 
 $total_turnover = 0;
-foreach ( $estimated_turnover as $year => $amount ) {
-	$total_turnover += $amount;
+if ( !empty( $estimated_turnover ) ) {
+	foreach ( $estimated_turnover as $year => $amount ) {
+		$total_turnover += $amount;
+	}
 }
-$profitability_ratio = round( ( $total_turnover * $campaign->roi_percent_estimated() / 100 ) / $campaign->goal( false ), 5 );
+$profitability_ratio = 0;
+if ( $campaign->goal( false ) > 0 ) {
+	$profitability_ratio = round( ( $total_turnover * $campaign->roi_percent_estimated() / 100 ) / $campaign->goal( false ), 5 );
+}
 $profitability_ratio = min($profitability_ratio, $campaign->maximum_profit_complete());
 $profitability_percent = $profitability_ratio * 100 - 100;
 
