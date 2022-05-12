@@ -19,7 +19,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 	<div>
 
 		<div id="item-body">
-			<div id="item-body-account" class="item-body-tab">
+			<div id="item-body-account" class="tab-account item-body-tab">
 				<?php locate_template( array( 'pages/view/mon-compte/content-account.php' ), true ); ?>
 			</div>
 
@@ -59,7 +59,7 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 				<?php global $WDGOrganization; ?>
 				<?php foreach ( $list_current_organizations as $organization_item ): ?>
 					<?php $WDGOrganization = $organization_item; ?>
-					<div id="item-body-orga-account-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
+					<div id="item-body-orga-account-<?php echo $WDGOrganization->get_wpref(); ?>" class="tab-account item-body-tab hidden">
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-account.php' ), true, false ); ?>
 					</div>
 

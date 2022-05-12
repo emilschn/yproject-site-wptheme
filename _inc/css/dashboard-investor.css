@@ -96,7 +96,7 @@ body.template-mon-compte div#container div#content .db-form.v3 {
 	}
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard {
 	max-width: 820px;
 	margin: 0px auto;
 	margin-top: 50px;
@@ -105,49 +105,49 @@ body.template-mon-compte div#container div#content #item-body-account div.accoun
 	justify-content: space-between;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div {
 	width: 220px;
 	margin-bottom: 24px;
 	padding: 24px;
 	border: 1px solid #EBEBEB;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:first-child {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div:first-child {
 	margin-bottom: 4px;
 	text-align: center;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:first-child img {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div:first-child img {
 	width: 50px;
 	height: 50px;
 	object-fit: contain;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div.account-dashboard-data {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div.account-dashboard-data {
 	margin-bottom: 4px;
 	font-size: 1.3em;
 	color: #93626D;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div.account-dashboard-text {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div.account-dashboard-text {
 	margin-bottom: 16px;
 	font-size: 1em;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:nth-child(4) {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div:nth-child(4) {
 	text-align: center;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:last-child {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div:last-child {
 	margin-top: 16px;
 	text-align: center;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div a {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div a {
 	font-size: 0.8em;
 }
 
-body.template-mon-compte div#container div#content #item-body-account div.account-dashboard>div div:last-child a {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div:last-child a {
 	font-size: 0.7em;
 }
 
