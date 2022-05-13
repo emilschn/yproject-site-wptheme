@@ -4,6 +4,7 @@ function UserAccountDashboard() {
 	this.initPhoneNotification();
 	this.initLoadingAnimation();
 	this.initSubscriptionForm();
+	this.initIdentityDocs();
 }
 
 /**
@@ -148,6 +149,9 @@ UserAccountDashboard.prototype.initMenu = function () {
  * Change d'onglet
  */
 UserAccountDashboard.prototype.switchTab = function (sType) {
+	if (sType.indexOf('authentication')) {
+		sType.split('authentication').join('account');
+	}
 
 	if ($('ul.nav-menu li#menu-item-' + sType).length > 0) {
 		$('ul.nav-menu li').removeClass('selected');
@@ -313,7 +317,12 @@ UserAccountDashboard.prototype.displayUserInvestments = function (result, userID
 
 					if (oInvestmentItem['contract_file_path'] != '') {
 						sCampaignBuffer += '<div class="investment-item-child align-center">';
-						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ' + $('#invest-trans-investiement_duration_years').text() + '<br>';
+						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ';
+						if (oCampaignItem['funding_duration'] > 1) {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_years').text() + '<br>';
+						} else {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_year').text() + '<br>';
+						}
 						if (oCampaignItem['start_date'] !== '') {
 							sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem['start_date'] + '<br>';
 						}
@@ -331,7 +340,12 @@ UserAccountDashboard.prototype.displayUserInvestments = function (result, userID
 						sCampaignBuffer += '</div>';
 					} else {
 						sCampaignBuffer += '<div class="investment-item-child align-center">';
-						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ' + $('#invest-trans-investiement_duration_years').text() + '<br>';
+						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ';
+						if (oCampaignItem['funding_duration'] > 1) {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_years').text() + '<br>';
+						} else {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_year').text() + '<br>';
+						}
 						if (oCampaignItem['start_date'] !== '') {
 							sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem['start_date'] + '<br>';
 						}
@@ -589,6 +603,40 @@ UserAccountDashboard.prototype.initSubscriptionAmount = function () {
 		}
 		else {
 			$("#field-amount").hide();
+		}
+	});
+}
+
+UserAccountDashboard.prototype.initIdentityDocs = function () {
+	$('#item-body-identitydocs #field-id_back select').hide();
+	$('#item-body-identitydocs #field-id_2_back select').hide();
+
+	$('#item-body-identitydocs #field-id select').change(function () {
+		let sVal = $(this).val();
+		// Synchro du champ verso caché
+		$('#item-body-identitydocs #field-id_back select').val(sVal);
+		// Masquage de l'option dans l'autre champ
+		$('#item-body-identitydocs #field-id_2 select option').show();
+		if (sVal != undefined && sVal !== 'undefined') {
+			$('#item-body-identitydocs #field-id_2 select option').each(function () {
+				if ($(this).val() == sVal) {
+					$(this).hide();
+				}
+			});
+		}
+	});
+	$('#item-body-identitydocs #field-id_2 select').change(function () {
+		let sVal = $(this).val();
+		// Synchro du champ verso caché
+		$('#item-body-identitydocs #field-id_2_back select').val(sVal);
+		// Masquage de l'option dans l'autre champ
+		$('#item-body-identitydocs #field-id select option').show();
+		if (sVal != undefined && sVal !== 'undefined') {
+			$('#item-body-identitydocs #field-id select option').each(function () {
+				if ($(this).val() == sVal) {
+					$(this).hide();
+				}
+			});
 		}
 	});
 }

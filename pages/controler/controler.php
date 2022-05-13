@@ -11,6 +11,8 @@ class WDG_Page_Controler {
 	protected $show_user_hidden_project_visited = FALSE;
 	private $show_user_needs_authentication;
 	protected $controler_name;
+	private $redirect_url_by_language;
+
 
 	public function __construct() {
 		ypcf_session_start();
@@ -224,6 +226,34 @@ class WDG_Page_Controler {
 			wp_enqueue_script( 'datatable-jszip-script', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/js/dataTables/jszip.min.js', array( 'datatable-script' ), true, true );
 			wp_enqueue_style( 'datatable-buttons-css', dirname( get_bloginfo( 'stylesheet_url' ) ). '/_inc/css/dataTables/buttons.dataTables.min.css', null, false, 'all' );
 		}
+	}
+
+	protected function init_redirect_url_by_language() {
+		global $force_language_to_translate_to;
+		$this->redirect_url_by_language = array();
+
+		$force_language_to_translate_to = 'fr';
+		WDG_Languages_Helpers::switch_to_temp_language( 'fr' );
+		$this->redirect_url_by_language[ 'fr' ] = WDGUser::get_login_redirect_page();
+
+		WDG_Languages_Helpers::switch_to_temp_language( 'en' );
+		$force_language_to_translate_to = 'en';
+		$this->redirect_url_by_language[ 'en' ] = WDGUser::get_login_redirect_page();
+
+		WDG_Languages_Helpers::switch_back_to_display_language();
+	}
+
+	public function get_redirect_url_by_language( $language ) {
+		return $this->redirect_url_by_language[ $language ];
+	}
+
+	public function get_init_locale() {
+		$init_locale = WDG_Languages_Helpers::get_current_locale_id();
+		if ( empty( $init_locale ) ) {
+			$init_locale = 'fr';
+		}
+
+		return $init_locale;
 	}
 
 	//******************************************************************************

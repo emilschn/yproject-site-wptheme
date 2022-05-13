@@ -115,6 +115,10 @@ class WDG_Page_Controler_User_Account extends WDG_Page_Controler_WDG {
 	public function get_current_user() {
 		return $this->current_user;
 	}
+
+	public function get_displayed_user() {
+		return $this->get_current_user();
+	}
 	/**
 	 * Retourne les informations de l'utilisateur admin en cours (si override)
 	 * @return WDGUser

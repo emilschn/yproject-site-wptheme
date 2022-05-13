@@ -23,7 +23,7 @@ if ( $WDGUser_current->has_voted_on_campaign( $post->ID ) && !$WDGUser_current->
 	<br><br><br>
 <?php endif; ?>
 
-<?php _e( "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !", 'yproject' ); ?>
+<?php _e( "Merci d'avoir &eacute;valu&eacute; ce projet, pensez &agrave; en parler autour de vous !", 'yproject' ); ?>
 <br><br>
 <p class="align-center">
 	<?php locate_template( array( "projects/common/share-buttons.php" ), true, false );  ?>

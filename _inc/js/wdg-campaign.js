@@ -502,7 +502,7 @@ WDGProjectPageFunctions = (function ($) {
 				if (projectMore.is(':visible')) {
 					WDGProjectPageFunctions.hideEditButton(property);
 					//Si le Lire plus n'est pas visible & si la page est en cours d'édition, la zone est éditable
-				} else if ($("#content").hasClass("editing") && property !== "statistics") {
+				} else if ($("#content").hasClass("editing") && property !== "statistics" && property !== "economic_model_automatic") {
 					$(this).children(".zone-content").addClass("editable");
 					WDGProjectPageFunctions.showEditButton(property);
 					//Sinon, la zone n'est pas éditable

@@ -2,27 +2,28 @@
 * COMMON
 *******************************************************************************/
 div#content.version-3 div.separator-title {
-    height: 43px;
-    padding-top: 30px;
-    padding-bottom: 13px;
-    background-image: url('../../images/traits.jpg');
-    background-repeat: repeat-x;
-    background-position: center;
-    text-align: center;
+	height: 43px;
+	padding-top: 30px;
+	padding-bottom: 13px;
+	background-image: url('../../images/traits.jpg');
+	background-repeat: repeat-x;
+	background-position: center;
+	text-align: center;
 }
+
 div#content.version-3 div.separator-title span {
-    background: #FFFFFF;
-    padding-left: 25px;
-    padding-right: 25px;
-    font-size: 35px;
-    text-transform: uppercase;
+	background: #FFFFFF;
+	padding-left: 25px;
+	padding-right: 25px;
+	font-size: 35px;
+	text-transform: uppercase;
 }
 
 div.lightbox-organization-separator {
 	color: #333333;
-    border-bottom: 1px solid #333333;
-    font-weight: normal;
-    font-size: 13pt !important;
+	border-bottom: 1px solid #333333;
+	font-weight: normal;
+	font-size: 13pt !important;
 }
 
 /*******************************************************************************
@@ -43,6 +44,7 @@ div#content.version-3 header {
 	background-image: url(../../images/common-background.png);
 	background-repeat: no-repeat;
 }
+
 div#content.version-3 header .header-container {
 	max-width: 1300px;
 	margin: 0 auto;
@@ -59,12 +61,18 @@ div#content.version-3 header h1 {
 /*******************************************************************************
 * NAVIGATION
 *******************************************************************************/
-body.single-post div#content.version-3 .project-banner-title.padder { margin-top: 122px; }
-body.archive.category div#content.version-3 .padder { margin-top: 120px; }
+body.single-post div#content.version-3 .project-banner-title.padder {
+	margin-top: 122px;
+}
+
+body.archive.category div#content.version-3 .padder {
+	margin-top: 120px;
+}
+
 div#content.version-3 .separator {
-    background: url("../../images/tiret_noir.png");
-    height: 6px;
-    margin: 15px 0px;
+	background: url("../../images/tiret_noir.png");
+	height: 6px;
+	margin: 15px 0px;
 }
 
 div#content.version-3 nav.project-navigation {
@@ -72,18 +80,21 @@ div#content.version-3 nav.project-navigation {
 	background-color: #FFFFFF;
 	border-bottom: 2px solid;
 }
+
 div#content.version-3 nav.project-navigation ul {
-    float: left;
+	float: left;
 	margin: 0px;
 	padding: 0px 0px 0px 14px;
 }
+
 div#content.version-3 nav.project-navigation ul li {
-    list-style: none;
-    height: 60px;
-    vertical-align: middle;
-    display: table-cell;
-    padding-right: 15px;
+	list-style: none;
+	height: 60px;
+	vertical-align: middle;
+	display: table-cell;
+	padding-right: 15px;
 }
+
 div#content.version-3 nav.project-navigation ul li a {
 	color: #333333;
 	text-transform: uppercase;
@@ -101,6 +112,7 @@ div#content.version-3 nav.project-navigation ul.menu-project li.project-navigati
 	color: #000000;
 	content: "";
 }
+
 div#content.version-3 nav.project-navigation ul.menu-project li.project-navigation-title {
 	font-size: 12pt;
 	font-weight: bold;
@@ -108,33 +120,39 @@ div#content.version-3 nav.project-navigation ul.menu-project li.project-navigati
 	letter-spacing: 2px;
 	padding-right: 50px;
 }
+
 div#content.version-3 nav.project-navigation ul.menu-project li.slashed:after {
 	content: "/";
 	padding-left: 15px;
 }
+
 div#content.version-3 nav.project-navigation ul.menu-project li.slashed:last-child:after {
 	content: "";
 }
 
 
 div#content.version-3 nav.project-navigation ul.menu-actions {
-    float: right;
+	float: right;
 }
+
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item {
 	padding-right: 0px;
 	background: #EA4F51;
 }
+
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a {
 	height: 40px;
 	padding: 10px 40px;
 	font-weight: bold;
 	color: #FFFFFF;
 }
+
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item a.disabled {
 	background: #EBEBEB;
 	padding: 21px 40px;
 	color: #333333;
 }
+
 div#content.version-3 nav.project-navigation ul.menu-actions li.action-item div.disabled {
 	height: 20px;
 	padding: 20px 40px;
@@ -151,7 +169,10 @@ div#content.version-3 div.project-admin {
 	top: 90px;
 	z-index: 2;
 }
-div#content.version-3 div.project-admin > a, div#content.version-3 div.project-admin > div.btn-edit, .wdg-send-project-notification {
+
+div#content.version-3 div.project-admin>a,
+div#content.version-3 div.project-admin>div.btn-edit,
+.wdg-send-project-notification {
 	display: block;
 	margin-bottom: 8px;
 	padding: 8px;
@@ -162,12 +183,19 @@ div#content.version-3 div.project-admin > a, div#content.version-3 div.project-a
 	text-align: right;
 	text-decoration: none;
 }
-.edit-button, .move-button, .cancel-button, .wait-button, #wdg-edit-project-add-lang button.add-button {
+
+.edit-button,
+.move-button,
+.cancel-button,
+.wait-button,
+#wdg-edit-project-add-lang button.add-button {
 	background-color: #D3EAE9;
 }
-div#content.version-3 div.project-admin > div.btn-edit.edit-button-validate {
+
+div#content.version-3 div.project-admin>div.btn-edit.edit-button-validate {
 	background-color: #00879B;
 }
+
 .wdg-send-project-notification {
 	width: 100%;
 	display: none;
@@ -177,37 +205,48 @@ div#content.version-3 div.project-admin > div.btn-edit.edit-button-validate {
 	font-size: 12pt;
 	cursor: pointer;
 }
+
 #wdg-send-project-notification-to-project {
 	background-color: #F1A074;
 }
+
 .wdg-send-project-notification.clicked {
 	cursor: default;
 }
+
 .wdg-send-project-notification.clicked.confirm {
 	background-color: #8BC79C;
 }
+
 .wdg-send-project-notification.clicked.error {
 	background-color: #EACDCB;
 }
-div#content.version-3 div.project-admin > div.btn-edit {
+
+div#content.version-3 div.project-admin>div.btn-edit {
 	display: none;
 	cursor: pointer;
 }
-div#content.version-3 div.project-admin > div.btn-edit:before {
-    content: "Mode Edition";
+
+div#content.version-3 div.project-admin>div.btn-edit:before {
+	content: "Mode Edition";
 }
-div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before {
-    content: "Mode Normal";
+
+div#content.version-3 div.project-admin>div.btn-edit.btn-edit-validate:before {
+	content: "Mode Normal";
 }
-.en_US div#content.version-3 div.project-admin > div.btn-edit:before {
-    content: "Edition Mode";
+
+.en_US div#content.version-3 div.project-admin>div.btn-edit:before {
+	content: "Edition Mode";
 }
-.en_US div#content.version-3 div.project-admin > div.btn-edit.btn-edit-validate:before {
-    content: "Normal Mode";
+
+.en_US div#content.version-3 div.project-admin>div.btn-edit.btn-edit-validate:before {
+	content: "Normal Mode";
 }
-div#content.version-3 div.project-admin > div.btn-edit#wdg-remove-cache:before {
-    content: "Suppr cache";
+
+div#content.version-3 div.project-admin>div.btn-edit#wdg-remove-cache:before {
+	content: "Suppr cache";
 }
+
 #wdg-edit-project-add-lang {
 	display: none;
 	width: 149px;
@@ -215,24 +254,30 @@ div#content.version-3 div.project-admin > div.btn-edit#wdg-remove-cache:before {
 	cursor: pointer;
 	margin-bottom: 8px;
 }
-#wdg-edit-project-add-lang select, #wdg-edit-project-add-lang button.add-button {
+
+#wdg-edit-project-add-lang select,
+#wdg-edit-project-add-lang button.add-button {
 	display: none;
 }
+
 #wdg-edit-project-add-lang select {
 	width: 120px;
 }
+
 #wdg-edit-project-add-lang button.add-button {
 	padding: 0px 4px;
 	border: 0px;
 	font-size: 16px;
-    font-weight: bold;
-    color: #FFFFFF;
+	font-weight: bold;
+	color: #FFFFFF;
 	background: #000;
 	cursor: pointer;
 }
+
 div#content.version-3 div.project-admin span.remove-lang-container {
 	display: none;
 }
+
 div#content.version-3 div.project-admin a.remove-lang {
 	padding: 0px;
 	text-transform: none;
@@ -258,151 +303,186 @@ div#content div.project-admin div.error {
 	background-color: #E1E3E2;
 	color: #333;
 }
+
 div#content div.project-admin div.error.error-big {
 	background-color: #EACDCB;
 }
 
 .editable {
-    border: 1px dashed #2B2C2C;
-}
-.edit-button, .edit-button-validate, .edit-button-validate-locked, .move-button, .wait-button {
-    position: absolute;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
-    z-index: 150;
-}
-.cancel-button {
-    position: absolute;
-    cursor: pointer;
-    width: 30px;
-    height: 30px;
-    margin-left: 5px;
-    margin-top: 35px;
-    z-index: 150;
-}
-.edit-button {
-    background: url("../../images/editer.png") #D3EAE9 center no-repeat;
-    position: absolute;
-    min-height: 24px;
-}
-.cancel-button {
-    background: url("../../images/croix.png") #D3EAE9 center no-repeat;
-}
-.edit-button-validate {
-    background: url("../../images/enregistrement.png") #D3EAE9 center no-repeat;
-}
-.edit-button-validate-locked {
-    background: url("../../images/enregistrement.png") #E1E3E2 center no-repeat;
-}
-.move-button {
-    background: url("../../images/position.png") #D3EAE9 center no-repeat;
-}
-.wait-button {
-    background: url("../../images/chargement.gif") #D3EAE9 center no-repeat;
+	border: 1px dashed #2B2C2C;
 }
 
-#wdg-input-title { position: relative; width: 70%; }
-#wdg-input-subtitle { width: 100%; height: 50px; }
-#wdg-input-rewards {
-    margin-left: 15px;
-    text-align: center;
+.edit-button,
+.edit-button-validate,
+.edit-button-validate-locked,
+.move-button,
+.wait-button {
+	position: absolute;
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	z-index: 150;
 }
-#wdg-edit-rewards, #wdg-validate-rewards {
-    margin-left: 20px;
+
+.cancel-button {
+	position: absolute;
+	cursor: pointer;
+	width: 30px;
+	height: 30px;
+	margin-left: 5px;
+	margin-top: 35px;
+	z-index: 150;
+}
+
+.edit-button {
+	background: url("../../images/editer.png") #D3EAE9 center no-repeat;
+	position: absolute;
+	min-height: 24px;
+}
+
+.cancel-button {
+	background: url("../../images/croix.png") #D3EAE9 center no-repeat;
+}
+
+.edit-button-validate {
+	background: url("../../images/enregistrement.png") #D3EAE9 center no-repeat;
+}
+
+.edit-button-validate-locked {
+	background: url("../../images/enregistrement.png") #E1E3E2 center no-repeat;
+}
+
+.move-button {
+	background: url("../../images/position.png") #D3EAE9 center no-repeat;
+}
+
+.wait-button {
+	background: url("../../images/chargement.gif") #D3EAE9 center no-repeat;
+}
+
+#wdg-input-title {
+	position: relative;
+	width: 70%;
+}
+
+#wdg-input-subtitle {
+	width: 100%;
+	height: 50px;
+}
+
+#wdg-input-rewards {
+	margin-left: 15px;
+	text-align: center;
+}
+
+#wdg-edit-rewards,
+#wdg-validate-rewards {
+	margin-left: 20px;
 }
 
 .projects-desc-content .zone-edit .wp-editor-wrap .wp-editor-container .wp-editor-area {
-    min-height: 500px !important;
+	min-height: 500px !important;
 }
 
 #head-image #wdg-edit-picture-head {
-    display: none;
-    left: 28px;
-    top: 106px;
+	display: none;
+	left: 28px;
+	top: 106px;
 }
+
 #head-image #wdg-move-picture-head {
-    display: none;
-    position: absolute;
-    top: 106px;
-    left: 62px;
-    z-index: 150;
+	display: none;
+	position: absolute;
+	top: 106px;
+	left: 62px;
+	z-index: 150;
 }
-#content.editing #wdg-move-picture-head, #content.editing #wdg-edit-picture-head {
-    display: block;
+
+#content.editing #wdg-move-picture-head,
+#content.editing #wdg-edit-picture-head {
+	display: block;
 }
 
 #wdg-move-picture-location {
-    display: none;
-    position: relative;
-    float: left;
-    left: 250px;
-    top: -200px;
+	display: none;
+	position: relative;
+	float: left;
+	left: 250px;
+	top: -200px;
 }
+
 #content.editing #wdg-move-picture-location {
-    display: block;
+	display: block;
 }
 
 .video-zone.editable:before {
-    content: "Image d'apercu / Video";
+	content: "Image d'apercu / Video";
 }
+
 .video-zone.editable {
-    background-color: #F2F2F2;
-    padding-top: 20px;
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
-    height: 305px !important;
-    min-height: 305px !important;
+	background-color: #F2F2F2;
+	padding-top: 20px;
+	text-align: center;
+	text-transform: uppercase;
+	font-weight: bold;
+	height: 305px !important;
+	min-height: 305px !important;
 }
 
 /*******************************************************************************
 * BANNER
 *******************************************************************************/
 div#content.version-3 div.project-banner {}
+
 div#content.version-3 div.project-banner div.project-banner-title div.project-banner-info-item.author-info p {
-        margin-bottom: 32px;
-        margin-top: 8px;
+	margin-bottom: 32px;
+	margin-top: 8px;
 }
 
 div#content.version-3 div.project-banner .project-banner-content {
-    height: 400px;
-    overflow: hidden;
+	height: 400px;
+	overflow: hidden;
 }
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left {
 	width: 65%;
 	text-align: center;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left iframe {
 	width: 100%;
 	height: 400px;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left #apercu_video iframe {
 	height: 100%;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left img {
 	width: 100%;
 }
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right {
-    width: 32%;
+	width: 32%;
 	height: 400px;
 	padding: 15px 1%;
 	background-color: #FFF;
 }
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item {
-    margin: 10px 5px;
+	margin: 10px 5px;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item img {
-    vertical-align: middle;
-    width: 30px;
+	vertical-align: middle;
+	width: 30px;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item span {
-    vertical-align: middle;
+	vertical-align: middle;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions {
 	height: 50px;
 	text-align: right;
@@ -415,40 +495,46 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	width: auto;
 	margin: 0px;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions div.impacts-container .impact-logo {
 	cursor: auto;
 	display: inline;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions div.impacts-container .impact-logo:hover {
 	transform: none;
 	border: 0px;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions a {
 	display: inline-block;
 	padding: 13px;
 	font-size: 12pt;
 	line-height: 20px;
-        vertical-align: middle;
+	vertical-align: middle;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions a.btn-followed {
 	background: #D3EAE9;
 	border: #D3EAE9;
 	color: #333;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions a:last-child {
-        line-height: 16px;
-        padding: 0;
+	line-height: 16px;
+	padding: 0;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-actions a img {
 	height: 20px;
-        width: 18px;
-        padding: 12px;
+	width: 18px;
+	padding: 12px;
 }
 
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text {
-    margin: 10px auto;
-    line-height: 1.25;
+	margin: 10px auto;
+	line-height: 1.25;
 	/* coupe le texte s'il dépasse une certaine hauteur */
 	display: block;
 	display: -webkit-box;
@@ -457,6 +543,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	overflow: hidden;
 	text-overflow: ellipsis;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text p {
 	text-align: justify;
 	font-size: 11pt;
@@ -466,11 +553,13 @@ div.progress-bar-container {
 	margin-top: 30px;
 }
 
-div.progress-bar-container div.project-page-bar, div.evaluation-container div.evaluation-bar {
+div.progress-bar-container div.project-page-bar,
+div.evaluation-container div.evaluation-bar {
 	width: 100%;
 }
 
-div.progress-bar-container div.project-page-data, div.evaluation-container span.vote-status {
+div.progress-bar-container div.project-page-data,
+div.evaluation-container span.vote-status {
 	padding: 0;
 }
 
@@ -484,11 +573,11 @@ div.progress-bar-container span.progress-bar-separator {
 	margin-bottom: 30px;
 }
 
-div.progress-bar-container hr{ 
-    border: none;
-    border-left: 2px solid #B3DAE1;
-    height: 16px;
-    width: 2px;
+div.progress-bar-container hr {
+	border: none;
+	border-left: 2px solid #B3DAE1;
+	height: 16px;
+	width: 2px;
 	padding: 0;
 	margin-top: -2px;
 }
@@ -504,6 +593,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	text-align: center;
 	text-transform: uppercase;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left.bordered {
 	width: -webkit-calc(33.33% - 4px);
 	width: -moz-calc(33.33% - 4px);
@@ -511,24 +601,29 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 	border-left: 2px solid;
 	border-right: 2px solid;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left.bordered span:last-child {
-        font-size: 9pt;
+	font-size: 9pt;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left span:first-child {
 	font-size: 12pt;
 	font-weight: bold;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left span:last-child {
-        font-size: 9pt;
+	font-size: 9pt;
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.end-sentence {
-        margin: 20px auto;
-        text-align: justify;
-        font-size: 12pt;
-        font-weight: bold;
-        text-transform: uppercase;
-        
+	margin: 20px auto;
+	text-align: justify;
+	font-size: 12pt;
+	font-weight: bold;
+	text-transform: uppercase;
+
 }
+
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right a.button.red {
 	display: inline-block;
 	width: -webkit-calc(100% - 32px);
@@ -541,7 +636,7 @@ div#content.version-3 div.project-banner div.project-banner-content div.banner-h
 }
 
 div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item.author-info {
-    margin-top: 30px;
+	margin-top: 30px;
 	margin-bottom: 20px;
 }
 
@@ -549,15 +644,19 @@ div#content.version-3 div.project-banner div.hashtags {
 	padding: 8px 0px;
 	font-size: 10pt;
 }
+
 div#content.version-3 div.project-banner div.hashtags span.hashtag-environment {
 	color: #8BC79C;
 }
+
 div#content.version-3 div.project-banner div.hashtags span.hashtag-social {
 	color: #F1A074;
 }
+
 div#content.version-3 div.project-banner div.hashtags span.hashtag-economy {
 	color: #00879B;
 }
+
 div#content.version-3 div.project-banner div.subtitle {
 	height: 50px;
 	padding: 8px 0px;
@@ -566,24 +665,26 @@ div#content.version-3 div.project-banner div.subtitle {
 
 div#content.version-3 div#triggered-menu-share {
 	display: none;
-    position: relative;
+	position: relative;
 	margin-top: -520px;
-    margin-bottom: 470px;
+	margin-bottom: 470px;
 	float: right;
 }
+
 div#content.version-3 div#triggered-menu-share.triggered {
-    display: block;
+	display: block;
 }
 
 div#content.version-3 #wdg-move-picture-head {
-    display: none;
-    position: absolute;
-    top: 0px;
-    left: 40px;
-    z-index: 150;
+	display: none;
+	position: absolute;
+	top: 0px;
+	left: 40px;
+	z-index: 150;
 }
+
 div#content.version-3.editing #wdg-move-picture-head {
-    display: block;
+	display: block;
 }
 
 /*******************************************************************************
@@ -594,81 +695,100 @@ div.project-rewards-content {
 	margin: 0px auto 40px;
 	font-size: 15px;
 }
+
 div.project-rewards-content .font-14 {
 	font-size: 14px;
 }
+
 div#content.version-3 div.project-rewards-content .db-form {
 	text-align: left;
 	padding: 20px;
 }
+
 div#content.version-3 div.project-rewards-content .db-form .field-container {
 	white-space: normal;
 }
+
 div.project-rewards-content .db-form .field-container .field-value input {
 	background-color: #fff;
 	border-bottom: 3px solid #00879B;
 	margin: auto;
 	color: #00879B;
 }
+
 div#content.version-3 div.project-rewards-content .db-form .field-container .field-value .field-money {
 	color: #00879B;
 }
+
 div#content.version-3 div.project-rewards-content .db-form .field-container.field-init-invest {
 	white-space: nowrap;
 	text-align: center;
 }
-div.project-rewards-content label, div.project-rewards-content .db-form.v3.full .field label {
+
+div.project-rewards-content label,
+div.project-rewards-content .db-form.v3.full .field label {
 	font-size: 14px;
 	font-weight: bold;
 	text-transform: uppercase;
 	color: #333;
 	text-align: center;
 }
+
 div#content.version-3 div.project-rewards-content div.roi_amount_base {
 	height: 5px;
 	margin-bottom: 5px;
 	background-color: #333;
 }
+
 div#content.version-3 div.project-rewards-content table {
-    margin: 30px auto 15px;
+	margin: 30px auto 15px;
 }
+
 div#content.version-3 div.project-rewards-content table:before {
 	position: relative;
 	top: 70px;
 	border-top: 1px solid;
 }
+
 div#content.version-3 div.project-rewards-content table tr td {
-    min-width: 50px;
+	min-width: 50px;
 	text-align: center;
 	border: 0px;
 }
+
 div#content.version-3 div.project-rewards-content table tr td:nth-child(1) {
-    vertical-align: bottom;
+	vertical-align: bottom;
 }
-div#content.version-3 div.project-rewards-content table tr td > div {
+
+div#content.version-3 div.project-rewards-content table tr td>div {
 	margin: auto;
 	width: 40px;
 	height: 70px;
 	background: #93626D;
 }
-div#content.version-3 div.project-rewards-content table tr td > div > div {
+
+div#content.version-3 div.project-rewards-content table tr td>div>div {
 	background: #FFF;
 	vertical-align: bottom;
 }
+
 div#content.version-3 div.project-rewards-content table tr:last-child td span.roi_amount_user_container {
 	position: relative;
 	top: -20px;
 	font-size: 8pt;
 }
+
 div#content.version-3 div.project-rewards-content ul {
 	margin: 0px;
 	padding: 0px;
 }
+
 div#content.version-3 div.project-rewards-content ul li {
 	list-style: none;
 	margin: 0px;
 	padding: 0px;
 }
+
 div#content.version-3 div.project-rewards-content ul li:before {
 	content: '';
 	position: relative;
@@ -681,14 +801,18 @@ div#content.version-3 div.project-rewards-content ul li:before {
 	border-bottom: 8px solid transparent;
 	border-left: 16px solid #333333;
 }
+
 div.project-rewards-content .align-left {
 	margin-top: 15px;
 }
+
 div.project-rewards-content .button {
 	margin-top: 30px;
 }
+
 div.project-rewards-content .calculateurRoyaltiesContainer {
-	min-height: 300px !important; /* pris en compte par les projets et l'EP */
+	min-height: 300px !important;
+	/* pris en compte par les projets et l'EP */
 }
 
 div.padder div.project-rewards-content .db-form {
@@ -699,15 +823,17 @@ div.padder div.project-rewards-content .db-form {
 * DESCRIPTION
 *******************************************************************************/
 div#content.version-3 div.project-expander {
-    position: relative;
-    width: 100%;
-    height: 28px;
-    background: url("../../images/responsive-plus.png") no-repeat center center;
+	position: relative;
+	width: 100%;
+	height: 28px;
+	background: url("../../images/responsive-plus.png") no-repeat center center;
 }
+
 div#content.version-3 div.project-description-item {
 	position: relative;
 	margin-top: 5%;
 }
+
 div#content.version-3 div.project-description-item div.projects-desc-content-picto {
 	display: inline-block;
 	position: absolute;
@@ -720,223 +846,295 @@ div#content.version-3 div.project-description-item div.projects-desc-content-pic
 	text-align: center;
 	background-color: #FFF;
 }
-div#content.version-3 div.project-description-item div.projects-desc-content-picto img[alt="model"]{
+
+div#content.version-3 div.project-description-item div.projects-desc-content-picto img[alt="model"] {
 	margin-top: 10px;
 	margin-left: 8px;
 }
 
 div#content.version-3 .projects-desc-content {
-    position: relative;
-    display: inline-block;
+	position: relative;
+	display: inline-block;
 	width: 95%;
 	margin-bottom: 40px;
 	padding: 25px;
 	vertical-align: top;
-    background-color: #FFF;
-    cursor: pointer;
+	background-color: #FFF;
+	cursor: pointer;
 }
+
 div#content.version-3 div.project-description {
 	background: rgba(51, 51, 51, 0.05);
 	padding-bottom: 40px;
 }
+
 div#content.version-3 div.project-description div.projects-desc-content .projects-more {
-    position: relative;
+	position: relative;
 	margin: 24px auto 0px;
 	text-align: center;
 }
+
 div#content.version-3 div.project-description div.projects-desc-content .projects-more button {
-    height: 56px;
+	height: 56px;
 }
 
-div#content.version-3 .projects-desc-content h3{
-    margin-top: 35px;
-    text-transform: uppercase;
-    font-size: 13pt;
-    font-style: normal;
+div#content.version-3 .projects-desc-content h3 {
+	margin-top: 35px;
+	text-transform: uppercase;
+	font-size: 13pt;
+	font-style: normal;
 	text-align: center;
 	color: #333333;
 }
-div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content ul {
+
+div#content.version-3 .projects-desc-content p,
+div#content.version-3 .projects-desc-content ul {
 	line-height: 1.6em;
 }
-div#content.version-3 .projects-desc-content p, div#content.version-3 .projects-desc-content h4 {
-    padding: 0px 0px 10px;
+
+div#content.version-3 .projects-desc-content p,
+div#content.version-3 .projects-desc-content h4 {
+	padding: 0px 0px 10px;
 }
+
 div#content.version-3 .projects-desc-content div.expandable,
 div#content.version-3 .projects-desc-content h1,
 div#content.version-3 .projects-desc-content h2,
 div#content.version-3 .projects-desc-content h3,
 div#content.version-3 .projects-desc-content h5,
-div#content.version-3 .projects-desc-content h6{
-    padding-left: 0px;
+div#content.version-3 .projects-desc-content h6 {
+	padding-left: 0px;
 }
+
 div#content.version-3 .projects-desc-content iframe {
 	max-width: 100%;
 }
-div#content.version-3 .projects-desc-content img, div#content.version-3 .projects-desc-content .zone-content div {
+
+div#content.version-3 .projects-desc-content img,
+div#content.version-3 .projects-desc-content .zone-content div {
 	max-width: 100%;
 	height: auto;
 }
+
 div#content.version-3 .projects-desc-content img.aligncenter {
-    display: block !important;
-    margin: 0px auto;
+	display: block !important;
+	margin: 0px auto;
 }
+
 div#content.version-3 .projects-desc-content img.alignleft {
-    float: left;
-    margin: 5px 20px 20px 0;
+	float: left;
+	margin: 5px 20px 20px 0;
 }
+
 div#content.version-3 .projects-desc-content img.alignright {
-    float: right;
-    margin: 5px 0 20px 20px;
+	float: right;
+	margin: 5px 0 20px 20px;
 }
+
 div#content.version-3 .projects-desc-content table {
-    width: 755px;
-    margin: 0px 25px;
-    border-spacing: 0px;
-    border-collapse: collapse;
+	width: 755px;
+	margin: 0px 25px;
+	border-spacing: 0px;
+	border-collapse: collapse;
 }
+
 div#content.version-3 .projects-desc-content table td {
-    border: 1px dashed #2B2C2C;
+	border: 1px dashed #2B2C2C;
 }
+
 div#content.version-3 .projects-desc-content blockquote {
-    font-style: italic;
-    font-size: 16px;
+	font-style: italic;
+	font-size: 16px;
 }
+
 div#content.version-3 .vertical-align-middle {
-    vertical-align: middle;
+	vertical-align: middle;
 }
+
 div#content.version-3 .grey-triangle {
-    position: relative;
-    left: -5px;
+	position: relative;
+	left: -5px;
 }
-#wp-link .howto, #wp-link #search-panel, #wp-link #wp-link-close .screen-reader-text {
-    display: none !important;
+
+#wp-link .howto,
+#wp-link #search-panel,
+#wp-link #wp-link-close .screen-reader-text {
+	display: none !important;
 }
+
 #wp-link-wrap {
-    height: 250px !important;
+	height: 250px !important;
 }
 
 /*******************************************************************************
 * DESCRIPTION AUTOMATIC
 *******************************************************************************/
-div#project-content-economic_model div.zone-content {
+div#project-content-economic_model_automatic div.zone-content {
 	display: flex;
 	flex-flow: row wrap;
 	justify-content: center;
 	margin-top: 40px;
 }
-div.economic-intro.left {
-	width: 30%;
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro {
+	width: 100% !important;
+}
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro tr td {
+	border: 0px !important;
+}
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro tr td.left {
+	width: 29%;
 	margin-right: 10px;
 	padding-right: 10px;
-	border-right: 1px solid #c2c2c2;
+	border-right: 1px solid #c2c2c2 !important;
 }
-div.economic-intro.third {
-	border-right: 0;
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro tr td.third {
+	border-right: 0 !important;
 }
-div.economic-intro.two-cols.left {
-	width: 49%;
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro tr td.two-cols.left {
+	width: 46%;
 }
-div.economic-intro.left h5 {
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro tr td.left h5 {
 	text-transform: uppercase;
 	font-weight: normal;
 	font-size: 14px;
 	margin-bottom: 20px;
 	margin-top: 0;
 }
-div.economic-intro.left span.economic-data {
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro tr td.left span.economic-data {
 	font-size: 1.2em;
 	color: #00879B;
 	font-weight: bold;
 }
-div.economic-intro span:not([economic-data]) {
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro span:not([economic-data]) {
 	font-size: 0.8em;
 }
-div.economic-intro.left span.economic-data-details {
+
+div#project-content-economic_model_automatic div.zone-content table.economic-intro.left span.economic-data-details {
 	font-size: 0.7em;
 }
-div#project-content-economic_model h4 {
+
+div#project-content-economic_model_automatic div.zone-content h4 {
 	font-weight: bold;
 	font-size: 20px;
 	text-align: left;
 	width: 100%;
 	margin: 50px 0 10px 0;
 }
-div#project-content-economic_model .title-question:before {
+
+div#project-content-economic_model_automatic div.zone-content .title-question:before {
 	content: "\25B6";
 	color: #c2c2c2;
 }
-div#project-content-economic_model p {
+
+div#project-content-economic_model_automatic div.zone-content p {
 	width: 100%;
 	margin: 0;
 }
-div#project-content-economic_model .campaign-risk:before {
+
+div#project-content-economic_model_automatic div.zone-content .campaign-risk:before {
 	content: "\26A0";
 	color: #c2c2c2;
 	font-weight: normal;
 }
+
 /* Tableau des revenus */
-div#project-content-economic_model .table-container {
+div#project-content-economic_model_automatic div.zone-content .table-container {
 	overflow-x: auto;
 }
-div#project-content-economic_model table {
+
+div#project-content-economic_model_automatic div.zone-content table {
 	margin: 20px 0 !important;
 }
-div#project-content-economic_model table tbody {
+
+div#project-content-economic_model_automatic div.zone-content table tbody {
 	font-family: 'Arial', sans-serif;
 }
-div#project-content-economic_model table tbody tr th:first-of-type {
+
+div#project-content-economic_model_automatic div.zone-content table tbody tr th:first-of-type {
 	text-align: left;
 	font-weight: normal;
 	background-color: #ebebeb;
 }
-div#project-content-economic_model table tbody tr td, div#project-content-economic_model table tbody tr th, div#project-content-economic_model table thead th {
+
+div#project-content-economic_model_automatic div.zone-content table tbody tr td,
+div#project-content-economic_model_automatic div.zone-content table tbody tr th,
+div#project-content-economic_model_automatic div.zone-content table thead th {
 	padding: 10px;
 }
-div#project-content-economic_model table tbody tr td, div#project-content-economic_model table thead th {
-	border: 1px solid #c2c2c2 !important; 
-}
-div#project-content-economic_model table tbody tr:last-of-type td {
-	color: #00879B;
-}
-div#project-content-economic_model table thead tr:first-of-type th:first-of-type {
-	border: 0 !important;
-}
-/* Tableau des échéances */
-div#project-content-economic_model table.declarations-table thead tr th:first-of-type {
+
+div#project-content-economic_model_automatic div.zone-content table tbody tr td,
+div#project-content-economic_model_automatic div.zone-content table thead th {
 	border: 1px solid #c2c2c2 !important;
 }
-div#project-content-economic_model table.declarations-table tbody tr:last-of-type td {
+
+div#project-content-economic_model_automatic div.zone-content table tbody tr:last-of-type td {
+	color: #00879B;
+}
+
+div#project-content-economic_model_automatic div.zone-content table thead tr:first-of-type th:first-of-type {
+	border: 0 !important;
+}
+
+/* Tableau des échéances */
+div#project-content-economic_model_automatic div.zone-content table.declarations-table thead tr th:first-of-type {
+	border: 1px solid #c2c2c2 !important;
+}
+
+div#project-content-economic_model_automatic div.zone-content table.declarations-table tbody tr:last-of-type td {
 	color: #333;
 }
+
+@media screen and (max-width: 768px) {
+	div#project-content-economic_model_automatic div.zone-content table.economic-intro tr td.left {
+		display: block;
+		width: calc(100% - 20px);
+		margin: 0px;
+		padding: 20px 10px;
+	}
+}
+
 /*******************************************************************************
 * NEWS
 *******************************************************************************/
 div#content.version-3 .project-news {
 	border-bottom: 2px solid #333333;
 }
+
 div#content.version-3 .project-news .project-news-item {
 	padding: 20px;
 	border-top: 2px solid #000000;
 }
+
 div#content.version-3 .project-news .project-news-item a {
 	text-transform: uppercase;
 	color: #00879B;
 	font-size: 14pt;
 }
+
 div#content.version-3 .project-news .project-news-item span.project-news-item-date {
 	font-size: 10pt;
 }
+
 div#content.version-3 .project-news .project-news-item a.button {
 	display: inline-block;
 	margin: 15px 0px;
 	padding: 10px 60px;
 	color: #000000;
 }
+
 div#content.version-3 .project-news img {
 	max-width: 100%;
 	height: auto;
 }
+
 div#content.version-3 .project-news table {
 	width: 100% !important;
 }
@@ -947,23 +1145,30 @@ div#content.version-3 .project-news table {
 div#content.version-3 .project-comments {
 	margin-bottom: 30px;
 }
+
 div#content.version-3 .comment-avatar-box {
 	display: none;
 }
+
 div#content.version-3 .project-comments ul {
-	margin: 0px 0px 15px; padding: 0px 0px 0px 20px;
+	margin: 0px 0px 15px;
+	padding: 0px 0px 0px 20px;
 }
+
 div#content.version-3 .project-comments li {
 	list-style: none;
 	margin-bottom: 5px;
 }
+
 div#content.version-3 .project-comments .comment-respond {
 	margin: auto;
 	width: 500px;
 }
+
 div#content.version-3 div.project-comments div.comment-respond p.form-submit {
 	text-align: center;
 }
+
 div#content.version-3 div.project-comments div.comment-respond p.form-submit input[type="submit"] {
 	padding: 10px 40px;
 	border: 0px;
@@ -976,41 +1181,55 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 /*******************************************************************************
 * Lightbox vote
 *******************************************************************************/
-#vote-form #field-rate-economy label, #vote-form #field-rate-ecology label, #vote-form #field-rate-social label, #vote-form #field-more-info-other label, #vote-form #field-rate-other label {
+#vote-form #field-rate-economy label,
+#vote-form #field-rate-ecology label,
+#vote-form #field-rate-social label,
+#vote-form #field-more-info-other label,
+#vote-form #field-rate-other label {
 	font-weight: normal;
 }
+
 #vote-form #field-more-info-other label {
 	margin-top: -16px;
 }
+
 #vote-form .vote-progress-bar {
 	margin: 0px auto 32px;
 	max-width: 250px;
 	border-top: 1px solid #333333;
 }
+
 #vote-form .vote-progress-bar span {
 	display: inline-block;
 	margin-top: 16px;
 }
+
 #vote-form .vote-progress-bar span.selected {
 	font-weight: bold;
 }
+
 #vote-form .vote-progress-bar span:first-child {
 	float: left;
 	margin-left: -25px;
 }
+
 #vote-form .vote-progress-bar span:nth-child(2) {
 	float: left;
 	margin-left: 25px;
 }
+
 #vote-form .vote-progress-bar span:first-child {
 	float: left;
 	margin-left: -25px;
 }
+
 #vote-form .vote-progress-bar span:last-child {
 	float: right;
 	margin-right: -25px;
 }
-#vote-form .vote-progress-bar span:before, #vote-form .vote-progress-bar span:after {
+
+#vote-form .vote-progress-bar span:before,
+#vote-form .vote-progress-bar span:after {
 	content: '';
 	position: relative;
 	top: -24px;
@@ -1022,6 +1241,7 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	border-bottom: 8px solid transparent;
 	border-left: 16px solid #333333;
 }
+
 #vote-form .vote-progress-bar span:after {
 	top: -57px;
 	left: 26px;
@@ -1029,20 +1249,25 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	border-bottom: 6px solid transparent;
 	border-left: 12px solid #F2F2F2;
 }
+
 @-moz-document url-prefix() {
 	#vote-form .vote-progress-bar span:after {
 		top: -58px;
 	}
 }
+
 #vote-form .vote-progress-bar span.selected:after {
 	border-left: 0px;
 }
 
-#wdg-lightbox-vote #field-would-invest-amount-with-warranty, #wdg-lightbox-vote #field-would-invest-number-per-year-with-warranty {
+#wdg-lightbox-vote #field-would-invest-amount-with-warranty,
+#wdg-lightbox-vote #field-would-invest-number-per-year-with-warranty {
 	display: none;
 }
 
-#wdg-lightbox-vote #field-other-motivations-to-invest, #wdg-lightbox-vote #field-other-source-to-know-the-fundraising, #wdg-lightbox-vote #field-other-source-where-the-user-come-from {
+#wdg-lightbox-vote #field-other-motivations-to-invest,
+#wdg-lightbox-vote #field-other-source-to-know-the-fundraising,
+#wdg-lightbox-vote #field-other-source-where-the-user-come-from {
 	margin-top: -50px;
 	margin-left: 30px;
 }
@@ -1051,53 +1276,62 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 /*******************************************************************************
 * Mode édition
 *******************************************************************************/
-#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel, #wdg-edit-picture-head-next_update {
+#wdg-edit-picture-head-next_valid,
+#wdg-edit-picture-head-next_cancel,
+#wdg-edit-picture-head-next_update {
 	background: #A4DBDE;
-    height: 25px;
-    color: #000000;
-    font-weight: bold;
-    border: none;
-    cursor: pointer;
+	height: 25px;
+	color: #000000;
+	font-weight: bold;
+	border: none;
+	cursor: pointer;
 	text-transform: uppercase;
 }
 
-#wdg-edit-picture-head-next_valid{
+#wdg-edit-picture-head-next_valid {
 	margin-left: 5px;
 }
 
-#wdg-edit-picture-head-next_cancel{
+#wdg-edit-picture-head-next_cancel {
 	margin-left: 10px;
 }
 
 
-#text_url_video{
+#text_url_video {
 	width: 100%;
 	height: 44px;
 }
-#wdg-edit-picture-head-next_update{
+
+#wdg-edit-picture-head-next_update {
 	height: 35px;
 	text-align: center;
 }
-#wdg-edit-picture-head-next_update{
-    width: 180px;
+
+#wdg-edit-picture-head-next_update {
+	width: 180px;
 }
-#wdg-edit-picture-head-next_valid, #wdg-edit-picture-head-next_cancel{
+
+#wdg-edit-picture-head-next_valid,
+#wdg-edit-picture-head-next_cancel {
 	height: 37px;
 	width: 65px;
 }
 
 
-.input_text_error{
-    border:solid 0.5px red; 
-    border-radius:5px;
+.input_text_error {
+	border: solid 0.5px red;
+	border-radius: 5px;
 }
 
-.input_text_good{
-    border:solid 0.5px green; 
-    border-radius:5px;
+.input_text_good {
+	border: solid 0.5px green;
+	border-radius: 5px;
 }
 
-#apercu_image, #apercu_video, #wdg-edit-video-image_update, #upload-video-form {
+#apercu_image,
+#apercu_video,
+#wdg-edit-video-image_update,
+#upload-video-form {
 	width: 48%;
 	display: inline-block;
 	float: left;
@@ -1105,55 +1339,101 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 	text-align: center;
 }
 
-#apercu_image, #apercu_video{
+#apercu_image,
+#apercu_video {
 	height: 228px;
 }
 
-#wdg-edit-video-image_update, #upload-video-form {
+#wdg-edit-video-image_update,
+#upload-video-form {
 	height: 50px;
 }
 
-#video-zone-image{
+#video-zone-image {
 	width: auto;
 	height: auto;
 	max-height: 90%;
 	max-width: 90%;
 }
 
-#wdg-edit-video-zone-next_cancel, #wdg-edit-video-zone-next_valid {
-    margin-right: 10px;
-    margin-bottom: 10px;
-    margin-top: 10px;
+#wdg-edit-video-zone-next_cancel,
+#wdg-edit-video-zone-next_valid {
+	margin-right: 10px;
+	margin-bottom: 10px;
+	margin-top: 10px;
 }
 
 /*******************************************************************************
 * WIDE SCREENS
 *******************************************************************************/
 @media screen and (min-width: 768px) {
-	nav#main.scrolled { display: none; }
-	div#content.version-3.scrolled nav.project-navigation { position:fixed; z-index: 200; width: 100%; top: 0px; }
+	nav#main.scrolled {
+		display: none;
+	}
+
+	div#content.version-3.scrolled nav.project-navigation {
+		position: fixed;
+		z-index: 200;
+		width: 100%;
+		top: 0px;
+	}
 }
+
 @media screen and (min-width: 768px) and (max-width: 997px) {
-	div#content.version-3 div#triggered-menu-share { margin-top: -380px; margin-right: 150px; margin-bottom: 0px; }
+	div#content.version-3 div#triggered-menu-share {
+		margin-top: -380px;
+		margin-right: 150px;
+		margin-bottom: 0px;
+	}
 }
+
 @media screen and (min-width: 997px) and (max-width: 1300px) {
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text { font-size: 14px; }
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text {
+		font-size: 14px;
+	}
 }
 
 /*******************************************************************************
 * RESPONSIVE MEDIUM
 *******************************************************************************/
 @media screen and (max-width: 997px) {
-	div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered { width: 768px; }
-	
-	.campaign-mobile-hidden { display: none; }
-	nav#navigation { display: block; }
-	div#content.version-3 .padder { margin-top: 0px; }
-	div#content.version-3 nav.project-navigation { display: none; }
-	div#content.version-3 div.project-admin { top: 70px; }
-	div#content.version-3 div.project-admin #wdg-edit-project { top: 105px; }
-	div#content.version-3 div.separator-title span { font-size: 28px; }
-	div#content.version-3 div.project-banner-img, div#content.version-3 div.project-banner-deco { display: none; }
+	div#content.version-3 div.project-banner div.project-banner-content div#triggered-menu-share.triggered {
+		width: 768px;
+	}
+
+	.campaign-mobile-hidden {
+		display: none;
+	}
+
+	nav#navigation {
+		display: block;
+	}
+
+	div#content.version-3 .padder {
+		margin-top: 0px;
+	}
+
+	div#content.version-3 nav.project-navigation {
+		display: none;
+	}
+
+	div#content.version-3 div.project-admin {
+		top: 70px;
+	}
+
+	div#content.version-3 div.project-admin #wdg-edit-project {
+		top: 105px;
+	}
+
+	div#content.version-3 div.separator-title span {
+		font-size: 28px;
+	}
+
+	div#content.version-3 div.project-banner-img,
+	div#content.version-3 div.project-banner-deco {
+		display: none;
+	}
+
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.left,
 	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right {
 		float: none;
@@ -1162,75 +1442,289 @@ div#content.version-3 div.project-comments div.comment-respond p.form-submit inp
 		width: calc(100% - 20px);
 		padding: 10px;
 	}
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right { height: auto; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.separator { display: none; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text { height: auto; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar-bg { background: #FFFFFF; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar-bg div.progressbar-complete { background: #EA4F51; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar { margin: 80px auto 0px; width: 310px; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-logos { margin: -100px auto 0px; width: 230px; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-logos div.project-banner-info-item { display: inline-block; width: 60px; text-align: center; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item.author-info { margin-top: 65px; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item.author-info p { margin: 2px 0px; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item span.hidden { display: inline; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item img { width: 40px; display: block; margin: auto; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.logos_zone.vote { margin: 15px auto 0px; width: 320px; }
-	div#content.version-3 div.project-banner div.project-banner-content { height: auto; }
-	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left span:last-child { font-size: 11pt; }
-	div#content.version-3 div.project-banner div.subtitle { display: none; }
-	div#content.version-3 div.project-pitch div.project-pitch-title { display: none; }
-	div#content.version-3 div.project-pitch div.project-pitch-text { margin: 5px 1%; width: 98%; height: auto; }
-	div#content.version-3 div.project-pitch div.project-pitch-video { margin: 5px 1%; width: 98%; }
-	div#content.version-3 div.project-rewards-content { width: auto; margin: 0% auto; padding-top: 0px; }
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder { width: 100%; }
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder p { width: 100%; }
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div { float: none; }
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div:first-child { width: 100%; text-align: center; }
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder > div:first-child img { width: 50px; }
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder button.init_invest_count { display: block; margin: 7px auto; }
-	div#content.version-3 div.project-rewards-content table tr td { min-width: 40px; padding: 0px 3px; }
-	div#content.version-3 div.project-rewards-content .calculateurRoyaltiesContainer { min-height: 300px; }
-	div#content.version-3 div.project-description div.project-description-item { width: 96%; margin: 80px 2% 0px 2%; }
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right {
+		height: auto;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.separator {
+		display: none;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-pitch-text {
+		height: auto;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar-bg {
+		background: #FFFFFF;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar-bg div.progressbar-complete {
+		background: #EA4F51;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.progressbar {
+		margin: 80px auto 0px;
+		width: 310px;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-logos {
+		margin: -100px auto 0px;
+		width: 230px;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-logos div.project-banner-info-item {
+		display: inline-block;
+		width: 60px;
+		text-align: center;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item.author-info {
+		margin-top: 65px;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item.author-info p {
+		margin: 2px 0px;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item span.hidden {
+		display: inline;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.project-banner-info-item img {
+		width: 40px;
+		display: block;
+		margin: auto;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.logos_zone.vote {
+		margin: 15px auto 0px;
+		width: 320px;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content {
+		height: auto;
+	}
+
+	div#content.version-3 div.project-banner div.project-banner-content div.banner-half.right div.left span:last-child {
+		font-size: 11pt;
+	}
+
+	div#content.version-3 div.project-banner div.subtitle {
+		display: none;
+	}
+
+	div#content.version-3 div.project-pitch div.project-pitch-title {
+		display: none;
+	}
+
+	div#content.version-3 div.project-pitch div.project-pitch-text {
+		margin: 5px 1%;
+		width: 98%;
+		height: auto;
+	}
+
+	div#content.version-3 div.project-pitch div.project-pitch-video {
+		margin: 5px 1%;
+		width: 98%;
+	}
+
+	div#content.version-3 div.project-rewards-content {
+		width: auto;
+		margin: 0% auto;
+		padding-top: 0px;
+	}
+
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder {
+		width: 100%;
+	}
+
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder p {
+		width: 100%;
+	}
+
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder>div {
+		float: none;
+	}
+
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder>div:first-child {
+		width: 100%;
+		text-align: center;
+	}
+
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder>div:first-child img {
+		width: 50px;
+	}
+
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder button.init_invest_count {
+		display: block;
+		margin: 7px auto;
+	}
+
+	div#content.version-3 div.project-rewards-content table tr td {
+		min-width: 40px;
+		padding: 0px 3px;
+	}
+
+	div#content.version-3 div.project-rewards-content .calculateurRoyaltiesContainer {
+		min-height: 300px;
+	}
+
+	div#content.version-3 div.project-description div.project-description-item {
+		width: 96%;
+		margin: 80px 2% 0px 2%;
+	}
+
 	/*div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { top: -60px; }*/
-	div#content.version-3 div.project-description div.project-description-item img.grey-triangle { display: none; }
-	div#content.version-3 div.project-description div.projects-desc-content { width: 100% !important; margin: 0px; padding: 0px; left: 0px; }
-	div#content.version-3 div.project-description div.projects-desc-content h2 { margin: 15px 10px; font-size: 18px; text-align: center; text-transform: none; }
-	div#content.version-3 div.project-description div.projects-desc-content h3 { margin-top: 45px; }
-	div#content.version-3 div.project-description div.projects-desc-content table { width: 90%; }
-	div#content.version-3 div.project-description div.projects-desc-content .projects-more { margin-top: 10px; }
-	div#content.version-3 div.project-description div.projects-desc-content p, div#content.version-3 div.project-description div.projects-desc-content h4 { padding: 0px 10px 10px; }
-	div#content.version-3 div.project-comments li { margin: 0px 0px 10px 5px; }
-	div#content.version-3 div.project-comments div.comment-respond { width: 96%; }
-	div#content.version-3 div.project-comments div.comment-respond textarea { width: 98%; }
-	div#content.version-3 div.project-responsive-buttons { display: block; position: fixed; bottom: 0px; width: 100%; }
-	div#content.version-3 div.project-responsive-buttons a { display: inline-block; background: #FFFFFF; }
-	div#content.version-3 div.project-responsive-buttons a.button-action { float: left; }
-	div#content.version-3 div.project-responsive-buttons a.button-share { float: right; }
-	div#content.version-3 div.project-responsive-buttons a img { width: 80px; }
-	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered { position: fixed; display: block; bottom: 50px; right: 0px; padding: 5px; background: #FFFFFF; }
-	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img { width: 50px; }
+	div#content.version-3 div.project-description div.project-description-item img.grey-triangle {
+		display: none;
+	}
+
+	div#content.version-3 div.project-description div.projects-desc-content {
+		width: 100% !important;
+		margin: 0px;
+		padding: 0px;
+		left: 0px;
+	}
+
+	div#content.version-3 div.project-description div.projects-desc-content h2 {
+		margin: 15px 10px;
+		font-size: 18px;
+		text-align: center;
+		text-transform: none;
+	}
+
+	div#content.version-3 div.project-description div.projects-desc-content h3 {
+		margin-top: 45px;
+	}
+
+	div#content.version-3 div.project-description div.projects-desc-content table {
+		width: 90%;
+	}
+
+	div#content.version-3 div.project-description div.projects-desc-content .projects-more {
+		margin-top: 10px;
+	}
+
+	div#content.version-3 div.project-description div.projects-desc-content p,
+	div#content.version-3 div.project-description div.projects-desc-content h4 {
+		padding: 0px 10px 10px;
+	}
+
+	div#content.version-3 div.project-comments li {
+		margin: 0px 0px 10px 5px;
+	}
+
+	div#content.version-3 div.project-comments div.comment-respond {
+		width: 96%;
+	}
+
+	div#content.version-3 div.project-comments div.comment-respond textarea {
+		width: 98%;
+	}
+
+	div#content.version-3 div.project-responsive-buttons {
+		display: block;
+		position: fixed;
+		bottom: 0px;
+		width: 100%;
+	}
+
+	div#content.version-3 div.project-responsive-buttons a {
+		display: inline-block;
+		background: #FFFFFF;
+	}
+
+	div#content.version-3 div.project-responsive-buttons a.button-action {
+		float: left;
+	}
+
+	div#content.version-3 div.project-responsive-buttons a.button-share {
+		float: right;
+	}
+
+	div#content.version-3 div.project-responsive-buttons a img {
+		width: 80px;
+	}
+
+	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered {
+		position: fixed;
+		display: block;
+		bottom: 50px;
+		right: 0px;
+		padding: 5px;
+		background: #FFFFFF;
+	}
+
+	div#content.version-3 div.project-responsive-buttons div#triggered-menu-shareresponsive.triggered a img {
+		width: 50px;
+	}
 }
+
 @media screen and (max-width: 768px) {
-	div#content.version-3 div#triggered-menu-share { margin-top: -451px; margin-right: 10px; }
+	div#content.version-3 div#triggered-menu-share {
+		margin-top: -451px;
+		margin-right: 10px;
+	}
 }
+
 @media screen and (min-width: 750px) and (max-width: 959px) {
-	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 42%; }
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto {
+		margin-left: 42%;
+	}
 }
+
 @media screen and (min-width: 500px) and (max-width: 750px) {
-	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 40%; }
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto {
+		margin-left: 40%;
+	}
 }
+
 @media screen and (min-width: 400px) and (max-width: 500px) {
-	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 37%; }
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto {
+		margin-left: 37%;
+	}
 }
+
 /*******************************************************************************
 * RESPONSIVE MOBILE
 *******************************************************************************/
 @media screen and (max-width: 400px) {
-	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line { width: auto !important; }
-	div#content.version-3 div.project-description { padding-bottom: 0px; background-color: #FFFFFF; }
-	div#content.version-3 div.project-description div.project-description-item { margin: 25px 2%; }
-	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto { margin-left: 34%; top: -45px; border-radius: 0% 0% 100% 100%; }
-	div#content.version-3 div.project-description div.projects-desc-content h3 { margin-top: 65px; }
-	div#content.version-3 div.project-description div.projects-desc-content { margin: 0px 0px 40px 0px; background-color: #FFF }
-	div.project-description div#project-content-description>h3, div#project-content-societal_challenge>h3, div#project-content-added_value>h3, div#project-content-economic_model>h3, div#project-content-implementation>h3, div#project-content-statistics>h3 { padding-bottom: 20px; border-bottom: 1px solid #c2c2c2; }
+	div#content.version-3 div.project-rewards-content div.project-rewards-padder div.arrow-line {
+		width: auto !important;
+	}
+
+	div#content.version-3 div.project-description {
+		padding-bottom: 0px;
+		background-color: #FFFFFF;
+	}
+
+	div#content.version-3 div.project-description div.project-description-item {
+		margin: 25px 2%;
+	}
+
+	div#content.version-3 div.project-description div.project-description-item div.projects-desc-content-picto {
+		margin-left: 34%;
+		top: -45px;
+		border-radius: 0% 0% 100% 100%;
+	}
+
+	div#content.version-3 div.project-description div.projects-desc-content h3 {
+		margin-top: 65px;
+	}
+
+	div#content.version-3 div.project-description div.projects-desc-content {
+		margin: 0px 0px 40px 0px;
+		background-color: #FFF
+	}
+
+	div.project-description div#project-content-description>h3,
+	div#project-content-societal_challenge>h3,
+	div#project-content-added_value>h3,
+	div#project-content-economic_model>h3,
+	div#project-content-implementation>h3,
+	div#project-content-statistics>h3 {
+		padding-bottom: 20px;
+		border-bottom: 1px solid #c2c2c2;
+	}
 }

@@ -42,6 +42,8 @@ class WDG_Page_Controler_Invest extends WDG_Page_Controler {
 		WDGRoutes::redirect_invest_if_not_logged_in();
 		WDGRoutes::redirect_invest_if_project_not_investable();
 		WDGRoutes::redirect_invest_if_investment_not_initialized();
+		// TODO quand obligatoire : WDGRoutes::redirect_invest_if_user_capacity_not_valid();
+		// TODO when UI is finished: WDGRoutes::redirect_invest_if_user_has_not_send_documents();
 
 		$this->init_current_investment();
 		$this->init_current_step();

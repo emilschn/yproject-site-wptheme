@@ -1,6 +1,7 @@
 # This file is distributed under the GNU General Public License v2 or later.
 # ############################## COMMON ################################
 # Translators:
+# Jean-David Bar <jean-david@wedogood.co>, 2021
 # Admin WE DO GOOD <admin@wedogood.co>, 2021
 # Fred Joseph <frederic@wedogood.co>, 2021
 #
@@ -8,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-03-10 16:32+0100\n"
+"PO-Revision-Date: 2022-05-13 15:00+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -84,6 +85,9 @@ msgstr "Transaction"
 msgid "common.INVESTMENT"
 msgstr "Investment"
 
+msgid "common.SUBSCRIPTION"
+msgstr "Subscription"
+
 msgid "common.YEARS"
 msgstr "years"
 
@@ -138,21 +142,24 @@ msgstr "Accept"
 msgid "common.READ_MORE"
 msgstr "Read more"
 
-# ############################## COMMON - FORMS - ERROR ################################
+# ############################## COMMON - FORMS - ERROR
+# ################################
 msgid "common.forms.error.FILE_WRONG_FORMAT"
 msgstr "This file is in the wrong format."
 
 msgid "common.forms.error.FILE_TOO_BIG"
 msgstr "This file is too big."
 
-# ############################## HEADER - META ################################
+# ############################## HEADER - META
+# ################################
 msgid "meta.title.PROJECT"
-msgstr ": fundraising with royalties"
+msgstr " : fundraising in royalties"
 
 msgid "meta.description.PROJECT"
 msgstr "Financing of projects in equity and without dilution of capital in"
 
-# ############################## HEADER - MENU ################################
+# ############################## HEADER - MENU
+# ################################
 msgid "menu.THE_PROJECTS"
 msgstr "See the projects"
 
@@ -177,14 +184,16 @@ msgstr "Find a project"
 msgid "menu.WELCOME_TO_WEDOGOOD"
 msgstr "and welcome to WE DO GOOD!"
 
-# ############################## HEADER - CONDITIONS GENERALES ################################
+# ############################## HEADER - CONDITIONS GENERALES
+# ################################
 msgid "terms.UPDATE"
 msgstr "Update to the general terms and conditions of use"
 
 msgid "terms.ACCEPT"
 msgstr "I accept the general terms and conditions of use"
 
-# ############################## FOOTER - MENU ################################
+# ############################## FOOTER - MENU
+# ################################
 msgid "footer.WHO_WE_ARE"
 msgstr "About WE DO GOOD"
 
@@ -459,51 +468,52 @@ msgstr "There was a problem while creating your user account."
 msgid "signup.ERROR_ROBOT_CHECKBOX"
 msgstr "Please check the box to confirm you are not a robot."
 
-# ############################## /activer-compte ################################
+# ############################## /activer-compte
+# ################################
 msgid "validation.WELCOME_TO_WEDOGOOD"
-msgstr "Welcome to WE DO GOOD !"
+msgstr "Welcome to WE DO GOOD!"
 
 msgid "validation.HELLO_WELCOME_TO_WEDOGOOD"
-msgstr "Hello and welcome on WE DO GOOD!"
+msgstr "Hello and welcome to WE DO GOOD!"
 
 msgid "validation.ACCOUNT_IS_CREATED"
-msgstr "Your account has been created."
+msgstr "Your account is now created."
 
 msgid "validation.YOU_NEED_TO_COMPLETE"
-msgstr "To invest on a project, you need to complete your profile."
+msgstr "To invest in a project, you need to complete your profile."
 
 msgid "validation.YOU_CAN_LEAVE_WHEN_YOU_WANT"
-msgstr "You can leave this course and come back where you stopped whenever you want!"
+msgstr "You can leave the course at any time and come back to pick up where you left off!"
 
 msgid "validation.COMPLETE_MY_PROFILE"
 msgstr "Complete my profile"
 
 msgid "validation.YOUR_EMAIL_IS_VALIDATED"
-msgstr "Your e-mail address has been validated:"
+msgstr "We confirm that your e-mail address has been validated:"
 
 msgid "validation.WE_WILL_REDIRECT_IN_A_FEW_SECONDS"
-msgstr "We will redirect this webpage in a few seconds."
+msgstr "We will automatically redirect you within seconds."
 
 msgid "validation.CLICK_TO_GET_AWAY"
-msgstr "If you want to speed the process up, please click on"
+msgstr "If you want to speed up your redirection, you can click"
 
 msgid "validation.THIS_LINK"
 msgstr "this link"
 
 msgid "validation.CURRENT_ACCOUNT_MATCHES_EMAIL"
-msgstr "The logged in account matches the e-mail address"
+msgstr "The connected account corresponds to the email address"
 
 msgid "validation.EMAIL_HAS_BEEN_VALIDATED"
-msgstr "This e-mail address has previously been validated."
+msgstr "This address has already been validated previously."
 
 msgid "validation.CODE_DOESNT_MATCH"
-msgstr "However, the validation code doesn't match the expected code."
+msgstr "However, the validation code does not match."
 
 msgid "validation.SEND_NEW_VALIDATION_EMAIL"
-msgstr "We can send you a new validation e-mail if you click on the button below:"
+msgstr "We may send you a validation email to this address, if you click on the button below:"
 
 msgid "validation.SEND_NEW_VALIDATION_EMAIL_BUTTON"
-msgstr "Send a new validation e-mail"
+msgstr "Send an email to validate my account"
 
 # ############################## /mon-compte ################################
 msgid "account.OVERRIDE_USER_DOESNT_EXIST"
@@ -548,6 +558,9 @@ msgstr "Validation of your information"
 msgid "account.lightbox.DATA_SAVED"
 msgstr "Information recorded! Thank you!"
 
+msgid "account.menu.MY_ACCOUNT"
+msgstr "My account"
+
 msgid "account.menu.MY_WALLET"
 msgstr "My wallet"
 
@@ -575,6 +588,9 @@ msgstr "My authentication"
 msgid "account.menu.MY_NOTIFICATIONS"
 msgstr "My notifications"
 
+msgid "account.menu.organization.ACCOUNT"
+msgstr "Account"
+
 msgid "account.menu.organization.WALLET"
 msgstr "Wallet"
 
@@ -595,9 +611,6 @@ msgstr "Identification documents"
 
 msgid "account.menu.organization.BANK_INFO"
 msgstr "Bank account"
-
-msgid "account.menu.organization.AUTHENTICATION"
-msgstr "Authentication"
 
 msgid "account.menu.LINKED_PROJECTS"
 msgstr "Linked projects"
@@ -659,8 +672,8 @@ msgstr "Identity documents"
 msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
 msgstr "Edit my documents"
 
-msgid "account.authentication.orga.AUTHENTICATION_OF"
-msgstr "Authentication of"
+msgid "account.authentication.orga.ACCOUNT_OF"
+msgstr "Account of"
 
 msgid "account.bank.MY_BANK_CARD"
 msgstr "My bank card"
@@ -711,7 +724,7 @@ msgid "account.bank.BIC"
 msgstr "BIC:"
 
 msgid "account.bank.CODE"
-msgstr "Code to transmit to identify your transfer:"
+msgstr "Code to indicate to identify your payment (Payee Label or Recipient Code):"
 
 msgid "account.bank.MODIFY_BANK_DETAILS"
 msgstr "Modify my bank details"
@@ -920,11 +933,14 @@ msgstr "My investments on"
 msgid "account.investments.INVESTMENT_DURATION"
 msgstr "Contract on"
 
+msgid "account.investments.INVESTMENT_DURATION_YEAR"
+msgstr "year"
+
 msgid "account.investments.INVESTMENT_DURATION_YEARS"
-msgstr "Years"
+msgstr "years"
 
 msgid "account.investments.INVESTMENT_DURATION_STARTING"
-msgstr "started in "
+msgstr "from "
 
 msgid "account.investments.ROYALTIES_RECEIVED_A"
 msgstr "Royalties received"
@@ -971,29 +987,32 @@ msgstr "The company is committed to paying you royalties until refunded, except 
 msgid "account.investments.ESTIMATED"
 msgstr "forecast"
 
-msgid "account.investments.ACCOUNT_AUTHENTICATION"
-msgstr "Authenticate my account"
-
 msgid "account.subscriptions.SUBSCRIPTIONS_OF"
 msgstr "Subscriptions of"
 
+msgid "account.subscriptions.INFORMATION_SUBSCRIPTIONS"
+msgstr "You can reinvest the royalties you receive in Positive Savings projects."
+
+msgid "account.subscriptions.SECOND_INFORMATION_SUBSCRIPTIONS"
+msgstr "It is non-binding, modifiable at any time and automatic."
+
 msgid "account.subscriptions.VIEW_INVESTMENTS"
-msgstr "View investments history"
+msgstr "View investment history"
 
 msgid "account.subscriptions.ADD_SUBSCRIPTIONS"
-msgstr "+ Add new subscription"
+msgstr "+ Add an investment per subscription"
 
 msgid "account.subscriptions.item.I_INVEST"
-msgstr "I'm investing"
+msgstr "I invest"
 
 msgid "account.subscriptions.item.MODALITY_QUARTER"
-msgstr "each quarter"
+msgstr "quarterly"
 
 msgid "account.subscriptions.item.IN_THE_THEMATIC"
-msgstr "in the thematic"
+msgstr "in the theme"
 
 msgid "account.subscriptions.item.INVESTMENT_CONDITION"
-msgstr "If the amount in your wallet is enough at the date of the payment."
+msgstr "Provided that my wallet reaches this amount on the date of payment."
 
 msgid "account.subscriptions.item.INACTIVE_STATUS"
 msgstr "Inactive subscription"
@@ -1002,28 +1021,31 @@ msgid "account.subscriptions.item.NEXT_PAYMENT"
 msgstr "Next payment:"
 
 msgid "account.subscriptions.item.FEBRUARY_1ST"
-msgstr "February 1st"
+msgstr "February 1"
 
 msgid "account.subscriptions.item.MAY_1ST"
-msgstr "May 1st"
+msgstr "May 1"
 
 msgid "account.subscriptions.item.AUGUST_1ST"
-msgstr "August 1st"
+msgstr "August 1"
 
 msgid "account.subscriptions.item.NOVEMBER_1ST"
-msgstr "November 1st"
+msgstr "November 1"
 
 msgid "account.subscriptions.item.CONTRACT_RECEPTION"
-msgstr "With each payment, I will automatically receive an investment contract by e-mail, which will also be available in the list of my investments."
+msgstr "With each payment, I will receive an investment contract automatically by e-mail, which will also be available in the list of my investments."
 
 msgid "account.subscriptions.item.ACCESS_CONTRACT_TYPE"
-msgstr "Access the model contract"
+msgstr "See the standard contract"
 
 msgid "account.subscriptions.item.END_THE_SUBSCRIPTION"
-msgstr "End the subscription"
+msgstr "End subscription"
 
 msgid "account.subscriptions.item.ARE_YOU_SURE_TO_DELETE"
-msgstr "Are you sure that you want to end this subscription?"
+msgstr "Are you sure you want to end the subscription?"
+
+msgid "account.investments.ACCOUNT_AUTHENTICATION"
+msgstr "Authenticate my account"
 
 msgid "account.notifications.TITLE"
 msgstr "Notifications coming from WE DO GOOD"
@@ -1096,6 +1118,9 @@ msgstr "Recipient bank account"
 
 msgid "account.wallet.LOAD_VIBAN"
 msgstr "Get the bank account details"
+
+msgid "account.wallet.LOAD_VIBAN_ALERT"
+msgstr "By clicking on this button, you assign a virtual bank account (RIB) to your e-wallet. This is useful if you want to fund your e-wallet by bank transfer. Would you like to continue?"
 
 msgid "account.wallet.TRANSFER_TO_MY_BANK_ACCOUNT"
 msgstr "Transfer to my bank account"
@@ -1214,6 +1239,33 @@ msgstr "Bank transfer:"
 msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
 msgstr "Bank direct debit:"
 
+msgid "account.SOPHISTICATED_INVESTOR"
+msgstr "Investisseur averti"
+
+msgid "account.SOPHISTICATED"
+msgstr "Averti"
+
+msgid "account.NONSOPHISTICATED_INVESTOR"
+msgstr "Investisseur non-averti"
+
+msgid "account.NONSOPHISTICATED"
+msgstr "Non-averti"
+
+msgid "account.IN_MY_WALLET"
+msgstr "dans mon porte-monnaie"
+
+msgid "account.VIEW_MY_WALLET"
+msgstr "Voir mon porte-monnaie"
+
+msgid "account.VIEW_MY_SUBSCRIPTIONS"
+msgstr "Voir mes abonnements"
+
+msgid "account.EDIT_MY_PROFILE"
+msgstr "Editer mon profil"
+
+msgid "account.INVESTOR_PROFILE"
+msgstr "Profil investisseur"
+
 # ############################## /investir ################################
 msgid "invest.header.INVEST_ROYALTIES"
 msgstr "Investir en royalties"
@@ -1321,49 +1373,49 @@ msgid "invest.contract.VALIDATE_CONTRACT"
 msgstr "Validate the contract"
 
 msgid "invest.contract.COMMA"
-msgstr "dot"
+msgstr "comma"
 
 msgid "invest.contract.ZERO"
 msgstr "zero"
 
 msgid "invest.contract.PERCENT"
-msgstr "percent"
+msgstr "Percent"
 
 msgid "invest.email.ACCOUNT_REGISTERED_DEBIT"
 msgstr "The bank account of your registered card has been debited."
 
 msgid "invest.email.ACCOUNT_DEBIT"
-msgstr "Your bank account has been debited."
+msgstr "Your account has been debited."
 
 msgid "invest.email.INVESTMENT_VALIDATED_WHEN_GOAL_REACHED"
-msgstr "Your investment will be effective if the project reaches its minimum threshold."
+msgstr "The investment will only be definitively validated if the project reaches its minimum funding threshold."
 
 msgid "invest.email.PREINVESTMENT_CONDITIONS_1"
-msgstr "Please remember that the terms you accepted could change at the end of the project evaluation."
+msgstr "We remind you that the conditions you have accepted are subject to change at the end of the evaluation phase."
 
 msgid "invest.email.PREINVESTMENT_CONDITIONS_2"
-msgstr "If no modification is applied, your investment will be automatically valid."
+msgstr "If no change occurs, your investment will be validated automatically."
 
 msgid "invest.email.PREINVESTMENT_CONDITIONS_3"
-msgstr "If a modification occurs, you'll have to confirm or reject your investment."
+msgstr "If a change should occur, you will need to confirm or withdraw your investment."
 
 msgid "invest.email.WHERE_TO_FIND_CONTRACT"
-msgstr "You can find your investment contract enclosed and follow your royalties transfer on your"
+msgstr "You will find your investment contract attached and can track your royalty payments by logging into your"
 
 msgid "invest.email.PERSONAL_ACCOUNT"
 msgstr "personal account"
 
 msgid "invest.email.THERE_WAS_A_PROBLEM_WITH_CONTRACT_GENERATION"
-msgstr "There was a problem while generating your contract. Our tech team has been notified."
+msgstr "There was a problem during the generation of the contract. Our team has been informed."
 
 msgid "invest.email.BANK_ACCOUNT_SUMMARY_LEMONWAY"
-msgstr "On your bank account summary, you will see a label Lemonway, the name of our payment provider."
+msgstr "On your bank account statement, you will see the Lemonway label, the name of our payment provider, in the details of the transactions."
 
 msgid "invest.email.YOU_NEED_TO_SIGN_THE_CONTRACT"
-msgstr "You still need to sign the contract that you should receive on behalf of our partner Eversign"
+msgstr "You still have to sign the contract you should receive from our partner Eversign"
 
 msgid "invest.email.CHECK_SPAM"
-msgstr "Please check in your Spam folder"
+msgstr "Remember to check your junk mail"
 
 msgid "invest.cancel.YOU_CHOSE_CANCEL_PROJECT"
 msgstr "You have chosen to cancel your investment in the %s project."
@@ -1555,7 +1607,7 @@ msgid "invest.mean-payment.check-return.TO_THE_ADDRESS"
 msgstr "to the following address:"
 
 msgid "invest.mean-payment.wire.INFORMATION"
-msgstr "In order to proceed with the transfer, here is the banking information you need:"
+msgstr "In order to proceed with the transfer, here is the banking information you will need:"
 
 msgid "invest.mean-payment.wire.ACCOUNT_OWNER"
 msgstr "Account owner:"
@@ -1579,7 +1631,7 @@ msgid "invest.mean-payment.success.TWO_EMAILS"
 msgstr "You will receive two consecutive emails at"
 
 msgid "invest.mean-payment.success.TWO_EMAILS_CHECK_SPAM"
-msgstr "(remember to check your spam folder)"
+msgstr "(remember to check your junk folder)"
 
 msgid "invest.mean-payment.success.TWO_EMAILS_LIST_1"
 msgstr "an email sent by WEDOGOOD confirming your payment,"
@@ -1678,7 +1730,7 @@ msgid "invest.lightbox.OTHER_AMOUNT"
 msgstr "Invest another amount"
 
 msgid "invest.lightbox.CONFIRM"
-msgstr "Confirm my investment"
+msgstr "Coucou"
 
 msgid "invest.lightbox.CANCEL"
 msgstr "Cancel my investment"
@@ -1740,7 +1792,8 @@ msgstr "semester"
 msgid "invest.contract.PERIOD_YEAR"
 msgstr "year"
 
-# ############################## share-buttons ################################
+# ############################## share-buttons
+# ################################
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
 msgstr "Join me in investing positively from €10 to support"
 
@@ -1759,7 +1812,8 @@ msgstr "I have just invested in the project"
 msgid "share-buttons.email.SUBJECT"
 msgstr "A project to invest in!"
 
-# ############################## forms - common ################################
+# ############################## forms - common
+# ################################
 msgid "forms.file.DOCUMENT_ACCEPTED_BY_PROVIDER"
 msgstr "Document validated by our service provider"
 
@@ -1803,7 +1857,7 @@ msgid "forms.file.IMPORT_A_FILE"
 msgstr "Import a file"
 
 msgid "forms.file.ERROR_EXT"
-msgstr "Document format not allowed"
+msgstr "Unauthorized file format"
 
 msgid "forms.file.ERROR_SIZE"
 msgstr "File size too large"
@@ -1812,9 +1866,10 @@ msgid "forms.file.ERROR_UPLOAD"
 msgstr "Unreadable file"
 
 msgid "forms.file.ERROR_SERVER"
-msgstr "Problem while saving the file"
+msgstr "Problem saving file"
 
-# ############################## form - user-bank ################################
+# ############################## form - user-bank
+# ################################
 msgid "form.user-bank.NAME_ACCOUNT_OWNER"
 msgstr "Name of account owner"
 
@@ -1839,12 +1894,13 @@ msgstr "BIC"
 msgid "form.user-bank.RIB"
 msgstr "RIB"
 
-# ############################## form - user-subscription ################################
+# ############################## form - user-subscription
+# ################################
 msgid "form.subscription.MODALITY"
 msgstr "Every quarter, I want to invest automatically..."
 
 msgid "form.subscription.MODALITY_ALL_ROYALTIES"
-msgstr "the entirety of my wallet"
+msgstr "my entire wallet"
 
 msgid "form.subscription.MODALITY_FIXED_AMOUNT"
 msgstr "a fixed amount"
@@ -1853,13 +1909,13 @@ msgid "form.subscription.AMOUNT"
 msgstr "Amount"
 
 msgid "form.subscription.AMOUNT_DESCRIPTION"
-msgstr "The amount must be an integer superior to 10 €."
+msgstr "The amount must be a whole number greater than 10€."
 
 msgid "form.subscription.PROJECT"
-msgstr "In the thematic ..."
+msgstr "In the theme ..."
 
 msgid "form.subscription.SUCCESS"
-msgstr "Your subscription has successfully been registered."
+msgstr "Your subscription has been successfully registered."
 
 msgid "form.subscription.error.AMOUNT_MINIMUM"
 msgstr "The minimum valid amount is 10€"
@@ -1871,27 +1927,28 @@ msgid "invest.contract.VALIDATE_SUBSCRIPTION"
 msgstr "Validate the subscription"
 
 msgid "form.user-contract-subscription.SUBSCRIPTION_ERROR"
-msgstr "An error occurred when saving your subscription"
+msgstr "An error occurred while registering your subscription"
 
 msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
-msgstr "You cancelled your subscription"
+msgstr "You have renounced the signature of the subscription contract"
 
 msgid "form.user-contract-subscription.ALL_ROYALTIES"
-msgstr "the entirety of my e-wallet (if the available amount is at least equal to 10 €)."
+msgstr "my entire e-wallet (if the available amount is at least €10)"
 
 msgid "form.user-contract-subscription.PART_ROYALTIES"
-msgstr "%s € from my e-wallet (if available)."
+msgstr "%s € from my e-wallet (if the amount is available)"
 
 msgid "form.user-contract-subscription.MODALITY"
-msgstr "quarters"
+msgstr "quarter"
 
 msgid "form.user-contract-subscription.notification.ALL_ROYALTIES"
-msgstr "the entirety of your e-wallet (if the available amount is at least equal to 10 €)"
+msgstr "your entire e-wallet (if the available amount is at least €10)"
 
 msgid "form.user-contract-subscription.notification.PART_ROYALTIES"
-msgstr "%s € (if the amount is available)"
+msgstr "%s € (if available)"
 
-# ############################## form - user-details ################################
+# ############################## form - user-details
+# ################################
 msgid "form.user-details.EMAIL"
 msgstr "E-mail"
 
@@ -1899,13 +1956,13 @@ msgid "form.user-details.FIRSTNAME"
 msgstr "First name"
 
 msgid "form.user-details.FIRSTNAME_DESCRIPTION"
-msgstr "Please enter your real first name, without abbreviation"
+msgstr "Merci de renseigner votre vrai pr&eacute;nom, sans abr&eacute;viation"
 
 msgid "form.user-details.LASTNAME"
 msgstr "Last name"
 
 msgid "form.user-details.LASTNAME_DESCRIPTION"
-msgstr "Please enter your real last name, without abbreviation"
+msgstr "Merci de renseigner votre vrai nom, sans abr&eacute;viation"
 
 msgid "form.user-details.USENAME"
 msgstr "User name"
@@ -2012,7 +2069,8 @@ msgstr "You have to fill in the field"
 msgid "form.user-details.error.ONLY_MAJOR"
 msgstr "Only adults can invest."
 
-# ############################## form - organization-details ################################
+# ############################## form - organization-details
+# ################################
 msgid "form.organization-details.NAME"
 msgstr "Corporate name"
 
@@ -2073,7 +2131,8 @@ msgstr "The zip code should be a number"
 msgid "form.organization-details.error.RCS"
 msgstr "The organization's RCS is not valid."
 
-# ############################## form - user-identitydocs ################################
+# ############################## form - user-identitydocs
+# ################################
 msgid "form.user-identitydocs.ID_OF_PRESIDENT"
 msgstr "Proof of identity of the manager or president"
 
@@ -2096,7 +2155,7 @@ msgid "form.user-identitydocs.KBIS_DESCRIPTION"
 msgstr "Less than 3 months old"
 
 msgid "form.user-identitydocs.STATUS_SHORT"
-msgstr "Articles of association"
+msgstr "Articles of association of the company"
 
 msgid "form.user-identitydocs.STATUS"
 msgstr "Articles of association, certified as an accurate copy of the original by the manager (ideally showing the distribution of the company's capital)"
@@ -2105,34 +2164,34 @@ msgid "form.user-identitydocs.OPTIONAL"
 msgstr "(optional)"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION"
-msgstr "Certificate of capital distribution"
+msgstr "Certificate of distribution of capital"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
 msgstr "If the distribution of capital is not clearly expressed in the articles of association"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON"
-msgstr "Proof of identity of the second person"
+msgstr "Proof of identity of the second person holding at least 25% of the capital"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON_DESCRIPTION"
-msgstr "If a second individual holds at least 25% of the capital"
+msgstr "This file is necessary if an associate holds more than 25% of the capital. The accepted documents are the identity card or passport."
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON"
-msgstr "Second proof of identity of the second person"
+msgstr "Second proof of identity of the second person holding at least 25% of the capital"
 
 msgid "form.user-identitydocs.SECOND_ID_SECOND_PERSON_DESCRIPTION"
-msgstr "Same types as the first. Otherwise a driving licence or the latest tax notice can be provided."
+msgstr "Same types as for the first document. Otherwise the driver's license or the last tax notice can be provided."
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON"
-msgstr "Third person's proof of identity"
+msgstr "Proof of identity of the third person holding at least 25% of the capital"
 
 msgid "form.user-identitydocs.ID_THIRD_PERSON_DESCRIPTION"
-msgstr "If a third individual holds at least 25% of the capital"
+msgstr "This file is necessary if a third partner holds more than 25% of the capital. The accepted documents are the identity card or passport."
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON"
-msgstr "Second proof of identity of the third person"
+msgstr "Second proof of identity of the third person holding at least 25% of the capital"
 
 msgid "form.user-identitydocs.SECOND_ID_THIRD_PERSON_DESCRIPTION"
-msgstr "Same types as the first. Otherwise a driving licence or the latest tax notice can be provided."
+msgstr "Same types as for the first document. Otherwise the driver's license or the last tax notice can be provided."
 
 msgid "form.user-identitydocs.ID_BACK"
 msgstr "Reverse of proof of identity"
@@ -2147,7 +2206,7 @@ msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_1"
 msgstr "Passport or double-sided identity card with fully readable MRZ strip that was not uploaded as the first proof of identity."
 
 msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_2"
-msgstr "Otherwise one of the following documents: driving licence, last tax notice, health card, family record book, birth certificate."
+msgstr "Otherwise one of the following documents: driving licence, last tax notice, family record book, birth certificate."
 
 msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_3"
 msgstr "Residence permits are accepted for non-French nationals."
@@ -2176,7 +2235,8 @@ msgstr "Send me a SMS about the evolution of my authentication"
 msgid "form.user-identitydocs.PHONE_NUMBER"
 msgstr "The SMS will be sent to the following number:"
 
-# ############################## form - user-notifications ################################
+# ############################## form - user-notifications
+# ################################
 msgid "form.user-notifications.newsletters.WEDOGOOD"
 msgstr "WE DO GOOD newsletter"
 
@@ -2198,7 +2258,8 @@ msgstr "Projects around me"
 msgid "form.user-notifications.royalties.ONLY_POSITIVE"
 msgstr "Only if the amount is positive"
 
-# ############################## form - user-password ################################
+# ############################## form - user-password
+# ################################
 msgid "form.user-password.PASSWORD_CURRENT"
 msgstr "Current Password"
 
@@ -2220,7 +2281,8 @@ msgstr "Your current password does not match."
 msgid "form.user-password.PASSWORD_MODIFIED"
 msgstr "Your password has been successfully changed."
 
-# ############################## form - invest-input ################################
+# ############################## form - invest-input
+# ################################
 msgid "form.invest-input.I_WISH_TO_INVEST"
 msgstr "I want to invest"
 
@@ -2245,7 +2307,8 @@ msgstr "You have not entered a sufficient amount."
 msgid "form.invest-input.error.AMOUNT_TOO_MUCH"
 msgstr "You cannot invest that much."
 
-# ############################## form - invest-user-details ################################
+# ############################## form - invest-user-details
+# ################################
 msgid "form.invest-user-details.IN_MY_NAME"
 msgstr "On my own behalf (individual)"
 
@@ -2294,7 +2357,8 @@ msgstr "The organisation's email address is already in use."
 msgid "form.invest-user-details.error.ORGANIZATION_WEBSITE_EMPTY"
 msgstr "The organisation's website is not defined."
 
-# ############################## form - invest-poll ################################
+# ############################## form - invest-poll
+# ################################
 msgid "form.invest-poll.source.TITLE"
 msgstr "My reason for investing today:"
 
@@ -2352,7 +2416,8 @@ msgstr "A press article"
 msgid "form.invest-poll.come-from.OPTION_OTHER"
 msgstr "Other:"
 
-# ############################## form - invest-poll-continuous ################################
+# ############################## form - invest-poll-continuous
+# ################################
 msgid "form.invest-poll-continuous.notifications.TITLE"
 msgstr "I would like to receive a notification:"
 
@@ -2392,7 +2457,8 @@ msgstr "From"
 msgid "form.invest-poll-continuous.known.OPTION_OTHER"
 msgstr "Other"
 
-# ############################## /lemonway-document ################################
+# ############################## /lemonway-document
+# ################################
 msgid "lemonway.document.CONTACT"
 msgstr "Please contact us through the chat or our e-mail address: investir@wedogood.co."
 
@@ -2438,6 +2504,9 @@ msgstr "Residency permit"
 msgid "lemonway.document.type.KBIS"
 msgstr "Company KBIS"
 
+msgid "lemonway.document.type.TAX"
+msgstr "The last tax assessment"
+
 msgid "lemonway.document.status.WAITING"
 msgstr "Awaiting validation"
 
@@ -2466,52 +2535,88 @@ msgid "lemonway.document.details_MAIN_ID"
 msgstr "The main ID"
 
 msgid "lemonway.email.error.SECOND_ID"
+msgstr "The second piece of identification"
+
+msgid "lemonway.document.type.SECOND_ID"
 msgstr "The second ID"
 
 msgid "lemonway.email.error.MAIN_ID_BACK"
 msgstr "The back of the main ID"
 
 msgid "lemonway.email.error.ORGA_KBIS"
-msgstr "The organization KBIS"
+msgstr "The organization's KBIS"
 
 msgid "lemonway.email.error.ORGA_STATUS"
-msgstr "The organization statuses"
+msgstr "The statuses of the organization"
 
 msgid "lemonway.email.error.SECOND_ID_BACK"
-msgstr "The back of the second ID"
+msgstr "The back of the second piece of identification"
+
+msgid "lemonway.document.type.ORGA_KBIS"
+msgstr "The organization KBIS"
 
 msgid "lemonway.email.error.SELFIE"
 msgstr "The selfie (Type 13)"
 
+msgid "lemonway.document.type.SELFIE"
+msgstr "The selfie"
+
+msgid "lemonway.document.type.ID_SECOND_PERSON"
+msgstr "The first ID of the second person"
+
+msgid "lemonway.document.type.ID_SECOND_PERSON_2"
+msgstr "The second ID of the second person"
+
+msgid "lemonway.document.type.ID_THIRD_PERSON"
+msgstr "The first ID of the third person"
+
+msgid "lemonway.document.type.ID_THIRD_PERSON_2"
+msgstr "The second ID of the third person"
+
+msgid "lemonway.document.type.ID_FOURTH_PERSON"
+msgstr "The first ID of the fourth person"
+
+msgid "lemonway.document.type.ID_FOURTH_PERSON_2"
+msgstr "The second ID of the fourth person"
+
 msgid "lemonway.email.error.ID_SECOND_PERSON"
-msgstr "The first ID of the second person (Type 16)"
+msgstr "The identity document of the second person (Type 16)"
 
 msgid "lemonway.email.error.ID_SECOND_PERSON_2"
-msgstr "The second ID of the second person (Type 17)"
+msgstr "The second piece of identification of the second person (Type 17)"
 
 msgid "lemonway.email.error.ID_THIRD_PERSON"
-msgstr "The first ID of the third person (Type 18)"
+msgstr "Third person IDENTIFICATION (Type 18)"
 
 msgid "lemonway.email.error.ID_THIRD_PERSON_2"
-msgstr "The second ID of the third person (Type 19)"
+msgstr "The second piece of identification of the third person (Type 19)"
 
 msgid "lemonway.email.error.CAPITAL_ALLOCATION"
-msgstr "The document of capital distribution (Type 20)"
+msgstr "The capital allocation document (Type 20)"
+
+msgid "lemonway.document.type.CAPITAL_ALLOCATION"
+msgstr "The document of capital distribution"
 
 msgid "lemonway.email.error.action.REFUSED"
 msgstr "refused"
 
 msgid "lemonway.email.error.action.UNREADABLE"
+msgstr "considered illegible"
+
+msgid "lemonway.document.type.action.UNREADABLE"
 msgstr "considered unreadable"
 
 msgid "lemonway.email.error.action.EXPIRED"
 msgstr "considered expired"
 
 msgid "lemonway.email.error.action.WRONG_TYPE"
-msgstr "considered of wrong type"
+msgstr "considered of the wrong type"
 
 msgid "lemonway.email.error.action.WRONG_PERSON"
-msgstr "considered from the wrong person"
+msgstr "considered to be related to a person who does not match"
+
+msgid "lemonway.document.type.action.WRONG_TYPE"
+msgstr "considered of wrong type"
 
 msgid "lemonway.email.error.message.BLOCK_AUTHENTICATION"
 msgstr "blocks the authentication."
@@ -2522,160 +2627,161 @@ msgstr "The document has been"
 msgid "lemonway.email.error.message.LEMONWAY_COMMENT"
 msgstr "Additional comment from Lemonway:"
 
-# ############################## /lemonway-errors ################################
+# ############################## /lemonway-errors
+# ################################
 msgid "lemonway.error_01_03"
-msgstr "Notre prestataire de paiement nous signale une erreur de configuration."
+msgstr "Our payment provider reports a configuration error to us."
 
 msgid "lemonway.error_01_05"
-msgstr "Votre paiement a &eacute;t&eacute; refus&eacute; par notre prestataire de paiement."
+msgstr "Your payment has been refused by our payment provider."
 
 msgid "lemonway.error_01_12"
-msgstr "La transaction n'a pas pu &ecirc;tre valid&eacute;e par notre prestataire de paiement."
+msgstr "The transaction could not be validated by our payment provider."
 
 msgid "lemonway.error_01_14"
-msgstr "Les coordonn&eacute;es bancaires ou le cryptogramme visuel sont invalides. Merci de renouveler l'op&eacute;ration."
+msgstr "Bank details or visual cryptogram are invalid. Thank you for renewing the operation."
 
 msgid "lemonway.error_01_17"
-msgstr "Votre investissement a &eacute;t&eacute; annul&eacute;."
+msgstr "Your investment has been cancelled."
 
 msgid "lemonway.error_01_34"
-msgstr "Notre prestataire de paiement nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+msgstr "Our payment provider reports an error related to your card. We invite you to try again or choose another payment method."
 
 msgid "lemonway.error_01_54"
-msgstr "La date de validit&eacute; de la carte bancaire est d&eacute;pass&eacute;e. Veuillez v&eacute;rifier vos informations, utiliser une autre carte bancaire ou choisir un autre mode de paiement."
+msgstr "The validity date of the credit card has passed. Please verify your information, use a different credit card or choose a different payment method."
 
 msgid "lemonway.error_01_63"
-msgstr "La transaction n'a pas &eacute;t&eacute; autoris&eacute;e. Nous vous conseillons de vous rapprocher de votre banque pour en conna&icirc;tre les raisons ou de choisir un autre mode de paiement."
+msgstr "The transaction was not authorized. We advise you to contact your bank to find out the reasons or to choose another payment method."
 
 msgid "lemonway.error_01_75"
-msgstr "Votre tentative d'investissement a &eacute;chou&eacute; car le code de s&eacute;curit&eacute; 3-D Secure transmis par votre banque n'a pas &eacute;t&eacute; renseign&eacute; dans les temps ou sa saisie est incorrecte. Veuillez renouveler l'op&eacute;ration."
+msgstr "Your investment attempt failed because the 3-D Secure security code transmitted by your bank was not filled in on time or its entry is incorrect. Please repeat the operation."
 
 msgid "lemonway.error_01_90"
-msgstr "Le service de paiement est temporairement indisponible."
+msgstr "The payment service is temporarily unavailable."
 
 msgid "lemonway.error_01_99"
-msgstr "Le service de paiement est temporairement indisponible."
+msgstr "The payment service is temporarily unavailable."
 
 msgid "lemonway.error_02_02"
-msgstr "Nous sommes tr&egrave;s heureux de voir que vous &ecirc;tes un investisseur engag&eacute; pour l'impact positif ! N&eacute;anmoins, pour des raisons de s&eacute;curit&eacute;, le nombre d'investissements par jour est limit&eacute; &agrave; 3. Il vous faudra attendre 24h avant votre prochain investissement !"
+msgstr "We are very happy to see that you are a committed investor for positive impact! Nevertheless, for security reasons, the number of investments per day is limited to 3. You will have to wait 24 hours before your next investment!"
 
 msgid "lemonway.error_02_03"
-msgstr "Vous ne pouvez pas investir avec cette carte car elle est sur la liste grise de notre prestataire de paiement Lemon Way, merci de choisir un autre mode de paiement."
+msgstr "You cannot invest with this card as it is on the grey list of our payment provider Lemon Way, please choose another payment method."
 
 msgid "lemonway.error_02_05"
-msgstr "Le pays d'&eacute;mission de votre carte bancaire n'est pas reconnu par notre prestataire de paiement Lemon Way. Merci de v&eacute;rifier vos informations, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "The country of issue of your credit card is not recognized by our payment provider Lemon Way. Please verify your information, use a different credit card or choose another payment method."
 
 msgid "lemonway.error_02_06"
-msgstr "Le pays d'émission de votre carte bancaire n'est pas autoris&eacute; par notre prestataire de paiement Lemon Way. Merci d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "The country of issue of your credit card is not authorized by our payment provider Lemon Way. Please use a different credit card or choose another payment method."
 
 msgid "lemonway.error_02_07"
-msgstr "L'e-carte de paiement n'est pas autoris&eacute;e par notre prestataire de paiement Lemon Way. Merci d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "The payment e-card is not authorised by our payment provider Lemon Way. Please use a different credit card or choose another payment method."
 
 msgid "lemonway.error_02_08"
-msgstr "Le pays d'&eacute;mission de votre carte bancaire n'est pas autoris&eacute; par notre prestataire de paiement Lemon Way. Merci d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "The country of issue of your credit card is not authorized by our payment provider Lemon Way. Please use a different credit card or choose another payment method."
 
 msgid "lemonway.error_02_17"
-msgstr "Votre tentative d'investissement a &eacute;chou&eacute; car le code de s&eacute;curit&eacute; 3-D Secure transmis par votre banque n'a pas &eacute;t&eacute; renseign&eacute; dans les temps ou sa saisie est incorrecte. Veuillez renouveler l’op&eacute;ration."
+msgstr "Your investment attempt failed because the 3-D Secure security code transmitted by your bank was not filled in on time or its entry is incorrect. Please repeat the operation."
 
 msgid "lemonway.error_02_99"
-msgstr "Notre prestataire de paiement Lemon Way nous fait part d'un probl&egrave;me technique."
+msgstr "Our payment provider Lemon Way tells us about a technical problem."
 
 msgid "lemonway.error_03_04"
-msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way reports an error related to your card. We invite you to try again or choose another payment method."
 
 msgid "lemonway.error_03_05"
-msgstr "La transaction n'a pas &eacute;t&eacute; autoris&eacute;e par notre prestataire de paiement. Nous vous conseillons de vous rapprocher de votre banque pour en connaître les raisons en leur communiquant la date et le montant ou de choisir un autre mode de paiement."
+msgstr "The transaction has not been authorised by our payment provider. We advise you to contact your bank to find out the reasons by informing them of the date and amount or to choose another payment method."
 
 msgid "lemonway.error_03_07"
-msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way reports an error related to your card. We invite you to try again or choose another payment method."
 
 msgid "lemonway.error_03_12"
-msgstr "La transaction est invalide."
+msgstr "The transaction is invalid."
 
 msgid "lemonway.error_03_13"
-msgstr "La transaction est invalide."
+msgstr "The transaction is invalid."
 
 msgid "lemonway.error_03_14"
-msgstr "Notre prestataire de paiement Lemon Way ne reconna&icirc;t pas le num&eacute;ro de porteur."
+msgstr "Our payment provider Lemon Way does not recognize the bearer number."
 
 msgid "lemonway.error_03_15"
-msgstr "Notre prestataire de paiement Lemon Way ne reconna&icirc;t pas l'&eacute;metteur de la carte."
+msgstr "Our payment provider Lemon Way does not recognize the card issuer."
 
 msgid "lemonway.error_03_30"
-msgstr "Notre prestataire de paiement nous signale une erreur de format. Veuillez r&eacute;essayer ou choisir un autre mode de paiement."
+msgstr "Our payment provider reports a format error to us. Please try again or choose a different payment method."
 
 msgid "lemonway.error_03_33"
-msgstr "La date de validit&eacute; de la carte bancaire est d&eacute;pass&eacute;e. Merci de v&eacute;rifier vos informations, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "The validity date of the credit card has passed. Please verify your information, use a different credit card or choose another payment method."
 
 msgid "lemonway.error_03_34"
-msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way reports an error related to your card. We invite you to try again or choose another payment method."
 
 msgid "lemonway.error_03_41"
-msgstr "Le paiement a &eacute;t&eacute; bloqu&eacute; car la carte utilis&eacute;e pour le paiement semble avoir &eacute;t&eacute; d&eacute;clar&eacute;e comme perdue par son propriétaire. Veuillez contacter votre banque. En parall&egrave;le, vous pouvez utiliser une autre carte bancaire ou choisir un autre mode de paiement."
+msgstr "The payment was blocked because the card used for the payment appears to have been declared lost by its owner. Please contact your bank. In parallel, you can use another credit card or choose another payment method."
 
 msgid "lemonway.error_03_43"
-msgstr "Le paiement a &eacute;t&eacute; bloqu&eacute; car la carte utilis&eacute;e pour le paiement semble avoir &eacute;t&eacute; d&eacute;clar&eacute;e comme vol&eacute;e par son propriétaire. Veuillez contacter votre banque. En parall&egrave;le, vous pouvez utiliser une autre carte bancaire ou choisir un autre mode de paiement."
+msgstr "The payment was blocked because the card used for the payment appears to have been reported as stolen by its owner. Please contact your bank. In parallel, you can use another credit card or choose another payment method."
 
 msgid "lemonway.error_03_51"
-msgstr "La provision de votre compte bancaire semble insuffisante pour valider l'investissement ou le plafond de paiement de votre carte a &eacute;t&eacute; d&eacute;pass&eacute;. Nous vous conseillons de vous rapprocher de votre banque ou de choisir un autre mode de paiement."
+msgstr "The provision of your bank account seems insufficient to validate the investment or the payment limit of your card has been exceeded. We advise you to contact your bank or choose another payment method."
 
 msgid "lemonway.error_03_54"
-msgstr "La date de validit&eacute; de la carte bancaire est d&eacute;pass&eacute;e. Merci de v&eacute;rifier vos informations, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "The validity date of the credit card has passed. Please verify your information, use a different credit card or choose another payment method."
 
 msgid "lemonway.error_03_56"
-msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur technique pour le paiement avec cette carte. Merci de v&eacute;rifier vos informations, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way reports a technical error for payment with this card. Please verify your information, use a different credit card or choose another payment method."
 
 msgid "lemonway.error_03_57"
-msgstr "Selon notre prestataire de paiement, la transaction n'a pas &eacute;t&eacute; permise par votre banque. Nous vous conseillons de vous rapprocher de votre banque pour en conna&icirc;tre les raisons en leur communiquant la date et le montant ou de choisir un autre mode de paiement."
+msgstr "According to our payment provider, the transaction was not permitted by your bank. We advise you to contact your bank to find out the reasons by informing them of the date and amount or to choose another payment method."
 
 msgid "lemonway.error_03_59"
-msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur li&eacute;e &agrave; votre carte. Nous vous invitons &agrave; r&eacute;essayer ou &agrave; choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way reports an error related to your card. We invite you to try again or choose another payment method."
 
 msgid "lemonway.error_03_61"
-msgstr "La provision de votre compte bancaire semble insuffisante pour valider l'investissement ou le plafond de paiement de votre carte a &eacute;t&eacute; d&eacute;pass&eacute;. Merci de prendre contact avec votre banque ou de choisir un autre mode de paiement."
+msgstr "The provision of your bank account seems insufficient to validate the investment or the payment limit of your card has been exceeded. Please contact your bank or choose another payment method."
 
 msgid "lemonway.error_03_63"
-msgstr "Notre prestataire de paiement Lemon Way nous signale que les r&egrave;gles de s&eacute;curit&eacute; n'ont pas &eacute;t&eacute; respect&eacute;es. Merci de prendre contact avec votre banque ou de choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way informs us that the security rules have not been respected. Please contact your bank or choose another payment method."
 
 msgid "lemonway.error_03_68"
-msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur technique. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way reports a technical error to us. Please try again, use a different credit card or choose a different payment method."
 
 msgid "lemonway.error_03_90"
-msgstr "Le service de paiement est temporairement indisponible."
+msgstr "The payment service is temporarily unavailable."
 
 msgid "lemonway.error_03_91"
-msgstr "Selon notre prestataire de paiement Lemon Way, l'&eacute;metteur de cette carte est inaccessible. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "According to our payment provider Lemon Way, the issuer of this card is inaccessible. Please try again, use a different credit card or choose a different payment method."
 
 msgid "lemonway.error_03_96"
-msgstr "Le service de paiement est temporairement indisponible."
+msgstr "The payment service is temporarily unavailable."
 
 msgid "lemonway.error_03_97"
-msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur technique. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way reports a technical error to us. Please try again, use a different credit card or choose a different payment method."
 
 msgid "lemonway.error_03_98"
-msgstr "Le service de paiement est temporairement indisponible."
+msgstr "The payment service is temporarily unavailable."
 
 msgid "lemonway.error_03_99"
-msgstr "Notre prestataire de paiement Lemon Way nous signale une erreur technique. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "Our payment provider Lemon Way reports a technical error to us. Please try again, use a different credit card or choose a different payment method."
 
 msgid "lemonway.error.RAW"
-msgstr "Il y a eu un probl&egrave;me lors de votre investissement. Merci de bien vouloir r&eacute;essayer, d'utiliser une autre carte bancaire ou de choisir un autre mode de paiement."
+msgstr "There was a problem with your investment. Please try again, use a different credit card or choose a different payment method."
 
 msgid "lemonway.error.GENERIC"
-msgstr "Si besoin, nous sommes &agrave; votre disposition sur le chat en ligne ou &agrave; l'adresse suivante : investir@wedogood.co. Merci de nous pr&eacute;ciser le code d'erreur ci-dessous."
+msgstr "If necessary, we are at your disposal on the online chat or at the following address: investir@wedogood.co. Please specify the error code below."
 
 # ############################## e-mails ################################
 msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES"
 msgstr "These companies paid you royalties:"
 
 msgid "email.royalties.COMPANIES_TRANSFERED_ROYALTIES_SAMPLE"
-msgstr "in which were sampled"
+msgstr "of which sampling"
 
 msgid "email.royalties.COMPANIES_PENDING_TRANSFER"
 msgstr "Payments from these companies are pending:"
 
 msgid "email.royalties.COMPANIES_NOT_YET_TRANSFERING"
-msgstr "These companies have not yet entered the declaration phase:"
+msgstr "These companies have not yet entered the reporting phase:"
 
 msgid "email.royalties.WALLET_AMOUNT_1"
 msgstr "You currently have "
@@ -2684,7 +2790,7 @@ msgid "email.royalties.WALLET_AMOUNT_2"
 msgstr " € in your e-wallet."
 
 msgid "email.royalties.FUNDRAISING"
-msgstr "FUNDRAISING"
+msgstr "Fundraising"
 
 # ############################## THEME - projects/common/stats-public.php
 msgid "Votes"
@@ -2918,7 +3024,8 @@ msgstr "pollution prevention"
 msgid "produit ou service &eacute;coresponsable"
 msgstr "eco-friendly product ou service"
 
-# ################################ PROJECT PAGE ################################
+# ################################ PROJECT PAGE
+# ################################
 # THEME - commun
 msgid "Inscription"
 msgstr "Register"
@@ -3074,7 +3181,7 @@ msgid "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; pr
 msgstr "Sadly, this fundraising campaign has not succeeded"
 
 msgid "project.GOAL_MAX_REACHED_NO_MORE_INVEST"
-msgstr "Maximum goal reached: it is no longer possible to invest! "
+msgstr "Maximum goal achieved: it is no longer possible to invest!"
 
 msgid "Impacts"
 msgstr "Impacts"
@@ -3262,10 +3369,16 @@ msgid "project.single.description.economic.ROYALTIES_PER_QUARTER_MAX_DESCRIPTION
 msgstr "%% de chiffre d’affaires versé à l’ensemble des investisseurs, pour %s € levés, proportionnel au montant levé"
 
 msgid "project.single.description.economic.PROJECT_REVENUES"
-msgstr "Revenus du projet"
+msgstr "Revenus et financement du projet"
 
 msgid "project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR"
 msgstr "Sur les 12 mois précédents la levée de fonds, nous avons réalisé %s € de chiffre d'affaires."
+
+msgid "project.single.description.economic.COUNT_SALES"
+msgstr "Nombre de ventes"
+
+msgid "project.single.description.economic.ESTIMATED_TURNOVER"
+msgstr "Chiffre d'affaires prévisionnel"
 
 msgid "project.single.description.economic.YOUR_INVESTMENT"
 msgstr "Votre investissement"
@@ -3474,10 +3587,14 @@ msgstr "To authenticate your account, you have to complete your personal data an
 msgid "Je compl&egrave;te mon compte"
 msgstr "Complete my account"
 
-msgid "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !"
+msgid "Merci d'avoir &eacute;valu&eacute; ce projet, pensez &agrave; en parler autour de vous !"
 msgstr "Thank you for your evaluation, don't forget to spread the word about this project around you!"
 
-# ################################ INVEST PAGES ################################
+msgid "Plus tard"
+msgstr "Later"
+
+# ################################ INVEST PAGES
+# ################################
 # THEME - template-single-campaign-invest.php
 msgid "Investir sur le projet"
 msgstr "Invest on the project"
@@ -3885,10 +4002,10 @@ msgid "Au niveau social (conditions de vie et de travail, lien social) :"
 msgstr "On a social level (work and living conditions, social bond):"
 
 msgid "Tr&egrave;s faible"
-msgstr "Very weak"
+msgstr "Very low"
 
 msgid "Faible"
-msgstr "Weak"
+msgstr "Low"
 
 msgid "Moyen"
 msgstr "Average"
@@ -3951,7 +4068,7 @@ msgid "J'ai l'intention d'investir :"
 msgstr "I'm thinking about investing:"
 
 msgid "Mes conseils ou encouragements pour le(s) porteur(s) de projet :"
-msgstr "My advices or cheerings to the project owner(s)"
+msgstr "My advice or encouragement  to the project owner(s)"
 
 msgid "Je souhaite que mes conseils soient publi&eacute;s sur la page de pr&eacute;sentation du projet"
 msgstr "I would like my advices to be published on the page of the project"

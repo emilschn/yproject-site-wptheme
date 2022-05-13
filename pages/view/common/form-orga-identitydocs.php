@@ -6,6 +6,7 @@
 	$fields_hidden = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_hidden );
 	$fields_files = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files );
 	$fields_files_orga = $WDGOrganizationIdentityDocsForm->getFields( WDG_Form_User_Identity_Docs::$field_group_files_orga );
+	$is_authentified = $WDGOrganization->is_registered_lemonway_wallet();
 
 	$form_feedback = FALSE;
 	if ( !empty( $_SESSION[ 'account_organization_identitydocs_form_feedback_' . $WDGOrganization->get_wpref() ] ) ) {

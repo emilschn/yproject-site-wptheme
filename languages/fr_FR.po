@@ -79,6 +79,9 @@ msgstr "Transaction"
 msgid "common.INVESTMENT"
 msgstr "Investissement"
 
+msgid "common.SUBSCRIPTION"
+msgstr "Abonnement"
+
 msgid "common.YEARS"
 msgstr "ans"
 
@@ -132,6 +135,24 @@ msgstr "Accepter"
 
 msgid "common.READ_MORE"
 msgstr "Lire plus"
+
+msgid "common.HELP"
+msgstr "Aide"
+
+msgid "common.COMPLETE"
+msgstr "Complet"
+
+msgid "common.INCOMPLETE"
+msgstr "Incomplet"
+
+msgid "common.VALIDATED"
+msgstr "Validée"
+
+msgid "common.NOT_VALIDATED"
+msgstr "Non validée"
+
+msgid "common.AUTHENTICATION"
+msgstr "Authentification"
 
 # ############################## COMMON - FORMS - ERROR ################################
 msgid "common.forms.error.FILE_WRONG_FORMAT"
@@ -543,6 +564,9 @@ msgstr "Validation de vos informations"
 msgid "account.lightbox.DATA_SAVED"
 msgstr "Donn&eacute;es enregistr&eacute;es ! Merci !"
 
+msgid "account.menu.MY_ACCOUNT"
+msgstr "Mon compte"
+
 msgid "account.menu.MY_WALLET"
 msgstr "Mon porte-monnaie"
 
@@ -570,6 +594,9 @@ msgstr "Mon authentification"
 msgid "account.menu.MY_NOTIFICATIONS"
 msgstr "Mes notifications"
 
+msgid "account.menu.organization.ACCOUNT"
+msgstr "Compte"
+
 msgid "account.menu.organization.WALLET"
 msgstr "Porte-monnaie"
 
@@ -590,9 +617,6 @@ msgstr "Justificatifs d'identification"
 
 msgid "account.menu.organization.BANK_INFO"
 msgstr "Coordonn&eacute;es bancaires"
-
-msgid "account.menu.organization.AUTHENTICATION"
-msgstr "Authentification"
 
 msgid "account.menu.LINKED_PROJECTS"
 msgstr "Projets li&eacute;s"
@@ -654,8 +678,8 @@ msgstr "Justificatifs d'identit&eacute;"
 msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
 msgstr "Editer mes justificatifs"
 
-msgid "account.authentication.orga.AUTHENTICATION_OF"
-msgstr "Authentification de"
+msgid "account.authentication.orga.ACCOUNT_OF"
+msgstr "Compte de"
 
 msgid "account.bank.MY_BANK_CARD"
 msgstr "Ma carte bancaire"
@@ -915,11 +939,14 @@ msgstr "Mes investissements sur"
 msgid "account.investments.INVESTMENT_DURATION"
 msgstr "Contrat sur"
 
+msgid "account.investments.INVESTMENT_DURATION_YEAR"
+msgstr "an"
+
 msgid "account.investments.INVESTMENT_DURATION_YEARS"
 msgstr "ans"
 
 msgid "account.investments.INVESTMENT_DURATION_STARTING"
-msgstr "d&eacute;marr&eacute; en "
+msgstr "&agrave; partir de "
 
 msgid "account.investments.ROYALTIES_RECEIVED_A"
 msgstr "Royalties re&ccedil;ues"
@@ -1208,6 +1235,33 @@ msgstr "Virement :"
 
 msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
 msgstr "Pr&eacute;l&egrave;vement bancaire :"
+
+msgid "account.SOPHISTICATED_INVESTOR"
+msgstr "Investisseur averti"
+
+msgid "account.SOPHISTICATED"
+msgstr "Averti"
+
+msgid "account.NONSOPHISTICATED_INVESTOR"
+msgstr "Investisseur non-averti"
+
+msgid "account.NONSOPHISTICATED"
+msgstr "Non-averti"
+
+msgid "account.IN_MY_WALLET"
+msgstr "dans mon porte-monnaie"
+
+msgid "account.VIEW_MY_WALLET"
+msgstr "Voir mon porte-monnaie"
+
+msgid "account.VIEW_MY_SUBSCRIPTIONS"
+msgstr "Voir mes abonnements"
+
+msgid "account.EDIT_MY_PROFILE"
+msgstr "Editer mon profil"
+
+msgid "account.INVESTOR_PROFILE"
+msgstr "Profil investisseur"
 
 # ############################## /investir ################################
 msgid "invest.header.INVEST_ROYALTIES"
@@ -2100,10 +2154,10 @@ msgid "form.user-identitydocs.OPTIONAL"
 msgstr "(facultatif)"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION"
-msgstr "Attestation de r&eacute;partition du capital"
+msgstr "Formulaire des bénéficiaires effectifs"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
-msgstr "Si la r&eacute;partition du capital n'est pas exprim&eacute;e clairement dans les statuts"
+msgstr "Disponible sur Infogreffe ou à défaut attestation de répartition du capital"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON"
 msgstr "Justificatif d'identité de la deuxième personne détenant au moins 25% du capital"
@@ -2142,7 +2196,7 @@ msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_1"
 msgstr "Passeport ou carte d'identit&eacute; recto-verso avec bande MRZ lisible en intégralit&eacute;, qui n'aurait pas &eacute;t&eacute; d&eacute;pos&eacute; en premi&egrave;re pi&egrave;ce d'identit&eacute;."
 
 msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_2"
-msgstr "Sinon un des documents suivants : permis de conduire, dernier avis d'imposition, carte vitale, livret de famille, acte de naissance."
+msgstr "Sinon un des documents suivants : permis de conduire, dernier avis d'imposition, livret de famille, acte de naissance."
 
 msgid "form.user-identitydocs.SECOND_ID_DESCRIPTION_3"
 msgstr "Les titres de s&eacute;jour sont accept&eacute;s pour les personnes qui ne sont pas fran&ccedil;aises."
@@ -2416,22 +2470,40 @@ msgid "lemonway.document.ADDITIONAL_COMMENT"
 msgstr "Commentaire compl&eacute;mentaire de Lemon Way :"
 
 msgid "lemonway.document.type.ID"
-msgstr "Pi&egrave;ce d'identit&eacute;"
+msgstr "La carte d'identit&eacute;"
 
 msgid "lemonway.document.type.PROOF_ADDRESS"
 msgstr "Justificatif de domicile"
 
 msgid "lemonway.document.type.RIB"
-msgstr "RIB"
+msgstr "Le RIB"
+
+msgid "lemonway.document.type.RESIDENCY_PERMIT"
+msgstr "Le permis de r&eacute;sidence"
+
+msgid "lemonway.document.type.KBIS"
+msgstr "Le KBIS"
+
+msgid "lemonway.document.type.CARD_ID"
+msgstr "La carte d'identit&eacute;"
+
+msgid "lemonway.document.type.CARD_ID_BACK"
+msgstr "Le verso de la carte d'identit&eacute;"
+
+msgid "lemonway.document.type.TAX"
+msgstr "Le dernier avis d'imposition"
+
+msgid "lemonway.document.type.WELFARE"
+msgstr "La carte vitale"
+
+msgid "lemonway.document.type.FAMILY"
+msgstr "Le livret de famille"
+
+msgid "lemonway.document.type.BIRTH"
+msgstr "L'acte de naissance"
 
 msgid "lemonway.document.type.PASSPORT"
 msgstr "Passeport"
-
-msgid "lemonway.document.type.RESIDENCY_PERMIT"
-msgstr "Permis de r&eacute;sidence"
-
-msgid "lemonway.document.type.KBIS"
-msgstr "KBIS"
 
 msgid "lemonway.document.status.WAITING"
 msgstr "En attente de v&eacute;rification"
@@ -3257,10 +3329,16 @@ msgid "project.single.description.economic.ROYALTIES_PER_QUARTER_MAX_DESCRIPTION
 msgstr "%% de chiffre d’affaires versé à l’ensemble des investisseurs, pour %s € levés, proportionnel au montant levé"
 
 msgid "project.single.description.economic.PROJECT_REVENUES"
-msgstr "Revenus du projet"
+msgstr "Revenus et financement du projet"
 
 msgid "project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR"
 msgstr "Sur les 12 mois précédents la levée de fonds, nous avons réalisé %s € de chiffre d'affaires."
+
+msgid "project.single.description.economic.COUNT_SALES"
+msgstr "Nombre de ventes"
+
+msgid "project.single.description.economic.ESTIMATED_TURNOVER"
+msgstr "Chiffre d'affaires prévisionnel"
 
 msgid "project.single.description.economic.YOUR_INVESTMENT"
 msgstr "Votre investissement"
@@ -3469,8 +3547,11 @@ msgstr "Pour authentifier votre compte, il suffit de compl&eacute;ter les inform
 msgid "Je compl&egrave;te mon compte"
 msgstr "Je compl&egrave;te mon compte"
 
-msgid "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !"
-msgstr "Merci d'avoir &eacute;valu&eacute; sur ce projet, pensez &agrave; en parler autour de vous !"
+msgid "Merci d'avoir &eacute;valu&eacute; ce projet, pensez &agrave; en parler autour de vous !"
+msgstr "Merci d'avoir &eacute;valu&eacute; ce projet, pensez &agrave; en parler autour de vous !"
+
+msgid "Plus tard"
+msgstr "Plus tard"
 
 # ################################ INVEST PAGES ################################
 # THEME - template-single-campaign-invest.php

@@ -10,7 +10,7 @@ $pending_wire_investments = $WDGOrganization->get_pending_wire_investments();
 
 <?php if ( $WDGUser_current->is_admin() && $has_pending_wire_investments ): ?>		
 	<div class="admin-theme">
-		<strong><?php _e( "Attention, il y a des virements de 0&euro; &agrave; corriger : ", 'yproject' ); ?></strong><br>
+		<strong><?php _e( "Virements en attente : ", 'yproject' ); ?></strong><br>
 		<?php foreach ( $pending_wire_investments as $wire_investment ): ?>
 			<br>
 			<?php

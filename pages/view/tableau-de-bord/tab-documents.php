@@ -126,9 +126,18 @@ $today_date = new DateTime();
 		<?php if ( $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_funded || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_closed || $page_controler->get_campaign()->campaign_status() == ATCF_Campaign::$campaign_status_archive ): ?>
 			<div class="field admin-theme">
 				<?php _e( "En cas de recouvrement", 'yproject' ); ?><br><br>
+
+			<?php $investment_contracts = WDGInvestmentContract::get_list( $page_controler->get_campaign()->ID ); ?>
+			<?php if ( empty( $investment_contracts ) ): ?>
+				Accès bloqué pour l'instant. Demander à un admin de transférer les données d'investissement.
+
+			<?php else: ?>
 				<?php $campaign_debt_files = new WDGCampaignDebtFiles( $page_controler->get_campaign() ); ?>
 				<a href="<?php echo $campaign_debt_files->get_recover_certificate(); ?>?time=<?php echo time(); ?>" download="debt-certificate.pdf" class="button admin-theme"><?php _e( "Attestation de cr&eacute;ance", 'yproject' ); ?></a>
 				<a href="<?php echo $campaign_debt_files->get_recover_list(); ?>?time=<?php echo time(); ?>" download="investors-list.csv" class="button admin-theme"><?php _e( "Liste de l'&eacute;tat des versements", 'yproject' ); ?></a>
+				
+			<?php endif; ?>
+
 			</div>
 		<?php endif; ?>
 
