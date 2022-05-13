@@ -74,7 +74,7 @@ if ( $WDGUser_displayed->has_valid_conformity_data() ) {
 	</div>
 
 	<div>
-		<?php if ( false && $WDGUser_displayed->has_valid_conformity_data() ): ?>
+		<?php if ( $WDGUser_displayed->has_valid_conformity_data() ): ?>
 			<div><img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="50" height="50"></div>
 			<div class="account-dashboard-data">
 				<?php echo $user_conformity_type; ?><br>
