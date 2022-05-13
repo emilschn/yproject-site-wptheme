@@ -2,11 +2,13 @@
 global $stylesheet_directory_uri, $WDGOrganization;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
+$orga_wpref = 0;
 $lw_wallet_amount = 0;
 $count_validated_investments = 0;
 $can_register_lemonway = false;
 $is_lemonway_registered = false;
 if ( isset( $WDGOrganization ) ) {
+	$orga_wpref = $WDGOrganization->get_wpref();
 	$lw_wallet_amount = $WDGOrganization->get_lemonway_balance();
 	$validated_investments = $WDGOrganization->get_validated_investments();
 	$count_validated_investments = count( $validated_investments );
@@ -21,45 +23,44 @@ if ( isset( $WDGOrganization ) ) {
 	<div>
 		<div><img src="<?php echo $stylesheet_directory_uri; ?>/images/template-invest/picto-porte-monnaie.png" alt="porte-monnaie" width="50" height="50"></div>
 		<div class="account-dashboard-data"><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</div>
-		<div class="account-dashboard-text">dans votre porte-monnaie</div>
-		<div><a href="#wallet" class="button blue go-to-tab" data-tab="wallet">Voir mon porte-monnaie</a></div>
-		<div><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#porte-monnaie-et-s%C3%A9curisation-des-donn%C3%A9es" target="_blank">Aide</a></div>
+		<div class="account-dashboard-text"><?php _e( 'account.IN_MY_WALLET', 'yproject' ); ?></div>
+		<div><a href="#orga-wallet-<?php echo $orga_wpref; ?>" class="button blue go-to-tab" data-tab="orga-wallet-<?php echo $orga_wpref; ?>"><?php _e( 'account.VIEW_MY_WALLET', 'yproject' ); ?></a></div>
+		<div><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#porte-monnaie-et-s%C3%A9curisation-des-donn%C3%A9es" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
 	<div><img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project-list/picto-balloon.png" alt="montgolfiere" width="50" height="50"></div>
 		<div class="account-dashboard-data"><?php echo $count_validated_investments; ?></div>
-		<div class="account-dashboard-text">investissement<?php if ($count_validated_investments > 1) { echo 's'; } ?></div>
-		<div><a href="#investments" class="button blue go-to-tab" data-tab="investments">Voir mes investissements</a><br></div>
-		<div><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#investissement" target="_blank">Aide</a></div>
+		<div class="account-dashboard-text"><?php if ($count_validated_investments > 1) { _e( 'account.menu.organization.INVESTMENTS', 'yproject' ); } else { _e( 'common.INVESTMENT', 'yproject' ); } ?></div>
+		<div><a href="#orga-investments-<?php echo $orga_wpref; ?>" class="button blue go-to-tab" data-tab="orga-investments-<?php echo $orga_wpref; ?>"><?php _e( 'account.authentication.VIEW_MY_INVESTMENTS', 'yproject' ); ?></a><br></div>
+		<div><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#investissement" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
 		<?php if ( $can_register_lemonway ): ?>
 			<div><img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="50" height="50"></div>
-			<div class="account-dashboard-data">Complet</div>
-			<div class="account-dashboard-text">Informations personnelles</div>
+			<div class="account-dashboard-data"><?php _e( 'common.COMPLETE', 'yproject' ); ?></div>
 		<?php else: ?>
 			<div><img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-error.png" alt="check" width="50" height="50"></div>
-			<div class="account-dashboard-data">Incomplet</div>
-			<div class="account-dashboard-text">Informations personnelles</div>
+			<div class="account-dashboard-data"><?php _e( 'common.INCOMPLETE', 'yproject' ); ?></div>
 		<?php endif; ?>
-		<div><a href="#parameters" class="button blue go-to-tab" data-tab="parameters">Editer mes informations</a></div>
-		<div><a href="https://support.wedogood.co/fr/mon-compte-et-donn%C3%A9es-personnelles#connexion-et-gestion-de-mon-compte" target="_blank">Aide</a></div>
+		<div class="account-dashboard-text"><?php _e( 'account.authentication.PERSONAL_INFORMATION', 'yproject' ); ?></div>
+		<div><a href="#orga-parameters-<?php echo $orga_wpref; ?>" class="button blue go-to-tab" data-tab="orga-parameters-<?php echo $orga_wpref; ?>"><?php _e( 'account.authentication.EDIT_MY_INFORMATION', 'yproject' ); ?></a></div>
+		<div><a href="https://support.wedogood.co/fr/mon-compte-et-donn%C3%A9es-personnelles#connexion-et-gestion-de-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
 		<?php if ( $is_lemonway_registered ): ?>
 			<div><img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-checked.png" alt="check" width="50" height="50"></div>
-			<div class="account-dashboard-data">Validée</div>
-			<div class="account-dashboard-text">Authentification</div>
+			<div class="account-dashboard-data"><?php _e( 'common.VALIDATED', 'yproject' ); ?></div>
+			<div class="account-dashboard-text"><?php _e( 'common.AUTHENTICATION', 'yproject' ); ?></div>
 		<?php else: ?>
 			<div><img src="<?php echo $stylesheet_directory_uri; ?>/images/template-account/check-error.png" alt="check" width="50" height="50"></div>
-			<div class="account-dashboard-data">Non valide</div>
-			<div class="account-dashboard-text">Authentification</div>
+			<div class="account-dashboard-data"><?php _e( 'common.NOT_VALIDATED', 'yproject' ); ?></div>
+			<div class="account-dashboard-text"><?php _e( 'common.AUTHENTICATION', 'yproject' ); ?></div>
+			<div><a href="#orga-identitydocs-<?php echo $orga_wpref; ?>" class="button blue go-to-tab" data-tab="orga-identitydocs-<?php echo $orga_wpref; ?>"><?php _e( 'account.authentication.EDIT_IDENTITY_DOCUMENTS', 'yproject' ); ?></a></div>
+			<div><a href="https://support.wedogood.co/fr/comment-authentifier-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 		<?php endif; ?>
-		<div><a href="#identitydocs" class="button blue go-to-tab" data-tab="identitydocs">Editer mes justificatifs</a></div>
-		<div><a href="https://support.wedogood.co/fr/comment-authentifier-mon-compte" target="_blank">Aide</a></div>
 	</div>
 </div>
 

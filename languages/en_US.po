@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-05-11 10:56+0200\n"
+"PO-Revision-Date: 2022-05-13 12:01+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -84,6 +84,9 @@ msgstr "Transaction"
 
 msgid "common.INVESTMENT"
 msgstr "Investment"
+
+msgid "common.SUBSCRIPTION"
+msgstr "Subscription"
 
 msgid "common.YEARS"
 msgstr "years"
@@ -1235,6 +1238,33 @@ msgstr "Bank transfer:"
 
 msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
 msgstr "Bank direct debit:"
+
+msgid "account.SOPHISTICATED_INVESTOR"
+msgstr "Investisseur averti"
+
+msgid "account.SOPHISTICATED"
+msgstr "Averti"
+
+msgid "account.NONSOPHISTICATED_INVESTOR"
+msgstr "Investisseur non-averti"
+
+msgid "account.NONSOPHISTICATED"
+msgstr "Non-averti"
+
+msgid "account.IN_MY_WALLET"
+msgstr "dans mon porte-monnaie"
+
+msgid "account.VIEW_MY_WALLET"
+msgstr "Voir mon porte-monnaie"
+
+msgid "account.VIEW_MY_SUBSCRIPTIONS"
+msgstr "Voir mes abonnements"
+
+msgid "account.EDIT_MY_PROFILE"
+msgstr "Editer mon profil"
+
+msgid "account.INVESTOR_PROFILE"
+msgstr "Profil investisseur"
 
 # ############################## /investir ################################
 msgid "invest.header.INVEST_ROYALTIES"
