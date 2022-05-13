@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-05-09 10:57+0200\n"
+"PO-Revision-Date: 2022-05-13 09:54+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/en/)\n"
 "Language: en\n"
@@ -2339,6 +2339,9 @@ msgstr "The organisation's email address is already in use."
 
 msgid "form.invest-user-details.error.ORGANIZATION_WEBSITE_EMPTY"
 msgstr "The organisation's website is not defined."
+
+msgid "form.positive-savings-subscription.I_WISH_TO_SUBSCRIBE"
+msgstr "Je souhaite investir automatiquement l'intégralité de mes royalties dans cette thématique."
 
 # ############################## form - invest-poll
 # ################################

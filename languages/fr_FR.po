@@ -2304,6 +2304,9 @@ msgstr "L'adresse e-mail de l'organisation est d&eacute;j&agrave; utilis&eacute;
 msgid "form.invest-user-details.error.ORGANIZATION_WEBSITE_EMPTY"
 msgstr "Le site web de l'organisation n'est pas d&eacute;fini."
 
+msgid "form.positive-savings-subscription.I_WISH_TO_SUBSCRIBE"
+msgstr "Je souhaite investir automatiquement l'intégralité de mes royalties dans cette thématique."
+
 # ############################## form - invest-poll ################################
 msgid "form.invest-poll.source.TITLE"
 msgstr "Ce qui m'a motiv&eacute;(e) &agrave; investir aujourd'hui&nbsp;:"
