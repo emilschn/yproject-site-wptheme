@@ -5,6 +5,7 @@ $WDGOrganization = new WDGOrganization( $campaign_organization->wpref, $campaign
 $funding_duration = $campaign->funding_duration();
 $estimated_turnover = $campaign->estimated_turnover();
 $estimated_sales = $campaign->estimated_sales();
+$minimum_profit = $campaign->minimum_profit();
 
 $total_turnover = 0;
 if ( !empty( $estimated_turnover ) ) {
@@ -128,7 +129,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 	<br>
 	<strong class="title-question"> <?php _e( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_1', 'yproject' ); ?></strong>
 	<br>
-	<?php echo sprintf( __( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_1_ANSWER', 'yproject' ), $funding_duration, $WDGOrganization->get_name() ); ?>
+	<?php echo sprintf( __( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_1_ANSWER', 'yproject' ), $funding_duration, $WDGOrganization->get_name(), UIHelpers::format_number( $minimum_profit ) ); ?>
 	<br>
 	<br>
 	<strong class="title-question"> <?php _e( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_2', 'yproject' ); ?></strong>

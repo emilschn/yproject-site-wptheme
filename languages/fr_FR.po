@@ -3332,7 +3332,7 @@ msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_1"
 msgstr "Que se passe-t-il si le prévisionnel n’est pas atteint ?"
 
 msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_1_ANSWER"
-msgstr "Au cas où le prévisionnel ne serait pas atteint au bout de %s ans et où l’activité continuerait, %s continuera à verser les royalties jusqu’à remboursement total de la somme investie."
+msgstr "Au cas où le prévisionnel ne serait pas atteint au bout de %s ans et où l’activité continuerait, %s continuera à verser les royalties jusqu’à l'atteint d'un rendement de %s fois la somme investie."
 
 msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_2"
 msgstr "A partir de quand commencent les versements ?"
