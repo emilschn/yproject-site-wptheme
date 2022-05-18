@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-05-18 14:33+0200\n"
+"PO-Revision-Date: 2022-05-18 16:26+0200\n"
 "Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/"
 "en/)\n"
@@ -3654,6 +3654,9 @@ msgstr "(+%s %% raw)"
 
 msgid "project.single.description.economic.TARGET_PROFITABILITY_RISK"
 msgstr "Risk of full loss of investment, maximum gain: %s"
+
+msgid "project.single.description.economic.MINIMUM_PROFITABILITY_WHILE_ACTIVE"
+msgstr "Minimum gain while the company is active: x%s"
 
 msgid "project.single.description.economic.TARGET_PROFITABILITY_CALCULATE"
 msgstr "Calculate my return"

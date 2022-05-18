@@ -36,7 +36,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 			<br>
 			<span><?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_RISK', 'yproject' ), $campaign->maximum_profit_str() ); ?></span>
 			<br>
-			<a href="#"><?php _e( 'project.single.description.economic.TARGET_PROFITABILITY_CALCULATE', 'yproject' ); ?></a>
+			<span><?php echo sprintf( __( 'project.single.description.economic.MINIMUM_PROFITABILITY_WHILE_ACTIVE', 'yproject' ), UIHelpers::format_number( $minimum_profit ) ); ?></span>
 		</td>
 
 		<?php if ( !$campaign->is_hidden() ): ?>
@@ -125,6 +125,8 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 	<?php echo sprintf( __( 'project.single.description.economic.YOUR_INVESTMENT_DESCRIPTION_2', 'yproject' ), UIHelpers::format_number( $campaign->roi_percent_estimated() ), UIHelpers::format_number( $campaign->goal( false ) ) ); ?>
 	<br>
 	<?php echo sprintf( __( 'project.single.description.economic.YOUR_INVESTMENT_DESCRIPTION_3', 'yproject' ), $WDGOrganization->get_name(), UIHelpers::format_number( $profitability_percent ), $funding_duration ); ?>
+	<br>
+	<a href="#" class="scroll-to-simulator"><?php _e( 'project.single.description.economic.TARGET_PROFITABILITY_CALCULATE', 'yproject' ); ?></a>
 	<br>
 	<br>
 	<strong class="title-question"> <?php _e( 'project.single.description.economic.YOUR_INVESTMENT_QUESTION_1', 'yproject' ); ?></strong>

@@ -3265,6 +3265,9 @@ msgstr "(+%s %% bruts)"
 msgid "project.single.description.economic.TARGET_PROFITABILITY_RISK"
 msgstr "Risque de perte intégrale de l’investissement, gain maximum : %s"
 
+msgid "project.single.description.economic.MINIMUM_PROFITABILITY_WHILE_ACTIVE"
+msgstr "Gain minimum tant que l'entreprise est en activité : x%s"
+
 msgid "project.single.description.economic.TARGET_PROFITABILITY_CALCULATE"
 msgstr "Calculer mon rendement"
 
