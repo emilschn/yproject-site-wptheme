@@ -86,6 +86,17 @@
 <?php if ( $page_controler->admin_is_overriding_user() ): ?>
 	<br>
 	<hr>
+	<?php if ( !$WDGUser_override->is_email_validated() ): ?>
+		<?php
+		$url_page_validation_email = WDG_Redirect_Engine::override_get_page_url( 'activer-compte' );
+		$link_validation_email = $url_page_validation_email . "?action=validate&validation-code=" . $WDGUser_override->get_email_validation_code();
+		?>
+		<br><br>
+		<div class="field admin-theme">
+			Le lien de validation d'adresse e-mail est le suivant : <?php echo $link_validation_email; ?>
+		</div>
+		<br><br>
+	<?php endif; ?>
 	<br>
 	<div class="field admin-theme">
 		<form method="post" class="db-form form-register v3 full" enctype="multipart/form-data">
