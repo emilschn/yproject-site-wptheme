@@ -138,7 +138,7 @@ body.template-mon-compte div#container div#content .tab-account div.account-dash
 	text-align: center;
 }
 
-body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div:last-child {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div.account-dashboard-help {
 	margin-top: 16px;
 	text-align: center;
 }
@@ -147,7 +147,7 @@ body.template-mon-compte div#container div#content .tab-account div.account-dash
 	font-size: 0.8em;
 }
 
-body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div:last-child a {
+body.template-mon-compte div#container div#content .tab-account div.account-dashboard>div div.account-dashboard-help a {
 	font-size: 0.7em;
 }
 

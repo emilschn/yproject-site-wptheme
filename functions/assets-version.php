@@ -1,2 +1,6 @@
 <?php
+<<<<<<< HEAD
 define( 'ASSETS_VERSION', '1652447035683');
+=======
+define( 'ASSETS_VERSION', '1652967497026');
+>>>>>>> c78ad2101f7776ac9c353733f25343341bc8b727

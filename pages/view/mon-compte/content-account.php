@@ -27,7 +27,7 @@ if ( $WDGUser_displayed->has_valid_conformity_data() ) {
 		<div class="account-dashboard-data"><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</div>
 		<div class="account-dashboard-text"><?php _e( 'account.IN_MY_WALLET', 'yproject' ); ?></div>
 		<div><a href="#wallet" class="button blue go-to-tab" data-tab="wallet"><?php _e( 'account.VIEW_MY_WALLET', 'yproject' ); ?></a></div>
-		<div><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#porte-monnaie-et-s%C3%A9curisation-des-donn%C3%A9es" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+		<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/porte-monnaie-electronique" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
@@ -35,7 +35,7 @@ if ( $WDGUser_displayed->has_valid_conformity_data() ) {
 		<div class="account-dashboard-data"><?php echo $count_validated_investments; ?></div>
 		<div class="account-dashboard-text"><?php if ($count_validated_investments > 1) { _e( 'account.menu.organization.INVESTMENTS', 'yproject' ); } else { _e( 'common.INVESTMENT', 'yproject' ); } ?></div>
 		<div><a href="#investments" class="button blue go-to-tab" data-tab="investments"><?php _e( 'account.authentication.VIEW_MY_INVESTMENTS', 'yproject' ); ?></a><br></div>
-		<div><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#investissement" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+		<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#investissement" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
@@ -43,7 +43,7 @@ if ( $WDGUser_displayed->has_valid_conformity_data() ) {
 		<div class="account-dashboard-data"><?php echo $count_subscriptions; ?></div>
 		<div class="account-dashboard-text"><?php if ($count_subscriptions > 1) { _e( 'account.menu.organization.SUBSCRIPTIONS', 'yproject' ); } else { _e( 'common.SUBSCRIPTION', 'yproject' ); } ?></div>
 		<div><a href="#subscriptions" class="button blue go-to-tab" data-tab="subscriptions"><?php _e( 'account.VIEW_MY_SUBSCRIPTIONS', 'yproject' ); ?></a></div>
-		<div><a href="https://support.wedogood.co/fr/quest-ce-quun-abonnement" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+		<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/quest-ce-quun-abonnement" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
@@ -56,7 +56,7 @@ if ( $WDGUser_displayed->has_valid_conformity_data() ) {
 		<?php endif; ?>
 		<div class="account-dashboard-text"><?php _e( 'account.authentication.PERSONAL_INFORMATION', 'yproject' ); ?></div>
 		<div><a href="#parameters" class="button blue go-to-tab" data-tab="parameters"><?php _e( 'account.authentication.EDIT_MY_INFORMATION', 'yproject' ); ?></a></div>
-		<div><a href="https://support.wedogood.co/fr/mon-compte-et-donn%C3%A9es-personnelles#connexion-et-gestion-de-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+		<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/mon-compte-et-donn%C3%A9es-personnelles#connexion-et-gestion-de-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
@@ -69,7 +69,7 @@ if ( $WDGUser_displayed->has_valid_conformity_data() ) {
 			<div class="account-dashboard-data"><?php _e( 'common.NOT_VALIDATED', 'yproject' ); ?></div>
 			<div class="account-dashboard-text"><?php _e( 'common.AUTHENTICATION', 'yproject' ); ?></div>
 			<div><a href="#identitydocs" class="button blue go-to-tab" data-tab="identitydocs"><?php _e( 'account.authentication.EDIT_IDENTITY_DOCUMENTS', 'yproject' ); ?></a></div>
-			<div><a href="https://support.wedogood.co/fr/comment-authentifier-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+			<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/comment-authentifier-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 		<?php endif; ?>
 	</div>
 
@@ -86,7 +86,7 @@ if ( $WDGUser_displayed->has_valid_conformity_data() ) {
 		<?php endif; ?>
 		<div class="account-dashboard-text"><?php _e( 'account.INVESTOR_PROFILE', 'yproject' ); ?></div>
 		<div><a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'mon-compte/capacite' ); ?>" class="button blue"><?php _e( 'account.EDIT_MY_PROFILE', 'yproject' ); ?></a></div>
-		<div><a href="https://support.wedogood.co/fr/quest-ce-quun-investisseur-averti" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+		<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/quest-ce-quun-investisseur-averti" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 </div>
 
