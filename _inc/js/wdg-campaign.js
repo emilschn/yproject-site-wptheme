@@ -38,16 +38,17 @@ var WDGProjectViewer = (function ($) {
 					"slow"
 				);
 			});
+			$("a.scroll-to-simulator").click(function (e) {
+				e.preventDefault();
+				$('html, body').animate(
+					{ scrollTop: $('.project-rewards').offset().top - 100 },
+					"slow"
+				);
+			});
 
 			$("div#content.version-3 div.project-banner div.project-banner-title select").change(function () {
 				window.location = $(this).val();
 			});
-
-			if ($("#scroll-to-utilite-societale").length > 0) {
-				$("#scroll-to-utilite-societale").click(function () {
-					$('html, body').animate({ scrollTop: $('#anchor-societal_challenge').offset().top - $("#navigation").height() }, "slow");
-				});
-			}
 
 			if ($(document).width() < 997) {
 				if ($('div#project-banner-picture .video-element iframe').length > 0) {
