@@ -13,8 +13,10 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 
 	private $can_display_form;
 	private $form;
+	public $form_text;
 	private $form_fields_hidden_slug;
 	private $form_fields_displayed_slug;
+	public $form_buttons;
 
 	private $return_eversign;
 
@@ -73,7 +75,7 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 			// Si c'est une personne physique qui a investi
 			// Et si c'est de l'épargne positive
 			// On propose de s'abonner (si l'utilisateur n'est pas encore abonné à cette thématique)
-			if ( $this->current_investment->get_session_user_type() == 'user' && $this->current_campaign->is_positive_savings() ) {
+			if ( true /*$this->current_investment->get_session_user_type() == 'user' && $this->current_campaign->is_positive_savings()*/ ) {
 				$has_subscribed_before = FALSE;
 				$list_subscriptions = $WDGCurrent_User->get_active_subscriptions();
 				foreach ( $list_subscriptions as $item_subscription ) {
@@ -90,7 +92,22 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 					$core->include_form( 'positive-savings-subscription' );
 					$this->form = new WDG_Form_Subscribe_Positive_Savings( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
 					$this->form_fields_hidden_slug = WDG_Form_Subscribe_Positive_Savings::$field_group_hidden;
-					$this->form_fields_displayed_slug = WDG_Form_Subscribe_Positive_Savings::$field_group_subscribe;
+					$this->form_text = sprintf( __( 'form.positive-savings-subscription.DO_YOU_WISH_TO_SUBSCRIBE', 'yproject' ), $this->current_campaign->get_name() );
+					$this->form_fields_displayed_slug = array();
+					$this->form_buttons = array(
+						array(
+							'classes'	=> 'transparent',
+							'name'		=> 'subscribe',
+							'value'		=> 'no',
+							'label'		=> __( 'form.positive-savings-subscription.NO_I_DONT', 'yproject' )
+						),
+						array(
+							'classes'	=> 'red',
+							'name'		=> 'subscribe',
+							'value'		=> 'yes',
+							'label'		=> __( 'form.positive-savings-subscription.YES_I_WISH', 'yproject' )
+						)
+					);
 					if ( $this->form->isPosted() && $this->form->postForm() ) {
 						$this->can_display_form = FALSE;
 					}
