@@ -26,7 +26,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 				<?php
 				$fields_hidden = $page_controler->get_form()->getFields( $page_controler->get_form_fields_hidden_slug() );
-				$fields_displayed = $page_controler->get_form()->getFields( $page_controler->get_form_fields_displayed_slug() );
+				$fields_displayed = FALSE;
+				$test_fields = $page_controler->get_form_fields_displayed_slug();
+				if ( !empty( $test_fields ) ) {
+					$fields_displayed = $page_controler->get_form()->getFields( $test_fields );
+				}
 				?>
 
 				<form action="<?php echo $page_controler->get_form_action(); ?>" method="post" class="db-form v3 full bg-white">
@@ -45,13 +49,29 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 						<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
 					<?php endforeach; ?>
 
-					<?php foreach ( $fields_displayed as $field ): ?>
-						<?php global $wdg_current_field; $wdg_current_field = $field; ?>
-						<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
-					<?php endforeach; ?>
+					<?php if ( !empty( $page_controler->form_text ) ): ?>
+						<?php echo $page_controler->form_text; ?>
+						<br><br>
+					<?php endif; ?>
+
+					<?php if ( !empty( $fields_displayed ) ): ?>
+						<?php foreach ( $fields_displayed as $field ): ?>
+							<?php global $wdg_current_field; $wdg_current_field = $field; ?>
+							<?php locate_template( array( 'common/forms/field.php' ), true, false );  ?>
+						<?php endforeach; ?>
+					<?php endif; ?>
 
 					<div id="fieldgroup-to-display">
-						<button type="submit" class="button half right transparent"><?php _e( 'common.NEXT', 'yproject' ); ?></button>
+						<?php if ( empty( $page_controler->form_buttons ) ): ?>
+							<button type="submit" class="button half right transparent"><?php _e( 'common.NEXT', 'yproject' ); ?></button>
+						<?php else: ?>
+							<div class="align-center">
+								<?php foreach ( $page_controler->form_buttons as $button_item ): ?>
+									<button type="submit" name="<?php echo $button_item['name']; ?>" value="<?php echo $button_item['value']; ?>" class="button <?php echo $button_item['classes']; ?>"><?php echo $button_item['label']; ?></button>
+									<br><br>
+								<?php endforeach; ?>
+							</div>
+						<?php endif; ?>
 					</div>
 
 					<div class="clear"></div>
