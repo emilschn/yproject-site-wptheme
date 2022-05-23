@@ -25,7 +25,7 @@ if ( isset( $WDGOrganization ) ) {
 		<div class="account-dashboard-data"><?php echo UIHelpers::format_number( $lw_wallet_amount ); ?> &euro;</div>
 		<div class="account-dashboard-text"><?php _e( 'account.IN_MY_WALLET', 'yproject' ); ?></div>
 		<div><a href="#orga-wallet-<?php echo $orga_wpref; ?>" class="button blue go-to-tab" data-tab="orga-wallet-<?php echo $orga_wpref; ?>"><?php _e( 'account.VIEW_MY_WALLET', 'yproject' ); ?></a></div>
-		<div><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#porte-monnaie-et-s%C3%A9curisation-des-donn%C3%A9es" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+		<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#porte-monnaie-et-s%C3%A9curisation-des-donn%C3%A9es" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
@@ -33,7 +33,7 @@ if ( isset( $WDGOrganization ) ) {
 		<div class="account-dashboard-data"><?php echo $count_validated_investments; ?></div>
 		<div class="account-dashboard-text"><?php if ($count_validated_investments > 1) { _e( 'account.menu.organization.INVESTMENTS', 'yproject' ); } else { _e( 'common.INVESTMENT', 'yproject' ); } ?></div>
 		<div><a href="#orga-investments-<?php echo $orga_wpref; ?>" class="button blue go-to-tab" data-tab="orga-investments-<?php echo $orga_wpref; ?>"><?php _e( 'account.authentication.VIEW_MY_INVESTMENTS', 'yproject' ); ?></a><br></div>
-		<div><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#investissement" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+		<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/investir-et-suivre-mes-investissements#investissement" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
@@ -46,7 +46,7 @@ if ( isset( $WDGOrganization ) ) {
 		<?php endif; ?>
 		<div class="account-dashboard-text"><?php _e( 'account.authentication.PERSONAL_INFORMATION', 'yproject' ); ?></div>
 		<div><a href="#orga-parameters-<?php echo $orga_wpref; ?>" class="button blue go-to-tab" data-tab="orga-parameters-<?php echo $orga_wpref; ?>"><?php _e( 'account.authentication.EDIT_MY_INFORMATION', 'yproject' ); ?></a></div>
-		<div><a href="https://support.wedogood.co/fr/mon-compte-et-donn%C3%A9es-personnelles#connexion-et-gestion-de-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+		<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/mon-compte-et-donn%C3%A9es-personnelles#connexion-et-gestion-de-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 	</div>
 
 	<div>
@@ -59,7 +59,7 @@ if ( isset( $WDGOrganization ) ) {
 			<div class="account-dashboard-data"><?php _e( 'common.NOT_VALIDATED', 'yproject' ); ?></div>
 			<div class="account-dashboard-text"><?php _e( 'common.AUTHENTICATION', 'yproject' ); ?></div>
 			<div><a href="#orga-identitydocs-<?php echo $orga_wpref; ?>" class="button blue go-to-tab" data-tab="orga-identitydocs-<?php echo $orga_wpref; ?>"><?php _e( 'account.authentication.EDIT_IDENTITY_DOCUMENTS', 'yproject' ); ?></a></div>
-			<div><a href="https://support.wedogood.co/fr/comment-authentifier-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
+			<div class="account-dashboard-help"><a href="https://support.wedogood.co/fr/comment-authentifier-mon-compte" target="_blank"><?php _e( 'common.HELP', 'yproject' ); ?></a></div>
 		<?php endif; ?>
 	</div>
 </div>
