@@ -28,7 +28,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<?php locate_template( array( 'pages/view/moyen-de-paiement/card-choice.php'  ), true, false ); ?>
 		</div>
 
-		<?php if ( $page_controler->has_sign_mandate() ): ?>
+		<?php // if ( $page_controler->has_sign_mandate() ): ?>
 		<div class="mean-payment" data-meanofpayment="mandate">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?>" width="120">
 			<div>
@@ -45,7 +45,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<span><?php _e( "De plus, l'utilisation de ce moyen de paiement provoque un d&eacute;lai de versement &agrave; vos investisseurs de <strong>10 jours</strong> &agrave; compter de la r&eacute;ception de votre paiement.", 'yproject' ); ?></span>
 			</div>
 		</div>
-		<?php endif; ?>
+		<?php // endif; ?>
 
 		<?php if ( $page_controler->can_display_wire() ): ?>
 		<div class="mean-payment" data-meanofpayment="wire">
@@ -64,7 +64,29 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</div>
 		<?php endif; ?>
 	</div>
-	
+
+	<div class="mandate-checkbox align-left">
+		<label>
+			<input type="checkbox" class="radio-label"><span></span>
+			<?php _e( "Je confirme que le compte bancaire", 'yproject' ); ?> <?php echo $page_controler->get_mandate_infos(); ?> <?php _e( "est toujours valide", 'yproject' ); ?>
+		</label>
+		<br><br>
+		<label>
+			<input type="checkbox" class="radio-label"><span></span>
+			<?php _e( "Je confirme qu'il est suffisamment approvisionné pour effectuer ce paiement", 'yproject' ); ?>
+		</label>
+		<br><br>
+		<label>
+			<input type="checkbox" class="radio-label"><span></span>
+			<?php _e( "Je suis au courant qu'en cas de refus de paiement, l'annulation aura un coût supplémentaire de 80 € (30 € de Lemonway et 50 € de frais de traitement par WE DO GOOD)", 'yproject' ); ?>
+		</label>
+		<br><br>
+		<label>
+			<input type="checkbox" class="radio-label"><span></span>
+			<?php _e( "Je suis au courant que l'utilisation de ce moyen de paiement provoque un délai de versement de 10 jours pour mes investisseurs", 'yproject' ); ?>
+		</label>
+		<br><br>
+	</div>
 	
 	<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
 	<input type="hidden" id="input-meanofpayment-card-type" name="meanofpayment-card-type" value="">

@@ -124,11 +124,16 @@ var WDGInvestPageFunctions = (function ($) {
 			}
 
 			if ($('body.template-declarer-chiffre-daffaires .mean-payment').length > 0) {
+				$('.mandate-checkbox').hide();
 				$('body.template-declarer-chiffre-daffaires .mean-payment').click(function () {
 					$('body.template-declarer-chiffre-daffaires .mean-payment').removeClass('selected');
 					$(this).addClass('selected');
-					$('body.template-declarer-chiffre-daffaires form button.half.right.red').removeClass('hidden');
 					var sMeanOfPayment = $(this).data('meanofpayment');
+					if (sMeanOfPayment == 'mandate') {
+						$('body.template-declarer-chiffre-daffaires form button.half.right.red').addClass('hidden');
+					} else {
+						$('body.template-declarer-chiffre-daffaires form button.half.right.red').removeClass('hidden');
+					}
 
 					// Si on change de moyen de paiement
 					if (sMeanOfPayment != $('#input-meanofpayment').val()) {
@@ -150,13 +155,31 @@ var WDGInvestPageFunctions = (function ($) {
 								$('#card-option-' + sMeanOfPayment + '-' + idDefaultCardType).attr('checked', true);
 							}
 
-						} else {
-							if (sMeanOfPayment == 'card') {
-								$('#save-card-zone-' + sMeanOfPayment).slideDown(200);
-							}
+						} else if (sMeanOfPayment == 'card') {
+							$('#save-card-zone-' + sMeanOfPayment).slideDown(200);
+						}
 
+						if (sMeanOfPayment == 'mandate') {
+							$('body.template-declarer-chiffre-daffaires form button.half.right.red').addClass('hidden');
+							$('.mandate-checkbox').slideDown(200);
+						} else if ($('.mandate-checkbox').is(':visible')) {
+							$('.mandate-checkbox').slideUp(200);
 						}
 					}
+
+					$('.mandate-checkbox label').click(function () {
+						var nbChecked = 0;
+						$('.mandate-checkbox input').each(function () {
+							if ($(this).is(':checked')) {
+								nbChecked++;
+							}
+						});
+						if (nbChecked == 4) {
+							$('body.template-declarer-chiffre-daffaires form button.half.right.red').removeClass('hidden');
+						} else {
+							$('body.template-declarer-chiffre-daffaires form button.half.right.red').addClass('hidden');
+						}
+					});
 				});
 			}
 
