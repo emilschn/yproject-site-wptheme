@@ -39,10 +39,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 						<?php _e( "Pr&eacute;l&egrave;vement bancaire (mandat de type Core)", 'yproject' ); ?>
 					<?php endif; ?>
 				</span><br>
-				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <strong><?php echo $page_controler->get_mandate_infos(); ?></strong></span><br><br>
-				<span><?php _e( "Merci de vous assurer que les fonds sont suffisants sur ce compte. En cas d'annulation, Lemon Way nous pr&eacute;l&egrave;ve des frais que nous vous refacturerons &agrave; hauteur de 30 € HT.", 'yproject' ); ?></span>
-				<span><?php _e( "Des frais de traitement internes s'ajouteront à ce montant, à hauteur de 50 € HT. <strong>Soit un total de 80 € HT.</strong>", 'yproject' ); ?></span><br><br>
-				<span><?php _e( "De plus, l'utilisation de ce moyen de paiement provoque un d&eacute;lai de versement &agrave; vos investisseurs de <strong>10 jours</strong> &agrave; compter de la r&eacute;ception de votre paiement.", 'yproject' ); ?></span>
+				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <strong><?php echo $page_controler->get_mandate_infos(); ?></strong></span>
 			</div>
 		</div>
 		<?php // endif; ?>
