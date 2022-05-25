@@ -212,7 +212,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	public function can_display_wire() {
 		$declaration_amount_to_pay = $this->current_declaration->get_amount_with_commission();
 
-		return ( $declaration_amount_to_pay >= 500 && !$this->has_sign_mandate() );
+		return ( $declaration_amount_to_pay >= 500 );
 	}
 
 	public function has_commission() {
