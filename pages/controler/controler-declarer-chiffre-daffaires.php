@@ -253,7 +253,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				switch ( $action_posted ) {
 					case 'gobacktodeclaration':
 						$this->current_declaration->status = WDGROIDeclaration::$status_declaration;
-						$this->current_declaration->save();
+						$this->current_declaration->update();
 						$this->current_step = $this->current_declaration->get_status();
 						$core = ATCF_CrowdFunding::instance();
 						$core->include_form( 'declaration-input' );
@@ -443,7 +443,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
 				$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_card;
 				$this->current_declaration->status = WDGROIDeclaration::$status_transfer;
-				$this->current_declaration->save();
+				$this->current_declaration->update();
 				$this->start_auto_transfer();
 				NotificationsSlack::send_notification_roi_payment_success_admin( $this->current_declaration->id );
 				NotificationsEmails::send_notification_roi_payment_success_user( $this->current_declaration->id );
@@ -463,7 +463,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			$input_card_option_save = filter_input( INPUT_POST, 'meanofpayment-card-save' );
 			$wk_token = LemonwayLib::make_token( '', $this->current_declaration->id );
 			$this->current_declaration->payment_token = $wk_token;
-			$this->current_declaration->save();
+			$this->current_declaration->update();
 			$ask_payment_webkit_url = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $error_url, $error_url, $input_card_option_save );
 			if ( $ask_payment_webkit_url !== FALSE ) {
 				wp_redirect( $ask_payment_webkit_url);
@@ -512,7 +512,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_mandate;
 					$this->current_declaration->payment_token = $result->TRANS->HPAY->ID;
 					$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
-					$this->current_declaration->save();
+					$this->current_declaration->update();
 
 					NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 				}
@@ -527,8 +527,9 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
 		$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
 		$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_wire;
-		$this->current_declaration->save();
+		$this->current_declaration->update();
 
+		NotificationsAsana::declaration_pending_wire( $this->current_declaration->id );
 		NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 	}
 
