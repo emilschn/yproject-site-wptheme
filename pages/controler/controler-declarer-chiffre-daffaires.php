@@ -531,6 +531,16 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 
 		NotificationsAsana::declaration_pending_wire( $this->current_declaration->id );
 		NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+
+		$campaign_organization_item = $this->current_campaign->get_organization();
+		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+		$linked_users_creator = $WDGOrganization->get_linked_users( WDGWPREST_Entity_Organization::$link_user_type_creator );
+		$WDGUser_creator = $linked_users_creator[ 0 ];
+		$iban = LemonwayLib::$lw_wire_iban;
+		$bic = LemonwayLib::$lw_wire_bic;
+		$holder = LemonwayLib::$lw_wire_holder;
+		$code = 'wedogood-' . $this->get_current_campaign_organization_wallet_id();
+		NotificationsAPI::declaration_done_pending_wire( $WDGOrganization, $WDGUser_creator, $this->current_campaign, $iban, $bic, $holder, $code );
 	}
 
 	private function start_auto_transfer() {

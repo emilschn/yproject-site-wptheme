@@ -51,7 +51,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Virement bancaire", 'yproject' ); ?>" width="120">
 			<div>
 				<span class="mean-payment-name"><?php _e( "Virement bancaire", 'yproject' ); ?></span><br>
-				<span><?php _e( "Doit &ecirc;tre fait depuis le compte bancaire de l'entreprise vers l'IBAN de Lemon Way : FR76 3000 4025 1100 0111 8625 268.", 'yproject' ); ?></span><br>
+				<span><?php _e( "Doit &ecirc;tre fait depuis le compte bancaire de l'entreprise vers l'IBAN de Lemon Way :", 'yproject' ); ?> <?php echo LemonwayLib::$lw_wire_iban; ?></span><br>
 				<span><?php _e( "Il faut imp&eacute;rativement indiquer le code destinataire ou b&eacute;n&eacute;ficiaire suivant :", 'yproject' ); ?></span><br>
 				<strong><span id="clipboard-user-lw-code">wedogood-<?php echo $page_controler->get_current_campaign_organization_wallet_id(); ?></span></strong>
 				<br><br>
