@@ -21,8 +21,9 @@
 		<?php _e( "Ceci est normal : l'aventure entrepreneuriale est risqu&eacute;e et peut &eacute;chouer, mais cela vaut le coup d'essayer pour faire &eacute;merger des id&eacute;es qui am&eacute;liorent le monde dans lequel nous vivons.", 'yproject' ); ?><br>
 		<br>
 
-		<?php _e( "Donc si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin.", 'yproject' ); ?>
-		<?php _e( "Sinon, vous pouvez simplement donner votre avis sur les projets.", 'yproject' ); ?><br>
+		<?php _e( "Si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin.", 'yproject' ); ?>
+		<?php _e( "Sinon, vous pouvez simplement donner votre avis sur les projets.", 'yproject' ); ?>
+		<?php _e( "De plus, vous b&eacute;n&eacute;ficiez d'un d&aecute;lai de r&eacute;flexion de 4 jours minimum.", 'yproject' ); ?><br>
 		<br>
 
 		<?php _e( "WE DO GOOD est agr&eacute;&eacute;e par l'ORIAS et membre de l'association professionnelle Financement Participatif France.", 'yproject' ); ?>

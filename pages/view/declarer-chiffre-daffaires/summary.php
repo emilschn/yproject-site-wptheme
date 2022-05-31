@@ -111,6 +111,11 @@ $summary_data = $page_controler->get_summary_data();
 		<br><br>
 	<?php endif; ?>
 
+	<p class="align-justify">
+		<?php _e( "Nous vous encourageons fortement à payer par carte afin de verser immédiatement les royalties à vos investisseurs.", 'yproject' ); ?><br>
+		<?php _e( "De plus, si vous choisissez le paiement par prélèvement, des frais s'appliqueront en cas de rejet de prélèvement.", 'yproject' ); ?><br><br>
+	</p>
+
 	<button type="submit" name="action" value="gotopayment" class="button red"><?php _e( "Valider et payer par carte", 'yproject' ); ?></button>
 	<div class="clear"><br></div>
 	
