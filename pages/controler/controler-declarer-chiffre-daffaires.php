@@ -515,6 +515,9 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$this->current_declaration->update();
 
 					NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+					$linked_users_creator = $WDGOrganization->get_linked_users( WDGWPREST_Entity_Organization::$link_user_type_creator );
+					$WDGUser_creator = $linked_users_creator[ 0 ];
+					NotificationsAPI::declaration_done_pending_mandate( $WDGOrganization, $WDGUser_creator, $this->current_campaign );
 				}
 			}
 		}
@@ -540,7 +543,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$bic = LemonwayLib::$lw_wire_bic;
 		$holder = LemonwayLib::$lw_wire_holder;
 		$code = 'wedogood-' . $this->get_current_campaign_organization_wallet_id();
-		NotificationsAPI::declaration_done_pending_wire( $WDGOrganization, $WDGUser_creator, $this->current_campaign, $iban, $bic, $holder, $code );
+		NotificationsAPI::declaration_done_pending_wire( $WDGOrganization, $WDGUser_creator, $this->current_campaign, $this->current_declaration, $iban, $bic, $holder, $code );
 	}
 
 	private function start_auto_transfer() {
