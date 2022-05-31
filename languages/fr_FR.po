@@ -79,6 +79,9 @@ msgstr "Transaction"
 msgid "common.INVESTMENT"
 msgstr "Investissement"
 
+msgid "common.SUBSCRIPTION"
+msgstr "Abonnement"
+
 msgid "common.YEARS"
 msgstr "ans"
 
@@ -132,6 +135,24 @@ msgstr "Accepter"
 
 msgid "common.READ_MORE"
 msgstr "Lire plus"
+
+msgid "common.HELP"
+msgstr "Aide"
+
+msgid "common.COMPLETE"
+msgstr "Complet"
+
+msgid "common.INCOMPLETE"
+msgstr "Incomplet"
+
+msgid "common.VALIDATED"
+msgstr "Validée"
+
+msgid "common.NOT_VALIDATED"
+msgstr "Non validée"
+
+msgid "common.AUTHENTICATION"
+msgstr "Authentification"
 
 # ############################## COMMON - FORMS - ERROR ################################
 msgid "common.forms.error.FILE_WRONG_FORMAT"
@@ -543,6 +564,9 @@ msgstr "Validation de vos informations"
 msgid "account.lightbox.DATA_SAVED"
 msgstr "Donn&eacute;es enregistr&eacute;es ! Merci !"
 
+msgid "account.menu.MY_ACCOUNT"
+msgstr "Mon compte"
+
 msgid "account.menu.MY_WALLET"
 msgstr "Mon porte-monnaie"
 
@@ -570,6 +594,9 @@ msgstr "Mon authentification"
 msgid "account.menu.MY_NOTIFICATIONS"
 msgstr "Mes notifications"
 
+msgid "account.menu.organization.ACCOUNT"
+msgstr "Compte"
+
 msgid "account.menu.organization.WALLET"
 msgstr "Porte-monnaie"
 
@@ -590,9 +617,6 @@ msgstr "Justificatifs d'identification"
 
 msgid "account.menu.organization.BANK_INFO"
 msgstr "Coordonn&eacute;es bancaires"
-
-msgid "account.menu.organization.AUTHENTICATION"
-msgstr "Authentification"
 
 msgid "account.menu.LINKED_PROJECTS"
 msgstr "Projets li&eacute;s"
@@ -654,8 +678,8 @@ msgstr "Justificatifs d'identit&eacute;"
 msgid "account.authentication.EDIT_IDENTITY_DOCUMENTS"
 msgstr "Editer mes justificatifs"
 
-msgid "account.authentication.orga.AUTHENTICATION_OF"
-msgstr "Authentification de"
+msgid "account.authentication.orga.ACCOUNT_OF"
+msgstr "Compte de"
 
 msgid "account.bank.MY_BANK_CARD"
 msgstr "Ma carte bancaire"
@@ -1214,6 +1238,33 @@ msgstr "Virement :"
 
 msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
 msgstr "Pr&eacute;l&egrave;vement bancaire :"
+
+msgid "account.SOPHISTICATED_INVESTOR"
+msgstr "Investisseur averti"
+
+msgid "account.SOPHISTICATED"
+msgstr "Averti"
+
+msgid "account.NONSOPHISTICATED_INVESTOR"
+msgstr "Investisseur non-averti"
+
+msgid "account.NONSOPHISTICATED"
+msgstr "Non-averti"
+
+msgid "account.IN_MY_WALLET"
+msgstr "dans mon porte-monnaie"
+
+msgid "account.VIEW_MY_WALLET"
+msgstr "Voir mon porte-monnaie"
+
+msgid "account.VIEW_MY_SUBSCRIPTIONS"
+msgstr "Voir mes abonnements"
+
+msgid "account.EDIT_MY_PROFILE"
+msgstr "Editer mon profil"
+
+msgid "account.INVESTOR_PROFILE"
+msgstr "Profil investisseur"
 
 # ############################## /investir ################################
 msgid "invest.header.INVEST_ROYALTIES"
@@ -3498,11 +3549,14 @@ msgstr "&gt; Risque de perte totale ou partielle du capital investi."
 msgid "Ceci est normal : l'aventure entrepreneuriale est risqu&eacute;e et peut &eacute;chouer, mais cela vaut le coup d'essayer pour faire &eacute;merger des id&eacute;es qui am&eacute;liorent le monde dans lequel nous vivons."
 msgstr "Ceci est normal : l'aventure entrepreneuriale est risqu&eacute;e et peut &eacute;chouer, mais cela vaut le coup d'essayer pour faire &eacute;merger des id&eacute;es qui am&eacute;liorent le monde dans lequel nous vivons."
 
-msgid "Donc si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
-msgstr "Donc si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
+msgid "Si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
+msgstr "Si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
 
 msgid "Sinon, vous pouvez simplement donner votre avis sur les projets."
 msgstr "Sinon, vous pouvez simplement donner votre avis sur les projets."
+
+msgid "De plus, vous b&eacute;n&eacute;ficiez d'un d&aecute;lai de r&eacute;flexion de 4 jours minimum."
+msgstr "De plus, vous b&eacute;n&eacute;ficiez d'un d&aecute;lai de r&eacute;flexion de 4 jours minimum."
 
 msgid "WE DO GOOD est agr&eacute;&eacute;e par l'ORIAS et membre de l'association professionnelle Financement Participatif France."
 msgstr "WE DO GOOD est agr&eacute;&eacute;e par l'ORIAS et membre de l'association professionnelle Financement Participatif France."

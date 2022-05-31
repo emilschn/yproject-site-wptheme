@@ -151,6 +151,9 @@ UserAccountDashboard.prototype.initMenu = function () {
  * Change d'onglet
  */
 UserAccountDashboard.prototype.switchTab = function (sType) {
+	if (sType.indexOf('authentication')) {
+		sType.split('authentication').join('account');
+	}
 
 	if ($('ul.nav-menu li#menu-item-' + sType).length > 0) {
 		$('ul.nav-menu li').removeClass('selected');

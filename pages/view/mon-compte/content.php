@@ -19,7 +19,11 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 	<div>
 
 		<div id="item-body">
-			<div id="item-body-wallet" class="item-body-tab">
+			<div id="item-body-account" class="tab-account item-body-tab">
+				<?php locate_template( array( 'pages/view/mon-compte/content-account.php' ), true ); ?>
+			</div>
+
+			<div id="item-body-wallet" class="item-body-tab hidden">
 				<?php locate_template( array( 'pages/view/mon-compte/content-wallet.php' ), true ); ?>
 			</div>
 
@@ -47,10 +51,6 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 				<?php locate_template( array( 'pages/view/mon-compte/content-bank.php' ), true ); ?>
 			</div>
 
-			<div id="item-body-authentication" class="item-body-tab hidden">
-				<?php locate_template( array( 'pages/view/mon-compte/content-authentication.php' ), true ); ?>
-			</div>
-
 			<div id="item-body-notifications" class="item-body-tab hidden">
 				<?php locate_template( array( 'pages/view/mon-compte/content-user-notifications.php' ), true ); ?>
 			</div>
@@ -59,16 +59,16 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 				<?php global $WDGOrganization; ?>
 				<?php foreach ( $list_current_organizations as $organization_item ): ?>
 					<?php $WDGOrganization = $organization_item; ?>
+					<div id="item-body-orga-account-<?php echo $WDGOrganization->get_wpref(); ?>" class="tab-account item-body-tab hidden">
+						<?php locate_template( array( 'pages/view/mon-compte/content-orga-account.php' ), true, false ); ?>
+					</div>
+
 					<div id="item-body-orga-wallet-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-wallet.php' ), true, false ); ?>
 					</div>
 			
 					<div id="item-body-orga-investments-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-investments.php' ), true, false ); ?>
-					</div>
-			
-					<div id="item-body-orga-subscriptions-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
-						<?php locate_template( array( 'pages/view/mon-compte/content-orga-subscriptions.php' ), true, false ); ?>
 					</div>
 
 					<div id="item-body-orga-documents-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
@@ -85,10 +85,6 @@ $list_current_organizations = $page_controler->get_current_user_organizations();
 			
 					<div id="item-body-orga-bank-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
 						<?php locate_template( array( 'pages/view/mon-compte/content-orga-bank.php' ), true, false ); ?>
-					</div>
-			
-					<div id="item-body-orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>" class="item-body-tab hidden">
-						<?php locate_template( array( 'pages/view/mon-compte/content-orga-authentication.php' ), true, false ); ?>
 					</div>
 				<?php endforeach; ?>
 			<?php endif; ?>

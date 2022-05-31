@@ -57,7 +57,6 @@ YPUIFunctions = (function ($) {
 
 			if ($('span#auto-redirect').length > 0) {
 				var redirectUrl = $('span#auto-redirect').data('redirect-link');
-				console.log("blabla" + redirectUrl);
 				setTimeout(function () { window.location = redirectUrl; }, 2000);
 			}
 
