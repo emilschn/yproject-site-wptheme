@@ -107,7 +107,7 @@ global $stylesheet_directory_uri;
 
 <?php if ( $page_controler->can_add_check() ): ?>
 <div class="align-center margin-height">
-	<a href="#contacts" class="button-contacts-add-check button blue" data-lightbox="add-check"><?php _e("Ajouter un ch&egrave;que", "yproject") ?></a>
+	<a href="#contacts" class="button-contacts-add-check button blue"><?php _e("Ajouter un ch&egrave;que", "yproject") ?></a>
 	<br><br>
 	<?php locate_template( array( 'pages/view/tableau-de-bord/tab-contacts/add-check.php'  ), true ); ?>
 </div>
