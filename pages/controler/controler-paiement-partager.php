@@ -75,7 +75,7 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 			// Si c'est une personne physique qui a investi
 			// Et si c'est de l'épargne positive
 			// On propose de s'abonner (si l'utilisateur n'est pas encore abonné à cette thématique)
-			if ( true /*$this->current_investment->get_session_user_type() == 'user' && $this->current_campaign->is_positive_savings()*/ ) {
+			if ( $this->current_investment->get_session_user_type() == 'user' && $this->current_campaign->is_positive_savings() ) {
 				$has_subscribed_before = FALSE;
 				$list_subscriptions = $WDGCurrent_User->get_active_subscriptions();
 				foreach ( $list_subscriptions as $item_subscription ) {
