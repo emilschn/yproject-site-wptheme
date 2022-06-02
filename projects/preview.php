@@ -170,7 +170,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 				<p><?php _e( 'project.POSITIVE_SAVINGS_BANNER', 'yproject' ); ?></p>
 			</div>
 			<?php endif; ?>
-			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php _e( 'project.INVEST_ON_PROJECT', 'yproject' ) ?></a>
+			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php _e( 'common.INVEST', 'yproject' ) ?></a>
 
 		<?php
 		//Projets déja financés
