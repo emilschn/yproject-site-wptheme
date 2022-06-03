@@ -171,6 +171,17 @@ class WDG_Page_Controler_Project_Dashboard extends WDG_Page_Controler {
 		return $this->can_access_author;
 	}
 
+	public function can_access_contract() {
+		$contract_spendings_description = $this->campaign->contract_spendings_description();
+		$roi_percent_estimated = $this->campaign->roi_percent_estimated();
+		$contract_start_date = $this->campaign->contract_start_date();
+		$estimated_turnover = $this->campaign->estimated_turnover();
+		return !empty( $contract_spendings_description )
+			&& !empty( $roi_percent_estimated )
+			&& !empty( $contract_start_date )
+			&& !empty( $estimated_turnover );
+	}
+
 	/******************************************************************************/
 	// DONNEES DE LA CAMPAGNE
 	/******************************************************************************/
