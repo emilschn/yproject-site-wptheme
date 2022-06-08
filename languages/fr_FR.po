@@ -11,7 +11,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -1655,7 +1655,7 @@ msgid "invest.mean-payment.success.ONE_EMAIL_3"
 msgstr "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail."
 
 msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_1"
-msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase d'&eacute;valuation'."
+msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase d'&eacute;valuation."
 
 msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_2"
 msgstr "Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement."
