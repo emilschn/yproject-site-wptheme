@@ -19,6 +19,12 @@ if ( isset( $WDGOrganization ) ) {
 
 <h2><?php _e( 'account.menu.MY_ACCOUNT', 'yproject' ); ?></h2>
 
+<?php if ( $page_controler->admin_is_overriding_user() ): ?>
+	<div class="admin-theme">
+		ID LemonWay : <?php echo $WDGOrganization->get_lemonway_id(); ?>
+	</div>
+<?php endif; ?>
+
 <div class="account-dashboard">
 	<div>
 		<div><img src="<?php echo $stylesheet_directory_uri; ?>/images/template-invest/picto-porte-monnaie.png" alt="porte-monnaie" width="50" height="50"></div>
