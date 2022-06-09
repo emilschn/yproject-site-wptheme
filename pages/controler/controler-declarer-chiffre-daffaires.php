@@ -362,11 +362,11 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		return ( $this->display_payment_error || !empty( $input_has_error ) );
 	}
 
-	public function has_sign_mandate() {
+	public function can_display_mandate() {
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
 
-		return $WDGOrganization->has_signed_mandate();
+		return $WDGOrganization->has_signed_mandate() && $this->current_declaration->get_amount_with_commission() > 0.5;
 	}
 
 	public function get_mandate_infos() {

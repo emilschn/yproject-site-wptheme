@@ -28,7 +28,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<?php locate_template( array( 'pages/view/moyen-de-paiement/card-choice.php'  ), true, false ); ?>
 		</div>
 
-		<?php // if ( $page_controler->has_sign_mandate() ): ?>
+		<?php if ( $page_controler->can_display_mandate() ): ?>
 		<div class="mean-payment" data-meanofpayment="mandate">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?>" width="120">
 			<div>
@@ -42,7 +42,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <strong><?php echo $page_controler->get_mandate_infos(); ?></strong></span>
 			</div>
 		</div>
-		<?php // endif; ?>
+		<?php endif; ?>
 
 		<?php if ( $page_controler->can_display_wire() ): ?>
 		<div class="mean-payment" data-meanofpayment="wire">
