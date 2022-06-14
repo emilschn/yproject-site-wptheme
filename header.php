@@ -307,7 +307,6 @@
 		<?php
 		WDGUser::check_validate_general_terms();
 		if (WDGUser::must_show_general_terms_block()):
-			global $edd_options;
 		?>
 		<div id="validate-terms" class="wdg-lightbox">
 			<div class="wdg-lightbox-padder">
