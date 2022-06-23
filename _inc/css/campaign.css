@@ -1021,6 +1021,21 @@ div#project-content-economic_model_automatic div.zone-content table.economic-int
 	font-size: 0.7em;
 }
 
+div#project-content-economic_model_automatic div.zone-content span.duplicate-triangle {
+	display: inline-block;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-width: 7px 0 7px 14px;
+	margin-right: 8px;
+	border-color: transparent transparent transparent #B3DAE1;
+}
+
+div#project-content-economic_model_automatic div.zone-content span.duplicate-triangle.current {
+	border-color: transparent transparent transparent #00879B;
+}
+
+
 div#project-content-economic_model_automatic div.zone-content h4 {
 	font-weight: bold;
 	font-size: 20px;

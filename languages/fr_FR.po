@@ -3161,6 +3161,9 @@ msgstr "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
 msgid "L'investissement est possible jusqu'au premier versement de royalties"
 msgstr "L'investissement est possible jusqu'au premier versement de royalties"
 
+msgid "progressbar.CURRENTLY_RAISING"
+msgstr "levée en cours"
+
 msgid "personnes"
 msgstr "personnes"
 
@@ -3372,6 +3375,9 @@ msgstr "Revenus et financement du projet"
 
 msgid "project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR"
 msgstr "Sur les 12 mois précédents la levée de fonds, nous avons réalisé %s € de chiffre d'affaires."
+
+msgid "project.single.description.economic.THE_FUNDRAISINGS_ON_WEDOGOOD"
+msgstr "Les levées de fonds de %s sur WE DO GOOD"
 
 msgid "project.single.description.economic.COUNT_SALES"
 msgstr "Nombre de ventes"
