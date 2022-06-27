@@ -19,8 +19,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<center><img src="<?php echo $stylesheet_directory_uri; ?>/images/eversign.png" width="150" height="40" /></center><br>
 
 		<?php else: ?>
-			<?php _e( "Vous allez recevoir un e-mail de confirmation de paiement.", 'yproject' ); ?><br>
-			<span class="errors"><?php _e( "Votre contrat est en pièce jointe, mais nous avons rencontré un problème pour l'envoyer à notre prestataire de signature électronique. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me. Vous recevrez alors une invitation à signer le contrat en ligne, via Eversign.", 'yproject' ); ?></span><br><br>
+			<?php _e( 'invest.mean-payment.success.TWO_EMAILS_ERROR_1', 'yproject' ); ?><br>
+			<span class="errors"><?php _e( 'invest.mean-payment.success.TWO_EMAILS_ERROR_2', 'yproject' ); ?></span><br><br>
 
 		<?php endif; ?>
 
