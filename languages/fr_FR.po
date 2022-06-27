@@ -1643,7 +1643,7 @@ msgid "invest.mean-payment.success.TWO_EMAILS_ERROR_1"
 msgstr "Vous allez recevoir un e-mail de confirmation de paiement."
 
 msgid "invest.mean-payment.success.TWO_EMAILS_ERROR_2"
-msgstr "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me."
+msgstr "Votre contrat est en pièce jointe, mais nous avons rencontré un problème pour l'envoyer à notre prestataire de signature électronique. Nos équipes travaillent &agrave; la résolution de ce problème. Vous recevrez alors une invitation à signer le contrat en ligne, via Eversign."
 
 msgid "invest.mean-payment.success.ONE_EMAIL_1"
 msgstr "Votre investissement est valid&eacute;."
@@ -3961,7 +3961,7 @@ msgid "Vous allez recevoir un e-mail de confirmation de paiement."
 msgstr "Vous allez recevoir un e-mail de confirmation de paiement."
 
 msgid "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me."
-msgstr "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me."
+msgstr "Votre contrat est en pièce jointe, mais nous avons rencontré un problème pour l'envoyer à notre prestataire de signature électronique. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me. Vous recevrez alors une invitation à signer le contrat en ligne, via Eversign."
 
 msgid "Votre investissement est valid&eacute;."
 msgstr "Votre investissement est valid&eacute;."
