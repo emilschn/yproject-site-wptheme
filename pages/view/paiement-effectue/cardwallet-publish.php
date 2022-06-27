@@ -20,7 +20,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		<?php else: ?>
 			<?php _e( "Vous allez recevoir un e-mail de confirmation de paiement.", 'yproject' ); ?><br>
-			<span class="errors"><?php _e( "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me.", 'yproject' ); ?></span><br><br>
+			<span class="errors"><?php _e( "Votre contrat est en pièce jointe, mais nous avons rencontré un problème pour l'envoyer à notre prestataire de signature électronique. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me. Vous recevrez alors une invitation à signer le contrat en ligne, via Eversign.", 'yproject' ); ?></span><br><br>
 
 		<?php endif; ?>
 
