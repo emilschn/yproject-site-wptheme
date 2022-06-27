@@ -88,6 +88,21 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 <?php echo html_entity_decode( $campaign->total_previous_funding_description() ); ?>
 <p><?php echo sprintf( __( 'project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR', 'yproject' ), UIHelpers::format_number( $campaign->turnover_previous_year() ) ); ?></p>
 
+<?php if ( $campaign->has_duplicate_campaigns() ): ?>
+<p>
+	<br>
+	<strong><?php echo sprintf( __( 'project.single.description.economic.THE_FUNDRAISINGS_ON_WEDOGOOD', 'yproject' ), $WDGOrganization->get_name() ); ?></strong>
+	<br><br>
+	<span class="duplicate-triangle current"></span><strong><?php echo ucfirst( __( 'progressbar.CURRENTLY_RAISING', 'yproject' ) ); ?></strong> - <span class="has-bleu-color"><?php echo UIHelpers::format_number( $campaign->current_amount( false) ); ?> &euro;</span><br>
+	<?php $duplicate_campaigns_id = $campaign->get_duplicate_campaigns_id(); ?>
+	<?php foreach ( $duplicate_campaigns_id as $campaign_id ): ?>
+		<?php $WDGCampaignDuplicate = new ATCF_Campaign( $campaign_id ); ?>
+		<span class="duplicate-triangle"></span><?php echo $WDGCampaignDuplicate->end_date( 'd/m/Y' ); ?> - <span class="has-bleu-color"><?php echo UIHelpers::format_number( $WDGCampaignDuplicate->current_amount( false) ); ?> &euro;</span><br>
+	<?php endforeach; ?>
+	<br>
+</p>
+<?php endif; ?>
+
 <div class="table-container">
 	<table>
 		<thead>

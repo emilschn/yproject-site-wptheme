@@ -19,6 +19,8 @@ $campaign_status = $campaign->campaign_status();
 </div>
 
 <?php elseif ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
+	<?php display_duplicate_campaigns_amount( $campaign ); ?>
+
 	<?php
 	$maximum_goal = $campaign->goal( false );
 	$minimum_goal = $campaign->minimum_goal( false );
@@ -40,15 +42,22 @@ $campaign_status = $campaign->campaign_status();
 	} else {
 		$bar_width = $percent_minimum_completed * $width_to_minimum_goal / 100;
 	}
+
+	$container_classes = '';
+	if ( !empty( $is_progressbar_shortcode ) ) {
+		$container_classes .= 'shortcode-context';
+	}
+	$progress_data_class = '';
+	if ( $campaign->has_duplicate_campaigns() ) {
+		$progress_data_class .= ' has-duplicate';
+	}
 	?>
-<div class="progress-bar-container minimum-as-step <?php if ( !empty( $is_progressbar_shortcode ) ) {
-		echo 'shortcode-context';
-	} ?>">
+<div class="progress-bar-container minimum-as-step <?php echo $container_classes; ?>">
 	<div class="progress-bar project-page-bar">
 		<div class="current-bar" style="min-width:<?php echo $bar_width; ?>%"></div>
 	</div>
-	<div class="progress-data project-page-data">
-		<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
+	<div class="progress-data project-page-data <?php echo $progress_data_class; ?>">
+		<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;<span class="current-fundraising">- <?php _e( 'progressbar.CURRENTLY_RAISING', 'yproject' ); ?></span></span>
 		<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
 	</div>
 	<span class="progress-bar-separator" style="margin-left: <?php echo $width_to_minimum_goal; ?>%;">
@@ -58,21 +67,44 @@ $campaign_status = $campaign->campaign_status();
 </div>
 
 <?php else: ?>
+	<?php display_duplicate_campaigns_amount( $campaign ); ?>
+
 	<?php
 	$percent = min( 100, $campaign->percent_minimum_completed( false ) );
 	$width = 100 * $percent / 100; // taille maxi de la barre est à 100%
+
+	$container_classes = '';
+	if ( !empty( $is_progressbar_shortcode ) ) {
+		$container_classes .= ' shortcode-context';
+	}
+	$progress_data_class = '';
+	if ( $campaign->has_duplicate_campaigns() ) {
+		$progress_data_class .= ' has-duplicate';
+	}
 	?>
 
-	<div class="progress-bar-container <?php if ( !empty( $is_progressbar_shortcode ) ) {
-		echo 'shortcode-context';
-	} ?>">
+	<div class="progress-bar-container <?php echo $container_classes; ?>">
 		<div class="progress-bar project-page-bar">
 			<div class="current-bar" style="min-width:<?php echo $width; ?>%"></div>
 		</div>
-		<div class="progress-data project-page-data">
-			<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
+		<div class="progress-data project-page-data <?php echo $progress_data_class; ?>">
+			<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;<span class="current-fundraising">- <?php _e( 'progressbar.CURRENTLY_RAISING', 'yproject' ); ?></span></span>
 			<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
 		</div>
 	</div>
 
 <?php endif;
+
+function display_duplicate_campaigns_amount( $campaign ) {
+	global $stylesheet_directory_uri;
+	if ( !$campaign->has_duplicate_campaigns() ) {
+		return;
+	}
+	$amount_total_formatted = $campaign->get_duplicate_campaigns_total_amount();
+	?>
+	<div class="align-center progress-duplicate-amount">
+		<?php echo $amount_total_formatted; ?> <?php _e( 'common.RAISED.P', 'yproject' ); ?>
+		<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/continuous-fund-icon.png" width="22" height="19" alt="en continu">
+	</div>
+	<?php
+}
