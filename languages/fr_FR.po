@@ -366,7 +366,7 @@ msgid "projects.CLOSING_CAMPAIGNS_DESCRIPTION"
 msgstr "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties."
 
 msgid "projects.FUNDED_CAMPAIGNS"
-msgstr "projets financ&eacute;s"
+msgstr "projets financés et terminés"
 
 msgid "projects.FUNDED_CAMPAIGNS_SEE_MORE"
 msgstr "Voir plus de projets"

@@ -196,6 +196,8 @@ if ( !empty( $page_controler ) ) :
 					<?php
 					global $project_id;
 					$currentprojects_list = $page_controler->get_currentprojects_list();
+					$project_list_positive_savings = $page_controler->get_positive_savings_projects_list();
+					
 					$project_list_funding = $currentprojects_list[ 'funding' ];
 					if ( count( $project_list_funding ) > 0 ) {
 						foreach ( $project_list_funding as $project_post ) {
@@ -203,9 +205,25 @@ if ( !empty( $page_controler ) ) :
 							locate_template( array( "projects/preview.php" ), true, false );
 						}
 					}
+
 					$project_list_vote = $currentprojects_list[ 'vote' ];
 					if ( count( $project_list_vote ) > 0 ) {
 						foreach ( $project_list_vote as $project_post ) {
+							$project_id = $project_post->ID;
+							locate_template( array( "projects/preview.php" ), true, false );
+						}
+					}
+
+					if ( count( $project_list_positive_savings ) > 0 ) {
+						foreach ( $project_list_positive_savings as $project_post ) {
+							$project_id = $project_post->ID;
+							locate_template( array( "projects/preview.php" ), true, false );
+						}
+					}
+	
+					$project_list_funding_after = $currentprojects_list[ 'funding_after' ];
+					if ( count( $project_list_funding_after ) > 0 ) {
+						foreach ( $project_list_funding_after as $project_post ) {
 							$project_id = $project_post->ID;
 							locate_template( array( "projects/preview.php" ), true, false );
 						}
@@ -230,93 +248,6 @@ if ( !empty( $page_controler ) ) :
 <?php
 /******************************************************************************/
 // FIN CURRENT PROJECTS
-/******************************************************************************/
-?>
-
-
-<?php
-/******************************************************************************/
-// POSITIVE SAVINGS PROJECTS
-/******************************************************************************/
-?>
-					
-<?php $positive_savings_projects_html = $page_controler->get_positive_savings_projects_html(); ?>
-
-<?php if ( !$positive_savings_projects_html ): ?>
-
-<?php ob_start(); ?>
-
-	<?php $project_list_positive_savings = $page_controler->get_positive_savings_projects_list(); ?>
-	<?php if ( count( $project_list_positive_savings ) > 0 ): ?>
-	<div class="projects-positive-savings">
-		<div class="padder">
-			<section class="wdg-component-projects-preview">
-				<h2 class="standard"> <?php _e( 'projects.POSITIVE_SAVINGS', 'yproject' ); ?> </h2>
-				<div class="projects-title-precisions">
-					<?php _e( 'projects.POSITIVE_SAVINGS_DESCRIPTION', 'yproject' ); ?><br>
-					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'epargne-positive' ); ?>"><?php _e( 'projects.POSITIVE_SAVINGS_KNOW_MORE', 'yproject' ); ?></a>
-				</div>
-
-
-				<div class="project-slider">
-					<div class="block-projects">
-
-						<?php
-						global $project_id;
-						foreach ( $project_list_positive_savings as $project_post ) {
-							$project_id = $project_post->ID;
-							locate_template( array( "projects/preview.php" ), true, false );
-						}
-						?>
-						
-					</div>
-				</div>
-			</section>
-		</div>
-	</div>
-	<?php endif; ?>
-	
-	<?php
-	$currentprojects_list = $page_controler->get_currentprojects_list();
-	$project_list_funding_after = $currentprojects_list[ 'funding_after' ];
-	?>
-	<?php if ( count( $project_list_funding_after ) > 0 ): ?>
-	<div class="projects-after-end-date">
-		<div class="padder">
-			<section class="wdg-component-projects-preview">
-				<h2 class="standard"><?php _e( 'projects.CLOSING_CAMPAIGNS', 'yproject' ); ?></h2>
-				<div class="projects-title-precisions"><?php _e( 'projects.CLOSING_CAMPAIGNS_DESCRIPTION', 'yproject' ); ?></div>
-
-				<div class="project-slider">
-					<div class="block-projects">
-
-					<?php
-					global $project_id;
-					foreach ( $project_list_funding_after as $project_post ) {
-						$project_id = $project_post->ID;
-						locate_template( array( "projects/preview.php" ), true, false );
-					}
-					?>
-					</div>
-				</div>
-			</section>
-		</div>
-	</div>
-	<?php endif; ?>
-	
-<?php
-$cache_positive_savings_projects = ob_get_contents();
-$page_controler->set_positive_savings_projects_html( $cache_positive_savings_projects );
-ob_end_clean();
-?>
-
-<?php endif; ?>
-
-<?php echo $page_controler->get_positive_savings_projects_html(); ?>
-
-<?php
-/******************************************************************************/
-// FIN POSITIVE SAVINGS PROJECTS
 /******************************************************************************/
 ?>
 
