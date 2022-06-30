@@ -517,7 +517,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
 					$linked_users_creator = $WDGOrganization->get_linked_users( WDGWPREST_Entity_Organization::$link_user_type_creator );
 					$WDGUser_creator = $linked_users_creator[ 0 ];
-					NotificationsAPI::declaration_done_pending_mandate( $WDGOrganization, $WDGUser_creator, $this->current_campaign );
+					NotificationsAPI::declaration_done_pending_mandate( $WDGOrganization, $WDGUser_creator, $this->current_campaign, $this->current_declaration );
 				}
 			}
 		}
