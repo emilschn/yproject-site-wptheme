@@ -10,8 +10,7 @@ $is_lemonway_registered = false;
 if ( isset( $WDGOrganization ) ) {
 	$orga_wpref = $WDGOrganization->get_wpref();
 	$lw_wallet_amount = $WDGOrganization->get_lemonway_balance();
-	$validated_investments = $WDGOrganization->get_validated_investments();
-	$count_validated_investments = count( $validated_investments );
+	$count_validated_investments = $WDGOrganization->get_count_validated_investments();
 	$can_register_lemonway = $WDGOrganization->can_register_lemonway();
 	$is_lemonway_registered = $WDGOrganization->is_registered_lemonway_wallet();
 }

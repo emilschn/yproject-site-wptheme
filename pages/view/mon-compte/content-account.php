@@ -3,8 +3,7 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
 $lw_wallet_amount = $WDGUser_displayed->get_lemonway_wallet_amount();
-$validated_investments = $WDGUser_displayed->get_validated_investments();
-$count_validated_investments = count( $validated_investments );
+$count_validated_investments = $WDGUser_displayed->get_count_validated_investments();
 $list_subscriptions = $page_controler->get_active_subscriptions_list();
 $count_subscriptions = count( $list_subscriptions );
 
