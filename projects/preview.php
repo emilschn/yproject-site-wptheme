@@ -84,7 +84,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
 		<?php
 		//Projets en cours de collecte ou en vote
-		if ( ( $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ) && !$campaign->is_positive_savings() ):
+		if ( $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ):
 		?>
 			<a class="hidden-link" href="<?php echo $link; ?>">
 				<?php
@@ -171,18 +171,6 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 				</div>
 			</a>
 			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>
-
-		<?php
-		//Projets en épargne positive
-		elseif ($campaign->is_positive_savings()) :
-		?>
-			<?php if ( $campaign->has_duplicate_campaigns() ): ?>
-			<div class="financed-banner"> 
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" alt="logo WE DO GOOD">
-				<p><?php _e( 'project.POSITIVE_SAVINGS_BANNER', 'yproject' ); ?></p>
-			</div>
-			<?php endif; ?>
-			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php _e( 'common.INVEST', 'yproject' ) ?></a>
 
 		<?php
 		//Projets déja financés
