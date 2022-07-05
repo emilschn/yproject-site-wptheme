@@ -157,7 +157,13 @@ $lang_list = $campaign->get_lang_list();
 				<input type="hidden" id="url_video_link" value="<?php echo $campaign->video(); ?>" />
 			</div>
 			
-			<div class="banner-half right">
+			<?php
+			$right_classes = '';
+			if ( $campaign->has_duplicate_campaigns() ) {
+				$right_classes = 'has-duplicates';
+			}
+			?>
+			<div class="banner-half right <?php echo $right_classes; ?>">
 				
 				<div class="project-banner-info-actions">
 					<div class="impacts-container" id="impacts-<?php echo $post->ID; ?>">
