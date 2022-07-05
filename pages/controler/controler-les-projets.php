@@ -163,11 +163,6 @@ class WDG_Page_Controler_ProjectList extends WDG_Page_Controler {
 				'vote'				=> ATCF_Campaign::get_list_vote( -1, '', TRUE )
 			);
 		}
-		if ( empty( $this->currentprojects_list ) ) {
-			$this->currentprojects_list = array(
-				'funding_after'		=> ATCF_Campaign::get_list_funding( -1, '', TRUE, FALSE )
-			);
-		}
 	}
 
 	public function get_currentprojects_html() {
