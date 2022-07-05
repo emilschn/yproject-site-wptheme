@@ -305,7 +305,7 @@ $lang_list = $campaign->get_lang_list();
 					<?php else: ?>
 						<?php if ( $campaign->percent_completed( false ) < 100 ): ?>
 							<?php
-							$nbinvestors = $campaign->backers_count();
+							$nbinvestors = $campaign->backers_count( true );
 							?>
 
 							<div class="left">
