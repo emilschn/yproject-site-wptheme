@@ -10,6 +10,7 @@
 	
 	$WDGUser_displayed = $page_controler->get_displayed_user();
 	$is_authentified = $WDGUser_displayed->is_lemonway_registered();
+	$is_project_owner = $WDGUser_displayed->is_project_owner();
 ?>
 
 <form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?> account-form">
@@ -68,7 +69,7 @@
 		<?php endforeach; ?>
 	</div>
 	
-	<?php if ( $is_authentified == FALSE ): ?>
+	<?php if ( !$is_authentified || $is_project_owner ): ?>
 		<div id="user-identify-docs-form-buttons">
 			<button type="submit" class="button save red">
 				<span class="button-text">

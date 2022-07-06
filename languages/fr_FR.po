@@ -2219,6 +2219,12 @@ msgstr "Verso du deuxi&egrave;me justificatif d'identit&eacute;"
 msgid "form.user-identitydocs.SECOND_ID_BACK_DESCRIPTION"
 msgstr "Ce fichier n'est utile que si le verso ne figure pas dans le fichier pr&eacute;c&eacute;dent."
 
+msgid "form.user-identitydocs.CRIMINAL_RECORD"
+msgstr "Extrait de casier judiciaire"
+
+msgid "form.user-identitydocs.CRIMINAL_RECORD_DESCRIPTION"
+msgstr "De moins de trois mois, nécessaire pour les porteurs de projet"
+
 msgid "form.user-identitydocs.PROOF_ADDRESS"
 msgstr "Justificatif de domicile"
 
