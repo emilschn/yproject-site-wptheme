@@ -118,7 +118,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 				<?php endif; ?>
 				</div>
 
-				<?php if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte && !$campaign->is_positive_savings() ): ?>
+				<?php if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte ): ?>
 					<?php
 						$projectAction = __( 'project.TO_INVEST', 'yproject' );
 						$buttonAction = __( 'project.INVEST_ON_PROJECT', 'yproject' );
@@ -131,7 +131,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 							<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
 						</div>
 
-				<?php elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote && !$campaign->is_positive_savings() ): ?>
+				<?php elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote ): ?>
 					<?php
 						if ( $time_remaining_str != '-' ) {
 							$projectAction = __( 'project.TO_EVALUATE', 'yproject' );
