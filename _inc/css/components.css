@@ -476,24 +476,6 @@ div.progress-data.has-duplicate span.current-amount span.current-fundraising {
 }
 
 /*******************************************************************************
-* EPARGNE POSITIVE
-*******************************************************************************/
-
-.cat-epargne-positive .progress-bar,
-.cat-epargne-positive .progress-data,
-.cat-epargne-positive div.progress-info {
-	display: none;
-}
-
-.cat-epargne-positive div.project-summary {
-	height: 60px;
-}
-
-.cat-epargne-positive div.financed-banner {
-	margin-top: -360px;
-}
-
-/*******************************************************************************
 * PROJETS FINANCES
 *******************************************************************************/
 
