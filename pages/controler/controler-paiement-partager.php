@@ -108,6 +108,8 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 						)
 					);
 					if ( $this->form->isPosted() && $this->form->postForm() ) {
+						$this->form_text = '';
+						$this->form_buttons = FALSE;
 						$this->can_display_form = FALSE;
 					}
 				}
