@@ -147,12 +147,6 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					<span class="vote-status" style="min-width:100%"><span><?php echo $project_status; ?></span>&nbsp;</span>
 				<?php endif; ?>
 			</a>
-			<?php if ($campaign->is_funded()) : ?>
-				<div class="financed-banner campaign-collecte"> 
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" alt="logo WE DO GOOD">
-					<p><?php _e( 'project.FUNDED_BANNER', 'yproject' ); ?></p>
-				</div>
-			<?php endif; ?>
 			<a class="hidden-link" href="<?php echo $link; ?>">
 				<div class="progress-info">
 					<span class="progress-pers">
