@@ -22,12 +22,21 @@ $profitability_percent = $profitability_ratio * 100 - 100;
 
 $contract_start_date = new DateTime( $campaign->contract_start_date() );
 $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfunding/includes/contracts/' .  $campaign->backoffice_contract_orga();
+
+$vote_results = false;
+$is_two_cols = $campaign->is_hidden();
+if ( !$is_two_cols ) {
+	if ( $campaign->campaign_status() != ATCF_Campaign::$campaign_status_preparing && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_validated && $campaign->campaign_status() != ATCF_Campaign::$campaign_status_vote ) {
+		$vote_results = WDGCampaignVotes::get_results( $campaign->ID );
+		$is_two_cols = ( $vote_results[ 'count_voters' ] == 0 );
+	}
+}
 ?>
 
 <?php // 3 zones du haut ?>
 <table class="economic-intro">
 	<tr>
-		<td class="left <?php if ( $campaign->is_hidden() ) { ?>two-cols<?php } ?>">
+		<td class="left <?php if ( $is_two_cols ) { ?>two-cols<?php } ?>">
 			<h5><?php _e( 'project.single.description.economic.TARGET_PROFITABILITY', 'yproject' ); ?></h5>
 			<span class="economic-data">
 				<?php echo sprintf( __( 'project.single.description.economic.TARGET_PROFITABILITY_RATIO', 'yproject' ), UIHelpers::format_number( $profitability_ratio ), $funding_duration ); ?>
@@ -39,7 +48,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 			<span><?php echo sprintf( __( 'project.single.description.economic.MINIMUM_PROFITABILITY_WHILE_ACTIVE', 'yproject' ), UIHelpers::format_number( $minimum_profit ) ); ?></span>
 		</td>
 
-		<?php if ( !$campaign->is_hidden() ): ?>
+		<?php if ( !$is_two_cols ): ?>
 		<td class="left">
 			<h5><?php _e( 'project.single.description.economic.RISK', 'yproject' ); ?></h5>
 
@@ -50,7 +59,9 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 
 			<?php else: ?>
 				<?php
-				$vote_results = WDGCampaignVotes::get_results( $campaign->ID );
+				if ( empty( $vote_results ) ) {
+					$vote_results = WDGCampaignVotes::get_results( $campaign->ID );
+				}
 				$risk_rate = round( $vote_results[ 'average_risk' ], 2 );
 				?>
 				<span class="economic-data">
@@ -72,7 +83,7 @@ $file_name_contract_orga = site_url() . '/wp-content/plugins/appthemer-crowdfund
 		</td>
 		<?php endif; ?>
 
-		<td class="left third <?php if ( $campaign->is_hidden() ) { ?>two-cols<?php } ?>">
+		<td class="left third <?php if ( $is_two_cols ) { ?>two-cols<?php } ?>">
 			<h5><?php _e( 'project.single.description.economic.ROYALTIES_PER_QUARTER', 'yproject' ); ?></h5>
 			<span class="economic-data"><?php echo sprintf( __( 'project.single.description.economic.ROYALTIES_PER_QUARTER_MAX', 'yproject' ), UIHelpers::format_number( $campaign->roi_percent_estimated() ) ); ?></span>
 			<br>
