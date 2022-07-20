@@ -71,10 +71,23 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 		$this->can_display_form = FALSE;
 		if ( is_user_logged_in() ) {
 			$WDGCurrent_User = WDGUser::current();
+			$core = ATCF_CrowdFunding::instance();
+
+			// Vérification si les formulaires suivants ont été postés pour ne pas réafficher en boucle la proposition d'abonnement
+			$is_test_form_posted = false;
+			if ( $this->current_campaign->is_positive_savings() ) {
+				$core->include_form( 'invest-poll-continuous' );
+				$test_form = new WDG_Form_Invest_Poll_Continuous( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+				$is_test_form_posted = $test_form->isPosted();
+			} else {
+				$core->include_form( 'invest-poll' );
+				$test_form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+				$is_test_form_posted = $test_form->isPosted();
+			}
 
 			// Si c'est une personne physique qui a investi
 			// On propose de s'abonner (si l'utilisateur n'est pas encore abonné à ce projet)
-			if ( $this->current_investment->get_session_user_type() == 'user' ) {
+			if ( $this->current_investment->get_session_user_type() == 'user' && !$is_test_form_posted ) {
 				$has_subscribed_before = FALSE;
 				$list_subscriptions = $WDGCurrent_User->get_active_subscriptions();
 				foreach ( $list_subscriptions as $item_subscription ) {
@@ -87,7 +100,6 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 				if ( !$has_subscribed_before ) {
 					$this->can_display_form = TRUE;
 					WDG_Languages_Helpers::load_languages();
-					$core = ATCF_CrowdFunding::instance();
 					$core->include_form( 'positive-savings-subscription' );
 					$this->form = new WDG_Form_Subscribe_Positive_Savings( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
 					$this->form_fields_hidden_slug = WDG_Form_Subscribe_Positive_Savings::$field_group_hidden;
@@ -120,7 +132,6 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 				if ( empty( $poll_answers ) ) {
 					WDG_Languages_Helpers::load_languages();
 					$this->can_display_form = TRUE;
-					$core = ATCF_CrowdFunding::instance();
 					if ( $this->current_campaign->is_positive_savings() ) {
 						$core->include_form( 'invest-poll-continuous' );
 						$this->form = new WDG_Form_Invest_Poll_Continuous( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
