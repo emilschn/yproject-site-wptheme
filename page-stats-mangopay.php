@@ -38,17 +38,6 @@ get_header();
 		
 		    <h1>Infos LW</h1>
 			
-			<?php //Ajouter un RIB à un utilisateur
-			/*$id_user = 0;
-			$user = new WDGUser($id_user);
-			$holder_name = "";
-			$iban = "";
-			$bic = "";
-			$address1 = "";
-			$user->save_iban( $holder_name, $iban, $bic, $address1 );
-			LemonwayLib::wallet_register_iban( $user->get_lemonway_id(), $holder_name, $iban, $bic, $address1 );*/
-			?>
-			
 			<?php // Refaire des transferts de ROI
 			//$roi_declaration = new WDGROIDeclaration(1); $roi_declaration->redo_transfers(); 
 //			$roi_declaration = new WDGROIDeclaration(14);
@@ -85,10 +74,6 @@ get_header();
 			
 			<?php // Annuler des ROI
 //			WDGROI::cancel_list( 1173 );
-			?>
-			
-			<?php
-//			LemonwayLib::wallet_register_iban( 'SC', 'WE DO GOOD', 'FR7614445202000800123435043', 'CEPAFRPP444', '51 RUE SAINT HELIER 35000 RENNES' );
 			?>
 			
 			<?php // Gérer des virements individuels
