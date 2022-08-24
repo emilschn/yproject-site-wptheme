@@ -414,10 +414,11 @@ WDGCampaignDashboard.prototype.initAjaxForms = function () {
 			return false;
 		}
 		var thisForm = $(this);
+		var thisFormAction = $(this).data('action');
 
 		//Recueillir informations du formulaire
 		var data_to_update = {
-			'action': $(this).data('action'),
+			'action': thisFormAction,
 			'campaign_id': campaign_id
 		};
 		$(this).find('.field').each(function (index) {
@@ -523,11 +524,16 @@ WDGCampaignDashboard.prototype.initAjaxForms = function () {
 				}
 			}).fail(function () {
 				thisForm.find('.save_fail').fadeIn();
+
 			}).always(function () {
-				//Réactive les champs
-				save_button.find(".button-waiting").hide();
-				save_button.find(".button-text").show();
-				thisForm.find(":input").prop('disabled', false);
+				if (thisFormAction == 'save_project_status') {
+					window.location.reload();
+				} else {
+					//Réactive les champs
+					save_button.find(".button-waiting").hide();
+					save_button.find(".button-text").show();
+					thisForm.find(":input").prop('disabled', false);
+				}
 			});
 		} else {
 			//Réactive les champs
