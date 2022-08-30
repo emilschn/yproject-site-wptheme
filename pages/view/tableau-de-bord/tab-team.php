@@ -19,10 +19,15 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
                     $team_member_wp = get_userdata($team_member->wpref);
 					$team_member_name = ($team_member_wp->user_firstname != "") ? $team_member_wp->user_firstname . ' ' . $team_member_wp->user_lastname : $team_member_wp->user_login;
 					?>
-                    <li>
-                        <?php echo $team_member_name; ?>
-                        <a class="project-manage-team button red" data-action="yproject-remove-member" data-user="<?php echo $team_member->wpref; ?>"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
-                    </li>
+					<li>
+						<?php echo $team_member_name; ?>
+						<?php if ($team_member->notifications == '1'): ?>
+							<a class="project-manage-notifications button red" title="Désactiver les notifications" data-action="yproject-remove-notification" data-user="<?php echo $team_member->wpref; ?>"><i class="fa fa-bell fa-fw" aria-hidden="true"></i></a>
+						<?php else: ?>
+							<a class="project-manage-notifications button disabled" title="Activer les notifications" data-action="yproject-add-notification" data-user="<?php echo $team_member->wpref; ?>"><i class="fa fa-bell fa-fw" aria-hidden="true"></i></a>
+						<?php endif; ?>
+						<a class="project-manage-team button red" title="Supprimer de l'équipe" data-action="yproject-remove-member" data-user="<?php echo $team_member->wpref; ?>"><i class="fa fa-times fa-fw" aria-hidden="true"></i></a>
+					</li>
                 <?php endforeach; ?>
 			</ul>
 		

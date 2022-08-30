@@ -1309,12 +1309,20 @@ WDGCampaignDashboard.prototype.initTeam = function ($param) {
 	$(".project-manage-team").click(function () {
 		var action, data
 		action = $(this).attr('data-action');
-		if (action === "yproject-add-member") {
-			data = ($("#new_team_member_string")[0].value);
+		switch (action) {
+			case "yproject-add-member":
+				data = ($("#new_team_member_string")[0].value);
+				break;
+			case "yproject-remove-member":
+				data = $(this).attr('data-user');
+				break;
 		}
-		else if (action === "yproject-remove-member") {
-			data = $(this).attr('data-user');
-		}
+		self.manageTeam(action, data, campaign_id);
+	});
+	$(".project-manage-notifications").click(function () {
+		var action, data
+		action = $(this).attr('data-action');
+		data = $(this).attr('data-user');
 		self.manageTeam(action, data, campaign_id);
 	});
 };
@@ -1610,11 +1618,13 @@ WDGCampaignDashboard.prototype.manageTeam = function (action, data, campaign_id)
 						//Recharge l'UI pour ajouter listener au nouveau button
 						$(".project-manage-team").click(function () {
 							action = $(this).attr('data-action');
-							if (action === "yproject-add-member") {
-								data = ($("#new_team_member_string")[0].value);
-							}
-							else if (action === "yproject-remove-member") {
-								data = $(this).attr('data-user');
+							switch (action) {
+								case "yproject-add-member":
+									data = ($("#new_team_member_string")[0].value);
+									break;
+								case "yproject-remove-member":
+									data = $(this).attr('data-user');
+									break;
 							}
 							self.manageTeam(action, data, campaign_id);
 						});
@@ -1626,20 +1636,50 @@ WDGCampaignDashboard.prototype.manageTeam = function (action, data, campaign_id)
 
 	//Clic pour supprimer un membre
 	else if (action === "yproject-remove-member") {
-		//Affichage en attente de suppression
-		$("a[data-user=" + data + "]").closest("li").css("opacity", 0.5);
-		$("a[data-user=" + data + "]").html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
+		if (confirm("Êtes-vous sûr(e) de vouloir supprimer cet utilisateur de l'équipe du projet (son compte personnel ne sera pas supprimé) ?")) {
+			//Affichage en attente de suppression
+			$("a[data-user=" + data + "]").closest("li").css("opacity", 0.5);
+			$("a[data-user=" + data + "]").html('<i class="fa fa-spinner fa-spin fa-fw"></i>');
 
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': {
+					'action': 'remove_team_member',
+					'id_campaign': campaign_id,
+					'user_to_remove': data
+				}
+			}).done(function (result) {
+				$("a[data-user=" + data + "]").closest("li").slideUp("slow", function () { $(this).remove(); });
+			});
+		}
+	}
+
+	//Clic pour activer les notifications
+	else if (action === "yproject-add-notification" || action === "yproject-remove-notification") {
+		$("a.project-manage-notifications[data-user=" + data + "]").parent().css("opacity", 0.5);
 		$.ajax({
 			'type': "POST",
 			'url': ajax_object.ajax_url,
 			'data': {
-				'action': 'remove_team_member',
+				'action': 'update_user_project_notifications',
 				'id_campaign': campaign_id,
-				'user_to_remove': data
+				'id_user': data,
+				'notifications': action === "yproject-add-notification" ? '1' : '0'
 			}
 		}).done(function (result) {
-			$("a[data-user=" + data + "]").closest("li").slideUp("slow", function () { $(this).remove(); });
+			if ($("a.project-manage-notifications[data-user=" + data + "]").hasClass('red')) {
+				$("a.project-manage-notifications[data-user=" + data + "]").removeClass('red');
+				$("a.project-manage-notifications[data-user=" + data + "]").addClass('disabled');
+				$("a.project-manage-notifications[data-user=" + data + "]").attr('title', 'Activer les notifications');
+				$("a.project-manage-notifications[data-user=" + data + "]").attr('data-action', 'yproject-add-notification');
+			} else {
+				$("a.project-manage-notifications[data-user=" + data + "]").removeClass('disabled');
+				$("a.project-manage-notifications[data-user=" + data + "]").addClass('red');
+				$("a.project-manage-notifications[data-user=" + data + "]").attr('title', 'Désactiver les notifications');
+				$("a.project-manage-notifications[data-user=" + data + "]").attr('data-action', 'yproject-remove-notification');
+			}
+			$("a.project-manage-notifications[data-user=" + data + "]").parent().css("opacity", 1);
 		});
 	}
 };
