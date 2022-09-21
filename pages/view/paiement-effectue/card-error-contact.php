@@ -13,6 +13,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<a class="button" href="<?php echo $page_controler->get_error_link(); ?>"><?php _e( 'common.NEXT', 'yproject' ); ?></a>
 
 	<?php elseif ( $page_controler->get_error_restart_link() != '' ): ?>
+	<br>
 	<a href="<?php echo $page_controler->get_error_restart_link(); ?>"><?php _e( 'invest.mean-payment.error.WALLET_TRANSFER_RESTART', 'yproject' ); ?></a>
 
 	<?php endif; ?>

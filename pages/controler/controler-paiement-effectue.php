@@ -234,8 +234,8 @@ class WDG_Page_Controler_PaymentDone extends WDG_Page_Controler {
 		$buffer = '';
 		$error_item = $this->current_investment->get_error_item();
 		if ( isset( $error_item ) && $error_item->ask_restart() ) {
-			$page_url = WDG_Redirect_Engine::override_get_page_url( 'investir' );
-			$buffer = $page_url. '?campaign_id=' .$this->current_campaign->ID. '&invest_start=1';
+			$page_url = WDG_Redirect_Engine::override_get_page_url( 'moyen-de-paiement' );
+			$buffer = $page_url. '?campaign_id=' .$this->current_campaign->ID;
 		}
 		return $buffer;
 	}
