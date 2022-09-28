@@ -3533,13 +3533,6 @@ msgid ""
 "d'investissement !"
 msgstr "This fundraising campaign will be available for investment soon!"
 
-msgid "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
-msgstr "This fundraising campaign is being closed!"
-
-msgid "L'investissement est possible jusqu'au premier versement de royalties"
-msgstr ""
-"It is possible to keep investing up to the start of the royalties payment"
-
 msgid "progressbar.CURRENTLY_RAISING"
 msgstr "current fundraising"
 

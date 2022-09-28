@@ -3161,12 +3161,6 @@ msgstr "Merci pour votre &eacute;valuation !"
 msgid "Cette lev&eacute;e de fonds passera bient&ocirc;t en phase d'investissement !"
 msgstr "Cette lev&eacute;e de fonds passera bient&ocirc;t en phase d'investissement !"
 
-msgid "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
-msgstr "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
-
-msgid "L'investissement est possible jusqu'au premier versement de royalties"
-msgstr "L'investissement est possible jusqu'au premier versement de royalties"
-
 msgid "progressbar.CURRENTLY_RAISING"
 msgstr "levée en cours"
 
