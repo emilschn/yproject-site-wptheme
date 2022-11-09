@@ -376,7 +376,7 @@ $lang_list = $campaign->get_lang_list();
 				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_funded || $campaign_status == ATCF_Campaign::$campaign_status_closed): ?>
 					<?php
 					$nbinvestors = $campaign->backers_count();
-					$invest_amount = $campaign->current_amount();
+					$invest_amount = $campaign->get_duplicate_campaigns_total_amount();
 					?>
 					<div class="end-sentence">
 						<?php echo $nbinvestors. " " .__("personnes", "yproject"). " " .__("ont investi", "yproject"). " " .$invest_amount. " " .__("pour propulser cette lev&eacute;e de fonds", "yproject"); ?>
