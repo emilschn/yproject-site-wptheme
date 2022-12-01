@@ -33,6 +33,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		la page se rafraichira et les modifications qui ne sont pas enregistrées seront perdues.</h3>
 	<?php endif; ?>
 
+	<?php if ( $page_controler->can_access_contract() ): ?>
 	<form action="<?php echo admin_url( 'admin-post.php?action=upload_contract_files'); ?>" method="post" id="contract_files_form" enctype="multipart/form-data">
 		<ul class="errors">
 
@@ -274,6 +275,12 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 		<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 	</form>
+
+	<?php else: ?>
+		Prochainement : Votre contrat d'investissement.<br>
+		Veuillez compléter l'onglet Financement de ce tableau de bord.<br><br>
+
+	<?php endif; ?>
 
 	<?php if ( $page_controler->can_access_admin() ): ?>
 	<form id="contract_modification_form" class="ajax-db-form" data-action="save_project_contract_modification">

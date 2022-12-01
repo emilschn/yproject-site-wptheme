@@ -15,8 +15,7 @@ $pending_wire_investments = $WDGOrganization->get_pending_wire_investments();
 			<br>
 			<?php
 				$WDGInvestment = new WDGInvestment( $wire_investment->ID );
-				$post_campaign = atcf_get_campaign_post_by_payment_id($wire_investment->ID);
-				$campaign = atcf_get_campaign($post_campaign);
+				$campaign = $WDGInvestment->get_saved_campaign();
 			?>
 			<strong><?php _e( "Identifiants du virement :", 'yproject' ); ?></strong><br>
 			<?php echo $campaign->get_name(); ?><br>

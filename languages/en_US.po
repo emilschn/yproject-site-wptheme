@@ -2,15 +2,15 @@
 # ############################## COMMON ################################
 # Translators:
 # Jean-David Bar <jean-david@wedogood.co>, 2022
-# Admin WE DO GOOD <admin@wedogood.co>, 2022
 # Fred Joseph <frederic@wedogood.co>, 2022
+# Admin WE DO GOOD <admin@wedogood.co>, 2022
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2022-05-19 16:46+0200\n"
-"Last-Translator: Fred Joseph <frederic@wedogood.co>, 2021\n"
+"PO-Revision-Date: 2022-11-09 10:31+0100\n"
+"Last-Translator: Admin WE DO GOOD <admin@wedogood.co>, 2022\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/"
 "en/)\n"
 "Language: en\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
 
 msgid "common.OR"
 msgstr "or"
@@ -142,6 +142,24 @@ msgstr "Accept"
 
 msgid "common.READ_MORE"
 msgstr "Read more"
+
+msgid "common.HELP"
+msgstr "Help"
+
+msgid "common.COMPLETE"
+msgstr "Complete"
+
+msgid "common.INCOMPLETE"
+msgstr "Incomplete"
+
+msgid "common.VALIDATED"
+msgstr "Validated"
+
+msgid "common.NOT_VALIDATED"
+msgstr "Not validated"
+
+msgid "common.AUTHENTICATION"
+msgstr "Authentication"
 
 # ############################## COMMON - FORMS - ERROR
 # ################################
@@ -371,7 +389,7 @@ msgstr ""
 "invest until the start of their royalty contract."
 
 msgid "projects.FUNDED_CAMPAIGNS"
-msgstr "funded projects"
+msgstr "funded and finished projects"
 
 msgid "projects.FUNDED_CAMPAIGNS_SEE_MORE"
 msgstr "See more projects"
@@ -1342,31 +1360,31 @@ msgid "account.wallet.transactions.BANK_DIRECT_DEBIT"
 msgstr "Bank direct debit:"
 
 msgid "account.SOPHISTICATED_INVESTOR"
-msgstr "Investisseur averti"
+msgstr "Sophisticated investor"
 
 msgid "account.SOPHISTICATED"
-msgstr "Averti"
+msgstr "Sophisticated"
 
 msgid "account.NONSOPHISTICATED_INVESTOR"
-msgstr "Investisseur non-averti"
+msgstr "Unsophisticated investor"
 
 msgid "account.NONSOPHISTICATED"
-msgstr "Non-averti"
+msgstr "Non-sophisticated"
 
 msgid "account.IN_MY_WALLET"
-msgstr "dans mon porte-monnaie"
+msgstr "in my wallet"
 
 msgid "account.VIEW_MY_WALLET"
-msgstr "Voir mon porte-monnaie"
+msgstr "See my wallet"
 
 msgid "account.VIEW_MY_SUBSCRIPTIONS"
-msgstr "Voir mes abonnements"
+msgstr "See my subscriptions"
 
 msgid "account.EDIT_MY_PROFILE"
-msgstr "Editer mon profil"
+msgstr "Edit my profile"
 
 msgid "account.INVESTOR_PROFILE"
-msgstr "Profil investisseur"
+msgstr "Investor Profile"
 
 # ############################## /investir ################################
 msgid "invest.header.INVEST_ROYALTIES"
@@ -2451,6 +2469,12 @@ msgid "form.user-identitydocs.SECOND_ID_BACK_DESCRIPTION"
 msgstr ""
 "This file is only required if the reverse side is not in the previous file."
 
+msgid "form.user-identitydocs.CRIMINAL_RECORD"
+msgstr "Extract of your criminal record"
+
+msgid "form.user-identitydocs.CRIMINAL_RECORD_DESCRIPTION"
+msgstr "Less than 3 months, necessary for project owners"
+
 msgid "form.user-identitydocs.PROOF_ADDRESS"
 msgstr "Proof of address"
 
@@ -2599,6 +2623,18 @@ msgstr "The organisation's email address is already in use."
 msgid "form.invest-user-details.error.ORGANIZATION_WEBSITE_EMPTY"
 msgstr "The organisation's website is not defined."
 
+msgid "form.positive-savings-subscription.DO_YOU_WISH_TO_SUBSCRIBE"
+msgstr ""
+"Congratulations, you will receive royalties quarterly. Would you like these "
+"to be automatically reinvested in the theme %s? You can change your mind at "
+"any time, on your personal account."
+
+msgid "form.positive-savings-subscription.YES_I_WISH"
+msgstr "Yes, I want to activate a subscription"
+
+msgid "form.positive-savings-subscription.NO_I_DONT"
+msgstr "No, I want to manage my royalties myself"
+
 # ############################## form - invest-poll
 # ################################
 msgid "form.invest-poll.source.TITLE"
@@ -2741,7 +2777,7 @@ msgid "lemonway.document.ADDITIONAL_COMMENT"
 msgstr "Additional comment from Lemon Way:"
 
 msgid "lemonway.document.type.ID"
-msgstr "The identity document"
+msgstr "The identity card"
 
 msgid "lemonway.document.type.PROOF_ADDRESS"
 msgstr "Proof of address"
@@ -2765,7 +2801,7 @@ msgid "lemonway.document.type.CARD_ID_BACK"
 msgstr "The back of the identity card"
 
 msgid "lemonway.document.type.TAX"
-msgstr "The tax notice"
+msgstr "The last tax notice"
 
 msgid "lemonway.document.type.WELFARE"
 msgstr "The carte vitale"
@@ -3506,12 +3542,8 @@ msgid ""
 "d'investissement !"
 msgstr "This fundraising campaign will be available for investment soon!"
 
-msgid "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
-msgstr "This fundraising campaign is being closed!"
-
-msgid "L'investissement est possible jusqu'au premier versement de royalties"
-msgstr ""
-"It is possible to keep investing up to the start of the royalties payment"
+msgid "progressbar.CURRENTLY_RAISING"
+msgstr "current fundraising"
 
 msgid "personnes"
 msgstr "people"
@@ -3698,7 +3730,7 @@ msgid "project.single.description.economic.TARGET_PROFITABILITY_RISK"
 msgstr "Risk of full loss of investment, maximum gain: %s"
 
 msgid "project.single.description.economic.MINIMUM_PROFITABILITY_WHILE_ACTIVE"
-msgstr "Minimum gain while the company is active: x%s"
+msgstr "Minimum gain as long as the company is in business: x%s"
 
 msgid "project.single.description.economic.TARGET_PROFITABILITY_CALCULATE"
 msgstr "Calculate my return"
@@ -3743,11 +3775,14 @@ msgstr ""
 "amount raised"
 
 msgid "project.single.description.economic.PROJECT_REVENUES"
-msgstr "Project Revenues"
+msgstr "Revenues and funding project "
 
 msgid "project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR"
 msgstr ""
 "Over the 12 months preceding the fundraising, we achieved %s € in turnover."
+
+msgid "project.single.description.economic.THE_FUNDRAISINGS_ON_WEDOGOOD"
+msgstr "%s's fundraisings on WE DO GOOD"
 
 msgid "project.single.description.economic.COUNT_SALES"
 msgstr "Number of sales"
@@ -3779,8 +3814,8 @@ msgstr "What happens if the forecast is not reached?"
 msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_1_ANSWER"
 msgstr ""
 "In the event that the forecast is not reached after %s years and the "
-"activity continues, %s will continue to pay the royalties until full "
-"repayment of the amount invested."
+"activity continues, %s will continue to pay the royalties until a return of "
+"%s times the amount invested is reached."
 
 msgid "project.single.description.economic.YOUR_INVESTMENT_QUESTION_2"
 msgstr "When do payments start?"
@@ -3989,14 +4024,19 @@ msgstr ""
 "trying to help emerge ideas that improve the world we live in."
 
 msgid ""
-"Donc si vous souhaitez y participer et d&eacute;cidez d'investir, "
-"n'investissez que de l'argent dont vous n'avez pas besoin."
+"Si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez "
+"que de l'argent dont vous n'avez pas besoin."
 msgstr ""
-"Therefore if you wish to participate and decide to invest, use only the "
-"money that you don't need."
+"If you want to participate and decide to invest, only invest money that you "
+"do not need."
 
 msgid "Sinon, vous pouvez simplement donner votre avis sur les projets."
 msgstr "You can also evaluate the projects without investing."
+
+msgid ""
+"De plus, vous b&eacute;n&eacute;ficiez d'un d&eacute;lai de r&eacute;"
+"flexion de 4 jours minimum."
+msgstr "In addition, you benefit from a reflection period of at least 4 days."
 
 msgid ""
 "WE DO GOOD est agr&eacute;&eacute;e par l'ORIAS et membre de l'association "

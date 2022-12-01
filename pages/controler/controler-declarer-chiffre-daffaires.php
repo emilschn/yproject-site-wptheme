@@ -212,7 +212,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 	public function can_display_wire() {
 		$declaration_amount_to_pay = $this->current_declaration->get_amount_with_commission();
 
-		return ( $declaration_amount_to_pay >= 500 && !$this->has_sign_mandate() );
+		return ( $declaration_amount_to_pay >= 500 );
 	}
 
 	public function has_commission() {
@@ -253,7 +253,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				switch ( $action_posted ) {
 					case 'gobacktodeclaration':
 						$this->current_declaration->status = WDGROIDeclaration::$status_declaration;
-						$this->current_declaration->save();
+						$this->current_declaration->update();
 						$this->current_step = $this->current_declaration->get_status();
 						$core = ATCF_CrowdFunding::instance();
 						$core->include_form( 'declaration-input' );
@@ -362,11 +362,11 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		return ( $this->display_payment_error || !empty( $input_has_error ) );
 	}
 
-	public function has_sign_mandate() {
+	public function can_display_mandate() {
 		$campaign_organization_item = $this->current_campaign->get_organization();
 		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
 
-		return $WDGOrganization->has_signed_mandate();
+		return $WDGOrganization->has_signed_mandate() && $this->current_declaration->get_amount_with_commission() > 0.5;
 	}
 
 	public function get_mandate_infos() {
@@ -443,7 +443,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 				$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
 				$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_card;
 				$this->current_declaration->status = WDGROIDeclaration::$status_transfer;
-				$this->current_declaration->save();
+				$this->current_declaration->update();
 				$this->start_auto_transfer();
 				NotificationsSlack::send_notification_roi_payment_success_admin( $this->current_declaration->id );
 				NotificationsEmails::send_notification_roi_payment_success_user( $this->current_declaration->id );
@@ -463,7 +463,7 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 			$input_card_option_save = filter_input( INPUT_POST, 'meanofpayment-card-save' );
 			$wk_token = LemonwayLib::make_token( '', $this->current_declaration->id );
 			$this->current_declaration->payment_token = $wk_token;
-			$this->current_declaration->save();
+			$this->current_declaration->update();
 			$ask_payment_webkit_url = LemonwayLib::ask_payment_webkit( $WDGOrganization->get_lemonway_id(), $this->current_declaration->get_amount_with_commission(), $this->current_declaration->get_commission_to_pay(), $wk_token, $return_url, $error_url, $error_url, $input_card_option_save );
 			if ( $ask_payment_webkit_url !== FALSE ) {
 				wp_redirect( $ask_payment_webkit_url);
@@ -512,9 +512,12 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 					$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_mandate;
 					$this->current_declaration->payment_token = $result->TRANS->HPAY->ID;
 					$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
-					$this->current_declaration->save();
+					$this->current_declaration->update();
 
 					NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+					$linked_users_creator = $WDGOrganization->get_linked_users( WDGWPREST_Entity_Organization::$link_user_type_creator );
+					$WDGUser_creator = $linked_users_creator[ 0 ];
+					NotificationsAPI::declaration_done_pending_mandate( $WDGOrganization, $WDGUser_creator, $this->current_campaign, $this->current_declaration );
 				}
 			}
 		}
@@ -527,9 +530,20 @@ class WDG_Page_Controler_DeclarationInput extends WDG_Page_Controler {
 		$this->current_declaration->date_paid = $date_now->format( 'Y-m-d' );
 		$this->current_declaration->status = WDGROIDeclaration::$status_waiting_transfer;
 		$this->current_declaration->mean_payment = WDGROIDeclaration::$mean_payment_wire;
-		$this->current_declaration->save();
+		$this->current_declaration->update();
 
+		NotificationsAsana::declaration_pending_wire( $this->current_declaration->id );
 		NotificationsSlack::send_notification_roi_payment_pending_admin( $this->current_declaration->id );
+
+		$campaign_organization_item = $this->current_campaign->get_organization();
+		$WDGOrganization = new WDGOrganization( $campaign_organization_item->wpref, $campaign_organization_item );
+		$linked_users_creator = $WDGOrganization->get_linked_users( WDGWPREST_Entity_Organization::$link_user_type_creator );
+		$WDGUser_creator = $linked_users_creator[ 0 ];
+		$iban = LemonwayLib::$lw_wire_iban;
+		$bic = LemonwayLib::$lw_wire_bic;
+		$holder = LemonwayLib::$lw_wire_holder;
+		$code = 'wedogood-' . $this->get_current_campaign_organization_wallet_id();
+		NotificationsAPI::declaration_done_pending_wire( $WDGOrganization, $WDGUser_creator, $this->current_campaign, $this->current_declaration, $iban, $bic, $holder, $code );
 	}
 
 	private function start_auto_transfer() {

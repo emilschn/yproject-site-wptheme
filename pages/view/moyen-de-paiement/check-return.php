@@ -32,8 +32,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 	<?php echo $page_controler->get_campaign_organization_name(); ?>
 	<?php _e( 'invest.mean-payment.check-return.TO_THE_ADDRESS', 'yproject' ); ?><br>
 	WE DO GOOD<br>
-	38 rue des Olivettes<br>
-	44000 Nantes<br><br>
+	40 rue de la tour d’Auvergne<br>
+	44200 Nantes<br><br>
 
 	<div class="db-form v3 full investment-form">
 		<a class="button transparent investment-button" href="<?php echo $page_controler->get_success_next_link(); ?>">			

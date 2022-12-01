@@ -210,7 +210,7 @@ class WDG_Page_Controler_PreinvestmentFinish extends WDG_Page_Controler {
 			$WDGCurrent_User->get_pending_preinvestments( TRUE );
 			$this->current_investment->refund();
 			$this->current_investment->cancel( 'canceled' );
-			NotificationsEmails::preinvestment_canceled( $WDGCurrent_User->get_email(), $this->current_investment->get_saved_campaign() );
+			NotificationsAPI::preinvestment_canceled( $WDGCurrent_User, $this->current_investment->get_saved_campaign() );
 		}
 
 		// Chargement du formulaire à afficher

@@ -11,7 +11,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.1\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -366,7 +366,7 @@ msgid "projects.CLOSING_CAMPAIGNS_DESCRIPTION"
 msgstr "Ces projets ont &eacute;t&eacute; financ&eacute;s avec succ&egrave;s mais il est toujours possible d'investir jusqu'au d&eacute;marrage de leur contrat de royalties."
 
 msgid "projects.FUNDED_CAMPAIGNS"
-msgstr "projets financ&eacute;s"
+msgstr "projets financés et terminés"
 
 msgid "projects.FUNDED_CAMPAIGNS_SEE_MORE"
 msgstr "Voir plus de projets"
@@ -1640,7 +1640,7 @@ msgid "invest.mean-payment.success.TWO_EMAILS_ERROR_1"
 msgstr "Vous allez recevoir un e-mail de confirmation de paiement."
 
 msgid "invest.mean-payment.success.TWO_EMAILS_ERROR_2"
-msgstr "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me."
+msgstr "Votre contrat est en pièce jointe, mais nous avons rencontré un problème pour l'envoyer à notre prestataire de signature électronique. Nos équipes travaillent &agrave; la résolution de ce problème. Vous recevrez alors une invitation à signer le contrat en ligne, via Eversign."
 
 msgid "invest.mean-payment.success.ONE_EMAIL_1"
 msgstr "Votre investissement est valid&eacute;."
@@ -1652,7 +1652,7 @@ msgid "invest.mean-payment.success.ONE_EMAIL_3"
 msgstr "Votre contrat d&apos;investissement sera joint &agrave; cet e-mail."
 
 msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_1"
-msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase d'&eacute;valuation'."
+msgstr "Nous vous rappelons que les conditions que vous avez accept&eacute;es sont susceptibles d'&ecirc;tre modifi&eacute;es &agrave; l'issue de la phase d'&eacute;valuation."
 
 msgid "invest.mean-payment.success.PREINVESTMENT_ALERT_2"
 msgstr "Si aucun changement ne survient, votre investissement sera valid&eacute; automatiquement."
@@ -2207,6 +2207,12 @@ msgstr "Verso du deuxi&egrave;me justificatif d'identit&eacute;"
 msgid "form.user-identitydocs.SECOND_ID_BACK_DESCRIPTION"
 msgstr "Ce fichier n'est utile que si le verso ne figure pas dans le fichier pr&eacute;c&eacute;dent."
 
+msgid "form.user-identitydocs.CRIMINAL_RECORD"
+msgstr "Extrait de casier judiciaire"
+
+msgid "form.user-identitydocs.CRIMINAL_RECORD_DESCRIPTION"
+msgstr "De moins de trois mois, nécessaire pour les porteurs de projet"
+
 msgid "form.user-identitydocs.PROOF_ADDRESS"
 msgstr "Justificatif de domicile"
 
@@ -2342,6 +2348,15 @@ msgstr "L'adresse e-mail de l'organisation est d&eacute;j&agrave; utilis&eacute;
 
 msgid "form.invest-user-details.error.ORGANIZATION_WEBSITE_EMPTY"
 msgstr "Le site web de l'organisation n'est pas d&eacute;fini."
+
+msgid "form.positive-savings-subscription.DO_YOU_WISH_TO_SUBSCRIBE"
+msgstr "Félicitations, vous allez donc recevoir des royalties de façon trimestrielle. Souhaitez-vous que celles-ci soient automatiquement réinvesties dans la thématique %s ? Vous pouvez changer d'avis à tout moment, sur votre compte personnel."
+
+msgid "form.positive-savings-subscription.YES_I_WISH"
+msgstr "Oui, je souhaite activer un abonnement"
+
+msgid "form.positive-savings-subscription.NO_I_DONT"
+msgstr "Non, je souhaite gérer mes royalties moi-même"
 
 # ############################## form - invest-poll ################################
 msgid "form.invest-poll.source.TITLE"
@@ -3119,11 +3134,8 @@ msgstr "Merci pour votre &eacute;valuation !"
 msgid "Cette lev&eacute;e de fonds passera bient&ocirc;t en phase d'investissement !"
 msgstr "Cette lev&eacute;e de fonds passera bient&ocirc;t en phase d'investissement !"
 
-msgid "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
-msgstr "Cette lev&eacute;e de fonds est en cours de cl&ocirc;ture !"
-
-msgid "L'investissement est possible jusqu'au premier versement de royalties"
-msgstr "L'investissement est possible jusqu'au premier versement de royalties"
+msgid "progressbar.CURRENTLY_RAISING"
+msgstr "levée en cours"
 
 msgid "personnes"
 msgstr "personnes"
@@ -3337,6 +3349,9 @@ msgstr "Revenus et financement du projet"
 msgid "project.single.description.economic.PROJECT_REVENUES_PREVIOUS_YEAR"
 msgstr "Sur les 12 mois précédents la levée de fonds, nous avons réalisé %s € de chiffre d'affaires."
 
+msgid "project.single.description.economic.THE_FUNDRAISINGS_ON_WEDOGOOD"
+msgstr "Les levées de fonds de %s sur WE DO GOOD"
+
 msgid "project.single.description.economic.COUNT_SALES"
 msgstr "Nombre de ventes"
 
@@ -3513,11 +3528,14 @@ msgstr "&gt; Risque de perte totale ou partielle du capital investi."
 msgid "Ceci est normal : l'aventure entrepreneuriale est risqu&eacute;e et peut &eacute;chouer, mais cela vaut le coup d'essayer pour faire &eacute;merger des id&eacute;es qui am&eacute;liorent le monde dans lequel nous vivons."
 msgstr "Ceci est normal : l'aventure entrepreneuriale est risqu&eacute;e et peut &eacute;chouer, mais cela vaut le coup d'essayer pour faire &eacute;merger des id&eacute;es qui am&eacute;liorent le monde dans lequel nous vivons."
 
-msgid "Donc si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
-msgstr "Donc si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
+msgid "Si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
+msgstr "Si vous souhaitez y participer et d&eacute;cidez d'investir, n'investissez que de l'argent dont vous n'avez pas besoin."
 
 msgid "Sinon, vous pouvez simplement donner votre avis sur les projets."
 msgstr "Sinon, vous pouvez simplement donner votre avis sur les projets."
+
+msgid "De plus, vous b&eacute;n&eacute;ficiez d'un d&eacute;lai de r&eacute;flexion de 4 jours minimum."
+msgstr "De plus, vous b&eacute;n&eacute;ficiez d'un d&eacute;lai de r&eacute;flexion de 4 jours minimum."
 
 msgid "WE DO GOOD est agr&eacute;&eacute;e par l'ORIAS et membre de l'association professionnelle Financement Participatif France."
 msgstr "WE DO GOOD est agr&eacute;&eacute;e par l'ORIAS et membre de l'association professionnelle Financement Participatif France."
@@ -3916,7 +3934,7 @@ msgid "Vous allez recevoir un e-mail de confirmation de paiement."
 msgstr "Vous allez recevoir un e-mail de confirmation de paiement."
 
 msgid "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me."
-msgstr "Cependant, il y a eu un probl&egrave;me lors de la g&eacute;n&eacute;ration du contrat. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me."
+msgstr "Votre contrat est en pièce jointe, mais nous avons rencontré un problème pour l'envoyer à notre prestataire de signature électronique. Nos &eacute;quipes travaillent &agrave; la r&eacute;solution de ce probl&egrave;me. Vous recevrez alors une invitation à signer le contrat en ligne, via Eversign."
 
 msgid "Votre investissement est valid&eacute;."
 msgstr "Votre investissement est valid&eacute;."

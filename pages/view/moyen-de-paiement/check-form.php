@@ -11,8 +11,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 
 	<?php _e( 'invest.mean-payment.check-form.SEND_CHECK', 'yproject' ); ?><br>
 	WE DO GOOD<br>
-	38 rue des Olivettes<br>
-	44000 Nantes<br><br>
+	40 rue de la tour d’Auvergne<br>
+	44200 Nantes<br><br>
 
 	<?php _e( 'invest.mean-payment.check-form.CHECK_CASHED_IF_SUCCESS', 'yproject' ); ?><br><br>
 

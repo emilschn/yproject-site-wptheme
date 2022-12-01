@@ -84,7 +84,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 
 		<?php
 		//Projets en cours de collecte ou en vote
-		if ( ( $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ) && !$campaign->is_positive_savings() ):
+		if ( $campaign_status == ATCF_Campaign::$campaign_status_vote || $campaign_status == ATCF_Campaign::$campaign_status_collecte ):
 		?>
 			<a class="hidden-link" href="<?php echo $link; ?>">
 				<?php
@@ -106,7 +106,19 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					}
 				?>
 
-				<?php if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte && !$campaign->is_positive_savings() ): ?>
+				<?php $progress_data_class = ''; ?>
+				<div class="align-center progress-duplicate-amount">
+				<?php if ( $campaign->has_duplicate_campaigns() ): ?>
+					<?php
+					$amount_total_formatted = $campaign->get_duplicate_campaigns_total_amount();
+					$progress_data_class = ' has-duplicate';
+					?>
+					<?php echo $amount_total_formatted; ?> <?php _e( 'common.RAISED.P', 'yproject' ); ?>
+					<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/continuous-fund-icon.png" width="22" height="19" alt="en continu">
+				<?php endif; ?>
+				</div>
+
+				<?php if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte ): ?>
 					<?php
 						$projectAction = __( 'project.TO_INVEST', 'yproject' );
 						$buttonAction = __( 'project.INVEST_ON_PROJECT', 'yproject' );
@@ -114,12 +126,12 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 						<div class="progress-bar">
 							<div class="current-bar" style="min-width:<?php echo $width; ?>%"></div>
 						</div>
-						<div class="progress-data">
-							<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;</span>
+						<div class="progress-data <?php echo $progress_data_class; ?>">
+							<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;<span class="current-fundraising">- <?php _e( 'progressbar.CURRENTLY_RAISING', 'yproject' ); ?></span></span>
 							<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
 						</div>
 
-				<?php elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote && !$campaign->is_positive_savings() ): ?>
+				<?php elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote ): ?>
 					<?php
 						if ( $time_remaining_str != '-' ) {
 							$projectAction = __( 'project.TO_EVALUATE', 'yproject' );
@@ -135,12 +147,6 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					<span class="vote-status" style="min-width:100%"><span><?php echo $project_status; ?></span>&nbsp;</span>
 				<?php endif; ?>
 			</a>
-			<?php if ($campaign->is_funded()) : ?>
-				<div class="financed-banner campaign-collecte"> 
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" alt="logo WE DO GOOD">
-					<p><?php _e( 'project.FUNDED_BANNER', 'yproject' ); ?></p>
-				</div>
-			<?php endif; ?>
 			<a class="hidden-link" href="<?php echo $link; ?>">
 				<div class="progress-info">
 					<span class="progress-pers">
@@ -161,18 +167,6 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>
 
 		<?php
-		//Projets en épargne positive
-		elseif ($campaign->is_positive_savings()) :
-		?>
-			<?php if ( $campaign->get_duplicate_campaigns_id() ): ?>
-			<div class="financed-banner"> 
-				<img src="<?php echo $stylesheet_directory_uri; ?>/images/favicon.png" alt="logo WE DO GOOD">
-				<p><?php _e( 'project.POSITIVE_SAVINGS_BANNER', 'yproject' ); ?></p>
-			</div>
-			<?php endif; ?>
-			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php _e( 'project.INVEST_ON_PROJECT', 'yproject' ) ?></a>
-
-		<?php
 		//Projets déja financés
 		else :
 		?>
@@ -188,7 +182,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 			<a class="hidden-link" href="<?php echo $link; ?>">
 				<span class="info-nb financed-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e('project.PEOPLE_RAISE', 'yproject', "yproject") ?></span>
 				<div class="financed-data">
-						<span><?php echo $campaign->current_amount(); ?></span><hr><span><?php echo $campaign->percent_minimum_completed(); ?></span>
+						<span><?php echo $campaign->get_duplicate_campaigns_total_amount(); ?></span><hr><span><?php echo $campaign->percent_minimum_completed(); ?></span>
 					</span>
 				</div>
 			</a>

@@ -3,8 +3,7 @@ global $stylesheet_directory_uri;
 $page_controler = WDG_Templates_Engine::instance()->get_controler();
 $WDGUser_displayed = $page_controler->get_current_user();
 $lw_wallet_amount = $WDGUser_displayed->get_lemonway_wallet_amount();
-$validated_investments = $WDGUser_displayed->get_validated_investments();
-$count_validated_investments = count( $validated_investments );
+$count_validated_investments = $WDGUser_displayed->get_count_validated_investments();
 $list_subscriptions = $page_controler->get_active_subscriptions_list();
 $count_subscriptions = count( $list_subscriptions );
 
@@ -20,6 +19,12 @@ if ( $WDGUser_displayed->has_valid_conformity_data() ) {
 ?>
 
 <h2><?php _e( 'account.menu.MY_ACCOUNT', 'yproject' ); ?></h2>
+
+<?php if ( $page_controler->admin_is_overriding_user() ): ?>
+	<div class="admin-theme">
+		ID LemonWay : <?php echo $WDGUser_displayed->get_lemonway_id(); ?>
+	</div>
+<?php endif; ?>
 
 <div class="account-dashboard">
 	<div>

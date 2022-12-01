@@ -10,6 +10,7 @@
 	
 	$WDGUser_displayed = $page_controler->get_displayed_user();
 	$is_authentified = $WDGUser_displayed->is_lemonway_registered();
+	$is_project_owner = $WDGUser_displayed->is_project_owner();
 ?>
 
 <form method="POST" enctype="multipart/form-data" class="<?php echo $page_controler->get_form_css_classes();?> account-form">
@@ -68,15 +69,17 @@
 		<?php endforeach; ?>
 	</div>
 	
-	<div id="user-identify-docs-form-buttons">
-		<button type="submit" class="button save red">
-			<span class="button-text">
-				<?php _e( 'account.identitydocs.SEND_DOCUMENTS', 'yproject' ); ?>
-			</span>
-			<span class="button-loading loading align-center hidden">
-				<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
-			</span>
-		</button>
-	</div>
+	<?php if ( !$is_authentified || $is_project_owner ): ?>
+		<div id="user-identify-docs-form-buttons">
+			<button type="submit" class="button save red">
+				<span class="button-text">
+					<?php _e( 'account.identitydocs.SEND_DOCUMENTS', 'yproject' ); ?>
+				</span>
+				<span class="button-loading loading align-center hidden">
+					<img class="alignverticalmiddle marginright" src="<?php echo $stylesheet_directory_uri; ?>/images/loading-grey.gif" width="30" alt="chargement" /><?php _e( 'common.SENDING', 'yproject' ); ?>			
+				</span>
+			</button>
+		</div>
+	<?php endif; ?>
 	
 </form>

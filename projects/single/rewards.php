@@ -95,7 +95,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 							
 							<?php _e("Soit un total de", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
 							<?php if ( empty( $is_simulator_shortcode ) ): ?>
-								<a href="#top-economic_model"><?php _e( "les pr&eacute;visions du porteur de projet :", 'yproject' )?></a>
+								<a href="#top-economic_model" class="display-eco"><?php _e( "les pr&eacute;visions du porteur de projet :", 'yproject' )?></a>
 							<?php else: ?>
 								<?php _e( "les pr&eacute;visions du porteur de projet :", 'yproject' )?>
 							<?php endif; ?>

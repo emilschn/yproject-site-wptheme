@@ -229,6 +229,10 @@ var WDGProjectViewer = (function ($) {
 				}
 			});
 
+			$('.display-eco').click(function () {
+				$('.projects-desc-content.economic').click();
+			});
+
 			if ($('#wdg-lightbox-project-warning button.close').length > 0) {
 				var hideprojectwarning = YPUIFunctions.getCookie('hideprojectwarning');
 				if (hideprojectwarning != '1') {

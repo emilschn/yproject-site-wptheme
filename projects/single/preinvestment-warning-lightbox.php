@@ -4,7 +4,6 @@
 // *****************************************************************************
 // Lightbox d'avertissement de pré-investissement
 // *****************************************************************************
-$edd_settings = get_option( 'edd_settings' );
 ?>
 
 <?php ob_start(); ?>
@@ -13,6 +12,7 @@ $edd_settings = get_option( 'edd_settings' );
 	<form method="post" class="sidebar-login-form db-form v3 full ajax-form">
 		
 		<div class="align-left">
+			<?php WDG_Languages_Helpers::set_current_locale_id( WDG_Languages_Helpers::get_current_locale_id() ); ?>
 			<?php echo apply_filters( 'the_content', WDGConfigTexts::get_config_text_by_name( WDGConfigTexts::$type_investment_generalities_preinvestment, 'preinvest_warning' ) ); ?>
 		</div>
 		

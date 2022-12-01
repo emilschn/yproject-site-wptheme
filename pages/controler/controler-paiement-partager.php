@@ -13,8 +13,10 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 
 	private $can_display_form;
 	private $form;
+	public $form_text;
 	private $form_fields_hidden_slug;
 	private $form_fields_displayed_slug;
+	public $form_buttons;
 
 	private $return_eversign;
 
@@ -69,28 +71,85 @@ class WDG_Page_Controler_InvestShare extends WDG_Page_Controler {
 		$this->can_display_form = FALSE;
 		if ( is_user_logged_in() ) {
 			$WDGCurrent_User = WDGUser::current();
-			$poll_answers = WDGWPREST_Entity_PollAnswer::get_list( $WDGCurrent_User->get_api_id(), $this->current_campaign->get_api_id() );
-			if ( empty( $poll_answers ) ) {
-				WDG_Languages_Helpers::load_languages();
-				$this->can_display_form = TRUE;
-				$core = ATCF_CrowdFunding::instance();
-				if ( $this->current_campaign->is_positive_savings() ) {
-					$core->include_form( 'invest-poll-continuous' );
-					$this->form = new WDG_Form_Invest_Poll_Continuous( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
-					$this->form->setContextAmount( $this->current_investment->get_session_amount() );
-					$this->form_fields_hidden_slug = WDG_Form_Invest_Poll_Continuous::$field_group_hidden;
-					$this->form_fields_displayed_slug = WDG_Form_Invest_Poll_Continuous::$field_group_poll_continuous;
+			$core = ATCF_CrowdFunding::instance();
+
+			// Vérification si les formulaires suivants ont été postés pour ne pas réafficher en boucle la proposition d'abonnement
+			$is_test_form_posted = false;
+			if ( $this->current_campaign->is_positive_savings() ) {
+				$core->include_form( 'invest-poll-continuous' );
+				$test_form = new WDG_Form_Invest_Poll_Continuous( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+				$is_test_form_posted = $test_form->isPosted();
+			} else {
+				$core->include_form( 'invest-poll' );
+				$test_form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+				$is_test_form_posted = $test_form->isPosted();
+			}
+
+			// Si c'est une personne physique qui a investi
+			// On propose de s'abonner (si l'utilisateur n'est pas encore abonné à ce projet)
+			if ( $this->current_investment->get_session_user_type() == 'user' && !$is_test_form_posted ) {
+				$has_subscribed_before = FALSE;
+				$list_subscriptions = $WDGCurrent_User->get_active_subscriptions();
+				foreach ( $list_subscriptions as $item_subscription ) {
+					if ( $item_subscription->id_project == $this->current_campaign->get_api_id() ) {
+						$has_subscribed_before = TRUE;
+						break;
+					}
+				}
+
+				if ( !$has_subscribed_before ) {
+					$this->can_display_form = TRUE;
+					WDG_Languages_Helpers::load_languages();
+					$core->include_form( 'positive-savings-subscription' );
+					$this->form = new WDG_Form_Subscribe_Positive_Savings( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+					$this->form_fields_hidden_slug = WDG_Form_Subscribe_Positive_Savings::$field_group_hidden;
+					$this->form_text = sprintf( __( 'form.positive-savings-subscription.DO_YOU_WISH_TO_SUBSCRIBE', 'yproject' ), $this->current_campaign->get_name() );
+					$this->form_fields_displayed_slug = array();
+					$this->form_buttons = array(
+						array(
+							'classes'	=> 'transparent',
+							'name'		=> 'subscribe',
+							'value'		=> 'no',
+							'label'		=> __( 'form.positive-savings-subscription.NO_I_DONT', 'yproject' )
+						),
+						array(
+							'classes'	=> 'red',
+							'name'		=> 'subscribe',
+							'value'		=> 'yes',
+							'label'		=> __( 'form.positive-savings-subscription.YES_I_WISH', 'yproject' )
+						)
+					);
 					if ( $this->form->isPosted() && $this->form->postForm() ) {
+						$this->form_text = '';
+						$this->form_buttons = FALSE;
 						$this->can_display_form = FALSE;
 					}
-				} else {
-					$core->include_form( 'invest-poll' );
-					$this->form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
-					$this->form->setContextAmount( $this->current_investment->get_session_amount() );
-					$this->form_fields_hidden_slug = WDG_Form_Invest_Poll::$field_group_hidden;
-					$this->form_fields_displayed_slug = WDG_Form_Invest_Poll::$field_group_poll_source;
-					if ( $this->form->isPosted() && $this->form->postForm() ) {
-						$this->can_display_form = FALSE;
+				}
+			}
+
+			if ( !$this->can_display_form ) {
+				$poll_answers = WDGWPREST_Entity_PollAnswer::get_list( $WDGCurrent_User->get_api_id(), $this->current_campaign->get_api_id() );
+				if ( empty( $poll_answers ) ) {
+					WDG_Languages_Helpers::load_languages();
+					$this->can_display_form = TRUE;
+					if ( $this->current_campaign->is_positive_savings() ) {
+						$core->include_form( 'invest-poll-continuous' );
+						$this->form = new WDG_Form_Invest_Poll_Continuous( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+						$this->form->setContextAmount( $this->current_investment->get_session_amount() );
+						$this->form_fields_hidden_slug = WDG_Form_Invest_Poll_Continuous::$field_group_hidden;
+						$this->form_fields_displayed_slug = WDG_Form_Invest_Poll_Continuous::$field_group_poll_continuous;
+						if ( $this->form->isPosted() && $this->form->postForm() ) {
+							$this->can_display_form = FALSE;
+						}
+					} else {
+						$core->include_form( 'invest-poll' );
+						$this->form = new WDG_Form_Invest_Poll( $this->current_campaign->ID, $WDGCurrent_User->wp_user->ID );
+						$this->form->setContextAmount( $this->current_investment->get_session_amount() );
+						$this->form_fields_hidden_slug = WDG_Form_Invest_Poll::$field_group_hidden;
+						$this->form_fields_displayed_slug = WDG_Form_Invest_Poll::$field_group_poll_source;
+						if ( $this->form->isPosted() && $this->form->postForm() ) {
+							$this->can_display_form = FALSE;
+						}
 					}
 				}
 			}

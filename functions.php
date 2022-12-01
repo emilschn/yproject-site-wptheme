@@ -176,6 +176,27 @@ function remove_team_member(){
 add_action( 'wp_ajax_remove_team_member', 'remove_team_member' );
 add_action( 'wp_ajax_nopriv_remove_team_member', 'remove_team_member' );
 
+
+function update_user_project_notifications(){
+    //Récupération des infos existantes sur l'API
+	$wdg_user = new WDGUser( $_POST['id_user'] );
+	$api_user_id = $wdg_user->get_api_id();
+	$post_campaign = get_post($_POST['id_campaign']);
+	$campaign = new ATCF_Campaign($post_campaign);
+    $project_api_id = $campaign->get_api_id();
+	$notifications = $_POST['notifications'];
+    // Mise à jour dans l'API
+	WDGWPREST_Entity_Project::update_link_user( $project_api_id, $api_user_id, $notifications );
+    do_action('wdg_delete_cache', array(
+            'users/' . $api_user_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/projects',
+            'projects/' . $project_api_id . '/roles/' . WDGWPREST_Entity_Project::$link_user_type_team . '/members'
+    ));
+    echo "TRUE";
+    exit();
+}
+add_action( 'wp_ajax_update_user_project_notifications', 'update_user_project_notifications' );
+add_action( 'wp_ajax_nopriv_update_user_project_notifications', 'update_user_project_notifications' );
+
 function yproject_get_current_projects() {
 	$nb = isset($_POST['nb']) ? $_POST['nb'] : -1;
 	$query_options = array(

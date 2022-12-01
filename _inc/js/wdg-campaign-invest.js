@@ -124,11 +124,18 @@ var WDGInvestPageFunctions = (function ($) {
 			}
 
 			if ($('body.template-declarer-chiffre-daffaires .mean-payment').length > 0) {
+				$('.mandate-checkbox').hide();
+
 				$('body.template-declarer-chiffre-daffaires .mean-payment').click(function () {
 					$('body.template-declarer-chiffre-daffaires .mean-payment').removeClass('selected');
 					$(this).addClass('selected');
-					$('body.template-declarer-chiffre-daffaires form button.half.right.red').removeClass('hidden');
 					var sMeanOfPayment = $(this).data('meanofpayment');
+
+					$('body.template-declarer-chiffre-daffaires form button.half.right.red').removeClass('hidden disabled');
+					$('body.template-declarer-chiffre-daffaires form button.half.right.red').unbind('click');
+					if (sMeanOfPayment == 'mandate') {
+						WDGInvestPageFunctions.royaltiesMandateCheckboxes();
+					}
 
 					// Si on change de moyen de paiement
 					if (sMeanOfPayment != $('#input-meanofpayment').val()) {
@@ -150,13 +157,20 @@ var WDGInvestPageFunctions = (function ($) {
 								$('#card-option-' + sMeanOfPayment + '-' + idDefaultCardType).attr('checked', true);
 							}
 
-						} else {
-							if (sMeanOfPayment == 'card') {
-								$('#save-card-zone-' + sMeanOfPayment).slideDown(200);
-							}
+						} else if (sMeanOfPayment == 'card') {
+							$('#save-card-zone-' + sMeanOfPayment).slideDown(200);
+						}
 
+						if (sMeanOfPayment == 'mandate') {
+							$('.mandate-checkbox').slideDown(200);
+						} else if ($('.mandate-checkbox').is(':visible')) {
+							$('.mandate-checkbox').slideUp(200);
 						}
 					}
+
+					$('.mandate-checkbox label').click(function () {
+						WDGInvestPageFunctions.royaltiesMandateCheckboxes();
+					});
 				});
 			}
 
@@ -369,6 +383,25 @@ var WDGInvestPageFunctions = (function ($) {
 			$('form #fieldgroup-orga-info #org_city').val($('form #org_init_city_' + idOrga).val());
 			$('form #fieldgroup-orga-info #select-org_nationality').val($('form #org_init_nationality_' + idOrga).val());
 			$('form #fieldgroup-orga-info #org_nationality').change();
+		},
+
+		royaltiesMandateCheckboxes: function () {
+			var nbChecked = 0;
+			$('.mandate-checkbox input').each(function () {
+				if ($(this).is(':checked')) {
+					nbChecked++;
+				}
+			});
+			$('body.template-declarer-chiffre-daffaires form button.half.right.red.disabled').unbind('click');
+			if (nbChecked == 4) {
+				$('body.template-declarer-chiffre-daffaires form button.half.right.red').removeClass('disabled');
+			} else {
+				$('body.template-declarer-chiffre-daffaires form button.half.right.red').addClass('disabled');
+				$('body.template-declarer-chiffre-daffaires form button.half.right.red.disabled').click(function (e) {
+					e.preventDefault();
+					alert('Merci de cocher les 4 cases avant de valider le paiement.');
+				});
+			}
 		}
 
 	};

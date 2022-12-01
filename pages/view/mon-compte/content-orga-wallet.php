@@ -40,7 +40,7 @@ $pending_amount = $WDGOrganization->get_pending_rois_amount();
 			<?php _e( 'account.wallet.orga.AUTHENTICATION_NECESSARY', 'yproject' ); ?>
 		</div>
 
-		<a href="#authentication" class="button red go-to-tab" data-tab="orga-authentication-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( 'account.wallet.VIEW_AUTHENTICATION_STATUS', 'yproject' ); ?></a>
+		<a href="#orga-account-<?php echo $WDGOrganization->get_wpref(); ?>" class="button red go-to-tab" data-tab="orga-account-<?php echo $WDGOrganization->get_wpref(); ?>"><?php _e( 'account.wallet.VIEW_AUTHENTICATION_STATUS', 'yproject' ); ?></a>
 
 	<?php else: ?>
 		<h3><?php _e( 'account.wallet.SEND_MONEY_TO_WALLET', 'yproject' ); ?></h3>

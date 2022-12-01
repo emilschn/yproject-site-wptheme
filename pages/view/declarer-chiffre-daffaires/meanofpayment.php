@@ -12,7 +12,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		<br><br>
 	<?php endif; ?>
 	
-	<?php echo sprintf( __( "Vous allez proc&eacute;der &agrave; un r&egrave;glement de %s &euro;.", 'yproject' ), YPUIHelpers::display_number( $page_controler->get_current_declaration_amount(), TRUE, 0 ) ); ?>
+	<?php echo sprintf( __( "Vous allez proc&eacute;der &agrave; un r&egrave;glement de %s &euro;.", 'yproject' ), YPUIHelpers::display_number( $page_controler->get_current_declaration_amount(), TRUE ) ); ?>
 	<br><br>
 	
 	<div class="mean-payment-list">
@@ -28,7 +28,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<?php locate_template( array( 'pages/view/moyen-de-paiement/card-choice.php'  ), true, false ); ?>
 		</div>
 
-		<?php if ( $page_controler->has_sign_mandate() ): ?>
+		<?php if ( $page_controler->can_display_mandate() ): ?>
 		<div class="mean-payment" data-meanofpayment="mandate">
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Pr&eacute;l&egrave;vement bancaire", 'yproject' ); ?>" width="120">
 			<div>
@@ -39,9 +39,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 						<?php _e( "Pr&eacute;l&egrave;vement bancaire (mandat de type Core)", 'yproject' ); ?>
 					<?php endif; ?>
 				</span><br>
-				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <strong><?php echo $page_controler->get_mandate_infos(); ?></strong></span><br><br>
-				<span><?php _e( "Merci de vous assurer que les fonds sont suffisants sur ce compte. En cas d'annulation, notre prestataire de services de paiement nous pr&eacute;l&egrave;ve des frais que <strong>nous vous refacturerons &agrave; hauteur de 30 € HT</strong>.", 'yproject' ); ?></span><br><br>
-				<span><?php _e( "De plus, l'utilisation de ce moyen de paiement provoque un d&eacute;lai de versement &agrave; vos investisseurs de <strong>10 jours</strong> &agrave; compter de la r&eacute;ception de votre paiement.", 'yproject' ); ?></span>
+				<span><?php _e( "Le pr&eacute;l&egrave;vement bancaire s'effectuera sur le compte bancaire dont l'IBAN est le suivant :", 'yproject' ); ?> <strong><?php echo $page_controler->get_mandate_infos(); ?></strong></span>
 			</div>
 		</div>
 		<?php endif; ?>
@@ -51,7 +49,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			<img src="<?php echo get_stylesheet_directory_uri(); ?>/images/template-invest/picto-virement.png" alt="<?php _e( "Virement bancaire", 'yproject' ); ?>" width="120">
 			<div>
 				<span class="mean-payment-name"><?php _e( "Virement bancaire", 'yproject' ); ?></span><br>
-				<span><?php _e( "Doit &ecirc;tre fait depuis le compte bancaire de l'entreprise vers l'IBAN de Lemon Way : FR76 3000 4025 1100 0111 8625 268.", 'yproject' ); ?></span><br>
+				<span><?php _e( "Doit &ecirc;tre fait depuis le compte bancaire de l'entreprise vers l'IBAN de Lemon Way :", 'yproject' ); ?> <?php echo LemonwayLib::$lw_wire_iban; ?></span><br>
 				<span><?php _e( "Il faut imp&eacute;rativement indiquer le code destinataire ou b&eacute;n&eacute;ficiaire suivant :", 'yproject' ); ?></span><br>
 				<strong><span id="clipboard-user-lw-code">wedogood-<?php echo $page_controler->get_current_campaign_organization_wallet_id(); ?></span></strong>
 				<br><br>
@@ -63,7 +61,29 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</div>
 		<?php endif; ?>
 	</div>
-	
+
+	<div class="mandate-checkbox align-left">
+		<label>
+			<input type="checkbox" class="radio-label"><span></span>
+			<?php _e( "Je confirme que le compte bancaire", 'yproject' ); ?> <?php echo $page_controler->get_mandate_infos(); ?> <?php _e( "est toujours valide", 'yproject' ); ?>
+		</label>
+		<br><br>
+		<label>
+			<input type="checkbox" class="radio-label"><span></span>
+			<?php _e( "Je confirme qu'il est suffisamment approvisionné pour effectuer ce paiement", 'yproject' ); ?>
+		</label>
+		<br><br>
+		<label>
+			<input type="checkbox" class="radio-label"><span></span>
+			<?php _e( "Je suis au courant qu'en cas de refus de paiement, l'annulation aura un coût supplémentaire de 80 € (30 € de Lemonway et 50 € de frais de traitement par WE DO GOOD)", 'yproject' ); ?>
+		</label>
+		<br><br>
+		<label>
+			<input type="checkbox" class="radio-label"><span></span>
+			<?php _e( "Je suis au courant que l'utilisation de ce moyen de paiement provoque un délai de versement de 10 jours pour mes investisseurs", 'yproject' ); ?>
+		</label>
+		<br><br>
+	</div>
 	
 	<input type="hidden" id="input-meanofpayment" name="meanofpayment" value="">
 	<input type="hidden" id="input-meanofpayment-card-type" name="meanofpayment-card-type" value="">

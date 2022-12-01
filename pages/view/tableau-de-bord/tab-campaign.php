@@ -493,7 +493,7 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		</div>
 
 		<!-- TODO : actualiser la liste ci-dessous quand on vient de faire une copie ci-dessus -->
-		<?php if ( $page_controler->get_campaign()->get_duplicate_campaigns_id() && $page_controler->get_campaign()->is_funded()): ?>
+		<?php if ( $page_controler->get_campaign()->get_duplicate_campaigns_id()): ?>
 			<div class="field admin-theme">
 				<form id="campaign_transfer_investments_form" class="ajax-db-form" data-action="campaign_transfer_investments">
 					<?php DashboardUtility::create_field(array(
@@ -505,8 +505,11 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 						"options_names"	=> $page_controler->get_campaign()->get_duplicate_campaigns_titles()
 					));?>
 
-					<?php DashboardUtility::create_save_button( 'campaign_transfer_investments', $page_controler->can_access_admin(), 'Transférer les investissements vers une autre campagne', 'Transfert en cours', TRUE ); ?>
-					<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+					<!-- on ne fait apparaitre le bouton de transfert que si la campagne est funded -->
+					<?php if ( $page_controler->get_campaign()->is_funded()): ?>
+						<?php DashboardUtility::create_save_button( 'campaign_transfer_investments', $page_controler->can_access_admin(), 'Transférer les investissements vers une autre campagne', 'Transfert en cours', TRUE ); ?>
+						<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
+					<?php endif; ?>
 				</form>
 			</div>
 		<?php endif; ?>
