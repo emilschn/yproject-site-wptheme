@@ -394,6 +394,12 @@ msgstr "funded and finished projects"
 msgid "projects.FUNDED_CAMPAIGNS_SEE_MORE"
 msgstr "See more projects"
 
+msgid "projects.MAXIMUM_GOAL"
+msgstr "Maximum goal"
+
+msgid "projects.CONTINUOUSLY"
+msgstr "Continuously"
+
 # ############################## /connexion ################################
 msgid "login.INTRO"
 msgstr "Login on WE DO GOOD"
@@ -3536,14 +3542,17 @@ msgstr "This fundraising campaign will be available for investment soon!"
 msgid "progressbar.CURRENTLY_RAISING"
 msgstr "current fundraising"
 
+msgid "progressbar.RAISED"
+msgstr "raised"
+
 msgid "personnes"
 msgstr "people"
 
 msgid "ont investi"
 msgstr "have invested"
 
-msgid "pour propulser cette lev&eacute;e de fonds"
-msgstr "to boost this fundraising campaign"
+msgid "project.BOOST_PROJECT"
+msgstr "to boost this project"
 
 msgid "D&eacute;couvrir d'autres projets"
 msgstr "Discover other projects"

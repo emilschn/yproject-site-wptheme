@@ -19,7 +19,6 @@ $campaign_status = $campaign->campaign_status();
 </div>
 
 <?php elseif ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
-	<?php display_duplicate_campaigns_amount( $campaign ); ?>
 
 	<?php
 	$maximum_goal = $campaign->goal( false );
@@ -57,8 +56,15 @@ $campaign_status = $campaign->campaign_status();
 		<div class="current-bar" style="min-width:<?php echo $bar_width; ?>%"></div>
 	</div>
 	<div class="progress-data project-page-data <?php echo $progress_data_class; ?>">
-		<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;<span class="current-fundraising">- <?php _e( 'progressbar.CURRENTLY_RAISING', 'yproject' ); ?></span></span>
-		<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
+		<span class="current-amount"><span><?php echo $campaign->get_duplicate_campaigns_total_amount(); ?></span>&nbsp;<?php _e( 'progressbar.RAISED', 'yproject' ); ?></span>
+		<span class="progress-percent"><span><?php 
+		
+	if ( $campaign->has_duplicate_campaigns() ) {
+		// TODO : comment connaitre le step suivant
+		echo $campaign->current_amount() . ' / ' . '10000 € - ';
+		 _e( 'progressbar.CURRENTLY_RAISING', 'yproject' );
+	}
+				echo ' ' . $campaign->percent_minimum_completed(); ?></span></span>
 	</div>
 	<span class="progress-bar-separator" style="margin-left: <?php echo $width_to_minimum_goal; ?>%;">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/<?php echo $file_check; ?>" width="20" height="20">
@@ -67,7 +73,6 @@ $campaign_status = $campaign->campaign_status();
 </div>
 
 <?php else: ?>
-	<?php display_duplicate_campaigns_amount( $campaign ); ?>
 
 	<?php
 	$percent = min( 100, $campaign->percent_minimum_completed( false ) );
@@ -88,23 +93,21 @@ $campaign_status = $campaign->campaign_status();
 			<div class="current-bar" style="min-width:<?php echo $width; ?>%"></div>
 		</div>
 		<div class="progress-data project-page-data <?php echo $progress_data_class; ?>">
-			<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;<span class="current-fundraising">- <?php _e( 'progressbar.CURRENTLY_RAISING', 'yproject' ); ?></span></span>
-			<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
+			<span class="current-amount"><span><?php echo $campaign->get_duplicate_campaigns_total_amount(); ?></span>&nbsp;<?php _e( 'progressbar.RAISED', 'yproject' ); ?></span>
+			<span class="progress-percent"><span>
+				<?php 
+				
+	if ( $campaign->has_duplicate_campaigns() ) {
+		// TODO : comment connaitre le step suivant
+		echo $campaign->current_amount() . '/' . '10000€' . _e( 'progressbar.CURRENTLY_RAISING', 'yproject' );
+	}
+				
+				echo $campaign->percent_minimum_completed(); 
+				
+				?>
+			
+			</span></span>
 		</div>
 	</div>
 
 <?php endif;
-
-function display_duplicate_campaigns_amount( $campaign ) {
-	global $stylesheet_directory_uri;
-	if ( !$campaign->has_duplicate_campaigns() ) {
-		return;
-	}
-	$amount_total_formatted = $campaign->get_duplicate_campaigns_total_amount();
-	?>
-	<div class="align-center progress-duplicate-amount">
-		<?php echo $amount_total_formatted; ?> <?php _e( 'common.RAISED.P', 'yproject' ); ?>
-		<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/continuous-fund-icon.png" width="22" height="19" alt="en continu">
-	</div>
-	<?php
-}
