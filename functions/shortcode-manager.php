@@ -560,8 +560,8 @@ class YPShortcodeManager {
 		global $post;
 
 		// On commence toujours par WE DO GOOD
-		$buffer = "<a itemscope itemtype=\"https://schema.org/WebPage\"
-		itemprop=\"item\" itemid=\"" . home_url() . "\" href=\"" .home_url(). "\">WE DO GOOD</a>";
+		$buffer = "<span itemprop=\"itemListElement\" itemscope itemtype=\"https://schema.org/ListItem\"><a itemscope itemtype=\"https://schema.org/WebPage\"
+		itemprop=\"item\" itemid=\"" . home_url() . "\" href=\"" .home_url(). "\"><span itemprop=\"name\">WE DO GOOD</span></a><meta itemprop=\"position\" content=\"1\" /></span>";
 		$buffer .= " " .$atts[ 'separator' ]. " ";
 
 		if ( $post->post_parent ) {
@@ -576,13 +576,13 @@ class YPShortcodeManager {
 			// Parcours des parents dans le bon ordre
 			for ( $i = 0; $i < $count_ancestors; $i++ ) {
 				$post_ancestor = get_post( $post_ancestors_list[ $i ] );
-
+				$position = $i + 2;
 				// Le parent est publié normalement, on lui met un lien normal
 				if ( $post_ancestor->post_status == 'publish' ) {
 					$post_meta_title = get_post_meta( $post_ancestor->ID, 'breadcrumb_title', TRUE );
 					$post_title = ( !empty( $post_meta_title ) ) ? $post_meta_title : get_the_title( $post_ancestor );
-					$buffer .= "<a itemscope itemtype=\"https://schema.org/WebPage\"
-					itemprop=\"item\" itemid=\"" . get_permalink( $post_ancestor ) . "\" href=\"" . get_permalink( $post_ancestor ) . "\" title=\"" .$post_title. "\">" .$post_title. "</a>";
+					$buffer .= "<span itemprop=\"itemListElement\" itemscope itemtype=\"https://schema.org/ListItem\"><a itemscope itemtype=\"https://schema.org/WebPage\"
+					itemprop=\"item\" itemid=\"" . get_permalink( $post_ancestor ) . "\" href=\"" . get_permalink( $post_ancestor ) . "\" title=\"" .$post_title. "\"><span itemprop=\"name\">" .$post_title. "</span></a><meta itemprop=\"position\" content=\"".$position."\" /></span>";
 					if ( isset( $post_ancestors_list[ $i + 1 ] ) ) {
 						$buffer .= " " .$atts[ 'separator' ]. " ";
 					}
@@ -597,8 +597,8 @@ class YPShortcodeManager {
 						$post_title = ( !empty( $post_meta_title ) ) ? $post_meta_title : get_the_title( $post_ancestors_list[ $i ] );
 						$current_title .= $post_title;
 					}
-					$buffer .= "<a itemscope itemtype=\"https://schema.org/WebPage\"
-					itemprop=\"item\" itemid=\"" . get_permalink( $post_ancestors_list[ $i ] ) . "\" href=\"" . get_permalink( $post_ancestors_list[ $i ] ) . "\" title=\"" .$current_title. "\">" .$current_title. "</a>";
+					$buffer .= "<span itemprop=\"itemListElement\" itemscope itemtype=\"https://schema.org/ListItem\"><a itemscope itemtype=\"https://schema.org/WebPage\"
+					itemprop=\"item\" itemid=\"" . get_permalink( $post_ancestors_list[ $i ] ) . "\" href=\"" . get_permalink( $post_ancestors_list[ $i ] ) . "\" title=\"" .$current_title. "\"><span itemprop=\"name\">" .$current_title. "</span></a><meta itemprop=\"position\" content=\"".$position."\" /></span>";
 				}
 			}
 
@@ -606,11 +606,11 @@ class YPShortcodeManager {
 		} elseif ( !is_home() && !is_front_page() ) {
 			$post_meta_title = get_post_meta( get_the_ID(), 'breadcrumb_title', TRUE );
 			$post_title = ( !empty( $post_meta_title ) ) ? $post_meta_title : get_the_title();
-			$buffer .= "<a itemscope itemtype=\"https://schema.org/WebPage\"
-			itemprop=\"item\" itemid=\"" . get_permalink() . "\" href=\"" .get_the_permalink(). "\" title=\"" .$post_title. "\">" .$post_title. "</a>";
+			$buffer .= "<span itemprop=\"itemListElement\" itemscope itemtype=\"https://schema.org/ListItem\"><a itemscope itemtype=\"https://schema.org/WebPage\"
+			itemprop=\"item\" itemid=\"" . get_permalink() . "\" href=\"" .get_the_permalink(). "\" title=\"" .$post_title. "\"><span itemprop=\"name\">" .$post_title. "</span></a><meta itemprop=\"position\" content=\"1\" /></span>";
 		}
 
-		$buffer = "<nav class=\"wdg-breadcrumb\" itemscope itemtype=\"https://schema.org/BreadcrumbList\">" .$buffer. "</nav>";
+		$buffer = "<nav class=\"wdg-breadcrumb\" itemprop=\"breadcrumb\" itemscope itemtype=\"https://schema.org/BreadcrumbList\">" .$buffer. "</nav>";
 
 		return $buffer;
 	}
