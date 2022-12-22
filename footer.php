@@ -20,6 +20,7 @@ if ($cache_footer !== FALSE && empty($client_context)) {
 								<?php dynamic_sidebar( 'first-footer-widget-area' ); ?>
 
 								<li>
+									<a class="social_network" href="https://mastodon.social/@wedogood" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-mastodon.png" alt="mastodon" style="width: 30px;"/></a>
 									<a class="social_network" href="https://www.facebook.com/wedogood.co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-facebook.jpg" alt="facebook" style="width: 30px;"/></a>
 									<a class="social_network" href="https://twitter.com/wedogood_co" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-twitter.jpg" alt="twitter" style="width: 30px;"/></a>
 									<a class="social_network" href="https://www.linkedin.com/company/we-do-good/" target="_blank"><img src="<?php echo $stylesheet_directory_uri; ?>/images/reseaux/icon-linkedin.jpg" alt="linkedin" style="width: 30px;"/></a>
