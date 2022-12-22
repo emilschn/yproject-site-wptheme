@@ -319,8 +319,9 @@ $lang_list = $campaign->get_lang_list();
 							<span><?php echo $number; ?></span><br />
 							<span><?php echo $text; ?></span>
 						</div>
-						<div class="left bordered">						
-							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; </span><br />
+						<div class="left bordered">		
+							<!-- TODO : soit get_maximum_goal_legt soit juste goal				 -->
+							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->get_maximum_goal_left( false ), TRUE, 0 ); ?> &euro; </span><br />
 							<span><?php _e('projects.MAXIMUM_GOAL', 'yproject'); ?></span>
 						</div>
 						<div class="left">

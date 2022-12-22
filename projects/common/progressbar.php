@@ -22,7 +22,8 @@ $campaign_status = $campaign->campaign_status();
 
 	<?php
 	$maximum_goal = $campaign->goal( false );
-	$minimum_goal = $campaign->minimum_goal( false );
+	// TODO : c'est le minimum_goal de la première campagne qu'il faut récupérer
+	$minimum_goal = $campaign->get_original_minimum_goal( false );
 	$percent_minimum_completed = $campaign->percent_minimum_completed( false );
 	$percent_minimum_display = min( 100, $percent_minimum_completed );
 	if ( isset($maximum_goal) && $maximum_goal != 0 ) {
@@ -42,6 +43,12 @@ $campaign_status = $campaign->campaign_status();
 		$bar_width = $percent_minimum_completed * $width_to_minimum_goal / 100;
 	}
 
+	$width_to_next_step = $campaign->get_next_goal( false ) * 100 / $maximum_goal;
+	$bar_width = $campaign->get_duplicate_campaigns_total_amount( false ) * 100 / $maximum_goal;
+	
+
+	$file_next_step = 'minimum-goal-empty.png';
+
 	$container_classes = '';
 	if ( !empty( $is_progressbar_shortcode ) ) {
 		$container_classes .= 'shortcode-context';
@@ -57,17 +64,21 @@ $campaign_status = $campaign->campaign_status();
 	</div>
 	<div class="progress-data project-page-data <?php echo $progress_data_class; ?>">
 		<span class="current-amount"><span><?php echo $campaign->get_duplicate_campaigns_total_amount(); ?></span>&nbsp;<?php _e( 'progressbar.RAISED', 'yproject' ); ?></span>
-		<span class="progress-percent"><span><?php 
-		
-	if ( $campaign->has_duplicate_campaigns() ) {
-		// TODO : comment connaitre le step suivant
-		echo $campaign->current_amount() . ' / ' . '10000 € - ';
-		 _e( 'progressbar.CURRENTLY_RAISING', 'yproject' );
-	}
-				echo ' ' . $campaign->percent_minimum_completed(); ?></span></span>
+		<span class="progress-percent"><span><?php 		
+			if ( $campaign->has_duplicate_campaigns() ) {
+				// TODO : comment connaitre le step suivant
+				echo $campaign->current_amount() . ' / ' . $campaign->minimum_goal(). ' € ';
+				_e( 'progressbar.CURRENTLY_RAISING', 'yproject' );
+			}
+			echo ' - ' . $campaign->percent_minimum_completed(); ?>
+		</span></span>
 	</div>
 	<span class="progress-bar-separator" style="margin-left: <?php echo $width_to_minimum_goal; ?>%;">
 		<img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/<?php echo $file_check; ?>" width="20" height="20">
+		<hr>
+	</span>
+	<span class="progress-bar-separator" style="margin-left: <?php echo $width_to_next_step; ?>%;">
+		<!-- <img src="<?php echo $stylesheet_directory_uri; ?>/images/template-project/<?php echo $file_next_step; ?>" width="20" height="20"> -->
 		<hr>
 	</span>
 </div>
@@ -98,8 +109,8 @@ $campaign_status = $campaign->campaign_status();
 				<?php 
 				
 	if ( $campaign->has_duplicate_campaigns() ) {
-		// TODO : comment connaitre le step suivant
-		echo $campaign->current_amount() . '/' . '10000€' . _e( 'progressbar.CURRENTLY_RAISING', 'yproject' );
+		// TODO : comment connaitre le step suivant, est-ce bien minimum_goal ?
+		echo $campaign->current_amount() . '/' . $campaign->minimum_goal( false ) . '€' . _e( 'progressbar.CURRENTLY_RAISING', 'yproject' );
 	}
 				
 				echo $campaign->percent_minimum_completed(); 
