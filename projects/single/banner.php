@@ -320,8 +320,7 @@ $lang_list = $campaign->get_lang_list();
 							<span><?php echo $text; ?></span>
 						</div>
 						<div class="left bordered">		
-							<!-- TODO : soit get_maximum_goal_legt soit juste goal				 -->
-							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->get_maximum_goal_left( false ), TRUE, 0 ); ?> &euro; </span><br />
+							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->get_maximum_goal_total( false ), TRUE, 0 ); ?> &euro; </span><br />
 							<span><?php _e('projects.MAXIMUM_GOAL', 'yproject'); ?></span>
 						</div>
 						<div class="left">
@@ -358,6 +357,7 @@ $lang_list = $campaign->get_lang_list();
 
 						<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 					<?php else: ?>
+						<br>
 						<div class="end-sentence">
 							<?php if ( $campaign->maximum_complete_message() == '' ): ?>
 								<?php _e( "project.GOAL_MAX_REACHED_NO_MORE_INVEST", 'yproject' ); ?>
@@ -375,9 +375,10 @@ $lang_list = $campaign->get_lang_list();
 				<?php // cas d'un projet terminé et financé?>
 				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_funded || $campaign_status == ATCF_Campaign::$campaign_status_closed): ?>
 					<?php
-					$nbinvestors = $campaign->backers_count();
+					$nbinvestors = $campaign->backers_count( TRUE );
 					$invest_amount = $campaign->get_duplicate_campaigns_total_amount();
 					?>
+					<br>
 					<div class="end-sentence">
 						<?php echo $nbinvestors. " " .__("personnes", "yproject"). " " .__("ont investi", "yproject"). " " .$invest_amount. " " .__("project.BOOST_PROJECT", "yproject"); ?>
 					</div>
@@ -385,7 +386,8 @@ $lang_list = $campaign->get_lang_list();
 				
                                         
 				<?php // cas d'un projet terminé et non financé?>
-				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
+				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>  
+					<br>          
 					<div class="end-sentence">
 						<?php if ( $campaign->archive_message() == '' ): ?>
 							<?php _e( "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e", 'yproject' ); ?>
