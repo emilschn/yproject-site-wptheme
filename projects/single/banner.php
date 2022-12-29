@@ -319,19 +319,18 @@ $lang_list = $campaign->get_lang_list();
 							<span><?php echo $number; ?></span><br />
 							<span><?php echo $text; ?></span>
 						</div>
-						<div class="left bordered">
-							<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
-								<span></span>
-								<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
-								<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; MAX</span>
-							<?php else: ?>
-								<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro;</span><br />
-								<span><?php _e('Objectif minimum', 'yproject'); ?></span>
-							<?php endif; ?>
+						<div class="left bordered">		
+							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->get_maximum_goal_total( false ), TRUE, 0 ); ?> &euro; </span><br />
+							<span><?php _e('projects.MAXIMUM_GOAL', 'yproject'); ?></span>
 						</div>
 						<div class="left">
+							<?php if ($campaign->has_duplicate_campaigns() ): ?>
+								<div>
+									<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/continuous-fund-icon.png" width="19" height="17" alt="en continu"></br>
+									<span><?php _e( 'projects.CONTINUOUSLY', 'yproject' ); ?></span>
+								</div>
 							<?php
-							if ($time_remaining_str != '-'):
+							elseif ($time_remaining_str != '-'):
 								$time_remaining_str_split = explode('-', $time_remaining_str);
 								$time_remaining_str = ($time_remaining_str_split[1] + 1) . ' ';
 								$time_remaining_str_unit = $time_remaining_str_split[0];
@@ -358,6 +357,7 @@ $lang_list = $campaign->get_lang_list();
 
 						<a href="<?php echo $invest_url_href; ?>" class="button red"><?php _e( "Investir", 'yproject' ); ?></a>
 					<?php else: ?>
+						<br>
 						<div class="end-sentence">
 							<?php if ( $campaign->maximum_complete_message() == '' ): ?>
 								<?php _e( "project.GOAL_MAX_REACHED_NO_MORE_INVEST", 'yproject' ); ?>
@@ -375,17 +375,19 @@ $lang_list = $campaign->get_lang_list();
 				<?php // cas d'un projet terminé et financé?>
 				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_funded || $campaign_status == ATCF_Campaign::$campaign_status_closed): ?>
 					<?php
-					$nbinvestors = $campaign->backers_count();
+					$nbinvestors = $campaign->backers_count( TRUE );
 					$invest_amount = $campaign->get_duplicate_campaigns_total_amount();
 					?>
+					<br>
 					<div class="end-sentence">
-						<?php echo $nbinvestors. " " .__("personnes", "yproject"). " " .__("ont investi", "yproject"). " " .$invest_amount. " " .__("pour propulser cette lev&eacute;e de fonds", "yproject"); ?>
+						<?php echo $nbinvestors. " " .__("personnes", "yproject"). " " .__("ont investi", "yproject"). " " .$invest_amount. " " .__("project.BOOST_PROJECT", "yproject"); ?>
 					</div>
 					<a href="<?php echo WDG_Redirect_Engine::override_get_page_url( 'les-projets' ); ?>" class="button red"><?php _e("D&eacute;couvrir d'autres projets", "yproject" ) ?></a>
 				
                                         
 				<?php // cas d'un projet terminé et non financé?>
-				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>            
+				<?php elseif ($campaign_status == ATCF_Campaign::$campaign_status_archive): ?>  
+					<br>          
 					<div class="end-sentence">
 						<?php if ( $campaign->archive_message() == '' ): ?>
 							<?php _e( "Malheureusement, cette lev&eacute;e de fonds n'a pas &eacute;t&eacute; propuls&eacute;e", 'yproject' ); ?>
