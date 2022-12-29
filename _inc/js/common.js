@@ -1139,8 +1139,31 @@ var WDGFormsFunctions = (function ($) {
 
 		initFileInput: function () {
 			$('.field-file select').on('change', function (e) {
+				// console.log(this);
 				var div_add_file = $(this).parent().parent().find('div#add-file');
 				div_add_file.show();
+				var selectedValue = console.log(this.selectedOptions[0].value);
+				if (this.name == 'select-id'){
+					var select2 = $(this).parent().parent().parent().parent().parent().parent().find('select#select-id_2')[0];
+					$(select2).find('option').each(function () {
+						if ($(this).attr('value') == selectedValue ) {
+              				$(this).prop('disabled',true);             
+						} else {
+               				$(this).prop('disabled',false);             
+						}
+					});
+					// console.log(select2);
+				}
+				if (this.name == 'select-id_2'){
+					var select1 = $(this).parent().parent().parent().parent().parent().parent().find('select#select-id')[0];
+					$(select1).find('option').each(function () {
+						if ($(this).attr('value') == selectedValue ) {
+              				$(this).prop('disabled',true);             
+						} else {
+               				$(this).prop('disabled',false);             
+						}
+					});
+				}
 			});
 			$('.field-file input').on('change', function (e) {
 				var label_element = $(this).next('label');
