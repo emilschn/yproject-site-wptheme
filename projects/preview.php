@@ -161,7 +161,18 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 						</span>
 					</span>
 					<hr>
-					<span class="progress-days"><span class="info-nb"><?php echo $time_remaining_str; ?></span><br><span class="info-action"> <?php echo $projectAction ?></span></span>
+					<?php if (  $campaign->has_duplicate_campaigns() ): ?>
+						<div class="progress-days>
+							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/continuous-fund-icon.png" width="19" height="17" alt="en continu"></br>
+							<span><?php _e( 'projects.CONTINUOUSLY', 'yproject' ); ?></span>
+						</div>						
+					<?php else: ?>
+						<span class="progress-days">
+							<span class="info-nb"><?php echo $time_remaining_str; ?></span>
+							<br>
+							<span class="info-action"> <?php echo $projectAction ?></span>
+						</span>
+					<?php endif; ?>
 				</div>
 			</a>
 			<a class="home-button-project project-button" href="<?php echo $link; ?>"><?php echo $buttonAction ?></a>

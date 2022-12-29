@@ -52,31 +52,23 @@ $campaign_status = $campaign->campaign_status();
 <?php elseif ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step  && $campaign_status === ATCF_Campaign::$campaign_status_collecte): ?>
 
 	<?php
-	$maximum_goal = $campaign->goal( false );
+	$maximum_goal = $campaign->get_maximum_goal_total( false );
 	// c'est le minimum_goal de la première campagne qu'on récupère
 	$minimum_goal = $campaign->get_original_minimum_goal( false );
 	$percent_minimum_completed = $campaign->percent_minimum_completed( false );
-	$percent_minimum_display = min( 100, $percent_minimum_completed );
 	if ( isset($maximum_goal) && $maximum_goal != 0 ) {
 		$width_to_minimum_goal = $minimum_goal / $maximum_goal * 100;
 	} else {
 		$width_to_minimum_goal = 0;
 	}
 
-	$width_to_minimum_completed = $percent_minimum_display * $width_to_minimum_goal / 100;
 	$file_check = 'minimum-goal-empty.png';
-	$width_to_completed = 0;
 	if ( $percent_minimum_completed >= 100 ) {
-		$width_to_completed = ( $percent_minimum_completed - 100 ) * $width_to_minimum_goal / 100;
 		$file_check = 'minimum-goal-full.png';
-		$bar_width = $width_to_minimum_goal + $width_to_completed;
-	} else {
-		$bar_width = $percent_minimum_completed * $width_to_minimum_goal / 100;
-	}
+	} 
 
 	$width_to_next_step = $campaign->get_next_goal( false ) * 100 / $maximum_goal;
-	$bar_width = $campaign->get_duplicate_campaigns_total_amount( false ) * 100 / $maximum_goal;
-	
+	$bar_width = $campaign->get_duplicate_campaigns_total_amount( false ) * 100 / $maximum_goal;	
 
 	$file_next_step = 'minimum-goal-empty.png';
 
