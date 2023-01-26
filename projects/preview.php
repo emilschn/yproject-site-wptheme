@@ -52,7 +52,7 @@ if ($jycrois > 1) {
 	}
 }
 
-$percent = min(100, $campaign->percent_minimum_completed(false));
+$percent = min(100, $campaign->percent_on_first_minimum_goal(false));
 $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 ?>
 
@@ -106,18 +106,6 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					}
 				?>
 
-				<?php $progress_data_class = ''; ?>
-				<div class="align-center progress-duplicate-amount">
-				<?php if ( $campaign->has_duplicate_campaigns() ): ?>
-					<?php
-					$amount_total_formatted = $campaign->get_duplicate_campaigns_total_amount();
-					$progress_data_class = ' has-duplicate';
-					?>
-					<?php echo $amount_total_formatted; ?> <?php _e( 'common.RAISED.P', 'yproject' ); ?>
-					<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/continuous-fund-icon.png" width="22" height="19" alt="en continu">
-				<?php endif; ?>
-				</div>
-
 				<?php if ( $campaign_status === ATCF_Campaign::$campaign_status_collecte ): ?>
 					<?php
 						$projectAction = __( 'project.TO_INVEST', 'yproject' );
@@ -126,9 +114,9 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 						<div class="progress-bar">
 							<div class="current-bar" style="min-width:<?php echo $width; ?>%"></div>
 						</div>
-						<div class="progress-data <?php echo $progress_data_class; ?>">
-							<span class="current-amount"><span><?php echo $campaign->current_amount(); ?></span>&nbsp;<span class="current-fundraising">- <?php _e( 'progressbar.CURRENTLY_RAISING', 'yproject' ); ?></span></span>
-							<span class="progress-percent"><span><?php echo $campaign->percent_minimum_completed(); ?></span></span>
+						<div class="progress-data">
+							<span class="current-amount"><span><?php echo $campaign->get_duplicate_campaigns_total_amount(); ?></span>&nbsp;<span class="current-fundraising">- <?php _e( 'progressbar.CURRENTLY_RAISING', 'yproject' ); ?></span></span>
+							<span class="progress-percent"><span><?php echo $campaign->percent_on_first_minimum_goal(); ?></span></span>
 						</div>
 
 				<?php elseif ( $campaign_status === ATCF_Campaign::$campaign_status_vote ): ?>
@@ -162,7 +150,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 					</span>
 					<hr>
 					<?php if (  $campaign->has_duplicate_campaigns() ): ?>
-						<div class="progress-days>
+						<div class="progress-days" style="text-align: center;">									
 							<img src="<?php echo $stylesheet_directory_uri; ?>/images/common/continuous-fund-icon.png" width="19" height="17" alt="en continu"></br>
 							<span><?php _e( 'projects.CONTINUOUSLY', 'yproject' ); ?></span>
 						</div>						
