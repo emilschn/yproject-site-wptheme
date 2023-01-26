@@ -191,7 +191,7 @@ $width = 100 * $percent / 100; // taille maxi de la barre est à 100%
 			</div>
 
 			<a class="hidden-link" href="<?php echo $link; ?>">
-				<span class="info-nb financed-nb"><?php echo $campaign->get_jycrois_nb(); ?>&nbsp;<?php _e('project.PEOPLE_RAISE', 'yproject', "yproject") ?></span>
+				<span class="info-nb financed-nb"><?php echo $campaign->backers_count( TRUE ); ?>&nbsp;<?php _e('project.PEOPLE_RAISE', 'yproject', "yproject") ?></span>
 				<div class="financed-data">
 						<span><?php echo $campaign->get_duplicate_campaigns_total_amount(); ?></span><hr><span><?php echo $campaign->percent_minimum_completed(); ?></span>
 					</span>
