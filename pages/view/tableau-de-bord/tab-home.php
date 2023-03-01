@@ -652,7 +652,7 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 		<?php foreach ( $finished_declarations as $declaration_item ): ?>
 			<li>Déclaration du <?php echo $declaration_item->get_formatted_date(); ?> : <?php echo $declaration_item->get_amount_with_adjustment(); ?> € de royalties
 				<?php if ( $declaration_item->get_amount_with_adjustment() > 0 ): ?>
-				(effectuée le <?php echo $declaration_item->get_formatted_date( 'declaration' ); ?>)
+				(versées le <?php echo $declaration_item->get_formatted_date( 'transfer' ); ?>)
 				<?php endif; ?>
 			</li>
 		<?php endforeach; ?>
