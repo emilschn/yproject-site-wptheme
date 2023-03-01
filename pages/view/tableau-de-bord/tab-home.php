@@ -650,9 +650,9 @@ $nb_invests = $page_controler->get_campaign()->backers_count();
 
 		<ul>
 		<?php foreach ( $finished_declarations as $declaration_item ): ?>
-			<li>Déclaration du <?php echo $declaration_item->date_due; ?> : <?php echo $declaration_item->get_amount_with_adjustment(); ?> € de royalties
+			<li>Déclaration du <?php echo $declaration_item->get_formatted_date(); ?> : <?php echo $declaration_item->get_amount_with_adjustment(); ?> € de royalties
 				<?php if ( $declaration_item->get_amount_with_adjustment() > 0 ): ?>
-				payées le <?php echo $declaration_item->get_formatted_date( 'paid' ); ?>
+				(effectuée le <?php echo $declaration_item->get_formatted_date( 'declaration' ); ?>)
 				<?php endif; ?>
 			</li>
 		<?php endforeach; ?>
