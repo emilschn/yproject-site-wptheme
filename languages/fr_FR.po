@@ -11,7 +11,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.1\n"
+"X-Generator: Poedit 3.2\n"
 
 msgid "common.OR"
 msgstr "ou"
@@ -376,6 +376,7 @@ msgstr "Objectif maximum"
 
 msgid "projects.CONTINUOUSLY"
 msgstr "En continu"
+
 # ############################## /connexion ################################
 msgid "login.INTRO"
 msgstr "Connexion sur WE DO GOOD"
@@ -2796,6 +2797,12 @@ msgstr "Vous avez actuellement "
 
 msgid "email.royalties.WALLET_AMOUNT_2"
 msgstr " € dans votre porte-monnaie électronique."
+
+msgid "email.royalties.WALLET_PENDING_AMOUNT_1"
+msgstr "Vous aurez "
+
+msgid "email.royalties.WALLET_PENDING_AMOUNT_2"
+msgstr " € dans votre porte-monnaie électronique lorsque vous aurez authentifié votre compte."
 
 msgid "email.royalties.FUNDRAISING"
 msgstr "Levée de fonds"
