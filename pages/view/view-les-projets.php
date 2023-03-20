@@ -198,14 +198,28 @@ if ( !empty( $page_controler ) ) :
 					$currentprojects_list = $page_controler->get_currentprojects_list();
 					$project_list_positive_savings = $page_controler->get_positive_savings_projects_list();
 					
+					// En financement initial
 					$project_list_funding = $currentprojects_list[ 'funding' ];
 					if ( count( $project_list_funding ) > 0 ) {
 						foreach ( $project_list_funding as $project_post ) {
+							$project_id = $project_post->ID;
+							$campaign = atcf_get_campaign( $project_id );
+							if (!$campaign->has_duplicate_campaigns()) {
+								locate_template( array( "projects/preview.php" ), true, false );
+							}
+						}
+					}
+	
+					// En post-cloture
+					$project_list_funding_after = $currentprojects_list[ 'funding_after' ];
+					if ( count( $project_list_funding_after ) > 0 ) {
+						foreach ( $project_list_funding_after as $project_post ) {
 							$project_id = $project_post->ID;
 							locate_template( array( "projects/preview.php" ), true, false );
 						}
 					}
 
+					// En évaluation
 					$project_list_vote = $currentprojects_list[ 'vote' ];
 					if ( count( $project_list_vote ) > 0 ) {
 						foreach ( $project_list_vote as $project_post ) {
@@ -214,16 +228,20 @@ if ( !empty( $page_controler ) ) :
 						}
 					}
 
-					if ( count( $project_list_positive_savings ) > 0 ) {
-						foreach ( $project_list_positive_savings as $project_post ) {
+					// En levée continue
+					if ( count( $project_list_funding ) > 0 ) {
+						foreach ( $project_list_funding as $project_post ) {
 							$project_id = $project_post->ID;
-							locate_template( array( "projects/preview.php" ), true, false );
+							$campaign = atcf_get_campaign( $project_id );
+							if ($campaign->has_duplicate_campaigns()) {
+								locate_template( array( "projects/preview.php" ), true, false );
+							}
 						}
 					}
-	
-					$project_list_funding_after = $currentprojects_list[ 'funding_after' ];
-					if ( count( $project_list_funding_after ) > 0 ) {
-						foreach ( $project_list_funding_after as $project_post ) {
+
+					// Epargne positive
+					if ( count( $project_list_positive_savings ) > 0 ) {
+						foreach ( $project_list_positive_savings as $project_post ) {
 							$project_id = $project_post->ID;
 							locate_template( array( "projects/preview.php" ), true, false );
 						}
