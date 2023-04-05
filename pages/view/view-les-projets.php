@@ -215,7 +215,10 @@ if ( !empty( $page_controler ) ) :
 					if ( count( $project_list_funding_after ) > 0 ) {
 						foreach ( $project_list_funding_after as $project_post ) {
 							$project_id = $project_post->ID;
-							locate_template( array( "projects/preview.php" ), true, false );
+							$campaign = atcf_get_campaign( $project_id );
+							if (!$campaign->has_duplicate_campaigns()) {
+								locate_template( array( "projects/preview.php" ), true, false );
+							}
 						}
 					}
 
@@ -229,6 +232,15 @@ if ( !empty( $page_controler ) ) :
 					}
 
 					// En levée continue
+					if ( count( $project_list_funding_after ) > 0 ) {
+						foreach ( $project_list_funding_after as $project_post ) {
+							$project_id = $project_post->ID;
+							$campaign = atcf_get_campaign( $project_id );
+							if ($campaign->has_duplicate_campaigns()) {
+								locate_template( array( "projects/preview.php" ), true, false );
+							}
+						}
+					}
 					if ( count( $project_list_funding ) > 0 ) {
 						foreach ( $project_list_funding as $project_post ) {
 							$project_id = $project_post->ID;
