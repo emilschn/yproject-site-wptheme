@@ -319,9 +319,15 @@ $lang_list = $campaign->get_lang_list();
 							<span><?php echo $number; ?></span><br />
 							<span><?php echo $text; ?></span>
 						</div>
-						<div class="left bordered">		
-							<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->get_maximum_goal_total( false ), TRUE, 0 ); ?> &euro; </span><br />
-							<span><?php _e('projects.MAXIMUM_GOAL', 'yproject'); ?></span>
+						<div class="left bordered">
+							<?php if ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ): ?>
+								<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
+								<?php echo YPUIHelpers::display_number( $campaign->get_maximum_goal_total( false ), TRUE, 0 ); ?> &euro; MAX</span>
+								<span></span>
+							<?php else: ?>
+								<span style="font-weight: bold;"><?php echo YPUIHelpers::display_number( $campaign->get_maximum_goal_total( false ), TRUE, 0 ); ?> &euro; </span><br />
+								<span><?php _e('projects.MAXIMUM_GOAL', 'yproject'); ?></span>
+							<?php endif; ?>
 						</div>
 						<div class="left">
 							<?php if ($campaign->has_duplicate_campaigns() ): ?>
