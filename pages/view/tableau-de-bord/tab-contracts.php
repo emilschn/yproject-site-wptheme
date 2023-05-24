@@ -10,9 +10,10 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 		/!\ <?php _e( "Si vous choisissez de g&eacute;n&eacute;rer les contrats, cela remplacera les fichiers précédents :", 'yproject' ); ?> /!\
 		<br /><br />
 		<div class="align-center">
+			Version de la fiche : <input type="text" name="key_info_form_version" value="<?php echo $page_controler->get_campaign()->get_key_info_form_version() ?>">
 			<input type="hidden" name="campaign_id" value="<?php echo $page_controler->get_campaign_id(); ?>" />
 			<input type="hidden" name="campaign_locale" value="<?php echo WDG_Languages_Helpers::get_current_locale_id(); ?>" />
-			<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer le contrat vierge", 'yproject' ); ?></button>
+			<button class="button admin-theme"><?php _e( "G&eacute;n&eacute;rer le contrat et la fiche", 'yproject' ); ?></button>
 			
 			<?php
 			$file_name_contract_agreement = $page_controler->get_campaign()->backoffice_contract_agreement();
