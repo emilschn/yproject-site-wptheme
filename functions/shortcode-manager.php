@@ -17,6 +17,8 @@ class YPShortcodeManager {
 		'wdg_project_vote_intention_sum',
 		'wdg_project_investors_count',
 		'wdg_project_amount_count',
+		'wdg_project_campaign_name',
+		'wdg_project_campaign_url',
 		'wdg_project_investment_link',
 		'wdg_project_progress_bar',
 		'wdg_project_royalties_simulator',
@@ -339,6 +341,32 @@ class YPShortcodeManager {
 
 			return $campaign->current_amount();
 		}
+	}
+	
+	public static function wdg_project_campaign_name($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+		), $atts );
+
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			$campaign = new ATCF_Campaign( $atts[ 'project' ] );
+			return $campaign->get_name();
+		}
+
+		return '';
+	}
+
+	public static function wdg_project_campaign_url($atts, $content = '') {
+		$atts = shortcode_atts( array(
+			'project' => '',
+		), $atts );
+
+		if ( isset( $atts[ 'project' ] ) && is_numeric( $atts[ 'project' ] ) ) {
+			$campaign = new ATCF_Campaign( $atts[ 'project' ] );
+			return $campaign->get_url();
+		}
+
+		return '';
 	}
 
 	public static function wdg_project_investment_link($atts, $content = '') {
