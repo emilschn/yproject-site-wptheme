@@ -26,7 +26,8 @@ class YPShortcodeManager {
 		'wdg_project_warning_lightbox',
 		'wdg_royalties_simulator',
 		'wdg_page_breadcrumb',
-		'wdg_footer_banner_link'
+		'wdg_footer_banner_link',
+		'wdg_current_date'
 	);
 
 	public static function register_shortcodes() {
@@ -658,5 +659,10 @@ class YPShortcodeManager {
 		$buffer = '<div style="' .$footer_style. '"><a href="' .$atts[ 'link' ]. '" style="' .$link_style. '"><img style="' .$img_arrow_style. '" src="' .$img_arrow_src. '"> ' .$text. ' <img style="' .$img_wdg_style. '" src="' .$img_wdg_src. '"></a></div>';
 
 		return $buffer;
+	}
+
+	public static function wdg_current_date($atts, $content = '') {
+		$date_current = new DateTime();
+		return $date_current->format('d/m/Y');
 	}
 }
