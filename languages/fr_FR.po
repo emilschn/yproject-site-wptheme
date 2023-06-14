@@ -2099,7 +2099,10 @@ msgid "form.organization-details.LEGAL_FORM"
 msgstr "Forme juridique"
 
 msgid "form.organization-details.CITY"
-msgstr "RCS (Ville)"
+msgstr "RCS"
+
+msgid "form.organization-details.CITY_DESCRIPTION"
+msgstr "Saisir uniquement le nom de la ville"
 
 msgid "form.organization-details.SHARE_CAPITAL"
 msgstr "Capital social (en euros)"

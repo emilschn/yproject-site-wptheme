@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2023-03-15 12:22+0100\n"
+"PO-Revision-Date: 2023-06-14 14:38+0200\n"
 "Last-Translator: Admin WE DO GOOD <admin@wedogood.co>, 2022\n"
 "Language-Team: English (https://www.transifex.com/we-do-good/teams/115370/"
 "en/)\n"
@@ -2315,6 +2315,9 @@ msgstr "Legal form"
 
 msgid "form.organization-details.CITY"
 msgstr "Trade and society register city"
+
+msgid "form.organization-details.CITY_DESCRIPTION"
+msgstr "Please input only the name of the city"
 
 msgid "form.organization-details.SHARE_CAPITAL"
 msgstr "Share capital (in euros)"
