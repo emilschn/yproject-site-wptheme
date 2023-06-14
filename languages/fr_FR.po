@@ -847,7 +847,7 @@ msgid "account.identitydocs.SEND_DOCUMENTS"
 msgstr "Envoyer les documents"
 
 msgid "account.identitydocs.orga.TITLE"
-msgstr "Justificatifs d'identitification de"
+msgstr "Justificatifs d'identification de"
 
 msgid "account.identitydocs.orga.AUTHENTICATION_TEXT_1"
 msgstr "Les justificatifs d'identit&eacute; sont imm&eacute;diatement transmis, puis v&eacute;rifi&eacute;s sous 48h par notre prestataire de paiement, Lemon Way."
