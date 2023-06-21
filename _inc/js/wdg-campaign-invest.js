@@ -373,6 +373,7 @@ var WDGInvestPageFunctions = (function ($) {
 			$('form #fieldgroup-orga-info #org_email').val($('form #org_init_email_' + idOrga).val());
 			$('form #fieldgroup-orga-info #org_website').val($('form #org_init_website_' + idOrga).val());
 			$('form #fieldgroup-orga-info #org_legalform').val($('form #org_init_legalform_' + idOrga).val());
+			$('form #fieldgroup-orga-info #org_description').val($('form #org_init_description_' + idOrga).val());
 			$('form #fieldgroup-orga-info #org_idnumber').val($('form #org_init_idnumber_' + idOrga).val());
 			$('form #fieldgroup-orga-info #org_rcs').val($('form #org_init_rcs_' + idOrga).val());
 			$('form #fieldgroup-orga-info #org_capital').val($('form #org_init_capital_' + idOrga).val());
