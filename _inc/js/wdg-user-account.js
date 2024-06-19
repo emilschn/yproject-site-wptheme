@@ -69,15 +69,19 @@ UserAccountDashboard.prototype.initMenu = function () {
 				$('div.user-transactions-init button').hide();
 				$('div.user-transactions-init div.loading').hide();
 				$('div.user-transactions-init').append(result);
+				if (result.includes('user-transactions')) {
+					$('a#history-download').show();
+					$('p#transactions-note').show();
+				}
 				$('table.user-transactions').DataTable({
 					order: [[0, 'desc']],
 					dom: 'Bfrtip',
-					buttons: [
-						{
-							extend: 'excelHtml5',
-							text: $('span#transaction-trans-download_history').text(),
-						}
-					],
+					// buttons: [
+					// 	{
+					// 		extend: 'excelHtml5',
+					// 		text: $('span#transaction-trans-download_history').text(),
+					// 	}
+					// ],
 					language: {
 						"sProcessing": "Traitement en cours...",
 						"sSearch": "Rechercher&nbsp;:",
@@ -104,7 +108,47 @@ UserAccountDashboard.prototype.initMenu = function () {
 			});
 		});
 	}
+	if ($('a#history-download').length > 0) {
+		$('a#history-download').click(function () {
+			$('.modal-download-transaction').css('display', 'flex');
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': {
+					'user_id': $(this).data('userid'),
+					'action': 'get_transactions_history'
+				}
 
+			}).done(function (result) {
+				let intervalId = setInterval(function () {
+					$.ajax({
+						type: "POST",
+						url: ajax_object.ajax_url,
+						data: {
+							user_id: $('a#history-download').data('userid'),
+							action: 'get_transactions_history_download'
+						}
+					}).done(function (data) {
+						if (data == '0') {
+							console.log('data not built yet, retrying in 10 seconds....');
+						} else {
+							var universalBOM = "\uFEFF";
+							let link = document.createElement('a');
+							link.href = 'data:text/csv; charset=utf-8,' + encodeURIComponent(universalBOM + data);
+							link.download = $('a#history-download').data('userid') + '_transactions.csv';
+							document.body.appendChild(link);
+							link.click();
+							document.body.removeChild(link);
+							clearInterval(intervalId);
+							$('.modal-download-transaction').css('display', 'none');
+						}
+					}).fail(function () {
+						console.log('Error in AJAX request, retrying in 10 seconds...');
+					});
+				}, 10000);
+			});
+		});
+	}
 	if ($('.button-load-viban').length > 0) {
 		$('.button-load-viban').click(function () {
 			if (confirm($(this).data('alert'))) {
