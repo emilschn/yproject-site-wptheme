@@ -3628,8 +3628,8 @@ msgstr "semester"
 msgid " (pourcentage indicatif)."
 msgstr " (estimated percentage)"
 
-msgid "du chiffre d'affaires de ce projet pendant"
-msgstr "of the project revenue for"
+msgid "du chiffre d'affaires généré pendant"
+msgstr "of the revenue generated for"
 
 msgid ""
 "Il n'est pas possible d'investir plus que l'objectif maximum "
