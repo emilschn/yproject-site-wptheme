@@ -1337,7 +1337,7 @@ msgid "invest.input.DURING"
 msgstr "pendant"
 
 msgid "invest.input.OF_TURNOVER_OF_PROJECT_DURING"
-msgstr "du chiffre d'affaires de ce projet pendant"
+msgstr "du chiffre d'affaires généré pendant"
 
 msgid "invest.input.THANKS_TO_ME"
 msgstr "Gr&acirc;ce &agrave; moi"
@@ -3254,8 +3254,8 @@ msgstr "semestres"
 msgid " (pourcentage indicatif)."
 msgstr " (pourcentage indicatif)."
 
-msgid "du chiffre d'affaires de ce projet pendant"
-msgstr "du chiffre d'affaires de ce projet pendant"
+msgid "du chiffre d'affaires généré pendant"
+msgstr "du chiffre d'affaires généré pendant"
 
 msgid "Il n'est pas possible d'investir plus que l'objectif maximum recherch&eacute;."
 msgstr "Il n'est pas possible d'investir plus que l'objectif maximum recherch&eacute;."
