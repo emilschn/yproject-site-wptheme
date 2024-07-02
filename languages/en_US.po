@@ -3628,8 +3628,8 @@ msgstr "semester"
 msgid " (pourcentage indicatif)."
 msgstr " (estimated percentage)"
 
-msgid "du chiffre d'affaires généré pendant"
-msgstr "of the revenue generated for"
+msgid "du chiffre d'affaires généré"
+msgstr "of the revenue generated"
 
 msgid ""
 "Il n'est pas possible d'investir plus que l'objectif maximum "
@@ -3669,8 +3669,8 @@ msgstr "Targeted return on investment:"
 msgid "de votre investissement initial en"
 msgstr "of your investment in"
 
-msgid "votre investissement initial en"
-msgstr "your initial investment in"
+msgid "votre investissement initial"
+msgstr "your initial investment"
 
 msgid ""
 "Risque de perte int&eacute;grale de l&apos;investissement. Retour sur "

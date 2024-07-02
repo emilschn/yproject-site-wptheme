@@ -3293,8 +3293,8 @@ msgstr "Retour sur investissement vis&eacute; :"
 msgid "de votre investissement initial en"
 msgstr "de votre investissement initial en"
 
-msgid "votre investissement initial en"
-msgstr "votre investissement initial en"
+msgid "votre investissement initial"
+msgstr "votre investissement initial"
 
 msgid "Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s."
 msgstr "Risque de perte int&eacute;grale de l&apos;investissement. Retour sur investissement maximum : %s."
