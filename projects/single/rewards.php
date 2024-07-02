@@ -90,7 +90,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 							<?php if ($campaign->is_positive_savings() ): ?>
 								<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires de", 'yproject' ) . ' '; ?><span class="nb_assets">0</span><span class="name_assets"><?php echo ' '.$campaign->get_asset_name_singular(); ?></span><?php echo ' '.__( "pendant", 'yproject' ).' '.$funding_duration_str. $complementary_text; ?><br>
 							<?php else: ?>
-								<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires généré pendant", 'yproject' ) . ' ' .$funding_duration_str. $complementary_text; ?><br>
+								<span class="roi_percent_user">0</span> % <?php echo __( "du chiffre d'affaires généré", 'yproject' ); ?><br>
 							<?php endif; ?>
 							
 							<?php _e("Soit un total de", 'yproject'); ?> <span class="roi_amount_user">0</span><span> &euro; </span><?php _e( "(brut) selon", 'yproject' ); ?>
@@ -244,7 +244,7 @@ $estimated_turnover = $campaign->estimated_turnover();
 					
 				<div class="align-left font-14">
 					<?php _e( "Retour sur investissement vis&eacute; :", 'yproject' ); ?><br>
-					<strong><span>x<span class="roi_ratio_on_total">... </span></span></strong> <?php echo __( "votre investissement initial en", 'yproject' ). ' ' .$funding_duration_str_2; ?>
+					<strong><span>x<span class="roi_ratio_on_total">... </span></span></strong> <?php echo __( "votre investissement initial", 'yproject' ); ?>
 					(<?php _e( "soit", 'yproject' ); ?> + <span><span class="roi_percent_total">...</span> %</span>)
 				</div>
 				
