@@ -73,7 +73,6 @@ $months = array( 'January', 'February', 'March', 'April', 'May', 'June', 'July',
 		<?php elseif ( $page_controler->can_access_admin() ): ?>
 			<?php if ( $declaration->get_status() == WDGROIDeclaration::$status_transfer ): ?>
 			<div class="single-line">
-				<a href="#" class="button admin-theme transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="0"><?php _e( "Verser" ); ?></a><br>
 				<a href="#" class="button admin-theme transfert-roi-open wdg-button-lightbox-open" data-lightbox="transfer-roi" data-roideclaration-id="<?php echo $declaration->id; ?>" data-refund="1"><?php _e( "Rembourser" ); ?></a>
 			</div>
 			<?php elseif ( $declaration->get_status() == WDGROIDeclaration::$status_waiting_transfer ): ?>
