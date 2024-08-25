@@ -111,7 +111,7 @@ class WDG_Page_Controler {
 	}
 
 	private function init_page_description() {
-		$this->page_description = "WE DO GOOD est le leader français des levées de fonds en royalties et du crowdinvesting. Investissez en ligne à partir de 10 € dans les projets qui vous parlent.";
+		$this->page_description = "WE DO GOOD est le leader français des levées de fonds en royalties et du crowdinvesting. Investissez en ligne à partir de 100 € dans les projets qui vous parlent.";
 		global $post;
 		if ( is_single() && $post->post_type == 'download' ) {
 			$campaign = new ATCF_Campaign( $post->ID );
@@ -258,7 +258,7 @@ class WDG_Page_Controler {
 
 	//******************************************************************************
 	/**
-	 * Détermine si il est nécessaire d'afficher la lightbox de confirmation d'information à l'utilisateur
+	 * Détermine si il est nécessaire d'afficher la lightbox de formation à l'utilisateur
 	 */
 	public function init_show_user_details_confirmation() {
 		if ( !isset( $this->show_user_details_confirmation ) ) {

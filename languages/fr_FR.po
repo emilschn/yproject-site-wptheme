@@ -1800,13 +1800,13 @@ msgstr "an"
 
 # ############################## share-buttons ################################
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
-msgstr "Faites comme moi, épargnez positif d&egrave;s 10 € pour soutenir"
+msgstr "Faites comme moi, épargnez positif d&egrave;s 100 € pour soutenir"
 
 msgid "share-buttons.HASHTAGS_POSITIVE_SAVINGS"
 msgstr "épargne,impact,investissement,royalties"
 
 msgid "share-buttons.DO_LIKE_ME_PROJECT"
-msgstr "Faites comme moi, investissez d&egrave;s 10 € sur le projet"
+msgstr "Faites comme moi, investissez d&egrave;s 100 € sur le projet"
 
 msgid "share-buttons.HASHTAGS_PROJECT"
 msgstr "royaltycrowdfunding,finpart,investissement"
@@ -1911,7 +1911,7 @@ msgid "form.subscription.AMOUNT"
 msgstr "Montant"
 
 msgid "form.subscription.AMOUNT_DESCRIPTION"
-msgstr "Le montant doit être un nombre entier supérieur à 10€."
+msgstr "Le montant doit être un nombre entier supérieur à 100€."
 
 msgid "form.subscription.PROJECT"
 msgstr "Dans la thématique ..."
@@ -1920,10 +1920,10 @@ msgid "form.subscription.SUCCESS"
 msgstr "Votre abonnement a été enregistré avec succès."
 
 msgid "form.subscription.error.AMOUNT_MINIMUM"
-msgstr "Le montant minimum valide est de 10€"
+msgstr "Le montant minimum valide est de 100€"
 
 msgid "form.subscription.description.AMOUNT_MINIMUM"
-msgstr "Le montant doit être un nombre entier supérieur à 10€."
+msgstr "Le montant doit être un nombre entier supérieur à 100€."
 
 msgid "invest.contract.VALIDATE_SUBSCRIPTION"
 msgstr "Valider l'abonnement"
@@ -1935,7 +1935,7 @@ msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
 msgstr "Vous avez renoncé à la signature du contrat d'abonnement"
 
 msgid "form.user-contract-subscription.ALL_ROYALTIES"
-msgstr "l'intégralité de mon porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)"
+msgstr "l'intégralité de mon porte-monnaie électronique (si le montant disponible est au moins égal à 100 €)"
 
 msgid "form.user-contract-subscription.PART_ROYALTIES"
 msgstr "%s € venant de mon porte-monnaie électronique (si le montant est disponible)"
@@ -1944,7 +1944,7 @@ msgid "form.user-contract-subscription.MODALITY"
 msgstr "trimestres"
 
 msgid "form.user-contract-subscription.notification.ALL_ROYALTIES"
-msgstr "l'intégralité de votre porte-monnaie électronique (si le montant disponible est au moins égal à 10 €)"
+msgstr "l'intégralité de votre porte-monnaie électronique (si le montant disponible est au moins égal à 100 €)"
 
 msgid "form.user-contract-subscription.notification.PART_ROYALTIES"
 msgstr "%s € (si le montant est disponible)"

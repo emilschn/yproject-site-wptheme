@@ -2000,13 +2000,13 @@ msgstr "year"
 # ############################## share-buttons
 # ################################
 msgid "share-buttons.DO_LIKE_ME_POSITIVE_SAVINGS"
-msgstr "Do as I do, save positive from 10 € to support"
+msgstr "Do as I do, save positive from 100 € to support"
 
 msgid "share-buttons.HASHTAGS_POSITIVE_SAVINGS"
 msgstr "savings, impact, investment,royalties"
 
 msgid "share-buttons.DO_LIKE_ME_PROJECT"
-msgstr "Do as I do, invest from 10 € on the project"
+msgstr "Do as I do, invest from 100 € on the project"
 
 msgid "share-buttons.HASHTAGS_PROJECT"
 msgstr "royaltycrowdfunding,finpart,investment"
@@ -2116,7 +2116,7 @@ msgid "form.subscription.AMOUNT"
 msgstr "Amount"
 
 msgid "form.subscription.AMOUNT_DESCRIPTION"
-msgstr "The amount must be a whole number greater than 10€."
+msgstr "The amount must be a whole number greater than 100€."
 
 msgid "form.subscription.PROJECT"
 msgstr "In the theme ..."
@@ -2125,10 +2125,10 @@ msgid "form.subscription.SUCCESS"
 msgstr "Your subscription has been successfully registered."
 
 msgid "form.subscription.error.AMOUNT_MINIMUM"
-msgstr "The minimum valid amount is 10€"
+msgstr "The minimum valid amount is 100€"
 
 msgid "form.subscription.description.AMOUNT_MINIMUM"
-msgstr "The amount must be a whole number greater than 10€."
+msgstr "The amount must be a whole number greater than 100€."
 
 msgid "invest.contract.VALIDATE_SUBSCRIPTION"
 msgstr "Validate the subscription"
@@ -2140,7 +2140,7 @@ msgid "form.user-contract-subscription.SUBSCRIPTION_CANCEL"
 msgstr "You have renounced the signature of the subscription contract"
 
 msgid "form.user-contract-subscription.ALL_ROYALTIES"
-msgstr "my entire e-wallet (if the available amount is at least €10)"
+msgstr "my entire e-wallet (if the available amount is at least €100)"
 
 msgid "form.user-contract-subscription.PART_ROYALTIES"
 msgstr "%s € from my e-wallet (if the amount is available)"
@@ -2149,7 +2149,7 @@ msgid "form.user-contract-subscription.MODALITY"
 msgstr "quarter"
 
 msgid "form.user-contract-subscription.notification.ALL_ROYALTIES"
-msgstr "your entire e-wallet (if the available amount is at least €10)"
+msgstr "your entire e-wallet (if the available amount is at least €100)"
 
 msgid "form.user-contract-subscription.notification.PART_ROYALTIES"
 msgstr "%s € (if available)"
