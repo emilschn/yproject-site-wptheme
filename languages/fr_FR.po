@@ -2163,10 +2163,10 @@ msgid "form.user-identitydocs.OPTIONAL"
 msgstr "(facultatif)"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION"
-msgstr "Formulaire des bénéficiaires effectifs"
+msgstr "Formulaire des bénéficiaires effectifs ou  Extrait des inscriptions au Registre national des entreprises"
 
 msgid "form.user-identitydocs.CAPITAL_ALLOCATION_DESCRIPTION"
-msgstr "Disponible sur Infogreffe ou à défaut attestation de répartition du capital"
+msgstr "Vous pouvez récupérer l'extrait directement via l'INPI : <a href='https://entreprendre.service-public.fr/vosdroits/R19859' target='_blank'>https://entreprendre.service-public.fr/vosdroits/R19859</a><br>En cas de problème, veuillez contacter support@wedogood.co"
 
 msgid "form.user-identitydocs.ID_SECOND_PERSON"
 msgstr "Justificatif d'identité de la deuxi&egrave;me personne détenant au moins 25% du capital"
