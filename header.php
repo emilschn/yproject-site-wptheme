@@ -304,7 +304,7 @@
 			<div class="account-signin" id="content" style="background-color: rgb(229 243 245);padding: 10px;rgba(0, 135, 155,CONTAIN-INTRINSIC-BLOCK-SIZE: AUTO 100PX);color: #00879B;!;font-size: 16px;">Notre plateforme est en refonte pour améliorer votre expérience. Des ralentissements peuvent survenir, merci de votre compréhension.</div>
 			<?php endif; ?>
 			<?php if ( is_page( array(70421, 70424) ) ) : ?>
-			<div class="account-signin" id="content" style="background-color: rgb(229 243 245);padding: 10px;rgba(0, 135, 155,CONTAIN-INTRINSIC-BLOCK-SIZE: AUTO 100PX);color: #00879B;!;font-size: 16px;">Our platform is being redesigned to enhance your experience. Slowdowns may occur, thank you for your understanding.</div>
+			<div class="account-signin" id="content" style="width: 100%;max-width: 1280px;margin: 0 auto;background-color: rgb(229 243 245);padding: 10px;rgba(0, 135, 155,CONTAIN-INTRINSIC-BLOCK-SIZE: AUTO 100PX);color: #00879B;!;font-size: 16px;">Our platform is being redesigned to enhance your experience. Slowdowns may occur, thank you for your understanding.</div>
 			<?php endif; ?>
 		</nav>
 		<?php endif; ?>
