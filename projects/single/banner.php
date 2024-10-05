@@ -221,9 +221,12 @@ $lang_list = $campaign->get_lang_list();
 							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro; MIN<br />
 							<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro; MAX</span>
 							<span></span>
+						<?php elseif ( $campaign->get_minimum_goal_display() == ATCF_Campaign::$key_maximum_goal_display ): ?>
+							<?php echo YPUIHelpers::display_number( $campaign->goal( false ), TRUE, 0 ); ?> &euro;</span>
+							<span><?php _e('Objectif maximum', 'yproject'); ?></span>
 						<?php else: ?>
 							<span><?php echo YPUIHelpers::display_number( $campaign->minimum_goal(), TRUE, 0 ); ?> &euro;</span><br />
-							<span><?php _e('Objectif minimum', 'yproject'); ?></span>
+							<span><?php _e('Objectif minumum', 'yproject'); ?></span>
 						<?php endif; ?>
 					</div>
 					<div class="left">

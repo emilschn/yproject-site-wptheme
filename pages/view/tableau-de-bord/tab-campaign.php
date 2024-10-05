@@ -241,8 +241,8 @@ $page_controler = WDG_Templates_Engine::instance()->get_controler();
 			"type"			=> "select",
 			"label"			=> __( "Affichage de l'objectif minimum", 'yproject' ),
 			"value"			=> $page_controler->get_campaign()->get_minimum_goal_display(),
-			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
-			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum et un seuil de validation" )
+			"options_id"	=> array( ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_max, ATCF_Campaign::$key_maximum_goal_display, ATCF_Campaign::$key_minimum_goal_display_option_minimum_as_step ),
+			"options_names"	=> array( "Afficher l'objectif minimum", "Afficher l'objectif maximum", "Afficher l'objectif minimum et l'objectif maximum" )
 		));
 
 		DashboardUtility::create_field(array(
