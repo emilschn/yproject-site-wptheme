@@ -732,7 +732,7 @@ UserAccountDashboard.prototype.toggleRoisNew = function () {
 
 						sCampaignBuffer += '<tr>';
 						sCampaignBuffer += '<td class="align-right">status</td>';
-						sCampaignBuffer += '<td class="status finished">' + oInvestmentItem['status_str'] + ' €</td>';
+						sCampaignBuffer += '<td class="status finished">' + oInvestmentItem['status_str'] + '</td>';
 						sCampaignBuffer += '</tr>';
 
 
