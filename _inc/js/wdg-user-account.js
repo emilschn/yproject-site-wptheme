@@ -731,14 +731,22 @@ UserAccountDashboard.prototype.toggleRoisNew = function () {
 						sCampaignBuffer += '</tr>';
 
 						sCampaignBuffer += '<tr>';
+						sCampaignBuffer += '<td class="align-right">status</td>';
+						sCampaignBuffer += '<td class="status finished">' + oInvestmentItem['status_str'] + ' €</td>';
+						sCampaignBuffer += '</tr>';
+
+
+						sCampaignBuffer += '<tr>';
 						sCampaignBuffer += '<td class="align-right">' + $('#invest-trans-royalties_received').text() + '</td>';
 						sCampaignBuffer += '<td class="status finished">' + oInvestmentItem['roi_amount'] + ' €</td>';
 						sCampaignBuffer += '</tr>';
 
-						sCampaignBuffer += '<tr>';
-						sCampaignBuffer += '<td class="align-right">' + $('#invest-trans-return_on_investment').text() + '</td>';
-						sCampaignBuffer += '<td class="status finished">' + oInvestmentItem['roi_return'] + '</td>';
-						sCampaignBuffer += '</tr>';
+						if(oInvestmentItem['roi_return'] != ''){
+							sCampaignBuffer += '<tr>';
+							sCampaignBuffer += '<td class="align-right">' + $('#invest-trans-return_on_investment').text() + '</td>';
+							sCampaignBuffer += '<td class="status finished">' + oInvestmentItem['roi_return'] + '</td>';
+							sCampaignBuffer += '</tr>';
+						}
 
 	
 	
