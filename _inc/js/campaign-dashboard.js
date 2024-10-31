@@ -976,7 +976,7 @@ WDGCampaignDashboard.prototype.getContactsTable = function (inv_data, campaign_i
 			'id_campaign': campaign_id,
 			'data': inv_data
 		},
-		'timeout': 30000 // sets timeout to 30 seconds
+		'timeout': 0
 	}).done(function (result) {
 		self.createTableRequest = undefined;
 		//Affiche resultat requete Ajax une fois reçue
