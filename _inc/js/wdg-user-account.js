@@ -245,7 +245,11 @@ UserAccountDashboard.prototype.initProjectList = function () {
 
 		// Une fois les projets obtenus
 	}).done(function (result) {
-		self.displayUserInvestments(result, userID, userType);
+		if (sAction == 'display_user_investments_optimized') {
+			self.displayUserInvestmentsNew(result, userID, userType);
+		} else {
+			self.displayUserInvestments(result, userID, userType);
+		}
 
 	}).fail(function () {
 		var sBuffer = '<div id="container-reload-investments-' + userID + '" class="db-form v3"><button id="reload-investments-' + userID + '" class="button blue">' + $('#invest-trans-reload').text() + '</button></div>';
@@ -532,9 +536,297 @@ UserAccountDashboard.prototype.displayUserInvestments = function (result, userID
 	});
 };
 
+
+UserAccountDashboard.prototype.displayUserInvestmentsNew = function (result, userID, userType) {
+	var self = this;
+	var nInvestmentPublishCount = 0;
+	var nInvestmentPendingCount = 0;
+	var nProject = 0;
+	var nAmountInvested = 0;
+	var nAmountReceived = 0;
+	var sBuffer = '';
+	var aInvestmentCampaigns = new Array();
+
+	if (result !== '') {
+
+		aInvestmentCampaigns = JSON.parse(result);
+		nAmountReceived = aInvestmentCampaigns['roi_total'];
+		for (var nCampaignID in aInvestmentCampaigns['investments']) {
+
+			var oCampaignItem = aInvestmentCampaigns['investments'][nCampaignID];
+			console.log(oCampaignItem);
+			if (oCampaignItem['name'] !== undefined && oCampaignItem['name'] !== null) {
+				var bCountProject = false;
+				var sCampaignBuffer = '<h3 class="has-margin-top">' + $('#invest-trans-my_investments_on').text() + ' ' + oCampaignItem['name'] + '</h3>';
+				var aCampaignInvestments = oCampaignItem['items'];
+				for (var nIndex in aCampaignInvestments) {
+					var oInvestmentItem = aCampaignInvestments[nIndex];
+					sCampaignBuffer += '<div class="investment-item">';
+
+					sCampaignBuffer += '<div class="investment-item-child amount-date">';
+					sCampaignBuffer += '<span class="amount-amount"><strong>' + oInvestmentItem['amount'] + ' €</strong></span><br>';
+					sCampaignBuffer += '</div>';
+					sCampaignBuffer += '<div class="investment-item-child amount-date">';
+					sCampaignBuffer += oInvestmentItem['date'] + '<br>';
+					sCampaignBuffer += oInvestmentItem['time'];
+					sCampaignBuffer += '</div>';
+
+					var bCountInGlobalStat = true;
+					if (oInvestmentItem['status'] === 'pending') {
+						bCountInGlobalStat = false;
+						nInvestmentPendingCount++;
+					} else if (oCampaignItem['status'] === 'archive') {
+						bCountInGlobalStat = false;
+					}
+					if (bCountInGlobalStat) {
+						bCountProject = true;
+						nInvestmentPublishCount++;
+						nAmountInvested += Number(oInvestmentItem['amount']);
+					}
+
+					if (oInvestmentItem[''] != '') {
+						sCampaignBuffer += '<div class="investment-item-child align-center">';
+						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ';
+						if (oCampaignItem['funding_duration'] > 1) {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_years').text() + '<br>';
+						} else {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_year').text() + '<br>';
+						}
+
+						if (oInvestmentItem['contract_file_path'] != '') {
+							sCampaignBuffer += '<a href="' + oInvestmentItem['contract_file_path'] + '" download="' + oInvestmentItem['contract_file_name'] + '" title="T&eacute;l&eacute;charger le contrat">';
+							sCampaignBuffer += $('#invest-trans-see_contract').text();
+							sCampaignBuffer += '</a>';
+							sCampaignBuffer += '<div class="clear"></div>';
+
+						}
+						sCampaignBuffer += '</div>';
+					} else if (oInvestmentItem['conclude-investment-url'] != '') {
+						sCampaignBuffer += '<div class="investment-item-child align-center single-line">';
+						sCampaignBuffer += '<a href="' + oInvestmentItem['conclude-investment-url'] + '" class="button red" title="Finaliser investissement">';
+						sCampaignBuffer += $('#invest-trans-finish_investment').text();
+						sCampaignBuffer += '</a>';
+						sCampaignBuffer += '<div class="clear"></div>';
+						sCampaignBuffer += '</div>';
+					} else {
+						sCampaignBuffer += '<div class="investment-item-child align-center">';
+						sCampaignBuffer += $('#invest-trans-investiement_duration').text() + ' ' + oCampaignItem['funding_duration'] + ' ';
+						if (oCampaignItem['funding_duration'] > 1) {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_years').text() + '<br>';
+						} else {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_year').text() + '<br>';
+						}
+						if (oCampaignItem['start_date'] !== '') {
+							sCampaignBuffer += $('#invest-trans-investiement_duration_starting').text() + ' ' + oCampaignItem['start_date'] + '<br>';
+						}
+						sCampaignBuffer += $('#invest-trans-contract').text() + ' ' + $('#invest-trans-inaccessible').text();
+						sCampaignBuffer += '<div class="clear"></div>';
+						sCampaignBuffer += '</div>';
+					}
+
+					sCampaignBuffer += '</div>';
+
+					sCampaignBuffer += '<div class="align-center">';
+					sCampaignBuffer += '<button class="button-view-royalties-list button transparent" id="button-royalties-list-' + nCampaignID + '-' + nIndex + '" data-list="' + nCampaignID + '-' + nIndex + '">+</button>';
+					sCampaignBuffer += '</div>';
+
+					sCampaignBuffer += '<div class="royalties-list align-center hidden" id="royalties-list-' + nCampaignID + '-' + nIndex + '">';
+					sCampaignBuffer += '<div id="ajax-loader-' + nCampaignID + '-' + nIndex + '" class="center" style="text-align: center;">';
+					sCampaignBuffer += $('#ajax-loader-' + userID).html();
+					sCampaignBuffer += '</div>';
+					
+
+					sCampaignBuffer += '<div class="align-center">';
+					sCampaignBuffer += '<button class="button-hide-royalties-list button transparent" data-list="' + nCampaignID + '-' + nIndex + '">-</button>';
+					sCampaignBuffer += '</div>';
+
+					sCampaignBuffer += '</div>';
+				}
+				if (bCountProject) {
+					nProject++;
+				}
+				sBuffer = sCampaignBuffer + sBuffer;
+
+			}
+
+		}
+	}
+	if (result === '' || aInvestmentCampaigns.length === 0) {
+		sBuffer = '<div class="align-center">';
+		sBuffer += $('#invest-trans-no_investments').text() + '<br>';
+		sBuffer += $('#invest-trans-no_investments_if_vote').text();
+		sBuffer += '</div>';
+	} else {
+		$('#investment-synthesis-' + userID + ' .publish-count').text(nInvestmentPublishCount);
+		if (nInvestmentPendingCount > 0) {
+			$('#investment-synthesis-' + userID + ' .pending-str').show();
+			$('#investment-synthesis-' + userID + ' .pending-count').text(nInvestmentPendingCount);
+		}
+		$('#investment-synthesis-pictos-' + userID + ' .funded-projects .data').text(nProject);
+		$('#investment-synthesis-pictos-' + userID + ' .amount-invested .data').html(JSHelpers.formatNumber(nAmountInvested, '&euro;'));
+		nAmountReceived = Math.round(nAmountReceived * 100) / 100;
+		$('#investment-synthesis-pictos-' + userID + ' .royalties-received .data').html(JSHelpers.formatNumber(nAmountReceived, '&euro;'));
+		$('#investment-synthesis-' + userID).removeClass('hidden');
+		$('#investment-synthesis-pictos-' + userID).removeClass('hidden');
+		$('#to-hide-after-loading-success-' + userID).hide();
+	}
+
+	$('#ajax-loader-' + userID).after(sBuffer);
+
+	$('#vote-intentions-' + userID).removeClass('hidden');
+
+	$('#item-body-projects').height('auto');
+
+	// Masquage de ce qui n'est plus utile
+	$('#ajax-loader-img-' + userID).hide();
+	self.toggleRoisNew();
+
+};
 /**
  * Affiche ou masque les détails de paiement
  */
+UserAccountDashboard.prototype.toggleRoisNew = function () {
+	var self = this;
+	var userID = $('ul.nav-menu li.selected a').data('userid');
+	var userType = $('ul.nav-menu li.selected a').data('usertype');
+
+	$('.button-view-royalties-list').click(function () {
+		var button = $(this);
+		var sIdList = $(this).data('list');
+		const result = sIdList.split('-');
+		if (!$('#royalties-list-' + sIdList).hasClass('loaded-already')) {
+			$.ajax({
+				'type': "POST",
+				'url': ajax_object.ajax_url,
+				'data': {
+					'user_id': userID,
+					'user_type': userType,
+					'invest_id': result[0],
+					'action': 'get_investment_royalties_optimized'
+				}
+			}).done(function (result) {
+				if (result !== '') {
+					oCampaignItem = JSON.parse(result);
+					if (oCampaignItem['name'] !== undefined && oCampaignItem['name'] !== null) {
+						oInvestmentItem = oCampaignItem['items'][0];
+						var nYears = oInvestmentItem['rois_by_year'].length;
+						var sCampaignBuffer = '';
+						sCampaignBuffer += '<div>' + $('#invest-trans-quarterly_payments').text() + '</div>';
+						sCampaignBuffer += '<table class="roi-table">';
+						sCampaignBuffer += '<tr>';
+						sCampaignBuffer += '<td class="align-right">' + oInvestmentItem['status_str'] + '</td>';
+						sCampaignBuffer += '<td class="status finished">';
+						if (oInvestmentItem['payment_str'] && oInvestmentItem['payment_str'] !== '') {
+							sCampaignBuffer += oInvestmentItem['payment_str'];
+						}
+						if (oInvestmentItem['payment_date'] && oInvestmentItem['payment_date'] !== '') {
+							sCampaignBuffer += ' ' + oInvestmentItem['payment_date'];
+						}
+						sCampaignBuffer += '</td>';
+						sCampaignBuffer += '</tr>';
+
+						sCampaignBuffer += '<tr>';
+						sCampaignBuffer += '<td class="align-right">' + $('#invest-trans-royalties_received').text() + '</td>';
+						sCampaignBuffer += '<td class="status finished">' + oInvestmentItem['roi_amount'] + ' €</td>';
+						sCampaignBuffer += '</tr>';
+
+						sCampaignBuffer += '<tr>';
+						sCampaignBuffer += '<td class="align-right">' + $('#invest-trans-return_on_investment').text() + '</td>';
+						sCampaignBuffer += '<td class="status finished">' + oInvestmentItem['roi_return'] + '</td>';
+						sCampaignBuffer += '</tr>';
+
+	
+	
+						if (nYears > 0) {
+							for (var i = 0; i < nYears; i++) {
+								var oYearItem = oInvestmentItem['rois_by_year'][i];
+								sCampaignBuffer += '<tr class="year-title yearly-title">';
+								sCampaignBuffer += '<td>' + $('#invest-trans-years').text() + ' ' + (i + 1) + '</td>';
+								sCampaignBuffer += '<td></td>';
+								sCampaignBuffer += '</tr>';
+								sCampaignBuffer += '<tr class="yearly-title">';
+								sCampaignBuffer += '<td>' + $('#invest-trans-turnover').text() + '</td>';
+								if (oYearItem['estimated_turnover'] != '-') {
+									sCampaignBuffer += '<td>' + oYearItem['amount_turnover'] + ' / ' + oYearItem['estimated_turnover'] + ' <span>(' + $('#invest-trans-estimated').text() + ')</span></td>';
+								} else {
+									sCampaignBuffer += '<td></td>';
+								}
+								sCampaignBuffer += '</tr>';
+								sCampaignBuffer += '<tr class="yearly-title">';
+								sCampaignBuffer += '<td>' + $('#invest-trans-royalties').text() + '</td>';
+								if (oYearItem['estimated_rois'] != '-') {
+									sCampaignBuffer += '<td>' + oYearItem['amount_rois'] + ' / ' + oYearItem['estimated_rois'] + ' <span>(' + $('#invest-trans-estimated').text() + ')</span></td>';
+								} else {
+									sCampaignBuffer += '<td></td>';
+								}
+								sCampaignBuffer += '</tr>';
+								var nRois = oYearItem['roi_items'].length;
+								for (var j = 0; j < nRois; j++) {
+									var oRoiItem = oYearItem['roi_items'][j];
+									sCampaignBuffer += '<tr>';
+									sCampaignBuffer += '<td class="align-right">' + oRoiItem['date'] + '</td>';
+									sCampaignBuffer += '<td class="status ' + oRoiItem['status'] + '">';
+									if (oRoiItem['status'] == 'finished') {
+										sCampaignBuffer += oRoiItem['amount'];
+									} else {
+										sCampaignBuffer += oRoiItem['status_str'];
+									}
+									sCampaignBuffer += '</td>';
+									sCampaignBuffer += '</tr>';
+								}
+							}
+
+							if (oInvestmentItem['status'] === 'publish' && oInvestmentItem['roi_return'] < 100) {
+								sCampaignBuffer += '<tr class="year-title">';
+								sCampaignBuffer += '<td></td>';
+								sCampaignBuffer += '<td class="status future">';
+								sCampaignBuffer += $('#invest-trans-other_commitments').text();
+								sCampaignBuffer += '<div class="tooltip">';
+								sCampaignBuffer += '<button type="button">i</button>';
+								sCampaignBuffer += '<div class="tooltip-text">' + $('#invest-trans-company_is_commited').text() + '</div>';
+								sCampaignBuffer += '</div>';
+								sCampaignBuffer += '</td>';
+								sCampaignBuffer += '</tr>';
+							}
+						}
+						sCampaignBuffer += '</table>';
+						$('#ajax-loader-'+sIdList).hide();
+						$('#royalties-list-' + sIdList + ' .align-center' ).before(sCampaignBuffer)
+						$('#royalties-list-' + sIdList).slideDown(300);
+						$('#royalties-list-' + sIdList).addClass('loaded-already');
+						$(this).slideUp(100);
+
+					} else {
+						button.hide();
+						$('#royalties-list-' + sIdList).hide();
+					}
+				} else {
+					button.hide();
+					$('#royalties-list-' + sIdList).hide();
+				}
+			}).fail(function () {
+				button.hide();
+			});
+		}
+
+
+	});
+
+
+
+	$('.button-view-royalties-list').click(function () {
+		var sIdList = $(this).data('list');
+		$(this).slideUp(100);
+		$('#royalties-list-' + sIdList).slideDown(300);
+	});
+
+	$('.button-hide-royalties-list').click(function () {
+		var sIdList = $(this).data('list');
+		$('#button-royalties-list-' + sIdList).slideDown(100);
+		$('#royalties-list-' + sIdList).slideUp(300);
+	});
+};
+
 UserAccountDashboard.prototype.toggleRois = function () {
 	var self = this;
 
