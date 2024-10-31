@@ -701,7 +701,7 @@ UserAccountDashboard.prototype.toggleRoisNew = function () {
 				'data': {
 					'user_id': userID,
 					'user_type': userType,
-					'invest_id': result[0],
+					'invest_id': result[1],
 					'action': 'get_investment_royalties_optimized'
 				}
 			}).done(function (result) {
