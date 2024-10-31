@@ -711,6 +711,11 @@ UserAccountDashboard.prototype.toggleRoisNew = function () {
 						oInvestmentItem = oCampaignItem['items'][0];
 						var nYears = oInvestmentItem['rois_by_year'].length;
 						var sCampaignBuffer = '';
+						if (oInvestmentItem['contract_file_path'] != '') {
+							sCampaignBuffer += '<a href="' + oInvestmentItem['contract_file_path'] + '" download="' + oInvestmentItem['contract_file_name'] + '" title="T&eacute;l&eacute;charger le contrat">';
+							sCampaignBuffer += $('#invest-trans-see_contract').text();
+							sCampaignBuffer += '</a>';
+						}
 						sCampaignBuffer += '<div>' + $('#invest-trans-quarterly_payments').text() + '</div>';
 						sCampaignBuffer += '<table class="roi-table">';
 						sCampaignBuffer += '<tr>';
